@@ -1,0 +1,10 @@
+# Site navigation links
+
+- title: Archive
+  url: /archive/
+
+- title: About
+  url: /about/
+
+- title: Feed
+  url: /feed.xml
