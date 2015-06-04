@@ -5,15 +5,15 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>EK</title>
-
-<meta name="keywords" content="computers, programming, Jekyll, blog, ctf, security, devops, sysadm, linux, unix">
+<title>Используем Jekyll + Github для блога &#8211; EK</title>
+<meta name="description" content="Небольшое руководство как запустить блог на github.com и jekyll">
+<meta name="keywords" content="jekyll">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="EK">
-
+<meta name="twitter:title" content="Используем Jekyll + Github для блога">
+<meta name="twitter:description" content="Небольшое руководство как запустить блог на github.com и jekyll">
 <meta name="twitter:site" content="@yajivoi">
 <meta name="twitter:creator" content="@yajivoi">
 
@@ -23,16 +23,16 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="EK">
-
-<meta property="og:url" content="http://jivoi.github.io/">
+<meta property="og:title" content="Используем Jekyll + Github для блога">
+<meta property="og:description" content="Небольшое руководство как запустить блог на github.com и jekyll">
+<meta property="og:url" content="http://jivoi.github.io/2011/09/23/install-jekyll-blog/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="http://jivoi.github.io/">
+<link rel="canonical" href="http://jivoi.github.io/2011/09/23/install-jekyll-blog/">
 <link href="http://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -73,7 +73,7 @@
 
 </head>
 
-<body class="home">
+<body class="post">
 
 <!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
 
@@ -107,7 +107,7 @@
 
 
 
-<div id="main" role="main"> 
+<div id="main" role="main">
   <div class="article-author-side">
     
 
@@ -136,51 +136,91 @@
 
 
   </div>
-  <div id="index">
-    <h3><a href="http://jivoi.github.io/posts/">Recent Posts</a></h3>
-        
-    <article>
+  <article class="post">
+    <div class="headline-wrap">
       
-        <h2><a href="http://jivoi.github.io/2011/10/10/answers-for-mailru/" title="Ответы для Mail.ru - Вакансия "Системный администратор"">Ответы для Mail.ru - Вакансия "Системный администратор"</a></h2>
-        <p>Ответы для Mail.ru - Вакансия "Системный администратор"</p>
+        <h1><a href="http://jivoi.github.io/2011/09/23/install-jekyll-blog/" rel="bookmark" title="Используем Jekyll + Github для блога">Используем Jekyll + Github для блога</a></h1>
       
-    </article>
-        
-    <article>
-      
-        <h2><a href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" title="Как установить CentOS из %Your Linux% по SSH">Как установить CentOS из %Your Linux% по SSH</a></h2>
-        <p>Как установить CentOS из %Your Linux% по SSH.</p>
-      
-    </article>
-        
-    <article>
-      
-        <h2><a href="http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></h2>
-        <p>Руководство как установить CentOS из под FreeBSD по SSH.</p>
-      
-    </article>
-        
-    <article>
-      
-        <h2><a href="http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" title="Устанавливаем Chef-Server и Chef-Client на CentOS 6">Устанавливаем Chef-Server и Chef-Client на CentOS 6</a></h2>
-        <p>Набор команд которые нужно выполнть чтобы все заработало на CentOS 6</p>
-      
-    </article>
-        
-    <article>
-      
-        <h2><a href="http://jivoi.github.io/2011/09/23/ski-ost/" title="Саундтреки из Лыжных фильмов">Саундтреки из Лыжных фильмов</a></h2>
-        <p>Спешу поделится с вами небольшой но постоянно растущей коллекцией саундреков из лыжных фильмов. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в ...</p>
-      
-    </article>
-    
-    <!--
-    <article><h2 style="padding-left:1em; font-size:15px; text-decoration:underline;"><a href="http://jivoi.github.io/archive">all posts</a></h2></article>
-    -->
-  </div><!-- /#index -->
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Небольшое руководство как запустить блог на github.com и jekyll.</p>
+
+<p><strong>Команды:</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S git
+bash &lt; &lt;<span class="o">(</span>curl -s https://rvm.beginrescueend.com/install/rvm<span class="o">)</span>
+rvm install 1.9.2
+gem install jekyll
+gem install RedCloth
+easy_install Pygments
+git config --global user.name <span class="s2">&quot;user&quot;</span>
+git config --global user.email mail@gmail.com
+mkdir blog
+<span class="nb">cd </span>blog
+git clone git@github.com:jivoi/jivoi.github.io.git
+rake post
+rake deploy</code></pre></div>
+
+<p>Полезные ссылки:</p>
+
+<p>[https://github.com/mojombo/jekyll/wiki] (https://github.com/mojombo/jekyll/wiki) <br />
+<a href="http://klen.github.com/github-blog-ru.html">http://klen.github.com/github-blog-ru.html</a> <br />
+<a href="http://blog.envylabs.com/2009/08/publishing-a-blog-with-github-pages-and-jekyll/">http://blog.envylabs.com/2009/08/publishing-a-blog-with-github-pages-and-jekyll/</a> <br />
+<a href="http://pyobject.ru/blog/2010/04/15/static-blog-generators/">http://pyobject.ru/blog/2010/04/15/static-blog-generators/</a> <br />
+<a href="http://habrahabr.ru/blogs/webdev/93499/">http://habrahabr.ru/blogs/webdev/93499/</a> <br /></p>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="http://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/yajivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Используем Jekyll + Github для блога</strong> was published on <time datetime="2011-09-23T00:00:00+04:00">September 23, 2011</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
 </div><!-- /#main -->
 
 <div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="http://jivoi.github.io/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="http://jivoi.github.io/2011/10/10/answers-for-mailru/" title="Ответы для Mail.ru - Вакансия "Системный администратор"">Ответы для Mail.ru - Вакансия "Системный администратор"</a></li>
+    
+      <li><a href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" title="Как установить CentOS из %Your Linux% по SSH">Как установить CentOS из %Your Linux% по SSH</a></li>
+    
+      <li><a href="http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
   <footer>
     
 
@@ -219,7 +259,7 @@ var sc_security="015e0a49";
 </script>
 
 
+	        
 
-  
 </body>
 </html>

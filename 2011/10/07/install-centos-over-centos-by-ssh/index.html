@@ -1,0 +1,270 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Как установить CentOS из %Your Linux% по SSH &#8211; EK</title>
+<meta name="description" content="Как установить CentOS из %Your Linux% по SSH.">
+<meta name="keywords" content="centos">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Как установить CentOS из %Your Linux% по SSH">
+<meta name="twitter:description" content="Как установить CentOS из %Your Linux% по SSH.">
+<meta name="twitter:site" content="@yajivoi">
+<meta name="twitter:creator" content="@yajivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как установить CentOS из %Your Linux% по SSH">
+<meta property="og:description" content="Как установить CentOS из %Your Linux% по SSH.">
+<meta property="og:url" content="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/">
+<link href="http://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="http://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="http://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="http://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="http://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="http://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="http://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="http://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/yajivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" rel="bookmark" title="Как установить CentOS из %Your Linux% по SSH">Как установить CentOS из %Your Linux% по SSH</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Как установить CentOS из %Your Linux% по SSH.
+Это нам нужно если мы хотим поменять архитектуру i386 на AMD64 или поставить более новую версии поверх старой эв случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.</p>
+
+<p><strong>Дано:</strong>
+  1.Настроенный сервер с kickstart
+  2.Сервер с CentOS любой версии который мы будем переустанавливать
+  3.Прямые руки.</p>
+
+<p><strong>1. Скачиваем initrd и vmlinuz нужной версии</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+  wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz</code></pre></div>
+
+<p><strong>2. Правим /boot/grub/grub.conf</strong>
+<strong>ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!
+1.ks файл
+2.IP\GATE\NETMASK!</strong></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">title CentOS Remote Install
+  root <span class="o">(</span>hd0,0<span class="o">)</span>
+  kernel /boot/vmlinuz_remote <span class="nv">lang</span><span class="o">=</span>en_US <span class="nv">keymap</span><span class="o">=</span>us <span class="nv">method</span><span class="o">=</span>http://ks.example.com/ <span class="nv">ks</span><span class="o">=</span>http://ks.example.com/ks.cfg <span class="nv">ip</span><span class="o">=</span>192.168.0.10 <span class="nv">netmask</span><span class="o">=</span>255.255.255.0 <span class="nv">gateway</span><span class="o">=</span>192.168.0.1 <span class="nv">dns</span><span class="o">=</span>8.8.8.8 noselinux headless 
+  initrd /boot/initrd_remote.img</code></pre></div>
+
+<p><strong>3.Правим порядок загрузки из консоли</strong></p>
+
+<p>Предполагается, что наша конфигурация идет  вторым пунктом меню. 
+  Мы указали grub попробовать загрузить ее один раз. 
+  Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c"># echo &#39;savedefault --default=1 --once&#39; | grub --batch</span></code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="http://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/yajivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Как установить CentOS из %Your Linux% по SSH</strong> was published on <time datetime="2011-10-07T00:00:00+04:00">October 07, 2011</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="http://jivoi.github.io/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="http://jivoi.github.io/2011/10/10/answers-for-mailru/" title="Ответы для Mail.ru - Вакансия "Системный администратор"">Ответы для Mail.ru - Вакансия "Системный администратор"</a></li>
+    
+      <li><a href="http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></li>
+    
+      <li><a href="http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" title="Устанавливаем Chef-Server и Chef-Client на CentOS 6">Устанавливаем Chef-Server и Chef-Client на CentOS 6</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-10178897-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+	        
+
+</body>
+</html>

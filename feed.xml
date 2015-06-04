@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+<title type="text">EK</title>
+<generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
+<link rel="self" type="application/atom+xml" href="http://jivoi.github.io/feed.xml" />
+<link rel="alternate" type="text/html" href="http://jivoi.github.io" />
+<icon>https://i.imgur.com/s7cqI3w.jpg</icon>
+<updated>2015-06-04T14:40:38+03:00</updated>
+<id>http://jivoi.github.io/</id>
+<author>
+  <name>EK</name>
+  <uri>http://jivoi.github.io/</uri>
+  <email></email>
+</author>
+
+
+<entry>
+  <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия "Системный администратор"]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/10/answers-for-mailru/" />
+  <id>http://jivoi.github.io/2011/10/10/answers-for-mailru</id>
+  <published>2011-10-10T00:00:00+04:00</published>
+  <updated>2011-10-10T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
+&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 1.&lt;/strong&gt;  Что такое load average в юникс системах?
+(Ответ требует конкретной формулировки.)
+&lt;strong&gt;Ответ:&lt;/strong&gt; Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения.
+“Более подробно тут”:qhttp://knp84.livejournal.com/4835.html&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 2.&lt;/strong&gt; Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется?
+(Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)
+&lt;strong&gt;Ответ:&lt;/strong&gt; MaxRequestsPerChild это значение из конфигурации Apache. Она указывает сколько запросов может обработать дочерний процесс апача перед тем как он будет завершен.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 3.&lt;/strong&gt; На сервере заканчивается место в разделе с логами. Какие процессы пишут логи неизвестно, ротейт логов не настроен. Проблему надо разрешить, сохранив сами логи.
+&lt;strong&gt;Ответ:&lt;/strong&gt; Использя команду ls -la посмотреть значение последней модификации файлов, найти самые старые,переместить\сжать их куданить где есть место, так же можно использовать команду find c ключами -mmin\mtime и еще один способо используя команду lsof узнать какие файловые дискрипторы используются на разделе с логами.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 4.&lt;/strong&gt; Напишите программу на bourne shell (не bash!) и/или perl, выводящую простые (делятся на только на 1 и на само себя) числа от 1 до 500.
+&lt;strong&gt;Ответ:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;enter a range 
+ &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;rng 
+ &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; 
+ &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$rng&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
+ &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; 
+ &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; % &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; -ne &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; 
+ &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; 
+ &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -eq &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; 
+ &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt; 
+ &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
+ &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 5.&lt;/strong&gt; Написать регулярное выражение под которое подходит число от 1 до 1999
+[1-1999]
+&lt;strong&gt;Ответ:&lt;/strong&gt; echo -e ‘10\n2\n199\n10000\n’|grep -P ‘^1?\d{1,3}$’&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Вопрос 6.&lt;/strong&gt; На каком уровне 7-миуровневой модели ISO OSI работает протокол udp? (ответ можо написать названием, можно номером)
+&lt;strong&gt;Ответ:&lt;/strong&gt; Транспортный уровень - 4 номер.&lt;/p&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/10/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия "Системный администратор"&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 10, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Как установить CentOS из %Your Linux% по SSH]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" />
+  <id>http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh</id>
+  <published>2011-10-07T00:00:00+04:00</published>
+  <updated>2011-10-07T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Как установить CentOS из %Your Linux% по SSH.
+Это нам нужно если мы хотим поменять архитектуру i386 на AMD64 или поставить более новую версии поверх старой эв случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Дано:&lt;/strong&gt;
+  1.Настроенный сервер с kickstart
+  2.Сервер с CentOS любой версии который мы будем переустанавливать
+  3.Прямые руки.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Скачиваем initrd и vmlinuz нужной версии&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+  wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Правим /boot/grub/grub.conf&lt;/strong&gt;
+&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!
+1.ks файл
+2.IP\GATE\NETMASK!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;title CentOS Remote Install
+  root &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hd0,0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  kernel /boot/vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless 
+  initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;3.Правим порядок загрузки из консоли&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Предполагается, что наша конфигурация идет  вторым пунктом меню. 
+  Мы указали grub попробовать загрузить ее один раз. 
+  Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS из %Your Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 07, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" />
+  <id>http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh</id>
+  <published>2011-10-05T00:00:00+04:00</published>
+  <updated>2011-10-05T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
+Задавайте вопросы в комментах, если что-то не понятно.&lt;/p&gt;
+
+&lt;p&gt;Дано:
+1.Настроенный сервер с kickstart
+2.Сервер с FreeBSD любой версии который будем переустанавливать
+3.Прямые руки. =)&lt;/p&gt;
+
+&lt;p&gt;1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD
+cd /usr/ports/sysutils/grub2&amp;amp;&amp;amp;make install
+cd /usr/ports/sysutils/e2fsprogs&amp;amp;&amp;amp;make install&lt;/p&gt;
+
+&lt;p&gt;2.Создаем на разделе /tmp ext2 файловую систему
+/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
+/dev/amrd0s1f on /tmp (ufs, local, soft-updates)&lt;/p&gt;
+
+&lt;p&gt;umount /tmp
+mke2fs /dev/amrd0s1f
+mount -t ext2fs /dev/amrd0s1f /mnt&lt;/p&gt;
+
+&lt;p&gt;Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Копируем на ext2 раздел initrd и vmlinuz нужной версии
+fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/p&gt;
+
+&lt;p&gt;4.Устанавливаем grub2 в MBR и создаем кофиг загрузки
+grub2-install /dev/amrd0
+grub-mkconfig
+/usr/local/etc/grub.d/00_header
+/usr/local/etc/grub.d/40_custom
+grub-mkconfig -o /boot/grub/grub.cfg&lt;/p&gt;
+
+&lt;p&gt;Нужнно поправить /usr/local/etc/grub.d/00_header выставив default=1
+В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.
+ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ! 
+1.root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f
+2.ks файл
+3.IP\GATE\NETMASK!
+4.НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!&lt;/p&gt;
+
+&lt;p&gt;menuentry “CentOS”  {
+        insmod ext2
+        set root=’(hd0,1,f)’
+        linux /vmlinuz_remote lang=en_US keymap=us method=http://ks.example.com/ ks=http://ks.example.com/ks.cfg vnc vncpassword=qwe123 ksdevice=eth0 ip=192.168.0.10 netmask=255.255.255.0 gateway=192.168.0.1 dns=8.8.8.8 noselinux headless
+        initrd /initrd_remote.img
+}&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 05, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Устанавливаем Chef-Server и Chef-Client на CentOS 6]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" />
+  <id>http://jivoi.github.io/2011/09/28/install-chef-server-on-centos</id>
+  <published>2011-09-28T00:00:00+04:00</published>
+  <updated>2011-09-28T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/chef.jpg&quot; alt=&quot;chef&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Если кто не знает Chef - это CMT (configuration management tool) написан на ruby.&lt;/p&gt;
+
+&lt;p&gt;Набор команд которые нужно выполнть чтобы все заработало на CentOS 6.
+Ставить будем на x64, но все это также будет работать и на i386.
+Поехали.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Chef-Client:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;+# Ставим нужные пакеты+&lt;/p&gt;
+
+&lt;p&gt;rpm -Uvh http://rbel.co/rbel6
+yum install rubygem-chef&lt;/p&gt;
+
+&lt;p&gt;+# Настраиваем конфиг клиента+&lt;/p&gt;
+
+&lt;p&gt;cat &amp;gt; /etc/chef/client.rb «-EOF&lt;/p&gt;
+
+&lt;p&gt;log_level                :info
+log_location             STDOUT
+node_name                ‘node.test.ru’
+client_key               ‘/etc/chef/client.pem’
+interval                ‘300’ &lt;br /&gt;
+validation_client_name   ‘chef-validator’
+validation_key           ‘/etc/chef/validation.pem’
+chef_server_url          ‘http://servers.test.ru:4000’
+cache_type               ‘BasicFile’
+cache_options( :path =&amp;gt; ‘/etc/chef/checksums’ )&lt;/p&gt;
+
+&lt;p&gt;EOF&lt;/p&gt;
+
+&lt;p&gt;запускать /etc/init.d/chef-client только после установки Chef-Server!&lt;/p&gt;
+
+&lt;p&gt;+# Правим iptables+&lt;/p&gt;
+
+&lt;h1 id=&quot;chef&quot;&gt;Chef&lt;/h1&gt;
+&lt;p&gt;# – web interface
+$IPT -A INPUT -p tcp –dport 4040 -j ACCEPT
+# – chef-server
+$IPT -A INPUT -p tcp –dport 4000 -j ACCEPT
+# – amqp server
+$IPT -A INPUT -p tcp -m multiport –dport 5672,4369,50229 -j ACCEPT
+# – search indexes (solr)
+$IPT -A INPUT -p tcp –dport 8983 -j ACCEPT
+# data store (couchdb)
+$IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Chef-Server:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;+# Ставим нужные пакеты+&lt;/p&gt;
+
+&lt;p&gt;rpm -Uvh http://rbel.co/rbel6
+yum install rubygem-chef-server&lt;/p&gt;
+
+&lt;p&gt;+# Запускаем скрипт настройки+&lt;/p&gt;
+
+&lt;p&gt;setup-chef-server.sh&lt;/p&gt;
+
+&lt;p&gt;+# Правим iptables+&lt;/p&gt;
+
+&lt;h1 id=&quot;chef-1&quot;&gt;Chef&lt;/h1&gt;
+&lt;p&gt;# – web interface
+$IPT -A INPUT -p tcp –dport 4040 -j ACCEPT
+# – chef-server
+$IPT -A INPUT -p tcp –dport 4000 -j ACCEPT
+# – amqp server
+$IPT -A INPUT -p tcp -m multiport –dport 5672,4369,50229 -j ACCEPT
+# – search indexes (solr)
+$IPT -A INPUT -p tcp –dport 8983 -j ACCEPT
+# data store (couchdb)
+$IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
+
+&lt;p&gt;+# Перезапускам демонов+&lt;/p&gt;
+
+&lt;p&gt;/etc/init.d/chef-server restart
+/etc/init.d/chef-server-webui restart&lt;/p&gt;
+
+&lt;p&gt;+# Копируем приватный ключи на клиентa+&lt;/p&gt;
+
+&lt;p&gt;scp /etc/chef/validation.pem login@client.test.ru:/etc/chef/validation.pem&lt;/p&gt;
+
+&lt;p&gt;+# Настраиваем knife+&lt;/p&gt;
+
+&lt;p&gt;knife configure -i&lt;/p&gt;
+
+&lt;p&gt;+# Смотрим в админку+&lt;/p&gt;
+
+&lt;p&gt;http://your-chef-server:4040&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Полезные ссылки:&lt;/strong&gt;
+“Opscode Open Source Wiki”:http://wiki.opscode.com/display/chef/Home
+“Chef Tutorial”:http://blog.afistfulofservers.net/post/3902042503/a-brief-chef-tutorial-from-concentrate&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/&quot;&gt;Устанавливаем Chef-Server и Chef-Client на CentOS 6&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 28, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Саундтреки из Лыжных фильмов]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/23/ski-ost/" />
+  <id>http://jivoi.github.io/2011/09/23/ski-ost</id>
+  <published>2011-09-23T00:00:00+04:00</published>
+  <updated>2011-09-23T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/ski.jpg&quot; alt=&quot;ski&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Спешу поделится с вами небольшой но постоянно растущей коллекцией саундреков из лыжных фильмов. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Список&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Propaganda (Poor Boyz Productions, 2001) &lt;a href=&quot;http://oigen.ifolder.ru/25955013&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Happy Dayz (Poor Boyz Productions, 2002) &lt;a href=&quot;http://oigen.ifolder.ru/25955012&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Ready Fire Aim (Poor Boyz Productions, 2003) &lt;a href=&quot;http://oigen.ifolder.ru/25955014&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Yearbook (Matchstick Productions, 2004) &lt;a href=&quot;http://oigen.ifolder.ru/25958256&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The Hit List (Matchstick Productions, 2005) &lt;a href=&quot;http://oigen.ifolder.ru/25958253&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Teddy Bear Crisis (  Teddy Bear Crisis, 2005) &lt;a href=&quot;http://oigen.ifolder.ru/25958255&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Ski Porn (Poor Boyz Productions, 2006) &lt;a href=&quot;http://oigen.ifolder.ru/25955020&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Push (Matchstick Productions, 2006) &lt;a href=&quot;http://oigen.ifolder.ru/26013447&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Believe (Studio 411, 2007) &lt;a href=&quot;http://oigen.ifolder.ru/25951955&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Realtime (Level 1 Productions, 2007) &lt;a href=&quot;http://oigen.ifolder.ru/25955015&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Seven Sunny Days (Matchstick Productions, 2007) &lt;a href=&quot;http://oigen.ifolder.ru/25955017&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Idea (Poor Boyz Productions, 2007) &lt;a href=&quot;http://oigen.ifolder.ru/25958258&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Claim (Matchstick Productions, 2008) &lt;a href=&quot;http://oigen.ifolder.ru/25951956&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Hot Lunch (Joystick team, 2008) &lt;a href=&quot;http://oigen.ifolder.ru/25951959&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Lost &amp;amp; Found (TGR, 2008) &lt;a href=&quot;http://oigen.ifolder.ru/25953378&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Turbo (Level 1 Productions, 2008) &lt;a href=&quot;http://oigen.ifolder.ru/25958254&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Contrast (Nimbus Independent, 2009) &lt;a href=&quot;http://oigen.ifolder.ru/25951957&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Everyday Is A Saturday (Poor Boyz Productions, 2009) &lt;a href=&quot;http://oigen.ifolder.ru/25951958&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Refresh (Level 1 Productions, 2009) &lt;a href=&quot;http://oigen.ifolder.ru/25953375&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Shoot Me (Chaoz Productions, 2009) &lt;a href=&quot;http://oigen.ifolder.ru/25955018&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;EYE TRIP (Level 1 Productions, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25953374&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Like A Lion (Inspired Media Concepts, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25953376&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Look on The Bright Side (Voleurz, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25953377&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Revolver (Poor Boyz Productions, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25955010&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Separation (Illegal Production, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25955016&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Side By Side (Field Productions, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25955019&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Light The Wick (TGR, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25958252&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The Way I See It (Matchstick Productions, 2010) &lt;a href=&quot;http://oigen.ifolder.ru/25958257&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;+===== OST of 2011 — 2012 season =) =====+
+1. Afterdark (Level 1 Productions, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26462161&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+2. All I Can (Sherpas Cinema, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/27996760&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/23/ski-ost/&quot;&gt;Саундтреки из Лыжных фильмов&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Используем Jekyll + Github для блога]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/23/install-jekyll-blog/" />
+  <id>http://jivoi.github.io/2011/09/23/install-jekyll-blog</id>
+  <published>2011-09-23T00:00:00+04:00</published>
+  <updated>2011-09-23T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Небольшое руководство как запустить блог на github.com и jekyll.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Команды:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S git
+bash &amp;lt; &amp;lt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;curl -s https://rvm.beginrescueend.com/install/rvm&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+rvm install 1.9.2
+gem install jekyll
+gem install RedCloth
+easy_install Pygments
+git config --global user.name &lt;span class=&quot;s2&quot;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;
+git config --global user.email mail@gmail.com
+mkdir blog
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;blog
+git clone git@github.com:jivoi/jivoi.github.io.git
+rake post
+rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Полезные ссылки:&lt;/p&gt;
+
+&lt;p&gt;[https://github.com/mojombo/jekyll/wiki] (https://github.com/mojombo/jekyll/wiki) &lt;br /&gt;
+&lt;a href=&quot;http://klen.github.com/github-blog-ru.html&quot;&gt;http://klen.github.com/github-blog-ru.html&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;http://blog.envylabs.com/2009/08/publishing-a-blog-with-github-pages-and-jekyll/&quot;&gt;http://blog.envylabs.com/2009/08/publishing-a-blog-with-github-pages-and-jekyll/&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;http://pyobject.ru/blog/2010/04/15/static-blog-generators/&quot;&gt;http://pyobject.ru/blog/2010/04/15/static-blog-generators/&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;http://habrahabr.ru/blogs/webdev/93499/&quot;&gt;http://habrahabr.ru/blogs/webdev/93499/&lt;/a&gt; &lt;br /&gt;&lt;/p&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/23/install-jekyll-blog/&quot;&gt;Используем Jekyll + Github для блога&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[MTB саундтреки]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/22/mtb-ost/" />
+  <id>http://jivoi.github.io/2011/09/22/mtb-ost</id>
+  <published>2011-09-22T00:00:00+04:00</published>
+  <updated>2011-09-22T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/mtb.jpg&quot; alt=&quot;mtb&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Немного саундтреков для любителей MTB. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.&lt;/p&gt;
+
+&lt;p&gt;Список:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;New World Disorder I OST  &lt;a href=&quot;http://ifolder.ru/24469598&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder II OST  &lt;a href=&quot;http://ifolder.ru/24510268&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder III OST  &lt;a href=&quot;http://ifolder.ru/24510669&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder IV OST  &lt;a href=&quot;http://ifolder.ru/24529258&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder V OST  &lt;a href=&quot;http://ifolder.ru/24529259&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder VI OST  &lt;a href=&quot;http://ifolder.ru/24529260&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder VII OST  &lt;a href=&quot;http://ifolder.ru/24529261&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder VIII OST  &lt;a href=&quot;http://ifolder.ru/24529262&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;New World Disorder IX OST  &lt;a href=&quot;http://ifolder.ru/24529263&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;From the Inside Out (Secondbasefilms, 2011)  &lt;a href=&quot;http://oigen.ifolder.ru/29279189&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;LifeCycles - Unofficial Soundtrack (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/29331084&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/22/mtb-ost/&quot;&gt;MTB саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 22, 2011.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Сноуборд саундтреки]]></title>
+  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/21/snowboard-ost/" />
+  <id>http://jivoi.github.io/2011/09/21/snowboard-ost</id>
+  <published>2011-09-21T00:00:00+04:00</published>
+  <updated>2011-09-21T00:00:00+04:00</updated>
+  <author>
+    <name>EK</name>
+    <uri>http://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/snow.jpg&quot; alt=&quot;snow&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Достаточно давно я собираю саундтреки(OST) из Сноуборд видео и из года в год их все больше и больше и теперь я хочу поделится ими с вами. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях. Check It!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Список:&lt;/strong&gt;
+1. Overseas (Pirate Movie Production, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719188&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+2. Knockout (Alterna Films, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719227&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+3. Aesthetica (Standard Films, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719299&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+4. The Lab  &lt;a href=&quot;http://oigen.ifolder.ru/10718948&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+5. Guns Out (Variety Pack, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719262&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+6. КУХНЯ от Stereotactic  &lt;a href=&quot;http://oigen.ifolder.ru/10718829&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+7. That’s It, That’s All (Brain Farm, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719062&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+8. Notes (Factor Films, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719200&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+9. Pony Tale (Actionhorse Films, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719149&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+10. Forum Or Against’Em (Forum Snowboards, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10719278&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+11. Lost in Transition (Standard Films, 2004)  &lt;a href=&quot;http://oigen.ifolder.ru/10719217&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+12. Positron (Whiteout Films, 2004)  &lt;a href=&quot;http://oigen.ifolder.ru/10719123&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+13. Thank’s Brain! (Think Thank, 2007)  &lt;a href=&quot;http://oigen.ifolder.ru/10720933&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+14. In Transit (Alterna Films, 2006)  &lt;a href=&quot;http://oigen.ifolder.ru/10719248&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+15. Vivid (Absinthe Films, 2002)  &lt;a href=&quot;http://oigen.ifolder.ru/10718835&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+16. Teenage Love Graffiti (Isenseven, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10721281&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+17. Double Decade  &lt;a href=&quot;http://oigen.ifolder.ru/14936085&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+18. Familia  &lt;a href=&quot;http://oigen.ifolder.ru/10721669&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+19. Ubermovie (Isenseven, 2007)  &lt;a href=&quot;http://oigen.ifolder.ru/10721743&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+20. Pirate Movie Production  &lt;a href=&quot;http://oigen.ifolder.ru/10731704&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+21. Shaun White Snowboarding (Ubisoft, 2008) &lt;a href=&quot;http://oigen.ifolder.ru/10732486&quot; target=&quot;_blank&quot;&gt;Скачать Part1&lt;/a&gt; &lt;a href=&quot;http://oigen.ifolder.ru/10732517&quot; target=&quot;_blank&quot;&gt;Скачать Part2&lt;/a&gt; &lt;a href=&quot; http://oigen.ifolder.ru/10732522&quot; target=&quot;_blank&quot;&gt;Скачать Part3&lt;/a&gt;
+22. It’s Always Snowing Somewhere (North Sphere 2008) &lt;a href=&quot;http://oigen.ifolder.ru/10733191&quot; target=&quot;_blank&quot;&gt;Скачать Part1&lt;/a&gt; &lt;a href=&quot; http://oigen.ifolder.ru/10733197&quot; target=&quot;_blank&quot;&gt;Скачать Part2&lt;/a&gt;
+23. I Ride Park City (2008)  &lt;a href=&quot;http://oigen.ifolder.ru/10733786&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+24. Afterbang  &lt;a href=&quot;http://oigen.ifolder.ru/10734589&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+25. Apples And Oranges  &lt;a href=&quot;http://oigen.ifolder.ru/10734808&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+26. Catch The Vapors  &lt;a href=&quot;http://oigen.ifolder.ru/10735465&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+27. Child Support  &lt;a href=&quot;http://oigen.ifolder.ru/10736060&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+28. Chulksmack  &lt;a href=&quot;http://oigen.ifolder.ru/10736826&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+29. Cold World  &lt;a href=&quot;http://oigen.ifolder.ru/10738132&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+30. DC Mtn Lab 1.5  &lt;a href=&quot;http://oigen.ifolder.ru/10739260&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+31. Decade  &lt;a href=&quot;http://oigen.ifolder.ru/10748016&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+32. Derelictica  &lt;a href=&quot;http://oigen.ifolder.ru/10748942&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+33. След Души (White Label, 2008)  &lt;a href=&quot;http://oigen.ifolder.ru/11322874&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+34. Elekrep  &lt;a href=&quot;http://oigen.ifolder.ru/10749870&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+35. Well (Insenseven)  &lt;a href=&quot;http://oigen.ifolder.ru/10751042&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+36. Lines (Billabong)  &lt;a href=&quot;http://oigen.ifolder.ru/10751761&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+37. Montreal (Sunset Films 2006)  &lt;a href=&quot;http://oigen.ifolder.ru/10752566&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+38. Nixon — Jib Fest  &lt;a href=&quot;http://oigen.ifolder.ru/10753037&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+39. No Air No Grab (Gudd One Productions)  &lt;a href=&quot;http://oigen.ifolder.ru/10754111&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+40. One Love (Finger On Da Trigger)  &lt;a href=&quot;http://oigen.ifolder.ru/10755123&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+41. One Track Mind  &lt;a href=&quot;http://oigen.ifolder.ru/10766031&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+42. Optimistic  &lt;a href=&quot;http://oigen.ifolder.ru/10766312&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+43. Picture This (Mack Dawg Production)  &lt;a href=&quot;http://oigen.ifolder.ru/10766998&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+44. Pop (Absinthe Films)  &lt;a href=&quot;http://oigen.ifolder.ru/10769317&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+45. Forum — That  &lt;a href=&quot;http://oigen.ifolder.ru/10769999&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+46. True Life (Mack Dawg Productions)  &lt;a href=&quot;http://oigen.ifolder.ru/10770975&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+47. Up In The Sky  &lt;a href=&quot;http://oigen.ifolder.ru/10772229&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+48. Video Gangs  &lt;a href=&quot;http://oigen.ifolder.ru/10772725&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+49. Марафон  &lt;a href=&quot;http://oigen.ifolder.ru/10773164&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+50. Afterlame (Robot Food)  &lt;a href=&quot;http://oigen.ifolder.ru/10962759&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+51. Lame (Robot Food)  &lt;a href=&quot;http://oigen.ifolder.ru/10963174&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+52. Moment of Truth  &lt;a href=&quot;http://oigen.ifolder.ru/10963428&quot; target=&quot;_blank&quot;&gt;Скачать Part1&lt;/a&gt; &lt;a href=&quot;http://oigen.ifolder.ru/10963675&quot; target=&quot;_blank&quot;&gt;Скачать Part2&lt;/a&gt;
+53. Optigrab (Standard Films TB10)  &lt;a href=&quot;http://oigen.ifolder.ru/10965372&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+54. Shakedown (MDP)  &lt;a href=&quot;http://oigen.ifolder.ru/10965683&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+55. Technical Difficulties (MDP)  &lt;a href=&quot;http://oigen.ifolder.ru/10965853&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+56. The Resistance (MDP)  &lt;a href=&quot;http://oigen.ifolder.ru/10966087&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+57. Shaun White — Album  &lt;a href=&quot;http://oigen.ifolder.ru/10966251&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+58. White_Balance  &lt;a href=&quot;http://oigen.ifolder.ru/10966523&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+59. Revision Films — Life  &lt;a href=&quot;http://oigen.ifolder.ru/10967172&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+60. Corduroy  &lt;a href=&quot;http://oigen.ifolder.ru/10967365&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+61. Draw The Line  &lt;a href=&quot;http://oigen.ifolder.ru/10967659&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+62. Flavor Country  &lt;a href=&quot;http://oigen.ifolder.ru/10967950&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+63. Isenseven Prediculous  &lt;a href=&quot;http://oigen.ifolder.ru/10968063&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+64. Follow Me Around (MDP)  &lt;a href=&quot;http://oigen.ifolder.ru/10968261&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+65. PokOskopOs  &lt;a href=&quot;http://oigen.ifolder.ru/10968416&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+66. Storbis VI  &lt;a href=&quot;http://oigen.ifolder.ru/10968481&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+67. W.I.P Revision Films  &lt;a href=&quot;http://oigen.ifolder.ru/10968620&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+68. King Size  &lt;a href=&quot;http://oigen.ifolder.ru/11071367&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+69. Smell The Glove (Grenade)  &lt;a href=&quot;http://oigen.ifolder.ru/11153281&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+70. Committed (Strait Jacket Films)  &lt;a href=&quot;http://oigen.ifolder.ru/11385822&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+71. Dope Shit  &lt;a href=&quot;http://oigen.ifolder.ru/11385835&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+72. Love Hate (Kidsknow 2005)  &lt;a href=&quot;http://oigen.ifolder.ru/11385905&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+73. Showdown  &lt;a href=&quot;http://oigen.ifolder.ru/11385986&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+74. The Massive  &lt;a href=&quot;http://oigen.ifolder.ru/12129899&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+75. Push  &lt;a href=&quot;http://oigen.ifolder.ru/12130152&quot; target=&quot;_blank&quot;&gt;Скачать Part1&lt;/a&gt; &lt;a href=&quot; http://oigen.ifolder.ru/12130173&quot; target=&quot;_blank&quot;&gt;Скачать Part2&lt;/a&gt;
+76. Futureproof  &lt;a href=&quot;http://oigen.ifolder.ru/12130564&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+77. Enjoy  &lt;a href=&quot;http://oigen.ifolder.ru/12800644&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+78. In Short (2008)  &lt;a href=&quot;http://oigen.ifolder.ru/13012636&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+79. Belive (2007)  &lt;a href=&quot;http://oigen.ifolder.ru/13326235&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+80. PMP Walk The Plank Bonus — Still Boardbagged (2007)  &lt;a href=&quot;http://oigen.ifolder.ru/13918379&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+81. Full Metal Edges (2003)  &lt;a href=&quot;http://oigen.ifolder.ru/14170711&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+82. Saturation (2003)  &lt;a href=&quot;http://oigen.ifolder.ru/14170816&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+83. State of Mind (2006)  &lt;a href=&quot;http://oigen.ifolder.ru/14170853&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+84. Frosted Flakes (2006)  &lt;a href=&quot;http://oigen.ifolder.ru/14170920&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+85. Walk the plank — Пройди по планке(2007)  &lt;a href=&quot;http://oigen.ifolder.ru/14350102&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+86. Völkl Snowboard OST  &lt;a href=&quot;http://oigen.ifolder.ru/14618667&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+87. Mack Dawg — PULSE  &lt;a href=&quot;http://oigen.ifolder.ru/14848232&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+88. MMP — Snowbored  &lt;a href=&quot;http://oigen.ifolder.ru/14848318&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+89. Wildcats — Blackout  &lt;a href=&quot;http://oigen.ifolder.ru/14848362&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+90. Rome — Any Means  &lt;a href=&quot;http://oigen.ifolder.ru/14848427&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+91. Outof Nowhere Production — Ehhh!  &lt;a href=&quot;http://oigen.ifolder.ru/14848479&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+92. Sandbox — Time Well Wasted  &lt;a href=&quot;http://oigen.ifolder.ru/14848556&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+93. Mack Dawg — AMP  &lt;a href=&quot;http://oigen.ifolder.ru/14848819&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+94. The Band Wagon  &lt;a href=&quot;http://oigen.ifolder.ru/17063739&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+95. Ready To  &lt;a href=&quot;http://oigen.ifolder.ru/17420040&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+96. ESPN X Games Pro Boarder  &lt;a href=&quot;http://oigen.ifolder.ru/17420411&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+97. Shaba Pictures — Color Me  &lt;a href=&quot;http://oigen.ifolder.ru/17493524&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+98. Pirate Movie Production — Jolly Roger  &lt;a href=&quot;http://oigen.ifolder.ru/17506615&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+99. People Creative — Nice Try  &lt;a href=&quot;http://oigen.ifolder.ru/17509195&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
+100. M-Movie — 007  &lt;a href=&quot;http://oigen.ifolder.ru/17567748&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;+===== OST of 2009 — 2010 season =) =====+&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Think Thank — Cool Story (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14170962&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Absinthe — Neverland (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14215359&quot; target=&quot;_blank&quot;&gt;Скачать - Part1&lt;/a&gt; &lt;a href=&quot; http://oigen.ifolder.ru/14215364&quot; target=&quot;_blank&quot;&gt;Скачать - Part2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Burton — The B Movie (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14456049&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Alterna — Elektro OST (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14709213&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Standard Films — Black Winter (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14709370&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Forever — Forum (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/14714812&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Almost Dead (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/15078192&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;This Video Sucks (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/15264142&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Isenseven — Lets Go Get Lost (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/15367508&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Transworld Get Real OST (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/15468672&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Factor Films — THEY CAME FROM (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/16667675&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;RE: by Stereotactics (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/17490838&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Finger On Da Trigger — Hard To Earn OST (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/17491768&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;NCproduction — From Scratch  &lt;a href=&quot;http://oigen.ifolder.ru/17503422&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;+===== OST of 2010 — 2011 season =) =====+&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Jeremy Jones Deeper  &lt;a href=&quot;http://oigen.ifolder.ru/20581697&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Isenseven — Don’t Panic!  &lt;a href=&quot;http://oigen.ifolder.ru/20581842&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Absinthe Films — NowHere  &lt;a href=&quot;http://oigen.ifolder.ru/20581945&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Think Thank — Right Brain Left Brain  &lt;a href=&quot;http://oigen.ifolder.ru/20582337&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Standard Films — The Storming  &lt;a href=&quot;http://oigen.ifolder.ru/20582400&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Pirate Movie Production — Hooked  &lt;a href=&quot;http://oigen.ifolder.ru/20667046&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;All In — Chaoz Production  &lt;a href=&quot;http://oigen.ifolder.ru/21063315&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Erosion — Lagnordfilms  &lt;a href=&quot;http://oigen.ifolder.ru/21063374&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;DC`s IT  &lt;a href=&quot;http://oigen.ifolder.ru/21300747 &quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Eurogap 3 — Pablo Films  &lt;a href=&quot;http://oigen.ifolder.ru/21300901&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;We Are 2012  &lt;a href=&quot;http://oigen.ifolder.ru/21585029&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Snowporning The 10th Movie  &lt;a href=&quot;http://oigen.ifolder.ru/23235861&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;+===== OST of 2011 — 2012 season =) =====+&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The Art of FLIGHT (Brain Farm, 2011)  &lt;a href=&quot;http://oigen.ifolder.ru/25929594&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Standing Sideways (Burton, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26462155&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Weight (Stept Productions, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26462158&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;13 O’Clock (Alterna Films, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26660757&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Vacation (Forum Snowboards, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26811851&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Kaleidoscope (Isenseven Productions, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26864900&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/21/snowboard-ost/&quot;&gt;Сноуборд саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 21, 2011.&lt;/p&gt;</content>
+</entry>
+
+</feed>
