@@ -2,27 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">EK</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://jivoi.github.io/feed.xml" />
-<link rel="alternate" type="text/html" href="http://jivoi.github.io" />
+<link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
+<link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-04T14:40:38+03:00</updated>
-<id>http://jivoi.github.io/</id>
+<updated>2015-06-04T14:45:07+03:00</updated>
+<id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
-  <uri>http://jivoi.github.io/</uri>
+  <uri>https://jivoi.github.io/</uri>
   <email></email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия "Системный администратор"]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/10/answers-for-mailru/" />
-  <id>http://jivoi.github.io/2011/10/10/answers-for-mailru</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/10/answers-for-mailru/" />
+  <id>https://jivoi.github.io/2011/10/10/answers-for-mailru</id>
   <published>2011-10-10T00:00:00+04:00</published>
   <updated>2011-10-10T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
@@ -76,19 +76,19 @@
 &lt;strong&gt;Ответ:&lt;/strong&gt; Транспортный уровень - 4 номер.&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/10/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия "Системный администратор"&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 10, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/10/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия "Системный администратор"&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 10, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Как установить CentOS из %Your Linux% по SSH]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" />
-  <id>http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" />
+  <id>https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh</id>
   <published>2011-10-07T00:00:00+04:00</published>
   <updated>2011-10-07T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Как установить CentOS из %Your Linux% по SSH.
@@ -123,19 +123,19 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS из %Your Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 07, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS из %Your Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 07, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" />
-  <id>http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" />
+  <id>https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh</id>
   <published>2011-10-05T00:00:00+04:00</published>
   <updated>2011-10-05T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
@@ -191,19 +191,19 @@ grub-mkconfig -o /boot/grub/grub.cfg&lt;/p&gt;
         initrd /initrd_remote.img
 }&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 05, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 05, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Устанавливаем Chef-Server и Chef-Client на CentOS 6]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" />
-  <id>http://jivoi.github.io/2011/09/28/install-chef-server-on-centos</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" />
+  <id>https://jivoi.github.io/2011/09/28/install-chef-server-on-centos</id>
   <published>2011-09-28T00:00:00+04:00</published>
   <updated>2011-09-28T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/chef.jpg&quot; alt=&quot;chef&quot; /&gt;&lt;/p&gt;
@@ -300,19 +300,19 @@ $IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
 “Opscode Open Source Wiki”:http://wiki.opscode.com/display/chef/Home
 “Chef Tutorial”:http://blog.afistfulofservers.net/post/3902042503/a-brief-chef-tutorial-from-concentrate&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/28/install-chef-server-on-centos/&quot;&gt;Устанавливаем Chef-Server и Chef-Client на CentOS 6&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 28, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/28/install-chef-server-on-centos/&quot;&gt;Устанавливаем Chef-Server и Chef-Client на CentOS 6&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 28, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Саундтреки из Лыжных фильмов]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/23/ski-ost/" />
-  <id>http://jivoi.github.io/2011/09/23/ski-ost</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/23/ski-ost/" />
+  <id>https://jivoi.github.io/2011/09/23/ski-ost</id>
   <published>2011-09-23T00:00:00+04:00</published>
   <updated>2011-09-23T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/ski.jpg&quot; alt=&quot;ski&quot; /&gt;&lt;/p&gt;
@@ -356,19 +356,19 @@ $IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
 1. Afterdark (Level 1 Productions, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/26462161&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;
 2. All I Can (Sherpas Cinema, 2011) &lt;a href=&quot;http://oigen.ifolder.ru/27996760&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/23/ski-ost/&quot;&gt;Саундтреки из Лыжных фильмов&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/23/ski-ost/&quot;&gt;Саундтреки из Лыжных фильмов&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Используем Jekyll + Github для блога]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/23/install-jekyll-blog/" />
-  <id>http://jivoi.github.io/2011/09/23/install-jekyll-blog</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/23/install-jekyll-blog/" />
+  <id>https://jivoi.github.io/2011/09/23/install-jekyll-blog</id>
   <published>2011-09-23T00:00:00+04:00</published>
   <updated>2011-09-23T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Небольшое руководство как запустить блог на github.com и jekyll.&lt;/p&gt;
@@ -398,19 +398,19 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;a href=&quot;http://habrahabr.ru/blogs/webdev/93499/&quot;&gt;http://habrahabr.ru/blogs/webdev/93499/&lt;/a&gt; &lt;br /&gt;&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/23/install-jekyll-blog/&quot;&gt;Используем Jekyll + Github для блога&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/23/install-jekyll-blog/&quot;&gt;Используем Jekyll + Github для блога&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 23, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[MTB саундтреки]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/22/mtb-ost/" />
-  <id>http://jivoi.github.io/2011/09/22/mtb-ost</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/22/mtb-ost/" />
+  <id>https://jivoi.github.io/2011/09/22/mtb-ost</id>
   <published>2011-09-22T00:00:00+04:00</published>
   <updated>2011-09-22T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/mtb.jpg&quot; alt=&quot;mtb&quot; /&gt;&lt;/p&gt;
@@ -433,19 +433,19 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;LifeCycles - Unofficial Soundtrack (2010)  &lt;a href=&quot;http://oigen.ifolder.ru/29331084&quot; target=&quot;_blank&quot;&gt;Скачать&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/22/mtb-ost/&quot;&gt;MTB саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 22, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/22/mtb-ost/&quot;&gt;MTB саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 22, 2011.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Сноуборд саундтреки]]></title>
-  <link rel="alternate" type="text/html" href="http://jivoi.github.io/2011/09/21/snowboard-ost/" />
-  <id>http://jivoi.github.io/2011/09/21/snowboard-ost</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/21/snowboard-ost/" />
+  <id>https://jivoi.github.io/2011/09/21/snowboard-ost</id>
   <published>2011-09-21T00:00:00+04:00</published>
   <updated>2011-09-21T00:00:00+04:00</updated>
   <author>
     <name>EK</name>
-    <uri>http://jivoi.github.io</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/snow.jpg&quot; alt=&quot;snow&quot; /&gt;&lt;/p&gt;
@@ -602,7 +602,7 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/ol&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://jivoi.github.io/2011/09/21/snowboard-ost/&quot;&gt;Сноуборд саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 21, 2011.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/21/snowboard-ost/&quot;&gt;Сноуборд саундтреки&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 21, 2011.&lt;/p&gt;</content>
 </entry>
 
 </feed>
