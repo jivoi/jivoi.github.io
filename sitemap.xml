@@ -36,23 +36,19 @@
 
     
     <url>
+        <loc>https://jivoi.github.io/2014/01/04/answers-for-mailru/</loc>
+    </url>
+    
+    <url>
+        <loc>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/</loc>
+    </url>
+    
+    <url>
+        <loc>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/</loc>
+    </url>
+    
+    <url>
         <loc>https://jivoi.github.io/2014/01/01/blogging-with-github/</loc>
-    </url>
-    
-    <url>
-        <loc>https://jivoi.github.io/2011/10/10/answers-for-mailru/</loc>
-    </url>
-    
-    <url>
-        <loc>https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/</loc>
-    </url>
-    
-    <url>
-        <loc>https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/</loc>
-    </url>
-    
-    <url>
-        <loc>https://jivoi.github.io/2011/09/28/install-chef-server-on-centos/</loc>
     </url>
     
 </urlset>

@@ -5,13 +5,220 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-05T13:09:45+03:00</updated>
+<updated>2015-06-05T16:03:35+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email></email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия 'Системный администратор']]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" />
+  <id>https://jivoi.github.io/2014/01/04/answers-for-mailru</id>
+  <updated>2014-01-04 13:43:49 +0400T00:00:00-00:00</updated>
+  <published>2014-01-04T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;Вопрос 1:&lt;/h3&gt;
+&lt;p&gt;Что такое load average в юникс системах? (Ответ требует конкретной формулировки.)&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения. Более подробно тут:qhttp://knp84.livejournal.com/4835.html&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;Вопрос 2:&lt;/h3&gt;
+&lt;p&gt;Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется? (Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;MaxRequestsPerChild это значение из конфигурации Apache. Она указывает сколько запросов может обработать дочерний процесс апача перед тем как он будет завершен.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;Вопрос 3:&lt;/h3&gt;
+&lt;p&gt;На сервере заканчивается место в разделе с логами. Какие процессы пишут логи неизвестно, ротейт логов не настроен. Проблему надо разрешить, сохранив сами логи.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Используя команду ls -la посмотреть значение последней модификации файлов, найти самые старые,переместить\сжать их куданить где есть место, так же можно использовать команду find c ключами -mmin\mtime и еще один способо используя команду lsof узнать какие файловые дискрипторы используются на разделе с логами.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;Вопрос 4:&lt;/h3&gt;
+&lt;p&gt;Напишите программу на bourne shell (не bash!) и/или perl, выводящую простые (делятся на только на 1 и на само себя) числа от 1 до 500.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;Ответ:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;enter a range
+ &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;rng
+ &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;2
+ &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
+ &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$rng&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
+ &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; % &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; -ne &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -eq &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;Вопрос 5:&lt;/h3&gt;
+&lt;p&gt;Написать регулярное выражение под которое подходит число от 1 до 1999&lt;/p&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;Ответ:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;10\n2\n199\n10000\n&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep -P &lt;span class=&quot;s1&quot;&gt;&amp;#39;^1?\d{1,3}$&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;Вопрос 6:&lt;/h3&gt;
+&lt;p&gt;На каком уровне 7-миуровневой модели ISO OSI работает протокол udp? (ответ можо написать названием, можно номером)&lt;/p&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Транспортный уровень - 4 номер.&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Как установить CentOS на %Linux% по SSH]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" />
+  <id>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh</id>
+  <updated>2014-01-03 13:43:49 +0400T00:00:00-00:00</updated>
+  <published>2014-01-03T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Как установить CentOS на другой %Linux% по SSH.
+Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;Дано:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Настроенный сервер с kickstart&lt;/li&gt;
+  &lt;li&gt;Сервер с CentOS любой версии который мы будем переустанавливать&lt;/li&gt;
+  &lt;li&gt;Прямые руки.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;initrd--vmlinuz--&quot;&gt;1. Скачиваем initrd и vmlinuz нужной версии&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bootgrubgrubconf&quot;&gt;2. Правим /boot/grub/grub.conf&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ks файл&lt;/li&gt;
+  &lt;li&gt;IP\GATE\NETMASK!**&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;title CentOS Remote Install
+root &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hd0,0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+kernel /boot/vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless
+initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;3.Правим порядок загрузки из консоли&lt;/h3&gt;
+&lt;p&gt;Предполагается, что наша конфигурация идет вторым пунктом меню.
+Мы указали grub попробовать загрузить ее один раз.
+Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" />
+  <id>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh</id>
+  <updated>2014-01-02 13:43:49 +0400T00:00:00-00:00</updated>
+  <published>2014-01-02T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
+Задавайте вопросы в комментах, если что-то не понятно.&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;Дано:&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Настроенный сервер с kickstart&lt;/li&gt;
+  &lt;li&gt;Сервер с FreeBSD любой версии который будем переустанавливать&lt;/li&gt;
+  &lt;li&gt;Прямые руки. =)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;grub2--e2fsprogs--freebsd&quot;&gt;1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/ports/sysutils/grub2&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;make install
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/ports/sysutils/e2fsprogs&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tmp-ext2--&quot;&gt;2.Создаем на разделе /tmp ext2 файловую систему&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
+/dev/amrd0s1f on /tmp &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ufs, &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;, soft-updates&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+umount /tmp
+mke2fs /dev/amrd0s1f
+mount -t ext2fs /dev/amrd0s1f /mnt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!&lt;/p&gt;
+
+&lt;h3 id=&quot;ext2--initrd--vmlinuz--&quot;&gt;3. Копируем на ext2 раздел initrd и vmlinuz нужной версии&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz
+
+wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
+wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;grub2--mbr----&quot;&gt;4.Устанавливаем grub2 в MBR и создаем кофиг загрузки&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grub2-install /dev/amrd0
+grub-mkconfig
+/usr/local/etc/grub.d/00_header
+/usr/local/etc/grub.d/40_custom
+grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Нужно поправить /usr/local/etc/grub.d/00_header выставив default=1
+В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f&lt;/li&gt;
+  &lt;li&gt;ks файл&lt;/li&gt;
+  &lt;li&gt;IP\GATE\NETMASK!&lt;/li&gt;
+  &lt;li&gt;НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;menuentry &lt;span class=&quot;s2&quot;&gt;&amp;quot;CentOS&amp;quot;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        insmod ext2
+        &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;(hd0,1,f)&amp;#39;&lt;/span&gt;
+        linux /vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg vnc &lt;span class=&quot;nv&quot;&gt;vncpassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;qwe123 &lt;span class=&quot;nv&quot;&gt;ksdevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -28,327 +235,37 @@
   </author>
   <content type="html">&lt;p&gt;Use github and jekyll for blog&lt;/p&gt;
 
-&lt;h2 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h2&gt;
+&lt;h3 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;curl -sSL https://get.rvm.io | bash -s stable --ruby&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;rvm install 2.1&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;rvm use 2.1 --default&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;gem install bundle&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -sSL https://get.rvm.io &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash -s stable --ruby
+rvm install 2.1
+rvm use 2.1 --default
+gem install bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;clone-github-repo-and-install-jekyll&quot;&gt;Clone Github Repo and install Jekyll&lt;/h2&gt;
+&lt;h3 id=&quot;clone-github-repo-and-install-jekyll&quot;&gt;Clone Github Repo and install Jekyll&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;git clone -b develop https://github.com/jivoi/jivoi.github.io.git&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;cd jivoi.github.io&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;bundle install&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;git clone -b master https://github.com/jivoi/jivoi.github.io.git _site&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;rake new_post&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;vim _posts/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone -b develop https://github.com/jivoi/jivoi.github.io.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;jivoi.github.io
+bundle install
+git clone -b master https://github.com/jivoi/jivoi.github.io.git _site
+rake new_post
+vim _posts/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;build-and-test&quot;&gt;Build and Test&lt;/h2&gt;
+&lt;h3 id=&quot;build-and-test&quot;&gt;Build and Test&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;jekyll b&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;jekyll s --host 0.0.0.0 --watch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jekyll b
+jekyll s --host 0.0.0.0 --watch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;commit-and-deploy&quot;&gt;Commit and deploy&lt;/h2&gt;
+&lt;h3 id=&quot;commit-and-deploy&quot;&gt;Commit and deploy&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;git st&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;git add _posts/*&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;git push -u origin develop&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;git commit -a -m &amp;quot;blogging with github&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;rake deploy&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git st
+git add _posts/*
+git push -u origin develop
+git commit -a -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;blogging with github&amp;quot;&lt;/span&gt;
+rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия "Системный администратор"]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/10/answers-for-mailru/" />
-  <id>https://jivoi.github.io/2011/10/10/answers-for-mailru</id>
-  <published>2011-10-10T00:00:00+04:00</published>
-  <updated>2011-10-10T00:00:00+04:00</updated>
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email></email>
-  </author>
-  <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
-&lt;!-- more --&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 1.&lt;/strong&gt;  Что такое load average в юникс системах?
-(Ответ требует конкретной формулировки.)
-&lt;strong&gt;Ответ:&lt;/strong&gt; Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения.
-“Более подробно тут”:qhttp://knp84.livejournal.com/4835.html&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 2.&lt;/strong&gt; Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется?
-(Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)
-&lt;strong&gt;Ответ:&lt;/strong&gt; MaxRequestsPerChild это значение из конфигурации Apache. Она указывает сколько запросов может обработать дочерний процесс апача перед тем как он будет завершен.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 3.&lt;/strong&gt; На сервере заканчивается место в разделе с логами. Какие процессы пишут логи неизвестно, ротейт логов не настроен. Проблему надо разрешить, сохранив сами логи.
-&lt;strong&gt;Ответ:&lt;/strong&gt; Использя команду ls -la посмотреть значение последней модификации файлов, найти самые старые,переместить\сжать их куданить где есть место, так же можно использовать команду find c ключами -mmin\mtime и еще один способо используя команду lsof узнать какие файловые дискрипторы используются на разделе с логами.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 4.&lt;/strong&gt; Напишите программу на bourne shell (не bash!) и/или perl, выводящую простые (делятся на только на 1 и на само себя) числа от 1 до 500.
-&lt;strong&gt;Ответ:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;enter a range 
- &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;rng 
- &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; 
- &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$rng&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
- &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; 
- &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; % &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; -ne &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; 
- &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; 
- &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -eq &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; 
- &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt; 
- &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
- &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 5.&lt;/strong&gt; Написать регулярное выражение под которое подходит число от 1 до 1999
-[1-1999]
-&lt;strong&gt;Ответ:&lt;/strong&gt; echo -e ‘10\n2\n199\n10000\n’|grep -P ‘^1?\d{1,3}$’&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Вопрос 6.&lt;/strong&gt; На каком уровне 7-миуровневой модели ISO OSI работает протокол udp? (ответ можо написать названием, можно номером)
-&lt;strong&gt;Ответ:&lt;/strong&gt; Транспортный уровень - 4 номер.&lt;/p&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/10/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия "Системный администратор"&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 10, 2011.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Как установить CentOS из %Your Linux% по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/" />
-  <id>https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh</id>
-  <published>2011-10-07T00:00:00+04:00</published>
-  <updated>2011-10-07T00:00:00+04:00</updated>
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email></email>
-  </author>
-  <content type="html">&lt;p&gt;Как установить CentOS из %Your Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на AMD64 или поставить более новую версии поверх старой эв случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Дано:&lt;/strong&gt;
-  1.Настроенный сервер с kickstart
-  2.Сервер с CentOS любой версии который мы будем переустанавливать
-  3.Прямые руки.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. Скачиваем initrd и vmlinuz нужной версии&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-  wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;2. Правим /boot/grub/grub.conf&lt;/strong&gt;
-&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!
-1.ks файл
-2.IP\GATE\NETMASK!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;title CentOS Remote Install
-  root &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hd0,0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  kernel /boot/vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless 
-  initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;3.Правим порядок загрузки из консоли&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Предполагается, что наша конфигурация идет  вторым пунктом меню. 
-  Мы указали grub попробовать загрузить ее один раз. 
-  Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/07/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS из %Your Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 07, 2011.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/" />
-  <id>https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh</id>
-  <published>2011-10-05T00:00:00+04:00</published>
-  <updated>2011-10-05T00:00:00+04:00</updated>
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email></email>
-  </author>
-  <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.&lt;/p&gt;
-
-&lt;p&gt;Дано:
-1.Настроенный сервер с kickstart
-2.Сервер с FreeBSD любой версии который будем переустанавливать
-3.Прямые руки. =)&lt;/p&gt;
-
-&lt;p&gt;1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD
-cd /usr/ports/sysutils/grub2&amp;amp;&amp;amp;make install
-cd /usr/ports/sysutils/e2fsprogs&amp;amp;&amp;amp;make install&lt;/p&gt;
-
-&lt;p&gt;2.Создаем на разделе /tmp ext2 файловую систему
-/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
-/dev/amrd0s1f on /tmp (ufs, local, soft-updates)&lt;/p&gt;
-
-&lt;p&gt;umount /tmp
-mke2fs /dev/amrd0s1f
-mount -t ext2fs /dev/amrd0s1f /mnt&lt;/p&gt;
-
-&lt;p&gt;Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Копируем на ext2 раздел initrd и vmlinuz нужной версии
-fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/p&gt;
-
-&lt;p&gt;4.Устанавливаем grub2 в MBR и создаем кофиг загрузки
-grub2-install /dev/amrd0
-grub-mkconfig
-/usr/local/etc/grub.d/00_header
-/usr/local/etc/grub.d/40_custom
-grub-mkconfig -o /boot/grub/grub.cfg&lt;/p&gt;
-
-&lt;p&gt;Нужнно поправить /usr/local/etc/grub.d/00_header выставив default=1
-В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.
-ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ! 
-1.root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f
-2.ks файл
-3.IP\GATE\NETMASK!
-4.НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!&lt;/p&gt;
-
-&lt;p&gt;menuentry “CentOS”  {
-        insmod ext2
-        set root=’(hd0,1,f)’
-        linux /vmlinuz_remote lang=en_US keymap=us method=http://ks.example.com/ ks=http://ks.example.com/ks.cfg vnc vncpassword=qwe123 ksdevice=eth0 ip=192.168.0.10 netmask=255.255.255.0 gateway=192.168.0.1 dns=8.8.8.8 noselinux headless
-        initrd /initrd_remote.img
-}&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/10/05/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on October 05, 2011.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Устанавливаем Chef-Server и Chef-Client на CentOS 6]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2011/09/28/install-chef-server-on-centos/" />
-  <id>https://jivoi.github.io/2011/09/28/install-chef-server-on-centos</id>
-  <published>2011-09-28T00:00:00+04:00</published>
-  <updated>2011-09-28T00:00:00+04:00</updated>
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email></email>
-  </author>
-  <content type="html">&lt;p&gt;&lt;img src=&quot;http://jivoi.github.io/images/blog/chef.jpg&quot; alt=&quot;chef&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Если кто не знает Chef - это CMT (configuration management tool) написан на ruby.&lt;/p&gt;
-
-&lt;p&gt;Набор команд которые нужно выполнть чтобы все заработало на CentOS 6.
-Ставить будем на x64, но все это также будет работать и на i386.
-Поехали.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Chef-Client:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;+# Ставим нужные пакеты+&lt;/p&gt;
-
-&lt;p&gt;rpm -Uvh http://rbel.co/rbel6
-yum install rubygem-chef&lt;/p&gt;
-
-&lt;p&gt;+# Настраиваем конфиг клиента+&lt;/p&gt;
-
-&lt;p&gt;cat &amp;gt; /etc/chef/client.rb «-EOF&lt;/p&gt;
-
-&lt;p&gt;log_level                :info
-log_location             STDOUT
-node_name                ‘node.test.ru’
-client_key               ‘/etc/chef/client.pem’
-interval                ‘300’ &lt;br /&gt;
-validation_client_name   ‘chef-validator’
-validation_key           ‘/etc/chef/validation.pem’
-chef_server_url          ‘http://servers.test.ru:4000’
-cache_type               ‘BasicFile’
-cache_options( :path =&amp;gt; ‘/etc/chef/checksums’ )&lt;/p&gt;
-
-&lt;p&gt;EOF&lt;/p&gt;
-
-&lt;p&gt;запускать /etc/init.d/chef-client только после установки Chef-Server!&lt;/p&gt;
-
-&lt;p&gt;+# Правим iptables+&lt;/p&gt;
-
-&lt;h1 id=&quot;chef&quot;&gt;Chef&lt;/h1&gt;
-&lt;p&gt;# – web interface
-$IPT -A INPUT -p tcp –dport 4040 -j ACCEPT
-# – chef-server
-$IPT -A INPUT -p tcp –dport 4000 -j ACCEPT
-# – amqp server
-$IPT -A INPUT -p tcp -m multiport –dport 5672,4369,50229 -j ACCEPT
-# – search indexes (solr)
-$IPT -A INPUT -p tcp –dport 8983 -j ACCEPT
-# data store (couchdb)
-$IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Chef-Server:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;+# Ставим нужные пакеты+&lt;/p&gt;
-
-&lt;p&gt;rpm -Uvh http://rbel.co/rbel6
-yum install rubygem-chef-server&lt;/p&gt;
-
-&lt;p&gt;+# Запускаем скрипт настройки+&lt;/p&gt;
-
-&lt;p&gt;setup-chef-server.sh&lt;/p&gt;
-
-&lt;p&gt;+# Правим iptables+&lt;/p&gt;
-
-&lt;h1 id=&quot;chef-1&quot;&gt;Chef&lt;/h1&gt;
-&lt;p&gt;# – web interface
-$IPT -A INPUT -p tcp –dport 4040 -j ACCEPT
-# – chef-server
-$IPT -A INPUT -p tcp –dport 4000 -j ACCEPT
-# – amqp server
-$IPT -A INPUT -p tcp -m multiport –dport 5672,4369,50229 -j ACCEPT
-# – search indexes (solr)
-$IPT -A INPUT -p tcp –dport 8983 -j ACCEPT
-# data store (couchdb)
-$IPT -A INPUT -p tcp –dport 5984 -j ACCEPT&lt;/p&gt;
-
-&lt;p&gt;+# Перезапускам демонов+&lt;/p&gt;
-
-&lt;p&gt;/etc/init.d/chef-server restart
-/etc/init.d/chef-server-webui restart&lt;/p&gt;
-
-&lt;p&gt;+# Копируем приватный ключи на клиентa+&lt;/p&gt;
-
-&lt;p&gt;scp /etc/chef/validation.pem login@client.test.ru:/etc/chef/validation.pem&lt;/p&gt;
-
-&lt;p&gt;+# Настраиваем knife+&lt;/p&gt;
-
-&lt;p&gt;knife configure -i&lt;/p&gt;
-
-&lt;p&gt;+# Смотрим в админку+&lt;/p&gt;
-
-&lt;p&gt;http://your-chef-server:4040&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Полезные ссылки:&lt;/strong&gt;
-“Opscode Open Source Wiki”:http://wiki.opscode.com/display/chef/Home
-“Chef Tutorial”:http://blog.afistfulofservers.net/post/3902042503/a-brief-chef-tutorial-from-concentrate&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2011/09/28/install-chef-server-on-centos/&quot;&gt;Устанавливаем Chef-Server и Chef-Client на CentOS 6&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 28, 2011.&lt;/p&gt;</content>
 </entry>
 
 </feed>

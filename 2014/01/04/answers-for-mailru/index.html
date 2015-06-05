@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Blogging with github &#8211; EK</title>
-<meta name="description" content="Use github and jekyll for blog
+<title>Ответы для Mail.ru - Вакансия 'Системный администратор' &#8211; EK</title>
+<meta name="description" content="Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
 
 ">
-<meta name="keywords" content="blog, github">
+<meta name="keywords" content="sysadm, linux, mailru">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Blogging with github">
-<meta name="twitter:description" content="Use github and jekyll for blog
+<meta name="twitter:title" content="Ответы для Mail.ru - Вакансия 'Системный администратор'">
+<meta name="twitter:description" content="Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
 
 ">
 <meta name="twitter:site" content="@yajivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blogging with github">
-<meta property="og:description" content="Use github and jekyll for blog
+<meta property="og:title" content="Ответы для Mail.ru - Вакансия 'Системный администратор'">
+<meta property="og:description" content="Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2014/01/01/blogging-with-github/">
+<meta property="og:url" content="https://jivoi.github.io/2014/01/04/answers-for-mailru/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2014/01/01/blogging-with-github/">
+<link rel="canonical" href="https://jivoi.github.io/2014/01/04/answers-for-mailru/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,41 +145,72 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/01/blogging-with-github/" rel="bookmark" title="Blogging with github">Blogging with github</a></h1>
+        <h1><a href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" rel="bookmark" title="Ответы для Mail.ru - Вакансия 'Системный администратор'">Ответы для Mail.ru - Вакансия 'Системный администратор'</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Use github and jekyll for blog</p>
+      <p>Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.</p>
 
-<h3 id="install-rvm">Install RVM</h3>
+<h3 id="section">Вопрос 1:</h3>
+<p>Что такое load average в юникс системах? (Ответ требует конкретной формулировки.)</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl -sSL https://get.rvm.io <span class="p">|</span> bash -s stable --ruby
-rvm install 2.1
-rvm use 2.1 --default
-gem install bundle</code></pre></div>
+<h3 id="section-1">Ответ:</h3>
+<p>Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения. Более подробно тут:qhttp://knp84.livejournal.com/4835.html</p>
 
-<h3 id="clone-github-repo-and-install-jekyll">Clone Github Repo and install Jekyll</h3>
+<h3 id="section-2">Вопрос 2:</h3>
+<p>Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется? (Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone -b develop https://github.com/jivoi/jivoi.github.io.git
-<span class="nb">cd </span>jivoi.github.io
-bundle install
-git clone -b master https://github.com/jivoi/jivoi.github.io.git _site
-rake new_post
-vim _posts/</code></pre></div>
+<h3 id="section-3">Ответ:</h3>
+<p>MaxRequestsPerChild это значение из конфигурации Apache. Она указывает сколько запросов может обработать дочерний процесс апача перед тем как он будет завершен.</p>
 
-<h3 id="build-and-test">Build and Test</h3>
+<h3 id="section-4">Вопрос 3:</h3>
+<p>На сервере заканчивается место в разделе с логами. Какие процессы пишут логи неизвестно, ротейт логов не настроен. Проблему надо разрешить, сохранив сами логи.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll b
-jekyll s --host 0.0.0.0 --watch</code></pre></div>
+<h3 id="section-5">Ответ:</h3>
+<p>Используя команду ls -la посмотреть значение последней модификации файлов, найти самые старые,переместить\сжать их куданить где есть место, так же можно использовать команду find c ключами -mmin\mtime и еще один способо используя команду lsof узнать какие файловые дискрипторы используются на разделе с логами.</p>
 
-<h3 id="commit-and-deploy">Commit and deploy</h3>
+<h3 id="section-6">Вопрос 4:</h3>
+<p>Напишите программу на bourne shell (не bash!) и/или perl, выводящую простые (делятся на только на 1 и на само себя) числа от 1 до 500.</p>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git st
-git add _posts/*
-git push -u origin develop
-git commit -a -m <span class="s2">&quot;blogging with github&quot;</span>
-rake deploy</code></pre></div>
+<h3 id="section-7">Ответ:</h3>
 
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+<span class="nb">echo </span>enter a range
+ <span class="nb">read </span>rng
+ <span class="nb">echo </span>2
+ <span class="nv">j</span><span class="o">=</span>3
+ <span class="k">while</span> <span class="nb">test</span> <span class="nv">$j</span> -le <span class="nv">$rng</span>
+ <span class="k">do</span>
+ <span class="nv">i</span><span class="o">=</span>2
+ <span class="nv">x</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$j</span> - 1<span class="sb">`</span>
+ <span class="k">while</span> <span class="nb">test</span> <span class="nv">$i</span> -le <span class="nv">$x</span>
+ <span class="k">do</span>
+ <span class="k">if</span> <span class="o">[</span> <span class="sb">`</span>expr <span class="nv">$j</span> % <span class="nv">$i</span><span class="sb">`</span> -ne <span class="m">0</span> <span class="o">]</span>
+ <span class="k">then</span>
+ <span class="nv">i</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$i</span> + 1<span class="sb">`</span>
+ <span class="k">else</span>
+ <span class="nb">break</span>
+<span class="nb"> </span><span class="k">fi</span>
+ <span class="k">done</span>
+ <span class="k">if</span> <span class="o">[</span> <span class="nv">$i</span> -eq <span class="nv">$j</span> <span class="o">]</span>
+ <span class="k">then</span>
+ <span class="nb">echo</span> <span class="nv">$j</span>
+ <span class="k">fi</span>
+ <span class="nv">j</span><span class="o">=</span><span class="sb">`</span>expr <span class="nv">$j</span> + 1<span class="sb">`</span>
+ <span class="k">done</span></code></pre></div>
+
+<h3 id="section-8">Вопрос 5:</h3>
+<p>Написать регулярное выражение под которое подходит число от 1 до 1999</p>
+
+<h3 id="section-9">Ответ:</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -e <span class="s1">&#39;10\n2\n199\n10000\n&#39;</span><span class="p">|</span>grep -P <span class="s1">&#39;^1?\d{1,3}$&#39;</span></code></pre></div>
+
+<h3 id="section-10">Вопрос 6:</h3>
+<p>На каком уровне 7-миуровневой модели ISO OSI работает протокол udp? (ответ можо написать названием, можно номером)</p>
+
+<h3 id="section-11">Ответ:</h3>
+<p>Транспортный уровень - 4 номер.</p>
 
       <hr />
       <footer role="contentinfo">
@@ -211,7 +242,7 @@ rake deploy</code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>Blogging with github</strong> was published on <time datetime="2014-01-01T00:00:00+04:00">January 01, 2014</time> and last modified on <time datetime="2014-01-01">January 01, 2014</time>.</p>
+        <p class="byline"><strong>Ответы для Mail.ru - Вакансия 'Системный администратор'</strong> was published on <time datetime="2014-01-04T00:00:00+04:00">January 04, 2014</time> and last modified on <time datetime="2014-01-04">January 04, 2014</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -225,11 +256,11 @@ rake deploy</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/posts/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" title="Ответы для Mail.ru - Вакансия 'Системный администратор'">Ответы для Mail.ru - Вакансия 'Системный администратор'</a></li>
-    
       <li><a href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" title="Как установить CentOS на %Linux% по SSH">Как установить CentOS на %Linux% по SSH</a></li>
     
       <li><a href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/01/blogging-with-github/" title="Blogging with github">Blogging with github</a></li>
     
     </ul>
     <hr />
