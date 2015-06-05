@@ -43,6 +43,8 @@ jekyll s --host 0.0.0.0 --watch
 ## Commit and deploy
 {% highlight console %}
 git st
+git add _posts/*
+git push -u origin develop
 git commit -a -m "blogging with github"
 rake deploy
 {% endhighlight %}
