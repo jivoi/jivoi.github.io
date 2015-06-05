@@ -5,15 +5,19 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>MTB саундтреки &#8211; EK</title>
-<meta name="description" content="Немного саундтреков для любителей MTB. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.">
-<meta name="keywords" content="ost">
+<title>Blogging with github &#8211; EK</title>
+<meta name="description" content="Use github and jekyll for blog
+
+">
+<meta name="keywords" content="blog, github">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="MTB саундтреки">
-<meta name="twitter:description" content="Немного саундтреков для любителей MTB. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.">
+<meta name="twitter:title" content="Blogging with github">
+<meta name="twitter:description" content="Use github and jekyll for blog
+
+">
 <meta name="twitter:site" content="@yajivoi">
 <meta name="twitter:creator" content="@yajivoi">
 
@@ -23,16 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MTB саундтреки">
-<meta property="og:description" content="Немного саундтреков для любителей MTB. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.">
-<meta property="og:url" content="https://jivoi.github.io/2011/09/22/mtb-ost/">
+<meta property="og:title" content="Blogging with github">
+<meta property="og:description" content="Use github and jekyll for blog
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2014/01/01/blogging-with-github/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2011/09/22/mtb-ost/">
+<link rel="canonical" href="https://jivoi.github.io/2014/01/01/blogging-with-github/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -139,29 +145,39 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2011/09/22/mtb-ost/" rel="bookmark" title="MTB саундтреки">MTB саундтреки</a></h1>
+        <h1><a href="https://jivoi.github.io/2014/01/01/blogging-with-github/" rel="bookmark" title="Blogging with github">Blogging with github</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p><img src="http://jivoi.github.io/images/blog/mtb.jpg" alt="mtb" /></p>
+      <p>Use github and jekyll for blog</p>
 
-<p>Немного саундтреков для любителей MTB. Все ссылки проверенны, если вы в друг нашли ошибку, пишите в комментариях.</p>
+<h2 id="install-rvm">Install RVM</h2>
 
-<p>Список:</p>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">curl -sSL https://get.rvm.io | bash -s stable --ruby</span>
+<span class="go">rvm install 2.1</span>
+<span class="go">rvm use 2.1 --default</span>
+<span class="go">gem install bundle</span></code></pre></div>
 
-<ol>
-  <li>New World Disorder I OST  <a href="http://ifolder.ru/24469598" target="_blank">Скачать</a></li>
-  <li>New World Disorder II OST  <a href="http://ifolder.ru/24510268" target="_blank">Скачать</a></li>
-  <li>New World Disorder III OST  <a href="http://ifolder.ru/24510669" target="_blank">Скачать</a></li>
-  <li>New World Disorder IV OST  <a href="http://ifolder.ru/24529258" target="_blank">Скачать</a></li>
-  <li>New World Disorder V OST  <a href="http://ifolder.ru/24529259" target="_blank">Скачать</a></li>
-  <li>New World Disorder VI OST  <a href="http://ifolder.ru/24529260" target="_blank">Скачать</a></li>
-  <li>New World Disorder VII OST  <a href="http://ifolder.ru/24529261" target="_blank">Скачать</a></li>
-  <li>New World Disorder VIII OST  <a href="http://ifolder.ru/24529262" target="_blank">Скачать</a></li>
-  <li>New World Disorder IX OST  <a href="http://ifolder.ru/24529263" target="_blank">Скачать</a></li>
-  <li>From the Inside Out (Secondbasefilms, 2011)  <a href="http://oigen.ifolder.ru/29279189" target="_blank">Скачать</a></li>
-  <li>LifeCycles - Unofficial Soundtrack (2010)  <a href="http://oigen.ifolder.ru/29331084" target="_blank">Скачать</a></li>
-</ol>
+<h2 id="clone-github-repo-and-install-jekyll">Clone Github Repo and install Jekyll</h2>
+
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">git clone -b develop https://github.com/jivoi/jivoi.github.io.git</span>
+<span class="go">cd jivoi.github.io</span>
+<span class="go">bundle install</span>
+<span class="go">git clone -b master https://github.com/jivoi/jivoi.github.io.git _site</span>
+<span class="go">rake new_post</span>
+<span class="go">vim _posts/</span></code></pre></div>
+
+<h2 id="build-and-test">Build and Test</h2>
+
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">jekyll b</span>
+<span class="go">jekyll s --host 0.0.0.0 --watch</span></code></pre></div>
+
+<h2 id="commit-and-deploy">Commit and deploy</h2>
+
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">git st</span>
+<span class="go">git commit -a -m &quot;blogging with github&quot;</span>
+<span class="go">rake deploy</span></code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -193,9 +209,11 @@
 
 
         </div>
-        <p class="byline"><strong>MTB саундтреки</strong> was published on <time datetime="2011-09-22T00:00:00+04:00">September 22, 2011</time>.</p>
+        <p class="byline"><strong>Blogging with github</strong> was published on <time datetime="2014-01-01T00:00:00+04:00">January 01, 2014</time> and last modified on <time datetime="2014-01-01">January 01, 2014</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
   
   </article>
 </div><!-- /#main -->
@@ -250,6 +268,30 @@ var sc_security="015e0a49";
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 	        
