@@ -2,28 +2,139 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">EK</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
-<link rel="alternate" type="text/html" href="https://jivoi.github.io" />
+<link rel="self" type="application/atom+xml" href="http://127.0.0.1:4000/feed.xml" />
+<link rel="alternate" type="text/html" href="http://127.0.0.1:4000" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-05T16:06:43+03:00</updated>
-<id>https://jivoi.github.io/</id>
+<updated>2015-06-06T21:04:37+03:00</updated>
+<id>http://127.0.0.1:4000/</id>
 <author>
   <name>EK</name>
-  <uri>https://jivoi.github.io/</uri>
+  <uri>http://127.0.0.1:4000/</uri>
   <email></email>
 </author>
 
 
 <entry>
+  <title type="html"><![CDATA[Ответы для Yandex - Вакансия 'Системный администратор Unix']]></title>
+  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/05/answers-for-yandex/" />
+  <id>http://127.0.0.1:4000/2014/01/05/answers-for-yandex</id>
+  <updated>2014-01-05 13:43:49 +0400T00:00:00-00:00</updated>
+  <published>2014-01-05T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>http://127.0.0.1:4000</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Ответы для Yandex.ru. Это набор вопросов которые доступны на сайте yandex.ru в разделе Вакансии.&lt;/p&gt;
+
+&lt;p&gt;Ссылка на вакансию: &lt;a href=&quot;https://yandex.ru/jobs/vacancies/maintenance/adv_technology_admin/&quot;&gt;Системный администратор Unix&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;Вопрос 2:&lt;/h3&gt;
+&lt;p&gt;Вам нужно проапгрейдить ядро и операционную систему на ста одинаково настроенных серверах.
+Как вы будете решать эту задачу?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Все зависит от конкретной ОС. В RHEL\CentOS\Fedora через yum\rpm(если есть уже собранное ядро в rpm пакете). Для Ubuntu\Debian - apt-get install или dpkg -i. Если стоит вопрос как выполнить эту команду удаленно на 100х серверах, то тут очень мгого факторов которые могут на это повлиять. Где-то есть система управления конфигурациями типа Chef\Puppet\cfengine или что-то своем самописное. В самом простом случаем можно в цикле выполнить на 100х серверах команду обновления.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; server in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat server.lst&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; ssh -t login@&lt;span class=&quot;nv&quot;&gt;$server&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;sudo yum install kernel&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;Вопрос 3:&lt;/h3&gt;
+&lt;p&gt;На сервере под управлением Linux собран программный RAID5 на десяти SCSI-дисках. Один диск в этом массиве помечен как faulty.
+Как узнать Host, Channel, ID и LUN этого диска?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Всю основную информацию про softraid в Linux можно узнать выполнив команду cat /proc/mdstat
+Больше информации покажет команда mdadm –detail /dev/md0.
+Чтобы узнать Host, Channel, ID и LUN дисков установленных в сервере выполняем cat /proc/scsi/scsi
+Там представлена информация вида Host: scsi0 Channel: 00 Id: 01 Lun: 00&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;Вопрос 4:&lt;/h3&gt;
+&lt;p&gt;Есть сервер с Linux, на котором 16 ГБ RAM и 4 ГБ swap.
+Что нужно сделать, чтобы запущенные на сервере программы не могли получить суммарно больше 9 ГБ памяти (без изменения объема доступной ядру памяти)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Можно сделать через настройку системных лимитов. 
+Прописав в /etc/security/limits.conf&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;* hard as 9000000000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Второй вариант установка лимитов через linux cgroups
+создаем группу с лимитами в /etc/cgconfig.conf
+group memlimit {
+    memory {
+        memory.limit_in_bytes = 9000000000;(Задает максимальный размер памяти и пространства подкачки)
+    }
+}&lt;/p&gt;
+
+&lt;p&gt;Добавляем правило в /etc/cgrules.conf:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;newuser   memory   memlimit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Это позволить ограничить все процессы по памяти для юзера - newuser&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;Вопрос 5:&lt;/h3&gt;
+&lt;p&gt;Имеется веб-сервер с очень маленьким временем ответа на запросы. Однако пользователи из некоторых сетей, например, ADSL или домашних, жалуются, что долго загружаются страницы с этого сервера, а иногда загрузка вообще «замирает». Ping при этом без потерь и больших задержек, с других веб-узлов страницы загружаются хорошо.
+Почему такое может происходить?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Причина тут скорей всего гдето посередине между конечным пользователем и сервером.Если есть прокси-сервер дома или в офисе то скорей всего проблема с ним, с его настройками\производительностью. Может быть проблема с софтом на компьютере пользователя - программные фильтры\фаерволлы\антивирусы и тд&lt;/p&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;Вопрос 6:&lt;/h3&gt;
+&lt;p&gt;Как будет выглядеть кусок конфигурационного файла Apache, который будет запрещать доступ к каталогу /var/www/restricted для клиентов, использующих браузер Browser всех версий, кроме версии 3.14?
+User-Agent для Browser выглядит как “Browser v$VERSION”.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Прописываем в конфиг Apache&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /var/www/restricted&amp;gt;
+SetEnvIfNoCase User-Agent &lt;span class=&quot;s2&quot;&gt;&amp;quot;^Browser v3.14&amp;quot;&lt;/span&gt; ok
+Order Allow,Deny
+Allow from &lt;span class=&quot;nv&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ok
+Deny from all
+ErrorDocument &lt;span class=&quot;m&quot;&gt;403&lt;/span&gt; /noindex.html
+&amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;Вопрос 7:&lt;/h3&gt;
+&lt;p&gt;Вы работаете с СУБД MySQL. У вас настроена репликация с одного сервера на другой. Мониторинг показывает, что репликация не работает.
+Как вы будете чинить неработающую репликацию (мастер-база работает 24х7х365)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Для правильных действий, нужно больше информации, но я приведу примеры из личного опыта. 
+Самое просто что может быть это в настройках mysql в /etc/my.cnf прописано skip-slave-start и слэйв сервер был перезагружен, чинится просто зайти в mysql и выполнить slave start
+Следующая из распостранненых это ошибка типа   Error ‘Duplicate entry ‘123’ for key 1’ on query.. это значит что на слэйвей в базе уже есть такие данные, скорей всего это ошибка кода. Чинится это в самом простом случае пропуском данной ошибки SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; START SLAVE; ну или полным востановленим рэплики из последнего бэкапа с мастера. Сделать это можно так же несколькими способами, если есть бэкап нужно развернуть его и выставить значения для бинлога
+change master to master_log_pos=4,master_log_file=’mysql-bin.000666’;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;Вопрос 8:&lt;/h3&gt;
+&lt;p&gt;Как можно посмотреть содержимое ip-пакетов, приходящих на хост test.yandex&lt;/p&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Самое просто использовать tcpdump с выводом в STDOUT или с записью в файл и с последующим анализом&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tcpdump -X host test.yandex
+tcpdump -w /tmp/test.yandex.cap host test.yandex
+tcpdump -vvAr /tmp/test.yandex.cap - читаем содержимое дампфайла.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Есть еще другие способы.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ngrep host test.yandex
+tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утилита tshark входит в пакет wireshark&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/05/answers-for-yandex/&quot;&gt;Ответы для Yandex - Вакансия 'Системный администратор Unix'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 05, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
   <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия 'Системный администратор']]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" />
-  <id>https://jivoi.github.io/2014/01/04/answers-for-mailru</id>
+  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/04/answers-for-mailru/" />
+  <id>http://127.0.0.1:4000/2014/01/04/answers-for-mailru</id>
   <updated>2014-01-04 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-04T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.&lt;/p&gt;
@@ -89,20 +200,20 @@
 &lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
 &lt;p&gt;Транспортный уровень - 4 номер.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Как установить CentOS на %Linux% по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" />
-  <id>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh</id>
+  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh/" />
+  <id>http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh</id>
   <updated>2014-01-03 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-03T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Как установить CentOS на другой %Linux% по SSH.
@@ -141,20 +252,20 @@ initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" />
-  <id>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh</id>
+  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh/" />
+  <id>http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh</id>
   <updated>2014-01-02 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-02T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
@@ -217,30 +328,32 @@ grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         linux /vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg vnc &lt;span class=&quot;nv&quot;&gt;vncpassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;qwe123 &lt;span class=&quot;nv&quot;&gt;ksdevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Blogging with github]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/01/blogging-with-github/" />
-  <id>https://jivoi.github.io/2014/01/01/blogging-with-github</id>
+  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/01/blogging-with-github/" />
+  <id>http://127.0.0.1:4000/2014/01/01/blogging-with-github</id>
   <updated>2014-01-01 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-01T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
+    <uri>http://127.0.0.1:4000</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Use github and jekyll for blog&lt;/p&gt;
 
-&lt;h3 id=&quot;install-rvm&quot;&gt;Install RVM&lt;/h3&gt;
+&lt;h3 id=&quot;install-rvm-and-nvm&quot;&gt;Install RVM and NVM&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -sSL https://get.rvm.io &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash -s stable --ruby
 rvm install 2.1
 rvm use 2.1 --default
-gem install bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+gem install bundle
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
+nvm install 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;clone-github-repo-and-install-jekyll&quot;&gt;Clone Github Repo and install Jekyll&lt;/h3&gt;
 
@@ -265,7 +378,7 @@ git commit -a -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;blogging with github
 rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
