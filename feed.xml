@@ -2,28 +2,28 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">EK</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://127.0.0.1:4000/feed.xml" />
-<link rel="alternate" type="text/html" href="http://127.0.0.1:4000" />
+<link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
+<link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-06T21:04:37+03:00</updated>
-<id>http://127.0.0.1:4000/</id>
+<updated>2015-06-06T21:12:07+03:00</updated>
+<id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
-  <uri>http://127.0.0.1:4000/</uri>
+  <uri>https://jivoi.github.io/</uri>
   <email></email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Ответы для Yandex - Вакансия 'Системный администратор Unix']]></title>
-  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/05/answers-for-yandex/" />
-  <id>http://127.0.0.1:4000/2014/01/05/answers-for-yandex</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/05/answers-for-yandex/" />
+  <id>https://jivoi.github.io/2014/01/05/answers-for-yandex</id>
   <updated>2014-01-05 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-05T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>http://127.0.0.1:4000</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Yandex.ru. Это набор вопросов которые доступны на сайте yandex.ru в разделе Вакансии.&lt;/p&gt;
@@ -121,20 +121,20 @@ tcpdump -vvAr /tmp/test.yandex.cap - читаем содержимое дамп�
 tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утилита tshark входит в пакет wireshark&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/05/answers-for-yandex/&quot;&gt;Ответы для Yandex - Вакансия 'Системный администратор Unix'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 05, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/05/answers-for-yandex/&quot;&gt;Ответы для Yandex - Вакансия 'Системный администратор Unix'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 05, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия 'Системный администратор']]></title>
-  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/04/answers-for-mailru/" />
-  <id>http://127.0.0.1:4000/2014/01/04/answers-for-mailru</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" />
+  <id>https://jivoi.github.io/2014/01/04/answers-for-mailru</id>
   <updated>2014-01-04 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-04T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>http://127.0.0.1:4000</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.&lt;/p&gt;
@@ -200,20 +200,20 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
 &lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
 &lt;p&gt;Транспортный уровень - 4 номер.&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Как установить CentOS на %Linux% по SSH]]></title>
-  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh/" />
-  <id>http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" />
+  <id>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh</id>
   <updated>2014-01-03 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-03T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>http://127.0.0.1:4000</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Как установить CentOS на другой %Linux% по SSH.
@@ -252,20 +252,20 @@ initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
-  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh/" />
-  <id>http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" />
+  <id>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh</id>
   <updated>2014-01-02 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-02T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>http://127.0.0.1:4000</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
@@ -328,20 +328,20 @@ grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
         linux /vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg vnc &lt;span class=&quot;nv&quot;&gt;vncpassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;qwe123 &lt;span class=&quot;nv&quot;&gt;ksdevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Blogging with github]]></title>
-  <link rel="alternate" type="text/html" href="http://127.0.0.1:4000/2014/01/01/blogging-with-github/" />
-  <id>http://127.0.0.1:4000/2014/01/01/blogging-with-github</id>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/01/blogging-with-github/" />
+  <id>https://jivoi.github.io/2014/01/01/blogging-with-github</id>
   <updated>2014-01-01 13:43:49 +0400T00:00:00-00:00</updated>
   <published>2014-01-01T00:00:00+04:00</published>
   
   <author>
     <name>EK</name>
-    <uri>http://127.0.0.1:4000</uri>
+    <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
   <content type="html">&lt;p&gt;Use github and jekyll for blog&lt;/p&gt;
@@ -378,7 +378,7 @@ git commit -a -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;blogging with github
 rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://127.0.0.1:4000/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;http://127.0.0.1:4000&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

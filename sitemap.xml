@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://127.0.0.1:4000</loc>
+        <loc>https://jivoi.github.io</loc>
     </url>
 
     
     <url>
-        <loc>http://127.0.0.1:4000/404.html</loc>
+        <loc>https://jivoi.github.io/404.html</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/about/</loc>
+        <loc>https://jivoi.github.io/about/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/feed.xml</loc>
+        <loc>https://jivoi.github.io/feed.xml</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/index.html</loc>
+        <loc>https://jivoi.github.io/index.html</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/assets/css/main.css</loc>
+        <loc>https://jivoi.github.io/assets/css/main.css</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/archive/</loc>
+        <loc>https://jivoi.github.io/archive/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/sitemap.xml</loc>
+        <loc>https://jivoi.github.io/sitemap.xml</loc>
     </url>
     
 
     
     <url>
-        <loc>http://127.0.0.1:4000/2014/01/05/answers-for-yandex/</loc>
+        <loc>https://jivoi.github.io/2014/01/05/answers-for-yandex/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/2014/01/04/answers-for-mailru/</loc>
+        <loc>https://jivoi.github.io/2014/01/04/answers-for-mailru/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/2014/01/03/install-centos-over-centos-by-ssh/</loc>
+        <loc>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/2014/01/02/install-centos-over-freebsd-by-ssh/</loc>
+        <loc>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/</loc>
     </url>
     
     <url>
-        <loc>http://127.0.0.1:4000/2014/01/01/blogging-with-github/</loc>
+        <loc>https://jivoi.github.io/2014/01/01/blogging-with-github/</loc>
     </url>
     
 </urlset>
