@@ -3,7 +3,7 @@
 title:            EK
 locale:           en_GB
 #url:              http://jivoi.github.io
-url:              http://192.168.56.103:4000
+url:              http://127.0.0.1:4000
 
 
 # Jekyll configuration
@@ -32,7 +32,7 @@ owner:
   bio: "I'm a hacker and security researcher from Russia"
   email: 
   disqus-shortname: httpjivoigithubcom
-  twitter: yajivoi
+  twitter: jivoi
   facebook: #username
   google:
     plus: #username

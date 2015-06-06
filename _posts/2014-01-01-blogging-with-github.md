@@ -13,12 +13,14 @@ share:
 ---
 Use github and jekyll for blog
 
-### Install RVM
+### Install RVM and NVM
 {% highlight bash %}
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 rvm install 2.1
 rvm use 2.1 --default
 gem install bundle
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
+nvm install 0.10
 {% endhighlight %}
 
 ### Clone Github Repo and install Jekyll
