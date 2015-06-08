@@ -21,6 +21,7 @@ rvm use 2.1 --default
 gem install bundle
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
 nvm install 0.10
+nvm use 0.10
 {% endhighlight %}
 
 ### Clone Github Repo and install Jekyll
