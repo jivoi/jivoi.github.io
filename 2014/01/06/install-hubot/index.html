@@ -5,19 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Установка CentOS из под FreeBSD по SSH &#8211; EK</title>
-<meta name="description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<title>Install hubot on Ubuntu &#8211; EK</title>
+<meta name="description" content="How to install Hubot to Ubuntu linux.
 
 ">
-<meta name="keywords" content="centos, freebsd">
+<meta name="keywords" content="linux, ubuntu, hubot">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Установка CentOS из под FreeBSD по SSH">
-<meta name="twitter:description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<meta name="twitter:title" content="Install hubot on Ubuntu">
+<meta name="twitter:description" content="How to install Hubot to Ubuntu linux.
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -29,19 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Установка CentOS из под FreeBSD по SSH">
-<meta property="og:description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<meta property="og:title" content="Install hubot on Ubuntu">
+<meta property="og:description" content="How to install Hubot to Ubuntu linux.
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/">
+<meta property="og:url" content="https://jivoi.github.io/2014/01/06/install-hubot/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/">
+<link rel="canonical" href="https://jivoi.github.io/2014/01/06/install-hubot/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -148,69 +145,63 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" rel="bookmark" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></h1>
+        <h1><a href="https://jivoi.github.io/2014/01/06/install-hubot/" rel="bookmark" title="Install hubot on Ubuntu">Install hubot on Ubuntu</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.</p>
+      <p>How to install Hubot to Ubuntu linux.</p>
 
-<h3 id="section">Дано:</h3>
-<ol>
-  <li>Настроенный сервер с kickstart</li>
-  <li>Сервер с FreeBSD любой версии который будем переустанавливать</li>
-  <li>Прямые руки. =)</li>
-</ol>
+<p>What is Hubot: <a href="https://hubot.github.com/">Awesome bot for everything</a></p>
 
-<h3 id="grub2--e2fsprogs--freebsd">1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD</h3>
+<h3 id="add-new-user-and-install-nvm">Add new user and install NVM</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/ports/sysutils/grub2<span class="o">&amp;&amp;</span>make install
-<span class="nb">cd</span> /usr/ports/sysutils/e2fsprogs<span class="o">&amp;&amp;</span>make install</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">useradd -m hubot
+su - hubot
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh <span class="p">|</span> bash
+nvm install 0.10</code></pre></div>
 
-<h3 id="tmp-ext2--">2.Создаем на разделе /tmp ext2 файловую систему</h3>
+<h3 id="install-hubot">Install HUBOT</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
-/dev/amrd0s1f on /tmp <span class="o">(</span>ufs, <span class="nb">local</span>, soft-updates<span class="o">)</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">npm install  generator-hubot yo coffee-script hubot hubot-xmpp
+yo hubot --defaults</code></pre></div>
 
-umount /tmp
-mke2fs /dev/amrd0s1f
-mount -t ext2fs /dev/amrd0s1f /mnt</code></pre></div>
+<h3 id="connect-hubot-to-xmpp-room">Connect Hubot to XMPP Room</h3>
 
-<p>Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat <span class="s">&lt;&lt;EOF &gt; /etc/init/hubot.conf</span>
+<span class="s"># hubot - xmpp bot</span>
+<span class="s">description &quot;Hubot XMPP bot&quot;</span>
+<span class="s">env HUBOT_LOG_LEVEL=&quot;debug&quot;</span>
+<span class="s">env HUBOT_XMPP_HOST=&quot;xmppserver.com&quot;</span>
+<span class="s">env HUBOT_XMPP_USERNAME=&quot;XMPPACC&quot;</span>
+<span class="s">env HUBOT_XMPP_PASSWORD=&quot;XMPPPASS&quot;</span>
+<span class="s">env HUBOT_XMPP_ROOMS=&#39;XMPPROOM@conference.xmppserver.com:roompassword&#39;</span>
+<span class="s">env HUBOT_XMPP_PORT=&quot;5222&quot;</span>
 
-<h3 id="ext2--initrd--vmlinuz--">3. Копируем на ext2 раздел initrd и vmlinuz нужной версии</h3>
+<span class="s">start on filesystem or runlevel [2345]</span>
+<span class="s">stop on runlevel [!2345]</span>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz
+<span class="s">env HUBOT_DIR=&quot;/home/hubot/&quot;</span>
+<span class="s">env HUBOT=&quot;bin/hubot&quot;</span>
+<span class="s">env HUBOT_ARGS=&quot;-a xmpp&quot;</span>
+<span class="s">env HUBOT_USER=&#39;hubot&#39; # system account</span>
+<span class="s">env HUBOT_NAME=&#39;hubot&#39; # what hubot listens to</span>
 
-wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz</code></pre></div>
+<span class="s">respawn</span>
+<span class="s">respawn limit 5 60</span>
+<span class="s">exec start-stop-daemon --start --chuid ${HUBOT_USER} --chdir ${HUBOT_DIR} --exec ${HUBOT_DIR}${HUBOT} -- $HUBOT_ARGS &gt;&gt; /home/hubot/hubot.log 2&gt;&amp;1</span>
+<span class="s">EOF</span></code></pre></div>
 
-<h3 id="grub2--mbr----">4.Устанавливаем grub2 в MBR и создаем кофиг загрузки</h3>
+<h3 id="configure-hubot-scripts">Configure Hubot scripts</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">grub2-install /dev/amrd0
-grub-mkconfig
-/usr/local/etc/grub.d/00_header
-/usr/local/etc/grub.d/40_custom
-grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat /home/hubot/hubot-scripts.json
+<span class="o">[</span><span class="s2">&quot;shipit.coffee&quot;</span>, <span class="s2">&quot;sudo.coffee&quot;</span>, <span class="s2">&quot;9gag.coffee&quot;</span>, <span class="s2">&quot;abstract.coffee&quot;</span>, <span class="s2">&quot;commandlinefu.coffee&quot;</span>, <span class="s2">&quot;xkcd.coffee&quot;</span>, <span class="s2">&quot;yoda-quotes.coffee&quot;</span><span class="o">]</span></code></pre></div>
 
-<p>Нужно поправить /usr/local/etc/grub.d/00_header выставив default=1
-В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.</p>
+<p>More scripts: <a href="https://github.com/hubot-scripts">LINK</a></p>
 
-<p><strong>ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!</strong></p>
+<h3 id="start-hubot">Start Hubot</h3>
 
-<ol>
-  <li>root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f</li>
-  <li>ks файл</li>
-  <li>IP\GATE\NETMASK!</li>
-  <li>НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!</li>
-</ol>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">menuentry <span class="s2">&quot;CentOS&quot;</span>  <span class="o">{</span>
-        insmod ext2
-        <span class="nb">set </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1,f)&#39;</span>
-        linux /vmlinuz_remote <span class="nv">lang</span><span class="o">=</span>en_US <span class="nv">keymap</span><span class="o">=</span>us <span class="nv">method</span><span class="o">=</span>http://ks.example.com/ <span class="nv">ks</span><span class="o">=</span>http://ks.example.com/ks.cfg vnc <span class="nv">vncpassword</span><span class="o">=</span>qwe123 <span class="nv">ksdevice</span><span class="o">=</span>eth0 <span class="nv">ip</span><span class="o">=</span>192.168.0.10 <span class="nv">netmask</span><span class="o">=</span>255.255.255.0 <span class="nv">gateway</span><span class="o">=</span>192.168.0.1 <span class="nv">dns</span><span class="o">=</span>8.8.8.8 noselinux headless</code></pre></div>
-
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">start hubot
+tail -f /home/hubot/hubot.log</code></pre></div>
 
       <hr />
       <footer role="contentinfo">
@@ -242,7 +233,7 @@ grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>Установка CentOS из под FreeBSD по SSH</strong> was published on <time datetime="2014-01-02T00:00:00+04:00">January 02, 2014</time> and last modified on <time datetime="2014-01-02">January 02, 2014</time>.</p>
+        <p class="byline"><strong>Install hubot on Ubuntu</strong> was published on <time datetime="2014-01-06T00:00:00+04:00">January 06, 2014</time> and last modified on <time datetime="2014-01-06">January 06, 2014</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -256,11 +247,11 @@ grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2014/01/06/install-hubot/" title="Install hubot on Ubuntu">Install hubot on Ubuntu</a></li>
-    
       <li><a href="https://jivoi.github.io/2014/01/05/answers-for-yandex/" title="Ответы для Yandex - Вакансия 'Системный администратор Unix'">Ответы для Yandex - Вакансия 'Системный администратор Unix'</a></li>
     
       <li><a href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" title="Ответы для Mail.ru - Вакансия 'Системный администратор'">Ответы для Mail.ru - Вакансия 'Системный администратор'</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" title="Как установить CentOS на %Linux% по SSH">Как установить CentOS на %Linux% по SSH</a></li>
     
     </ul>
     <hr />

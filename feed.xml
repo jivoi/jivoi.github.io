@@ -5,13 +5,83 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-06T21:12:07+03:00</updated>
+<updated>2015-06-08T20:15:47+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email></email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Install hubot on Ubuntu]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/06/install-hubot/" />
+  <id>https://jivoi.github.io/2014/01/06/install-hubot</id>
+  <updated>2014-01-06 13:43:49 +0400T00:00:00-00:00</updated>
+  <published>2014-01-06T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;How to install Hubot to Ubuntu linux.&lt;/p&gt;
+
+&lt;p&gt;What is Hubot: &lt;a href=&quot;https://hubot.github.com/&quot;&gt;Awesome bot for everything&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;add-new-user-and-install-nvm&quot;&gt;Add new user and install NVM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd -m hubot
+su - hubot
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
+nvm install 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-hubot&quot;&gt;Install HUBOT&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install  generator-hubot yo coffee-script hubot hubot-xmpp
+yo hubot --defaults&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;connect-hubot-to-xmpp-room&quot;&gt;Connect Hubot to XMPP Room&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat &lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;EOF &amp;gt; /etc/init/hubot.conf&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;# hubot - xmpp bot&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;description &amp;quot;Hubot XMPP bot&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_LOG_LEVEL=&amp;quot;debug&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_HOST=&amp;quot;xmppserver.com&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_USERNAME=&amp;quot;XMPPACC&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_PASSWORD=&amp;quot;XMPPPASS&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_ROOMS=&amp;#39;XMPPROOM@conference.xmppserver.com:roompassword&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_PORT=&amp;quot;5222&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;start on filesystem or runlevel [2345]&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;stop on runlevel [!2345]&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;env HUBOT_DIR=&amp;quot;/home/hubot/&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT=&amp;quot;bin/hubot&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_ARGS=&amp;quot;-a xmpp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_USER=&amp;#39;hubot&amp;#39; # system account&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;env HUBOT_NAME=&amp;#39;hubot&amp;#39; # what hubot listens to&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;respawn&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;respawn limit 5 60&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;exec start-stop-daemon --start --chuid ${HUBOT_USER} --chdir ${HUBOT_DIR} --exec ${HUBOT_DIR}${HUBOT} -- $HUBOT_ARGS &amp;gt;&amp;gt; /home/hubot/hubot.log 2&amp;gt;&amp;amp;1&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;configure-hubot-scripts&quot;&gt;Configure Hubot scripts&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat /home/hubot/hubot-scripts.json
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;shipit.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;sudo.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;9gag.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;abstract.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;commandlinefu.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;xkcd.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;yoda-quotes.coffee&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;More scripts: &lt;a href=&quot;https://github.com/hubot-scripts&quot;&gt;LINK&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;start-hubot&quot;&gt;Start Hubot&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;start hubot
+tail -f /home/hubot/hubot.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/06/install-hubot/&quot;&gt;Install hubot on Ubuntu&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 06, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -353,7 +423,8 @@ rvm install 2.1
 rvm use 2.1 --default
 gem install bundle
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
-nvm install 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+nvm install 0.10
+nvm use 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;clone-github-repo-and-install-jekyll&quot;&gt;Clone Github Repo and install Jekyll&lt;/h3&gt;
 
