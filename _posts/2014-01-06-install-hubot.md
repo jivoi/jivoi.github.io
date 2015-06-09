@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Install hubot on Ubuntu"
+title: "Install Hubot on Ubuntu"
 modified: 2014-01-06 12:43:49 +0300
 category: [howto]
 tags: [linux, ubuntu, hubot]
