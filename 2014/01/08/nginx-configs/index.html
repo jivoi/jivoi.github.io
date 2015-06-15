@@ -1,0 +1,367 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Useful nginx rewrite rules &#8211; EK</title>
+<meta name="description" content="Different rewrite rules for nginx.
+
+">
+<meta name="keywords" content="linux, nginx">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Useful nginx rewrite rules">
+<meta name="twitter:description" content="Different rewrite rules for nginx.
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Useful nginx rewrite rules">
+<meta property="og:description" content="Different rewrite rules for nginx.
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2014/01/08/nginx-configs/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2014/01/08/nginx-configs/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2014/01/08/nginx-configs/" rel="bookmark" title="Useful nginx rewrite rules">Useful nginx rewrite rules</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Different rewrite rules for nginx.</p>
+
+<h3 id="custom-502-error-page">Custom 502 error page</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">error_page</span>   <span class="mi">502</span> <span class="p">=</span><span class="mi">200</span> <span class="s">/empty.html</span><span class="p">;</span>
+<span class="k">proxy_intercept_errors</span>  <span class="no">on</span><span class="p">;</span>
+<span class="k">location</span> <span class="s">/empty.html</span> <span class="p">{</span>
+	<span class="kn">root</span>    <span class="s">/var/www/</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-somefilephp-to-somefiletxt">Rewrite somefile.php to somefile.txt</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="p">=</span> <span class="s">/somefile.php</span> <span class="p">{</span>
+	<span class="kn">rewrite</span> <span class="s">.*</span> <span class="s">/somefile.txt</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz">Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server{</span>
+<span class="s">server_name</span> <span class="p">~</span> <span class="sr">^(.*)\.mysite\.com$;</span>
+<span class="s">set</span> <span class="nv">$subdom</span> <span class="nv">$1</span><span class="p">;</span>
+<span class="k">location</span> <span class="p">~</span> <span class="sr">\/(.*)\.php</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$script</span> <span class="nv">$1</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^</span> <span class="s">http://mysite.com/</span><span class="nv">$subdom/index.php?p=$script</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">}</span></code></pre></div>
+
+<h3 id="permanent-redirect-from-domain-to-wwwdomain">Permanent redirect from domain to www.domain</h3>
+
+<div class="highlight"><pre><code class="language-apache" data-lang="apache"><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+  <span class="nb">ServerName</span>              example.com:80
+  <span class="nb">RedirectMatch</span> permanent (.*) http://www.example.com$1
+<span class="nt">&lt;/VirtualHost&gt;</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+	<span class="kn">server_name</span> <span class="s">example.com</span><span class="p">;</span>
+	<span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://www.example.com</span><span class="nv">$1</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">or</span>
+
+<span class="s">server</span> <span class="p">{</span>
+	<span class="kn">server_name</span> <span class="p">~</span><span class="sr">^(?!</span> <span class="s">www\.)</span><span class="p">;</span>
+	<span class="kn">rewrite</span> <span class="s">^</span> <span class="s">http://www.</span><span class="nv">$host$request_uri</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">or</span>
+
+<span class="s">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span><span class="sr">*</span> <span class="s">www\.(.*))</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$host_without_www</span> <span class="nv">$1</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://</span><span class="nv">$host_without_www$1</span> <span class="s">permanent</span><span class="p">;</span> 
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-request-from-imgsite-to-images">Rewrite request from img/site to images</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/img/site</span> <span class="p">{</span>
+		<span class="kn">if</span> <span class="s">(!-f</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span> 
+		<span class="kn">rewrite</span> <span class="s">^/img/site/(.*)</span> <span class="s">/images/</span><span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="proxy-pass-all-request-for-one-location">Proxy pass all request for one location</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="p">~</span> <span class="sr">/one/two/(.*)/(.*)$</span> <span class="p">{</span>
+    <span class="kn">rewrite</span> <span class="s">/one/two/(.*)/(.*)</span>$ <span class="s">/two/</span><span class="nv">$1/$2</span> <span class="s">break</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">two.domain.net</span><span class="p">;</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://two.domain.net</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="proxy-pass-all-request-for-one-location-1">Proxy pass all request for one location</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/html/</span> <span class="p">{</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="s">html.example.ru</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^/html/js/id/([0-9]+)</span> <span class="s">/js/id/</span><span class="nv">$1.html</span> <span class="s">break</span><span class="p">;</span>
+    <span class="kn">proxy_pass</span>  <span class="s">http://html.example.ru</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru">Rewrite *.domain.ru domain.ru to *.domain.newdomain.ru domain.newdomain.ru</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$newdomain_host</span> <span class="s">domain.newdomain.ru</span><span class="p">;</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span> <span class="sr">(.*).domain.ru)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$newdomain_host</span> <span class="s">&quot;</span><span class="nv">$1.domain.newdomain.ru&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kn">rewrite</span> <span class="s">/(.*)</span>$  <span class="s">http://</span><span class="nv">$newdomain_host/$1</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="redirect-from-httpdomainoneru-to-httpdomaintworu">Redirect from http://domainone.ru/ to http://domaintwo.ru</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="s">_</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">domainone.ru</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://domaintwo.ru/</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+<p>:</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Useful nginx rewrite rules</strong> was published on <time datetime="2014-01-08T00:00:00+04:00">January 08, 2014</time> and last modified on <time datetime="2014-01-08">January 08, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2014/01/07/101-IT-security-interview-questions/" title="101 IT Security Interview Questions">101 IT Security Interview Questions</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/06/install-hubot/" title="Install Hubot on Ubuntu">Install Hubot on Ubuntu</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/05/answers-for-yandex/" title="Ответы для Yandex - Вакансия 'Системный администратор Unix'">Ответы для Yandex - Вакансия 'Системный администратор Unix'</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-10178897-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+	        
+
+</body>
+</html>
