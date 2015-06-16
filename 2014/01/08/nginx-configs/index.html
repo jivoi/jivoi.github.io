@@ -205,7 +205,7 @@
 <h3 id="rewrite-request-from-imgsite-to-images">Rewrite request from img/site to images</h3>
 
 <div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/img/site</span> <span class="p">{</span>
-		<span class="kn">if</span> <span class="s">(!-f</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span> 
+	<span class="kn">if</span> <span class="s">(!-f</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span> 
 		<span class="kn">rewrite</span> <span class="s">^/img/site/(.*)</span> <span class="s">/images/</span><span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span></code></pre></div>
@@ -231,7 +231,7 @@
 <div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
     <span class="kn">set</span> <span class="nv">$newdomain_host</span> <span class="s">domain.newdomain.ru</span><span class="p">;</span>
     <span class="kn">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span> <span class="sr">(.*).domain.ru)</span> <span class="p">{</span>
-    <span class="kn">set</span> <span class="nv">$newdomain_host</span> <span class="s">&quot;</span><span class="nv">$1.domain.newdomain.ru&quot;</span><span class="p">;</span>
+    	<span class="kn">set</span> <span class="nv">$newdomain_host</span> <span class="s">&quot;</span><span class="nv">$1.domain.newdomain.ru&quot;</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kn">rewrite</span> <span class="s">/(.*)</span>$  <span class="s">http://</span><span class="nv">$newdomain_host/$1</span> <span class="s">permanent</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
@@ -244,7 +244,46 @@
     <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
     <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://domaintwo.ru/</span> <span class="s">permanent</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
-<p>:</p>
+
+<h3 id="rewrite-whole-domain-to-other-domain">Rewrite whole domain to other domain</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">_</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://newdomain.net/</span> <span class="s">permanent</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="for-404-error-redirect-to--of-vhost">For 404 error redirect to / of vhost</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">proxy_intercept_errors</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">error_page</span> <span class="mi">404</span>  <span class="s">http://newdomain.net/</span><span class="p">;</span></code></pre></div>
+
+<h3 id="turn-on-gzip-compress">Turn on gzip compress</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">gzip</span> <span class="no">on</span><span class="p">;</span>
+<span class="k">gzip_min_length</span> <span class="mi">1100</span><span class="p">;</span>
+<span class="k">gzip_buffers</span> <span class="mi">8</span> <span class="mi">16k</span><span class="p">;</span>
+<span class="k">gzip_types</span> <span class="s">text/plain</span> <span class="s">application/x-javascript</span> <span class="s">text/css</span><span class="p">;</span></code></pre></div>
+
+<h3 id="rewrite-all-request-to-not-exists-files-to-indexphp">Rewrite all request to not exists files to index.php</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">if</span> <span class="s">(!-e</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span>
+	<span class="kn">rewrite</span> <span class="s">^.*</span>$ <span class="s">/index.php</span> <span class="s">last</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="security-admin-location">Security /admin location</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">^~</span> <span class="s">/admin</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(!-e</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span>
+    	<span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">/index.php</span><span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1</span><span class="p">;</span>
+    <span class="kn">allow</span> <span class="mi">192</span><span class="s">.168.56.1/24</span><span class="p">;</span>
+    <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/var/www</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
