@@ -74,7 +74,7 @@ if ($host ~* www\.(.*)) {
 ### Rewrite request from img/site to images
 {% highlight nginx %}
 location /img/site {
-		if (!-f $request_filename) { 
+	if (!-f $request_filename) { 
 		rewrite ^/img/site/(.*) /images/$1 break;
 	}
 }
@@ -103,7 +103,7 @@ location /html/ {
 location / {
     set $newdomain_host domain.newdomain.ru;
     if ($host ~ (.*).domain.ru) {
-    set $newdomain_host "$1.domain.newdomain.ru";
+    	set $newdomain_host "$1.domain.newdomain.ru";
     }
     rewrite /(.*)$  http://$newdomain_host/$1 permanent;
 }
@@ -117,4 +117,48 @@ server {
     access_log off;
     rewrite ^(.*)$ http://domaintwo.ru/ permanent;
 }
-{% endhighlight %}:
+{% endhighlight %}
+
+### Rewrite whole domain to other domain
+{% highlight nginx %}
+server {
+    listen :80;
+    server_name _;
+    access_log off;
+    rewrite ^(.*)$ http://newdomain.net/ permanent;
+}
+{% endhighlight %}
+
+### For 404 error redirect to / of vhost
+{% highlight nginx %}
+proxy_intercept_errors on;
+error_page 404  http://newdomain.net/;
+{% endhighlight %}
+
+### Turn on gzip compress
+{% highlight nginx %}
+gzip on;
+gzip_min_length 1100;
+gzip_buffers 8 16k;
+gzip_types text/plain application/x-javascript text/css;
+{% endhighlight %}
+
+### Rewrite all request to not exists files to index.php
+{% highlight nginx %}
+if (!-e $request_filename) {
+	rewrite ^.*$ /index.php last;
+}
+{% endhighlight %}
+
+### Security /admin location
+{% highlight nginx %}
+location ^~ /admin {
+    if (!-e $request_filename) {
+    	rewrite ^(.*)$ /index.php$1 break;
+    }
+    proxy_pass http://127.0.0.1;
+    allow 192.168.56.1/24;
+    deny all;
+    root /var/www;
+}
+{% endhighlight %}
