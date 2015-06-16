@@ -75,6 +75,14 @@ task :new_page, :title do |t, args|
   end
 end
 
+# build and watch
+desc "Build and watch at localhost"
+task :b do
+    puts "\n## Building site"
+    system "jekyll b"
+    system "jekyll s --host 0.0.0.0 --watch"
+end
+
 # deploy to github
 desc "Deploy to github"
 task :deploy do
