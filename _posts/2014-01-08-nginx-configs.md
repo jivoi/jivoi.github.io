@@ -13,6 +13,16 @@ share:
 ---
 Different rewrite rules for nginx.
 
+<section id="table-of-contents" class="toc">                                    
+<header>                                                                        
+<h3>Contents</h3>                                                               
+</header>                                                                       
+<div id="drawer" markdown="1">                                                  
+*  Auto generated table of contents                                             
+{:toc}                                                                          
+</div>                                                                          
+</section><!-- /#table-of-contents -->
+
 ### Custom 502 error page
 {% highlight nginx %}
 error_page   502 =200 /empty.html;
@@ -161,4 +171,97 @@ location ^~ /admin {
     deny all;
     root /var/www;
 }
+{% endhighlight %}
+
+### Rewrite location for special User-Agent
+{% highlight nginx %}
+location / {
+    if ($http_user_agent = "Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en)") {
+		rewrite ^ /index.php break;
+}
+
+to check
+wget --no-cache --user-agent="Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en)" http://domain.net -O /dev/null
+{% endhighlight %}
+
+### Simple block of SQL Injection
+{% highlight nginx %}
+location / {
+	if ($request_uri ~* "union|concat") {
+		return 403;
+    }
+    proxy_pass      http://127.0.0.1/;
+}
+{% endhighlight %}
+
+### Rewrite location name to get args
+{% highlight nginx %}
+e.x /en/bla.php rewrite to /bla.php?lang=en, or /en/bla.php?a=1 to /bla.php?a=1&lang=en
+
+location ~* ^/en {
+    set $args $args&lang=en;
+    rewrite ^/en/(.*)$ /$1 ;
+}
+{% endhighlight %}
+
+### Change robots.txt for different domain
+{% highlight nginx %}
+location = /robots.txt {
+    root /var/www;
+    if ( $host = domain.net ) {
+        rewrite ^/robots.txt$ /robots_domain.txt;
+        }
+    }
+location = /robots_domain.txt {
+    root /var/www2;
+}
+{% endhighlight %}
+
+### Creates variables suitable for A/B testing, also known as split testing
+{% highlight nginx %}
+split_clients "$cookie_ruid"  $sharding {
+				50%                1;
+				50%                2;
+}
+if ($sharding = '1') {
+	proxy_pass http://one.domain.ru;
+}
+if ($sharding = '2') {
+	proxy_pass http://two.domain.ru;
+}
+{% endhighlight %}
+
+### No cache for 502 error
+{% highlight nginx %}
+error_page 502 = @502;
+location @502 {
+	add_header Pragma "no-cache";
+	expires off;
+	add_header Cache-Control "no-store, no-cache, must-revalidate, post-check=0, pre-check=0";
+	charset utf-8;
+	root /var/www/err;
+	rewrite .* /index.html break;
+}
+{% endhighlight %}
+
+### Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net
+{% highlight nginx %}
+server {
+    listen :80;
+    server_name domain.net;
+    location / {
+        root /var/www;
+        random_index  on;
+    }
+}
+
+Create 3 files in /var/www index1.html index2.html index3.html 
+
+cat /var/www/index1.html
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="REFRESH" content="0;url=http://one.domain.net"</HEAD>
+</HTML>
 {% endhighlight %}
