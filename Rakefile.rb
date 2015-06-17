@@ -95,7 +95,7 @@ task :deploy do
         message = "Site updated at #{Time.now.utc}"
         system "git commit -m \"#{message}\""
         puts "\n## Pushing generated website"
-        system "git push -f origin master"
+        system "git push -u origin master"
         puts "\n## Github Pages deploy complete"
     end
 end
