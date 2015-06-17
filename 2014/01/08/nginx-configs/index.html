@@ -151,6 +151,39 @@
     <div class="article-wrap">
       <p>Different rewrite rules for nginx.</p>
 
+<section id="table-of-contents" class="toc">                                    
+<header>                                                                        
+<h3>Contents</h3>                                                               
+</header>                                                                       
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#custom-502-error-page" id="markdown-toc-custom-502-error-page">Custom 502 error page</a></li>
+  <li><a href="#rewrite-somefilephp-to-somefiletxt" id="markdown-toc-rewrite-somefilephp-to-somefiletxt">Rewrite somefile.php to somefile.txt</a></li>
+  <li><a href="#rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz" id="markdown-toc-rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz">Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz</a></li>
+  <li><a href="#permanent-redirect-from-domain-to-wwwdomain" id="markdown-toc-permanent-redirect-from-domain-to-wwwdomain">Permanent redirect from domain to www.domain</a></li>
+  <li><a href="#rewrite-request-from-imgsite-to-images" id="markdown-toc-rewrite-request-from-imgsite-to-images">Rewrite request from img/site to images</a></li>
+  <li><a href="#proxy-pass-all-request-for-one-location" id="markdown-toc-proxy-pass-all-request-for-one-location">Proxy pass all request for one location</a></li>
+  <li><a href="#proxy-pass-all-request-for-one-location-1" id="markdown-toc-proxy-pass-all-request-for-one-location-1">Proxy pass all request for one location</a></li>
+  <li><a href="#rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru" id="markdown-toc-rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru">Rewrite *.domain.ru domain.ru to *.domain.newdomain.ru domain.newdomain.ru</a></li>
+  <li><a href="#redirect-from-httpdomainoneru-to-httpdomaintworu" id="markdown-toc-redirect-from-httpdomainoneru-to-httpdomaintworu">Redirect from http://domainone.ru/ to http://domaintwo.ru</a></li>
+  <li><a href="#rewrite-whole-domain-to-other-domain" id="markdown-toc-rewrite-whole-domain-to-other-domain">Rewrite whole domain to other domain</a></li>
+  <li><a href="#for-404-error-redirect-to--of-vhost" id="markdown-toc-for-404-error-redirect-to--of-vhost">For 404 error redirect to / of vhost</a></li>
+  <li><a href="#turn-on-gzip-compress" id="markdown-toc-turn-on-gzip-compress">Turn on gzip compress</a></li>
+  <li><a href="#rewrite-all-request-to-not-exists-files-to-indexphp" id="markdown-toc-rewrite-all-request-to-not-exists-files-to-indexphp">Rewrite all request to not exists files to index.php</a></li>
+  <li><a href="#security-admin-location" id="markdown-toc-security-admin-location">Security /admin location</a></li>
+  <li><a href="#rewrite-location-for-special-user-agent" id="markdown-toc-rewrite-location-for-special-user-agent">Rewrite location for special User-Agent</a></li>
+  <li><a href="#simple-block-of-sql-injection" id="markdown-toc-simple-block-of-sql-injection">Simple block of SQL Injection</a></li>
+  <li><a href="#rewrite-location-name-to-get-args" id="markdown-toc-rewrite-location-name-to-get-args">Rewrite location name to get args</a></li>
+  <li><a href="#change-robotstxt-for-different-domain" id="markdown-toc-change-robotstxt-for-different-domain">Change robots.txt for different domain</a></li>
+  <li><a href="#creates-variables-suitable-for-ab-testing-also-known-as-split-testing" id="markdown-toc-creates-variables-suitable-for-ab-testing-also-known-as-split-testing">Creates variables suitable for A/B testing, also known as split testing</a></li>
+  <li><a href="#no-cache-for-502-error" id="markdown-toc-no-cache-for-502-error">No cache for 502 error</a></li>
+  <li><a href="#create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet" id="markdown-toc-create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet">Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net</a></li>
+</ul>
+
+  </div>                                                                          
+</section>
+<!-- /#table-of-contents -->
+
 <h3 id="custom-502-error-page">Custom 502 error page</h3>
 
 <div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">error_page</span>   <span class="mi">502</span> <span class="p">=</span><span class="mi">200</span> <span class="s">/empty.html</span><span class="p">;</span>
@@ -283,6 +316,92 @@
     <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
     <span class="kn">root</span> <span class="s">/var/www</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-location-for-special-user-agent">Rewrite location for special User-Agent</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">=</span> <span class="s">&quot;Mozilla/5.0</span> <span class="s">(iPhone</span><span class="p">;</span> <span class="kn">U</span><span class="p">;</span> <span class="kn">CPU</span> <span class="s">like</span> <span class="s">Mac</span> <span class="s">OS</span> <span class="s">X</span><span class="p">;</span> <span class="kn">en)&quot;)</span> <span class="p">{</span>
+		<span class="kn">rewrite</span> <span class="s">^</span> <span class="s">/index.php</span> <span class="s">break</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kn">to</span> <span class="s">check</span>
+<span class="s">wget</span> <span class="s">--no-cache</span> <span class="s">--user-agent=&quot;Mozilla/5.0</span> <span class="s">(iPhone</span><span class="p">;</span> <span class="kn">U</span><span class="p">;</span> <span class="kn">CPU</span> <span class="s">like</span> <span class="s">Mac</span> <span class="s">OS</span> <span class="s">X</span><span class="p">;</span> <span class="kn">en)&quot;</span> <span class="s">http://domain.net</span> <span class="s">-O</span> <span class="s">/dev/null</span></code></pre></div>
+
+<h3 id="simple-block-of-sql-injection">Simple block of SQL Injection</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+	<span class="kn">if</span> <span class="s">(</span><span class="nv">$request_uri</span> <span class="p">~</span><span class="sr">*</span> <span class="s">&quot;union|concat&quot;)</span> <span class="p">{</span>
+		<span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kn">proxy_pass</span>      <span class="s">http://127.0.0.1/</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-location-name-to-get-args">Rewrite location name to get args</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">e.x</span> <span class="s">/en/bla.php</span> <span class="s">rewrite</span> <span class="s">to</span> <span class="s">/bla.php?lang=en,</span> <span class="s">or</span> <span class="s">/en/bla.php?a=1</span> <span class="s">to</span> <span class="s">/bla.php?a=1&amp;lang=en</span>
+
+<span class="s">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">^/en</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$args</span> <span class="nv">$args&amp;lang=en</span><span class="p">;</span>
+    <span class="kn">rewrite</span> <span class="s">^/en/(.*)</span>$ <span class="s">/</span><span class="nv">$1</span> <span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="change-robotstxt-for-different-domain">Change robots.txt for different domain</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="p">=</span> <span class="s">/robots.txt</span> <span class="p">{</span>
+    <span class="kn">root</span> <span class="s">/var/www</span><span class="p">;</span>
+    <span class="kn">if</span> <span class="s">(</span> <span class="nv">$host</span> <span class="p">=</span> <span class="s">domain.net</span> <span class="s">)</span> <span class="p">{</span>
+        <span class="kn">rewrite</span> <span class="s">^/robots.txt</span>$ <span class="s">/robots_domain.txt</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="k">location</span> <span class="p">=</span> <span class="s">/robots_domain.txt</span> <span class="p">{</span>
+    <span class="kn">root</span> <span class="s">/var/www2</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="creates-variables-suitable-for-ab-testing-also-known-as-split-testing">Creates variables suitable for A/B testing, also known as split testing</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">split_clients</span> <span class="s">&quot;</span><span class="nv">$cookie_ruid&quot;</span>  <span class="nv">$sharding</span> <span class="p">{</span>
+				<span class="kn">50%</span>                <span class="mi">1</span><span class="p">;</span>
+				<span class="kn">50%</span>                <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$sharding</span> <span class="p">=</span> <span class="s">&#39;1&#39;)</span> <span class="p">{</span>
+	<span class="kn">proxy_pass</span> <span class="s">http://one.domain.ru</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$sharding</span> <span class="p">=</span> <span class="s">&#39;2&#39;)</span> <span class="p">{</span>
+	<span class="kn">proxy_pass</span> <span class="s">http://two.domain.ru</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="no-cache-for-502-error">No cache for 502 error</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">error_page</span> <span class="mi">502</span> <span class="p">=</span> <span class="s">@502</span><span class="p">;</span>
+<span class="k">location</span> <span class="s">@502</span> <span class="p">{</span>
+	<span class="kn">add_header</span> <span class="s">Pragma</span> <span class="s">&quot;no-cache&quot;</span><span class="p">;</span>
+	<span class="kn">expires</span> <span class="no">off</span><span class="p">;</span>
+	<span class="kn">add_header</span> <span class="s">Cache-Control</span> <span class="s">&quot;no-store,</span> <span class="s">no-cache,</span> <span class="s">must-revalidate,</span> <span class="s">post-check=0,</span> <span class="s">pre-check=0&quot;</span><span class="p">;</span>
+	<span class="kn">charset</span> <span class="s">utf-8</span><span class="p">;</span>
+	<span class="kn">root</span> <span class="s">/var/www/err</span><span class="p">;</span>
+	<span class="kn">rewrite</span> <span class="s">.*</span> <span class="s">/index.html</span> <span class="s">break</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet">Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">domain.net</span><span class="p">;</span>
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/var/www</span><span class="p">;</span>
+        <span class="kn">random_index</span>  <span class="no">on</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">Create</span> <span class="mi">3</span> <span class="s">files</span> <span class="s">in</span> <span class="s">/var/www</span> <span class="s">index1.html</span> <span class="s">index2.html</span> <span class="s">index3.html</span> 
+
+<span class="s">cat</span> <span class="s">/var/www/index1.html</span>
+
+<span class="s">&lt;!DOCTYPE</span> <span class="s">HTML</span> <span class="s">PUBLIC</span> <span class="s">&quot;-//W3C//DTD</span> <span class="s">HTML</span> <span class="mi">4</span><span class="s">.0</span> <span class="s">Transitional//EN&quot;&gt;</span>
+<span class="s">&lt;html&gt;</span>
+<span class="s">&lt;head&gt;</span>
+<span class="s">&lt;meta</span> <span class="s">http-equiv=&quot;REFRESH&quot;</span> <span class="s">content=&quot;0</span><span class="p">;</span><span class="k">url=http://one.domain.net&quot;&lt;/HEAD&gt;</span>
+<span class="s">&lt;/HTML&gt;</span></code></pre></div>
 
 
       <hr />
