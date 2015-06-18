@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-17T21:43:23+03:00</updated>
+<updated>2015-06-18T16:33:12+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -242,6 +242,11 @@
   &lt;li&gt;&lt;a href=&quot;#creates-variables-suitable-for-ab-testing-also-known-as-split-testing&quot; id=&quot;markdown-toc-creates-variables-suitable-for-ab-testing-also-known-as-split-testing&quot;&gt;Creates variables suitable for A/B testing, also known as split testing&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#no-cache-for-502-error&quot; id=&quot;markdown-toc-no-cache-for-502-error&quot;&gt;No cache for 502 error&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet&quot; id=&quot;markdown-toc-create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet&quot;&gt;Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#custom-403-error-page&quot; id=&quot;markdown-toc-custom-403-error-page&quot;&gt;Custom 403 error page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#rewrite-requests-for-special-remote-address&quot; id=&quot;markdown-toc-rewrite-requests-for-special-remote-address&quot;&gt;Rewrite requests for special remote address&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#rewrite-sub-domains-to-new-domain&quot; id=&quot;markdown-toc-rewrite-sub-domains-to-new-domain&quot;&gt;Rewrite sub domains to new domain&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#new-format-for-301-redirect&quot; id=&quot;markdown-toc-new-format-for-301-redirect&quot;&gt;New format for 301 redirect&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#location-for-static-files&quot; id=&quot;markdown-toc-location-for-static-files&quot;&gt;Location for static files&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;                                                                          
@@ -466,6 +471,55 @@
 &lt;span class=&quot;s&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http-equiv=&amp;quot;REFRESH&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;content=&amp;quot;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;url=http://one.domain.net&amp;quot;&amp;lt;/HEAD&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;&amp;lt;/HTML&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;custom-403-error-page&quot;&gt;Custom 403 error page&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;error_page&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;403&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/403.html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/403.html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/err/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rewrite-requests-for-special-remote-address&quot;&gt;Rewrite requests for special remote address&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;&amp;quot;8.8.8.8&amp;quot;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$  &lt;span class=&quot;s&quot;&gt;/index2.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://backend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rewrite-sub-domains-to-new-domain&quot;&gt;Rewrite sub domains to new domain&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.ru&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;*.domain.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#rewrite all subdomains on $1.b.dot.ru&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;^([a-z0-9-\.]+)\.domain.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$subd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$subd.b.dot.ru$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;#rewrite domain.ru in b.dot.ru&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;^domain.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://b.dot.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;new-format-for-301-redirect&quot;&gt;New format for 301 redirect&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;Old&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;format:&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.blabla.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;New&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;format:&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;301&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.blabla.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request_uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;location-for-static-files&quot;&gt;Location for static files&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)&lt;/span&gt;$ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/08/nginx-configs/&quot;&gt;Useful nginx rewrite rules&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 08, 2014.&lt;/p&gt;</content>

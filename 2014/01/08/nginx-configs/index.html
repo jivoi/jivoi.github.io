@@ -178,6 +178,11 @@
   <li><a href="#creates-variables-suitable-for-ab-testing-also-known-as-split-testing" id="markdown-toc-creates-variables-suitable-for-ab-testing-also-known-as-split-testing">Creates variables suitable for A/B testing, also known as split testing</a></li>
   <li><a href="#no-cache-for-502-error" id="markdown-toc-no-cache-for-502-error">No cache for 502 error</a></li>
   <li><a href="#create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet" id="markdown-toc-create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet">Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net</a></li>
+  <li><a href="#custom-403-error-page" id="markdown-toc-custom-403-error-page">Custom 403 error page</a></li>
+  <li><a href="#rewrite-requests-for-special-remote-address" id="markdown-toc-rewrite-requests-for-special-remote-address">Rewrite requests for special remote address</a></li>
+  <li><a href="#rewrite-sub-domains-to-new-domain" id="markdown-toc-rewrite-sub-domains-to-new-domain">Rewrite sub domains to new domain</a></li>
+  <li><a href="#new-format-for-301-redirect" id="markdown-toc-new-format-for-301-redirect">New format for 301 redirect</a></li>
+  <li><a href="#location-for-static-files" id="markdown-toc-location-for-static-files">Location for static files</a></li>
 </ul>
 
   </div>                                                                          
@@ -402,6 +407,55 @@
 <span class="s">&lt;head&gt;</span>
 <span class="s">&lt;meta</span> <span class="s">http-equiv=&quot;REFRESH&quot;</span> <span class="s">content=&quot;0</span><span class="p">;</span><span class="k">url=http://one.domain.net&quot;&lt;/HEAD&gt;</span>
 <span class="s">&lt;/HTML&gt;</span></code></pre></div>
+
+<h3 id="custom-403-error-page">Custom 403 error page</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">error_page</span> <span class="mi">403</span> <span class="s">/403.html</span><span class="p">;</span>
+<span class="k">location</span> <span class="p">=</span> <span class="s">/403.html</span> <span class="p">{</span>
+    <span class="kn">allow</span> <span class="s">all</span><span class="p">;</span>
+    <span class="kn">root</span> <span class="s">/var/www/err/</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-requests-for-special-remote-address">Rewrite requests for special remote address</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span>  <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$remote_addr</span> <span class="p">~</span> <span class="sr">&quot;8.8.8.8&quot;)</span> <span class="p">{</span>
+        <span class="kn">rewrite</span>  <span class="s">^(.*)</span>$  <span class="s">/index2.html</span> <span class="s">break</span><span class="p">;</span>  
+    <span class="p">}</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://backend</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="rewrite-sub-domains-to-new-domain">Rewrite sub domains to new domain</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">domain.ru</span> <span class="s">*.domain.ru</span><span class="p">;</span>
+    <span class="c1">#rewrite all subdomains on $1.b.dot.ru</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span><span class="sr">*</span> <span class="s">&quot;^([a-z0-9-\.]+)\.domain.ru</span><span class="nv">$&quot;</span><span class="s">)</span><span class="p">{</span>
+        <span class="kn">set</span> <span class="nv">$subd</span> <span class="nv">$1</span><span class="p">;</span>
+        <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://</span><span class="nv">$subd.b.dot.ru$1</span> <span class="s">permanent</span><span class="p">;</span>
+        <span class="kn">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">#rewrite domain.ru in b.dot.ru</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span><span class="sr">*</span> <span class="s">&quot;^domain.ru</span><span class="nv">$&quot;</span><span class="s">)</span><span class="p">{</span>
+        <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://b.dot.ru</span><span class="nv">$1</span> <span class="s">permanent</span><span class="p">;</span>
+        <span class="kn">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="new-format-for-301-redirect">New format for 301 redirect</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">Old</span> <span class="s">format:</span>
+<span class="s">rewrite</span> <span class="s">^(.*)</span> <span class="s">https://www.blabla.ru</span><span class="nv">$1</span> <span class="s">permanent</span><span class="p">;</span>
+
+<span class="k">New</span> <span class="s">format:</span>
+<span class="s">return</span> <span class="mi">301</span> <span class="s">https://www.blabla.ru</span><span class="nv">$request_uri</span><span class="p">;</span></code></pre></div>
+
+<h3 id="location-for-static-files">Location for static files</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)</span>$ <span class="p">{</span>
+    <span class="kn">root</span> <span class="s">/var/www/</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
 
       <hr />
