@@ -265,3 +265,57 @@ cat /var/www/index1.html
 <meta http-equiv="REFRESH" content="0;url=http://one.domain.net"</HEAD>
 </HTML>
 {% endhighlight %}
+
+### Custom 403 error page
+{% highlight nginx %}
+error_page 403 /403.html;
+location = /403.html {
+    allow all;
+    root /var/www/err/;
+}
+{% endhighlight %}
+
+### Rewrite requests for special remote address
+{% highlight nginx %}
+location  / {
+    if ($remote_addr ~ "8.8.8.8") {
+        rewrite  ^(.*)$  /index2.html break;  
+    }
+    proxy_pass http://backend;
+}
+{% endhighlight %}
+
+### Rewrite sub domains to new domain
+{% highlight nginx %}
+server {
+    listen 80;
+    server_name domain.ru *.domain.ru;
+    #rewrite all subdomains on $1.b.dot.ru
+    if ($host ~* "^([a-z0-9-\.]+)\.domain.ru$"){
+        set $subd $1;
+        rewrite ^(.*)$ http://$subd.b.dot.ru$1 permanent;
+        break;
+    }
+    #rewrite domain.ru in b.dot.ru
+    if ($host ~* "^domain.ru$"){
+        rewrite ^(.*)$ http://b.dot.ru$1 permanent;
+        break;
+    }
+}
+{% endhighlight %}
+
+### New format for 301 redirect
+{% highlight nginx %}
+Old format:
+rewrite ^(.*) https://www.blabla.ru$1 permanent;
+
+New format:
+return 301 https://www.blabla.ru$request_uri;
+{% endhighlight %}
+
+### Location for static files
+{% highlight nginx %}
+location ~* ^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)$ {
+    root /var/www/;
+}
+{% endhighlight %}
