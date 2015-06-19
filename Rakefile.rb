@@ -5,6 +5,7 @@ require "stringex"
 ## -- Config -- ##
 
 posts_dir       = "_posts"    # directory for blog files
+drafts_dir       = "_drafts"    # directory for blog files
 new_post_ext    = "md"  # default new post file extension when using the new_post task
 new_page_ext    = "md"  # default new page file extension when using the new_page task
 
@@ -12,6 +13,38 @@ new_page_ext    = "md"  # default new page file extension when using the new_pag
 #############################
 # Create a new Post or Page #
 #############################
+
+# usage rake new_draft
+desc "Create a new draft in #{drafts_dir}"
+task :new_draft, :title do |t, args|
+  if args.title
+    title = args.title
+  else
+    title = get_stdin("Enter a title for your post: ")
+  end
+  filename = "#{drafts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+  category = get_stdin("Enter category name to group your post in (leave blank for none): ")
+  tags = get_stdin("Enter tags to classify your post (comma separated): ")
+  puts "Creating new draft: #{filename}"
+  open(filename, 'w') do |post|
+    post.puts "---"
+    post.puts "layout: post"
+    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+    post.puts "modified: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+    post.puts "category: [#{category}]"
+    post.puts "tags: [#{tags}]"
+    post.puts "image:"
+    post.puts "  feature: "
+    post.puts "  credit: "
+    post.puts "  creditlink: "
+    post.puts "comments: True"
+    post.puts "share: "
+    post.puts "---"
+  end
+end
 
 # usage rake new_post
 desc "Create a new post in #{posts_dir}"
