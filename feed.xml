@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-18T16:33:12+03:00</updated>
+<updated>2015-06-19T12:54:05+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -47,6 +47,213 @@
 &lt;/ol&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/&quot;&gt;Kali Linux Compatible USB Wifi Adapters&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 16, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Ответы с олимпиады для системных администраторов от Yandex]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/" />
+  <id>https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex</id>
+  <updated>2014-06-18 17:39:24 +0400T00:00:00-00:00</updated>
+  <published>2014-06-18T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Ответы с олимпиады для системных администраторов от Yandex.
+Много интересных вопросов.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;Ответы на вопросы первой игры первого тура:&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;Вопрос 1.&lt;/h3&gt;
+&lt;p&gt;С помощью каких комбинаций клавиш в текстовых редакторах vi или vim скопировать в буфер 4 строки, начиная со строки, где находится курсор?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Способов много,  навскидку можно ответить, что это можно сделать с помощью:  4yy, либо y4y, либо 4ddkp, либо v курсор y, либо 4+Shift+y&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;Вопрос  2.&lt;/h3&gt;
+&lt;p&gt;Вы в bash запустили команду echo $[5/2]. Какой будет результат?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;ну тут все просто, ответ  2&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;Вопрос 3.&lt;/h3&gt;
+&lt;p&gt;В bash вы хотите сравнить два числа.  Какой оператор сравнения нужно применить, если нужно узнать,  что первое значение больше или равно второму?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Обычно применяют  -ge&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;Вопрос 4.&lt;/h3&gt;
+&lt;p&gt;Вам нужно запустить web-сервер Apache на порту 3128. С помощью  какой директивы в конфигурационном файле это можно сделать?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Listen  или Port&lt;/p&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;Вопрос 5.&lt;/h3&gt;
+&lt;p&gt;Как в Linux узнать текущий рабочий каталог процесса с pid = 4556?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Его можно найти в файлике /proc/4556/cwd&lt;/p&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;Вопрос 6.&lt;/h3&gt;
+&lt;p&gt;Как в Unix посмотреть какие файлы или устройства  использует процесс с pid = 85003?&lt;br /&gt;
+Вообще этот вопрос вызвал много споров.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Мы принимали следующие ответы:
+Для Linux: никак или в ответе должно было быть упоминание, что это можно сделать с помощью дополнительной настройки ядра, например, sysctl -w kernel.pid_max = (число &amp;gt; 85003). По умолчанию значение переменной kernel.pid_max = 32768;
+Для FreeBSD: fstat -p 85003 или установить lsof, а потом посмотреть с помощью lsof -p 85003. Утилиты lsof и procfs по умолчанию не установлены;
+Для Solaris мы принимали ответ, что можно сделать с помощью утилиты pfiles.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;Вопрос 7.&lt;/h3&gt;
+&lt;p&gt;Какие из перечисленных типов хранилищ в MySQL  поддерживают транзакционность:  MyISAM, Memory, InnoDB, Archive, NDB, CSV?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-14&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Ну тут, конечно, все вспомнили InnoDB, но и NDB тоже поддерживает транзакции.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-15&quot;&gt;Вопрос 8.&lt;/h3&gt;
+&lt;p&gt;Как в PostgreSQL очистить файлы баз данных от уже удалённых записей?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-16&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Вот уже много лет,  любимой командой администраторов PostgreSQL  является VACUUM FULL.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-17&quot;&gt;Вопрос 9.&lt;/h3&gt;
+&lt;p&gt;Как очистить лог-файл /var/log/log, открытый  работающим процессом?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-18&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Тут как и в пером вопросе тоже сразу можно привести массу вариантов:  $echo –n &amp;gt; /var/log/log  или $ &amp;gt; /var/log/log или $ cat /dev/null &amp;gt; /var/log/log .&lt;/p&gt;
+
+&lt;h3 id=&quot;section-19&quot;&gt;Вопрос 10.&lt;/h3&gt;
+&lt;p&gt;Вы зашли на сервер с Linux с помощью ssh. Как перегрузить этот сервер по sysrq-b?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-20&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;вот такой командой - $ echo b &amp;gt; /proc/sysrq-trigger&lt;/p&gt;
+
+&lt;h3 id=&quot;section-21&quot;&gt;Вопрос 11.&lt;/h3&gt;
+&lt;p&gt;Как подсчитать количество строк в текстовом файле file.txt?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-22&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Ну тут тоже самый привычный и распространенный сценарий у васех администраторов - $wc -l file.txt  .&lt;/p&gt;
+
+&lt;h3 id=&quot;section-23&quot;&gt;Вопрос 12.&lt;/h3&gt;
+&lt;p&gt;Как найти подстроку  в файле, сжатом с помощью gzip?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-24&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Тоже вот прям сходу пара вариантов:  $zgrep  stroka  file или $zcat  file | grep stroka&lt;/p&gt;
+
+&lt;h3 id=&quot;section-25&quot;&gt;Вопрос 13.&lt;/h3&gt;
+&lt;p&gt;Какой утилитой в Linux можно проверить состояние и включить/выключить кеширование на запись для SAS/SATA устройства (диска)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-26&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;hdparm в случае SATA или  sdparm  в случае SAS/SATA.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-27&quot;&gt;Вопрос 14.&lt;/h3&gt;
+&lt;p&gt;Как посмотреть версию и возможные параметры модуля e1000e для загруженного в настоящий момент ядра в Linux?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-28&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;modinfo e1000e&lt;/p&gt;
+
+&lt;h3 id=&quot;section-29&quot;&gt;Вопрос 15.&lt;/h3&gt;
+&lt;p&gt;Как в командной строке bash повторить команду, которую вы набирали ранее?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-30&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Тоже навскидку 3 варианта: Ctrl+r или !- или курсорные клавиши&lt;/p&gt;
+
+&lt;h3 id=&quot;section-31&quot;&gt;Вопрос 16.&lt;/h3&gt;
+&lt;p&gt;Какой командой в Linux можно разрешить dump corefile-ов в текущей сессии без ограничения по размеру?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-32&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;ulimit -c unlimited&lt;/p&gt;
+
+&lt;h3 id=&quot;section-33&quot;&gt;Вопрос 17.&lt;/h3&gt;
+&lt;p&gt;Как записать 100 пакетов на интерфейсе eth0 в файл mytrace.raw, не ограничивая длину захваченного (captured) пакета?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-34&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;tcpdump -i eth0 -c 100 -s 0 -w mytrace.raw&lt;/p&gt;
+
+&lt;h3 id=&quot;section-35&quot;&gt;Вопрос 18.&lt;/h3&gt;
+&lt;p&gt;Как изменить процент зарезервированного для root-а места на файловой системе ext3 до 2%, смонтированной в /filesystem в Linux?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-36&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;tune2fs -m2 /filesystem&lt;/p&gt;
+
+&lt;h3 id=&quot;section-37&quot;&gt;Вопрос 19.&lt;/h3&gt;
+&lt;p&gt;Как в Linux смонтировать файловую систему tmpfs размеров 2Гб в /tmpfs?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-38&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;mount none /tmpfs -t tmpfs -o size=2g&lt;/p&gt;
+
+&lt;h3 id=&quot;section-39&quot;&gt;Вопрос 20.&lt;/h3&gt;
+&lt;p&gt;Как посмотреть таблицы NAT в «файрволе» на сервере с Linux (ядро 2.6.X)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-40&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;iptables -L -t nat&lt;/p&gt;
+
+&lt;h3 id=&quot;section-41&quot;&gt;Вопрос 21.&lt;/h3&gt;
+&lt;p&gt;Какой утилитой в Linux можно посмотреть, какие системные вызовы делает работающий процесс?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-42&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Любимой утилитой всех системных администраторов - strace&lt;/p&gt;
+
+&lt;h3 id=&quot;section-43&quot;&gt;Вопрос 22.&lt;/h3&gt;
+&lt;p&gt;Как посмотреть процессы пользователя vasya, отсортировав их по resident size в порядке убывания?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-44&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Вообще вариантов ответа очень много, но вот, например один из них: ps nu -U vasya –sort -rss&lt;/p&gt;
+
+&lt;h3 id=&quot;section-45&quot;&gt;Вопрос 23.&lt;/h3&gt;
+&lt;p&gt;Как смонтировать каталог /var/log/mydaemon в /mydaemon?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-46&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;mount /var/log/mydaemon /mydaemon -o bind&lt;/p&gt;
+
+&lt;h3 id=&quot;section-47&quot;&gt;Вопрос 24.&lt;/h3&gt;
+&lt;p&gt;Какое максимальное число адресов можно использовать в ipv4 сети /26?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-48&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Ответ 62, потому что 2 адреса из 64: Широковещательный адрес и Адрес сети – являются служебными.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-49&quot;&gt;Вопрос 25.&lt;/h3&gt;
+&lt;p&gt;Как затереть нулями первые 64Мб диска /dev/sda?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-50&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;dd if=/dev/zero of=/dev/sda bs=64M count=1 или dd if=/dev/zero of=/dev/sda bs=1M count=64&lt;/p&gt;
+
+&lt;h3 id=&quot;section-51&quot;&gt;Вопрос 26.&lt;/h3&gt;
+&lt;p&gt;Какова последовательность пакетов tcp при установке соединения (укажите типы пакетов)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-52&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;хост A посылает хосту B пакет с установленным битом SYN и 32-битным значением ISSa в поле Sequence Number
+хост B отвечает хосту A пакетом с установленными битами SYN и ACK, 32-битным значением ISSb в поле Sequence Number, и значением (ISSa+1) в поле ACK
+хост A отвечает хосту B пакетом с установленным битом ACK, значением (ISSa+1) в поле Sequence Number, и значением (ISSb+1) в поле ACK.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-53&quot;&gt;Вопрос 27.&lt;/h3&gt;
+&lt;p&gt;Какой параметр ядра отвечает за максимальный размер памяти, доступный для выделения процессам в Linux?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-54&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;vm.overcommit_ratio&lt;/p&gt;
+
+&lt;h3 id=&quot;section-55&quot;&gt;Вопрос 28.&lt;/h3&gt;
+&lt;p&gt;Как в Linux сделать так, чтобы core-файлы сохранялись c именем /var/tmp/core.{pid}?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-56&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;sysctl -w kernel.core_pattern=”/var/tmp/core.%p”&lt;/p&gt;
+
+&lt;h3 id=&quot;section-57&quot;&gt;Вопрос 29.&lt;/h3&gt;
+&lt;p&gt;Как одной командой «сбросить» все переменные окружения (сделать «пустое» окружение) в текущей сессии в Linux?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-58&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;env -i&lt;/p&gt;
+
+&lt;h3 id=&quot;section-59&quot;&gt;Вопрос 30.&lt;/h3&gt;
+&lt;p&gt;Как включить jumbo-frames на сетевом интерфейсе eth0?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-60&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;ifconfig eth0 mtu 9000&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/&quot;&gt;Ответы с олимпиады для системных администраторов от Yandex&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 18, 2014.&lt;/p&gt;</content>
 </entry>
 
 

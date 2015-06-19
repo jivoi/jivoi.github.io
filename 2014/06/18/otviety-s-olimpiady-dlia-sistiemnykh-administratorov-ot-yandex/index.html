@@ -1,0 +1,464 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Ответы с олимпиады для системных администраторов от Yandex &#8211; EK</title>
+<meta name="description" content="Ответы с олимпиады для системных администраторов от Yandex.
+Много интересных вопросов.
+
+">
+<meta name="keywords" content="linux, sysadm, yandex">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Ответы с олимпиады для системных администраторов от Yandex">
+<meta name="twitter:description" content="Ответы с олимпиады для системных администраторов от Yandex.
+Много интересных вопросов.
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ответы с олимпиады для системных администраторов от Yandex">
+<meta property="og:description" content="Ответы с олимпиады для системных администраторов от Yandex.
+Много интересных вопросов.
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/" rel="bookmark" title="Ответы с олимпиады для системных администраторов от Yandex">Ответы с олимпиады для системных администраторов от Yandex</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Ответы с олимпиады для системных администраторов от Yandex.
+Много интересных вопросов.</p>
+
+<h2 id="section">Ответы на вопросы первой игры первого тура:</h2>
+
+<h3 id="section-1">Вопрос 1.</h3>
+<p>С помощью каких комбинаций клавиш в текстовых редакторах vi или vim скопировать в буфер 4 строки, начиная со строки, где находится курсор?</p>
+
+<h3 id="section-2">Ответ:</h3>
+<p>Способов много,  навскидку можно ответить, что это можно сделать с помощью:  4yy, либо y4y, либо 4ddkp, либо v курсор y, либо 4+Shift+y</p>
+
+<h3 id="section-3">Вопрос  2.</h3>
+<p>Вы в bash запустили команду echo $[5/2]. Какой будет результат?</p>
+
+<h3 id="section-4">Ответ:</h3>
+<p>ну тут все просто, ответ  2</p>
+
+<h3 id="section-5">Вопрос 3.</h3>
+<p>В bash вы хотите сравнить два числа.  Какой оператор сравнения нужно применить, если нужно узнать,  что первое значение больше или равно второму?</p>
+
+<h3 id="section-6">Ответ:</h3>
+<p>Обычно применяют  -ge</p>
+
+<h3 id="section-7">Вопрос 4.</h3>
+<p>Вам нужно запустить web-сервер Apache на порту 3128. С помощью  какой директивы в конфигурационном файле это можно сделать?</p>
+
+<h3 id="section-8">Ответ:</h3>
+<p>Listen  или Port</p>
+
+<h3 id="section-9">Вопрос 5.</h3>
+<p>Как в Linux узнать текущий рабочий каталог процесса с pid = 4556?</p>
+
+<h3 id="section-10">Ответ:</h3>
+<p>Его можно найти в файлике /proc/4556/cwd</p>
+
+<h3 id="section-11">Вопрос 6.</h3>
+<p>Как в Unix посмотреть какие файлы или устройства  использует процесс с pid = 85003?<br />
+Вообще этот вопрос вызвал много споров.</p>
+
+<h3 id="section-12">Ответ:</h3>
+<p>Мы принимали следующие ответы:
+Для Linux: никак или в ответе должно было быть упоминание, что это можно сделать с помощью дополнительной настройки ядра, например, sysctl -w kernel.pid_max = (число &gt; 85003). По умолчанию значение переменной kernel.pid_max = 32768;
+Для FreeBSD: fstat -p 85003 или установить lsof, а потом посмотреть с помощью lsof -p 85003. Утилиты lsof и procfs по умолчанию не установлены;
+Для Solaris мы принимали ответ, что можно сделать с помощью утилиты pfiles.</p>
+
+<h3 id="section-13">Вопрос 7.</h3>
+<p>Какие из перечисленных типов хранилищ в MySQL  поддерживают транзакционность:  MyISAM, Memory, InnoDB, Archive, NDB, CSV?</p>
+
+<h3 id="section-14">Ответ:</h3>
+<p>Ну тут, конечно, все вспомнили InnoDB, но и NDB тоже поддерживает транзакции.</p>
+
+<h3 id="section-15">Вопрос 8.</h3>
+<p>Как в PostgreSQL очистить файлы баз данных от уже удалённых записей?</p>
+
+<h3 id="section-16">Ответ:</h3>
+<p>Вот уже много лет,  любимой командой администраторов PostgreSQL  является VACUUM FULL.</p>
+
+<h3 id="section-17">Вопрос 9.</h3>
+<p>Как очистить лог-файл /var/log/log, открытый  работающим процессом?</p>
+
+<h3 id="section-18">Ответ:</h3>
+<p>Тут как и в пером вопросе тоже сразу можно привести массу вариантов:  $echo –n &gt; /var/log/log  или $ &gt; /var/log/log или $ cat /dev/null &gt; /var/log/log .</p>
+
+<h3 id="section-19">Вопрос 10.</h3>
+<p>Вы зашли на сервер с Linux с помощью ssh. Как перегрузить этот сервер по sysrq-b?</p>
+
+<h3 id="section-20">Ответ:</h3>
+<p>вот такой командой - $ echo b &gt; /proc/sysrq-trigger</p>
+
+<h3 id="section-21">Вопрос 11.</h3>
+<p>Как подсчитать количество строк в текстовом файле file.txt?</p>
+
+<h3 id="section-22">Ответ:</h3>
+<p>Ну тут тоже самый привычный и распространенный сценарий у васех администраторов - $wc -l file.txt  .</p>
+
+<h3 id="section-23">Вопрос 12.</h3>
+<p>Как найти подстроку  в файле, сжатом с помощью gzip?</p>
+
+<h3 id="section-24">Ответ:</h3>
+<p>Тоже вот прям сходу пара вариантов:  $zgrep  stroka  file или $zcat  file | grep stroka</p>
+
+<h3 id="section-25">Вопрос 13.</h3>
+<p>Какой утилитой в Linux можно проверить состояние и включить/выключить кеширование на запись для SAS/SATA устройства (диска)?</p>
+
+<h3 id="section-26">Ответ:</h3>
+<p>hdparm в случае SATA или  sdparm  в случае SAS/SATA.</p>
+
+<h3 id="section-27">Вопрос 14.</h3>
+<p>Как посмотреть версию и возможные параметры модуля e1000e для загруженного в настоящий момент ядра в Linux?</p>
+
+<h3 id="section-28">Ответ:</h3>
+<p>modinfo e1000e</p>
+
+<h3 id="section-29">Вопрос 15.</h3>
+<p>Как в командной строке bash повторить команду, которую вы набирали ранее?</p>
+
+<h3 id="section-30">Ответ:</h3>
+<p>Тоже навскидку 3 варианта: Ctrl+r или !- или курсорные клавиши</p>
+
+<h3 id="section-31">Вопрос 16.</h3>
+<p>Какой командой в Linux можно разрешить dump corefile-ов в текущей сессии без ограничения по размеру?</p>
+
+<h3 id="section-32">Ответ:</h3>
+<p>ulimit -c unlimited</p>
+
+<h3 id="section-33">Вопрос 17.</h3>
+<p>Как записать 100 пакетов на интерфейсе eth0 в файл mytrace.raw, не ограничивая длину захваченного (captured) пакета?</p>
+
+<h3 id="section-34">Ответ:</h3>
+<p>tcpdump -i eth0 -c 100 -s 0 -w mytrace.raw</p>
+
+<h3 id="section-35">Вопрос 18.</h3>
+<p>Как изменить процент зарезервированного для root-а места на файловой системе ext3 до 2%, смонтированной в /filesystem в Linux?</p>
+
+<h3 id="section-36">Ответ:</h3>
+<p>tune2fs -m2 /filesystem</p>
+
+<h3 id="section-37">Вопрос 19.</h3>
+<p>Как в Linux смонтировать файловую систему tmpfs размеров 2Гб в /tmpfs?</p>
+
+<h3 id="section-38">Ответ:</h3>
+<p>mount none /tmpfs -t tmpfs -o size=2g</p>
+
+<h3 id="section-39">Вопрос 20.</h3>
+<p>Как посмотреть таблицы NAT в «файрволе» на сервере с Linux (ядро 2.6.X)?</p>
+
+<h3 id="section-40">Ответ:</h3>
+<p>iptables -L -t nat</p>
+
+<h3 id="section-41">Вопрос 21.</h3>
+<p>Какой утилитой в Linux можно посмотреть, какие системные вызовы делает работающий процесс?</p>
+
+<h3 id="section-42">Ответ:</h3>
+<p>Любимой утилитой всех системных администраторов - strace</p>
+
+<h3 id="section-43">Вопрос 22.</h3>
+<p>Как посмотреть процессы пользователя vasya, отсортировав их по resident size в порядке убывания?</p>
+
+<h3 id="section-44">Ответ:</h3>
+<p>Вообще вариантов ответа очень много, но вот, например один из них: ps nu -U vasya –sort -rss</p>
+
+<h3 id="section-45">Вопрос 23.</h3>
+<p>Как смонтировать каталог /var/log/mydaemon в /mydaemon?</p>
+
+<h3 id="section-46">Ответ:</h3>
+<p>mount /var/log/mydaemon /mydaemon -o bind</p>
+
+<h3 id="section-47">Вопрос 24.</h3>
+<p>Какое максимальное число адресов можно использовать в ipv4 сети /26?</p>
+
+<h3 id="section-48">Ответ:</h3>
+<p>Ответ 62, потому что 2 адреса из 64: Широковещательный адрес и Адрес сети – являются служебными.</p>
+
+<h3 id="section-49">Вопрос 25.</h3>
+<p>Как затереть нулями первые 64Мб диска /dev/sda?</p>
+
+<h3 id="section-50">Ответ:</h3>
+<p>dd if=/dev/zero of=/dev/sda bs=64M count=1 или dd if=/dev/zero of=/dev/sda bs=1M count=64</p>
+
+<h3 id="section-51">Вопрос 26.</h3>
+<p>Какова последовательность пакетов tcp при установке соединения (укажите типы пакетов)?</p>
+
+<h3 id="section-52">Ответ:</h3>
+<p>хост A посылает хосту B пакет с установленным битом SYN и 32-битным значением ISSa в поле Sequence Number
+хост B отвечает хосту A пакетом с установленными битами SYN и ACK, 32-битным значением ISSb в поле Sequence Number, и значением (ISSa+1) в поле ACK
+хост A отвечает хосту B пакетом с установленным битом ACK, значением (ISSa+1) в поле Sequence Number, и значением (ISSb+1) в поле ACK.</p>
+
+<h3 id="section-53">Вопрос 27.</h3>
+<p>Какой параметр ядра отвечает за максимальный размер памяти, доступный для выделения процессам в Linux?</p>
+
+<h3 id="section-54">Ответ:</h3>
+<p>vm.overcommit_ratio</p>
+
+<h3 id="section-55">Вопрос 28.</h3>
+<p>Как в Linux сделать так, чтобы core-файлы сохранялись c именем /var/tmp/core.{pid}?</p>
+
+<h3 id="section-56">Ответ:</h3>
+<p>sysctl -w kernel.core_pattern=”/var/tmp/core.%p”</p>
+
+<h3 id="section-57">Вопрос 29.</h3>
+<p>Как одной командой «сбросить» все переменные окружения (сделать «пустое» окружение) в текущей сессии в Linux?</p>
+
+<h3 id="section-58">Ответ:</h3>
+<p>env -i</p>
+
+<h3 id="section-59">Вопрос 30.</h3>
+<p>Как включить jumbo-frames на сетевом интерфейсе eth0?</p>
+
+<h3 id="section-60">Ответ:</h3>
+<p>ifconfig eth0 mtu 9000</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher from Russia</p>
+
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Ответы с олимпиады для системных администраторов от Yandex</strong> was published on <time datetime="2014-06-18T00:00:00+04:00">June 18, 2014</time> and last modified on <time datetime="2014-06-18">June 18, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/09/choose-life/" title="Choose Life">Choose Life</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/01/08/nginx-configs/" title="Useful nginx rewrite rules">Useful nginx rewrite rules</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+	        
+
+</body>
+</html>
