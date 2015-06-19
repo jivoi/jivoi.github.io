@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-19T12:54:05+03:00</updated>
+<updated>2015-06-19T16:09:08+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -252,6 +252,207 @@
 
 &lt;h3 id=&quot;section-60&quot;&gt;Ответ:&lt;/h3&gt;
 &lt;p&gt;ifconfig eth0 mtu 9000&lt;/p&gt;
+
+&lt;h2 id=&quot;section-61&quot;&gt;Ответы на вопросы второй игры первого тура:&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-62&quot;&gt;Вопрос 1.&lt;/h3&gt;
+&lt;p&gt;Напишите чему будет равен mss, если Вы используете IPv6 и mtu=1450?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-63&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;1390, при использовании TCP поверх IPv6, MSS должно быть вычислено как максимальная длина пакета минус 60 октетов, так как минимальная длина заголовка IPv6 (т.e., IPv6 заголовок без заголовков расширения) на 20 октетов больше, чем для IPv4.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-64&quot;&gt;Вопрос 2.&lt;/h3&gt;
+&lt;p&gt;Что в bash напечатает команда echo $((5/2))?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-65&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Как ни странно, но ответ такой же, как и в первой игре – 2&lt;/p&gt;
+
+&lt;h3 id=&quot;section-66&quot;&gt;Вопрос 3.&lt;/h3&gt;
+&lt;p&gt;Приведите пример команды, которая напечатает ‘Y’ , если файл/var/tmp/core существует и он ненулевого размера (используя средства bash и coreutils)?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-67&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Например, можно сделать это  вот таким способом  $test -s /var/tmp/core &amp;amp;&amp;amp; echo ‘Y’ или вот таким $ [ -s /var/tmp/core ] &amp;amp;&amp;amp; echo ‘Y’&lt;/p&gt;
+
+&lt;h3 id=&quot;section-68&quot;&gt;Вопрос 4.&lt;/h3&gt;
+&lt;p&gt;С помощью какой директивы в Apache 1.3 можно указать e-mail для связи на стандартной страничке Internal Server Error?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-69&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;ServerAdmin&lt;/p&gt;
+
+&lt;h3 id=&quot;section-70&quot;&gt;Вопрос 5.&lt;/h3&gt;
+&lt;p&gt;Как в Linux вывести все переменные окружения, с которыми работает процесс с pid = 5671, в виде списка, где каждая переменная на отдельной строке?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-71&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;На этот  вопрос в шаблоне для проверки забито очень много разных вариантов,  вот парочка из них:  $/proc/5671/environ | strings или $sudo cat /proc/2236/environ | sed ‘s/\x00/\n/g’&lt;/p&gt;
+
+&lt;h3 id=&quot;section-72&quot;&gt;Вопрос 6.&lt;/h3&gt;
+&lt;p&gt;Как в Linux или FreeBSD открыть tcp порт 74022 в режиме Listen при помощи утилиты пакета netcat?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-73&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;никак нельзя посмотреть, так как такого порта не может быть.  В протоколе TCP поле “Порт назначения” (DESTINATION PORT) занимает 2 байта, поэтому номер порта не может превышать два в шестнадцатой степени.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-74&quot;&gt;Вопрос 7.&lt;/h3&gt;
+&lt;p&gt;Как в MySQL посмотреть список текущих сессий?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-75&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;show processlist в консоли mysql или спецальной утилитой mysqladmin с ключиком processlist,  вообщем ключевое слово – processlist.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-76&quot;&gt;Вопрос 8.&lt;/h3&gt;
+&lt;p&gt;Как в PostgreSQL посмотреть список текущих сессий?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-77&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Тут нужно делать специальный запрос  в базе:  SELECT * from pg_stat_activity. Или так: $ps axu | grep postgre&lt;/p&gt;
+
+&lt;h3 id=&quot;section-78&quot;&gt;Вопрос 9.&lt;/h3&gt;
+&lt;p&gt;У Вас на сервере есть древовидная структура директорий с несколькими миллионами файлов. Напишите пример команды, которая удалит все файлы, не трогая структуру каталогов?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-79&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Это  один из наших любимых вопросов на собеседованиях   Конечно же, это легко делается с помощью команды find.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-80&quot;&gt;Вопрос 10.&lt;/h3&gt;
+&lt;p&gt;Как не перезагружая операционную систему Linux (ядро 2.6.X), разрешить автоматическую перезагрузку через 10 секунд после того, как произошел kernel panic?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-81&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;$sysctl -w kernel.panic=10 или $echo 10 &amp;gt; /proc/sys/kernel/panic&lt;/p&gt;
+
+&lt;h3 id=&quot;section-82&quot;&gt;Вопрос 11.&lt;/h3&gt;
+&lt;p&gt;Напишите пример команд из coreutils, при помощи которых можно разбить содержимое текстового файла на три примерно равных части и поместить их в три разных файла?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-83&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Ну тут опять очень много вариантов, но это точно можно сделать с помощью команд split, dd,  tail или head.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-84&quot;&gt;Вопрос 12.&lt;/h3&gt;
+&lt;p&gt;Как посмотреть в содержимое initrd, собранного mkinitramfs?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-85&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;$zcat |cpio -i –make-directories или разархивировать с помощью команды gunzip, а потом  сказать $mount -o loop initrd.img /mnt/initrd&lt;/p&gt;
+
+&lt;h3 id=&quot;section-86&quot;&gt;Вопрос 13.&lt;/h3&gt;
+&lt;p&gt;Какой утилитой в Linux посмотреть время наработки диска в часах?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-87&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Например, это можно сделать с помощью smartctl или sg_utils.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-88&quot;&gt;Вопрос 14.&lt;/h3&gt;
+&lt;p&gt;Как в Linux (2.6.X) безопасно выгрузить модуль ядра e1000e?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-89&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;С помощью команды $modprobe -r e1000e&lt;/p&gt;
+
+&lt;h3 id=&quot;section-90&quot;&gt;Вопрос 15.&lt;/h3&gt;
+&lt;p&gt;Как в терминале bash при помощи одной служебной комбинации клавиш слово dpgk превратить в dpkg, если курсор стоит на букве k?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-91&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Эта комбинация клавиш -  ctrl-T&lt;/p&gt;
+
+&lt;h3 id=&quot;section-92&quot;&gt;Вопрос 16.&lt;/h3&gt;
+&lt;p&gt;Как в Linux посмотреть лимиты на количество открытых файлов, действующие в текущей сессии?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-93&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Раз надо посмотреть лимиты, то  логично это делать с помощью команды ulimit -n или ulimit –a&lt;/p&gt;
+
+&lt;h3 id=&quot;section-94&quot;&gt;Вопрос 17.&lt;/h3&gt;
+&lt;p&gt;Какими командами можно узнать mac-адрес сервера, доступа к которому у Вас нет, и он находится вашем сегменте ethernet сети? При этом известен его ip и до этого момента обмена ip-пакетами с этим сервером не было.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-95&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Для начала надо с ним обменяться пакетами. Например, это можно сделать с помощью команды ping, ну а потом можно посмотреть его mac  в arp таблице с помощью команды arp.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-96&quot;&gt;Вопрос 18.&lt;/h3&gt;
+&lt;p&gt;Какой командой в Linux посмотреть размер журнала файловой системы ext3, смонтированной в /dev/sda1?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-97&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;dumpe2fs -h /dev/sda1&lt;/p&gt;
+
+&lt;h3 id=&quot;section-98&quot;&gt;Вопрос 19.&lt;/h3&gt;
+&lt;p&gt;Как в Linux изменить размер файловой системы tmpfs, смонтированной в /tmpfs с 2 до 4 гигабайт, без потери ее содержимого?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-99&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;mount /tmpfs -o remount, size=4g&lt;/p&gt;
+
+&lt;h3 id=&quot;section-100&quot;&gt;Вопрос 20.&lt;/h3&gt;
+&lt;p&gt;Как в Linux (ядро 2.6.X) одной командой посмотреть содержимое всех таблиц в firewall?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-101&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Это можно сделать командой iptables-save&lt;/p&gt;
+
+&lt;h3 id=&quot;section-102&quot;&gt;Вопрос 21.&lt;/h3&gt;
+&lt;p&gt;Какой командой посмотреть, какие из необходимых программе библиотек недоступны при ее запуске?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-103&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;С помощью любимой команды системных администраторов - strace или можно использовать ldd или gdb.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-104&quot;&gt;Вопрос 22.&lt;/h3&gt;
+&lt;p&gt;Как посмотреть «дерево» процессов?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-105&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Тут тоже сразу можно привести несколько вариантов: pstree или ps ax –forest или ps axf или ps ax -H&lt;/p&gt;
+
+&lt;h3 id=&quot;section-106&quot;&gt;Вопрос 23.&lt;/h3&gt;
+&lt;p&gt;Как в Linux прочитать файл /serial.txt, находящейся в ISO9660-образе winxpsp4.iso?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-107&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;По ощущениям вопрос всем очень понравился, запоминайте ответ!  mount -o loop -t iso9660 winxpsp4.iso /mnt;; cat /mnt/serial.txt&lt;/p&gt;
+
+&lt;h3 id=&quot;section-108&quot;&gt;Вопрос 24.&lt;/h3&gt;
+&lt;p&gt;Что неправильно в параметрах конфигурации интерфейса: 
+address 192.168.1.191 
+netmask 255.255.255.192 
+network 192.168.1.128 
+gateway 192.168.1.129 
+mtu 1450 ?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-109&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Адрес хоста (address) совпадает с адресом бродкаста (broadcast) сегмента сети.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-110&quot;&gt;Вопрос 25.&lt;/h3&gt;
+&lt;p&gt;Как скопировать данные с поврежденного диска /dev/sda на целый /dev/sdb, пропустив только сбойные сектора?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-111&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;Классический вариант - dd if=/dev/sda of=/dev/sdb conv=sync,noerror.
+Параметр “conv=sync,noerror” указывает dd не читать блок, если при этом происходит ошибка, но записать в архивируемый файл-образ данные (недостающие входные данные будут заменены нулевыми байтами).
+Еще есть  утилиты dd_rescue и ddrescue,  с помощью которых тоже можно решить задачу.&lt;/p&gt;
+
+&lt;h3 id=&quot;section-112&quot;&gt;Вопрос 26.&lt;/h3&gt;
+&lt;p&gt;Какой флаг должен быть установлен в tcp пакете, чтобы соединение было немедленно прекращено?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-113&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;RST&lt;/p&gt;
+
+&lt;h3 id=&quot;section-114&quot;&gt;Вопрос 27.&lt;/h3&gt;
+&lt;p&gt;Как в Linux запретить выделение более 90% физической памяти процессам, при условии, что swap выключен?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-115&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;канонический ответ согласно документации:
+$sysctl -w vm.overcommit_memory=2; sysctl -w vm.overcommit_ratio=90 или 
+$echo 2 &amp;gt; /proc/sys/vm/overcommit_memory; echo 90 &amp;gt; /proc/sys/vm/overcommit_ratio&lt;/p&gt;
+
+&lt;h3 id=&quot;section-116&quot;&gt;Вопрос 28.&lt;/h3&gt;
+&lt;p&gt;Как в Linux разрешить маршрутизацию ipv4 пакетов?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-117&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;sysctl -w net.ipv4.ip_forward=1 или echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&lt;/p&gt;
+
+&lt;h3 id=&quot;section-118&quot;&gt;Вопрос 29.&lt;/h3&gt;
+&lt;p&gt;Есть файл file со строками: 
+1 
+10 
+45 
+6 
+1 
+5 
+7 
+10 
+Как при помощи утилит, входящих в coreutils, узнать какие строки присутствуют в файле более 1 раза, и сколько раз повторяется каждая строка?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-119&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;cat file|sort|uniq -dc&lt;/p&gt;
+
+&lt;h3 id=&quot;section-120&quot;&gt;Вопрос 30.&lt;/h3&gt;
+&lt;p&gt;Вы зашли на сервер example.com и запустили там команду wget http://example.com Как посмотреть траффик этого соединения с помощью команды tcpdump?&lt;/p&gt;
+
+&lt;h3 id=&quot;section-121&quot;&gt;Ответ:&lt;/h3&gt;
+&lt;p&gt;tcpdump -i lo или -i any
+Для общения  между сетевым клиентским программным обеспечением и серверным приложением, расположенном на том же компьютере используется интерфейс loopback.&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/&quot;&gt;Ответы с олимпиады для системных администраторов от Yandex&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 18, 2014.&lt;/p&gt;</content>
 </entry>
