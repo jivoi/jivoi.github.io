@@ -44,6 +44,7 @@ task :new_draft, :title do |t, args|
     post.puts "share: "
     post.puts "---"
   end
+  system "vim \"#{filename}\""
 end
 
 # usage rake new_post
