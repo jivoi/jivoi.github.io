@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-22T13:06:27+03:00</updated>
+<updated>2015-06-22T13:58:29+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -47,6 +47,128 @@
 &lt;/ol&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/&quot;&gt;Kali Linux Compatible USB Wifi Adapters&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 16, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #1]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" />
+  <id>https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1</id>
+  <updated>2014-06-22 14:54:48 +0400T00:00:00-00:00</updated>
+  <published>2014-06-22T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#phpinfo&quot; id=&quot;markdown-toc-phpinfo&quot;&gt;pHpinfo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#apache-virtualhost&quot; id=&quot;markdown-toc-apache-virtualhost&quot;&gt;Apache VirtualHost&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#grant-all-access-to-mysql-db&quot; id=&quot;markdown-toc-grant-all-access-to-mysql-db&quot;&gt;Grant all access to MySQL DB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#check-disk-with-dd&quot; id=&quot;markdown-toc-check-disk-with-dd&quot;&gt;Check disk with DD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#manual-install-php-extensions&quot; id=&quot;markdown-toc-manual-install-php-extensions&quot;&gt;Manual install php extensions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-mysql-db&quot; id=&quot;markdown-toc-create-mysql-db&quot;&gt;Create MySQL DB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#update-user-grants-for-mysql-db&quot; id=&quot;markdown-toc-update-user-grants-for-mysql-db&quot;&gt;Update user grants for MySQL DB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#skip-mysql-db-replication-error&quot; id=&quot;markdown-toc-skip-mysql-db-replication-error&quot;&gt;Skip MySQL DB Replication error&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#simple-mysql-db-backuprestore-commands&quot; id=&quot;markdown-toc-simple-mysql-db-backuprestore-commands&quot;&gt;Simple MySQL DB backup\restore commands&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;phpinfo&quot;&gt;pHpinfo&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;?php phpinfo(); ?&amp;gt;&amp;quot;&lt;/span&gt; &amp;gt; file
+root@linux: ~ &lt;span class=&quot;c&quot;&gt;# php -i&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apache-virtualhost&quot;&gt;Apache VirtualHost&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory ~ &lt;span class=&quot;s2&quot;&gt;&amp;quot;.*\.svn&amp;quot;&lt;/span&gt;&amp;gt;
+    Order allow,deny
+    Deny from all
+    Satisfy All
+&amp;lt;/Directory&amp;gt;
+
+&amp;lt;VirtualHost 127.0.0.1:80&amp;gt;
+    ServerName vhost1
+    ErrorLog /logs/vhost1/error_log
+    DocumentRoot /www/vhost1/htdocs
+    &amp;lt;Directory /www/vhost1/htdocs&amp;gt;
+		AllowOverride All
+    &amp;lt;/Directory&amp;gt;
+&amp;lt;/VirtualHost&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;grant-all-access-to-mysql-db&quot;&gt;Grant all access to MySQL DB&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grant all privileges on user.* to user@&lt;span class=&quot;s2&quot;&gt;&amp;quot;%&amp;quot;&lt;/span&gt; identified by &lt;span class=&quot;s2&quot;&gt;&amp;quot;P@ssw0rd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;check-disk-with-dd&quot;&gt;Check disk with DD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/da0 &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/null bs8
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; progress Ctrl+T to send USR1 or &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; -USR1 DDPID&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;manual-install-php-extensions&quot;&gt;Manual install php extensions&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PHP_PREFIX&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin/pecl uninstall memcache
+&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PHP_PREFIX&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin/pecl install memcache
+
+add to php.ini
+&lt;span class=&quot;nv&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;memcache
+
+Build extension from &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;
+wget memcache-2.2.5.tgz
+/usr/local/php/bin/phpize
+./configure --with-php-config&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/php/bin/php-config&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-mysql-db&quot;&gt;Create MySQL DB&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;CREATE DATABASE TEST default charset utf8&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+grant all on testuser.*  to &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;update-user-grants-for-mysql-db&quot;&gt;Update user grants for MySQL DB&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;update user &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PASSWORD&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+show grants &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+revoke all on TEST.*  from &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;skip-mysql-db-replication-error&quot;&gt;Skip MySQL DB Replication error&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;show slave status&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+SET GLOBAL &lt;span class=&quot;nv&quot;&gt;SQL_SLAVE_SKIP_COUNTER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; N&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;simple-mysql-db-backuprestore-commands&quot;&gt;Simple MySQL DB backup\restore commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Backup all db server
+mysqldump --master-data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; --opt --single-transaction --all-databases &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip -9 -c &amp;gt; /www/backup/&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;hostname&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +%Y%m%d&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.sql.gz
+
+Backup only tables
+mysqldump &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; --tables tag_table &amp;gt; /backup/test.tag_table.sql
+mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 &amp;gt; /path/to/file/dump_table.sql
+
+Backup one database
+mysqldump -u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/dump.sql
+mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; /path/to/outputfile.sql.gz
+mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
+
+Backup database scheme
+mysqldump --no-data - u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/schema.sql
+
+Restore database
+mysql -u USER -pPASSWORD DATABASE &amp;lt; /path/to/dump.sql
+gunzip &amp;lt; /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE
+zcat /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>
 </entry>
 
 

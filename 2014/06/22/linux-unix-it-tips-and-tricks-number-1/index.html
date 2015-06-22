@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Kali Linux Compatible USB Wifi Adapters &#8211; EK</title>
-<meta name="description" content="Below are the most stable usb wifi adapters:
+<title>Linux-Unix-IT Tips and Tricks #1 &#8211; EK</title>
+<meta name="description" content="Different Linux / Unix / IT tips, notes, howto
 
 ">
-<meta name="keywords" content="kali, linux, wifi">
+<meta name="keywords" content="linux, unix, sysadm">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta name="twitter:description" content="Below are the most stable usb wifi adapters:
+<meta name="twitter:title" content="Linux-Unix-IT Tips and Tricks #1">
+<meta name="twitter:description" content="Different Linux / Unix / IT tips, notes, howto
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta property="og:description" content="Below are the most stable usb wifi adapters:
+<meta property="og:title" content="Linux-Unix-IT Tips and Tricks #1">
+<meta property="og:description" content="Different Linux / Unix / IT tips, notes, howto
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<meta property="og:url" content="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<link rel="canonical" href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,29 +145,115 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" rel="bookmark" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></h1>
+        <h1><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" rel="bookmark" title="Linux-Unix-IT Tips and Tricks #1">Linux-Unix-IT Tips and Tricks #1</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Below are the most stable usb wifi adapters:</p>
+      <p>Different Linux / Unix / IT tips, notes, howto</p>
 
-<h3 id="atheros-ar9271-chipset--ieee-80211bgn">Atheros AR9271 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NHA</li>
-  <li>TP-LINK TP-WN722N or TP-WN722NC</li>
-</ol>
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#phpinfo" id="markdown-toc-phpinfo">pHpinfo</a></li>
+  <li><a href="#apache-virtualhost" id="markdown-toc-apache-virtualhost">Apache VirtualHost</a></li>
+  <li><a href="#grant-all-access-to-mysql-db" id="markdown-toc-grant-all-access-to-mysql-db">Grant all access to MySQL DB</a></li>
+  <li><a href="#check-disk-with-dd" id="markdown-toc-check-disk-with-dd">Check disk with DD</a></li>
+  <li><a href="#manual-install-php-extensions" id="markdown-toc-manual-install-php-extensions">Manual install php extensions</a></li>
+  <li><a href="#create-mysql-db" id="markdown-toc-create-mysql-db">Create MySQL DB</a></li>
+  <li><a href="#update-user-grants-for-mysql-db" id="markdown-toc-update-user-grants-for-mysql-db">Update user grants for MySQL DB</a></li>
+  <li><a href="#skip-mysql-db-replication-error" id="markdown-toc-skip-mysql-db-replication-error">Skip MySQL DB Replication error</a></li>
+  <li><a href="#simple-mysql-db-backuprestore-commands" id="markdown-toc-simple-mysql-db-backuprestore-commands">Simple MySQL DB backup\restore commands</a></li>
+</ul>
 
-<h3 id="ralink-rt3070-chipset--ieee-80211bgn">Ralink RT3070 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NH</li>
-  <li>Alfa AWUS036NEH</li>
-</ol>
+  </div>
+</section>
+<!-- /#table-of-contents -->
 
-<h3 id="realtek-rtl8187l-chipset--ieee-80211bg">Realtek RTL8187L Chipset – IEEE 802.11B/G</h3>
-<ol>
-  <li>Alfa AWUS036H</li>
-  <li>Alfa AWUS036EW</li>
-</ol>
+<h3 id="phpinfo">pHpinfo</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;&lt;?php phpinfo(); ?&gt;&quot;</span> &gt; file
+root@linux: ~ <span class="c"># php -i</span></code></pre></div>
+
+<h3 id="apache-virtualhost">Apache VirtualHost</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;Directory ~ <span class="s2">&quot;.*\.svn&quot;</span>&gt;
+    Order allow,deny
+    Deny from all
+    Satisfy All
+&lt;/Directory&gt;
+
+&lt;VirtualHost 127.0.0.1:80&gt;
+    ServerName vhost1
+    ErrorLog /logs/vhost1/error_log
+    DocumentRoot /www/vhost1/htdocs
+    &lt;Directory /www/vhost1/htdocs&gt;
+		AllowOverride All
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre></div>
+
+<h3 id="grant-all-access-to-mysql-db">Grant all access to MySQL DB</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">grant all privileges on user.* to user@<span class="s2">&quot;%&quot;</span> identified by <span class="s2">&quot;P@ssw0rd&quot;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="check-disk-with-dd">Check disk with DD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/da0 <span class="nv">of</span><span class="o">=</span>/dev/null bs8
+<span class="k">for</span> progress Ctrl+T to send USR1 or <span class="nb">kill</span> -USR1 DDPID</code></pre></div>
+
+<h3 id="manual-install-php-extensions">Manual install php extensions</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">${</span><span class="nv">PHP_PREFIX</span><span class="k">}</span>/bin/pecl uninstall memcache
+<span class="k">${</span><span class="nv">PHP_PREFIX</span><span class="k">}</span>/bin/pecl install memcache
+
+add to php.ini
+<span class="nv">extension</span><span class="o">=</span>memcache
+
+Build extension from <span class="nb">source</span>
+wget memcache-2.2.5.tgz
+/usr/local/php/bin/phpize
+./configure --with-php-config<span class="o">=</span>/usr/local/php/bin/php-config</code></pre></div>
+
+<h3 id="create-mysql-db">Create MySQL DB</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">CREATE DATABASE TEST default charset utf8<span class="p">;</span>
+grant all on testuser.*  to <span class="s1">&#39;testuser&#39;</span>@<span class="s1">&#39;SOMEIP&#39;</span> identified by <span class="s1">&#39;P@ssw0rd&#39;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="update-user-grants-for-mysql-db">Update user grants for MySQL DB</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">update user <span class="nb">set </span><span class="nv">password</span><span class="o">=</span>PASSWORD<span class="o">(</span><span class="s1">&#39;P@ssw0rd&#39;</span><span class="o">)</span> where <span class="nv">user</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">;</span>
+show grants <span class="k">for</span> <span class="s1">&#39;testuser&#39;</span>@<span class="s1">&#39;SOMEIP&#39;</span><span class="p">;</span>
+revoke all on TEST.*  from <span class="s1">&#39;testuser&#39;</span>@<span class="s1">&#39;SOMEIP&#39;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="skip-mysql-db-replication-error">Skip MySQL DB Replication error</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">show slave status<span class="p">;</span>
+SET GLOBAL <span class="nv">SQL_SLAVE_SKIP_COUNTER</span> <span class="o">=</span> N<span class="p">;</span></code></pre></div>
+
+<h3 id="simple-mysql-db-backuprestore-commands">Simple MySQL DB backup\restore commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Backup all db server
+mysqldump --master-data<span class="o">=</span><span class="m">2</span> --opt --single-transaction --all-databases <span class="p">|</span> gzip -9 -c &gt; /www/backup/<span class="sb">`</span>hostname<span class="sb">`</span>.<span class="sb">`</span>date +%Y%m%d<span class="sb">`</span>.sql.gz
+
+Backup only tables
+mysqldump <span class="nb">test</span> --tables tag_table &gt; /backup/test.tag_table.sql
+mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 &gt; /path/to/file/dump_table.sql
+
+Backup one database
+mysqldump -u USER -pPASSWORD DATABASE &gt; /path/to/file/dump.sql
+mysqldump -u USER -pPASSWORD DATABASE <span class="p">|</span> gzip &gt; /path/to/outputfile.sql.gz
+mysqldump -u USER -pPASSWORD DATABASE <span class="p">|</span> gzip &gt; <span class="sb">`</span>date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz<span class="sb">`</span> 
+
+Backup database scheme
+mysqldump --no-data - u USER -pPASSWORD DATABASE &gt; /path/to/file/schema.sql
+
+Restore database
+mysql -u USER -pPASSWORD DATABASE &lt; /path/to/dump.sql
+gunzip &lt; /path/to/outputfile.sql.gz <span class="p">|</span> mysql -u USER -pPASSWORD DATABASE
+zcat /path/to/outputfile.sql.gz <span class="p">|</span> mysql -u USER -pPASSWORD DATABASE</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -199,7 +285,7 @@
 
 
         </div>
-        <p class="byline"><strong>Kali Linux Compatible USB Wifi Adapters</strong> was published on <time datetime="2015-06-16T00:00:00+03:00">June 16, 2015</time> and last modified on <time datetime="2015-06-16">June 16, 2015</time>.</p>
+        <p class="byline"><strong>Linux-Unix-IT Tips and Tricks #1</strong> was published on <time datetime="2014-06-22T00:00:00+04:00">June 22, 2014</time> and last modified on <time datetime="2014-06-22">June 22, 2014</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -213,7 +299,7 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" title="Linux-Unix-IT Tips and Tricks #1">Linux-Unix-IT Tips and Tricks #1</a></li>
+      <li><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></li>
     
       <li><a href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/" title="Ответы с олимпиады для системных администраторов от Yandex">Ответы с олимпиады для системных администраторов от Yandex</a></li>
     
