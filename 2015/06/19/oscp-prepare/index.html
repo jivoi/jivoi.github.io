@@ -5,19 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Как установить CentOS на %Linux% по SSH &#8211; EK</title>
-<meta name="description" content="Как установить CentOS на другой %Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.
+<title>OSCP Prepare &#8211; EK</title>
+<meta name="description" content="My current road to OSCP Certifications
 
 ">
-<meta name="keywords" content="centos, ssh">
+<meta name="keywords" content="linux, unix, security, cert">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Как установить CentOS на %Linux% по SSH">
-<meta name="twitter:description" content="Как установить CentOS на другой %Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.
+<meta name="twitter:title" content="OSCP Prepare">
+<meta name="twitter:description" content="My current road to OSCP Certifications
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -29,19 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Как установить CentOS на %Linux% по SSH">
-<meta property="og:description" content="Как установить CentOS на другой %Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.
+<meta property="og:title" content="OSCP Prepare">
+<meta property="og:description" content="My current road to OSCP Certifications
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/">
+<meta property="og:url" content="https://jivoi.github.io/2015/06/19/oscp-prepare/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/">
+<link rel="canonical" href="https://jivoi.github.io/2015/06/19/oscp-prepare/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -148,45 +145,71 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" rel="bookmark" title="Как установить CentOS на %Linux% по SSH">Как установить CentOS на %Linux% по SSH</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" rel="bookmark" title="OSCP Prepare">OSCP Prepare</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Как установить CentOS на другой %Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.</p>
+      <p>My current road to OSCP Certifications</p>
 
-<h3 id="section">Дано:</h3>
-<ol>
-  <li>Настроенный сервер с kickstart</li>
-  <li>Сервер с CentOS любой версии который мы будем переустанавливать</li>
-  <li>Прямые руки.</li>
-</ol>
+<h3 id="what-is-oscp">What is OSCP?</h3>
+<ul>
+  <li><a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/">What is OSCP</a></li>
+  <li><a href="http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf">Course Syllabus</a></li>
+</ul>
 
-<h3 id="initrd--vmlinuz--">1. Скачиваем initrd и vmlinuz нужной версии</h3>
+<h3 id="oscp-reviews">OSCP Reviews</h3>
+<ul>
+  <li>http://www.securitysift.com/offsec-pwb-oscp/</li>
+  <li>http://www.mogozobo.com/?p=1831</li>
+  <li>https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/</li>
+  <li>https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/</li>
+  <li>http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html</li>
+  <li>http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html</li>
+  <li>http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/</li>
+  <li>https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/</li>
+  <li>http://fourfourfourfour.co/2014/04/20/oscp-review/</li>
+  <li>http://netsec.ws/?p=398</li>
+  <li>http://www.jasonbernier.com/oscp-review/</li>
+  <li>http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html</li>
+  <li>https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/</li>
+  <li>http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/</li>
+  <li>https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/</li>
+  <li>http://buffered.io/posts/oscp-and-me/</li>
+  <li>http://www.en-lightn.com/?p=941</li>
+  <li>http://overflowsecurity.com/oscp-review-eagle11/</li>
+  <li>http://www.lo0.ro/2014/05/23/my-oscp-certification-review/</li>
+  <li>http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html</li>
+  <li>http://0xdeadcode.se/archives/165</li>
+  <li>http://www.exclarus.com/pentesting-with-kali-course-review-oscp/</li>
+  <li>http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/</li>
+  <li>http://blog.pauldrapeau.com/oscp/</li>
+</ul>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz</code></pre></div>
+<h3 id="read">2 Read</h3>
+<ul>
+  <li>https://github.com/pwnwiki/pwnwiki.github.io</li>
+  <li>http://netsec.ws/?p=262</li>
+  <li>http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html</li>
+  <li>https://www.offensive-security.com/metasploit-unleashed</li>
+</ul>
 
-<h3 id="bootgrubgrubconf">2. Правим /boot/grub/grub.conf</h3>
-<p><strong>ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!</strong></p>
+<h3 id="books">Books</h3>
+<ul>
+  <li>Web Penetration Testing with Kali Linux</li>
+  <li>Penetration Testing: A Hands-On Introduction to Hacking</li>
+  <li>Mastering Kali Linux for Advanced Penetration Testing</li>
+  <li>Building Virtual Pentesting Labs for Advanced Penetration Testing</li>
+  <li>Penetration Testing with the Bash shell</li>
+  <li>Lee Allen - Advanced Penetration Testing for Highly-Secured Environments, The Ultimate Security Guide</li>
+  <li>Metasploit. The Penetration Tester-s Guide.</li>
+  <li>Himanshu Kumar - Learning Nessus for Penetration Testing</li>
+  <li>Rtfm: Red Team Field Manual</li>
+  <li>Brian Ward - How Linux Works - What Every Superuser Should Know</li>
+  <li>Gray Hat Hacking the Ethical Hacker’s Handbook</li>
+  <li>Black Hat Python Python Programming for Hackers and Pentesters</li>
+</ul>
 
-<ol>
-  <li>ks файл</li>
-  <li>IP\GATE\NETMASK!**</li>
-</ol>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">title CentOS Remote Install
-root <span class="o">(</span>hd0,0<span class="o">)</span>
-kernel /boot/vmlinuz_remote <span class="nv">lang</span><span class="o">=</span>en_US <span class="nv">keymap</span><span class="o">=</span>us <span class="nv">method</span><span class="o">=</span>http://ks.example.com/ <span class="nv">ks</span><span class="o">=</span>http://ks.example.com/ks.cfg <span class="nv">ip</span><span class="o">=</span>192.168.0.10 <span class="nv">netmask</span><span class="o">=</span>255.255.255.0 <span class="nv">gateway</span><span class="o">=</span>192.168.0.1 <span class="nv">dns</span><span class="o">=</span>8.8.8.8 noselinux headless
-initrd /boot/initrd_remote.img</code></pre></div>
-
-<h3 id="section-1">3.Правим порядок загрузки из консоли</h3>
-<p>Предполагается, что наша конфигурация идет вторым пунктом меню.
-Мы указали grub попробовать загрузить ее один раз.
-Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.</p>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c"># echo &#39;savedefault --default=1 --once&#39; | grub --batch</span></code></pre></div>
-
+<h3 id="watch">2 Watch</h3>
 
       <hr />
       <footer role="contentinfo">
@@ -218,7 +241,7 @@ initrd /boot/initrd_remote.img</code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>Как установить CentOS на %Linux% по SSH</strong> was published on <time datetime="2014-01-03T00:00:00+04:00">January 03, 2014</time> and last modified on <time datetime="2014-01-03">January 03, 2014</time>.</p>
+        <p class="byline"><strong>OSCP Prepare</strong> was published on <time datetime="2015-06-19T00:00:00+03:00">June 19, 2015</time> and last modified on <time datetime="2015-06-19">June 19, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -232,11 +255,11 @@ initrd /boot/initrd_remote.img</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" title="OSCP Prepare">OSCP Prepare</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></li>
     
       <li><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" title="Linux-Unix-IT Tips and Tricks #1">Linux-Unix-IT Tips and Tricks #1</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/" title="Ответы с олимпиады для системных администраторов от Yandex">Ответы с олимпиады для системных администраторов от Yandex</a></li>
     
     </ul>
     <hr />

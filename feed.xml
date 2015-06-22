@@ -5,13 +5,91 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-22T13:59:21+03:00</updated>
+<updated>2015-06-22T14:28:20+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email></email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[OSCP Prepare]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/19/oscp-prepare/" />
+  <id>https://jivoi.github.io/2015/06/19/oscp-prepare</id>
+  <updated>2015-06-19 13:10:32 +0300T00:00:00-00:00</updated>
+  <published>2015-06-19T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;My current road to OSCP Certifications&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-oscp&quot;&gt;What is OSCP?&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/&quot;&gt;What is OSCP&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf&quot;&gt;Course Syllabus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oscp-reviews&quot;&gt;OSCP Reviews&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/li&gt;
+  &lt;li&gt;http://www.mogozobo.com/?p=1831&lt;/li&gt;
+  &lt;li&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/li&gt;
+  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/&lt;/li&gt;
+  &lt;li&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/li&gt;
+  &lt;li&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/li&gt;
+  &lt;li&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/li&gt;
+  &lt;li&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/li&gt;
+  &lt;li&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/li&gt;
+  &lt;li&gt;http://netsec.ws/?p=398&lt;/li&gt;
+  &lt;li&gt;http://www.jasonbernier.com/oscp-review/&lt;/li&gt;
+  &lt;li&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/li&gt;
+  &lt;li&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/li&gt;
+  &lt;li&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/li&gt;
+  &lt;li&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/li&gt;
+  &lt;li&gt;http://buffered.io/posts/oscp-and-me/&lt;/li&gt;
+  &lt;li&gt;http://www.en-lightn.com/?p=941&lt;/li&gt;
+  &lt;li&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/li&gt;
+  &lt;li&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/li&gt;
+  &lt;li&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/li&gt;
+  &lt;li&gt;http://0xdeadcode.se/archives/165&lt;/li&gt;
+  &lt;li&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/li&gt;
+  &lt;li&gt;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&lt;/li&gt;
+  &lt;li&gt;http://blog.pauldrapeau.com/oscp/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;https://github.com/pwnwiki/pwnwiki.github.io&lt;/li&gt;
+  &lt;li&gt;http://netsec.ws/?p=262&lt;/li&gt;
+  &lt;li&gt;http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html&lt;/li&gt;
+  &lt;li&gt;https://www.offensive-security.com/metasploit-unleashed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Web Penetration Testing with Kali Linux&lt;/li&gt;
+  &lt;li&gt;Penetration Testing: A Hands-On Introduction to Hacking&lt;/li&gt;
+  &lt;li&gt;Mastering Kali Linux for Advanced Penetration Testing&lt;/li&gt;
+  &lt;li&gt;Building Virtual Pentesting Labs for Advanced Penetration Testing&lt;/li&gt;
+  &lt;li&gt;Penetration Testing with the Bash shell&lt;/li&gt;
+  &lt;li&gt;Lee Allen - Advanced Penetration Testing for Highly-Secured Environments, The Ultimate Security Guide&lt;/li&gt;
+  &lt;li&gt;Metasploit. The Penetration Tester-s Guide.&lt;/li&gt;
+  &lt;li&gt;Himanshu Kumar - Learning Nessus for Penetration Testing&lt;/li&gt;
+  &lt;li&gt;Rtfm: Red Team Field Manual&lt;/li&gt;
+  &lt;li&gt;Brian Ward - How Linux Works - What Every Superuser Should Know&lt;/li&gt;
+  &lt;li&gt;Gray Hat Hacking the Ethical Hacker’s Handbook&lt;/li&gt;
+  &lt;li&gt;Black Hat Python Python Programming for Hackers and Pentesters&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/19/oscp-prepare/&quot;&gt;OSCP Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
