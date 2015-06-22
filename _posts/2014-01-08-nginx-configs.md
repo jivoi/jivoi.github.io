@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Useful nginx rewrite rules"
+title: "Useful nginx configs"
 modified: 2014-01-08 12:43:49 +0300
 category: [howto]
 tags: [linux, nginx]
@@ -11,7 +11,7 @@ image:
 comments: True
 share:
 ---
-Different rewrite rules for nginx.
+Different configs for nginx.
 
 <section id="table-of-contents" class="toc">                                    
 <header>                                                                        
@@ -22,6 +22,32 @@ Different rewrite rules for nginx.
 {:toc}                                                                          
 </div>                                                                          
 </section><!-- /#table-of-contents -->
+
+### Default vhost config
+{% highlight nginx %}
+server {
+listen 80;
+    server_name _;
+    access_log /var/log/nginx/access_log;
+    error_log /var/log/nginx/nginx_error_log;
+                
+    allow MYIP/32; #dev pc
+    satisfy any;
+    auth_basic  "restricted area";
+    auth_basic_user_file  /var/www/.htpasswd;
+
+    location ~* ^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)$ {
+        root /var/www/;
+    }
+         
+    location / {
+	proxy_pass http://127.0.0.1:80;
+    }
+    location ~ /.svn/ {
+	deny all;
+    }
+}
+{% endhighlight %}
 
 ### Custom 502 error page
 {% highlight nginx %}
