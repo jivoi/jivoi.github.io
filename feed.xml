@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-19T16:45:44+03:00</updated>
+<updated>2015-06-22T13:06:27+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1337,7 +1337,7 @@ export a=’myfile.txt’; echo ${}.
 
 
 <entry>
-  <title type="html"><![CDATA[Useful nginx rewrite rules]]></title>
+  <title type="html"><![CDATA[Useful nginx configs]]></title>
   <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/08/nginx-configs/" />
   <id>https://jivoi.github.io/2014/01/08/nginx-configs</id>
   <updated>2014-01-08 13:43:49 +0400T00:00:00-00:00</updated>
@@ -1348,7 +1348,7 @@ export a=’myfile.txt’; echo ${}.
     <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;Different rewrite rules for nginx.&lt;/p&gt;
+  <content type="html">&lt;p&gt;Different configs for nginx.&lt;/p&gt;
 
 &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;                                    
 &lt;header&gt;                                                                        
@@ -1356,6 +1356,7 @@ export a=’myfile.txt’; echo ${}.
 &lt;/header&gt;                                                                       
 &lt;div id=&quot;drawer&quot;&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#default-vhost-config&quot; id=&quot;markdown-toc-default-vhost-config&quot;&gt;Default vhost config&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#custom-502-error-page&quot; id=&quot;markdown-toc-custom-502-error-page&quot;&gt;Custom 502 error page&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#rewrite-somefilephp-to-somefiletxt&quot; id=&quot;markdown-toc-rewrite-somefilephp-to-somefiletxt&quot;&gt;Rewrite somefile.php to somefile.txt&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz&quot; id=&quot;markdown-toc-rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz&quot;&gt;Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz&lt;/a&gt;&lt;/li&gt;
@@ -1387,6 +1388,31 @@ export a=’myfile.txt’; echo ${}.
   &lt;/div&gt;                                                                          
 &lt;/section&gt;
 &lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;default-vhost-config&quot;&gt;Default vhost config&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log/nginx/access_log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;error_log&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log/nginx/nginx_error_log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                
+    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYIP/32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#dev pc&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;satisfy&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;auth_basic&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&amp;quot;restricted&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;area&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;auth_basic_user_file&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/var/www/.htpasswd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)&lt;/span&gt;$ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+         
+    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://127.0.0.1:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/.svn/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;custom-502-error-page&quot;&gt;Custom 502 error page&lt;/h3&gt;
 
@@ -1657,7 +1683,7 @@ export a=’myfile.txt’; echo ${}.
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/08/nginx-configs/&quot;&gt;Useful nginx rewrite rules&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 08, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/08/nginx-configs/&quot;&gt;Useful nginx configs&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 08, 2014.&lt;/p&gt;</content>
 </entry>
 
 

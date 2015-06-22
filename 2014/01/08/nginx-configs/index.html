@@ -5,8 +5,8 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Useful nginx rewrite rules &#8211; EK</title>
-<meta name="description" content="Different rewrite rules for nginx.
+<title>Useful nginx configs &#8211; EK</title>
+<meta name="description" content="Different configs for nginx.
 
 ">
 <meta name="keywords" content="linux, nginx">
@@ -14,8 +14,8 @@
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Useful nginx rewrite rules">
-<meta name="twitter:description" content="Different rewrite rules for nginx.
+<meta name="twitter:title" content="Useful nginx configs">
+<meta name="twitter:description" content="Different configs for nginx.
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,8 +27,8 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Useful nginx rewrite rules">
-<meta property="og:description" content="Different rewrite rules for nginx.
+<meta property="og:title" content="Useful nginx configs">
+<meta property="og:description" content="Different configs for nginx.
 
 ">
 <meta property="og:url" content="https://jivoi.github.io/2014/01/08/nginx-configs/">
@@ -145,11 +145,11 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/08/nginx-configs/" rel="bookmark" title="Useful nginx rewrite rules">Useful nginx rewrite rules</a></h1>
+        <h1><a href="https://jivoi.github.io/2014/01/08/nginx-configs/" rel="bookmark" title="Useful nginx configs">Useful nginx configs</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Different rewrite rules for nginx.</p>
+      <p>Different configs for nginx.</p>
 
 <section id="table-of-contents" class="toc">                                    
 <header>                                                                        
@@ -157,6 +157,7 @@
 </header>                                                                       
 <div id="drawer">
 <ul id="markdown-toc">
+  <li><a href="#default-vhost-config" id="markdown-toc-default-vhost-config">Default vhost config</a></li>
   <li><a href="#custom-502-error-page" id="markdown-toc-custom-502-error-page">Custom 502 error page</a></li>
   <li><a href="#rewrite-somefilephp-to-somefiletxt" id="markdown-toc-rewrite-somefilephp-to-somefiletxt">Rewrite somefile.php to somefile.txt</a></li>
   <li><a href="#rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz" id="markdown-toc-rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz">Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz</a></li>
@@ -188,6 +189,31 @@
   </div>                                                                          
 </section>
 <!-- /#table-of-contents -->
+
+<h3 id="default-vhost-config">Default vhost config</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+<span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">_</span><span class="p">;</span>
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/access_log</span><span class="p">;</span>
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/nginx_error_log</span><span class="p">;</span>
+                
+    <span class="kn">allow</span> <span class="s">MYIP/32</span><span class="p">;</span> <span class="c1">#dev pc</span>
+    <span class="kn">satisfy</span> <span class="s">any</span><span class="p">;</span>
+    <span class="kn">auth_basic</span>  <span class="s">&quot;restricted</span> <span class="s">area&quot;</span><span class="p">;</span>
+    <span class="kn">auth_basic_user_file</span>  <span class="s">/var/www/.htpasswd</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)</span>$ <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/var/www/</span><span class="p">;</span>
+    <span class="p">}</span>
+         
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+	<span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:80</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/.svn/</span> <span class="p">{</span>
+	<span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 
 <h3 id="custom-502-error-page">Custom 502 error page</h3>
 
@@ -488,7 +514,7 @@
 
 
         </div>
-        <p class="byline"><strong>Useful nginx rewrite rules</strong> was published on <time datetime="2014-01-08T00:00:00+04:00">January 08, 2014</time> and last modified on <time datetime="2014-01-08">January 08, 2014</time>.</p>
+        <p class="byline"><strong>Useful nginx configs</strong> was published on <time datetime="2014-01-08T00:00:00+04:00">January 08, 2014</time> and last modified on <time datetime="2014-01-08">January 08, 2014</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
