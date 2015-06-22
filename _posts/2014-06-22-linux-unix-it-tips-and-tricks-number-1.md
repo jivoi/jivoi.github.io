@@ -50,7 +50,7 @@ root@linux: ~ # php -i
 </VirtualHost>
 {% endhighlight %}
 
-###  Grant all access to MySQL DB
+### Grant all access to MySQL DB
 {% highlight bash %}
 grant all privileges on user.* to user@"%" identified by "P@ssw0rd";
 {% endhighlight %}
