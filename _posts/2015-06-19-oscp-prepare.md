@@ -1,0 +1,66 @@
+---
+layout: post
+title: "OSCP Prepare"
+modified: 2015-06-19 13:10:32 +0300
+category: [career]
+tags: [linux,unix,security,cert]
+image:
+  feature:
+  credit:
+  creditlink:
+comments: True
+share:
+---
+My current road to OSCP Certifications
+
+### What is OSCP?
+- [What is OSCP](https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/)
+- [Course Syllabus](http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf)
+
+### OSCP Reviews
+- http://www.securitysift.com/offsec-pwb-oscp/
+- http://www.mogozobo.com/?p=1831
+- https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/
+- https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/
+- http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html
+- http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html
+- http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/
+- https://n3ko1.github.io/certification/2015/05/27/oscp---offensive-security-certified-professional/
+- http://fourfourfourfour.co/2014/04/20/oscp-review/
+- http://netsec.ws/?p=398
+- http://www.jasonbernier.com/oscp-review/
+- http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html
+- https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/
+- http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/
+- https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/
+- http://buffered.io/posts/oscp-and-me/
+- http://www.en-lightn.com/?p=941
+- http://overflowsecurity.com/oscp-review-eagle11/
+- http://www.lo0.ro/2014/05/23/my-oscp-certification-review/
+- http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html
+- http://0xdeadcode.se/archives/165
+- http://www.exclarus.com/pentesting-with-kali-course-review-oscp/
+- http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/
+- http://blog.pauldrapeau.com/oscp/
+
+### 2 Read
+- https://github.com/pwnwiki/pwnwiki.github.io
+- http://netsec.ws/?p=262
+- http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html
+- https://www.offensive-security.com/metasploit-unleashed
+
+### Books
+- Web Penetration Testing with Kali Linux
+- Penetration Testing: A Hands-On Introduction to Hacking
+- Mastering Kali Linux for Advanced Penetration Testing
+- Building Virtual Pentesting Labs for Advanced Penetration Testing
+- Penetration Testing with the Bash shell
+- Lee Allen - Advanced Penetration Testing for Highly-Secured Environments, The Ultimate Security Guide
+- Metasploit. The Penetration Tester-s Guide.
+- Himanshu Kumar - Learning Nessus for Penetration Testing
+- Rtfm: Red Team Field Manual
+- Brian Ward - How Linux Works - What Every Superuser Should Know
+* Gray Hat Hacking the Ethical Hacker’s Handbook
+* Black Hat Python Python Programming for Hackers and Pentesters
+
+### 2 Watch
