@@ -11,7 +11,7 @@ image:
 comments: True
 share:
 ---
-My current road to OSCP Certifications
+My current way for OSCP Certifications
 
 ### What is OSCP?
 - [What is OSCP](https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/)
@@ -64,3 +64,8 @@ My current road to OSCP Certifications
 * Black Hat Python Python Programming for Hackers and Pentesters
 
 ### 2 Watch
+- Баранцев - Тестирование защищенности веб-приложений 
+- Advanced Penetration Testing
+- Packtpub - Kali Linux Web App Testing
+- Pentestit.ru video
+- Udemy - Certified Metasploit Framework Professional
