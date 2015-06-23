@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-23T15:56:59+03:00</updated>
+<updated>2015-06-23T18:44:08+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -71,6 +71,7 @@
   &lt;li&gt;https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/&lt;/li&gt;
   &lt;li&gt;http://resources.infosecinstitute.com/author/nikhil-kumar/&lt;/li&gt;
   &lt;li&gt;https://www.offensive-security.com/metasploit-unleashed&lt;/li&gt;
+  &lt;li&gt;http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
@@ -172,6 +173,15 @@
   &lt;li&gt;&lt;a href=&quot;#create-rsync-share&quot; id=&quot;markdown-toc-create-rsync-share&quot;&gt;Create rsync share&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#count-tmp-used-disk-space&quot; id=&quot;markdown-toc-count-tmp-used-disk-space&quot;&gt;Count /tmp used disk space&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#clean-yum-pkg-cache&quot; id=&quot;markdown-toc-clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-master-slave-replication&quot; id=&quot;markdown-toc-mysql-master-slave-replication&quot;&gt;MySQL Master-Slave replication&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#change-mysql-root-password&quot; id=&quot;markdown-toc-change-mysql-root-password&quot;&gt;Change MySQL root password&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#megarc-raid-cmd&quot; id=&quot;markdown-toc-megarc-raid-cmd&quot;&gt;Megarc raid cmd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#megacli-raid-cmd&quot; id=&quot;markdown-toc-megacli-raid-cmd&quot;&gt;Megacli raid cmd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ssh-tunnel&quot; id=&quot;markdown-toc-ssh-tunnel&quot;&gt;SSH tunnel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ram-disk-freebsd&quot; id=&quot;markdown-toc-ram-disk-freebsd&quot;&gt;Ram disk FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#add-firewall-rules-linux-or-freebsd&quot; id=&quot;markdown-toc-add-firewall-rules-linux-or-freebsd&quot;&gt;Add firewall rules Linux or FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#add-6g-swap-to-freebsd&quot; id=&quot;markdown-toc-add-6g-swap-to-freebsd&quot;&gt;Add 6G swap to FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd&quot; id=&quot;markdown-toc-clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -289,6 +299,95 @@ rsync -avP server::www/ /www1/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Pkg cache live here - /var/cache/yum/updates 
 yum clean all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-master-slave-replication&quot;&gt;MySQL Master-Slave replication&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;At master
+grant REPLICATION SLAVE on *.*  to &lt;span class=&quot;s1&quot;&gt;&amp;#39;replication&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+show master status&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+At slave
+slave stop&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+change master to &lt;span class=&quot;nv&quot;&gt;MASTER_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;master&amp;quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;mysql-bin.000013&amp;quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_POS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;455758064&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+slave start&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+show slave status&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;change-mysql-root-password&quot;&gt;Change MySQL root password&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;use mysql&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;update user &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;password&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+flush privileges&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;megarc-raid-cmd&quot;&gt;Megarc raid cmd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;megarc -dispCfg -a0
+run rebuild
+megarc -dorbld -a0 -rbldarray&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:1&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+http://www.freebsdwiki.net/index.php/Megarc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;megacli-raid-cmd&quot;&gt;Megacli raid cmd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+server:~# megacli -AdpGetProp RebuildRate -a0
+Adapter 0: Rebuild &lt;span class=&quot;nv&quot;&gt;Rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30%
+server:~# megacli -AdpSetProp RebuildRate &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt; -a0
+Adapter 0: Set rebuild rate to 60% success.
+LINUX
+server:~# cat /proc/sys/dev/raid/speed_limit_min
+1000
+server:~# cat /proc/sys/dev/raid/speed_limit_max
+200000
+
+Speed up limit to &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt; mb&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;
+server:~# &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50000&lt;/span&gt; &amp;gt; /proc/sys/dev/raid/speed_limit_min&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-tunnel&quot;&gt;SSH tunnel&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Local Port Forwarding
+ssh -L 3306:localhost:3306 username@hostname
+telnet localhost 3306
+
+Remote Port Forwarding
+ssh -R 9000:localhost:8001 username@hostname
+ssh -R 2222:localhost:22 username@hostname - SSH
+ssh -R 2223:localhost:5902 username@hostname - VNC
+autossh -M &lt;span class=&quot;m&quot;&gt;20000&lt;/span&gt; -f -R 2222:localhost:80 username@hostname
+telnet someserver &lt;span class=&quot;m&quot;&gt;9000&lt;/span&gt; -&amp;gt; go to localhost:8001&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ram-disk-freebsd&quot;&gt;Ram disk FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rc.conf
+&lt;span class=&quot;nv&quot;&gt;mdconfig_md0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-t malloc -s 512m -u 0&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_newfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-U&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_owner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;www&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_perms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;775&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_cmd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;chown www:www /www/ramdisk&amp;quot;&lt;/span&gt;
+mkdir -p /www/ramdisk
+/etc/rc.d/mdconfig start
+df -h&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-firewall-rules-linux-or-freebsd&quot;&gt;Add firewall rules Linux or FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Linux
+iptables -A INPUT -s 127.0.0.1 -p tcp --dport &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; -j ACCEPT
+service iptables save
+iptables -nL &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080
+
+FreBSD
+ipfw add pass tcp from 127.0.0.1 to me &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; setup 
+sh /usr/share/examples/ipfw/change_rules.sh
+ipfw list &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-6g-swap-to-freebsd&quot;&gt;Add 6G swap to FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/www/swap0 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6144
+chmod &lt;span class=&quot;m&quot;&gt;0600&lt;/span&gt; /www/swap0
+/etc/rc.conf
+&lt;span class=&quot;nv&quot;&gt;swapfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/www/swap0&amp;quot;&lt;/span&gt;
+mdconfig -a -t vnode -f /www/swap0 -u &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; swapon /dev/md0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/old_disk &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/new_disk &lt;span class=&quot;nv&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;noerror,sync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>

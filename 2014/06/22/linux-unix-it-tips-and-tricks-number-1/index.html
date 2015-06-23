@@ -171,6 +171,15 @@
   <li><a href="#create-rsync-share" id="markdown-toc-create-rsync-share">Create rsync share</a></li>
   <li><a href="#count-tmp-used-disk-space" id="markdown-toc-count-tmp-used-disk-space">Count /tmp used disk space</a></li>
   <li><a href="#clean-yum-pkg-cache" id="markdown-toc-clean-yum-pkg-cache">Clean Yum pkg cache</a></li>
+  <li><a href="#mysql-master-slave-replication" id="markdown-toc-mysql-master-slave-replication">MySQL Master-Slave replication</a></li>
+  <li><a href="#change-mysql-root-password" id="markdown-toc-change-mysql-root-password">Change MySQL root password</a></li>
+  <li><a href="#megarc-raid-cmd" id="markdown-toc-megarc-raid-cmd">Megarc raid cmd</a></li>
+  <li><a href="#megacli-raid-cmd" id="markdown-toc-megacli-raid-cmd">Megacli raid cmd</a></li>
+  <li><a href="#ssh-tunnel" id="markdown-toc-ssh-tunnel">SSH tunnel</a></li>
+  <li><a href="#ram-disk-freebsd" id="markdown-toc-ram-disk-freebsd">Ram disk FreeBSD</a></li>
+  <li><a href="#add-firewall-rules-linux-or-freebsd" id="markdown-toc-add-firewall-rules-linux-or-freebsd">Add firewall rules Linux or FreeBSD</a></li>
+  <li><a href="#add-6g-swap-to-freebsd" id="markdown-toc-add-6g-swap-to-freebsd">Add 6G swap to FreeBSD</a></li>
+  <li><a href="#clone-disk-with-dd" id="markdown-toc-clone-disk-with-dd">Clone disk with dd</a></li>
 </ul>
 
   </div>
@@ -288,6 +297,95 @@ rsync -avP server::www/ /www1/</code></pre></div>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">Pkg cache live here - /var/cache/yum/updates 
 yum clean all</code></pre></div>
+
+<h3 id="mysql-master-slave-replication">MySQL Master-Slave replication</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">At master
+grant REPLICATION SLAVE on *.*  to <span class="s1">&#39;replication&#39;</span>@<span class="s1">&#39;IP&#39;</span> identified by <span class="s1">&#39;P@ssw0rd&#39;</span><span class="p">;</span>
+show master status<span class="p">;</span>
+
+At slave
+slave stop<span class="p">;</span>
+change master to <span class="nv">MASTER_HOST</span><span class="o">=</span><span class="s2">&quot;master&quot;</span>, <span class="nv">MASTER_LOG_FILE</span><span class="o">=</span><span class="s2">&quot;mysql-bin.000013&quot;</span>, <span class="nv">MASTER_LOG_POS</span><span class="o">=</span>455758064<span class="p">;</span>
+slave start<span class="p">;</span>
+show slave status<span class="se">\G</span><span class="p">;</span></code></pre></div>
+
+<h3 id="change-mysql-root-password">Change MySQL root password</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">use mysql<span class="p">;</span>update user <span class="nb">set </span><span class="nv">password</span><span class="o">=</span>password<span class="o">(</span><span class="s1">&#39;P@ssw0rd&#39;</span><span class="o">)</span> where <span class="nv">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">;</span>
+flush privileges<span class="p">;</span></code></pre></div>
+
+<h3 id="megarc-raid-cmd">Megarc raid cmd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">megarc -dispCfg -a0
+run rebuild
+megarc -dorbld -a0 -rbldarray<span class="o">[</span>0:1<span class="o">]</span>
+http://www.freebsdwiki.net/index.php/Megarc</code></pre></div>
+
+<h3 id="megacli-raid-cmd">Megacli raid cmd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+server:~# megacli -AdpGetProp RebuildRate -a0
+Adapter 0: Rebuild <span class="nv">Rate</span> <span class="o">=</span> 30%
+server:~# megacli -AdpSetProp RebuildRate <span class="m">60</span> -a0
+Adapter 0: Set rebuild rate to 60% success.
+LINUX
+server:~# cat /proc/sys/dev/raid/speed_limit_min
+1000
+server:~# cat /proc/sys/dev/raid/speed_limit_max
+200000
+
+Speed up limit to <span class="m">50</span> mb<span class="se">\s</span>
+server:~# <span class="nb">echo </span><span class="m">50000</span> &gt; /proc/sys/dev/raid/speed_limit_min</code></pre></div>
+
+<h3 id="ssh-tunnel">SSH tunnel</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Local Port Forwarding
+ssh -L 3306:localhost:3306 username@hostname
+telnet localhost 3306
+
+Remote Port Forwarding
+ssh -R 9000:localhost:8001 username@hostname
+ssh -R 2222:localhost:22 username@hostname - SSH
+ssh -R 2223:localhost:5902 username@hostname - VNC
+autossh -M <span class="m">20000</span> -f -R 2222:localhost:80 username@hostname
+telnet someserver <span class="m">9000</span> -&gt; go to localhost:8001</code></pre></div>
+
+<h3 id="ram-disk-freebsd">Ram disk FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/rc.conf
+<span class="nv">mdconfig_md0</span><span class="o">=</span><span class="s2">&quot;-t malloc -s 512m -u 0&quot;</span>
+<span class="nv">mdconfig_md0_newfs</span><span class="o">=</span><span class="s2">&quot;-U&quot;</span>
+<span class="nv">mdconfig_md0_owner</span><span class="o">=</span><span class="s2">&quot;www&quot;</span>
+<span class="nv">mdconfig_md0_perms</span><span class="o">=</span><span class="s2">&quot;775&quot;</span>
+<span class="nv">mdconfig_md0_cmd</span><span class="o">=</span><span class="s2">&quot;chown www:www /www/ramdisk&quot;</span>
+mkdir -p /www/ramdisk
+/etc/rc.d/mdconfig start
+df -h</code></pre></div>
+
+<h3 id="add-firewall-rules-linux-or-freebsd">Add firewall rules Linux or FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Linux
+iptables -A INPUT -s 127.0.0.1 -p tcp --dport <span class="m">8080</span> -j ACCEPT
+service iptables save
+iptables -nL <span class="p">|</span> grep 8080
+
+FreBSD
+ipfw add pass tcp from 127.0.0.1 to me <span class="m">8080</span> setup 
+sh /usr/share/examples/ipfw/change_rules.sh
+ipfw list <span class="p">|</span> grep 8080</code></pre></div>
+
+<h3 id="add-6g-swap-to-freebsd">Add 6G swap to FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/www/swap0 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span>6144
+chmod <span class="m">0600</span> /www/swap0
+/etc/rc.conf
+<span class="nv">swapfile</span><span class="o">=</span><span class="s2">&quot;/www/swap0&quot;</span>
+mdconfig -a -t vnode -f /www/swap0 -u <span class="m">0</span> <span class="o">&amp;&amp;</span> swapon /dev/md0</code></pre></div>
+
+<h3 id="clone-disk-with-dd">Clone disk with dd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/old_disk <span class="nv">of</span><span class="o">=</span>/dev/new_disk <span class="nv">conv</span><span class="o">=</span>noerror,sync</code></pre></div>
 
 
       <hr />
