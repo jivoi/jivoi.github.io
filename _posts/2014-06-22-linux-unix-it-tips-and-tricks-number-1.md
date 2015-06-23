@@ -26,7 +26,7 @@ Different Linux / Unix / IT tips, notes, howto
 {% highlight bash %}
 {% endhighlight %}
 
-### pHpinfo
+### Phpinfo
 {% highlight bash %}
 echo "<?php phpinfo(); ?>" > file
 root@linux: ~ # php -i
@@ -115,4 +115,39 @@ Restore database
 mysql -u USER -pPASSWORD DATABASE < /path/to/dump.sql
 gunzip < /path/to/outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE
 zcat /path/to/outputfile.sql.gz | mysql -u USER -pPASSWORD DATABASE
+{% endhighlight %}
+
+### Run crontab task with lockf or lockfile
+{% highlight bash %}
+*/5 * * * * userlogin /usr/bin/lockf -st 0 /tmp/5min.lock  sh cron1.sh
+*/5 * * * * userlogin lockfile -s0 -r0 /tmp/5min.lock && (sh cron1.sh ; rm -f /tmp/5min.lock)
+{% endhighlight %}
+
+### Run crontab everyday except Saturday
+{% highlight bash %}
+0 * * * 0,1,2,3,4,6 userlogin sh cron1.sh
+{% endhighlight %}
+
+### Create rsync share
+{% highlight bash %}
+/etc/rsyncd.conf
+[www]
+path = /www
+list = yes
+read only = yes
+hosts allow = 10.0.0.0/8
+dont compress = *.*
+
+rsync -avP server::www/ /www1/
+{% endhighlight %}
+
+### Count /tmp used disk space 
+{% highlight bash %}
+sudo du -hs /tmp/*
+{% endhighlight %}
+
+### Clean Yum pkg cache
+{% highlight bash %}
+Pkg cache live here - /var/cache/yum/updates 
+yum clean all
 {% endhighlight %}

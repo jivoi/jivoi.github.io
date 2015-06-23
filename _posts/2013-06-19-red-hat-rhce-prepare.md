@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Red Hat RHCE Prepare"
-modified: 2015-06-19 13:09:19 +0300
+modified: 2013-06-19 13:09:19 +0300
 category: [career]
-tags: [linux, sysadm]
+tags: [linux, sysadm, redhat]
 image:
   feature: 
   credit: 
@@ -11,9 +11,14 @@ image:
 comments: True
 share: 
 ---
-The way i went for RHCE Certification
+The way that i went for RHCE Certification
 
 ### What is RHCE
+- [RedHat Site](https://www.redhat.com/en/services/certification/rhce)
+- [Wikipedia](https://en.wikipedia.org/wiki/Red_Hat_Certification_Program)
+
+### Courses
+- RH300 - Fast prepare for RHCE include exam RHCSA and RHCE www.rhd.ru
 
 ### Books
 - UNIX and Linux System Administration Handbook by Evi Nemeth
