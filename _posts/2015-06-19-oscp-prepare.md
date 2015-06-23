@@ -51,6 +51,7 @@ My current way for OSCP Certifications
 - https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/
 - http://resources.infosecinstitute.com/author/nikhil-kumar/
 - https://www.offensive-security.com/metasploit-unleashed
+- http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow
 
 ### Books
 - Web Penetration Testing with Kali Linux
