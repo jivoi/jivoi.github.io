@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-22T14:28:20+03:00</updated>
+<updated>2015-06-23T11:39:04+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -26,7 +26,7 @@
     <uri>https://jivoi.github.io</uri>
     <email></email>
   </author>
-  <content type="html">&lt;p&gt;My current road to OSCP Certifications&lt;/p&gt;
+  <content type="html">&lt;p&gt;My current way for OSCP Certifications&lt;/p&gt;
 
 &lt;h3 id=&quot;what-is-oscp&quot;&gt;What is OSCP?&lt;/h3&gt;
 &lt;ul&gt;
@@ -87,6 +87,13 @@
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Баранцев - Тестирование защищенности веб-приложений&lt;/li&gt;
+  &lt;li&gt;Advanced Penetration Testing&lt;/li&gt;
+  &lt;li&gt;Packtpub - Kali Linux Web App Testing&lt;/li&gt;
+  &lt;li&gt;Pentestit.ru video&lt;/li&gt;
+  &lt;li&gt;Udemy - Certified Metasploit Framework Professional&lt;/li&gt;
+&lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/19/oscp-prepare/&quot;&gt;OSCP Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2015.&lt;/p&gt;</content>
 </entry>
@@ -148,7 +155,7 @@
 &lt;/header&gt;
 &lt;div id=&quot;drawer&quot;&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#phpinfo&quot; id=&quot;markdown-toc-phpinfo&quot;&gt;pHpinfo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#phpinfo&quot; id=&quot;markdown-toc-phpinfo&quot;&gt;Phpinfo&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#apache-virtualhost&quot; id=&quot;markdown-toc-apache-virtualhost&quot;&gt;Apache VirtualHost&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#grant-all-access-to-mysql-db&quot; id=&quot;markdown-toc-grant-all-access-to-mysql-db&quot;&gt;Grant all access to MySQL DB&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#check-disk-with-dd&quot; id=&quot;markdown-toc-check-disk-with-dd&quot;&gt;Check disk with DD&lt;/a&gt;&lt;/li&gt;
@@ -157,13 +164,18 @@
   &lt;li&gt;&lt;a href=&quot;#update-user-grants-for-mysql-db&quot; id=&quot;markdown-toc-update-user-grants-for-mysql-db&quot;&gt;Update user grants for MySQL DB&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#skip-mysql-db-replication-error&quot; id=&quot;markdown-toc-skip-mysql-db-replication-error&quot;&gt;Skip MySQL DB Replication error&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#simple-mysql-db-backuprestore-commands&quot; id=&quot;markdown-toc-simple-mysql-db-backuprestore-commands&quot;&gt;Simple MySQL DB backup\restore commands&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#run-crontab-task-with-lockf-or-lockfile&quot; id=&quot;markdown-toc-run-crontab-task-with-lockf-or-lockfile&quot;&gt;Run crontab task with lockf or lockfile&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#run-crontab-everyday-except-saturday&quot; id=&quot;markdown-toc-run-crontab-everyday-except-saturday&quot;&gt;Run crontab everyday except Saturday&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-rsync-share&quot; id=&quot;markdown-toc-create-rsync-share&quot;&gt;Create rsync share&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#count-tmp-used-disk-space&quot; id=&quot;markdown-toc-count-tmp-used-disk-space&quot;&gt;Count /tmp used disk space&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#clean-yum-pkg-cache&quot; id=&quot;markdown-toc-clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
 &lt;/section&gt;
 &lt;!-- /#table-of-contents --&gt;
 
-&lt;h3 id=&quot;phpinfo&quot;&gt;pHpinfo&lt;/h3&gt;
+&lt;h3 id=&quot;phpinfo&quot;&gt;Phpinfo&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;?php phpinfo(); ?&amp;gt;&amp;quot;&lt;/span&gt; &amp;gt; file
 root@linux: ~ &lt;span class=&quot;c&quot;&gt;# php -i&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -244,6 +256,36 @@ Restore database
 mysql -u USER -pPASSWORD DATABASE &amp;lt; /path/to/dump.sql
 gunzip &amp;lt; /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE
 zcat /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;run-crontab-task-with-lockf-or-lockfile&quot;&gt;Run crontab task with lockf or lockfile&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;*/5 * * * * userlogin /usr/bin/lockf -st &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; /tmp/5min.lock  sh cron1.sh
+*/5 * * * * userlogin lockfile -s0 -r0 /tmp/5min.lock &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sh cron1.sh &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; rm -f /tmp/5min.lock&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;run-crontab-everyday-except-saturday&quot;&gt;Run crontab everyday except Saturday&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; * * * 0,1,2,3,4,6 userlogin sh cron1.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-rsync-share&quot;&gt;Create rsync share&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rsyncd.conf
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;www&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /www
+&lt;span class=&quot;nv&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
+&lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
+hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 10.0.0.0/8
+dont &lt;span class=&quot;nv&quot;&gt;compress&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *.*
+
+rsync -avP server::www/ /www1/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;count-tmp-used-disk-space&quot;&gt;Count /tmp used disk space&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo du -hs /tmp/*&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Pkg cache live here - /var/cache/yum/updates 
+yum clean all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>
@@ -2710,6 +2752,50 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Red Hat RHCE Prepare]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/" />
+  <id>https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare</id>
+  <updated>2013-06-19 14:09:19 +0400T00:00:00-00:00</updated>
+  <published>2013-06-19T00:00:00+04:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email></email>
+  </author>
+  <content type="html">&lt;p&gt;The way that i went for RHCE Certification&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-rhce&quot;&gt;What is RHCE&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.redhat.com/en/services/certification/rhce&quot;&gt;RedHat Site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Red_Hat_Certification_Program&quot;&gt;Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;courses&quot;&gt;Courses&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RH300 - Fast prepare for RHCE include exam RHCSA and RHCE www.rhd.ru&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;UNIX and Linux System Administration Handbook by Evi Nemeth&lt;/li&gt;
+  &lt;li&gt;RHCE - RH254 student workbook&lt;/li&gt;
+  &lt;li&gt;LPI 101 and LPI 102 student workbooks&lt;/li&gt;
+  &lt;li&gt;RHCSA/RHCE Red Hat Linux Certification Study Guide&lt;/li&gt;
+  &lt;li&gt;Hands-on Guide to the Red Hat Exams: RHCSA and RHCE Cert Guide and Lab Manual&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Livelessons (RHCE) Certification Complete Video Course&lt;/li&gt;
+  &lt;li&gt;VTC Red Hat Certified Engineer (RHCE) - Exam EX300&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/&quot;&gt;Red Hat RHCE Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2013.&lt;/p&gt;</content>
 </entry>
 
 </feed>

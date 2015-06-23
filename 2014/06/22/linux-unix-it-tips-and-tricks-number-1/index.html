@@ -157,7 +157,7 @@
 </header>
 <div id="drawer">
 <ul id="markdown-toc">
-  <li><a href="#phpinfo" id="markdown-toc-phpinfo">pHpinfo</a></li>
+  <li><a href="#phpinfo" id="markdown-toc-phpinfo">Phpinfo</a></li>
   <li><a href="#apache-virtualhost" id="markdown-toc-apache-virtualhost">Apache VirtualHost</a></li>
   <li><a href="#grant-all-access-to-mysql-db" id="markdown-toc-grant-all-access-to-mysql-db">Grant all access to MySQL DB</a></li>
   <li><a href="#check-disk-with-dd" id="markdown-toc-check-disk-with-dd">Check disk with DD</a></li>
@@ -166,13 +166,18 @@
   <li><a href="#update-user-grants-for-mysql-db" id="markdown-toc-update-user-grants-for-mysql-db">Update user grants for MySQL DB</a></li>
   <li><a href="#skip-mysql-db-replication-error" id="markdown-toc-skip-mysql-db-replication-error">Skip MySQL DB Replication error</a></li>
   <li><a href="#simple-mysql-db-backuprestore-commands" id="markdown-toc-simple-mysql-db-backuprestore-commands">Simple MySQL DB backup\restore commands</a></li>
+  <li><a href="#run-crontab-task-with-lockf-or-lockfile" id="markdown-toc-run-crontab-task-with-lockf-or-lockfile">Run crontab task with lockf or lockfile</a></li>
+  <li><a href="#run-crontab-everyday-except-saturday" id="markdown-toc-run-crontab-everyday-except-saturday">Run crontab everyday except Saturday</a></li>
+  <li><a href="#create-rsync-share" id="markdown-toc-create-rsync-share">Create rsync share</a></li>
+  <li><a href="#count-tmp-used-disk-space" id="markdown-toc-count-tmp-used-disk-space">Count /tmp used disk space</a></li>
+  <li><a href="#clean-yum-pkg-cache" id="markdown-toc-clean-yum-pkg-cache">Clean Yum pkg cache</a></li>
 </ul>
 
   </div>
 </section>
 <!-- /#table-of-contents -->
 
-<h3 id="phpinfo">pHpinfo</h3>
+<h3 id="phpinfo">Phpinfo</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;&lt;?php phpinfo(); ?&gt;&quot;</span> &gt; file
 root@linux: ~ <span class="c"># php -i</span></code></pre></div>
@@ -253,6 +258,36 @@ Restore database
 mysql -u USER -pPASSWORD DATABASE &lt; /path/to/dump.sql
 gunzip &lt; /path/to/outputfile.sql.gz <span class="p">|</span> mysql -u USER -pPASSWORD DATABASE
 zcat /path/to/outputfile.sql.gz <span class="p">|</span> mysql -u USER -pPASSWORD DATABASE</code></pre></div>
+
+<h3 id="run-crontab-task-with-lockf-or-lockfile">Run crontab task with lockf or lockfile</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">*/5 * * * * userlogin /usr/bin/lockf -st <span class="m">0</span> /tmp/5min.lock  sh cron1.sh
+*/5 * * * * userlogin lockfile -s0 -r0 /tmp/5min.lock <span class="o">&amp;&amp;</span> <span class="o">(</span>sh cron1.sh <span class="p">;</span> rm -f /tmp/5min.lock<span class="o">)</span></code></pre></div>
+
+<h3 id="run-crontab-everyday-except-saturday">Run crontab everyday except Saturday</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="m">0</span> * * * 0,1,2,3,4,6 userlogin sh cron1.sh</code></pre></div>
+
+<h3 id="create-rsync-share">Create rsync share</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/rsyncd.conf
+<span class="o">[</span>www<span class="o">]</span>
+<span class="nv">path</span> <span class="o">=</span> /www
+<span class="nv">list</span> <span class="o">=</span> yes
+<span class="nb">read </span><span class="nv">only</span> <span class="o">=</span> yes
+hosts <span class="nv">allow</span> <span class="o">=</span> 10.0.0.0/8
+dont <span class="nv">compress</span> <span class="o">=</span> *.*
+
+rsync -avP server::www/ /www1/</code></pre></div>
+
+<h3 id="count-tmp-used-disk-space">Count /tmp used disk space</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo du -hs /tmp/*</code></pre></div>
+
+<h3 id="clean-yum-pkg-cache">Clean Yum pkg cache</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Pkg cache live here - /var/cache/yum/updates 
+yum clean all</code></pre></div>
 
 
       <hr />
