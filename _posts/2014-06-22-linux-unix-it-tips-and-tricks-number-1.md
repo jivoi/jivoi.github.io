@@ -151,3 +151,102 @@ sudo du -hs /tmp/*
 Pkg cache live here - /var/cache/yum/updates 
 yum clean all
 {% endhighlight %}
+
+
+### MySQL Master-Slave replication
+{% highlight bash %}
+At master
+grant REPLICATION SLAVE on *.*  to 'replication'@'IP' identified by 'P@ssw0rd';
+show master status;
+
+At slave
+slave stop;
+change master to MASTER_HOST="master", MASTER_LOG_FILE="mysql-bin.000013", MASTER_LOG_POS=455758064;
+slave start;
+show slave status\G;
+{% endhighlight %}
+
+### Change MySQL root password
+{% highlight bash %}
+use mysql;update user set password=password('P@ssw0rd') where user='root';
+flush privileges;
+{% endhighlight %}
+
+### Megarc raid cmd
+{% highlight bash %}
+megarc -dispCfg -a0
+run rebuild
+megarc -dorbld -a0 -rbldarray[0:1]
+http://www.freebsdwiki.net/index.php/Megarc
+{% endhighlight %}
+
+### Megacli raid cmd
+{% highlight bash %}
+http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+server:~# megacli -AdpGetProp RebuildRate -a0
+Adapter 0: Rebuild Rate = 30%
+server:~# megacli -AdpSetProp RebuildRate 60 -a0
+Adapter 0: Set rebuild rate to 60% success.
+LINUX
+server:~# cat /proc/sys/dev/raid/speed_limit_min
+1000
+server:~# cat /proc/sys/dev/raid/speed_limit_max
+200000
+
+Speed up limit to 50 mb\s
+server:~# echo 50000 > /proc/sys/dev/raid/speed_limit_min
+{% endhighlight %}
+
+### SSH tunnel
+{% highlight bash %}
+Local Port Forwarding
+ssh -L 3306:localhost:3306 username@hostname
+telnet localhost 3306
+
+Remote Port Forwarding
+ssh -R 9000:localhost:8001 username@hostname
+ssh -R 2222:localhost:22 username@hostname - SSH
+ssh -R 2223:localhost:5902 username@hostname - VNC
+autossh -M 20000 -f -R 2222:localhost:80 username@hostname
+telnet someserver 9000 -> go to localhost:8001
+{% endhighlight %}
+
+### Ram disk FreeBSD
+{% highlight bash %}
+/etc/rc.conf
+mdconfig_md0="-t malloc -s 512m -u 0"
+mdconfig_md0_newfs="-U"
+mdconfig_md0_owner="www"
+mdconfig_md0_perms="775"
+mdconfig_md0_cmd="chown www:www /www/ramdisk"
+mkdir -p /www/ramdisk
+/etc/rc.d/mdconfig start
+df -h
+{% endhighlight %}
+
+### Add firewall rules Linux or FreeBSD
+{% highlight bash %}
+Linux
+iptables -A INPUT -s 127.0.0.1 -p tcp --dport 8080 -j ACCEPT
+service iptables save
+iptables -nL | grep 8080
+
+FreBSD
+ipfw add pass tcp from 127.0.0.1 to me 8080 setup 
+sh /usr/share/examples/ipfw/change_rules.sh
+ipfw list | grep 8080
+{% endhighlight %}
+
+### Add 6G swap to FreeBSD
+{% highlight bash %}
+dd if=/dev/zero of=/www/swap0 bs=1M count=6144
+chmod 0600 /www/swap0
+/etc/rc.conf
+swapfile="/www/swap0"
+mdconfig -a -t vnode -f /www/swap0 -u 0 && swapon /dev/md0
+{% endhighlight %}
+
+### Clone disk with dd
+{% highlight bash %}
+dd if=/dev/old_disk of=/dev/new_disk conv=noerror,sync
+{% endhighlight %}
