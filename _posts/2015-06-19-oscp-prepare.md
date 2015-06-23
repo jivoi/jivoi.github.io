@@ -26,6 +26,7 @@ My current way for OSCP Certifications
 - http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html
 - http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/
 - https://n3ko1.github.io/certification/2015/05/27/oscp---offensive-security-certified-professional/
+- https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/
 - http://fourfourfourfour.co/2014/04/20/oscp-review/
 - http://netsec.ws/?p=398
 - http://www.jasonbernier.com/oscp-review/
@@ -47,6 +48,8 @@ My current way for OSCP Certifications
 - https://github.com/pwnwiki/pwnwiki.github.io
 - http://netsec.ws/?p=262
 - http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html
+- https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/
+- http://resources.infosecinstitute.com/author/nikhil-kumar/
 - https://www.offensive-security.com/metasploit-unleashed
 
 ### Books
