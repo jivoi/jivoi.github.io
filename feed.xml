@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-23T18:44:08+03:00</updated>
+<updated>2015-06-24T17:25:27+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -182,6 +182,11 @@
   &lt;li&gt;&lt;a href=&quot;#add-firewall-rules-linux-or-freebsd&quot; id=&quot;markdown-toc-add-firewall-rules-linux-or-freebsd&quot;&gt;Add firewall rules Linux or FreeBSD&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#add-6g-swap-to-freebsd&quot; id=&quot;markdown-toc-add-6g-swap-to-freebsd&quot;&gt;Add 6G swap to FreeBSD&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd&quot; id=&quot;markdown-toc-clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#access-to-svn-server-with-ssh-key&quot; id=&quot;markdown-toc-access-to-svn-server-with-ssh-key&quot;&gt;Access to svn server with ssh-key&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-iso-image-with-dd&quot; id=&quot;markdown-toc-create-iso-image-with-dd&quot;&gt;Create iso image with dd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-swap-in-linux&quot; id=&quot;markdown-toc-create-swap-in-linux&quot;&gt;Create swap in Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#split-big-file-in-small-parts&quot; id=&quot;markdown-toc-split-big-file-in-small-parts&quot;&gt;Split big file in small parts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-postresql-status&quot; id=&quot;markdown-toc-show-postresql-status&quot;&gt;Show PostreSQL status&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -388,6 +393,35 @@ mdconfig -a -t vnode -f /www/swap0 -u &lt;span class=&quot;m&quot;&gt;0&lt;/span
 &lt;h3 id=&quot;clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/old_disk &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/new_disk &lt;span class=&quot;nv&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;noerror,sync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;access-to-svn-server-with-ssh-key&quot;&gt;Access to svn server with ssh-key&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd svnuser
+ssh-keygen -t rsa 
+mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+add to ~/.ssh/authorized_keys
+no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/bin/svnserve -t -r /www/svn&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-iso-image-with-dd&quot;&gt;Create iso image with dd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/scd0 &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/tmp/isoimage.iso
+sudo mount -t udf,iso9660  -o loop /tmp/isoimage.iso /mnt/cdrom/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-swap-in-linux&quot;&gt;Create swap in Linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fdisk /dev/sda
+mkswap -L &lt;span class=&quot;s1&quot;&gt;&amp;#39;swap&amp;#39;&lt;/span&gt; /dev/sda6
+swapon -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;split-big-file-in-small-parts&quot;&gt;Split big file in small parts&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;split -b1m large.mp3 large.mp3.
+collect back
+cat large.mp3.* &amp;gt; large.mp3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-postresql-status&quot;&gt;Show PostreSQL status&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from pg_stat_activity&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>

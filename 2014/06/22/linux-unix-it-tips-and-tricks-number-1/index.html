@@ -180,6 +180,11 @@
   <li><a href="#add-firewall-rules-linux-or-freebsd" id="markdown-toc-add-firewall-rules-linux-or-freebsd">Add firewall rules Linux or FreeBSD</a></li>
   <li><a href="#add-6g-swap-to-freebsd" id="markdown-toc-add-6g-swap-to-freebsd">Add 6G swap to FreeBSD</a></li>
   <li><a href="#clone-disk-with-dd" id="markdown-toc-clone-disk-with-dd">Clone disk with dd</a></li>
+  <li><a href="#access-to-svn-server-with-ssh-key" id="markdown-toc-access-to-svn-server-with-ssh-key">Access to svn server with ssh-key</a></li>
+  <li><a href="#create-iso-image-with-dd" id="markdown-toc-create-iso-image-with-dd">Create iso image with dd</a></li>
+  <li><a href="#create-swap-in-linux" id="markdown-toc-create-swap-in-linux">Create swap in Linux</a></li>
+  <li><a href="#split-big-file-in-small-parts" id="markdown-toc-split-big-file-in-small-parts">Split big file in small parts</a></li>
+  <li><a href="#show-postresql-status" id="markdown-toc-show-postresql-status">Show PostreSQL status</a></li>
 </ul>
 
   </div>
@@ -386,6 +391,35 @@ mdconfig -a -t vnode -f /www/swap0 -u <span class="m">0</span> <span class="o">&
 <h3 id="clone-disk-with-dd">Clone disk with dd</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/old_disk <span class="nv">of</span><span class="o">=</span>/dev/new_disk <span class="nv">conv</span><span class="o">=</span>noerror,sync</code></pre></div>
+
+<h3 id="access-to-svn-server-with-ssh-key">Access to svn server with ssh-key</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">useradd svnuser
+ssh-keygen -t rsa 
+mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+add to ~/.ssh/authorized_keys
+no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command<span class="o">=</span><span class="s2">&quot;/usr/bin/svnserve -t -r /www/svn&quot;</span></code></pre></div>
+
+<h3 id="create-iso-image-with-dd">Create iso image with dd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo dd <span class="k">if</span><span class="o">=</span>/dev/scd0 <span class="nv">of</span><span class="o">=</span>/tmp/isoimage.iso
+sudo mount -t udf,iso9660  -o loop /tmp/isoimage.iso /mnt/cdrom/</code></pre></div>
+
+<h3 id="create-swap-in-linux">Create swap in Linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">fdisk /dev/sda
+mkswap -L <span class="s1">&#39;swap&#39;</span> /dev/sda6
+swapon -a</code></pre></div>
+
+<h3 id="split-big-file-in-small-parts">Split big file in small parts</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">split -b1m large.mp3 large.mp3.
+collect back
+cat large.mp3.* &gt; large.mp3</code></pre></div>
+
+<h3 id="show-postresql-status">Show PostreSQL status</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">select</span> * from pg_stat_activity<span class="p">;</span></code></pre></div>
 
 
       <hr />
