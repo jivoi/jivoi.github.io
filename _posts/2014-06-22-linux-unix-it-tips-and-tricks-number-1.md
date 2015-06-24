@@ -250,3 +250,37 @@ mdconfig -a -t vnode -f /www/swap0 -u 0 && swapon /dev/md0
 {% highlight bash %}
 dd if=/dev/old_disk of=/dev/new_disk conv=noerror,sync
 {% endhighlight %}
+
+### Access to svn server with ssh-key
+{% highlight bash %}
+useradd svnuser
+ssh-keygen -t rsa 
+mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
+add to ~/.ssh/authorized_keys
+no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command="/usr/bin/svnserve -t -r /www/svn"
+{% endhighlight %}
+
+### Create iso image with dd
+{% highlight bash %}
+sudo dd if=/dev/scd0 of=/tmp/isoimage.iso
+sudo mount -t udf,iso9660  -o loop /tmp/isoimage.iso /mnt/cdrom/
+{% endhighlight %}
+
+### Create swap in Linux
+{% highlight bash %}
+fdisk /dev/sda
+mkswap -L 'swap' /dev/sda6
+swapon -a
+{% endhighlight %}
+
+### Split big file in small parts
+{% highlight bash %}
+split -b1m large.mp3 large.mp3.
+collect back
+cat large.mp3.* > large.mp3
+{% endhighlight %}
+
+### Show PostreSQL status
+{% highlight bash %}
+select * from pg_stat_activity;
+{% endhighlight %}
