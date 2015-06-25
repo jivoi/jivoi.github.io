@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-24T17:25:27+03:00</updated>
+<updated>2015-06-25T15:05:01+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -187,6 +187,16 @@
   &lt;li&gt;&lt;a href=&quot;#create-swap-in-linux&quot; id=&quot;markdown-toc-create-swap-in-linux&quot;&gt;Create swap in Linux&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#split-big-file-in-small-parts&quot; id=&quot;markdown-toc-split-big-file-in-small-parts&quot;&gt;Split big file in small parts&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#show-postresql-status&quot; id=&quot;markdown-toc-show-postresql-status&quot;&gt;Show PostreSQL status&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#soft-raid-freebsd&quot; id=&quot;markdown-toc-soft-raid-freebsd&quot;&gt;Soft Raid FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#test-channel-speed&quot; id=&quot;markdown-toc-test-channel-speed&quot;&gt;Test channel speed&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#patch-apply&quot; id=&quot;markdown-toc-patch-apply&quot;&gt;Patch apply&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#revoke-all-grant-and-remove-mysql-user&quot; id=&quot;markdown-toc-revoke-all-grant-and-remove-mysql-user&quot;&gt;Revoke all grant and remove MySQL user&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#cron-task-start-at-reboot&quot; id=&quot;markdown-toc-cron-task-start-at-reboot&quot;&gt;Cron task start at reboot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#simple-rsyncdconf&quot; id=&quot;markdown-toc-simple-rsyncdconf&quot;&gt;Simple rsyncd.conf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#open-files-limit&quot; id=&quot;markdown-toc-open-files-limit&quot;&gt;Open files limit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#use-curl-to-check-web-site-answer-time&quot; id=&quot;markdown-toc-use-curl-to-check-web-site-answer-time&quot;&gt;Use curl to check web site answer time&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#run-vncserver-at-port-5999&quot; id=&quot;markdown-toc-run-vncserver-at-port-5999&quot;&gt;Run vncserver at port 5999&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-200-host-records-in-etchosts&quot; id=&quot;markdown-toc-create-200-host-records-in-etchosts&quot;&gt;Create 200 host records in /etc/hosts&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -332,6 +342,7 @@ http://www.freebsdwiki.net/index.php/Megarc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;megacli-raid-cmd&quot;&gt;Megacli raid cmd&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+http://tools.rapidsoft.de/perc/perc-cheat-sheet.html
 server:~# megacli -AdpGetProp RebuildRate -a0
 Adapter 0: Rebuild &lt;span class=&quot;nv&quot;&gt;Rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30%
 server:~# megacli -AdpSetProp RebuildRate &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt; -a0
@@ -422,6 +433,87 @@ cat large.mp3.* &amp;gt; large.mp3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;show-postresql-status&quot;&gt;Show PostreSQL status&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from pg_stat_activity&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;soft-raid-freebsd&quot;&gt;Soft Raid FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;geom_mirror_load=&amp;quot;YES&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader.conf
+sysctl kern.geom.debugflags&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;16
+gmirror label -v -b round-robin -s &lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; gm0 /dev/mfid0
+change /etc/fstab /dev/mfid0s2a to /dev/mirror/gm0s1a
+reboot
+gmirror list
+gmirror status
+gmirror insert gm0 /dev/mfid1
+gmirror configure -b round-robin -s &lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; gm*
+gmirror remove gm0 /dev/mfid1
+gmirror foreget -v gm0
+gmirror rebuild -v gm1 /dev/fmid3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;test-channel-speed&quot;&gt;Test channel speed&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;at server:
+iperf -s
+at client:
+iperf -V -c SERVERIP -t 6000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;patch-apply&quot;&gt;Patch apply&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;patch --dry-run -p1 &amp;lt; patchfile.patch
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; all ok
+patch -p1 &amp;lt; patchfile.patch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;revoke-all-grant-and-remove-mysql-user&quot;&gt;Revoke all grant and remove MySQL user&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;REVOKE ALL PRIVILEGES on &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;DBNAME&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.* from &lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+drop user &lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from mysql.user&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from mysql.user where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;cron-task-start-at-reboot&quot;&gt;Cron task start at reboot&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/crontab
+@reboot         username /usr/bin/bash  /etc/startAtReboot.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;simple-rsyncdconf&quot;&gt;Simple rsyncd.conf&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rsyncd.conf
+pid &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /var/run/rsyncd.pid
+use &lt;span class=&quot;nv&quot;&gt;chroot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
+&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nobody
+&lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nobody
+hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 192.168.56.0/24
+hosts &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *
+pid &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /var/run/rsyncd.pid
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/test
+&lt;span class=&quot;nv&quot;&gt;comment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
+hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 10.0.0.1
+hosts &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *
+
+To start
+rsync --daemon&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;open-files-limit&quot;&gt;Open files limit&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://ss64.com/bash/limits.conf.html
+/etc/security/limits.conf
+*               hard    nofile          65535
+*               soft    nofile          65535
+username        hard    nofile          65536&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;use-curl-to-check-web-site-answer-time&quot;&gt;Use curl to check web site answer time&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -w &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n&amp;#39;&lt;/span&gt; -o /dev/null -s http://linux.com/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;run-vncserver-at-port-5999&quot;&gt;Run vncserver at port 5999&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vncserver -geometry 1024x768 -depth &lt;span class=&quot;m&quot;&gt;24&lt;/span&gt; :99&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-200-host-records-in-etchosts&quot;&gt;Create 200 host records in /etc/hosts&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;192.168.99.1-200 n001-n200
+&lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq -w 200&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;192.168.99.$P n$i&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$P&lt;/span&gt; + 1&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &amp;gt;&amp;gt;/etc/hosts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>

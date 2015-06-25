@@ -185,6 +185,16 @@
   <li><a href="#create-swap-in-linux" id="markdown-toc-create-swap-in-linux">Create swap in Linux</a></li>
   <li><a href="#split-big-file-in-small-parts" id="markdown-toc-split-big-file-in-small-parts">Split big file in small parts</a></li>
   <li><a href="#show-postresql-status" id="markdown-toc-show-postresql-status">Show PostreSQL status</a></li>
+  <li><a href="#soft-raid-freebsd" id="markdown-toc-soft-raid-freebsd">Soft Raid FreeBSD</a></li>
+  <li><a href="#test-channel-speed" id="markdown-toc-test-channel-speed">Test channel speed</a></li>
+  <li><a href="#patch-apply" id="markdown-toc-patch-apply">Patch apply</a></li>
+  <li><a href="#revoke-all-grant-and-remove-mysql-user" id="markdown-toc-revoke-all-grant-and-remove-mysql-user">Revoke all grant and remove MySQL user</a></li>
+  <li><a href="#cron-task-start-at-reboot" id="markdown-toc-cron-task-start-at-reboot">Cron task start at reboot</a></li>
+  <li><a href="#simple-rsyncdconf" id="markdown-toc-simple-rsyncdconf">Simple rsyncd.conf</a></li>
+  <li><a href="#open-files-limit" id="markdown-toc-open-files-limit">Open files limit</a></li>
+  <li><a href="#use-curl-to-check-web-site-answer-time" id="markdown-toc-use-curl-to-check-web-site-answer-time">Use curl to check web site answer time</a></li>
+  <li><a href="#run-vncserver-at-port-5999" id="markdown-toc-run-vncserver-at-port-5999">Run vncserver at port 5999</a></li>
+  <li><a href="#create-200-host-records-in-etchosts" id="markdown-toc-create-200-host-records-in-etchosts">Create 200 host records in /etc/hosts</a></li>
 </ul>
 
   </div>
@@ -330,6 +340,7 @@ http://www.freebsdwiki.net/index.php/Megarc</code></pre></div>
 <h3 id="megacli-raid-cmd">Megacli raid cmd</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+http://tools.rapidsoft.de/perc/perc-cheat-sheet.html
 server:~# megacli -AdpGetProp RebuildRate -a0
 Adapter 0: Rebuild <span class="nv">Rate</span> <span class="o">=</span> 30%
 server:~# megacli -AdpSetProp RebuildRate <span class="m">60</span> -a0
@@ -420,6 +431,87 @@ cat large.mp3.* &gt; large.mp3</code></pre></div>
 <h3 id="show-postresql-status">Show PostreSQL status</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">select</span> * from pg_stat_activity<span class="p">;</span></code></pre></div>
+
+<h3 id="soft-raid-freebsd">Soft Raid FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s1">&#39;geom_mirror_load=&quot;YES&quot;&#39;</span> &gt;&gt; /boot/loader.conf
+sysctl kern.geom.debugflags<span class="o">=</span>16
+gmirror label -v -b round-robin -s <span class="m">131072</span> gm0 /dev/mfid0
+change /etc/fstab /dev/mfid0s2a to /dev/mirror/gm0s1a
+reboot
+gmirror list
+gmirror status
+gmirror insert gm0 /dev/mfid1
+gmirror configure -b round-robin -s <span class="m">131072</span> gm*
+gmirror remove gm0 /dev/mfid1
+gmirror foreget -v gm0
+gmirror rebuild -v gm1 /dev/fmid3</code></pre></div>
+
+<h3 id="test-channel-speed">Test channel speed</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">at server:
+iperf -s
+at client:
+iperf -V -c SERVERIP -t 6000</code></pre></div>
+
+<h3 id="patch-apply">Patch apply</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">patch --dry-run -p1 &lt; patchfile.patch
+<span class="k">if</span> all ok
+patch -p1 &lt; patchfile.patch</code></pre></div>
+
+<h3 id="revoke-all-grant-and-remove-mysql-user">Revoke all grant and remove MySQL user</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">REVOKE ALL PRIVILEGES on <span class="sb">`</span>DBNAME<span class="sb">`</span>.* from <span class="s1">&#39;USERNAME&#39;</span>@<span class="s1">&#39;IP&#39;</span> <span class="p">;</span>
+drop user <span class="s1">&#39;USERNAME&#39;</span>@<span class="s1">&#39;IP&#39;</span><span class="p">;</span>
+<span class="k">select</span> * from mysql.user<span class="se">\G</span><span class="p">;</span>
+<span class="k">select</span> * from mysql.user where <span class="nv">user</span><span class="o">=</span><span class="s1">&#39;USERNAME&#39;</span><span class="se">\G</span><span class="p">;</span></code></pre></div>
+
+<h3 id="cron-task-start-at-reboot">Cron task start at reboot</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/crontab
+@reboot         username /usr/bin/bash  /etc/startAtReboot.sh</code></pre></div>
+
+<h3 id="simple-rsyncdconf">Simple rsyncd.conf</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/rsyncd.conf
+pid <span class="nv">file</span> <span class="o">=</span> /var/run/rsyncd.pid
+use <span class="nv">chroot</span> <span class="o">=</span> yes
+<span class="nv">uid</span> <span class="o">=</span> nobody
+<span class="nv">gid</span> <span class="o">=</span> nobody
+hosts <span class="nv">allow</span> <span class="o">=</span> 192.168.56.0/24
+hosts <span class="nv">deny</span>  <span class="o">=</span> *
+pid <span class="nv">file</span> <span class="o">=</span> /var/run/rsyncd.pid
+<span class="o">[</span><span class="nb">test</span><span class="o">]</span>
+<span class="nv">path</span><span class="o">=</span>/test
+<span class="nv">comment</span><span class="o">=</span><span class="nb">test</span>
+<span class="nb">read </span><span class="nv">only</span> <span class="o">=</span> yes
+hosts <span class="nv">allow</span> <span class="o">=</span> 10.0.0.1
+hosts <span class="nv">deny</span>  <span class="o">=</span> *
+
+To start
+rsync --daemon</code></pre></div>
+
+<h3 id="open-files-limit">Open files limit</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">http://ss64.com/bash/limits.conf.html
+/etc/security/limits.conf
+*               hard    nofile          65535
+*               soft    nofile          65535
+username        hard    nofile          65536</code></pre></div>
+
+<h3 id="use-curl-to-check-web-site-answer-time">Use curl to check web site answer time</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl -w <span class="s1">&#39;\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n&#39;</span> -o /dev/null -s http://linux.com/</code></pre></div>
+
+<h3 id="run-vncserver-at-port-5999">Run vncserver at port 5999</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">vncserver -geometry 1024x768 -depth <span class="m">24</span> :99</code></pre></div>
+
+<h3 id="create-200-host-records-in-etchosts">Create 200 host records in /etc/hosts</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">192.168.99.1-200 n001-n200
+<span class="nv">P</span><span class="o">=</span>1<span class="p">;</span> <span class="k">for</span> i in <span class="k">$(</span>seq -w 200<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&quot;192.168.99.$P n$i&quot;</span><span class="p">;</span> <span class="nv">P</span><span class="o">=</span><span class="k">$(</span>expr <span class="nv">$P</span> + 1<span class="k">)</span><span class="p">;</span><span class="k">done</span> &gt;&gt;/etc/hosts</code></pre></div>
 
 
       <hr />
