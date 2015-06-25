@@ -183,6 +183,7 @@ http://www.freebsdwiki.net/index.php/Megarc
 ### Megacli raid cmd
 {% highlight bash %}
 http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
+http://tools.rapidsoft.de/perc/perc-cheat-sheet.html
 server:~# megacli -AdpGetProp RebuildRate -a0
 Adapter 0: Rebuild Rate = 30%
 server:~# megacli -AdpSetProp RebuildRate 60 -a0
@@ -284,3 +285,95 @@ cat large.mp3.* > large.mp3
 {% highlight bash %}
 select * from pg_stat_activity;
 {% endhighlight %}
+
+### Soft Raid FreeBSD
+{% highlight bash %}
+echo 'geom_mirror_load="YES"' >> /boot/loader.conf
+sysctl kern.geom.debugflags=16
+gmirror label -v -b round-robin -s 131072 gm0 /dev/mfid0
+change /etc/fstab /dev/mfid0s2a to /dev/mirror/gm0s1a
+reboot
+gmirror list
+gmirror status
+gmirror insert gm0 /dev/mfid1
+gmirror configure -b round-robin -s 131072 gm*
+gmirror remove gm0 /dev/mfid1
+gmirror foreget -v gm0
+gmirror rebuild -v gm1 /dev/fmid3
+{% endhighlight %}
+
+### Test channel speed
+{% highlight bash %}
+at server:
+iperf -s
+at client:
+iperf -V -c SERVERIP -t 6000
+{% endhighlight %}
+
+### Patch apply
+{% highlight bash %}
+patch --dry-run -p1 < patchfile.patch
+if all ok
+patch -p1 < patchfile.patch
+{% endhighlight %}
+
+### Revoke all grant and remove MySQL user
+{% highlight bash %}
+REVOKE ALL PRIVILEGES on `DBNAME`.* from 'USERNAME'@'IP' ;
+drop user 'USERNAME'@'IP';
+select * from mysql.user\G;
+select * from mysql.user where user='USERNAME'\G;
+{% endhighlight %}
+
+### Cron task start at reboot
+{% highlight bash %}
+/etc/crontab
+@reboot         username /usr/bin/bash  /etc/startAtReboot.sh
+{% endhighlight %}
+
+### Simple rsyncd.conf 
+{% highlight bash %}
+/etc/rsyncd.conf
+pid file = /var/run/rsyncd.pid
+use chroot = yes
+uid = nobody
+gid = nobody
+hosts allow = 192.168.56.0/24
+hosts deny  = *
+pid file = /var/run/rsyncd.pid
+[test]
+path=/test
+comment=test
+read only = yes
+hosts allow = 10.0.0.1
+hosts deny  = *
+
+To start
+rsync --daemon
+{% endhighlight %}
+
+### Open files limit
+{% highlight bash %}
+http://ss64.com/bash/limits.conf.html
+/etc/security/limits.conf
+*               hard    nofile          65535
+*               soft    nofile          65535
+username        hard    nofile          65536
+{% endhighlight %}
+
+### Use curl to check web site answer time
+{% highlight bash %}
+curl -w '\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n' -o /dev/null -s http://linux.com/ 
+{% endhighlight %}
+
+### Run vncserver at port 5999
+{% highlight bash %}
+vncserver -geometry 1024x768 -depth 24 :99
+{% endhighlight %}
+
+### Create 200 host records in /etc/hosts 
+{% highlight bash %}
+192.168.99.1-200 n001-n200
+P=1; for i in $(seq -w 200); do echo "192.168.99.$P n$i"; P=$(expr $P + 1);done >>/etc/hosts 
+{% endhighlight %}
+
