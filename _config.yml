@@ -29,7 +29,7 @@ owner:
   name: EK
   avatar: avatar.jpg
   bio: "I'm a hacker and security researcher from Russia"
-  email: 
+  email: ekoz@protonmail.com
   disqus-shortname: httpjivoigithubcom
   twitter: jivoi
   facebook: #username
