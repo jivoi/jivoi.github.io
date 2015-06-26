@@ -5,13 +5,118 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-26T10:44:59+03:00</updated>
+<updated>2015-06-26T13:23:43+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Huawei E392 with Linux]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" />
+  <id>https://jivoi.github.io/2015/06/26/huawei-e392-with-linux</id>
+  <updated>2015-06-26 12:40:49 +0300T00:00:00-00:00</updated>
+  <published>2015-06-26T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Working with 3g modem Huawei E392 in Linux and OpenWRT&lt;/p&gt;
+
+&lt;h3 id=&quot;ubuntu-linux&quot;&gt;Ubuntu Linux&lt;/h3&gt;
+
+&lt;h5 id=&quot;install-pkgs&quot;&gt;Install pkgs&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install wvdial
+wvdialconf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;add-to-etcwvdialconf&quot;&gt;Add to /etc/wvdial.conf&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Dialer Defaults&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;Init1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ATZ
+&lt;span class=&quot;nv&quot;&gt;Init2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AT+CGDCONT&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1,&lt;span class=&quot;s2&quot;&gt;&amp;quot;IP&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;Internet&amp;quot;&lt;/span&gt;
+Modem &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; USB Modem
+&lt;span class=&quot;nv&quot;&gt;Baud&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 57600
+New &lt;span class=&quot;nv&quot;&gt;PPPD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
+&lt;span class=&quot;nv&quot;&gt;Modem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /dev/ttyUSB0
+&lt;span class=&quot;nv&quot;&gt;Phone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *99#
+&lt;span class=&quot;nv&quot;&gt;Password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt; 
+&lt;span class=&quot;nv&quot;&gt;Username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;
+Stupid &lt;span class=&quot;nv&quot;&gt;Mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;auto-reconnect&quot;&gt;Auto Reconnect&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#! /bin/bash&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; : &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+       wvdial
+       sleep 10
+   &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;system-network-configuration&quot;&gt;System network configuration&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/network/interfaces
+auto ppp0
+iface ppp0 inet wvdial&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;openwrt-asus-wl600g&quot;&gt;OpenWRT Asus Wl600g&lt;/h3&gt;
+
+&lt;h5 id=&quot;links&quot;&gt;Links&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/toh/asus/wl600g&quot;&gt;wl600g&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/doc/howto/basic.config&quot;&gt;basic.config&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/doc/recipes/ltedongle&quot;&gt;ltedongle&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://intelnuc.blogspot.ru/2014/10/turn-your-old-wireless-router-into-lte.html&quot;&gt;turn-your-old-wireless-router-into-lte&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;download-and-install&quot;&gt;Download and Install&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Load the image into your router via the web interface http://192.168.1.1 or tftp
+wget http://downloads.openwrt.org/backfire/10.03.1/brcm63xx/openwrt-96348GW-generic-squashfs-cfe.bin
+tftp -i 192.168.1.1 PUT openwrt-96348GW-generic-squashfs-cfe.bin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;enable-ssh&quot;&gt;Enable SSH&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Web -&amp;gt; System-Administration -&amp;gt; SSH Access -&amp;gt; Allow remote hosts to connect to &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;SSH forwarded ports&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;install-required-packages&quot;&gt;Install required packages&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;telnet&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;sh 192.168.1.1
+opkg update
+opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
+reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;configuring-modem&quot;&gt;Configuring modem&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@OpenWrt:~# ls -l /dev/cdc-wdm0
+root@OpenWrt:~# dmesg
+root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;network-configuration&quot;&gt;Network configuration&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add new Interface to /etc/config/network
+config interface &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
+option ifname &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan0&amp;#39;&lt;/span&gt;
+option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;firewall-configuration&quot;&gt;Firewall configuration&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;go to Network → Firewall, scroll down to wan and click the Edit button
+add a checkmark to the wwan box under Covered networks heading, click Save &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; Apply&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>

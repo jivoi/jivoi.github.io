@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Red Hat RHCE Prepare &#8211; EK</title>
-<meta name="description" content="The way that i went for RHCE Certification
+<title>Huawei E392 with Linux &#8211; EK</title>
+<meta name="description" content="Working with 3g modem Huawei E392 in Linux and OpenWRT
 
 ">
-<meta name="keywords" content="linux, sysadm, redhat">
+<meta name="keywords" content="linux, 3gmodem, openwrt">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Red Hat RHCE Prepare">
-<meta name="twitter:description" content="The way that i went for RHCE Certification
+<meta name="twitter:title" content="Huawei E392 with Linux">
+<meta name="twitter:description" content="Working with 3g modem Huawei E392 in Linux and OpenWRT
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Red Hat RHCE Prepare">
-<meta property="og:description" content="The way that i went for RHCE Certification
+<meta property="og:title" content="Huawei E392 with Linux">
+<meta property="og:description" content="Working with 3g modem Huawei E392 in Linux and OpenWRT
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/">
+<meta property="og:url" content="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/">
+<link rel="canonical" href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,37 +145,98 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/" rel="bookmark" title="Red Hat RHCE Prepare">Red Hat RHCE Prepare</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" rel="bookmark" title="Huawei E392 with Linux">Huawei E392 with Linux</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>The way that i went for RHCE Certification</p>
+      <p>Working with 3g modem Huawei E392 in Linux and OpenWRT</p>
 
-<h3 id="what-is-rhce">What is RHCE</h3>
+<h3 id="ubuntu-linux">Ubuntu Linux</h3>
+
+<h5 id="install-pkgs">Install pkgs</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install wvdial
+wvdialconf</code></pre></div>
+
+<h5 id="add-to-etcwvdialconf">Add to /etc/wvdial.conf</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>Dialer Defaults<span class="o">]</span>
+<span class="nv">Init1</span> <span class="o">=</span> ATZ
+<span class="nv">Init2</span> <span class="o">=</span> AT+CGDCONT<span class="o">=</span>1,<span class="s2">&quot;IP&quot;</span>,<span class="s2">&quot;Internet&quot;</span>
+Modem <span class="nv">Type</span> <span class="o">=</span> USB Modem
+<span class="nv">Baud</span> <span class="o">=</span> 57600
+New <span class="nv">PPPD</span> <span class="o">=</span> yes
+<span class="nv">Modem</span> <span class="o">=</span> /dev/ttyUSB0
+<span class="nv">Phone</span> <span class="o">=</span> *99#
+<span class="nv">Password</span> <span class="o">=</span> <span class="se">\n</span> 
+<span class="nv">Username</span> <span class="o">=</span> <span class="se">\n</span>
+Stupid <span class="nv">Mode</span> <span class="o">=</span> yes</code></pre></div>
+
+<h5 id="auto-reconnect">Auto Reconnect</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#! /bin/bash</span>
+<span class="o">(</span>
+   <span class="k">while</span> : <span class="p">;</span> <span class="k">do</span>
+       wvdial
+       sleep 10
+   <span class="k">done</span>
+<span class="o">)</span> <span class="p">&amp;</span></code></pre></div>
+
+<h5 id="system-network-configuration">System network configuration</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/network/interfaces
+auto ppp0
+iface ppp0 inet wvdial</code></pre></div>
+
+<h3 id="openwrt-asus-wl600g">OpenWRT Asus Wl600g</h3>
+
+<h5 id="links">Links</h5>
 <ul>
-  <li><a href="https://www.redhat.com/en/services/certification/rhce">RedHat Site</a></li>
-  <li><a href="https://en.wikipedia.org/wiki/Red_Hat_Certification_Program">Wikipedia</a></li>
+  <li><a href="http://wiki.openwrt.org/toh/asus/wl600g">wl600g</a></li>
+  <li><a href="http://wiki.openwrt.org/doc/howto/basic.config">basic.config</a></li>
+  <li><a href="http://wiki.openwrt.org/doc/recipes/ltedongle">ltedongle</a></li>
+  <li><a href="http://intelnuc.blogspot.ru/2014/10/turn-your-old-wireless-router-into-lte.html">turn-your-old-wireless-router-into-lte</a></li>
 </ul>
 
-<h3 id="courses">Courses</h3>
-<ul>
-  <li>RH300 - Fast prepare for RHCE include exam RHCSA and RHCE www.rhd.ru</li>
-</ul>
+<h5 id="download-and-install">Download and Install</h5>
 
-<h3 id="books">Books</h3>
-<ul>
-  <li>UNIX and Linux System Administration Handbook by Evi Nemeth</li>
-  <li>RHCE - RH254 student workbook</li>
-  <li>LPI 101 and LPI 102 student workbooks</li>
-  <li>RHCSA/RHCE Red Hat Linux Certification Study Guide</li>
-  <li>Hands-on Guide to the Red Hat Exams: RHCSA and RHCE Cert Guide and Lab Manual</li>
-</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Load the image into your router via the web interface http://192.168.1.1 or tftp
+wget http://downloads.openwrt.org/backfire/10.03.1/brcm63xx/openwrt-96348GW-generic-squashfs-cfe.bin
+tftp -i 192.168.1.1 PUT openwrt-96348GW-generic-squashfs-cfe.bin</code></pre></div>
 
-<h3 id="watch">2 Watch</h3>
-<ul>
-  <li>Livelessons (RHCE) Certification Complete Video Course</li>
-  <li>VTC Red Hat Certified Engineer (RHCE) - Exam EX300</li>
-</ul>
+<h5 id="enable-ssh">Enable SSH</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Web -&gt; System-Administration -&gt; SSH Access -&gt; Allow remote hosts to connect to <span class="nb">local </span>SSH forwarded ports</code></pre></div>
+
+<h5 id="install-required-packages">Install required packages</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">telnet<span class="se">\s</span>sh 192.168.1.1
+opkg update
+opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
+reboot</code></pre></div>
+
+<h5 id="configuring-modem">Configuring modem</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">root@OpenWrt:~# ls -l /dev/cdc-wdm0
+root@OpenWrt:~# dmesg
+root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
+root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status</code></pre></div>
+
+<h5 id="network-configuration">Network configuration</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">add new Interface to /etc/config/network
+config interface <span class="s1">&#39;wwan&#39;</span>
+option ifname <span class="s1">&#39;wwan0&#39;</span>
+option proto <span class="s1">&#39;dhcp&#39;</span></code></pre></div>
+
+<h5 id="firewall-configuration">Firewall configuration</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">go to Network → Firewall, scroll down to wan and click the Edit button
+add a checkmark to the wwan box under Covered networks heading, click Save <span class="p">&amp;</span> Apply</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -207,7 +268,7 @@
 
 
         </div>
-        <p class="byline"><strong>Red Hat RHCE Prepare</strong> was published on <time datetime="2013-06-19T00:00:00+04:00">June 19, 2013</time> and last modified on <time datetime="2013-06-19">June 19, 2013</time>.</p>
+        <p class="byline"><strong>Huawei E392 with Linux</strong> was published on <time datetime="2015-06-26T00:00:00+03:00">June 26, 2015</time> and last modified on <time datetime="2015-06-26">June 26, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -221,11 +282,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" title="Huawei E392 with Linux">Huawei E392 with Linux</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" title="OSCP Prepare">OSCP Prepare</a></li>
     
       <li><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></li>
+    
+      <li><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" title="Linux-Unix-IT Tips and Tricks #1">Linux-Unix-IT Tips and Tricks #1</a></li>
     
     </ul>
     <hr />
