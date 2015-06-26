@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Huawei E392 with Linux"
+title: "4G Huawei E392 with Linux"
 modified: 2015-06-26 12:40:49 +0300
 category: [howto]
-tags: [linux,3gmodem,openwrt]
+tags: [linux,4gmodem,openwrt]
 image:
   feature: 
   credit: 
@@ -11,7 +11,7 @@ image:
 comments: True
 share: 
 ---
-Working with 3g modem Huawei E392 in Linux and OpenWRT
+Working with 4G modem Huawei E392 in Linux and OpenWRT
 
 ### Ubuntu Linux
 
