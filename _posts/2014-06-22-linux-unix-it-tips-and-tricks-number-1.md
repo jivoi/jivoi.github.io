@@ -377,3 +377,91 @@ vncserver -geometry 1024x768 -depth 24 :99
 P=1; for i in $(seq -w 200); do echo "192.168.99.$P n$i"; P=$(expr $P + 1);done >>/etc/hosts 
 {% endhighlight %}
 
+### Com terminal for cisco
+{% highlight bash %}
+apt-get install cutecom(minicom)
+{% endhighlight %}
+
+### Disable php for custom dir in Apache 
+{% highlight bash %}
+<Directory /var/www/htdocs/images>
+    RemoveHandler .php .phtml .php3
+    AddType application/x-httpd-php-source .php .phtml .php3
+    Allow from all
+ </Directory>
+{% endhighlight %}
+
+### Print all ps pids with owner root
+{% highlight bash %}
+ps -aux | awk '{if ($1 == "root") print $2}'
+{% endhighlight %}
+
+### Set expired password for FreeBSD user
+{% highlight bash %}
+echo P@ssw0rd|sudo /usr/sbin/pw usermod username -h0 -p 1
+{% endhighlight %}
+
+### Enable coredumps in FreeBSD or Linux
+{% highlight bash %}
+FreeBSD
+sysctl kern.coredump=1
+sysctl kern.sugid_coredump=1
+sysctl kern.corefile=/core/%N-%P.core
+%N - name of process
+%P - PID
+%U - username login
+
+Linux
+mkdir /core 
+chmod 777/core
+echo "/core" > /proc/sys/kernel/core_pattern
+sysctl kernel.core_pattern=/core/%P.core
+{% endhighlight %}
+
+### Enable coredumps in NginX
+{% highlight bash %}
+Need to compile nginx with --with-debug
+Add to nginx.conf
+worker_rlimit_core 50m;
+working_directory /core/;
+echo 'www soft core unlimited' >> /etc/security/limits.conf
+/etc/init.d/httpd restart
+{% endhighlight %}
+
+### Add alias to network interface in FreeBSD
+{% highlight bash %}
+ifconfig em0 alias 192.168.56.100/32
+{% endhighlight %}
+
+### Print all locked request in MySQL
+{% highlight bash %}
+mysql -e "show full processlist" | grep "Locked"
+{% endhighlight %}
+
+### Redirect port from 5190 to 5222 with iptables
+{% highlight bash %}
+iptables -A INPUT -p tcp --dport 5190 -j ACCEPT
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 5190 -j REDIRECT --to-ports 5222
+{% endhighlight %}
+
+### Limit POST request size to 20MB
+{% highlight bash %}
+add to php.ini
+php_value max_execution_time 600 
+php_value upload_max_filesize 20M 
+php_value post_max_size 20M
+{% endhighlight %}
+
+### Apache error log limit 2G
+{% highlight bash %}
+[notice] child pid 15443 exit signal File size limit exceeded (25)
+some where you have log file size more than 2G, find it
+find /logs/* -size +2000000k
+{% endhighlight %}
+
+### Change nginx version number
+{% highlight bash %}
+src/core/nginx.h
+nginx version: nginx/0.7.62
+recompile from source
+{% endhighlight %}
