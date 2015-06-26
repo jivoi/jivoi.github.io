@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-26T13:24:58+03:00</updated>
+<updated>2015-06-26T14:33:22+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -302,6 +302,18 @@ add a checkmark to the wwan box under Covered networks heading, click Save &lt;s
   &lt;li&gt;&lt;a href=&quot;#use-curl-to-check-web-site-answer-time&quot; id=&quot;markdown-toc-use-curl-to-check-web-site-answer-time&quot;&gt;Use curl to check web site answer time&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#run-vncserver-at-port-5999&quot; id=&quot;markdown-toc-run-vncserver-at-port-5999&quot;&gt;Run vncserver at port 5999&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#create-200-host-records-in-etchosts&quot; id=&quot;markdown-toc-create-200-host-records-in-etchosts&quot;&gt;Create 200 host records in /etc/hosts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#com-terminal-for-cisco&quot; id=&quot;markdown-toc-com-terminal-for-cisco&quot;&gt;Com terminal for cisco&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#disable-php-for-custom-dir-in-apache&quot; id=&quot;markdown-toc-disable-php-for-custom-dir-in-apache&quot;&gt;Disable php for custom dir in Apache&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#print-all-ps-pids-with-owner-root&quot; id=&quot;markdown-toc-print-all-ps-pids-with-owner-root&quot;&gt;Print all ps pids with owner root&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#set-expired-password-for-freebsd-user&quot; id=&quot;markdown-toc-set-expired-password-for-freebsd-user&quot;&gt;Set expired password for FreeBSD user&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#enable-coredumps-in-freebsd-or-linux&quot; id=&quot;markdown-toc-enable-coredumps-in-freebsd-or-linux&quot;&gt;Enable coredumps in FreeBSD or Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#enable-coredumps-in-nginx&quot; id=&quot;markdown-toc-enable-coredumps-in-nginx&quot;&gt;Enable coredumps in NginX&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#add-alias-to-network-interface-in-freebsd&quot; id=&quot;markdown-toc-add-alias-to-network-interface-in-freebsd&quot;&gt;Add alias to network interface in FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#print-all-locked-request-in-mysql&quot; id=&quot;markdown-toc-print-all-locked-request-in-mysql&quot;&gt;Print all locked request in MySQL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#redirect-port-from-5190-to-5222-with-iptables&quot; id=&quot;markdown-toc-redirect-port-from-5190-to-5222-with-iptables&quot;&gt;Redirect port from 5190 to 5222 with iptables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#limit-post-request-size-to-20mb&quot; id=&quot;markdown-toc-limit-post-request-size-to-20mb&quot;&gt;Limit POST request size to 20MB&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#apache-error-log-limit-2g&quot; id=&quot;markdown-toc-apache-error-log-limit-2g&quot;&gt;Apache error log limit 2G&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#change-nginx-version-number&quot; id=&quot;markdown-toc-change-nginx-version-number&quot;&gt;Change nginx version number&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -619,6 +631,83 @@ username        hard    nofile          65536&lt;/code&gt;&lt;/pre&gt;&lt;/div&g
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;192.168.99.1-200 n001-n200
 &lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq -w 200&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;192.168.99.$P n$i&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$P&lt;/span&gt; + 1&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &amp;gt;&amp;gt;/etc/hosts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;com-terminal-for-cisco&quot;&gt;Com terminal for cisco&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install cutecom&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;minicom&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;disable-php-for-custom-dir-in-apache&quot;&gt;Disable php for custom dir in Apache&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /var/www/htdocs/images&amp;gt;
+    RemoveHandler .php .phtml .php3
+    AddType application/x-httpd-php-source .php .phtml .php3
+    Allow from all
+ &amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;print-all-ps-pids-with-owner-root&quot;&gt;Print all ps pids with owner root&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps -aux &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{if ($1 == &amp;quot;root&amp;quot;) print $2}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-expired-password-for-freebsd-user&quot;&gt;Set expired password for FreeBSD user&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;P@ssw0rd&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sudo /usr/sbin/pw usermod username -h0 -p 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-coredumps-in-freebsd-or-linux&quot;&gt;Enable coredumps in FreeBSD or Linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;FreeBSD
+sysctl kern.coredump&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+sysctl kern.sugid_coredump&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+sysctl kern.corefile&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%N-%P.core
+%N - name of process
+%P - PID
+%U - username login
+
+Linux
+mkdir /core 
+chmod 777/core
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/core&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/kernel/core_pattern
+sysctl kernel.core_pattern&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%P.core&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-coredumps-in-nginx&quot;&gt;Enable coredumps in NginX&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Need to compile nginx with --with-debug
+Add to nginx.conf
+worker_rlimit_core 50m&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+working_directory /core/&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;www soft core unlimited&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/security/limits.conf
+/etc/init.d/httpd restart&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-alias-to-network-interface-in-freebsd&quot;&gt;Add alias to network interface in FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ifconfig em0 &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;192.168.56.100/32&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;print-all-locked-request-in-mysql&quot;&gt;Print all locked request in MySQL&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;show full processlist&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;Locked&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;redirect-port-from-5190-to-5222-with-iptables&quot;&gt;Redirect port from 5190 to 5222 with iptables&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;iptables -A INPUT -p tcp --dport &lt;span class=&quot;m&quot;&gt;5190&lt;/span&gt; -j ACCEPT
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport &lt;span class=&quot;m&quot;&gt;5190&lt;/span&gt; -j REDIRECT --to-ports 5222&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limit-post-request-size-to-20mb&quot;&gt;Limit POST request size to 20MB&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to php.ini
+php_value max_execution_time &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt; 
+php_value upload_max_filesize 20M 
+php_value post_max_size 20M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apache-error-log-limit-2g&quot;&gt;Apache error log limit 2G&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;notice&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; child pid &lt;span class=&quot;m&quot;&gt;15443&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;signal File size limit exceeded &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;25&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+some where you have log file size more than 2G, find it
+find /logs/* -size +2000000k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;change-nginx-version-number&quot;&gt;Change nginx version number&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;src/core/nginx.h
+nginx version: nginx/0.7.62
+recompile from &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>

@@ -195,6 +195,18 @@
   <li><a href="#use-curl-to-check-web-site-answer-time" id="markdown-toc-use-curl-to-check-web-site-answer-time">Use curl to check web site answer time</a></li>
   <li><a href="#run-vncserver-at-port-5999" id="markdown-toc-run-vncserver-at-port-5999">Run vncserver at port 5999</a></li>
   <li><a href="#create-200-host-records-in-etchosts" id="markdown-toc-create-200-host-records-in-etchosts">Create 200 host records in /etc/hosts</a></li>
+  <li><a href="#com-terminal-for-cisco" id="markdown-toc-com-terminal-for-cisco">Com terminal for cisco</a></li>
+  <li><a href="#disable-php-for-custom-dir-in-apache" id="markdown-toc-disable-php-for-custom-dir-in-apache">Disable php for custom dir in Apache</a></li>
+  <li><a href="#print-all-ps-pids-with-owner-root" id="markdown-toc-print-all-ps-pids-with-owner-root">Print all ps pids with owner root</a></li>
+  <li><a href="#set-expired-password-for-freebsd-user" id="markdown-toc-set-expired-password-for-freebsd-user">Set expired password for FreeBSD user</a></li>
+  <li><a href="#enable-coredumps-in-freebsd-or-linux" id="markdown-toc-enable-coredumps-in-freebsd-or-linux">Enable coredumps in FreeBSD or Linux</a></li>
+  <li><a href="#enable-coredumps-in-nginx" id="markdown-toc-enable-coredumps-in-nginx">Enable coredumps in NginX</a></li>
+  <li><a href="#add-alias-to-network-interface-in-freebsd" id="markdown-toc-add-alias-to-network-interface-in-freebsd">Add alias to network interface in FreeBSD</a></li>
+  <li><a href="#print-all-locked-request-in-mysql" id="markdown-toc-print-all-locked-request-in-mysql">Print all locked request in MySQL</a></li>
+  <li><a href="#redirect-port-from-5190-to-5222-with-iptables" id="markdown-toc-redirect-port-from-5190-to-5222-with-iptables">Redirect port from 5190 to 5222 with iptables</a></li>
+  <li><a href="#limit-post-request-size-to-20mb" id="markdown-toc-limit-post-request-size-to-20mb">Limit POST request size to 20MB</a></li>
+  <li><a href="#apache-error-log-limit-2g" id="markdown-toc-apache-error-log-limit-2g">Apache error log limit 2G</a></li>
+  <li><a href="#change-nginx-version-number" id="markdown-toc-change-nginx-version-number">Change nginx version number</a></li>
 </ul>
 
   </div>
@@ -512,6 +524,83 @@ username        hard    nofile          65536</code></pre></div>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">192.168.99.1-200 n001-n200
 <span class="nv">P</span><span class="o">=</span>1<span class="p">;</span> <span class="k">for</span> i in <span class="k">$(</span>seq -w 200<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&quot;192.168.99.$P n$i&quot;</span><span class="p">;</span> <span class="nv">P</span><span class="o">=</span><span class="k">$(</span>expr <span class="nv">$P</span> + 1<span class="k">)</span><span class="p">;</span><span class="k">done</span> &gt;&gt;/etc/hosts</code></pre></div>
+
+<h3 id="com-terminal-for-cisco">Com terminal for cisco</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install cutecom<span class="o">(</span>minicom<span class="o">)</span></code></pre></div>
+
+<h3 id="disable-php-for-custom-dir-in-apache">Disable php for custom dir in Apache</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;Directory /var/www/htdocs/images&gt;
+    RemoveHandler .php .phtml .php3
+    AddType application/x-httpd-php-source .php .phtml .php3
+    Allow from all
+ &lt;/Directory&gt;</code></pre></div>
+
+<h3 id="print-all-ps-pids-with-owner-root">Print all ps pids with owner root</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ps -aux <span class="p">|</span> awk <span class="s1">&#39;{if ($1 == &quot;root&quot;) print $2}&#39;</span></code></pre></div>
+
+<h3 id="set-expired-password-for-freebsd-user">Set expired password for FreeBSD user</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo </span>P@ssw0rd<span class="p">|</span>sudo /usr/sbin/pw usermod username -h0 -p 1</code></pre></div>
+
+<h3 id="enable-coredumps-in-freebsd-or-linux">Enable coredumps in FreeBSD or Linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">FreeBSD
+sysctl kern.coredump<span class="o">=</span>1
+sysctl kern.sugid_coredump<span class="o">=</span>1
+sysctl kern.corefile<span class="o">=</span>/core/%N-%P.core
+%N - name of process
+%P - PID
+%U - username login
+
+Linux
+mkdir /core 
+chmod 777/core
+<span class="nb">echo</span> <span class="s2">&quot;/core&quot;</span> &gt; /proc/sys/kernel/core_pattern
+sysctl kernel.core_pattern<span class="o">=</span>/core/%P.core</code></pre></div>
+
+<h3 id="enable-coredumps-in-nginx">Enable coredumps in NginX</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Need to compile nginx with --with-debug
+Add to nginx.conf
+worker_rlimit_core 50m<span class="p">;</span>
+working_directory /core/<span class="p">;</span>
+<span class="nb">echo</span> <span class="s1">&#39;www soft core unlimited&#39;</span> &gt;&gt; /etc/security/limits.conf
+/etc/init.d/httpd restart</code></pre></div>
+
+<h3 id="add-alias-to-network-interface-in-freebsd">Add alias to network interface in FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ifconfig em0 <span class="nb">alias </span>192.168.56.100/32</code></pre></div>
+
+<h3 id="print-all-locked-request-in-mysql">Print all locked request in MySQL</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysql -e <span class="s2">&quot;show full processlist&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;Locked&quot;</span></code></pre></div>
+
+<h3 id="redirect-port-from-5190-to-5222-with-iptables">Redirect port from 5190 to 5222 with iptables</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">iptables -A INPUT -p tcp --dport <span class="m">5190</span> -j ACCEPT
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport <span class="m">5190</span> -j REDIRECT --to-ports 5222</code></pre></div>
+
+<h3 id="limit-post-request-size-to-20mb">Limit POST request size to 20MB</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">add to php.ini
+php_value max_execution_time <span class="m">600</span> 
+php_value upload_max_filesize 20M 
+php_value post_max_size 20M</code></pre></div>
+
+<h3 id="apache-error-log-limit-2g">Apache error log limit 2G</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>notice<span class="o">]</span> child pid <span class="m">15443</span> <span class="nb">exit </span>signal File size limit exceeded <span class="o">(</span>25<span class="o">)</span>
+some where you have log file size more than 2G, find it
+find /logs/* -size +2000000k</code></pre></div>
+
+<h3 id="change-nginx-version-number">Change nginx version number</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">src/core/nginx.h
+nginx version: nginx/0.7.62
+recompile from <span class="nb">source</span></code></pre></div>
 
 
       <hr />
