@@ -5,12 +5,12 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-25T15:05:01+03:00</updated>
+<updated>2015-06-26T10:44:59+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
-  <email></email>
+  <email>ekoz@protonmail.com</email>
 </author>
 
 
@@ -24,7 +24,7 @@
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;My current way for OSCP Certifications&lt;/p&gt;
 
@@ -113,7 +113,7 @@
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Below are the most stable usb wifi adapters:&lt;/p&gt;
 
@@ -149,7 +149,7 @@
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto&lt;/p&gt;
 
@@ -530,7 +530,7 @@ username        hard    nofile          65536&lt;/code&gt;&lt;/pre&gt;&lt;/div&g
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Ответы с олимпиады для системных администраторов от Yandex.
 Много интересных вопросов.&lt;/p&gt;
@@ -1665,7 +1665,7 @@ export a=’myfile.txt’; echo ${}.
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Найдено очень давно в сети, автор неизвестен.
 Иногда стоит перечитывать.&lt;/p&gt;
@@ -1816,7 +1816,7 @@ export a=’myfile.txt’; echo ${}.
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Different configs for nginx.&lt;/p&gt;
 
@@ -2167,7 +2167,7 @@ export a=’myfile.txt’; echo ${}.
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;A huge list of it security questions with my answers =)&lt;/p&gt;
 
@@ -2553,7 +2553,7 @@ export a=’myfile.txt’; echo ${}.
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;How to install Hubot to Ubuntu linux.&lt;/p&gt;
 
@@ -2624,7 +2624,7 @@ tail -f /home/hubot/hubot.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Yandex.ru. Это набор вопросов которые доступны на сайте yandex.ru в разделе Вакансии.&lt;/p&gt;
 
@@ -2735,7 +2735,7 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.&lt;/p&gt;
 
@@ -2814,7 +2814,7 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Как установить CentOS на другой %Linux% по SSH.
 Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.&lt;/p&gt;
@@ -2866,7 +2866,7 @@ initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
 Задавайте вопросы в комментах, если что-то не понятно.&lt;/p&gt;
@@ -2942,7 +2942,7 @@ grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Use github and jekyll for blog&lt;/p&gt;
 
@@ -2993,7 +2993,7 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   <author>
     <name>EK</name>
     <uri>https://jivoi.github.io</uri>
-    <email></email>
+    <email>ekoz@protonmail.com</email>
   </author>
   <content type="html">&lt;p&gt;The way that i went for RHCE Certification&lt;/p&gt;
 
