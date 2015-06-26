@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-26T13:23:43+03:00</updated>
+<updated>2015-06-26T13:24:58+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -15,7 +15,7 @@
 
 
 <entry>
-  <title type="html"><![CDATA[Huawei E392 with Linux]]></title>
+  <title type="html"><![CDATA[4G Huawei E392 with Linux]]></title>
   <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" />
   <id>https://jivoi.github.io/2015/06/26/huawei-e392-with-linux</id>
   <updated>2015-06-26 12:40:49 +0300T00:00:00-00:00</updated>
@@ -26,7 +26,7 @@
     <uri>https://jivoi.github.io</uri>
     <email>ekoz@protonmail.com</email>
   </author>
-  <content type="html">&lt;p&gt;Working with 3g modem Huawei E392 in Linux and OpenWRT&lt;/p&gt;
+  <content type="html">&lt;p&gt;Working with 4G modem Huawei E392 in Linux and OpenWRT&lt;/p&gt;
 
 &lt;h3 id=&quot;ubuntu-linux&quot;&gt;Ubuntu Linux&lt;/h3&gt;
 
@@ -115,7 +115,7 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 add a checkmark to the wwan box under Covered networks heading, click Save &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; Apply&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;4G Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>
 </entry>
 
 
