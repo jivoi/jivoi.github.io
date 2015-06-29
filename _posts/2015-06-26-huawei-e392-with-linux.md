@@ -83,8 +83,68 @@ opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-us
 reboot
 {% endhighlight %}
 
-##### Configuring modem
+##### Configuring modem with pppd
 {% highlight bash %}
+/etc/ppp/peers/megafon-3g
+connect "chat -Vs -r /var/log/ppp -f /etc/chatscripts/megafon-3g"
+460800
+crtscts
+modem
+ttyUSB1
+noauth
+usepeerdns
+defaultroute
+user ""
+password ""
+logfile /var/log/ppp
+
+and add to
+
+/etc/chatscripts/megafon-3g
+TIMEOUT 35
+ECHO ON
+ABORT '\nBUSY\r'
+ABORT '\nERROR\r'
+ABORT '\nNO ANSWER\r'
+ABORT '\nNO CARRIER\r'
+ABORT '\nNO DIALTONE\r'
+ABORT '\nRINGING\r\n\r\nRINGING\r'
+ABORT '\nUsername/pASSWORD Incorrect\r'
+''  \rAT
+OK  'AT+CGDCONT=1,"IP","Internet"'
+OK  ATD*99#CONNECT  ""
+
+Now you can run 
+pppd call megafon-3g
+{% endhighlight %}
+
+##### Network configuration
+{% highlight bash %}
+/etc/config/network
+config interface wan
+        option ifname  ppp0 # on some carriers enable this line
+        option device  /dev/ttyUSB1
+        option apn     Internet
+        option service umts
+        option proto   3g
+
+cp /etc/chatscripts/megafon-3g /etc/chatscripts/3g.chat
+
+and now you can run:
+
+ifup wan
+{% endhighlight %}
+
+##### Firewall configuration
+{% highlight bash %}
+go to Network → Firewall, scroll down to wan and click the Edit button
+add a checkmark to the wwan box under Covered networks heading, click Save & Apply
+{% endhighlight %}
+
+##### Configuring modem on Barrier Breaker
+{% highlight bash %}
+This example will work only with modern openwrt like Barrier Breaker 14.07
+
 root@OpenWrt:~# ls -l /dev/cdc-wdm0
 root@OpenWrt:~# dmesg
 root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
@@ -94,16 +154,10 @@ root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
 {% endhighlight %}
 
-##### Network configuration
+##### Network configurationa on Barrier Breaker
 {% highlight bash %}
 add new Interface to /etc/config/network
 config interface 'wwan'
 option ifname 'wwan0'
 option proto 'dhcp'
-{% endhighlight %}
-
-##### Firewall configuration
-{% highlight bash %}
-go to Network → Firewall, scroll down to wan and click the Edit button
-add a checkmark to the wwan box under Covered networks heading, click Save & Apply
 {% endhighlight %}
