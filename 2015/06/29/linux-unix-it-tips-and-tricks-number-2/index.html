@@ -1,0 +1,418 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Linux-Unix-IT Tips and Tricks #2 &#8211; EK</title>
+<meta name="description" content="Different Linux / Unix / IT tips, notes, howto part 2
+
+">
+<meta name="keywords" content="linux, unix, sysadm">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Linux-Unix-IT Tips and Tricks #2">
+<meta name="twitter:description" content="Different Linux / Unix / IT tips, notes, howto part 2
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-Unix-IT Tips and Tricks #2">
+<meta property="og:description" content="Different Linux / Unix / IT tips, notes, howto part 2
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" rel="bookmark" title="Linux-Unix-IT Tips and Tricks #2">Linux-Unix-IT Tips and Tricks #2</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Different Linux / Unix / IT tips, notes, howto part 2</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#mysql-log-rotate" id="markdown-toc-mysql-log-rotate">MySQL log rotate</a></li>
+  <li><a href="#mysql-dump-with-proceduresfunctionstriggers" id="markdown-toc-mysql-dump-with-proceduresfunctionstriggers">MySQL dump with procedures/functions/triggers</a></li>
+  <li><a href="#show-last-login-history" id="markdown-toc-show-last-login-history">Show last login history</a></li>
+  <li><a href="#enable-postgresql-vacuum" id="markdown-toc-enable-postgresql-vacuum">Enable PostgreSQL Vacuum</a></li>
+  <li><a href="#create-geo-db-for-nginx" id="markdown-toc-create-geo-db-for-nginx">Create GEO DB for nginx</a></li>
+  <li><a href="#connect-to-com-port-from-freebsd-or-linux" id="markdown-toc-connect-to-com-port-from-freebsd-or-linux">Connect to COM port from FreeBSD or Linux</a></li>
+  <li><a href="#upload-ios-to-cisco-routerswitch-from-centos-tftp" id="markdown-toc-upload-ios-to-cisco-routerswitch-from-centos-tftp">Upload IOS to Cisco router\switch from CentOS tftp</a></li>
+  <li><a href="#enable-ssh-on-cisco-2960-switch" id="markdown-toc-enable-ssh-on-cisco-2960-switch">Enable SSH on Cisco 2960 switch</a></li>
+  <li><a href="#restore-cisco-password" id="markdown-toc-restore-cisco-password">Restore Cisco password</a></li>
+  <li><a href="#boot-centos-in-a-single-user-mode" id="markdown-toc-boot-centos-in-a-single-user-mode">Boot CentOS in a Single-User Mode</a></li>
+  <li><a href="#delete-mysql-binary-logs" id="markdown-toc-delete-mysql-binary-logs">Delete MySQL binary logs</a></li>
+  <li><a href="#show-memory-map-of-a-process" id="markdown-toc-show-memory-map-of-a-process">Show memory map of a process</a></li>
+  <li><a href="#show-all-packages-files-in-centos" id="markdown-toc-show-all-packages-files-in-centos">Show all packages files in CentOS</a></li>
+  <li><a href="#find-duplicate-files-in-linux" id="markdown-toc-find-duplicate-files-in-linux">Find duplicate files in Linux</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="mysql-log-rotate">MySQL log rotate</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/logrotate.d/mysql
+/logs/mysql/mysql /logs/mysql/mysql.err /logs/mysql/mysql-slow.log /logs/mysql/query.log <span class="o">{</span>
+        notifempty
+        daily
+        rotate 7
+        missingok
+        compress
+        sharedscripts
+        postrotate
+        <span class="c"># just if mysqld is really running</span>
+        <span class="k">if</span> <span class="nb">test</span> -x /usr/bin/mysqladmin <span class="o">&amp;&amp;</span> <span class="se">\</span>
+           /usr/bin/mysqladmin ping <span class="p">&amp;</span>&gt;/dev/null
+        <span class="k">then</span>
+           /usr/bin/mysqladmin flush-logs
+        <span class="k">fi</span>
+    endscript
+<span class="o">}</span></code></pre></div>
+
+<h3 id="mysql-dump-with-proceduresfunctionstriggers">MySQL dump with procedures/functions/triggers</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysqldump --routines --no-create-info --no-data --no-create-db --skip-opt &lt;database&gt; &gt; outputfile.sql
+mysql &lt;database&gt; &lt; outputfile.sql</code></pre></div>
+
+<h3 id="show-last-login-history">Show last login history</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">last -f  /var/log/wtmp.0
+ -f file  Specifies a file to search other than /var/log/wtmp.</code></pre></div>
+
+<h3 id="enable-postgresql-vacuum">Enable PostgreSQL Vacuum</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">vacuum full VERBOSE analyze<span class="p">;</span></code></pre></div>
+
+<h3 id="create-geo-db-for-nginx">Create GEO DB for nginx</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">For use by the ngx_http_geo_module
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+unzip GeoIPCountryCSV.zip
+wget https://raw.githubusercontent.com/simplegeo/nginx/master/contrib/geo2nginx.pl
+perl geo2nginx.pl &lt; GeoIPCountryWhois.csv &gt; geo.conf</code></pre></div>
+
+<h3 id="connect-to-com-port-from-freebsd-or-linux">Connect to COM port from FreeBSD or Linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">FreeBSD:
+tip -vs9600 com1
+to disconnect  <span class="nb">shift</span>+~~+.
+
+or
+cu -l /dev/cuau0 -s9600
+
+Linux:
+minicom -s
+/dev/ttyS0
+<span class="m">9600</span> 8N1
+sudo -u root minicom -s</code></pre></div>
+
+<h3 id="upload-ios-to-cisco-routerswitch-from-centos-tftp">Upload IOS to Cisco router\switch from CentOS tftp</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">centos# yum -y install tftp-server tftp
+centos# /etc/xinetd.d/tftp
+<span class="nv">disable</span> <span class="o">=</span> no
+centos# service xinetd start
+
+switch# copy tftp: flash:
+switch# dir flash:
+switch#show boot
+switch# configure terminal
+switch# <span class="o">(</span>config<span class="o">)</span><span class="c">#boot system flash:c3550-i5q3l2-mz.121-13.</span></code></pre></div>
+
+<h3 id="enable-ssh-on-cisco-2960-switch">Enable SSH on Cisco 2960 switch</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">You IOS must support K9, ex c2960s-universalk9-mz.122-55.SE3.bin
+
+conf t
+ip domain-name domain.com
+crypto key generate rsa
+
+line vty <span class="m">0</span> 4
+transport input ssh
+<span class="nb">exec</span>-timeout <span class="m">0</span> 0</code></pre></div>
+
+<h3 id="restore-cisco-password">Restore Cisco password</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Connect COM port
+Reboot router and <span class="nb">wait</span> «Self decompressing the image: <span class="c">###» press Ctrl-C or Ctrl-Break</span>
+confreg 0x2142<span class="o">(</span>default -  2102<span class="o">)</span>
+reload
+copy start run
+make change with config
+config-register 0x2102
+reload</code></pre></div>
+
+<h3 id="boot-centos-in-a-single-user-mode">Boot CentOS in a Single-User Mode</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">add to grub line that start with kernel - single
+or 
+<span class="nv">init</span><span class="o">=</span>/bin/sh</code></pre></div>
+
+<h3 id="delete-mysql-binary-logs">Delete MySQL binary logs</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/my.cnf
+<span class="nv">expire_logs_days</span> <span class="o">=</span> 7
+PURGE BINARY LOGS TO <span class="s1">&#39;mysqld-bin.000123&#39;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="show-memory-map-of-a-process">Show memory map of a process</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pmap PID</code></pre></div>
+
+<h3 id="show-all-packages-files-in-centos">Show all packages files in CentOS</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in <span class="sb">`</span>rpm -qa<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> rpm -ql <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span></code></pre></div>
+
+<h3 id="find-duplicate-files-in-linux">Find duplicate files in Linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in <span class="sb">`</span>find *<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="o">[</span> -f <span class="s2">&quot;$i&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;`md5sum \&quot;$i\&quot;`&quot;</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sort <span class="p">|</span> awk -- <span class="s1">&#39;{ if (LAST==$1) print; else LAST=$1 }</span>
+<span class="s1">or </span>
+<span class="s1">find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &#39;</span><span class="o">{</span>print <span class="nv">$2</span><span class="o">}</span><span class="err">&#39;</span></code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Linux-Unix-IT Tips and Tricks #2</strong> was published on <time datetime="2015-06-29T00:00:00+03:00">June 29, 2015</time> and last modified on <time datetime="2014-06-29">June 29, 2014</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW in Linux with SSH">OTPW in Linux with SSH</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" title="4G Huawei E392 with Linux">4G Huawei E392 with Linux</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" title="OSCP Prepare">OSCP Prepare</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+	        
+
+</body>
+</html>

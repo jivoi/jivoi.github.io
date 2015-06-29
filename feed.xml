@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-29T12:02:14+03:00</updated>
+<updated>2015-06-29T13:28:52+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -71,6 +71,170 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/&quot;&gt;OTPW in Linux with SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #2]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" />
+  <id>https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2</id>
+  <updated>2014-06-29 14:54:48 +0400T00:00:00-00:00</updated>
+  <published>2015-06-29T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto part 2&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-log-rotate&quot; id=&quot;markdown-toc-mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-dump-with-proceduresfunctionstriggers&quot; id=&quot;markdown-toc-mysql-dump-with-proceduresfunctionstriggers&quot;&gt;MySQL dump with procedures/functions/triggers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-last-login-history&quot; id=&quot;markdown-toc-show-last-login-history&quot;&gt;Show last login history&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#enable-postgresql-vacuum&quot; id=&quot;markdown-toc-enable-postgresql-vacuum&quot;&gt;Enable PostgreSQL Vacuum&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-geo-db-for-nginx&quot; id=&quot;markdown-toc-create-geo-db-for-nginx&quot;&gt;Create GEO DB for nginx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#connect-to-com-port-from-freebsd-or-linux&quot; id=&quot;markdown-toc-connect-to-com-port-from-freebsd-or-linux&quot;&gt;Connect to COM port from FreeBSD or Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#upload-ios-to-cisco-routerswitch-from-centos-tftp&quot; id=&quot;markdown-toc-upload-ios-to-cisco-routerswitch-from-centos-tftp&quot;&gt;Upload IOS to Cisco router\switch from CentOS tftp&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#enable-ssh-on-cisco-2960-switch&quot; id=&quot;markdown-toc-enable-ssh-on-cisco-2960-switch&quot;&gt;Enable SSH on Cisco 2960 switch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#restore-cisco-password&quot; id=&quot;markdown-toc-restore-cisco-password&quot;&gt;Restore Cisco password&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#boot-centos-in-a-single-user-mode&quot; id=&quot;markdown-toc-boot-centos-in-a-single-user-mode&quot;&gt;Boot CentOS in a Single-User Mode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#delete-mysql-binary-logs&quot; id=&quot;markdown-toc-delete-mysql-binary-logs&quot;&gt;Delete MySQL binary logs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-memory-map-of-a-process&quot; id=&quot;markdown-toc-show-memory-map-of-a-process&quot;&gt;Show memory map of a process&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-all-packages-files-in-centos&quot; id=&quot;markdown-toc-show-all-packages-files-in-centos&quot;&gt;Show all packages files in CentOS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#find-duplicate-files-in-linux&quot; id=&quot;markdown-toc-find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/logrotate.d/mysql
+/logs/mysql/mysql /logs/mysql/mysql.err /logs/mysql/mysql-slow.log /logs/mysql/query.log &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        notifempty
+        daily
+        rotate 7
+        missingok
+        compress
+        sharedscripts
+        postrotate
+        &lt;span class=&quot;c&quot;&gt;# just if mysqld is really running&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; -x /usr/bin/mysqladmin &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+           /usr/bin/mysqladmin ping &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&amp;gt;/dev/null
+        &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+           /usr/bin/mysqladmin flush-logs
+        &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+    endscript
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-dump-with-proceduresfunctionstriggers&quot;&gt;MySQL dump with procedures/functions/triggers&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysqldump --routines --no-create-info --no-data --no-create-db --skip-opt &amp;lt;database&amp;gt; &amp;gt; outputfile.sql
+mysql &amp;lt;database&amp;gt; &amp;lt; outputfile.sql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-last-login-history&quot;&gt;Show last login history&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;last -f  /var/log/wtmp.0
+ -f file  Specifies a file to search other than /var/log/wtmp.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-postgresql-vacuum&quot;&gt;Enable PostgreSQL Vacuum&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vacuum full VERBOSE analyze&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-geo-db-for-nginx&quot;&gt;Create GEO DB for nginx&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;For use by the ngx_http_geo_module
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+unzip GeoIPCountryCSV.zip
+wget https://raw.githubusercontent.com/simplegeo/nginx/master/contrib/geo2nginx.pl
+perl geo2nginx.pl &amp;lt; GeoIPCountryWhois.csv &amp;gt; geo.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;connect-to-com-port-from-freebsd-or-linux&quot;&gt;Connect to COM port from FreeBSD or Linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;FreeBSD:
+tip -vs9600 com1
+to disconnect  &lt;span class=&quot;nb&quot;&gt;shift&lt;/span&gt;+~~+.
+
+or
+cu -l /dev/cuau0 -s9600
+
+Linux:
+minicom -s
+/dev/ttyS0
+&lt;span class=&quot;m&quot;&gt;9600&lt;/span&gt; 8N1
+sudo -u root minicom -s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;upload-ios-to-cisco-routerswitch-from-centos-tftp&quot;&gt;Upload IOS to Cisco router\switch from CentOS tftp&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;centos# yum -y install tftp-server tftp
+centos# /etc/xinetd.d/tftp
+&lt;span class=&quot;nv&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+centos# service xinetd start
+
+switch# copy tftp: flash:
+switch# dir flash:
+switch#show boot
+switch# configure terminal
+switch# &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#boot system flash:c3550-i5q3l2-mz.121-13.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-ssh-on-cisco-2960-switch&quot;&gt;Enable SSH on Cisco 2960 switch&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;You IOS must support K9, ex c2960s-universalk9-mz.122-55.SE3.bin
+
+conf t
+ip domain-name domain.com
+crypto key generate rsa
+
+line vty &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 4
+transport input ssh
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt;-timeout &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;restore-cisco-password&quot;&gt;Restore Cisco password&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Connect COM port
+Reboot router and &lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt; «Self decompressing the image: &lt;span class=&quot;c&quot;&gt;###» press Ctrl-C or Ctrl-Break&lt;/span&gt;
+confreg 0x2142&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default -  2102&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+reload
+copy start run
+make change with config
+config-register 0x2102
+reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;boot-centos-in-a-single-user-mode&quot;&gt;Boot CentOS in a Single-User Mode&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to grub line that start with kernel - single
+or 
+&lt;span class=&quot;nv&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;delete-mysql-binary-logs&quot;&gt;Delete MySQL binary logs&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/my.cnf
+&lt;span class=&quot;nv&quot;&gt;expire_logs_days&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7
+PURGE BINARY LOGS TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysqld-bin.000123&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-memory-map-of-a-process&quot;&gt;Show memory map of a process&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pmap PID&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-all-packages-files-in-centos&quot;&gt;Show all packages files in CentOS&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rpm -qa&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; rpm -ql &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find *&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;`md5sum \&amp;quot;$i\&amp;quot;`&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -- &lt;span class=&quot;s1&quot;&gt;&amp;#39;{ if (LAST==$1) print; else LAST=$1 }&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;or &lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;print &lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
 </entry>
 
 
