@@ -116,7 +116,7 @@ exec-timeout 0 0
 ### Restore Cisco password
 {% highlight bash %}
 Connect COM port
-Reboot router and wait «Self decompressing the image: ###» press Ctrl-C or Ctrl-Break
+Reboot router and wait «Self decompressing the image: » press Ctrl-C or Ctrl-Break
 confreg 0x2142(default -  2102)
 reload
 copy start run
@@ -154,4 +154,162 @@ for i in `rpm -qa`; do echo $i; rpm -ql $i; done
 for i in `find *`; do [ -f "$i" ] && echo "`md5sum \"$i\"`"; done | sort | awk -- '{ if (LAST==$1) print; else LAST=$1 }
 or 
 find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk '{print $2}'
+{% endhighlight %}
+
+### SSH+SVN error 
+{% highlight bash %}
+ssh svn: Network connection closed unexpectedly
+This mean that you dont have sshkey fingerprint in know_hosts
+try ssh to server first
+{% endhighlight %}
+
+### Kill all long MySQL request
+{% highlight bash %}
+mysql -e 'show full processlist'|grep -v Command |awk '{if ($6 >= 10) print "kill " $1 ";"}' |mysql
+{% endhighlight %}
+
+### Check LAST_ACK
+{% highlight bash %}
+LAST_ACK - mean that remote host is disconnected and socker is closed, we are waiting acknowledgment
+
+sysctl -a |grep last_ack
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack = 30
+sysctl -w net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack=10
+netstat -ant | fgrep ":" | cut -b 77-90 | sort | uniq -c
+
+cat /proc/sys/net/netfilter/nf_conntrack_count
+cat /proc/sys/net/ipv4/netfilter/ip_conntrack_count
+cat /proc/sys/net/ipv4/ip_conntrack_max
+echo 131072 > /proc/sys/net/ipv4/ip_conntrack_max
+sysctl net.ipv4.netfilter.ip_conntrack_max=1048576
+
+or disable conntrack for port
+
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -t raw -A PREROUTING -p tcp --dport 443 -j NOTRACK
+{% endhighlight %}
+
+### SYN flood protection
+{% highlight bash %}
+echo "20000" > /proc/sys/net/ipv4/tcp_max_syn_backlog
+echo "1" > /proc/sys/net/ipv4/tcp_synack_retries
+echo "30" > /proc/sys/net/ipv4/tcp_fin_timeout
+echo "5" > /proc/sys/net/ipv4/tcp_keepalive_probes
+echo "15" > /proc/sys/net/ipv4/tcp_keepalive_intvl
+echo "20000" > /proc/sys/net/core/netdev_max_backlog
+echo "20000" > /proc/sys/net/core/somaxconn
+
+iptables -N syn_flood
+$IPT -A INPUT -p tcp --syn -j syn_flood
+$IPT -A syn_flood -m limit --limit 500/s --limit-burst 1500 -j RETURN
+$IPT -A syn_flood -j DROP
+{% endhighlight %}
+
+### MegaCli on FreeBSD
+{% highlight bash %}
+Install linux compat from ports
+mkdir -p /usr/compat/linux/proc
+linsys          /compat/linux/sys       linsysfs        rw 0 0
+linproc         /compat/linux/proc      linprocfs       rw 0 0
+mount linsys
+mount linproc
+MegaCli -CfgDsply -a0
+{% endhighlight %}
+
+### Convert MySQL db from cp1251 to Utf8
+{% highlight bash %}
+mysqldump --default-character-set=utf8 database > database.utf8.sql
+mysql --default-character-set=utf8 database_new < database.utf8.sql
+
+or
+mysqldump -u admin --password=PASS --opt --default-character-set=latin1 --skip-set-charset -Q DB_NAME > database.sql
+sed -i 's/character set cp1251 collate cp1251_bin/character set utf8 collate utf8_bin/' database.sql
+sed -i 's/CHARSET=cp1251/CHARSET=utf8/' database.sql
+{% endhighlight %}
+
+### Insert text in the top of file
+{% highlight bash %}
+perl -i~ -0777pe's/^/New first line\n/' yourfile
+{% endhighlight %}
+
+### IPMI in Linux of FreeBSD
+{% highlight bash %}
+Linux
+yum install OpenIPMI OpenIPMI-tools
+http://www.openfusion.net/linux/ipmi_on_centos
+/sbin/modprobe ipmi_devintf; /sbin/modprobe ipmi_si; /sbin/modprobe ipmi_msghandler
+# Logging
+ipmitool sel info
+ipmitool sel list
+
+FreeBSD
+# kldload ipmi
+# dmesg | tail
+ipmi0:  on isa0
+ipmi0: KCS mode found at io 0xca2 alignment 0x1 on isa
+ipmi0: IPMI device rev. 1, firmware rev. 0.2, version 2.0
+ipmi0: Number of channels 2
+ipmi0: Attached watchdog
+
+# ipmitool chassis status
+System Power         : on
+Power Overload       : false
+Power Interlock      : inactive
+Main Power Fault     : false
+Power Control Fault  : false
+Power Restore Policy : always-on
+Last Power Event     : command
+{% endhighlight %}
+
+### Disable NginX\Apache server token
+{% highlight bash %}
+NginX
+server_tokens off
+
+Apache
+ServerTokens ProductOnly
+ServerSignature Off
+{% endhighlight %}
+
+### Show installed perl modules
+{% highlight bash %}
+perl -MFile::Find=find -MFile::Spec::Functions -Tlwe \
+'find { wanted => sub { print canonpath $_ if /\.pm\z/ }, no_chdir => 1 }, @INC'
+{% endhighlight %}
+
+### Use strace\lsof
+{% highlight bash %}
+strace -e trace=network -p PID
+strace $(pidof httpd |sed 's/\([0-9]*\)/\-p \1/g')
+
+lsof -nPp PID
+lsof -a -U -u username
+lsof -F pcfn
+lsof +d /mnt/DIR
+lsof +D /mnt/DIR
+lsof -i [46][protocol][@hostname|hostaddr][:service|port]
+{% endhighlight %}
+
+### Create Patch
+{% highlight bash %}
+diff -crB tmpl_lib.c.orig tmpl_lib.c > tmpl_lib.patchс
+patch -p1 -i tmpl_lib.patch
+{% endhighlight %}
+
+### Create gstripe in FreeBSD
+{% highlight bash %}
+kldload geom_stripe
+sysctl kern.geom.debugflags=16
+gstripe lable -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+gstripe create -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+bsdlabel -wB /dev/stripe/st0
+newfs -O 2 -U /dev/stripe/st0a
+mount /dev/stripe/st0a /www
+
+echo 'geom_stripe_load="YES"' >> /boot/loader.conf
+
+/etc/fstab
+/dev/stripe/st0a       /www           ufs     rw,noatime              2       2
+
+tunefs -m 1 /dev/stripe/st0a
 {% endhighlight %}
