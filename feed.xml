@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-26T14:33:22+03:00</updated>
+<updated>2015-06-29T09:22:44+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -92,9 +92,66 @@ opkg update
 opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
 reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h5 id=&quot;configuring-modem&quot;&gt;Configuring modem&lt;/h5&gt;
+&lt;h5 id=&quot;configuring-modem-with-pppd&quot;&gt;Configuring modem with pppd&lt;/h5&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root@OpenWrt:~# ls -l /dev/cdc-wdm0
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/ppp/peers/megafon-3g
+connect &lt;span class=&quot;s2&quot;&gt;&amp;quot;chat -Vs -r /var/log/ppp -f /etc/chatscripts/megafon-3g&amp;quot;&lt;/span&gt;
+460800
+crtscts
+modem
+ttyUSB1
+noauth
+usepeerdns
+defaultroute
+user &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+password &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+logfile /var/log/ppp
+
+and add to
+
+/etc/chatscripts/megafon-3g
+TIMEOUT 35
+ECHO ON
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nBUSY\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nERROR\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO ANSWER\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO CARRIER\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO DIALTONE\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nRINGING\r\n\r\nRINGING\r&amp;#39;&lt;/span&gt;
+ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nUsername/pASSWORD Incorrect\r&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;  &lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;AT
+OK  &lt;span class=&quot;s1&quot;&gt;&amp;#39;AT+CGDCONT=1,&amp;quot;IP&amp;quot;,&amp;quot;Internet&amp;quot;&amp;#39;&lt;/span&gt;
+OK  ATD*99#CONNECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+Now you can run 
+pppd call megafon-3g&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;network-configuration&quot;&gt;Network configuration&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/config/network
+config interface wan
+        option ifname  ppp0 &lt;span class=&quot;c&quot;&gt;# on some carriers enable this line&lt;/span&gt;
+        option device  /dev/ttyUSB1
+        option apn     Internet
+        option service umts
+        option proto   3g
+
+cp /etc/chatscripts/megafon-3g /etc/chatscripts/3g.chat
+
+and now you can run:
+
+ifup wan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;firewall-configuration&quot;&gt;Firewall configuration&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;go to Network → Firewall, scroll down to wan and click the Edit button
+add a checkmark to the wwan box under Covered networks heading, click Save &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; Apply&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;configuring-modem-on-barrier-breaker&quot;&gt;Configuring modem on Barrier Breaker&lt;/h5&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This example will work only with modern openwrt like Barrier Breaker 14.07
+
+root@OpenWrt:~# ls -l /dev/cdc-wdm0
 root@OpenWrt:~# dmesg
 root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
@@ -102,17 +159,12 @@ root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h5 id=&quot;network-configuration&quot;&gt;Network configuration&lt;/h5&gt;
+&lt;h5 id=&quot;network-configurationa-on-barrier-breaker&quot;&gt;Network configurationa on Barrier Breaker&lt;/h5&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add new Interface to /etc/config/network
 config interface &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
 option ifname &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan0&amp;#39;&lt;/span&gt;
 option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;firewall-configuration&quot;&gt;Firewall configuration&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;go to Network → Firewall, scroll down to wan and click the Edit button
-add a checkmark to the wwan box under Covered networks heading, click Save &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; Apply&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;4G Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>

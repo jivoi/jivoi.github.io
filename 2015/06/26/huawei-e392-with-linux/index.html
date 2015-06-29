@@ -215,9 +215,66 @@ opkg update
 opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
 reboot</code></pre></div>
 
-<h5 id="configuring-modem">Configuring modem</h5>
+<h5 id="configuring-modem-with-pppd">Configuring modem with pppd</h5>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">root@OpenWrt:~# ls -l /dev/cdc-wdm0
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/ppp/peers/megafon-3g
+connect <span class="s2">&quot;chat -Vs -r /var/log/ppp -f /etc/chatscripts/megafon-3g&quot;</span>
+460800
+crtscts
+modem
+ttyUSB1
+noauth
+usepeerdns
+defaultroute
+user <span class="s2">&quot;&quot;</span>
+password <span class="s2">&quot;&quot;</span>
+logfile /var/log/ppp
+
+and add to
+
+/etc/chatscripts/megafon-3g
+TIMEOUT 35
+ECHO ON
+ABORT <span class="s1">&#39;\nBUSY\r&#39;</span>
+ABORT <span class="s1">&#39;\nERROR\r&#39;</span>
+ABORT <span class="s1">&#39;\nNO ANSWER\r&#39;</span>
+ABORT <span class="s1">&#39;\nNO CARRIER\r&#39;</span>
+ABORT <span class="s1">&#39;\nNO DIALTONE\r&#39;</span>
+ABORT <span class="s1">&#39;\nRINGING\r\n\r\nRINGING\r&#39;</span>
+ABORT <span class="s1">&#39;\nUsername/pASSWORD Incorrect\r&#39;</span>
+<span class="s1">&#39;&#39;</span>  <span class="se">\r</span>AT
+OK  <span class="s1">&#39;AT+CGDCONT=1,&quot;IP&quot;,&quot;Internet&quot;&#39;</span>
+OK  ATD*99#CONNECT  <span class="s2">&quot;&quot;</span>
+
+Now you can run 
+pppd call megafon-3g</code></pre></div>
+
+<h5 id="network-configuration">Network configuration</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/config/network
+config interface wan
+        option ifname  ppp0 <span class="c"># on some carriers enable this line</span>
+        option device  /dev/ttyUSB1
+        option apn     Internet
+        option service umts
+        option proto   3g
+
+cp /etc/chatscripts/megafon-3g /etc/chatscripts/3g.chat
+
+and now you can run:
+
+ifup wan</code></pre></div>
+
+<h5 id="firewall-configuration">Firewall configuration</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">go to Network → Firewall, scroll down to wan and click the Edit button
+add a checkmark to the wwan box under Covered networks heading, click Save <span class="p">&amp;</span> Apply</code></pre></div>
+
+<h5 id="configuring-modem-on-barrier-breaker">Configuring modem on Barrier Breaker</h5>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This example will work only with modern openwrt like Barrier Breaker 14.07
+
+root@OpenWrt:~# ls -l /dev/cdc-wdm0
 root@OpenWrt:~# dmesg
 root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
@@ -225,17 +282,12 @@ root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
 root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status</code></pre></div>
 
-<h5 id="network-configuration">Network configuration</h5>
+<h5 id="network-configurationa-on-barrier-breaker">Network configurationa on Barrier Breaker</h5>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">add new Interface to /etc/config/network
 config interface <span class="s1">&#39;wwan&#39;</span>
 option ifname <span class="s1">&#39;wwan0&#39;</span>
 option proto <span class="s1">&#39;dhcp&#39;</span></code></pre></div>
-
-<h5 id="firewall-configuration">Firewall configuration</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">go to Network → Firewall, scroll down to wan and click the Edit button
-add a checkmark to the wwan box under Covered networks heading, click Save <span class="p">&amp;</span> Apply</code></pre></div>
 
 
       <hr />
