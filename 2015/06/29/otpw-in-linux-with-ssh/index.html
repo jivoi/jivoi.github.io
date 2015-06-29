@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Kali Linux Compatible USB Wifi Adapters &#8211; EK</title>
-<meta name="description" content="Below are the most stable usb wifi adapters:
+<title>OTPW in Linux with SSH &#8211; EK</title>
+<meta name="description" content="How to use One Time Password for SSH in Ubuntu Linux
 
 ">
-<meta name="keywords" content="kali, linux, wifi">
+<meta name="keywords" content="linux, ubuntu, security">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta name="twitter:description" content="Below are the most stable usb wifi adapters:
+<meta name="twitter:title" content="OTPW in Linux with SSH">
+<meta name="twitter:description" content="How to use One Time Password for SSH in Ubuntu Linux
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta property="og:description" content="Below are the most stable usb wifi adapters:
+<meta property="og:title" content="OTPW in Linux with SSH">
+<meta property="og:description" content="How to use One Time Password for SSH in Ubuntu Linux
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<meta property="og:url" content="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<link rel="canonical" href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,29 +145,53 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" rel="bookmark" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" rel="bookmark" title="OTPW in Linux with SSH">OTPW in Linux with SSH</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Below are the most stable usb wifi adapters:</p>
+      <p>How to use One Time Password for SSH in Ubuntu Linux</p>
 
-<h3 id="atheros-ar9271-chipset--ieee-80211bgn">Atheros AR9271 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NHA</li>
-  <li>TP-LINK TP-WN722N or TP-WN722NC</li>
-</ol>
+<h3 id="install-deb-pkgs">Install deb pkgs</h3>
 
-<h3 id="ralink-rt3070-chipset--ieee-80211bgn">Ralink RT3070 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NH</li>
-  <li>Alfa AWUS036NEH</li>
-</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install -y libpam-otpw otpw-bin</code></pre></div>
 
-<h3 id="realtek-rtl8187l-chipset--ieee-80211bg">Realtek RTL8187L Chipset – IEEE 802.11B/G</h3>
-<ol>
-  <li>Alfa AWUS036H</li>
-  <li>Alfa AWUS036EW</li>
-</ol>
+<h3 id="add-otpw-pam-modules-in-etcpamdsshd">Add OTPW pam modules in /etc/pam.d/sshd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#@include common-auth</span>
+
+<span class="c">#Enable OTPW Authentication</span>
+auth       required     pam_otpw.so
+session    optional     pam_otpw.so</code></pre></div>
+
+<h3 id="check-etcsshsshdconfig">Check /etc/ssh/sshd_config</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">UsePrivilegeSeparation yes
+ChallengeResponseAuthentication yes
+UsePAM yes
+PubkeyAuthentication yes
+PasswordAuthentication no
+
+Now you can restart sshd:
+service ssh restart
+
+After you can login to server only with ssh-key or <span class="nv">otpw</span> <span class="o">=)</span></code></pre></div>
+
+<h3 id="generate-otpw-list-for-user">Generate OTPW list for $USER</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">su - user
+otpw-gen &gt; otpw_list.txt 
+enter prefix <span class="k">for</span> password list
+<span class="k">for</span> ex 123</code></pre></div>
+
+<h3 id="login-with-otpw-to-server">Login with OTPW to server</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ssh user@remote_host
+Password 126:
+Welcome to Ubuntu 14.04.1 LTS <span class="o">(</span>GNU/Linux 3.13.0-32-generic x86_64<span class="o">)</span>
+
+Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
+<span class="m">126</span> LQQF uFOW</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -199,7 +223,7 @@
 
 
         </div>
-        <p class="byline"><strong>Kali Linux Compatible USB Wifi Adapters</strong> was published on <time datetime="2015-06-16T00:00:00+03:00">June 16, 2015</time> and last modified on <time datetime="2015-06-16">June 16, 2015</time>.</p>
+        <p class="byline"><strong>OTPW in Linux with SSH</strong> was published on <time datetime="2015-06-29T00:00:00+03:00">June 29, 2015</time> and last modified on <time datetime="2015-06-29">June 29, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -213,11 +237,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW in Linux with SSH">OTPW in Linux with SSH</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" title="4G Huawei E392 with Linux">4G Huawei E392 with Linux</a></li>
     
       <li><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" title="OSCP Prepare">OSCP Prepare</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></li>
     
     </ul>
     <hr />
