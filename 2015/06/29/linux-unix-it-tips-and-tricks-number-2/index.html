@@ -171,6 +171,19 @@
   <li><a href="#show-memory-map-of-a-process" id="markdown-toc-show-memory-map-of-a-process">Show memory map of a process</a></li>
   <li><a href="#show-all-packages-files-in-centos" id="markdown-toc-show-all-packages-files-in-centos">Show all packages files in CentOS</a></li>
   <li><a href="#find-duplicate-files-in-linux" id="markdown-toc-find-duplicate-files-in-linux">Find duplicate files in Linux</a></li>
+  <li><a href="#sshsvn-error" id="markdown-toc-sshsvn-error">SSH+SVN error</a></li>
+  <li><a href="#kill-all-long-mysql-request" id="markdown-toc-kill-all-long-mysql-request">Kill all long MySQL request</a></li>
+  <li><a href="#check-lastack" id="markdown-toc-check-lastack">Check LAST_ACK</a></li>
+  <li><a href="#syn-flood-protection" id="markdown-toc-syn-flood-protection">SYN flood protection</a></li>
+  <li><a href="#megacli-on-freebsd" id="markdown-toc-megacli-on-freebsd">MegaCli on FreeBSD</a></li>
+  <li><a href="#convert-mysql-db-from-cp1251-to-utf8" id="markdown-toc-convert-mysql-db-from-cp1251-to-utf8">Convert MySQL db from cp1251 to Utf8</a></li>
+  <li><a href="#insert-text-in-the-top-of-file" id="markdown-toc-insert-text-in-the-top-of-file">Insert text in the top of file</a></li>
+  <li><a href="#ipmi-in-linux-of-freebsd" id="markdown-toc-ipmi-in-linux-of-freebsd">IPMI in Linux of FreeBSD</a></li>
+  <li><a href="#disable-nginxapache-server-token" id="markdown-toc-disable-nginxapache-server-token">Disable NginX\Apache server token</a></li>
+  <li><a href="#show-installed-perl-modules" id="markdown-toc-show-installed-perl-modules">Show installed perl modules</a></li>
+  <li><a href="#use-stracelsof" id="markdown-toc-use-stracelsof">Use strace\lsof</a></li>
+  <li><a href="#create-patch" id="markdown-toc-create-patch">Create Patch</a></li>
+  <li><a href="#create-gstripe-in-freebsd" id="markdown-toc-create-gstripe-in-freebsd">Create gstripe in FreeBSD</a></li>
 </ul>
 
   </div>
@@ -262,7 +275,7 @@ transport input ssh
 <h3 id="restore-cisco-password">Restore Cisco password</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">Connect COM port
-Reboot router and <span class="nb">wait</span> «Self decompressing the image: <span class="c">###» press Ctrl-C or Ctrl-Break</span>
+Reboot router and <span class="nb">wait</span> «Self decompressing the image: » press Ctrl-C or Ctrl-Break
 confreg 0x2142<span class="o">(</span>default -  2102<span class="o">)</span>
 reload
 copy start run
@@ -295,6 +308,151 @@ PURGE BINARY LOGS TO <span class="s1">&#39;mysqld-bin.000123&#39;</span><span cl
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in <span class="sb">`</span>find *<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="o">[</span> -f <span class="s2">&quot;$i&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;`md5sum \&quot;$i\&quot;`&quot;</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sort <span class="p">|</span> awk -- <span class="s1">&#39;{ if (LAST==$1) print; else LAST=$1 }</span>
 <span class="s1">or </span>
 <span class="s1">find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &#39;</span><span class="o">{</span>print <span class="nv">$2</span><span class="o">}</span><span class="err">&#39;</span></code></pre></div>
+
+<h3 id="sshsvn-error">SSH+SVN error</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ssh svn: Network connection closed unexpectedly
+This mean that you dont have sshkey fingerprint in know_hosts
+try ssh to server first</code></pre></div>
+
+<h3 id="kill-all-long-mysql-request">Kill all long MySQL request</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysql -e <span class="s1">&#39;show full processlist&#39;</span><span class="p">|</span>grep -v Command <span class="p">|</span>awk <span class="s1">&#39;{if ($6 &gt;= 10) print &quot;kill &quot; $1 &quot;;&quot;}&#39;</span> <span class="p">|</span>mysql</code></pre></div>
+
+<h3 id="check-lastack">Check LAST_ACK</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">LAST_ACK - mean that remote host is disconnected and socker is closed, we are waiting acknowledgment
+
+sysctl -a <span class="p">|</span>grep last_ack
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack <span class="o">=</span> 30
+sysctl -w net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack<span class="o">=</span>10
+netstat -ant <span class="p">|</span> fgrep <span class="s2">&quot;:&quot;</span> <span class="p">|</span> cut -b 77-90 <span class="p">|</span> sort <span class="p">|</span> uniq -c
+
+cat /proc/sys/net/netfilter/nf_conntrack_count
+cat /proc/sys/net/ipv4/netfilter/ip_conntrack_count
+cat /proc/sys/net/ipv4/ip_conntrack_max
+<span class="nb">echo </span><span class="m">131072</span> &gt; /proc/sys/net/ipv4/ip_conntrack_max
+sysctl net.ipv4.netfilter.ip_conntrack_max<span class="o">=</span>1048576
+
+or disable conntrack <span class="k">for</span> port
+
+iptables -A INPUT -p tcp --dport <span class="m">443</span> -j ACCEPT
+iptables -t raw -A PREROUTING -p tcp --dport <span class="m">443</span> -j NOTRACK</code></pre></div>
+
+<h3 id="syn-flood-protection">SYN flood protection</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;20000&quot;</span> &gt; /proc/sys/net/ipv4/tcp_max_syn_backlog
+<span class="nb">echo</span> <span class="s2">&quot;1&quot;</span> &gt; /proc/sys/net/ipv4/tcp_synack_retries
+<span class="nb">echo</span> <span class="s2">&quot;30&quot;</span> &gt; /proc/sys/net/ipv4/tcp_fin_timeout
+<span class="nb">echo</span> <span class="s2">&quot;5&quot;</span> &gt; /proc/sys/net/ipv4/tcp_keepalive_probes
+<span class="nb">echo</span> <span class="s2">&quot;15&quot;</span> &gt; /proc/sys/net/ipv4/tcp_keepalive_intvl
+<span class="nb">echo</span> <span class="s2">&quot;20000&quot;</span> &gt; /proc/sys/net/core/netdev_max_backlog
+<span class="nb">echo</span> <span class="s2">&quot;20000&quot;</span> &gt; /proc/sys/net/core/somaxconn
+
+iptables -N syn_flood
+<span class="nv">$IPT</span> -A INPUT -p tcp --syn -j syn_flood
+<span class="nv">$IPT</span> -A syn_flood -m limit --limit 500/s --limit-burst <span class="m">1500</span> -j RETURN
+<span class="nv">$IPT</span> -A syn_flood -j DROP</code></pre></div>
+
+<h3 id="megacli-on-freebsd">MegaCli on FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Install linux compat from ports
+mkdir -p /usr/compat/linux/proc
+linsys          /compat/linux/sys       linsysfs        rw <span class="m">0</span> 0
+linproc         /compat/linux/proc      linprocfs       rw <span class="m">0</span> 0
+mount linsys
+mount linproc
+MegaCli -CfgDsply -a0</code></pre></div>
+
+<h3 id="convert-mysql-db-from-cp1251-to-utf8">Convert MySQL db from cp1251 to Utf8</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysqldump --default-character-set<span class="o">=</span>utf8 database &gt; database.utf8.sql
+mysql --default-character-set<span class="o">=</span>utf8 database_new &lt; database.utf8.sql
+
+or
+mysqldump -u admin --password<span class="o">=</span>PASS --opt --default-character-set<span class="o">=</span>latin1 --skip-set-charset -Q DB_NAME &gt; database.sql
+sed -i <span class="s1">&#39;s/character set cp1251 collate cp1251_bin/character set utf8 collate utf8_bin/&#39;</span> database.sql
+sed -i <span class="s1">&#39;s/CHARSET=cp1251/CHARSET=utf8/&#39;</span> database.sql</code></pre></div>
+
+<h3 id="insert-text-in-the-top-of-file">Insert text in the top of file</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">perl -i~ -0777pe<span class="s1">&#39;s/^/New first line\n/&#39;</span> yourfile</code></pre></div>
+
+<h3 id="ipmi-in-linux-of-freebsd">IPMI in Linux of FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Linux
+yum install OpenIPMI OpenIPMI-tools
+http://www.openfusion.net/linux/ipmi_on_centos
+/sbin/modprobe ipmi_devintf<span class="p">;</span> /sbin/modprobe ipmi_si<span class="p">;</span> /sbin/modprobe ipmi_msghandler
+<span class="c"># Logging</span>
+ipmitool sel info
+ipmitool sel list
+
+FreeBSD
+<span class="c"># kldload ipmi</span>
+<span class="c"># dmesg | tail</span>
+ipmi0:  on isa0
+ipmi0: KCS mode found at io 0xca2 alignment 0x1 on isa
+ipmi0: IPMI device rev. 1, firmware rev. 0.2, version 2.0
+ipmi0: Number of channels 2
+ipmi0: Attached watchdog
+
+<span class="c"># ipmitool chassis status</span>
+System Power         : on
+Power Overload       : <span class="nb">false</span>
+Power Interlock      : inactive
+Main Power Fault     : <span class="nb">false</span>
+Power Control Fault  : <span class="nb">false</span>
+Power Restore Policy : always-on
+Last Power Event     : <span class="nb">command</span></code></pre></div>
+
+<h3 id="disable-nginxapache-server-token">Disable NginX\Apache server token</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">NginX
+server_tokens off
+
+Apache
+ServerTokens ProductOnly
+ServerSignature Off</code></pre></div>
+
+<h3 id="show-installed-perl-modules">Show installed perl modules</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">perl -MFile::Find<span class="o">=</span>find -MFile::Spec::Functions -Tlwe <span class="se">\</span>
+<span class="s1">&#39;find { wanted =&gt; sub { print canonpath $_ if /\.pm\z/ }, no_chdir =&gt; 1 }, @INC&#39;</span></code></pre></div>
+
+<h3 id="use-stracelsof">Use strace\lsof</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">strace -e <span class="nv">trace</span><span class="o">=</span>network -p PID
+strace <span class="k">$(</span>pidof httpd <span class="p">|</span>sed <span class="s1">&#39;s/\([0-9]*\)/\-p \1/g&#39;</span><span class="k">)</span>
+
+lsof -nPp PID
+lsof -a -U -u username
+lsof -F pcfn
+lsof +d /mnt/DIR
+lsof +D /mnt/DIR
+lsof -i <span class="o">[</span>46<span class="o">][</span>protocol<span class="o">][</span>@hostname<span class="p">|</span>hostaddr<span class="o">][</span>:service<span class="p">|</span>port<span class="o">]</span></code></pre></div>
+
+<h3 id="create-patch">Create Patch</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">diff -crB tmpl_lib.c.orig tmpl_lib.c &gt; tmpl_lib.patchс
+patch -p1 -i tmpl_lib.patch</code></pre></div>
+
+<h3 id="create-gstripe-in-freebsd">Create gstripe in FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">kldload geom_stripe
+sysctl kern.geom.debugflags<span class="o">=</span>16
+gstripe lable -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+gstripe create -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+bsdlabel -wB /dev/stripe/st0
+newfs -O <span class="m">2</span> -U /dev/stripe/st0a
+mount /dev/stripe/st0a /www
+
+<span class="nb">echo</span> <span class="s1">&#39;geom_stripe_load=&quot;YES&quot;&#39;</span> &gt;&gt; /boot/loader.conf
+
+/etc/fstab
+/dev/stripe/st0a       /www           ufs     rw,noatime              <span class="m">2</span>       2
+
+tunefs -m <span class="m">1</span> /dev/stripe/st0a</code></pre></div>
 
 
       <hr />

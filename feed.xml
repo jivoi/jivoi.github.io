@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-29T13:28:52+03:00</updated>
+<updated>2015-06-29T15:51:07+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -108,6 +108,19 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
   &lt;li&gt;&lt;a href=&quot;#show-memory-map-of-a-process&quot; id=&quot;markdown-toc-show-memory-map-of-a-process&quot;&gt;Show memory map of a process&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#show-all-packages-files-in-centos&quot; id=&quot;markdown-toc-show-all-packages-files-in-centos&quot;&gt;Show all packages files in CentOS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#find-duplicate-files-in-linux&quot; id=&quot;markdown-toc-find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#sshsvn-error&quot; id=&quot;markdown-toc-sshsvn-error&quot;&gt;SSH+SVN error&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#kill-all-long-mysql-request&quot; id=&quot;markdown-toc-kill-all-long-mysql-request&quot;&gt;Kill all long MySQL request&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#check-lastack&quot; id=&quot;markdown-toc-check-lastack&quot;&gt;Check LAST_ACK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#syn-flood-protection&quot; id=&quot;markdown-toc-syn-flood-protection&quot;&gt;SYN flood protection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#megacli-on-freebsd&quot; id=&quot;markdown-toc-megacli-on-freebsd&quot;&gt;MegaCli on FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#convert-mysql-db-from-cp1251-to-utf8&quot; id=&quot;markdown-toc-convert-mysql-db-from-cp1251-to-utf8&quot;&gt;Convert MySQL db from cp1251 to Utf8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#insert-text-in-the-top-of-file&quot; id=&quot;markdown-toc-insert-text-in-the-top-of-file&quot;&gt;Insert text in the top of file&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ipmi-in-linux-of-freebsd&quot; id=&quot;markdown-toc-ipmi-in-linux-of-freebsd&quot;&gt;IPMI in Linux of FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#disable-nginxapache-server-token&quot; id=&quot;markdown-toc-disable-nginxapache-server-token&quot;&gt;Disable NginX\Apache server token&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-installed-perl-modules&quot; id=&quot;markdown-toc-show-installed-perl-modules&quot;&gt;Show installed perl modules&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#use-stracelsof&quot; id=&quot;markdown-toc-use-stracelsof&quot;&gt;Use strace\lsof&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-patch&quot; id=&quot;markdown-toc-create-patch&quot;&gt;Create Patch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-gstripe-in-freebsd&quot; id=&quot;markdown-toc-create-gstripe-in-freebsd&quot;&gt;Create gstripe in FreeBSD&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -199,7 +212,7 @@ transport input ssh
 &lt;h3 id=&quot;restore-cisco-password&quot;&gt;Restore Cisco password&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Connect COM port
-Reboot router and &lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt; «Self decompressing the image: &lt;span class=&quot;c&quot;&gt;###» press Ctrl-C or Ctrl-Break&lt;/span&gt;
+Reboot router and &lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt; «Self decompressing the image: » press Ctrl-C or Ctrl-Break
 confreg 0x2142&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default -  2102&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 reload
 copy start run
@@ -232,6 +245,151 @@ PURGE BINARY LOGS TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysqld-bin.000123
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find *&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;`md5sum \&amp;quot;$i\&amp;quot;`&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -- &lt;span class=&quot;s1&quot;&gt;&amp;#39;{ if (LAST==$1) print; else LAST=$1 }&lt;/span&gt;
 &lt;span class=&quot;s1&quot;&gt;or &lt;/span&gt;
 &lt;span class=&quot;s1&quot;&gt;find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;print &lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sshsvn-error&quot;&gt;SSH+SVN error&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ssh svn: Network connection closed unexpectedly
+This mean that you dont have sshkey fingerprint in know_hosts
+try ssh to server first&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;kill-all-long-mysql-request&quot;&gt;Kill all long MySQL request&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;show full processlist&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep -v Command &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{if ($6 &amp;gt;= 10) print &amp;quot;kill &amp;quot; $1 &amp;quot;;&amp;quot;}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;mysql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;check-lastack&quot;&gt;Check LAST_ACK&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;LAST_ACK - mean that remote host is disconnected and socker is closed, we are waiting acknowledgment
+
+sysctl -a &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep last_ack
+net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30
+sysctl -w net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10
+netstat -ant &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; fgrep &lt;span class=&quot;s2&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -b 77-90 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq -c
+
+cat /proc/sys/net/netfilter/nf_conntrack_count
+cat /proc/sys/net/ipv4/netfilter/ip_conntrack_count
+cat /proc/sys/net/ipv4/ip_conntrack_max
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/ip_conntrack_max
+sysctl net.ipv4.netfilter.ip_conntrack_max&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1048576
+
+or disable conntrack &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; port
+
+iptables -A INPUT -p tcp --dport &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -j ACCEPT
+iptables -t raw -A PREROUTING -p tcp --dport &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -j NOTRACK&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;syn-flood-protection&quot;&gt;SYN flood protection&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_max_syn_backlog
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_synack_retries
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;30&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_fin_timeout
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;5&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_keepalive_probes
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;15&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_keepalive_intvl
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/core/netdev_max_backlog
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/core/somaxconn
+
+iptables -N syn_flood
+&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A INPUT -p tcp --syn -j syn_flood
+&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A syn_flood -m limit --limit 500/s --limit-burst &lt;span class=&quot;m&quot;&gt;1500&lt;/span&gt; -j RETURN
+&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A syn_flood -j DROP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;megacli-on-freebsd&quot;&gt;MegaCli on FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Install linux compat from ports
+mkdir -p /usr/compat/linux/proc
+linsys          /compat/linux/sys       linsysfs        rw &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0
+linproc         /compat/linux/proc      linprocfs       rw &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0
+mount linsys
+mount linproc
+MegaCli -CfgDsply -a0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;convert-mysql-db-from-cp1251-to-utf8&quot;&gt;Convert MySQL db from cp1251 to Utf8&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysqldump --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf8 database &amp;gt; database.utf8.sql
+mysql --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf8 database_new &amp;lt; database.utf8.sql
+
+or
+mysqldump -u admin --password&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PASS --opt --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;latin1 --skip-set-charset -Q DB_NAME &amp;gt; database.sql
+sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/character set cp1251 collate cp1251_bin/character set utf8 collate utf8_bin/&amp;#39;&lt;/span&gt; database.sql
+sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/CHARSET=cp1251/CHARSET=utf8/&amp;#39;&lt;/span&gt; database.sql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;insert-text-in-the-top-of-file&quot;&gt;Insert text in the top of file&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -i~ -0777pe&lt;span class=&quot;s1&quot;&gt;&amp;#39;s/^/New first line\n/&amp;#39;&lt;/span&gt; yourfile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ipmi-in-linux-of-freebsd&quot;&gt;IPMI in Linux of FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Linux
+yum install OpenIPMI OpenIPMI-tools
+http://www.openfusion.net/linux/ipmi_on_centos
+/sbin/modprobe ipmi_devintf&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; /sbin/modprobe ipmi_si&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; /sbin/modprobe ipmi_msghandler
+&lt;span class=&quot;c&quot;&gt;# Logging&lt;/span&gt;
+ipmitool sel info
+ipmitool sel list
+
+FreeBSD
+&lt;span class=&quot;c&quot;&gt;# kldload ipmi&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# dmesg | tail&lt;/span&gt;
+ipmi0:  on isa0
+ipmi0: KCS mode found at io 0xca2 alignment 0x1 on isa
+ipmi0: IPMI device rev. 1, firmware rev. 0.2, version 2.0
+ipmi0: Number of channels 2
+ipmi0: Attached watchdog
+
+&lt;span class=&quot;c&quot;&gt;# ipmitool chassis status&lt;/span&gt;
+System Power         : on
+Power Overload       : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+Power Interlock      : inactive
+Main Power Fault     : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+Power Control Fault  : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+Power Restore Policy : always-on
+Last Power Event     : &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;disable-nginxapache-server-token&quot;&gt;Disable NginX\Apache server token&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;NginX
+server_tokens off
+
+Apache
+ServerTokens ProductOnly
+ServerSignature Off&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-installed-perl-modules&quot;&gt;Show installed perl modules&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -MFile::Find&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;find -MFile::Spec::Functions -Tlwe &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;find { wanted =&amp;gt; sub { print canonpath $_ if /\.pm\z/ }, no_chdir =&amp;gt; 1 }, @INC&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;use-stracelsof&quot;&gt;Use strace\lsof&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;strace -e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network -p PID
+strace &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;pidof httpd &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/\([0-9]*\)/\-p \1/g&amp;#39;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+
+lsof -nPp PID
+lsof -a -U -u username
+lsof -F pcfn
+lsof +d /mnt/DIR
+lsof +D /mnt/DIR
+lsof -i &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;46&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;protocol&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;@hostname&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;hostaddr&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;:service&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;port&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-patch&quot;&gt;Create Patch&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;diff -crB tmpl_lib.c.orig tmpl_lib.c &amp;gt; tmpl_lib.patchс
+patch -p1 -i tmpl_lib.patch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-gstripe-in-freebsd&quot;&gt;Create gstripe in FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;kldload geom_stripe
+sysctl kern.geom.debugflags&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;16
+gstripe lable -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+gstripe create -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
+bsdlabel -wB /dev/stripe/st0
+newfs -O &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -U /dev/stripe/st0a
+mount /dev/stripe/st0a /www
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;geom_stripe_load=&amp;quot;YES&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader.conf
+
+/etc/fstab
+/dev/stripe/st0a       /www           ufs     rw,noatime              &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;       2
+
+tunefs -m &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; /dev/stripe/st0a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
