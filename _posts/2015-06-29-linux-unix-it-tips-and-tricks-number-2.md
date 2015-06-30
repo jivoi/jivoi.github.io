@@ -313,3 +313,122 @@ echo 'geom_stripe_load="YES"' >> /boot/loader.conf
 
 tunefs -m 1 /dev/stripe/st0a
 {% endhighlight %}
+
+### Delete trailing spaces in text with VIM
+{% highlight bash %}
+:%s/\s\+$//
+delete blank lines
+:g/^$/d 
+{% endhighlight %}
+
+### Disable Apache dir listing
+{% highlight bash %}
+<Directory />
+    Options -Indexes
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+</Directory>
+{% endhighlight %}
+
+### MySQL load data grant
+{% highlight bash %}
+grant file on *.* to user@localhost identified by 'P@ssw0rd';
+{% endhighlight %}
+
+### MySQL grants for fields in table
+{% highlight bash %}
+GRANT SELECT (col1), INSERT (col1,col2) ON mydb.mytbl TO 'someuser'@'somehost';
+{% endhighlight %}
+
+### Determine MAX MTU
+{% highlight bash %}
+ping ya.ru -v -M dont -s 1472 -W 1
+{% endhighlight %}
+
+### Upgrade CentOS Password Hashing
+{% highlight bash %}
+authconfig --test | grep hashing
+authconfig --passalgo=sha512 --update
+{% endhighlight %}
+
+### Linux Pkg search 
+{% highlight bash %}
+http://pkgs.org/
+{% endhighlight %}
+
+### Run echo cmd with sudo
+{% highlight bash %}
+for i in server;do echo $i; echo 'echo ""' >  /logs/test.log'|ssh $i sudo sh;done
+{% endhighlight %}
+
+### Change percentage of root FS
+{% highlight bash %}
+tune2fs -m 0 /dev/sdc1
+{% endhighlight %}
+
+### Disable Ipv6 on CentOS
+{% highlight bash %}
+echo "alias net-pf-10 off" >/etc/modprobe.conf
+echo "alias ipv6 off" >>/etc/modprobe.conf
+chkconfig ip6tables off
+sed -i 's/NETWORKING_IPV6=yes/NETWORKING_IPV6=no/g' /etc/sysconfig/network
+reboot
+{% endhighlight %}
+
+### Fix chmod -x chmod
+{% highlight bash %}
+perl -e 'chmod 0755, "/bin/chmod"'
+python -c 'import os; os.chmod("chmod", 0755)'
+
+or 
+
+cp /bin/sh ~/chmod2
+cat /bin/chmod > ~/chmod2
+sudo ~/chmod2 +x /bin/chmod
+rm ~/chmod2
+
+or 
+
+sudo apt-get --reinstall install `dpkg -S /bin/chmod | cut -f1 -d:`
+
+gcc -x c - <<CHMOD
+#include <sys/stat.h>
+main(){chmod("/bin/chmod", S_IXUSR | S_IXGRP | S_IXOTH);}
+CHMOD
+sudo ./a.out
+rm a.out
+
+or
+
+/lib/ld-linux-x86-64.so.2 /bin/chown +x /bin/chown
+{% endhighlight %}
+
+### Get webserver http code answer 
+{% highlight bash %}
+wget --server-response -T 5 -t 1 http://ya.ru 2>&1 | awk '/^  HTTP/{print $2}'
+{% endhighlight %}
+
+### Clone disk with DD by network
+{% highlight bash %}
+dd if=/dev/sdd1 bs=1M | ssh -c arcfour user@server "dd of=/dev/sdf1 bs=1M" ; echo "dd of disk1@server1 is finished" | mail -s "DD_CLONE" adm@server.net
+
+disk with errors
+dd if=/dev/sdd1 bs=1M conv=sync,noerror | ssh -c arcfour user@server "dd of=/dev/sdd1 bs=1M"
+
+use nc
+dd if=/dev/sde1 bs=1M | nc newserver 7000
+nc -l 7000 | dd of=/dev/sde1 bs=1M
+{% endhighlight %}
+
+### SSH x11 forwarding
+{% highlight bash %}
+yum install xorg-x11-xauth
+apt-get install xauth
+ssh -X
+{% endhighlight %}
+
+### Extract RPM pkg
+{% highlight bash %}
+rpm2cpio myrpmfile.rpm | cpio -idmv
+{% endhighlight %}
