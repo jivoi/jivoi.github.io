@@ -184,6 +184,21 @@
   <li><a href="#use-stracelsof" id="markdown-toc-use-stracelsof">Use strace\lsof</a></li>
   <li><a href="#create-patch" id="markdown-toc-create-patch">Create Patch</a></li>
   <li><a href="#create-gstripe-in-freebsd" id="markdown-toc-create-gstripe-in-freebsd">Create gstripe in FreeBSD</a></li>
+  <li><a href="#delete-trailing-spaces-in-text-with-vim" id="markdown-toc-delete-trailing-spaces-in-text-with-vim">Delete trailing spaces in text with VIM</a></li>
+  <li><a href="#disable-apache-dir-listing" id="markdown-toc-disable-apache-dir-listing">Disable Apache dir listing</a></li>
+  <li><a href="#mysql-load-data-grant" id="markdown-toc-mysql-load-data-grant">MySQL load data grant</a></li>
+  <li><a href="#mysql-grants-for-fields-in-table" id="markdown-toc-mysql-grants-for-fields-in-table">MySQL grants for fields in table</a></li>
+  <li><a href="#determine-max-mtu" id="markdown-toc-determine-max-mtu">Determine MAX MTU</a></li>
+  <li><a href="#upgrade-centos-password-hashing" id="markdown-toc-upgrade-centos-password-hashing">Upgrade CentOS Password Hashing</a></li>
+  <li><a href="#linux-pkg-search" id="markdown-toc-linux-pkg-search">Linux Pkg search</a></li>
+  <li><a href="#run-echo-cmd-with-sudo" id="markdown-toc-run-echo-cmd-with-sudo">Run echo cmd with sudo</a></li>
+  <li><a href="#change-percentage-of-root-fs" id="markdown-toc-change-percentage-of-root-fs">Change percentage of root FS</a></li>
+  <li><a href="#disable-ipv6-on-centos" id="markdown-toc-disable-ipv6-on-centos">Disable Ipv6 on CentOS</a></li>
+  <li><a href="#fix-chmod--x-chmod" id="markdown-toc-fix-chmod--x-chmod">Fix chmod -x chmod</a></li>
+  <li><a href="#get-webserver-http-code-answer" id="markdown-toc-get-webserver-http-code-answer">Get webserver http code answer</a></li>
+  <li><a href="#clone-disk-with-dd-by-network" id="markdown-toc-clone-disk-with-dd-by-network">Clone disk with DD by network</a></li>
+  <li><a href="#ssh-x11-forwarding" id="markdown-toc-ssh-x11-forwarding">SSH x11 forwarding</a></li>
+  <li><a href="#extract-rpm-pkg" id="markdown-toc-extract-rpm-pkg">Extract RPM pkg</a></li>
 </ul>
 
   </div>
@@ -453,6 +468,110 @@ mount /dev/stripe/st0a /www
 /dev/stripe/st0a       /www           ufs     rw,noatime              <span class="m">2</span>       2
 
 tunefs -m <span class="m">1</span> /dev/stripe/st0a</code></pre></div>
+
+<h3 id="delete-trailing-spaces-in-text-with-vim">Delete trailing spaces in text with VIM</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">:%s/<span class="se">\s\+</span><span class="nv">$/</span>/
+delete blank lines
+:g/^<span class="nv">$/</span>d</code></pre></div>
+
+<h3 id="disable-apache-dir-listing">Disable Apache dir listing</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">&lt;Directory /&gt;
+    Options -Indexes
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;</code></pre></div>
+
+<h3 id="mysql-load-data-grant">MySQL load data grant</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">grant file on *.* to user@localhost identified by <span class="s1">&#39;P@ssw0rd&#39;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="mysql-grants-for-fields-in-table">MySQL grants for fields in table</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">GRANT SELECT <span class="o">(</span>col1<span class="o">)</span>, INSERT <span class="o">(</span>col1,col2<span class="o">)</span> ON mydb.mytbl TO <span class="s1">&#39;someuser&#39;</span>@<span class="s1">&#39;somehost&#39;</span><span class="p">;</span></code></pre></div>
+
+<h3 id="determine-max-mtu">Determine MAX MTU</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ping ya.ru -v -M dont -s <span class="m">1472</span> -W 1</code></pre></div>
+
+<h3 id="upgrade-centos-password-hashing">Upgrade CentOS Password Hashing</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">authconfig --test <span class="p">|</span> grep hashing
+authconfig --passalgo<span class="o">=</span>sha512 --update</code></pre></div>
+
+<h3 id="linux-pkg-search">Linux Pkg search</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">http://pkgs.org/</code></pre></div>
+
+<h3 id="run-echo-cmd-with-sudo">Run echo cmd with sudo</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in server<span class="p">;</span><span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;echo &quot;&quot;&#39;</span> &gt;  /logs/test.log<span class="err">&#39;</span><span class="p">|</span>ssh <span class="nv">$i</span> sudo sh<span class="p">;</span><span class="k">done</span></code></pre></div>
+
+<h3 id="change-percentage-of-root-fs">Change percentage of root FS</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">tune2fs -m <span class="m">0</span> /dev/sdc1</code></pre></div>
+
+<h3 id="disable-ipv6-on-centos">Disable Ipv6 on CentOS</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;alias net-pf-10 off&quot;</span> &gt;/etc/modprobe.conf
+<span class="nb">echo</span> <span class="s2">&quot;alias ipv6 off&quot;</span> &gt;&gt;/etc/modprobe.conf
+chkconfig ip6tables off
+sed -i <span class="s1">&#39;s/NETWORKING_IPV6=yes/NETWORKING_IPV6=no/g&#39;</span> /etc/sysconfig/network
+reboot</code></pre></div>
+
+<h3 id="fix-chmod--x-chmod">Fix chmod -x chmod</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">perl -e <span class="s1">&#39;chmod 0755, &quot;/bin/chmod&quot;&#39;</span>
+python -c <span class="s1">&#39;import os; os.chmod(&quot;chmod&quot;, 0755)&#39;</span>
+
+or 
+
+cp /bin/sh ~/chmod2
+cat /bin/chmod &gt; ~/chmod2
+sudo ~/chmod2 +x /bin/chmod
+rm ~/chmod2
+
+or 
+
+sudo apt-get --reinstall install <span class="sb">`</span>dpkg -S /bin/chmod <span class="p">|</span> cut -f1 -d:<span class="sb">`</span>
+
+gcc -x c - <span class="s">&lt;&lt;CHMOD</span>
+<span class="s">#include &lt;sys/stat.h&gt;</span>
+<span class="s">main(){chmod(&quot;/bin/chmod&quot;, S_IXUSR | S_IXGRP | S_IXOTH);}</span>
+<span class="s">CHMOD</span>
+sudo ./a.out
+rm a.out
+
+or
+
+/lib/ld-linux-x86-64.so.2 /bin/chown +x /bin/chown</code></pre></div>
+
+<h3 id="get-webserver-http-code-answer">Get webserver http code answer</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget --server-response -T <span class="m">5</span> -t <span class="m">1</span> http://ya.ru 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> awk <span class="s1">&#39;/^  HTTP/{print $2}&#39;</span></code></pre></div>
+
+<h3 id="clone-disk-with-dd-by-network">Clone disk with DD by network</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">dd <span class="k">if</span><span class="o">=</span>/dev/sdd1 <span class="nv">bs</span><span class="o">=</span>1M <span class="p">|</span> ssh -c arcfour user@server <span class="s2">&quot;dd of=/dev/sdf1 bs=1M&quot;</span> <span class="p">;</span> <span class="nb">echo</span> <span class="s2">&quot;dd of disk1@server1 is finished&quot;</span> <span class="p">|</span> mail -s <span class="s2">&quot;DD_CLONE&quot;</span> adm@server.net
+
+disk with errors
+dd <span class="k">if</span><span class="o">=</span>/dev/sdd1 <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">conv</span><span class="o">=</span>sync,noerror <span class="p">|</span> ssh -c arcfour user@server <span class="s2">&quot;dd of=/dev/sdd1 bs=1M&quot;</span>
+
+use nc
+dd <span class="k">if</span><span class="o">=</span>/dev/sde1 <span class="nv">bs</span><span class="o">=</span>1M <span class="p">|</span> nc newserver 7000
+nc -l <span class="m">7000</span> <span class="p">|</span> dd <span class="nv">of</span><span class="o">=</span>/dev/sde1 <span class="nv">bs</span><span class="o">=</span>1M</code></pre></div>
+
+<h3 id="ssh-x11-forwarding">SSH x11 forwarding</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">yum install xorg-x11-xauth
+apt-get install xauth
+ssh -X</code></pre></div>
+
+<h3 id="extract-rpm-pkg">Extract RPM pkg</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">rpm2cpio myrpmfile.rpm <span class="p">|</span> cpio -idmv</code></pre></div>
 
 
       <hr />

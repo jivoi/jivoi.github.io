@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-29T15:51:07+03:00</updated>
+<updated>2015-06-30T11:36:32+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -121,6 +121,21 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
   &lt;li&gt;&lt;a href=&quot;#use-stracelsof&quot; id=&quot;markdown-toc-use-stracelsof&quot;&gt;Use strace\lsof&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#create-patch&quot; id=&quot;markdown-toc-create-patch&quot;&gt;Create Patch&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#create-gstripe-in-freebsd&quot; id=&quot;markdown-toc-create-gstripe-in-freebsd&quot;&gt;Create gstripe in FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#delete-trailing-spaces-in-text-with-vim&quot; id=&quot;markdown-toc-delete-trailing-spaces-in-text-with-vim&quot;&gt;Delete trailing spaces in text with VIM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#disable-apache-dir-listing&quot; id=&quot;markdown-toc-disable-apache-dir-listing&quot;&gt;Disable Apache dir listing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-load-data-grant&quot; id=&quot;markdown-toc-mysql-load-data-grant&quot;&gt;MySQL load data grant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-grants-for-fields-in-table&quot; id=&quot;markdown-toc-mysql-grants-for-fields-in-table&quot;&gt;MySQL grants for fields in table&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#determine-max-mtu&quot; id=&quot;markdown-toc-determine-max-mtu&quot;&gt;Determine MAX MTU&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#upgrade-centos-password-hashing&quot; id=&quot;markdown-toc-upgrade-centos-password-hashing&quot;&gt;Upgrade CentOS Password Hashing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linux-pkg-search&quot; id=&quot;markdown-toc-linux-pkg-search&quot;&gt;Linux Pkg search&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#run-echo-cmd-with-sudo&quot; id=&quot;markdown-toc-run-echo-cmd-with-sudo&quot;&gt;Run echo cmd with sudo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#change-percentage-of-root-fs&quot; id=&quot;markdown-toc-change-percentage-of-root-fs&quot;&gt;Change percentage of root FS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#disable-ipv6-on-centos&quot; id=&quot;markdown-toc-disable-ipv6-on-centos&quot;&gt;Disable Ipv6 on CentOS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fix-chmod--x-chmod&quot; id=&quot;markdown-toc-fix-chmod--x-chmod&quot;&gt;Fix chmod -x chmod&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-webserver-http-code-answer&quot; id=&quot;markdown-toc-get-webserver-http-code-answer&quot;&gt;Get webserver http code answer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd-by-network&quot; id=&quot;markdown-toc-clone-disk-with-dd-by-network&quot;&gt;Clone disk with DD by network&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ssh-x11-forwarding&quot; id=&quot;markdown-toc-ssh-x11-forwarding&quot;&gt;SSH x11 forwarding&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#extract-rpm-pkg&quot; id=&quot;markdown-toc-extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -390,6 +405,110 @@ mount /dev/stripe/st0a /www
 /dev/stripe/st0a       /www           ufs     rw,noatime              &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;       2
 
 tunefs -m &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; /dev/stripe/st0a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;delete-trailing-spaces-in-text-with-vim&quot;&gt;Delete trailing spaces in text with VIM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;:%s/&lt;span class=&quot;se&quot;&gt;\s\+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$/&lt;/span&gt;/
+delete blank lines
+:g/^&lt;span class=&quot;nv&quot;&gt;$/&lt;/span&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;disable-apache-dir-listing&quot;&gt;Disable Apache dir listing&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /&amp;gt;
+    Options -Indexes
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+&amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-load-data-grant&quot;&gt;MySQL load data grant&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grant file on *.* to user@localhost identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-grants-for-fields-in-table&quot;&gt;MySQL grants for fields in table&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;GRANT SELECT &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;col1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, INSERT &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;col1,col2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ON mydb.mytbl TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;someuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;somehost&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;determine-max-mtu&quot;&gt;Determine MAX MTU&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ping ya.ru -v -M dont -s &lt;span class=&quot;m&quot;&gt;1472&lt;/span&gt; -W 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;upgrade-centos-password-hashing&quot;&gt;Upgrade CentOS Password Hashing&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;authconfig --test &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep hashing
+authconfig --passalgo&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sha512 --update&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;linux-pkg-search&quot;&gt;Linux Pkg search&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://pkgs.org/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;run-echo-cmd-with-sudo&quot;&gt;Run echo cmd with sudo&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in server&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;echo &amp;quot;&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;  /logs/test.log&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;ssh &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; sudo sh&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;change-percentage-of-root-fs&quot;&gt;Change percentage of root FS&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tune2fs -m &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; /dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;disable-ipv6-on-centos&quot;&gt;Disable Ipv6 on CentOS&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;alias net-pf-10 off&amp;quot;&lt;/span&gt; &amp;gt;/etc/modprobe.conf
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;alias ipv6 off&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt;/etc/modprobe.conf
+chkconfig ip6tables off
+sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/NETWORKING_IPV6=yes/NETWORKING_IPV6=no/g&amp;#39;&lt;/span&gt; /etc/sysconfig/network
+reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fix-chmod--x-chmod&quot;&gt;Fix chmod -x chmod&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;chmod 0755, &amp;quot;/bin/chmod&amp;quot;&amp;#39;&lt;/span&gt;
+python -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;import os; os.chmod(&amp;quot;chmod&amp;quot;, 0755)&amp;#39;&lt;/span&gt;
+
+or 
+
+cp /bin/sh ~/chmod2
+cat /bin/chmod &amp;gt; ~/chmod2
+sudo ~/chmod2 +x /bin/chmod
+rm ~/chmod2
+
+or 
+
+sudo apt-get --reinstall install &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dpkg -S /bin/chmod &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f1 -d:&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+gcc -x c - &lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;CHMOD&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;main(){chmod(&amp;quot;/bin/chmod&amp;quot;, S_IXUSR | S_IXGRP | S_IXOTH);}&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;CHMOD&lt;/span&gt;
+sudo ./a.out
+rm a.out
+
+or
+
+/lib/ld-linux-x86-64.so.2 /bin/chown +x /bin/chown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-webserver-http-code-answer&quot;&gt;Get webserver http code answer&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget --server-response -T &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; -t &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; http://ya.ru 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/^  HTTP/{print $2}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;clone-disk-with-dd-by-network&quot;&gt;Clone disk with DD by network&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdd1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; ssh -c arcfour user@server &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of=/dev/sdf1 bs=1M&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of disk1@server1 is finished&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mail -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;DD_CLONE&amp;quot;&lt;/span&gt; adm@server.net
+
+disk with errors
+dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdd1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sync,noerror &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; ssh -c arcfour user@server &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of=/dev/sdd1 bs=1M&amp;quot;&lt;/span&gt;
+
+use nc
+dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sde1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc newserver 7000
+nc -l &lt;span class=&quot;m&quot;&gt;7000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; dd &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sde1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-x11-forwarding&quot;&gt;SSH x11 forwarding&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;yum install xorg-x11-xauth
+apt-get install xauth
+ssh -X&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rpm2cpio myrpmfile.rpm &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cpio -idmv&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
@@ -3371,7 +3490,8 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
 &lt;p&gt;Что такое load average в юникс системах? (Ответ требует конкретной формулировки.)&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения. Более подробно тут:qhttp://knp84.livejournal.com/4835.html&lt;/p&gt;
+&lt;p&gt;Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения. Более подробно тут:http://knp84.livejournal.com/4835.html или вот так Load Average не является средним значением в обычном понимании среднего арифметического. Это дискретная функция, периодически рассчитываемая с момента запуска системы. При этом значение функции есть количество отрабатывающих в системе процессов в условиях экспоненциального затухания. Детали здесь: 
+http://habrahabr.ru/post/260335/&lt;/p&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;Вопрос 2:&lt;/h3&gt;
 &lt;p&gt;Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется? (Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)&lt;/p&gt;
@@ -3407,7 +3527,7 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
  &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+ one
  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -eq &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
  &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
  &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt;
