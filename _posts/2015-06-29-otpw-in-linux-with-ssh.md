@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OTPW in Linux with SSH"
+title: "OTPW for SSH in Linux"
 modified: 2015-06-29 11:46:36 +0300
 category: [howto]
 tags: [linux,ubuntu,security]
