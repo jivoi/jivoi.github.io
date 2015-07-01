@@ -1,0 +1,369 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title> Linux-Unix-IT Tips and Tricks #3 &#8211; EK</title>
+<meta name="description" content="Different Linux / Unix / IT tips, notes, howto part 3
+
+">
+<meta name="keywords" content="linux, unix, sysadm">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content=" Linux-Unix-IT Tips and Tricks #3">
+<meta name="twitter:description" content="Different Linux / Unix / IT tips, notes, howto part 3
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" Linux-Unix-IT Tips and Tricks #3">
+<meta property="og:description" content="Different Linux / Unix / IT tips, notes, howto part 3
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/" rel="bookmark" title=" Linux-Unix-IT Tips and Tricks #3"> Linux-Unix-IT Tips and Tricks #3</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Different Linux / Unix / IT tips, notes, howto part 3</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#other-parts" id="markdown-toc-other-parts">Other parts</a></li>
+  <li><a href="#speed-up-mysql-import" id="markdown-toc-speed-up-mysql-import">Speed up MySQL Import</a></li>
+  <li><a href="#coreutils-list" id="markdown-toc-coreutils-list">Coreutils List</a></li>
+  <li><a href="#list-all-process-swap-space-usage" id="markdown-toc-list-all-process-swap-space-usage">List all process swap space usage</a></li>
+  <li><a href="#delete-millions-files-from-dir" id="markdown-toc-delete-millions-files-from-dir">Delete millions files from dir</a></li>
+  <li><a href="#nice-diff" id="markdown-toc-nice-diff">Nice Diff</a></li>
+  <li><a href="#run-jobs-with-parallel" id="markdown-toc-run-jobs-with-parallel">Run jobs with parallel</a></li>
+  <li><a href="#awk-ps-sum" id="markdown-toc-awk-ps-sum">Awk PS SUM</a></li>
+  <li><a href="#show-ext4-fragmentation-" id="markdown-toc-show-ext4-fragmentation-">Show ext4 fragmentation %</a></li>
+  <li><a href="#statistic-of-system-resource" id="markdown-toc-statistic-of-system-resource">Statistic of system resource</a></li>
+  <li><a href="#tcpdump-with-ssh-stream" id="markdown-toc-tcpdump-with-ssh-stream">Tcpdump with SSH stream</a></li>
+  <li><a href="#linux-namespaces" id="markdown-toc-linux-namespaces">Linux Namespaces</a></li>
+  <li><a href="#show-daemon-list-need-to-restart-after-update" id="markdown-toc-show-daemon-list-need-to-restart-after-update">Show daemon list need to restart after update</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="other-parts">Other parts</h3>
+<p><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/">Part 1</a>
+<a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/">Part 2</a></p>
+
+<h3 id="speed-up-mysql-import">Speed up MySQL Import</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysql -u someuser -p SET <span class="nv">AUTOCOMMIT</span><span class="o">=</span>0<span class="p">;</span> SET <span class="nv">UNIQUE_CHECKS</span><span class="o">=</span>0<span class="p">;</span> SET <span class="nv">FOREIGN_KEY_CHECKS</span><span class="o">=</span>0<span class="p">;</span> <span class="se">\</span>
+<span class="nb">source </span>dump.sql<span class="p">;</span>SET <span class="nv">FOREIGN_KEY_CHECKS</span><span class="o">=</span>1<span class="p">;</span> <span class="nv">UNIQUE_CHECKS</span><span class="o">=</span>1<span class="p">;</span> COMMIT<span class="p">;</span></code></pre></div>
+
+<h3 id="coreutils-list">Coreutils List</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl <span class="s1">&#39;http://www.gnu.org/software/coreutils/manual/coreutils.html&#39;</span> 2&gt;/dev/null <span class="p">|</span>grep <span class="s1">&#39;h3 class&#39;</span> <span class="p">|</span> grep <span class="s1">&#39;class=&quot;command&quot;&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/.*class=&quot;command&quot;&gt;//&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s|&lt;/span&gt;&lt;/samp&gt;||&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s|&lt;/h3&gt;||&#39;</span> <span class="p">|</span> grep <span class="s1">&#39;:&#39;</span> <span class="p">|</span> sort</code></pre></div>
+
+<h3 id="list-all-process-swap-space-usage">List all process swap space usage</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> file in /proc/*/status <span class="p">;</span> <span class="k">do</span> awk <span class="s1">&#39;/VmSwap|Name/{printf $2 &quot; &quot; $3}END{ print &quot;&quot;}&#39;</span> <span class="nv">$file</span><span class="p">;</span> <span class="k">done</span></code></pre></div>
+
+<h3 id="delete-millions-files-from-dir">Delete millions files from dir</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># rm is fucked, this is ok =)</span>
+perl -e <span class="s1">&#39;chdir &quot;/tmp/1&quot; or die; opendir D, &quot;.&quot;; while ($n = readdir D) { unlink $n }&#39;</span></code></pre></div>
+
+<h3 id="nice-diff">Nice Diff</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">diff --side-by-side fileA.txt fileB.txt <span class="p">|</span> pager</code></pre></div>
+
+<h3 id="run-jobs-with-parallel">Run jobs with parallel</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># apt-get install parallel</span>
+ls *.png <span class="p">|</span> parallel -j4 convert <span class="o">{}</span> <span class="o">{</span>.<span class="o">}</span>.jpg</code></pre></div>
+
+<h3 id="awk-ps-sum">Awk PS SUM</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ps alx <span class="p">|</span> tail -n +2 <span class="p">|</span> awk <span class="s1">&#39;BEGIN{rss=0; vsz=0} {rss += $7; vsz+=$8} END{print rss, vsz;}&#39;</span></code></pre></div>
+
+<h3 id="show-ext4-fragmentation-">Show ext4 fragmentation %</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># be carefull!!</span>
+<span class="k">for</span> D in <span class="k">$(</span> mount <span class="p">|</span> awk <span class="s1">&#39;$5~/ext4/ { print $1 }&#39;</span> <span class="k">)</span><span class="p">;</span> <span class="k">do</span> sudo fsck.ext4 -nvf <span class="k">${</span><span class="nv">D</span><span class="k">}</span><span class="p">;</span> <span class="k">done</span>
+non-contiguous is a % of fragmentation
+
+<span class="c"># fragmentation for file</span>
+filefrag -v /PATH/TO/FILE</code></pre></div>
+
+<h3 id="statistic-of-system-resource">Statistic of system resource</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># apt-get install dstat</span>
+dstat -c --top-cpu -d --top-bio --top-latency</code></pre></div>
+
+<h3 id="tcpdump-with-ssh-stream">Tcpdump with SSH stream</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># stream through SSH the tcpdump output and analyze it locally with Wireshark</span>
+mkfifo /tmp/wshark
+ssh root@ip <span class="s2">&quot;tcpdump -s 0 -U -n -w - -i eth0 not port 22&quot;</span> &gt; /tmp/wshark
+wireshark -k -i /tmp/wshark</code></pre></div>
+
+<h3 id="linux-namespaces">Linux Namespaces</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Starting from kernel 2.6.24, Linux supports <span class="m">6</span> different types of namespaces. Namespaces are useful in creating processes that are more isolated from the rest of the system, without needing to use full low level virtualization technology.
+
+CLONE_NEWIPC: IPC Namespaces: SystemV IPC and POSIX Message Queues can be isolated.
+CLONE_NEWPID: PID Namespaces: PIDs are isolated, meaning that a virtual PID inside of the namespace can conflict with a PID outside of the namespace. PIDs inside the namespace will be mapped to other PIDs outside of the namespace. The first PID inside the namespace will be ‘1’ which outside of the namespace is assigned to init
+CLONE_NEWNET: Network Namespaces: Networking <span class="o">(</span>/proc/net, IPs, interfaces and routes<span class="o">)</span> are isolated. Services can be run on the same ports within namespaces, and “duplicate” virtual interfaces can be created.
+CLONE_NEWNS: Mount Namespaces. We have the ability to isolate mount points as they appear to processes. Using mount namespaces, we can achieve similar functionality to chroot<span class="o">()</span> however with improved security.
+CLONE_NEWUTS: UTS Namespaces. This namespaces primary purpose is to isolate the hostname and NIS name.
+CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside and outside of namespaces and can be duplicated.</code></pre></div>
+
+<h3 id="show-daemon-list-need-to-restart-after-update">Show daemon list need to restart after update</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo lsof / <span class="p">|</span> grep DEL <span class="p">|</span> cut -f1 -d<span class="s1">&#39; &#39;</span> <span class="p">|</span> sort -u</code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong> Linux-Unix-IT Tips and Tricks #3</strong> was published on <time datetime="2015-07-01T00:00:00+03:00">July 01, 2015</time> and last modified on <time datetime="2015-07-01">July 01, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/" title="Pentest Tips and Tricks">Pentest Tips and Tricks</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW for SSH in Linux">OTPW for SSH in Linux</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" title="Linux-Unix-IT Tips and Tricks #2">Linux-Unix-IT Tips and Tricks #2</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=2435245; 
+var sc_invisible=1; 
+var sc_security="015e0a49"; 
+</script>
+<script type="text/javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+<noscript><div class="statcounter"><a title="free hitcounter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="http://c.statcounter.com/2435245/0/015e0a49/1/" alt="free hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+	        
+
+</body>
+</html>

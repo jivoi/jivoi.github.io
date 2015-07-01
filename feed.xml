@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-01T13:16:15+03:00</updated>
+<updated>2015-07-01T17:30:57+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -18,7 +18,7 @@
   <title type="html"><![CDATA[Pentest Tips and Tricks]]></title>
   <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/" />
   <id>https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks</id>
-  <updated>2015-07-01 10:03:31 +0300T00:00:00-00:00</updated>
+  <updated>2015-07-01 12:03:31 +0300T00:00:00-00:00</updated>
   <published>2015-07-01T00:00:00+03:00</published>
   
   <author>
@@ -709,7 +709,122 @@ or
 
 
 <entry>
-  <title type="html"><![CDATA[OTPW in Linux with SSH]]></title>
+  <title type="html"><![CDATA[ Linux-Unix-IT Tips and Tricks #3]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/" />
+  <id>https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3</id>
+  <updated>2015-07-01 17:23:41 +0300T00:00:00-00:00</updated>
+  <published>2015-07-01T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto part 3&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other parts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#speed-up-mysql-import&quot; id=&quot;markdown-toc-speed-up-mysql-import&quot;&gt;Speed up MySQL Import&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#coreutils-list&quot; id=&quot;markdown-toc-coreutils-list&quot;&gt;Coreutils List&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#list-all-process-swap-space-usage&quot; id=&quot;markdown-toc-list-all-process-swap-space-usage&quot;&gt;List all process swap space usage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#delete-millions-files-from-dir&quot; id=&quot;markdown-toc-delete-millions-files-from-dir&quot;&gt;Delete millions files from dir&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nice-diff&quot; id=&quot;markdown-toc-nice-diff&quot;&gt;Nice Diff&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#run-jobs-with-parallel&quot; id=&quot;markdown-toc-run-jobs-with-parallel&quot;&gt;Run jobs with parallel&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#awk-ps-sum&quot; id=&quot;markdown-toc-awk-ps-sum&quot;&gt;Awk PS SUM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-ext4-fragmentation-&quot; id=&quot;markdown-toc-show-ext4-fragmentation-&quot;&gt;Show ext4 fragmentation %&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#statistic-of-system-resource&quot; id=&quot;markdown-toc-statistic-of-system-resource&quot;&gt;Statistic of system resource&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tcpdump-with-ssh-stream&quot; id=&quot;markdown-toc-tcpdump-with-ssh-stream&quot;&gt;Tcpdump with SSH stream&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linux-namespaces&quot; id=&quot;markdown-toc-linux-namespaces&quot;&gt;Linux Namespaces&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#show-daemon-list-need-to-restart-after-update&quot; id=&quot;markdown-toc-show-daemon-list-need-to-restart-after-update&quot;&gt;Show daemon list need to restart after update&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;speed-up-mysql-import&quot;&gt;Speed up MySQL Import&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -u someuser -p SET &lt;span class=&quot;nv&quot;&gt;AUTOCOMMIT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; SET &lt;span class=&quot;nv&quot;&gt;UNIQUE_CHECKS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; SET &lt;span class=&quot;nv&quot;&gt;FOREIGN_KEY_CHECKS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;dump.sql&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;SET &lt;span class=&quot;nv&quot;&gt;FOREIGN_KEY_CHECKS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;UNIQUE_CHECKS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; COMMIT&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;coreutils-list&quot;&gt;Coreutils List&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://www.gnu.org/software/coreutils/manual/coreutils.html&amp;#39;&lt;/span&gt; 2&amp;gt;/dev/null &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep &lt;span class=&quot;s1&quot;&gt;&amp;#39;h3 class&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s1&quot;&gt;&amp;#39;class=&amp;quot;command&amp;quot;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/.*class=&amp;quot;command&amp;quot;&amp;gt;//&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s|&amp;lt;/span&amp;gt;&amp;lt;/samp&amp;gt;||&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s|&amp;lt;/h3&amp;gt;||&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s1&quot;&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;list-all-process-swap-space-usage&quot;&gt;List all process swap space usage&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; file in /proc/*/status &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/VmSwap|Name/{printf $2 &amp;quot; &amp;quot; $3}END{ print &amp;quot;&amp;quot;}&amp;#39;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;delete-millions-files-from-dir&quot;&gt;Delete millions files from dir&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# rm is fucked, this is ok =)&lt;/span&gt;
+perl -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;chdir &amp;quot;/tmp/1&amp;quot; or die; opendir D, &amp;quot;.&amp;quot;; while ($n = readdir D) { unlink $n }&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nice-diff&quot;&gt;Nice Diff&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;diff --side-by-side fileA.txt fileB.txt &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; pager&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;run-jobs-with-parallel&quot;&gt;Run jobs with parallel&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# apt-get install parallel&lt;/span&gt;
+ls *.png &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -j4 convert &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;.&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;.jpg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;awk-ps-sum&quot;&gt;Awk PS SUM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps alx &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tail -n +2 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;BEGIN{rss=0; vsz=0} {rss += $7; vsz+=$8} END{print rss, vsz;}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-ext4-fragmentation-&quot;&gt;Show ext4 fragmentation %&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# be carefull!!&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; D in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt; mount &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;$5~/ext4/ { print $1 }&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; sudo fsck.ext4 -nvf &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+non-contiguous is a % of fragmentation
+
+&lt;span class=&quot;c&quot;&gt;# fragmentation for file&lt;/span&gt;
+filefrag -v /PATH/TO/FILE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;statistic-of-system-resource&quot;&gt;Statistic of system resource&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# apt-get install dstat&lt;/span&gt;
+dstat -c --top-cpu -d --top-bio --top-latency&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tcpdump-with-ssh-stream&quot;&gt;Tcpdump with SSH stream&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# stream through SSH the tcpdump output and analyze it locally with Wireshark&lt;/span&gt;
+mkfifo /tmp/wshark
+ssh root@ip &lt;span class=&quot;s2&quot;&gt;&amp;quot;tcpdump -s 0 -U -n -w - -i eth0 not port 22&amp;quot;&lt;/span&gt; &amp;gt; /tmp/wshark
+wireshark -k -i /tmp/wshark&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;linux-namespaces&quot;&gt;Linux Namespaces&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Starting from kernel 2.6.24, Linux supports &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; different types of namespaces. Namespaces are useful in creating processes that are more isolated from the rest of the system, without needing to use full low level virtualization technology.
+
+CLONE_NEWIPC: IPC Namespaces: SystemV IPC and POSIX Message Queues can be isolated.
+CLONE_NEWPID: PID Namespaces: PIDs are isolated, meaning that a virtual PID inside of the namespace can conflict with a PID outside of the namespace. PIDs inside the namespace will be mapped to other PIDs outside of the namespace. The first PID inside the namespace will be ‘1’ which outside of the namespace is assigned to init
+CLONE_NEWNET: Network Namespaces: Networking &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/proc/net, IPs, interfaces and routes&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; are isolated. Services can be run on the same ports within namespaces, and “duplicate” virtual interfaces can be created.
+CLONE_NEWNS: Mount Namespaces. We have the ability to isolate mount points as they appear to processes. Using mount namespaces, we can achieve similar functionality to chroot&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; however with improved security.
+CLONE_NEWUTS: UTS Namespaces. This namespaces primary purpose is to isolate the hostname and NIS name.
+CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside and outside of namespaces and can be duplicated.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-daemon-list-need-to-restart-after-update&quot;&gt;Show daemon list need to restart after update&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo lsof / &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep DEL &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f1 -d&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -u&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[OTPW for SSH in Linux]]></title>
   <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" />
   <id>https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh</id>
   <updated>2015-06-29 11:46:36 +0300T00:00:00-00:00</updated>
@@ -764,7 +879,7 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
 &lt;span class=&quot;m&quot;&gt;126&lt;/span&gt; LQQF uFOW&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/&quot;&gt;OTPW in Linux with SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/&quot;&gt;OTPW for SSH in Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
 </entry>
 
 
