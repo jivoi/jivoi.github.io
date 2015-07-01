@@ -432,3 +432,97 @@ ssh -X
 {% highlight bash %}
 rpm2cpio myrpmfile.rpm | cpio -idmv
 {% endhighlight %}
+
+### Create FFS snapshot
+{% highlight bash %}
+mksnap_ffs /www/.snap/1
+mdconfig -a -t vnode -o readonly -f /www/.snap/1
+mount -o ro /dev/md0 /mnt/
+sync
+umount -f /mnt
+sync
+mdconfig -d -u /dev/md0
+sync
+rm -f /www/.snap/1
+sync
+{% endhighlight %}
+
+### Exim cli commands
+{% highlight bash %}
+# remove from queue frozen messages
+exiqgrep -z -i|xargs exim -Mrm
+exipick -zi | xargs exim4 -Mrm
+exim -bp | awk '$6~"frozen" { print $3 }' | xargs exim -Mrm
+# view a message's headers
+exim -Mvh <message-id>
+# view a message's body
+exim -Mvb <message-id>
+# remove from queue messages older than week
+exipick -io 86400 | xargs exim4 -Mrm
+# remove all messages from queue
+exipick -i | xargs exim4 -Mrm
+# remove message by ID
+exim -v -Mrm ID
+# frozen message by email
+exiqgrep -i -f email | xargs exim -Mf
+# remove messages by email
+exiqgrep -i -f email | xargs exim -Mrm
+{% endhighlight %}
+
+### Clean Postfix queue
+{% highlight bash %}
+mailq|grep 'MAILER-DAEMON'|awk '{print $1}'|postsuper -d -
+{% endhighlight %}
+
+### Find all notpkgs files FreeBSD
+{% highlight bash %}
+find /usr/local -type f | xargs -J% pkg_which -v "%" |  fgrep '?'
+{% endhighlight %}
+
+### Display real LVM block devices
+{% highlight bash %}
+lvdisplay| awk '/LV Name/{n=$3} /Block device/{d=$3; sub(".*:","dm-",d); print d,n;}'
+lvdisplay| awk '/LV Name/{blockdev=$3} /Block device/{bdid=$3; sub("[0-9]*:","dm-",bdid); print bdid,blockdev;}'
+{% endhighlight %}
+
+### Mount ISO in FreeBSD
+{% highlight bash %}
+mdconfig -a -t vnode -f image.iso -u 0
+mount -t cd9660 -o ro /dev/md0 /mount_point
+umount /mount_point
+mdconfig -d -u 0
+{% endhighlight %}
+
+## Cisco CSS 1501 Tacacs
+{% highlight bash %}
+virtual authentication primary tacacs
+virtual authentication secondary local
+tacacs-server authorize config
+tacacs-server authorize non-config
+tacacs-server account non-config
+tacacs-server account config
+tacacs-server X.X.X.X primary frequency 10
+tacacs-server key SecretKeyCisco
+{% endhighlight %}
+
+### Show FreeBSD kernel config
+{% highlight bash %}
+sysctl -b kern.conftxt 
+{% endhighlight %}
+
+### HTTP redirect with HTML and JavaScript
+{% highlight html %}
+<html>
+<head>
+<title>301 moved permanently</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=http://example.ru/goto.html">
+</head>
+<body>
+<!-- <a href="http://example.ru/goto.html">Moved permanently</a> -->
+<script type="text/javascript"><!--
+document.location = "http://example.ru/goto.html";
+// --></script>
+</body>
+</html>
+{% endhighlight %}
