@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-06-30T19:13:12+03:00</updated>
+<updated>2015-07-01T12:41:11+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -795,6 +795,17 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
   &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd-by-network&quot; id=&quot;markdown-toc-clone-disk-with-dd-by-network&quot;&gt;Clone disk with DD by network&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#ssh-x11-forwarding&quot; id=&quot;markdown-toc-ssh-x11-forwarding&quot;&gt;SSH x11 forwarding&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#extract-rpm-pkg&quot; id=&quot;markdown-toc-extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-ffs-snapshot&quot; id=&quot;markdown-toc-create-ffs-snapshot&quot;&gt;Create FFS snapshot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exim-cli-commands&quot; id=&quot;markdown-toc-exim-cli-commands&quot;&gt;Exim cli commands&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#clean-postfix-queue&quot; id=&quot;markdown-toc-clean-postfix-queue&quot;&gt;Clean Postfix queue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#find-all-notpkgs-files-freebsd&quot; id=&quot;markdown-toc-find-all-notpkgs-files-freebsd&quot;&gt;Find all notpkgs files FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#display-real-lvm-block-devices&quot; id=&quot;markdown-toc-display-real-lvm-block-devices&quot;&gt;Display real LVM block devices&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mount-iso-in-freebsd&quot; id=&quot;markdown-toc-mount-iso-in-freebsd&quot;&gt;Mount ISO in FreeBSD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#cisco-css-1501-tacacs&quot; id=&quot;markdown-toc-cisco-css-1501-tacacs&quot;&gt;Cisco CSS 1501 Tacacs&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#show-freebsd-kernel-config&quot; id=&quot;markdown-toc-show-freebsd-kernel-config&quot;&gt;Show FreeBSD kernel config&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#http-redirect-with-html-and-javascript&quot; id=&quot;markdown-toc-http-redirect-with-html-and-javascript&quot;&gt;HTTP redirect with HTML and JavaScript&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -1168,6 +1179,91 @@ ssh -X&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rpm2cpio myrpmfile.rpm &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cpio -idmv&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-ffs-snapshot&quot;&gt;Create FFS snapshot&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mksnap_ffs /www/.snap/1
+mdconfig -a -t vnode -o &lt;span class=&quot;nb&quot;&gt;readonly&lt;/span&gt; -f /www/.snap/1
+mount -o ro /dev/md0 /mnt/
+sync
+umount -f /mnt
+sync
+mdconfig -d -u /dev/md0
+sync
+rm -f /www/.snap/1
+sync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exim-cli-commands&quot;&gt;Exim cli commands&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# remove from queue frozen messages&lt;/span&gt;
+exiqgrep -z -i&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs exim -Mrm
+exipick -zi &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
+exim -bp &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;$6~&amp;quot;frozen&amp;quot; { print $3 }&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mrm
+&lt;span class=&quot;c&quot;&gt;# view a message&amp;#39;s headers&lt;/span&gt;
+exim -Mvh &amp;lt;message-id&amp;gt;
+&lt;span class=&quot;c&quot;&gt;# view a message&amp;#39;s body&lt;/span&gt;
+exim -Mvb &amp;lt;message-id&amp;gt;
+&lt;span class=&quot;c&quot;&gt;# remove from queue messages older than week&lt;/span&gt;
+exipick -io &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
+&lt;span class=&quot;c&quot;&gt;# remove all messages from queue&lt;/span&gt;
+exipick -i &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
+&lt;span class=&quot;c&quot;&gt;# remove message by ID&lt;/span&gt;
+exim -v -Mrm ID
+&lt;span class=&quot;c&quot;&gt;# frozen message by email&lt;/span&gt;
+exiqgrep -i -f email &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mf
+&lt;span class=&quot;c&quot;&gt;# remove messages by email&lt;/span&gt;
+exiqgrep -i -f email &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mrm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;clean-postfix-queue&quot;&gt;Clean Postfix queue&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mailq&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep &lt;span class=&quot;s1&quot;&gt;&amp;#39;MAILER-DAEMON&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;postsuper -d -&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;find-all-notpkgs-files-freebsd&quot;&gt;Find all notpkgs files FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find /usr/local -type f &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -J% pkg_which -v &lt;span class=&quot;s2&quot;&gt;&amp;quot;%&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;  fgrep &lt;span class=&quot;s1&quot;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;display-real-lvm-block-devices&quot;&gt;Display real LVM block devices&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;lvdisplay&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/LV Name/{n=$3} /Block device/{d=$3; sub(&amp;quot;.*:&amp;quot;,&amp;quot;dm-&amp;quot;,d); print d,n;}&amp;#39;&lt;/span&gt;
+lvdisplay&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/LV Name/{blockdev=$3} /Block device/{bdid=$3; sub(&amp;quot;[0-9]*:&amp;quot;,&amp;quot;dm-&amp;quot;,bdid); print bdid,blockdev;}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mount-iso-in-freebsd&quot;&gt;Mount ISO in FreeBSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mdconfig -a -t vnode -f image.iso -u 0
+mount -t cd9660 -o ro /dev/md0 /mount_point
+umount /mount_point
+mdconfig -d -u 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;cisco-css-1501-tacacs&quot;&gt;Cisco CSS 1501 Tacacs&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;virtual authentication primary tacacs
+virtual authentication secondary &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
+tacacs-server authorize config
+tacacs-server authorize non-config
+tacacs-server account non-config
+tacacs-server account config
+tacacs-server X.X.X.X primary frequency 10
+tacacs-server key SecretKeyCisco&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-freebsd-kernel-config&quot;&gt;Show FreeBSD kernel config&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sysctl -b kern.conftxt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;http-redirect-with-html-and-javascript&quot;&gt;HTTP redirect with HTML and JavaScript&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;301 moved permanently&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;robots&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;noindex&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;refresh&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;0; url=http://example.ru/goto.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;a href=&amp;quot;http://example.ru/goto.html&amp;quot;&amp;gt;Moved permanently&amp;lt;/a&amp;gt; --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://example.ru/goto.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;// --&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>

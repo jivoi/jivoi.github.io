@@ -199,6 +199,17 @@
   <li><a href="#clone-disk-with-dd-by-network" id="markdown-toc-clone-disk-with-dd-by-network">Clone disk with DD by network</a></li>
   <li><a href="#ssh-x11-forwarding" id="markdown-toc-ssh-x11-forwarding">SSH x11 forwarding</a></li>
   <li><a href="#extract-rpm-pkg" id="markdown-toc-extract-rpm-pkg">Extract RPM pkg</a></li>
+  <li><a href="#create-ffs-snapshot" id="markdown-toc-create-ffs-snapshot">Create FFS snapshot</a></li>
+  <li><a href="#exim-cli-commands" id="markdown-toc-exim-cli-commands">Exim cli commands</a></li>
+  <li><a href="#clean-postfix-queue" id="markdown-toc-clean-postfix-queue">Clean Postfix queue</a></li>
+  <li><a href="#find-all-notpkgs-files-freebsd" id="markdown-toc-find-all-notpkgs-files-freebsd">Find all notpkgs files FreeBSD</a></li>
+  <li><a href="#display-real-lvm-block-devices" id="markdown-toc-display-real-lvm-block-devices">Display real LVM block devices</a></li>
+  <li><a href="#mount-iso-in-freebsd" id="markdown-toc-mount-iso-in-freebsd">Mount ISO in FreeBSD</a></li>
+  <li><a href="#cisco-css-1501-tacacs" id="markdown-toc-cisco-css-1501-tacacs">Cisco CSS 1501 Tacacs</a>    <ul>
+      <li><a href="#show-freebsd-kernel-config" id="markdown-toc-show-freebsd-kernel-config">Show FreeBSD kernel config</a></li>
+      <li><a href="#http-redirect-with-html-and-javascript" id="markdown-toc-http-redirect-with-html-and-javascript">HTTP redirect with HTML and JavaScript</a></li>
+    </ul>
+  </li>
 </ul>
 
   </div>
@@ -572,6 +583,91 @@ ssh -X</code></pre></div>
 <h3 id="extract-rpm-pkg">Extract RPM pkg</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">rpm2cpio myrpmfile.rpm <span class="p">|</span> cpio -idmv</code></pre></div>
+
+<h3 id="create-ffs-snapshot">Create FFS snapshot</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mksnap_ffs /www/.snap/1
+mdconfig -a -t vnode -o <span class="nb">readonly</span> -f /www/.snap/1
+mount -o ro /dev/md0 /mnt/
+sync
+umount -f /mnt
+sync
+mdconfig -d -u /dev/md0
+sync
+rm -f /www/.snap/1
+sync</code></pre></div>
+
+<h3 id="exim-cli-commands">Exim cli commands</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># remove from queue frozen messages</span>
+exiqgrep -z -i<span class="p">|</span>xargs exim -Mrm
+exipick -zi <span class="p">|</span> xargs exim4 -Mrm
+exim -bp <span class="p">|</span> awk <span class="s1">&#39;$6~&quot;frozen&quot; { print $3 }&#39;</span> <span class="p">|</span> xargs exim -Mrm
+<span class="c"># view a message&#39;s headers</span>
+exim -Mvh &lt;message-id&gt;
+<span class="c"># view a message&#39;s body</span>
+exim -Mvb &lt;message-id&gt;
+<span class="c"># remove from queue messages older than week</span>
+exipick -io <span class="m">86400</span> <span class="p">|</span> xargs exim4 -Mrm
+<span class="c"># remove all messages from queue</span>
+exipick -i <span class="p">|</span> xargs exim4 -Mrm
+<span class="c"># remove message by ID</span>
+exim -v -Mrm ID
+<span class="c"># frozen message by email</span>
+exiqgrep -i -f email <span class="p">|</span> xargs exim -Mf
+<span class="c"># remove messages by email</span>
+exiqgrep -i -f email <span class="p">|</span> xargs exim -Mrm</code></pre></div>
+
+<h3 id="clean-postfix-queue">Clean Postfix queue</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mailq<span class="p">|</span>grep <span class="s1">&#39;MAILER-DAEMON&#39;</span><span class="p">|</span>awk <span class="s1">&#39;{print $1}&#39;</span><span class="p">|</span>postsuper -d -</code></pre></div>
+
+<h3 id="find-all-notpkgs-files-freebsd">Find all notpkgs files FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">find /usr/local -type f <span class="p">|</span> xargs -J% pkg_which -v <span class="s2">&quot;%&quot;</span> <span class="p">|</span>  fgrep <span class="s1">&#39;?&#39;</span></code></pre></div>
+
+<h3 id="display-real-lvm-block-devices">Display real LVM block devices</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">lvdisplay<span class="p">|</span> awk <span class="s1">&#39;/LV Name/{n=$3} /Block device/{d=$3; sub(&quot;.*:&quot;,&quot;dm-&quot;,d); print d,n;}&#39;</span>
+lvdisplay<span class="p">|</span> awk <span class="s1">&#39;/LV Name/{blockdev=$3} /Block device/{bdid=$3; sub(&quot;[0-9]*:&quot;,&quot;dm-&quot;,bdid); print bdid,blockdev;}&#39;</span></code></pre></div>
+
+<h3 id="mount-iso-in-freebsd">Mount ISO in FreeBSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mdconfig -a -t vnode -f image.iso -u 0
+mount -t cd9660 -o ro /dev/md0 /mount_point
+umount /mount_point
+mdconfig -d -u 0</code></pre></div>
+
+<h2 id="cisco-css-1501-tacacs">Cisco CSS 1501 Tacacs</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">virtual authentication primary tacacs
+virtual authentication secondary <span class="nb">local</span>
+tacacs-server authorize config
+tacacs-server authorize non-config
+tacacs-server account non-config
+tacacs-server account config
+tacacs-server X.X.X.X primary frequency 10
+tacacs-server key SecretKeyCisco</code></pre></div>
+
+<h3 id="show-freebsd-kernel-config">Show FreeBSD kernel config</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sysctl -b kern.conftxt</code></pre></div>
+
+<h3 id="http-redirect-with-html-and-javascript">HTTP redirect with HTML and JavaScript</h3>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;title&gt;</span>301 moved permanently<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;robots&quot;</span> <span class="na">content=</span><span class="s">&quot;noindex&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;refresh&quot;</span> <span class="na">content=</span><span class="s">&quot;0; url=http://example.ru/goto.html&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="c">&lt;!-- &lt;a href=&quot;http://example.ru/goto.html&quot;&gt;Moved permanently&lt;/a&gt; --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span><span class="c">&lt;!--</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">&quot;http://example.ru/goto.html&quot;</span><span class="p">;</span>
+<span class="err">// --&gt;</span><span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
 
 
       <hr />
