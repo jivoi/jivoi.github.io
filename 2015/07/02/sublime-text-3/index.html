@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>4G Huawei E392 with Linux &#8211; EK</title>
-<meta name="description" content="Working with 4G modem Huawei E392 in Linux and OpenWRT
+<title>Sublime Text 3 &#8211; EK</title>
+<meta name="description" content="My configuration
 
 ">
-<meta name="keywords" content="linux, 4gmodem, openwrt">
+<meta name="keywords" content="sublime, linux">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="4G Huawei E392 with Linux">
-<meta name="twitter:description" content="Working with 4G modem Huawei E392 in Linux and OpenWRT
+<meta name="twitter:title" content="Sublime Text 3">
+<meta name="twitter:description" content="My configuration
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4G Huawei E392 with Linux">
-<meta property="og:description" content="Working with 4G modem Huawei E392 in Linux and OpenWRT
+<meta property="og:title" content="Sublime Text 3">
+<meta property="og:description" content="My configuration
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/02/sublime-text-3/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/02/sublime-text-3/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,149 +145,83 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" rel="bookmark" title="4G Huawei E392 with Linux">4G Huawei E392 with Linux</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/02/sublime-text-3/" rel="bookmark" title="Sublime Text 3">Sublime Text 3</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Working with 4G modem Huawei E392 in Linux and OpenWRT</p>
+      <p>My configuration</p>
 
-<h3 id="ubuntu-linux">Ubuntu Linux</h3>
+<h3 id="install-packagecontrol">Install Packagecontrol</h3>
+<p><a href="https://packagecontrol.io/installation#st3">https://packagecontrol.io/installation#st3</a></p>
 
-<h5 id="install-pkgs">Install pkgs</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install wvdial
-wvdialconf</code></pre></div>
-
-<h5 id="add-to-etcwvdialconf">Add to /etc/wvdial.conf</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">[</span>Dialer Defaults<span class="o">]</span>
-<span class="nv">Init1</span> <span class="o">=</span> ATZ
-<span class="nv">Init2</span> <span class="o">=</span> AT+CGDCONT<span class="o">=</span>1,<span class="s2">&quot;IP&quot;</span>,<span class="s2">&quot;Internet&quot;</span>
-Modem <span class="nv">Type</span> <span class="o">=</span> USB Modem
-<span class="nv">Baud</span> <span class="o">=</span> 57600
-New <span class="nv">PPPD</span> <span class="o">=</span> yes
-<span class="nv">Modem</span> <span class="o">=</span> /dev/ttyUSB0
-<span class="nv">Phone</span> <span class="o">=</span> *99#
-<span class="nv">Password</span> <span class="o">=</span> <span class="se">\n</span> 
-<span class="nv">Username</span> <span class="o">=</span> <span class="se">\n</span>
-Stupid <span class="nv">Mode</span> <span class="o">=</span> yes</code></pre></div>
-
-<h5 id="auto-reconnect">Auto Reconnect</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#! /bin/bash</span>
-<span class="o">(</span>
-   <span class="k">while</span> : <span class="p">;</span> <span class="k">do</span>
-       wvdial
-       sleep 10
-   <span class="k">done</span>
-<span class="o">)</span> <span class="p">&amp;</span></code></pre></div>
-
-<h5 id="system-network-configuration">System network configuration</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/network/interfaces
-auto ppp0
-iface ppp0 inet wvdial</code></pre></div>
-
-<h3 id="openwrt-asus-wl600g">OpenWRT Asus Wl600g</h3>
-
-<h5 id="links">Links</h5>
+<h3 id="install-plugins">Install Plugins</h3>
 <ul>
-  <li><a href="http://wiki.openwrt.org/toh/asus/wl600g">wl600g</a></li>
-  <li><a href="http://wiki.openwrt.org/doc/howto/basic.config">basic.config</a></li>
-  <li><a href="http://wiki.openwrt.org/doc/recipes/ltedongle">ltedongle</a></li>
-  <li><a href="http://intelnuc.blogspot.ru/2014/10/turn-your-old-wireless-router-into-lte.html">turn-your-old-wireless-router-into-lte</a></li>
+  <li>install Alignment</li>
+  <li>install BracketHighlighter</li>
+  <li>install Git</li>
+  <li>install GitGutter</li>
+  <li>install SidebarEnhancements</li>
+  <li>install Soda theme</li>
+  <li>install Flatland theme</li>
+  <li>install SublimeCodeIntel</li>
+  <li>install gosublime</li>
+  <li>install terminal</li>
 </ul>
 
-<h5 id="download-and-install">Download and Install</h5>
+<h3 id="install-settings---user">Install Settings - User</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">Load the image into your router via the web interface http://192.168.1.1 or tftp
-wget http://downloads.openwrt.org/backfire/10.03.1/brcm63xx/openwrt-96348GW-generic-squashfs-cfe.bin
-tftp -i 192.168.1.1 PUT openwrt-96348GW-generic-squashfs-cfe.bin</code></pre></div>
-
-<h5 id="enable-ssh">Enable SSH</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">Web -&gt; System-Administration -&gt; SSH Access -&gt; Allow remote hosts to connect to <span class="nb">local </span>SSH forwarded ports</code></pre></div>
-
-<h5 id="install-required-packages">Install required packages</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">telnet<span class="se">\s</span>sh 192.168.1.1
-opkg update
-opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
-reboot</code></pre></div>
-
-<h5 id="configuring-modem-with-pppd">Configuring modem with pppd</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/ppp/peers/megafon-3g
-connect <span class="s2">&quot;chat -Vs -r /var/log/ppp -f /etc/chatscripts/megafon-3g&quot;</span>
-460800
-crtscts
-modem
-ttyUSB1
-noauth
-usepeerdns
-defaultroute
-user <span class="s2">&quot;&quot;</span>
-password <span class="s2">&quot;&quot;</span>
-logfile /var/log/ppp
-
-and add to
-
-/etc/chatscripts/megafon-3g
-TIMEOUT 35
-ECHO ON
-ABORT <span class="s1">&#39;\nBUSY\r&#39;</span>
-ABORT <span class="s1">&#39;\nERROR\r&#39;</span>
-ABORT <span class="s1">&#39;\nNO ANSWER\r&#39;</span>
-ABORT <span class="s1">&#39;\nNO CARRIER\r&#39;</span>
-ABORT <span class="s1">&#39;\nNO DIALTONE\r&#39;</span>
-ABORT <span class="s1">&#39;\nRINGING\r\n\r\nRINGING\r&#39;</span>
-ABORT <span class="s1">&#39;\nUsername/pASSWORD Incorrect\r&#39;</span>
-<span class="s1">&#39;&#39;</span>  <span class="se">\r</span>AT
-OK  <span class="s1">&#39;AT+CGDCONT=1,&quot;IP&quot;,&quot;Internet&quot;&#39;</span>
-OK  ATD*99#CONNECT  <span class="s2">&quot;&quot;</span>
-
-Now you can run 
-pppd call megafon-3g</code></pre></div>
-
-<h5 id="network-configuration">Network configuration</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/config/network
-config interface wan
-        option ifname  ppp0 <span class="c"># on some carriers enable this line</span>
-        option device  /dev/ttyUSB1
-        option apn     Internet
-        option service umts
-        option proto   3g
-
-cp /etc/chatscripts/megafon-3g /etc/chatscripts/3g.chat
-
-and now you can run:
-
-ifup wan</code></pre></div>
-
-<h5 id="firewall-configuration">Firewall configuration</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">go to Network → Firewall, scroll down to wan and click the Edit button
-add a checkmark to the wwan box under Covered networks heading, click Save <span class="p">&amp;</span> Apply</code></pre></div>
-
-<h5 id="configuring-modem-on-barrier-breaker">Configuring modem on Barrier Breaker</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">This example will work only with modern openwrt like Barrier Breaker 14.07
-
-root@OpenWrt:~# ls -l /dev/cdc-wdm0
-root@OpenWrt:~# dmesg
-root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status</code></pre></div>
-
-<h5 id="network-configurationa-on-barrier-breaker">Network configurationa on Barrier Breaker</h5>
-
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">add new Interface to /etc/config/network
-config interface <span class="s1">&#39;wwan&#39;</span>
-option ifname <span class="s1">&#39;wwan0&#39;</span>
-option proto <span class="s1">&#39;dhcp&#39;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="o">{</span>
+	<span class="s2">&quot;bold_folder_labels&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;color_scheme&quot;</span>: <span class="s2">&quot;Packages/Theme - Flatland/Flatland Dark.tmTheme&quot;</span>,
+	<span class="s2">&quot;create_window_at_startup&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;detect_indentation&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;detect_slow_plugins&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;draw_white_space&quot;</span>: <span class="s2">&quot;all&quot;</span>,
+	<span class="s2">&quot;enable_telemetry&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;fade_fold_buttons&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;folder_exclude_patterns&quot;</span>:
+	<span class="o">[</span>
+		<span class="s2">&quot;.svn&quot;</span>,
+		<span class="s2">&quot;.git&quot;</span>,
+		<span class="s2">&quot;.hg&quot;</span>,
+		<span class="s2">&quot;CVS&quot;</span>,
+		<span class="s2">&quot;_build&quot;</span>,
+		<span class="s2">&quot;dist&quot;</span>,
+		<span class="s2">&quot;build&quot;</span>,
+		<span class="s2">&quot;site&quot;</span>,
+		<span class="s2">&quot;.bin&quot;</span>,
+		<span class="s2">&quot;node_modules&quot;</span>
+	<span class="o">]</span>,
+	<span class="s2">&quot;font_options&quot;</span>: <span class="s2">&quot;subpixel_antialias&quot;</span>,
+	<span class="s2">&quot;font_size&quot;</span>: 12,
+	<span class="s2">&quot;highlight_line&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;highlight_modified_tabs&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;ignored_packages&quot;</span>:
+	<span class="o">[</span>
+		<span class="s2">&quot;Vintage&quot;</span>
+	<span class="o">]</span>,
+	<span class="s2">&quot;line_padding_bottom&quot;</span>: 1,
+	<span class="s2">&quot;line_padding_top&quot;</span>: 1,
+	<span class="s2">&quot;open_files_in_new_window&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;preview_on_click&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;remember_open_files&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;rulers&quot;</span>:
+	<span class="o">[</span>
+		80
+	<span class="o">]</span>,
+	<span class="s2">&quot;scroll_past_end&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;show_encoding&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;show_line_endings&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;show_tab_close_buttons&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;soda_folder_icons&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;tab_completion&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;tab_size&quot;</span>: 4,
+	<span class="s2">&quot;theme&quot;</span>: <span class="s2">&quot;Soda Dark.sublime-theme&quot;</span>,
+	<span class="s2">&quot;translate_tabs_to_spaces&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;trim_trailing_white_space_on_save&quot;</span>: <span class="nb">true</span>,
+	<span class="s2">&quot;vintage_start_in_command_mode&quot;</span>: <span class="nb">false</span>,
+	<span class="s2">&quot;word_wrap&quot;</span>: <span class="nb">true</span>
+<span class="o">}</span></code></pre></div>
 
 
       <hr />
@@ -320,7 +254,7 @@ option proto <span class="s1">&#39;dhcp&#39;</span></code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>4G Huawei E392 with Linux</strong> was published on <time datetime="2015-06-26T00:00:00+03:00">June 26, 2015</time> and last modified on <time datetime="2015-06-26">June 26, 2015</time>.</p>
+        <p class="byline"><strong>Sublime Text 3</strong> was published on <time datetime="2015-07-02T00:00:00+03:00">July 02, 2015</time> and last modified on <time datetime="2015-07-02">July 02, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -334,11 +268,11 @@ option proto <span class="s1">&#39;dhcp&#39;</span></code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/02/sublime-text-3/" title="Sublime Text 3">Sublime Text 3</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/02/playing-with-docker/" title="Playing with Docker">Playing with Docker</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/" title="Pentest Tips and Tricks">Pentest Tips and Tricks</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/" title=" Linux-Unix-IT Tips and Tricks #3"> Linux-Unix-IT Tips and Tricks #3</a></li>
     
     </ul>
     <hr />
