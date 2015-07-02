@@ -71,6 +71,9 @@ ps alx | tail -n +2 | awk 'BEGIN{rss=0; vsz=0} {rss += $7; vsz+=$8} END{print rs
 for D in $( mount | awk '$5~/ext4/ { print $1 }' ); do sudo fsck.ext4 -nvf ${D}; done
 non-contiguous is a % of fragmentation
 
+e4defrag /
+e4defrag -c /
+
 # fragmentation for file
 filefrag -v /PATH/TO/FILE
 {% endhighlight %}
