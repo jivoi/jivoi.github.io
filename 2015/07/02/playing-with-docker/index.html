@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>OSCP Prepare &#8211; EK</title>
-<meta name="description" content="My current way for OSCP Certifications
+<title>Playing with Docker &#8211; EK</title>
+<meta name="description" content="Learn how to use Docker
 
 ">
-<meta name="keywords" content="linux, unix, security, cert">
+<meta name="keywords" content="linux, sysadm, docker">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="OSCP Prepare">
-<meta name="twitter:description" content="My current way for OSCP Certifications
+<meta name="twitter:title" content="Playing with Docker">
+<meta name="twitter:description" content="Learn how to use Docker
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OSCP Prepare">
-<meta property="og:description" content="My current way for OSCP Certifications
+<meta property="og:title" content="Playing with Docker">
+<meta property="og:description" content="Learn how to use Docker
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/19/oscp-prepare/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/02/playing-with-docker/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/19/oscp-prepare/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/02/playing-with-docker/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,82 +145,74 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/19/oscp-prepare/" rel="bookmark" title="OSCP Prepare">OSCP Prepare</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/02/playing-with-docker/" rel="bookmark" title="Playing with Docker">Playing with Docker</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>My current way for OSCP Certifications</p>
+      <p>Learn how to use Docker</p>
 
-<h3 id="what-is-oscp">What is OSCP?</h3>
 <ul>
-  <li><a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/">What is OSCP</a></li>
-  <li><a href="http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf">Course Syllabus</a></li>
+  <li><a href="https://www.docker.com/">Docker Site</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Docker_(software)">Wikipedia</a></li>
 </ul>
 
-<h3 id="oscp-reviews">OSCP Reviews</h3>
-<ul>
-  <li>http://www.securitysift.com/offsec-pwb-oscp/</li>
-  <li>http://www.mogozobo.com/?p=1831</li>
-  <li>https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/</li>
-  <li>https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/</li>
-  <li>http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html</li>
-  <li>http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html</li>
-  <li>http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/</li>
-  <li>https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/</li>
-  <li>https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/</li>
-  <li>http://fourfourfourfour.co/2014/04/20/oscp-review/</li>
-  <li>http://netsec.ws/?p=398</li>
-  <li>http://www.jasonbernier.com/oscp-review/</li>
-  <li>http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html</li>
-  <li>https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/</li>
-  <li>http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/</li>
-  <li>https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/</li>
-  <li>http://buffered.io/posts/oscp-and-me/</li>
-  <li>http://www.en-lightn.com/?p=941</li>
-  <li>http://overflowsecurity.com/oscp-review-eagle11/</li>
-  <li>http://www.lo0.ro/2014/05/23/my-oscp-certification-review/</li>
-  <li>http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html</li>
-  <li>http://0xdeadcode.se/archives/165</li>
-  <li>http://www.exclarus.com/pentesting-with-kali-course-review-oscp/</li>
-  <li>http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/</li>
-  <li>http://blog.pauldrapeau.com/oscp/</li>
-</ul>
+<h3 id="first-steps-with-docker">First steps with Docker</h3>
 
-<h3 id="read">2 Read</h3>
-<ul>
-  <li>https://github.com/pwnwiki/pwnwiki.github.io</li>
-  <li>http://netsec.ws/?p=262</li>
-  <li>http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html</li>
-  <li>https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/</li>
-  <li>http://resources.infosecinstitute.com/author/nikhil-kumar/</li>
-  <li>https://www.offensive-security.com/metasploit-unleashed</li>
-  <li>http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow</li>
-</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># install docker</span>
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+sudo sh -c <span class="s2">&quot;echo deb https://get.docker.com/ubuntu docker main &gt; /etc/apt/sources.list.d/docker.list&quot;</span>
+sudo apt-get update
+sudo apt-get install lxc-docker
 
-<h3 id="books">Books</h3>
-<ul>
-  <li>Web Penetration Testing with Kali Linux</li>
-  <li>Penetration Testing: A Hands-On Introduction to Hacking</li>
-  <li>Mastering Kali Linux for Advanced Penetration Testing</li>
-  <li>Building Virtual Pentesting Labs for Advanced Penetration Testing</li>
-  <li>Penetration Testing with the Bash shell</li>
-  <li>Lee Allen - Advanced Penetration Testing for Highly-Secured Environments, The Ultimate Security Guide</li>
-  <li>Metasploit. The Penetration Tester-s Guide.</li>
-  <li>Himanshu Kumar - Learning Nessus for Penetration Testing</li>
-  <li>Rtfm: Red Team Field Manual</li>
-  <li>Brian Ward - How Linux Works - What Every Superuser Should Know</li>
-  <li>Gray Hat Hacking the Ethical Hacker’s Handbook</li>
-  <li>Black Hat Python Python Programming for Hackers and Pentesters</li>
-</ul>
+<span class="c"># launch simple container</span>
+sudo docker pull phusion/baseimage
+sudo docker run -i -t phusion/baseimage:latest /sbin/my_init -- bash -l
+sudo docker ps
 
-<h3 id="watch">2 Watch</h3>
-<ul>
-  <li>Баранцев - Тестирование защищенности веб-приложений</li>
-  <li>Advanced Penetration Testing</li>
-  <li>Packtpub - Kali Linux Web App Testing</li>
-  <li>Pentestit.ru video</li>
-  <li>Udemy - Certified Metasploit Framework Professional</li>
-</ul>
+<span class="c"># save container image</span>
+sudo docker commit &lt;container id&gt; baseimage-ssh
+sudo docker stop &lt;container id&gt;
+
+<span class="c"># launch container with demonisation</span>
+sudo docker run -d -i -t baseimage-ssh /sbin/my_init
+
+<span class="c"># get container IP</span>
+sudo docker inspect -f <span class="s2">&quot;&quot;</span> &lt;container id&gt;
+
+<span class="c"># launch container with ssh port forwarding</span>
+sudo docker stop &lt;container id&gt;
+sudo docker run --dns 192.168.0.1 -p 127.0.0.1:222:22 -d -i -t baseimage-ssh /sbin/my_init
+ssh -p <span class="m">222</span> root@localhost
+
+<span class="c"># install nginx in container, save</span>
+apt-get update
+apt-get install nginx
+service nginx start
+curl localhost
+
+<span class="nb">echo</span> <span class="s2">&quot;service nginx start&quot;</span> &gt; /etc/my_init.d/01_services.sh
+chmod a+x /etc/my_init.d/01_services.sh
+
+sudo docker ps
+sudo docker commit &lt;container id&gt; baseimage-nginx
+sudo docker stop &lt;container id&gt;
+
+<span class="c"># launch nginx image </span>
+sudo docker run --name docker-nginx --dns 192.168.0.1 -p 127.0.0.1:222:22 -p 127.0.0.1:8080:80 -d -i -t baseimage-nginx /sbin/my_init
+curl localhost:8080
+
+<span class="c"># stop nginx container</span>
+sudo docker stop docker-nginx
+
+<span class="c"># rollback to last image version</span>
+sudo docker run -i -t baseimage-nginx:latest /sbin/my_init --skip-startup-files -- bash -l
+
+<span class="c"># export container image </span>
+sudo docker save -o baseimage-nginx.img baseimage-nginx
+
+<span class="c"># import container image</span>
+sudo docker load -i baseimage-nginx.img</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -252,7 +244,7 @@
 
 
         </div>
-        <p class="byline"><strong>OSCP Prepare</strong> was published on <time datetime="2015-06-19T00:00:00+03:00">June 19, 2015</time> and last modified on <time datetime="2015-06-19">June 19, 2015</time>.</p>
+        <p class="byline"><strong>Playing with Docker</strong> was published on <time datetime="2015-07-02T00:00:00+03:00">July 02, 2015</time> and last modified on <time datetime="2015-07-02">July 02, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -266,11 +258,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/02/playing-with-docker/" title="Playing with Docker">Playing with Docker</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/" title="Pentest Tips and Tricks">Pentest Tips and Tricks</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/" title=" Linux-Unix-IT Tips and Tricks #3"> Linux-Unix-IT Tips and Tricks #3</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW for SSH in Linux">OTPW for SSH in Linux</a></li>
     
     </ul>
     <hr />

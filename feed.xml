@@ -5,13 +5,94 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-01T17:30:57+03:00</updated>
+<updated>2015-07-02T12:27:49+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Playing with Docker]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/02/playing-with-docker/" />
+  <id>https://jivoi.github.io/2015/07/02/playing-with-docker</id>
+  <updated>2015-07-02 12:10:18 +0300T00:00:00-00:00</updated>
+  <published>2015-07-02T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Learn how to use Docker&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker Site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Docker_(software)&quot;&gt;Wikipedia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;first-steps-with-docker&quot;&gt;First steps with Docker&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# install docker&lt;/span&gt;
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+sudo sh -c &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo deb https://get.docker.com/ubuntu docker main &amp;gt; /etc/apt/sources.list.d/docker.list&amp;quot;&lt;/span&gt;
+sudo apt-get update
+sudo apt-get install lxc-docker
+
+&lt;span class=&quot;c&quot;&gt;# launch simple container&lt;/span&gt;
+sudo docker pull phusion/baseimage
+sudo docker run -i -t phusion/baseimage:latest /sbin/my_init -- bash -l
+sudo docker ps
+
+&lt;span class=&quot;c&quot;&gt;# save container image&lt;/span&gt;
+sudo docker commit &amp;lt;container id&amp;gt; baseimage-ssh
+sudo docker stop &amp;lt;container id&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# launch container with demonisation&lt;/span&gt;
+sudo docker run -d -i -t baseimage-ssh /sbin/my_init
+
+&lt;span class=&quot;c&quot;&gt;# get container IP&lt;/span&gt;
+sudo docker inspect -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &amp;lt;container id&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# launch container with ssh port forwarding&lt;/span&gt;
+sudo docker stop &amp;lt;container id&amp;gt;
+sudo docker run --dns 192.168.0.1 -p 127.0.0.1:222:22 -d -i -t baseimage-ssh /sbin/my_init
+ssh -p &lt;span class=&quot;m&quot;&gt;222&lt;/span&gt; root@localhost
+
+&lt;span class=&quot;c&quot;&gt;# install nginx in container, save&lt;/span&gt;
+apt-get update
+apt-get install nginx
+service nginx start
+curl localhost
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;service nginx start&amp;quot;&lt;/span&gt; &amp;gt; /etc/my_init.d/01_services.sh
+chmod a+x /etc/my_init.d/01_services.sh
+
+sudo docker ps
+sudo docker commit &amp;lt;container id&amp;gt; baseimage-nginx
+sudo docker stop &amp;lt;container id&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# launch nginx image &lt;/span&gt;
+sudo docker run --name docker-nginx --dns 192.168.0.1 -p 127.0.0.1:222:22 -p 127.0.0.1:8080:80 -d -i -t baseimage-nginx /sbin/my_init
+curl localhost:8080
+
+&lt;span class=&quot;c&quot;&gt;# stop nginx container&lt;/span&gt;
+sudo docker stop docker-nginx
+
+&lt;span class=&quot;c&quot;&gt;# rollback to last image version&lt;/span&gt;
+sudo docker run -i -t baseimage-nginx:latest /sbin/my_init --skip-startup-files -- bash -l
+
+&lt;span class=&quot;c&quot;&gt;# export container image &lt;/span&gt;
+sudo docker save -o baseimage-nginx.img baseimage-nginx
+
+&lt;span class=&quot;c&quot;&gt;# import container image&lt;/span&gt;
+sudo docker load -i baseimage-nginx.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/02/playing-with-docker/&quot;&gt;Playing with Docker&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 02, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -787,6 +868,9 @@ ls *.png &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -j4 convert &lt
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# be carefull!!&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; D in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt; mount &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;$5~/ext4/ { print $1 }&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; sudo fsck.ext4 -nvf &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;D&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
 non-contiguous is a % of fragmentation
+
+e4defrag /
+e4defrag -c /
 
 &lt;span class=&quot;c&quot;&gt;# fragmentation for file&lt;/span&gt;
 filefrag -v /PATH/TO/FILE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -4686,50 +4770,6 @@ rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2013/09/01/cisco-ccna-prepare/&quot;&gt;Cisco CCNA Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on September 01, 2013.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Red Hat RHCE Prepare]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/" />
-  <id>https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare</id>
-  <updated>2013-06-19 14:09:19 +0400T00:00:00-00:00</updated>
-  <published>2013-06-19T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;The way that i went for RHCE Certification&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-rhce&quot;&gt;What is RHCE&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.redhat.com/en/services/certification/rhce&quot;&gt;RedHat Site&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Red_Hat_Certification_Program&quot;&gt;Wikipedia&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;courses&quot;&gt;Courses&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;RH300 - Fast prepare for RHCE include exam RHCSA and RHCE www.rhd.ru&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;UNIX and Linux System Administration Handbook by Evi Nemeth&lt;/li&gt;
-  &lt;li&gt;RHCE - RH254 student workbook&lt;/li&gt;
-  &lt;li&gt;LPI 101 and LPI 102 student workbooks&lt;/li&gt;
-  &lt;li&gt;RHCSA/RHCE Red Hat Linux Certification Study Guide&lt;/li&gt;
-  &lt;li&gt;Hands-on Guide to the Red Hat Exams: RHCSA and RHCE Cert Guide and Lab Manual&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Livelessons (RHCE) Certification Complete Video Course&lt;/li&gt;
-  &lt;li&gt;VTC Red Hat Certified Engineer (RHCE) - Exam EX300&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2013/06/19/red-hat-rhce-prepare/&quot;&gt;Red Hat RHCE Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2013.&lt;/p&gt;</content>
 </entry>
 
 </feed>

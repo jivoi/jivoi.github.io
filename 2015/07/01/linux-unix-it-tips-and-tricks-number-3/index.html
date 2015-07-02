@@ -217,6 +217,9 @@ ls *.png <span class="p">|</span> parallel -j4 convert <span class="o">{}</span>
 <span class="k">for</span> D in <span class="k">$(</span> mount <span class="p">|</span> awk <span class="s1">&#39;$5~/ext4/ { print $1 }&#39;</span> <span class="k">)</span><span class="p">;</span> <span class="k">do</span> sudo fsck.ext4 -nvf <span class="k">${</span><span class="nv">D</span><span class="k">}</span><span class="p">;</span> <span class="k">done</span>
 non-contiguous is a % of fragmentation
 
+e4defrag /
+e4defrag -c /
+
 <span class="c"># fragmentation for file</span>
 filefrag -v /PATH/TO/FILE</code></pre></div>
 
@@ -292,11 +295,11 @@ CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside an
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
+      <li><a href="https://jivoi.github.io/2015/07/02/playing-with-docker/" title="Playing with Docker">Playing with Docker</a></li>
+    
       <li><a href="https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/" title="Pentest Tips and Tricks">Pentest Tips and Tricks</a></li>
     
       <li><a href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" title="OTPW for SSH in Linux">OTPW for SSH in Linux</a></li>
-    
-      <li><a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" title="Linux-Unix-IT Tips and Tricks #2">Linux-Unix-IT Tips and Tricks #2</a></li>
     
     </ul>
     <hr />
