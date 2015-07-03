@@ -5,13 +5,31 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-03T19:22:27+03:00</updated>
+<updated>2015-07-04T00:22:55+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Открытые базы данных РФ]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf/" />
+  <id>https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf</id>
+  <updated>2015-07-04 00:03:54 +0300T00:00:00-00:00</updated>
+  <published>2015-07-04T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf/&quot;&gt;Открытые базы данных РФ&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 04, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -99,7 +117,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   </author>
   <content type="html">&lt;p&gt;My security bookmarks collection.&lt;/p&gt;
 
-&lt;p&gt;All that thing I need to pass OSCP, i think =)&lt;/p&gt;
+&lt;p&gt;All that things I need to pass OSCP, i think =)&lt;/p&gt;
 
 &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
 &lt;header&gt;
@@ -5319,58 +5337,6 @@ http://habrahabr.ru/post/260335/&lt;/p&gt;
 &lt;p&gt;Транспортный уровень - 4 номер.&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Как установить CentOS на %Linux% по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/" />
-  <id>https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh</id>
-  <updated>2014-01-03 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-03T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Как установить CentOS на другой %Linux% по SSH.
-Это нам нужно если мы хотим поменять архитектуру i386 на x64 или поставить более новую версии поверх старой, в случае замены CentOS на CentOS или же если мы хотим заменить ArchLinux на CentOS.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;Дано:&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Настроенный сервер с kickstart&lt;/li&gt;
-  &lt;li&gt;Сервер с CentOS любой версии который мы будем переустанавливать&lt;/li&gt;
-  &lt;li&gt;Прямые руки.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;initrd--vmlinuz--&quot;&gt;1. Скачиваем initrd и vmlinuz нужной версии&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -O /boot/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /boot/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;bootgrubgrubconf&quot;&gt;2. Правим /boot/grub/grub.conf&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;ks файл&lt;/li&gt;
-  &lt;li&gt;IP\GATE\NETMASK!**&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;title CentOS Remote Install
-root &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hd0,0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-kernel /boot/vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless
-initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;3.Правим порядок загрузки из консоли&lt;/h3&gt;
-&lt;p&gt;Предполагается, что наша конфигурация идет вторым пунктом меню.
-Мы указали grub попробовать загрузить ее один раз.
-Если что-то пойдет не так, вернемся к ранее установленному дистрибутиву после перезагрузки, через 120 секунд.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;root@localhost ~&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# echo &amp;#39;savedefault --default=1 --once&amp;#39; | grub --batch&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
