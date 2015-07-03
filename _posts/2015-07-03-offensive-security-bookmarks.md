@@ -13,7 +13,7 @@ share:
 ---
 My security bookmarks collection.
 
-All that thing I need to pass OSCP, i think =)
+All that things I need to pass OSCP, i think =)
 
 <section id="table-of-contents" class="toc">
 <header>
