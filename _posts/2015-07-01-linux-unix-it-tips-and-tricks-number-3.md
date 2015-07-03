@@ -108,3 +108,159 @@ CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside an
 {% highlight bash %}
 sudo lsof / | grep DEL | cut -f1 -d' ' | sort -u
 {% endhighlight %}
+
+### Increases TCPdump buffer
+{% highlight bash %}
+tcpdump -l -B 10000 host example.com
+{% endhighlight %}
+
+### Get Firefox bookmarks
+{% highlight bash %}
+sqlite3 ~/.mozilla/firefox/*.[dD]efault/places.sqlite "SELECT strftime('%d.%m.%Y %H:%M:%S', dateAdded/1000000, 'unixepoch', 'localtime'),url FROM moz_places, moz_bookmarks WHERE moz_places.id = moz_bookmarks.fk ORDER BY dateAdded;"
+{% endhighlight %}
+
+## SSL certs info
+{% highlight bash %}
+# show expire date of cert
+openssl x509 -enddate -noout -in certnew.cer
+# show all info of cert
+openssl x509 -text -noout -in certnew.cer
+# check that secret key (privkey.pem) is valid
+openssl rsa -noout -text -in privkey.pem
+{% endhighlight %}
+
+## Reset root password on RHEL7\CentOS7
+{% highlight bash %}
+grub linux16 to the end of the line add "rd.break  console=tty1"
+ctrl+x
+switch_root:/# mount -o remount,rw /sysroot
+switch_root:/# chroot /sysroot
+sh-4.2# passwd root
+sh-4.2# touch /.autorelabel
+exit
+{% endhighlight %}
+
+### Blacklisting firewire in Linux
+{% highlight bash %}
+find /lib/modules/`uname -r` -name *firewire*
+modinfo snd-firewire-lib
+modinfo firewire-core
+echo "blacklist firewire-core" > /etc/modprobe.d/blacklist-firewire.conf
+modprobe --showconfig | grep blacklist #show blacklist modules
+modprobe --showconfig | grep "^install" | grep "/bin"
+{% endhighlight %}
+
+### Install Ubuntu OpenStack
+{% highlight bash %}
+sudo apt-add-repository -y ppa:cloud-installer/stable
+sudo apt-get update
+sudo apt-get install -y openstack
+sudo openstack-install
+{% endhighlight %}
+
+### Vagrant WinXP
+{% highlight bash %}
+# https://www.bram.us/2014/09/24/modern-ie-vagrant-boxes/
+# http://aka.ms/vagrant-xp-ie6
+vagrant box add winxpie6 http://aka.ms/vagrant-xp-ie6
+vagrant init winxpie6
+vagrant up
+{% endhighlight %}
+
+### Simple Cut Video in linux
+{% highlight bash %}
+# cut video from 00:02:52 to 00:03:45
+ffmpeg -i original.mp4 -ss 00:02:52 -t 00:03:45 -async 1 -strict -2 cut.mp4
+{% endhighlight %}
+
+### How to clean TMP dir on boot
+{% highlight bash %}
+/etc/default/rcS
+#TMPTIME=0
+{% endhighlight %}
+
+### The port scan attack detector - PSAD
+{% highlight bash %}
+# http://cipherdyne.org/psad/
+apt-get install psad
+
+/etc/syslog.conf
+kern.info       |/var/lib/psad/psadfifo
+
+/etc/init.d/sysklogd restart
+/etc/init.d/klogd
+
+/etc/psad/psad.conf
+/etc/init.d/psad restart
+
+iptables -A INPUT -j LOG
+iptables -A FORWARD -j LOG
+
+view port scan report
+psad -S
+{% endhighlight %}
+
+### SNMPTrap using
+{% highlight bash %}
+/etc/default/snmpd
+TRAPDRUN=yes
+
+/etc/snmp/snmptrapd.conf
+authCommunity log public
+
+snmptrap -v 1 -c public 127.0.0.1 .1.3.6.1 localhost 6 17 '' .1.3.6.1 s "Just a test"
+
+/var/log/syslog
+Jun 23 12:14:47 linux snmptrapd[14221]: 2015-06-23 12:14:47 linux [127.0.0.1] (via UDP: [127.0.0.1]:58914->[127.0.0.1]) TRAP, SNMP v1, community public#012#011iso.3.6.1 Enterprise Specific Trap (17) Uptime: 1 day, 1:45:51.14#012#011iso.3.6.1 = STRING: "Just a test"
+
+# tcpdump snmptraps
+tcpdump -i eth1 -w test.log "udp and (src port 161 or 162)"
+tcpdump -w troubleshoot.pcap -vv -A -T snmp "(dst port 162) or (src port 161) or (dst port 161)
+{% endhighlight %}
+
+### Remove Postfix Resiver Header
+{% highlight bash %}
+# add to /etc/postfix/header_checks
+/^Received:.*with ESMTP/              IGNORE
+
+# add to /etc/postfix/main.cf
+mime_header_checks = regexp:/etc/postfix/header_checks header_checks = regexp:/etc/postfix/header_checks
+postmap /etc/postfix/header_checks
+postfix reload
+{% endhighlight %}
+
+### SSH key login only for one user
+{% highlight bash %}
+# add to /etc/ssh/sshd_config
+Match user stew
+PasswordAuthentication no
+
+or
+
+Match group dumbusers
+PasswordAuthentication no
+{% endhighlight %}
+
+### Revert Firefox to init state
+{% highlight bash %}
+open about:support and press <Refresh Firefox>
+{% endhighlight %}
+
+### Limit MySQL and MongoDB mem usage with Cgroups
+{% highlight bash %}
+cgcreate -g memory:DBLimitedGroup
+echo 16G > /sys/fs/cgroup/memory/DBLimitedGroup/memory.limit_in_bytes
+sync; echo 3 > /proc/sys/vm/drop_caches
+cgclassify -g memory:DBLimitedGroup `pidof mongod`
+cgclassify -g memory:DBLimitedGroup `pidof mysqld_safe`
+{% endhighlight %}
+
+### Strace using
+{% highlight bash %}
+$ strace php 2>&1 | grep php.ini
+$ strace -e open php 2>&1 | grep php.ini
+$ strace -e open,access 2>&1 | grep your-filename
+$ strace -p PID
+# strace -c -p PID
+$ strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80
+{% endhighlight %}
