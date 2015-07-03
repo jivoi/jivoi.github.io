@@ -5,13 +5,472 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-02T15:56:59+03:00</updated>
+<updated>2015-07-03T17:34:24+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Offensive Security Bookmarks]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/" />
+  <id>https://jivoi.github.io/2015/07/03/offensive-security-bookmarks</id>
+  <updated>2015-07-03 16:58:01 +0300T00:00:00-00:00</updated>
+  <published>2015-07-03T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;My security bookmarks collection.
+All that thing I need to pass OSCP, i think =)&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#security-blogs&quot; id=&quot;markdown-toc-security-blogs&quot;&gt;Security Blogs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#security-forums&quot; id=&quot;markdown-toc-security-forums&quot;&gt;Security Forums&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#security-methodologies&quot; id=&quot;markdown-toc-security-methodologies&quot;&gt;Security Methodologies&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#trainingclassesvideo&quot; id=&quot;markdown-toc-trainingclassesvideo&quot;&gt;Training/Classes/Video&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pentest-tools&quot; id=&quot;markdown-toc-pentest-tools&quot;&gt;Pentest Tools&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pentest-lab-iso-vms&quot; id=&quot;markdown-toc-pentest-lab-iso-vms&quot;&gt;Pentest Lab ISO-VMs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#metasploit&quot; id=&quot;markdown-toc-metasploit&quot;&gt;Metasploit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#net-scanners&quot; id=&quot;markdown-toc-net-scanners&quot;&gt;Net Scanners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#man-in-the-middle-attack&quot; id=&quot;markdown-toc-man-in-the-middle-attack&quot;&gt;Man-in-the-middle attack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#phase-1---reconnaissance-information-gathering-before-the-attack&quot; id=&quot;markdown-toc-phase-1---reconnaissance-information-gathering-before-the-attack&quot;&gt;Phase 1 - Reconnaissance: Information Gathering before the Attack&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#phase-11---people-and-orginizational&quot; id=&quot;markdown-toc-phase-11---people-and-orginizational&quot;&gt;Phase 1.1 - People and Orginizational&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#phase-12---infastructure&quot; id=&quot;markdown-toc-phase-12---infastructure&quot;&gt;Phase 1.2 - Infastructure&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#phase-12---tools&quot; id=&quot;markdown-toc-phase-12---tools&quot;&gt;Phase 1.2 - Tools&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#phase-2---enumeration-finding-attack-vectors&quot; id=&quot;markdown-toc-phase-2---enumeration-finding-attack-vectors&quot;&gt;Phase 2 - Enumeration: Finding Attack Vectors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#phase-3---exploitation-verifying-security-weaknesses&quot; id=&quot;markdown-toc-phase-3---exploitation-verifying-security-weaknesses&quot;&gt;Phase 3 - Exploitation: Verifying Security Weaknesses&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#dump-windows-password-hashes&quot; id=&quot;markdown-toc-dump-windows-password-hashes&quot;&gt;Dump Windows Password Hashes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#windows-passhing-the-hash&quot; id=&quot;markdown-toc-windows-passhing-the-hash&quot;&gt;Windows Passhing The Hash&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#windows-previlige-escalation&quot; id=&quot;markdown-toc-windows-previlige-escalation&quot;&gt;Windows Previlige Escalation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-previlige-escalation&quot; id=&quot;markdown-toc-linux-previlige-escalation&quot;&gt;Linux Previlige Escalation&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tunneling--port-forwarding&quot; id=&quot;markdown-toc-tunneling--port-forwarding&quot;&gt;Tunneling &amp;amp; Port Forwarding&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#xss-cheat-codes&quot; id=&quot;markdown-toc-xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#webshells&quot; id=&quot;markdown-toc-webshells&quot;&gt;WebShells&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#sql-injection-cheat-codes&quot; id=&quot;markdown-toc-sql-injection-cheat-codes&quot;&gt;SQL Injection Cheat Codes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rfilfi-tutorials&quot; id=&quot;markdown-toc-rfilfi-tutorials&quot;&gt;RFI/LFI Tutorials&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#nasm-tutorial&quot; id=&quot;markdown-toc-nasm-tutorial&quot;&gt;NASM Tutorial&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#buffer-overflow-tutorial&quot; id=&quot;markdown-toc-buffer-overflow-tutorial&quot;&gt;Buffer Overflow Tutorial&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#exploit-development&quot; id=&quot;markdown-toc-exploit-development&quot;&gt;Exploit Development&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#exploits-and-shellcodes&quot; id=&quot;markdown-toc-exploits-and-shellcodes&quot;&gt;Exploits and Shellcodes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#reverse-engineering&quot; id=&quot;markdown-toc-reverse-engineering&quot;&gt;Reverse Engineering&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#os-cheat-sheets-and-script-syntax&quot; id=&quot;markdown-toc-os-cheat-sheets-and-script-syntax&quot;&gt;OS Cheat Sheets and Script Syntax&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#passwords-wordlists-hashes-tools&quot; id=&quot;markdown-toc-passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;security-blogs&quot;&gt;Security Blogs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.inoreader.com/reader/api/0/bundle/opml/0014cd636b14&quot;&gt;https://www.inoreader.com/reader/api/0/bundle/opml/0014cd636b14&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;security-forums&quot;&gt;Security Forums&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://securityoverride.org/forum/index.php&quot;&gt;http://securityoverride.org/forum/index.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hackthissite.org/forums/index.php&quot;&gt;https://www.hackthissite.org/forums/index.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ethicalhacker.net/forums/index.php&quot;&gt;https://www.ethicalhacker.net/forums/index.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://evilzone.org/&quot;&gt;https://evilzone.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://forum.antichat.ru/&quot;&gt;http://forum.antichat.ru/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/&quot;&gt;https://rstforums.com/forum/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;security-methodologies&quot;&gt;Security Methodologies&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html&quot;&gt;http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pentest-standard.org/index.php/Main_Page&quot;&gt;http://www.pentest-standard.org/index.php/Main_Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project&quot;&gt;https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://yehg.net/lab/pr0js/misc/wasarg_owasp-tgv4_with_ref.php&quot;&gt;http://yehg.net/lab/pr0js/misc/wasarg_owasp-tgv4_with_ref.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.social-engineer.org/&quot;&gt;http://www.social-engineer.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://projects.webappsec.org/w/page/13246927/FrontPage&quot;&gt;http://projects.webappsec.org/w/page/13246927/FrontPage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;trainingclassesvideo&quot;&gt;Training/Classes/Video&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://exploit-exercises.com&quot;&gt;https://exploit-exercises.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cybrary.it/cyber-security/&quot;&gt;https://www.cybrary.it/cyber-security/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.irongeek.com/i.php?page=videos/aide-winter-2011&quot;&gt;http://www.irongeek.com/i.php?page=videos/aide-winter-2011&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lab.pentestit.ru/pentestlabs/3&quot;&gt;https://lab.pentestit.ru/pentestlabs/3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://trailofbits.github.io/ctf/&quot;&gt;https://trailofbits.github.io/ctf/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://smashthestack.org/&quot;&gt;http://smashthestack.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ctf.hcesperer.org/&quot;&gt;http://ctf.hcesperer.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic&quot;&gt;https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.com/calendar/embed?src=pe2ikdbe6b841od6e26ato0asc@group.calendar.google.com&amp;amp;gsessionid=OK&quot;&gt;https://www.google.com/calendar/embed?src=pe2ikdbe6b841od6e26ato0asc@group.calendar.google.com&amp;amp;gsessionid=OK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://crypto.stanford.edu/cs155/&quot;&gt;https://crypto.stanford.edu/cs155/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.offensive-security.com/metasploit-unleashed/&quot;&gt;https://www.offensive-security.com/metasploit-unleashed/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.irongeek.com/i.php?page=videos/metasploit-class&quot;&gt;http://www.irongeek.com/i.php?page=videos/metasploit-class&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitytube.net/&quot;&gt;http://www.securitytube.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://resources.infosecinstitute.com/&quot;&gt;http://resources.infosecinstitute.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cs.fsu.edu/~redwood/OffensiveSecurity/lectures.html&quot;&gt;https://www.cs.fsu.edu/~redwood/OffensiveSecurity/lectures.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ANlROJNWtCs&amp;amp;list=PLM0IiVYClP2vC3A6Uz_ESV86kBVYei5qx&quot;&gt;https://www.youtube.com/watch?v=ANlROJNWtCs&amp;amp;list=PLM0IiVYClP2vC3A6Uz_ESV86kBVYei5qx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=Sye3mu-EoTI&quot;&gt;https://www.youtube.com/watch?v=Sye3mu-EoTI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=GPjcSxyIIUc&quot;&gt;https://www.youtube.com/watch?v=GPjcSxyIIUc&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=kPxavpgos2I&quot;&gt;https://www.youtube.com/watch?v=kPxavpgos2I&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=pnqcHU2qFiA&quot;&gt;https://www.youtube.com/watch?v=pnqcHU2qFiA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitytube.net/video/7640&quot;&gt;http://www.securitytube.net/video/7640&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=y2zrEAwmdws&quot;&gt;https://www.youtube.com/watch?v=y2zrEAwmdws&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitytube.net/video/7735&quot;&gt;http://www.securitytube.net/video/7735&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pentest-tools&quot;&gt;Pentest Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sbilly/awesome-security&quot;&gt;https://github.com/sbilly/awesome-security&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/paragonie/awesome-appsec&quot;&gt;https://github.com/paragonie/awesome-appsec&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/enaqx/awesome-pentest&quot;&gt;https://github.com/enaqx/awesome-pentest&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/kahun/awesome-sysadmin#security&quot;&gt;https://github.com/kahun/awesome-sysadmin#security&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://beefproject.com/&quot;&gt;http://beefproject.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://xsser.03c8.net/&quot;&gt;https://xsser.03c8.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/fuzzdb/&quot;&gt;https://code.google.com/p/fuzzdb/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements&quot;&gt;https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://w3af.org/&quot;&gt;http://w3af.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/skipfish/&quot;&gt;https://code.google.com/p/skipfish/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sqlmap.org/&quot;&gt;http://sqlmap.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214&quot;&gt;https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/&quot;&gt;https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.justanotherhacker.com/projects/graudit.html&quot;&gt;http://www.justanotherhacker.com/projects/graudit.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/files/tags/tool&quot;&gt;https://packetstormsecurity.com/files/tags/tool&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pentest-lab-iso-vms&quot;&gt;Pentest Lab ISO-VMs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.kali.org/&quot;&gt;https://www.kali.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project&quot;&gt;https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blackarch.org/&quot;&gt;http://blackarch.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/owaspbwa/&quot;&gt;https://code.google.com/p/owaspbwa/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mavensecurity.com/web_security_dojo/&quot;&gt;https://www.mavensecurity.com/web_security_dojo/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hackingdojo.com/dojo-media/&quot;&gt;http://hackingdojo.com/dojo-media/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://informatica.uv.es/~carlos/docencia/netinvm/&quot;&gt;http://informatica.uv.es/~carlos/docencia/netinvm/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.bonsai-sec.com/en/research/moth.php&quot;&gt;http://www.bonsai-sec.com/en/research/moth.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/metasploitable/files/Metasploitable2/&quot;&gt;http://sourceforge.net/projects/metasploitable/files/Metasploitable2/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/lampsecurity/?source=navbar&quot;&gt;http://sourceforge.net/projects/lampsecurity/?source=navbar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hacking-lab.com/index.html&quot;&gt;https://www.hacking-lab.com/index.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/virtualhacking/files/&quot;&gt;http://sourceforge.net/projects/virtualhacking/files/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.irongeek.com/i.php?page=mutillidae/mutillidae-deliberately-vulnerable-php-owasp-top-10&quot;&gt;http://www.irongeek.com/i.php?page=mutillidae/mutillidae-deliberately-vulnerable-php-owasp-top-10&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.dvwa.co.uk/&quot;&gt;http://www.dvwa.co.uk/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/thebutterflytmp/&quot;&gt;http://sourceforge.net/projects/thebutterflytmp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://magikh0e.ihtb.org/pubPapers/&quot;&gt;http://magikh0e.ihtb.org/pubPapers/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;metasploit&quot;&gt;Metasploit&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://netsec.ws/?p=262&quot;&gt;http://netsec.ws/?p=262&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://seclists.org/metasploit/&quot;&gt;http://seclists.org/metasploit/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.offensive-security.com/metasploit-unleashed/Introduction/&quot;&gt;https://www.offensive-security.com/metasploit-unleashed/Introduction/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.offensive-security.com/metasploit-unleashed/Msfvenom&quot;&gt;http://www.offensive-security.com/metasploit-unleashed/Msfvenom&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://community.rapid7.com/community/metasploit/&quot;&gt;https://community.rapid7.com/community/metasploit/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitytube.net/video/711?q=METASPLOIT&quot;&gt;http://www.securitytube.net/video/711?q=METASPLOIT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikibooks.org/wiki/Metasploit&quot;&gt;https://en.wikibooks.org/wiki/Metasploit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/security-resources/sec560/misc_tools_sheet_v1.pdf&quot;&gt;https://www.sans.org/security-resources/sec560/misc_tools_sheet_v1.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://rmccurdy.com/scripts/Metasploit%20meterpreter%20cheat%20sheet%20reference.html&quot;&gt;http://rmccurdy.com/scripts/Metasploit%20meterpreter%20cheat%20sheet%20reference.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rapid7/metasploit-framework/wiki/Meterpreter&quot;&gt;https://github.com/rapid7/metasploit-framework/wiki/Meterpreter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.blackhat.com/presentations/bh-dc-10/Egypt/BlackHat-DC-2010-Egypt-UAV-slides.pdf&quot;&gt;https://www.blackhat.com/presentations/bh-dc-10/Egypt/BlackHat-DC-2010-Egypt-UAV-slides.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;net-scanners&quot;&gt;Net Scanners&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nmap.org/&quot;&gt;https://nmap.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nmap.org/nsedoc/&quot;&gt;https://nmap.org/nsedoc/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitytube.net/video/931&quot;&gt;http://www.securitytube.net/video/931&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nmap.org/nsedoc/&quot;&gt;https://nmap.org/nsedoc/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.openvas.org/&quot;&gt;http://www.openvas.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tenable.com/products/nessus-vulnerability-scanner&quot;&gt;http://www.tenable.com/products/nessus-vulnerability-scanner&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.rapid7.com/products/nexpose/compare-downloads.jsp&quot;&gt;https://www.rapid7.com/products/nexpose/compare-downloads.jsp&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.inguardians.com/research/docs/Skoudis_pentestsecrets.pdf&quot;&gt;http://www.inguardians.com/research/docs/Skoudis_pentestsecrets.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;man-in-the-middle-attack&quot;&gt;Man-in-the-middle attack&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.linuxsecurity.com/docs/PDF/dsniff-n-mirror.pdf&quot;&gt;http://www.linuxsecurity.com/docs/PDF/dsniff-n-mirror.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://media.techtarget.com/searchUnifiedCommunications/downloads/Seven_Deadliest_UC_Attacks_Ch3.pdf&quot;&gt;http://media.techtarget.com/searchUnifiedCommunications/downloads/Seven_Deadliest_UC_Attacks_Ch3.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/papers/wireless/cracking-air.pdf&quot;&gt;https://packetstormsecurity.com/papers/wireless/cracking-air.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.blackhat.com/presentations/bh-europe-03/bh-europe-03-valleri.pdf&quot;&gt;https://www.blackhat.com/presentations/bh-europe-03/bh-europe-03-valleri.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.defcon.org/images/defcon-17/dc-17-presentations/defcon-17-sam_bowne-hijacking_web_2.0.pdf&quot;&gt;https://www.defcon.org/images/defcon-17/dc-17-presentations/defcon-17-sam_bowne-hijacking_web_2.0.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.leetupload.com/database/Misc/Papers/Asta%20la%20Vista/18.Ettercap_Spoof.pdf&quot;&gt;http://www.leetupload.com/database/Misc/Papers/Asta%20la%20Vista/18.Ettercap_Spoof.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bandwidthco.com/nf.html&quot;&gt;http://bandwidthco.com/nf.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://articles.manugarg.com/arp_spoofing.pdf&quot;&gt;http://articles.manugarg.com/arp_spoofing.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://academy.delmar.edu/Courses/ITSY2430/eBooks/Ettercap(ManInTheMiddleAttack-tool).pdf&quot;&gt;http://academy.delmar.edu/Courses/ITSY2430/eBooks/Ettercap(ManInTheMiddleAttack-tool).pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ucci.it/docs/ICTSecurity-2004-26.pdf&quot;&gt;http://www.ucci.it/docs/ICTSecurity-2004-26.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;phase-1---reconnaissance-information-gathering-before-the-attack&quot;&gt;Phase 1 - Reconnaissance: Information Gathering before the Attack&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Open-source_intelligence&quot;&gt;https://en.wikipedia.org/wiki/Open-source_intelligence&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-1-social-networks/&quot;&gt;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-1-social-networks/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/&quot;&gt;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/&quot;&gt;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/Laramies/tactical-information-gathering&quot;&gt;http://www.slideshare.net/Laramies/tactical-information-gathering&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infond.fr/2010/05/toturial-footprinting.html&quot;&gt;http://www.infond.fr/2010/05/toturial-footprinting.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;phase-11---people-and-orginizational&quot;&gt;Phase 1.1 - People and Orginizational&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.spokeo.com/&quot;&gt;http://www.spokeo.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.spoke.com/&quot;&gt;http://www.spoke.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.xing.com/&quot;&gt;https://www.xing.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.zoominfo.com/&quot;&gt;http://www.zoominfo.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pipl.com/&quot;&gt;https://pipl.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.zabasearch.com/&quot;&gt;http://www.zabasearch.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.searchbug.com/&quot;&gt;http://www.searchbug.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://skipease.com/&quot;&gt;http://skipease.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://addictomatic.com/&quot;&gt;http://addictomatic.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://socialmention.com/&quot;&gt;http://socialmention.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://entitycube.research.microsoft.com/&quot;&gt;http://entitycube.research.microsoft.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.yasni.com/&quot;&gt;http://www.yasni.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.glassdoor.com/index.htm&quot;&gt;http://www.glassdoor.com/index.htm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://connect.data.com/&quot;&gt;https://connect.data.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://searchwww.sec.gov/EDGARFSClient/jsp/EDGAR_MainAccess.jsp&quot;&gt;https://searchwww.sec.gov/EDGARFSClient/jsp/EDGAR_MainAccess.jsp&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.tineye.com/&quot;&gt;https://www.tineye.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.peekyou.com/&quot;&gt;http://www.peekyou.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;phase-12---infastructure&quot;&gt;Phase 1.2 - Infastructure&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://uptime.netcraft.com/&quot;&gt;http://uptime.netcraft.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.shodanhq.com/&quot;&gt;http://www.shodanhq.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.domaintools.com/&quot;&gt;http://www.domaintools.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://centralops.net/co/&quot;&gt;http://centralops.net/co/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://whois.webhosting.info/&quot;&gt;http://whois.webhosting.info/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ssllabs.com/ssltest/analyze.html&quot;&gt;https://www.ssllabs.com/ssltest/analyze.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.exploit-db.com/google-hacking-database/&quot;&gt;https://www.exploit-db.com/google-hacking-database/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.my-ip-neighbors.com/&quot;&gt;http://www.my-ip-neighbors.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;phase-12---tools&quot;&gt;Phase 1.2 - Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.edge-security.com/theharvester.php&quot;&gt;http://www.edge-security.com/theharvester.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.edge-security.com/metagoofil.php&quot;&gt;http://www.edge-security.com/metagoofil.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.paterva.com/web6/&quot;&gt;http://www.paterva.com/web6/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/privacy/document-metadata-silent-killer-32974&quot;&gt;https://www.sans.org/reading-room/whitepapers/privacy/document-metadata-silent-killer-32974&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sno.phy.queensu.ca/~phil/exiftool/&quot;&gt;http://www.sno.phy.queensu.ca/~phil/exiftool/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.darkoperator.com/blog/2009/4/24/metadata-enumeration-with-foca.html&quot;&gt;http://www.darkoperator.com/blog/2009/4/24/metadata-enumeration-with-foca.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;phase-2---enumeration-finding-attack-vectors&quot;&gt;Phase 2 - Enumeration: Finding Attack Vectors&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/pentest-bookmarks/wiki/BookmarksList&quot;&gt;https://code.google.com/p/pentest-bookmarks/wiki/BookmarksList&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.0daysecurity.com/penetration-testing/enumeration.html&quot;&gt;http://www.0daysecurity.com/penetration-testing/enumeration.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/n3ko1/WrapMap&quot;&gt;https://github.com/n3ko1/WrapMap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cirt.net/Nikto2&quot;&gt;https://cirt.net/Nikto2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.unixmen.com/install-nikto-web-scanner-check-vulnerabilities/&quot;&gt;http://www.unixmen.com/install-nikto-web-scanner-check-vulnerabilities/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://seclist.us/autoenum-nmap-enumeration-and-script-scan-automation-script.html&quot;&gt;http://seclist.us/autoenum-nmap-enumeration-and-script-scan-automation-script.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://code.stephenmorley.org/articles/xampp-version-history-apache-mysql-php/&quot;&gt;http://code.stephenmorley.org/articles/xampp-version-history-apache-mysql-php/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://carnal0wnage.attackresearch.com/2007/07/over-in-lso-chat-we-were-talking-about.html&quot;&gt;http://carnal0wnage.attackresearch.com/2007/07/over-in-lso-chat-we-were-talking-about.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.iodigitalsec.com/windows-null-session-enumeration/&quot;&gt;http://www.iodigitalsec.com/windows-null-session-enumeration/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions&quot;&gt;https://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html&quot;&gt;http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/isaudits/autoenum&quot;&gt;https://github.com/isaudits/autoenum&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.webpronews.com/snmp-enumeration-and-hacking-2003-09&quot;&gt;http://www.webpronews.com/snmp-enumeration-and-hacking-2003-09&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://carnal0wnage.attackresearch.com/2007/07/over-in-lso-chat-we-were-talking-about.html&quot;&gt;http://carnal0wnage.attackresearch.com/2007/07/over-in-lso-chat-we-were-talking-about.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.iodigitalsec.com/windows-null-session-enumeration/&quot;&gt;http://www.iodigitalsec.com/windows-null-session-enumeration/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions&quot;&gt;http://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html&quot;&gt;http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.madirish.net/59&quot;&gt;http://www.madirish.net/59&lt;/a&gt;a&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;phase-3---exploitation-verifying-security-weaknesses&quot;&gt;Phase 3 - Exploitation: Verifying Security Weaknesses&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pwnwiki.io&quot;&gt;http://pwnwiki.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://download.vulnhub.com/pentesterlab/php_include_and_post_exploitation.pdf&quot;&gt;http://download.vulnhub.com/pentesterlab/php_include_and_post_exploitation.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ru.scribd.com/doc/245679444/hak5-org-OSXPost-Exploitation-copy-20130228-pdf#scribd&quot;&gt;http://ru.scribd.com/doc/245679444/hak5-org-OSXPost-Exploitation-copy-20130228-pdf#scribd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cyberwar.nl/d/hak5.org_LinuxUnixBSDPost-ExploitationCommandList_copy-20130228.pdf&quot;&gt;https://cyberwar.nl/d/hak5.org_LinuxUnixBSDPost-ExploitationCommandList_copy-20130228.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yumpu.com/en/document/view/14963680/from-sqli-to-shell&quot;&gt;https://www.yumpu.com/en/document/view/14963680/from-sqli-to-shell&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dump-windows-password-hashes&quot;&gt;Dump Windows Password Hashes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bernardodamele.blogspot.com/2011/12/dump-windows-password-hashes.html&quot;&gt;http://bernardodamele.blogspot.com/2011/12/dump-windows-password-hashes.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;windows-passhing-the-hash&quot;&gt;Windows Passhing The Hash&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.kali.org/penetration-testing/passing-hash-remote-desktop/&quot;&gt;https://www.kali.org/penetration-testing/passing-hash-remote-desktop/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.kali.org/kali-monday/pass-the-hash-toolkit-winexe-updates/&quot;&gt;https://www.kali.org/kali-monday/pass-the-hash-toolkit-winexe-updates/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;windows-previlige-escalation&quot;&gt;Windows Previlige Escalation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/0xdeafbeef/PSSecSnapshot&quot;&gt;https://github.com/0xdeafbeef/PSSecSnapshot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://it-ovid.blogspot.com/2012/02/windows-privilege-escalation.html&quot;&gt;http://it-ovid.blogspot.com/2012/02/windows-privilege-escalation.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.fuzzysecurity.com/tutorials/16.html&quot;&gt;http://www.fuzzysecurity.com/tutorials/16.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=kMG8IsCohHA&quot;&gt;http://www.youtube.com/watch?v=kMG8IsCohHA&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=_8xJaaQlpBo&quot;&gt;http://www.youtube.com/watch?v=_8xJaaQlpBo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.greyhathacker.net/?p=738&quot;&gt;http://www.greyhathacker.net/?p=738&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bernardodamele.blogspot.ru/2011/12/dump-windows-password-hashes.html&quot;&gt;http://bernardodamele.blogspot.ru/2011/12/dump-windows-password-hashes.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;linux-previlige-escalation&quot;&gt;Linux Previlige Escalation&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://incolumitas.com/wp-content/uploads/2012/12/blackhats_view.pdf&quot;&gt;http://incolumitas.com/wp-content/uploads/2012/12/blackhats_view.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation.html&quot;&gt;http://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/tools/audit/unix-privesc-check&quot;&gt;http://pentestmonkey.net/tools/audit/unix-privesc-check&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rebootuser.com/?page_id=1721&quot;&gt;http://www.rebootuser.com/?page_id=1721&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rebootuser.com/?p=1758&quot;&gt;http://www.rebootuser.com/?p=1758&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.rebootuser.com/?p=1623&quot;&gt;http://www.rebootuser.com/?p=1623&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://insidetrust.blogspot.nl/2011/04/quick-guide-to-linux-privilege.html&quot;&gt;http://insidetrust.blogspot.nl/2011/04/quick-guide-to-linux-privilege.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tunneling--port-forwarding&quot;&gt;Tunneling &amp;amp; Port Forwarding&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://highon.coffee/blog/reverse-shell-cheat-sheet/&quot;&gt;https://highon.coffee/blog/reverse-shell-cheat-sheet/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/&quot;&gt;https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html&quot;&gt;http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html&quot;&gt;http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.danscourses.com/Network-Penetration-Testing/metasploit-pivoting.html&quot;&gt;http://www.danscourses.com/Network-Penetration-Testing/metasploit-pivoting.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://carnal0wnage.attackresearch.com/2007/09/using-metasploit-to-pivot-through_06.html&quot;&gt;http://carnal0wnage.attackresearch.com/2007/09/using-metasploit-to-pivot-through_06.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.offensive-security.com/metasploit-unleashed/Portfwd&quot;&gt;http://www.offensive-security.com/metasploit-unleashed/Portfwd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.offensive-security.com/metasploit-unleashed/Pivoting&quot;&gt;http://www.offensive-security.com/metasploit-unleashed/Pivoting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.howtoforge.com/reverse-ssh-tunneling&quot;&gt;http://www.howtoforge.com/reverse-ssh-tunneling&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ftp.acc.umu.se/pub/putty/putty-0.57/htmldoc/Chapter7.html&quot;&gt;http://ftp.acc.umu.se/pub/putty/putty-0.57/htmldoc/Chapter7.html&lt;/a&gt;a&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.xenuser.org/xss-cheat-sheet/&quot;&gt;http://www.xenuser.org/xss-cheat-sheet/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/sseffa/11031135&quot;&gt;https://gist.github.com/sseffa/11031135&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://html5sec.org/&quot;&gt;https://html5sec.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;webshells&quot;&gt;WebShells&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.r57shell.net/&quot;&gt;http://www.r57shell.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/b374k/b374k&quot;&gt;https://github.com/b374k/b374k&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sql-injection-cheat-codes&quot;&gt;SQL Injection Cheat Codes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://resources.infosecinstitute.com/backdoor-sql-injection/&quot;&gt;http://resources.infosecinstitute.com/backdoor-sql-injection/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;rfilfi-tutorials&quot;&gt;RFI/LFI Tutorials&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://evilzone.org/tutorials/remote-file-inclusion%28rfi%29/&quot;&gt;https://evilzone.org/tutorials/remote-file-inclusion%28rfi%29/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.hackersonlineclub.com/lfi-rfi&quot;&gt;http://www.hackersonlineclub.com/lfi-rfi&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://0xzoidberg.wordpress.com/category/security/lfi-rfi/&quot;&gt;https://0xzoidberg.wordpress.com/category/security/lfi-rfi/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;nasm-tutorial&quot;&gt;NASM Tutorial&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm&quot;&gt;http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;buffer-overflow-tutorial&quot;&gt;Buffer Overflow Tutorial&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156&quot;&gt;http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html&quot;&gt;http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148&quot;&gt;http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html&quot;&gt;http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.reverse4you.org/showthread.php?t=1371&quot;&gt;https://forum.reverse4you.org/showthread.php?t=1371&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/seh-stack-based-windows-buffer-overflow.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/seh-stack-based-windows-buffer-overflow.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html&quot;&gt;http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exploit-development&quot;&gt;Exploit Development&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.corelan.be/index.php/articles/&quot;&gt;https://www.corelan.be/index.php/articles/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.fuzzysecurity.com/tutorials.html&quot;&gt;http://www.fuzzysecurity.com/tutorials.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/it-sec-catalog/wiki/Exploitation&quot;&gt;https://code.google.com/p/it-sec-catalog/wiki/Exploitation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.myne-us.com/2010/08/from-0x90-to-0x4c454554-journey-into.html&quot;&gt;http://www.myne-us.com/2010/08/from-0x90-to-0x4c454554-journey-into.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ethicalhacker.net/columns/heffner/smashing-the-modern-stack-for-fun-and-profit&quot;&gt;https://www.ethicalhacker.net/columns/heffner/smashing-the-modern-stack-for-fun-and-profit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://x9090.blogspot.ru/2010/03/tutorial-exploit-writting-tutorial-from.html&quot;&gt;http://x9090.blogspot.ru/2010/03/tutorial-exploit-writting-tutorial-from.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ref.x86asm.net/index.html&quot;&gt;http://ref.x86asm.net/index.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sploitfun.wordpress.com/2015/06/26/linux-x86-exploit-development-tutorial-series/&quot;&gt;https://sploitfun.wordpress.com/2015/06/26/linux-x86-exploit-development-tutorial-series/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.reverse4you.org/showthread.php?t=1371&quot;&gt;https://forum.reverse4you.org/showthread.php?t=1371&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;exploits-and-shellcodes&quot;&gt;Exploits and Shellcodes&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.exploit-db.com/&quot;&gt;https://www.exploit-db.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/&quot;&gt;https://packetstormsecurity.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securityfocus.com/bid&quot;&gt;http://www.securityfocus.com/bid&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nvd.nist.gov/&quot;&gt;https://nvd.nist.gov/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://osvdb.org/&quot;&gt;http://osvdb.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.secdocs.org/&quot;&gt;http://www.secdocs.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cvedetails.com/&quot;&gt;http://www.cvedetails.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cve.mitre.org/&quot;&gt;https://cve.mitre.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.windowsexploits.com/&quot;&gt;http://www.windowsexploits.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://farlight.org/index.html?type=shellcode&quot;&gt;http://farlight.org/index.html?type=shellcode&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://shell-storm.org/shellcode/&quot;&gt;http://shell-storm.org/shellcode/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;reverse-engineering&quot;&gt;Reverse Engineering&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html&quot;&gt;http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.woodmann.com/TiGa/idaseries.html&quot;&gt;http://www.woodmann.com/TiGa/idaseries.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://visi.kenshoto.com/viki/MainPage&quot;&gt;http://visi.kenshoto.com/viki/MainPage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.radare.org/r/&quot;&gt;http://www.radare.org/r/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.offensivecomputing.net/&quot;&gt;http://www.offensivecomputing.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.oldapps.com/&quot;&gt;http://www.oldapps.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.oldversion.com/&quot;&gt;http://www.oldversion.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.exploit-db.com/webapps/&quot;&gt;https://www.exploit-db.com/webapps/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mcafee.com/us/downloads/free-tools/hacmebooks.aspx&quot;&gt;http://www.mcafee.com/us/downloads/free-tools/hacmebooks.aspx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mcafee.com/us/downloads/free-tools/hacme-casino.aspx&quot;&gt;http://www.mcafee.com/us/downloads/free-tools/hacme-casino.aspx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mcafee.com/us/downloads/free-tools/hacmeshipping.aspx&quot;&gt;http://www.mcafee.com/us/downloads/free-tools/hacmeshipping.aspx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx&quot;&gt;http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;os-cheat-sheets-and-script-syntax&quot;&gt;OS Cheat Sheets and Script Syntax&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cheat-sheets.org/&quot;&gt;http://www.cheat-sheets.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ss64.com/nt/&quot;&gt;http://ss64.com/nt/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/22324-hacking-tools-windows.rst&quot;&gt;https://rstforums.com/forum/22324-hacking-tools-windows.rst&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/IPv4_subnetting_reference&quot;&gt;https://en.wikipedia.org/wiki/IPv4_subnetting_reference&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.nixtutor.com/linux/all-the-best-linux-cheat-sheets/&quot;&gt;http://www.nixtutor.com/linux/all-the-best-linux-cheat-sheets/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://shelldorado.com/shelltips/beginner.html&quot;&gt;http://shelldorado.com/shelltips/beginner.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mywiki.wooledge.org/BashPitfalls&quot;&gt;http://mywiki.wooledge.org/BashPitfalls&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&quot;&gt;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.robvanderwoude.com/ntadmincommands.php&quot;&gt;http://www.robvanderwoude.com/ntadmincommands.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&quot;&gt;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&quot;&gt;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&quot;&gt;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.irongeek.com/i.php?page=videos/password-exploitation-class&quot;&gt;http://www.irongeek.com/i.php?page=videos/password-exploitation-class&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cirt.net/passwords&quot;&gt;https://cirt.net/passwords&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://h.foofus.net/?page_id=51&quot;&gt;http://h.foofus.net/?page_id=51&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://h.foofus.net/?page_id=55&quot;&gt;http://h.foofus.net/?page_id=55&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://foofus.net/?page_id=63&quot;&gt;http://foofus.net/?page_id=63&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hashcrack.blogspot.ru/&quot;&gt;http://hashcrack.blogspot.ru/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.onlinehashcrack.com/&quot;&gt;http://www.onlinehashcrack.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.md5this.com/&quot;&gt;http://www.md5this.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://contest-2010.korelogic.com/wordlists.html&quot;&gt;http://contest-2010.korelogic.com/wordlists.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://packetstormsecurity.com/Crackers/wordlists/&quot;&gt;https://packetstormsecurity.com/Crackers/wordlists/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hqsoftwarecollection.blogspot.in/p/36gn-wordlist.html&quot;&gt;http://hqsoftwarecollection.blogspot.in/p/36gn-wordlist.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.skullsecurity.org/Passwords&quot;&gt;https://wiki.skullsecurity.org/Passwords&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/testing/pass-the-hash-attacks-tools-mitigation-33283&quot;&gt;https://www.sans.org/reading-room/whitepapers/testing/pass-the-hash-attacks-tools-mitigation-33283&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/testing/crack-pass-hash-33219&quot;&gt;https://www.sans.org/reading-room/whitepapers/testing/crack-pass-hash-33219&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nmap.org/ncrack/&quot;&gt;https://nmap.org/ncrack/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.openwall.com/john/&quot;&gt;http://www.openwall.com/john/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ophcrack.sourceforge.net/&quot;&gt;http://ophcrack.sourceforge.net/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://inquisb.github.io/keimpx/&quot;&gt;https://inquisb.github.io/keimpx/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/&quot;&gt;http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -1774,31 +2233,32 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 
 &lt;h3 id=&quot;oscp-reviews&quot;&gt;OSCP Reviews&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/li&gt;
-  &lt;li&gt;http://www.mogozobo.com/?p=1831&lt;/li&gt;
-  &lt;li&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/li&gt;
-  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/&lt;/li&gt;
-  &lt;li&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/li&gt;
-  &lt;li&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/li&gt;
-  &lt;li&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/li&gt;
-  &lt;li&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/li&gt;
-  &lt;li&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/li&gt;
-  &lt;li&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/li&gt;
-  &lt;li&gt;http://netsec.ws/?p=398&lt;/li&gt;
-  &lt;li&gt;http://www.jasonbernier.com/oscp-review/&lt;/li&gt;
-  &lt;li&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/li&gt;
-  &lt;li&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/li&gt;
-  &lt;li&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/li&gt;
-  &lt;li&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/li&gt;
-  &lt;li&gt;http://buffered.io/posts/oscp-and-me/&lt;/li&gt;
-  &lt;li&gt;http://www.en-lightn.com/?p=941&lt;/li&gt;
-  &lt;li&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/li&gt;
-  &lt;li&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/li&gt;
-  &lt;li&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/li&gt;
   &lt;li&gt;http://0xdeadcode.se/archives/165&lt;/li&gt;
-  &lt;li&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/li&gt;
   &lt;li&gt;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&lt;/li&gt;
+  &lt;li&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/li&gt;
   &lt;li&gt;http://blog.pauldrapeau.com/oscp/&lt;/li&gt;
+  &lt;li&gt;http://buffered.io/posts/oscp-and-me/&lt;/li&gt;
+  &lt;li&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/li&gt;
+  &lt;li&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/li&gt;
+  &lt;li&gt;http://netsec.ws/?p=398&lt;/li&gt;
+  &lt;li&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/li&gt;
+  &lt;li&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/li&gt;
+  &lt;li&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/li&gt;
+  &lt;li&gt;http://www.en-lightn.com/?p=941&lt;/li&gt;
+  &lt;li&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/li&gt;
+  &lt;li&gt;http://www.jasonbernier.com/oscp-review/&lt;/li&gt;
+  &lt;li&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/li&gt;
+  &lt;li&gt;http://www.mogozobo.com/?p=1831&lt;/li&gt;
+  &lt;li&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/li&gt;
+  &lt;li&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/li&gt;
+  &lt;li&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/li&gt;
+  &lt;li&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/li&gt;
+  &lt;li&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/li&gt;
+  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&lt;/li&gt;
+  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/&lt;/li&gt;
+  &lt;li&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/li&gt;
+  &lt;li&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/li&gt;
+  &lt;li&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
@@ -4757,57 +5217,6 @@ grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Blogging with github]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/01/blogging-with-github/" />
-  <id>https://jivoi.github.io/2014/01/01/blogging-with-github</id>
-  <updated>2014-01-01 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-01T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Use github and jekyll for blog&lt;/p&gt;
-
-&lt;h3 id=&quot;install-rvm-and-nvm&quot;&gt;Install RVM and NVM&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -sSL https://get.rvm.io &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash -s stable --ruby
-rvm install 2.1
-rvm use 2.1 --default
-gem install bundle
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
-nvm install 0.10
-nvm use 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clone-github-repo-and-install-jekyll&quot;&gt;Clone Github Repo and install Jekyll&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone -b develop https://github.com/jivoi/jivoi.github.io.git
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;jivoi.github.io
-bundle install
-git clone -b master https://github.com/jivoi/jivoi.github.io.git _site
-rake new_post
-vim _posts/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;build-and-test&quot;&gt;Build and Test&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;jekyll b
-jekyll s --host 0.0.0.0 --watch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;commit-and-deploy&quot;&gt;Commit and deploy&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git st
-git add _posts/*
-git push -u origin develop
-git commit -a -m &lt;span class=&quot;s2&quot;&gt;&amp;quot;blogging with github&amp;quot;&lt;/span&gt;
-rake deploy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/01/blogging-with-github/&quot;&gt;Blogging with github&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 01, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
