@@ -12,6 +12,7 @@ comments: True
 share:
 ---
 My security bookmarks collection.
+
 All that thing I need to pass OSCP, i think =)
 
 <section id="table-of-contents" class="toc">
@@ -25,7 +26,7 @@ All that thing I need to pass OSCP, i think =)
 </section><!-- /#table-of-contents -->
 
 ### Security Blogs
-- [https://www.inoreader.com/reader/api/0/bundle/opml/0014cd636b14](https://www.inoreader.com/reader/api/0/bundle/opml/0014cd636b14)
+- [My Security OPML](http://pastebin.com/raw.php?i=SxCsSFv8)
 
 ### Security Forums
 - [http://securityoverride.org/forum/index.php](http://securityoverride.org/forum/index.php)
