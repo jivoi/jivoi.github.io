@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-03T18:36:35+03:00</updated>
+<updated>2015-07-03T19:22:27+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1444,6 +1444,24 @@ or
   &lt;li&gt;&lt;a href=&quot;#tcpdump-with-ssh-stream&quot; id=&quot;markdown-toc-tcpdump-with-ssh-stream&quot;&gt;Tcpdump with SSH stream&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#linux-namespaces&quot; id=&quot;markdown-toc-linux-namespaces&quot;&gt;Linux Namespaces&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#show-daemon-list-need-to-restart-after-update&quot; id=&quot;markdown-toc-show-daemon-list-need-to-restart-after-update&quot;&gt;Show daemon list need to restart after update&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#increases-tcpdump-buffer&quot; id=&quot;markdown-toc-increases-tcpdump-buffer&quot;&gt;Increases TCPdump buffer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-firefox-bookmarks&quot; id=&quot;markdown-toc-get-firefox-bookmarks&quot;&gt;Get Firefox bookmarks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ssl-certs-info&quot; id=&quot;markdown-toc-ssl-certs-info&quot;&gt;SSL certs info&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reset-root-password-on-rhel7centos7&quot; id=&quot;markdown-toc-reset-root-password-on-rhel7centos7&quot;&gt;Reset root password on RHEL7\CentOS7&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#blacklisting-firewire-in-linux&quot; id=&quot;markdown-toc-blacklisting-firewire-in-linux&quot;&gt;Blacklisting firewire in Linux&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#install-ubuntu-openstack&quot; id=&quot;markdown-toc-install-ubuntu-openstack&quot;&gt;Install Ubuntu OpenStack&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#vagrant-winxp&quot; id=&quot;markdown-toc-vagrant-winxp&quot;&gt;Vagrant WinXP&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#simple-cut-video-in-linux&quot; id=&quot;markdown-toc-simple-cut-video-in-linux&quot;&gt;Simple Cut Video in linux&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#how-to-clean-tmp-dir-on-boot&quot; id=&quot;markdown-toc-how-to-clean-tmp-dir-on-boot&quot;&gt;How to clean TMP dir on boot&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#the-port-scan-attack-detector---psad&quot; id=&quot;markdown-toc-the-port-scan-attack-detector---psad&quot;&gt;The port scan attack detector - PSAD&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#snmptrap-using&quot; id=&quot;markdown-toc-snmptrap-using&quot;&gt;SNMPTrap using&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#remove-postfix-resiver-header&quot; id=&quot;markdown-toc-remove-postfix-resiver-header&quot;&gt;Remove Postfix Resiver Header&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#ssh-key-login-only-for-one-user&quot; id=&quot;markdown-toc-ssh-key-login-only-for-one-user&quot;&gt;SSH key login only for one user&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#revert-firefox-to-init-state&quot; id=&quot;markdown-toc-revert-firefox-to-init-state&quot;&gt;Revert Firefox to init state&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#limit-mysql-and-mongodb-mem-usage-with-cgroups&quot; id=&quot;markdown-toc-limit-mysql-and-mongodb-mem-usage-with-cgroups&quot;&gt;Limit MySQL and MongoDB mem usage with Cgroups&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#strace-using&quot; id=&quot;markdown-toc-strace-using&quot;&gt;Strace using&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -1523,6 +1541,146 @@ CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside an
 &lt;h3 id=&quot;show-daemon-list-need-to-restart-after-update&quot;&gt;Show daemon list need to restart after update&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo lsof / &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep DEL &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f1 -d&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -u&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;increases-tcpdump-buffer&quot;&gt;Increases TCPdump buffer&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tcpdump -l -B &lt;span class=&quot;m&quot;&gt;10000&lt;/span&gt; host example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-firefox-bookmarks&quot;&gt;Get Firefox bookmarks&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sqlite3 ~/.mozilla/firefox/*.&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dD&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;efault/places.sqlite &lt;span class=&quot;s2&quot;&gt;&amp;quot;SELECT strftime(&amp;#39;%d.%m.%Y %H:%M:%S&amp;#39;, dateAdded/1000000, &amp;#39;unixepoch&amp;#39;, &amp;#39;localtime&amp;#39;),url FROM moz_places, moz_bookmarks WHERE moz_places.id = moz_bookmarks.fk ORDER BY dateAdded;&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ssl-certs-info&quot;&gt;SSL certs info&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# show expire date of cert&lt;/span&gt;
+openssl x509 -enddate -noout -in certnew.cer
+&lt;span class=&quot;c&quot;&gt;# show all info of cert&lt;/span&gt;
+openssl x509 -text -noout -in certnew.cer
+&lt;span class=&quot;c&quot;&gt;# check that secret key (privkey.pem) is valid&lt;/span&gt;
+openssl rsa -noout -text -in privkey.pem&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;reset-root-password-on-rhel7centos7&quot;&gt;Reset root password on RHEL7\CentOS7&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grub linux16 to the end of the line add &lt;span class=&quot;s2&quot;&gt;&amp;quot;rd.break  console=tty1&amp;quot;&lt;/span&gt;
+ctrl+x
+switch_root:/# mount -o remount,rw /sysroot
+switch_root:/# chroot /sysroot
+sh-4.2# passwd root
+sh-4.2# touch /.autorelabel
+&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;blacklisting-firewire-in-linux&quot;&gt;Blacklisting firewire in Linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find /lib/modules/&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;uname -r&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; -name *firewire*
+modinfo snd-firewire-lib
+modinfo firewire-core
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;blacklist firewire-core&amp;quot;&lt;/span&gt; &amp;gt; /etc/modprobe.d/blacklist-firewire.conf
+modprobe --showconfig &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep blacklist &lt;span class=&quot;c&quot;&gt;#show blacklist modules&lt;/span&gt;
+modprobe --showconfig &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;^install&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;/bin&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-ubuntu-openstack&quot;&gt;Install Ubuntu OpenStack&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-add-repository -y ppa:cloud-installer/stable
+sudo apt-get update
+sudo apt-get install -y openstack
+sudo openstack-install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;vagrant-winxp&quot;&gt;Vagrant WinXP&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://www.bram.us/2014/09/24/modern-ie-vagrant-boxes/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http://aka.ms/vagrant-xp-ie6&lt;/span&gt;
+vagrant box add winxpie6 http://aka.ms/vagrant-xp-ie6
+vagrant init winxpie6
+vagrant up&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;simple-cut-video-in-linux&quot;&gt;Simple Cut Video in linux&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# cut video from 00:02:52 to 00:03:45&lt;/span&gt;
+ffmpeg -i original.mp4 -ss 00:02:52 -t 00:03:45 -async &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -strict -2 cut.mp4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;how-to-clean-tmp-dir-on-boot&quot;&gt;How to clean TMP dir on boot&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/default/rcS
+&lt;span class=&quot;c&quot;&gt;#TMPTIME=0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;the-port-scan-attack-detector---psad&quot;&gt;The port scan attack detector - PSAD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# http://cipherdyne.org/psad/&lt;/span&gt;
+apt-get install psad
+
+/etc/syslog.conf
+kern.info       &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;/var/lib/psad/psadfifo
+
+/etc/init.d/sysklogd restart
+/etc/init.d/klogd
+
+/etc/psad/psad.conf
+/etc/init.d/psad restart
+
+iptables -A INPUT -j LOG
+iptables -A FORWARD -j LOG
+
+view port scan report
+psad -S&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;snmptrap-using&quot;&gt;SNMPTrap using&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/default/snmpd
+&lt;span class=&quot;nv&quot;&gt;TRAPDRUN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;yes
+
+/etc/snmp/snmptrapd.conf
+authCommunity log public
+
+snmptrap -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public 127.0.0.1 .1.3.6.1 localhost &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt; .1.3.6.1 s &lt;span class=&quot;s2&quot;&gt;&amp;quot;Just a test&amp;quot;&lt;/span&gt;
+
+/var/log/syslog
+Jun &lt;span class=&quot;m&quot;&gt;23&lt;/span&gt; 12:14:47 linux snmptrapd&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;14221&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;: 2015-06-23 12:14:47 linux &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;via UDP: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;:58914-&amp;gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;127.0.0.1&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; TRAP, SNMP v1, community public#012#011iso.3.6.1 Enterprise Specific Trap &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;17&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Uptime: &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; day, 1:45:51.14#012#011iso.3.6.1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; STRING: &lt;span class=&quot;s2&quot;&gt;&amp;quot;Just a test&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# tcpdump snmptraps&lt;/span&gt;
+tcpdump -i eth1 -w test.log &lt;span class=&quot;s2&quot;&gt;&amp;quot;udp and (src port 161 or 162)&amp;quot;&lt;/span&gt;
+tcpdump -w troubleshoot.pcap -vv -A -T snmp &lt;span class=&quot;err&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dst port 162&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; or &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;src port 161&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; or &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;dst port 161&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;remove-postfix-resiver-header&quot;&gt;Remove Postfix Resiver Header&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# add to /etc/postfix/header_checks&lt;/span&gt;
+/^Received:.*with ESMTP/              IGNORE
+
+&lt;span class=&quot;c&quot;&gt;# add to /etc/postfix/main.cf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mime_header_checks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; regexp:/etc/postfix/header_checks &lt;span class=&quot;nv&quot;&gt;header_checks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; regexp:/etc/postfix/header_checks
+postmap /etc/postfix/header_checks
+postfix reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ssh-key-login-only-for-one-user&quot;&gt;SSH key login only for one user&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# add to /etc/ssh/sshd_config&lt;/span&gt;
+Match user stew
+PasswordAuthentication no
+
+or
+
+Match group dumbusers
+PasswordAuthentication no&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;revert-firefox-to-init-state&quot;&gt;Revert Firefox to init state&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;open about:support and press &amp;lt;Refresh Firefox&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limit-mysql-and-mongodb-mem-usage-with-cgroups&quot;&gt;Limit MySQL and MongoDB mem usage with Cgroups&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cgcreate -g memory:DBLimitedGroup
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;16G &amp;gt; /sys/fs/cgroup/memory/DBLimitedGroup/memory.limit_in_bytes
+sync&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &amp;gt; /proc/sys/vm/drop_caches
+cgclassify -g memory:DBLimitedGroup &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;pidof mongod&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+cgclassify -g memory:DBLimitedGroup &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;pidof mysqld_safe&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;strace-using&quot;&gt;Strace using&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace php 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep php.ini
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e open php 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep php.ini
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e open,access 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep your-filename
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -p PID
+&lt;span class=&quot;c&quot;&gt;# strace -c -p PID&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>

@@ -170,6 +170,24 @@
   <li><a href="#tcpdump-with-ssh-stream" id="markdown-toc-tcpdump-with-ssh-stream">Tcpdump with SSH stream</a></li>
   <li><a href="#linux-namespaces" id="markdown-toc-linux-namespaces">Linux Namespaces</a></li>
   <li><a href="#show-daemon-list-need-to-restart-after-update" id="markdown-toc-show-daemon-list-need-to-restart-after-update">Show daemon list need to restart after update</a></li>
+  <li><a href="#increases-tcpdump-buffer" id="markdown-toc-increases-tcpdump-buffer">Increases TCPdump buffer</a></li>
+  <li><a href="#get-firefox-bookmarks" id="markdown-toc-get-firefox-bookmarks">Get Firefox bookmarks</a></li>
+  <li><a href="#ssl-certs-info" id="markdown-toc-ssl-certs-info">SSL certs info</a></li>
+  <li><a href="#reset-root-password-on-rhel7centos7" id="markdown-toc-reset-root-password-on-rhel7centos7">Reset root password on RHEL7\CentOS7</a>    <ul>
+      <li><a href="#blacklisting-firewire-in-linux" id="markdown-toc-blacklisting-firewire-in-linux">Blacklisting firewire in Linux</a></li>
+      <li><a href="#install-ubuntu-openstack" id="markdown-toc-install-ubuntu-openstack">Install Ubuntu OpenStack</a></li>
+      <li><a href="#vagrant-winxp" id="markdown-toc-vagrant-winxp">Vagrant WinXP</a></li>
+      <li><a href="#simple-cut-video-in-linux" id="markdown-toc-simple-cut-video-in-linux">Simple Cut Video in linux</a></li>
+      <li><a href="#how-to-clean-tmp-dir-on-boot" id="markdown-toc-how-to-clean-tmp-dir-on-boot">How to clean TMP dir on boot</a></li>
+      <li><a href="#the-port-scan-attack-detector---psad" id="markdown-toc-the-port-scan-attack-detector---psad">The port scan attack detector - PSAD</a></li>
+      <li><a href="#snmptrap-using" id="markdown-toc-snmptrap-using">SNMPTrap using</a></li>
+      <li><a href="#remove-postfix-resiver-header" id="markdown-toc-remove-postfix-resiver-header">Remove Postfix Resiver Header</a></li>
+      <li><a href="#ssh-key-login-only-for-one-user" id="markdown-toc-ssh-key-login-only-for-one-user">SSH key login only for one user</a></li>
+      <li><a href="#revert-firefox-to-init-state" id="markdown-toc-revert-firefox-to-init-state">Revert Firefox to init state</a></li>
+      <li><a href="#limit-mysql-and-mongodb-mem-usage-with-cgroups" id="markdown-toc-limit-mysql-and-mongodb-mem-usage-with-cgroups">Limit MySQL and MongoDB mem usage with Cgroups</a></li>
+      <li><a href="#strace-using" id="markdown-toc-strace-using">Strace using</a></li>
+    </ul>
+  </li>
 </ul>
 
   </div>
@@ -249,6 +267,146 @@ CLONE_NEWUSER: User Namespaces. Here, user and group IDs are different inside an
 <h3 id="show-daemon-list-need-to-restart-after-update">Show daemon list need to restart after update</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo lsof / <span class="p">|</span> grep DEL <span class="p">|</span> cut -f1 -d<span class="s1">&#39; &#39;</span> <span class="p">|</span> sort -u</code></pre></div>
+
+<h3 id="increases-tcpdump-buffer">Increases TCPdump buffer</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">tcpdump -l -B <span class="m">10000</span> host example.com</code></pre></div>
+
+<h3 id="get-firefox-bookmarks">Get Firefox bookmarks</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sqlite3 ~/.mozilla/firefox/*.<span class="o">[</span>dD<span class="o">]</span>efault/places.sqlite <span class="s2">&quot;SELECT strftime(&#39;%d.%m.%Y %H:%M:%S&#39;, dateAdded/1000000, &#39;unixepoch&#39;, &#39;localtime&#39;),url FROM moz_places, moz_bookmarks WHERE moz_places.id = moz_bookmarks.fk ORDER BY dateAdded;&quot;</span></code></pre></div>
+
+<h2 id="ssl-certs-info">SSL certs info</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># show expire date of cert</span>
+openssl x509 -enddate -noout -in certnew.cer
+<span class="c"># show all info of cert</span>
+openssl x509 -text -noout -in certnew.cer
+<span class="c"># check that secret key (privkey.pem) is valid</span>
+openssl rsa -noout -text -in privkey.pem</code></pre></div>
+
+<h2 id="reset-root-password-on-rhel7centos7">Reset root password on RHEL7\CentOS7</h2>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">grub linux16 to the end of the line add <span class="s2">&quot;rd.break  console=tty1&quot;</span>
+ctrl+x
+switch_root:/# mount -o remount,rw /sysroot
+switch_root:/# chroot /sysroot
+sh-4.2# passwd root
+sh-4.2# touch /.autorelabel
+<span class="nb">exit</span></code></pre></div>
+
+<h3 id="blacklisting-firewire-in-linux">Blacklisting firewire in Linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">find /lib/modules/<span class="sb">`</span>uname -r<span class="sb">`</span> -name *firewire*
+modinfo snd-firewire-lib
+modinfo firewire-core
+<span class="nb">echo</span> <span class="s2">&quot;blacklist firewire-core&quot;</span> &gt; /etc/modprobe.d/blacklist-firewire.conf
+modprobe --showconfig <span class="p">|</span> grep blacklist <span class="c">#show blacklist modules</span>
+modprobe --showconfig <span class="p">|</span> grep <span class="s2">&quot;^install&quot;</span> <span class="p">|</span> grep <span class="s2">&quot;/bin&quot;</span></code></pre></div>
+
+<h3 id="install-ubuntu-openstack">Install Ubuntu OpenStack</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-add-repository -y ppa:cloud-installer/stable
+sudo apt-get update
+sudo apt-get install -y openstack
+sudo openstack-install</code></pre></div>
+
+<h3 id="vagrant-winxp">Vagrant WinXP</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># https://www.bram.us/2014/09/24/modern-ie-vagrant-boxes/</span>
+<span class="c"># http://aka.ms/vagrant-xp-ie6</span>
+vagrant box add winxpie6 http://aka.ms/vagrant-xp-ie6
+vagrant init winxpie6
+vagrant up</code></pre></div>
+
+<h3 id="simple-cut-video-in-linux">Simple Cut Video in linux</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># cut video from 00:02:52 to 00:03:45</span>
+ffmpeg -i original.mp4 -ss 00:02:52 -t 00:03:45 -async <span class="m">1</span> -strict -2 cut.mp4</code></pre></div>
+
+<h3 id="how-to-clean-tmp-dir-on-boot">How to clean TMP dir on boot</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/default/rcS
+<span class="c">#TMPTIME=0</span></code></pre></div>
+
+<h3 id="the-port-scan-attack-detector---psad">The port scan attack detector - PSAD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># http://cipherdyne.org/psad/</span>
+apt-get install psad
+
+/etc/syslog.conf
+kern.info       <span class="p">|</span>/var/lib/psad/psadfifo
+
+/etc/init.d/sysklogd restart
+/etc/init.d/klogd
+
+/etc/psad/psad.conf
+/etc/init.d/psad restart
+
+iptables -A INPUT -j LOG
+iptables -A FORWARD -j LOG
+
+view port scan report
+psad -S</code></pre></div>
+
+<h3 id="snmptrap-using">SNMPTrap using</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/default/snmpd
+<span class="nv">TRAPDRUN</span><span class="o">=</span>yes
+
+/etc/snmp/snmptrapd.conf
+authCommunity log public
+
+snmptrap -v <span class="m">1</span> -c public 127.0.0.1 .1.3.6.1 localhost <span class="m">6</span> <span class="m">17</span> <span class="s1">&#39;&#39;</span> .1.3.6.1 s <span class="s2">&quot;Just a test&quot;</span>
+
+/var/log/syslog
+Jun <span class="m">23</span> 12:14:47 linux snmptrapd<span class="o">[</span>14221<span class="o">]</span>: 2015-06-23 12:14:47 linux <span class="o">[</span>127.0.0.1<span class="o">]</span> <span class="o">(</span>via UDP: <span class="o">[</span>127.0.0.1<span class="o">]</span>:58914-&gt;<span class="o">[</span>127.0.0.1<span class="o">])</span> TRAP, SNMP v1, community public#012#011iso.3.6.1 Enterprise Specific Trap <span class="o">(</span>17<span class="o">)</span> Uptime: <span class="m">1</span> day, 1:45:51.14#012#011iso.3.6.1 <span class="o">=</span> STRING: <span class="s2">&quot;Just a test&quot;</span>
+
+<span class="c"># tcpdump snmptraps</span>
+tcpdump -i eth1 -w test.log <span class="s2">&quot;udp and (src port 161 or 162)&quot;</span>
+tcpdump -w troubleshoot.pcap -vv -A -T snmp <span class="err">&quot;</span><span class="o">(</span>dst port 162<span class="o">)</span> or <span class="o">(</span>src port 161<span class="o">)</span> or <span class="o">(</span>dst port 161<span class="o">)</span></code></pre></div>
+
+<h3 id="remove-postfix-resiver-header">Remove Postfix Resiver Header</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># add to /etc/postfix/header_checks</span>
+/^Received:.*with ESMTP/              IGNORE
+
+<span class="c"># add to /etc/postfix/main.cf</span>
+<span class="nv">mime_header_checks</span> <span class="o">=</span> regexp:/etc/postfix/header_checks <span class="nv">header_checks</span> <span class="o">=</span> regexp:/etc/postfix/header_checks
+postmap /etc/postfix/header_checks
+postfix reload</code></pre></div>
+
+<h3 id="ssh-key-login-only-for-one-user">SSH key login only for one user</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># add to /etc/ssh/sshd_config</span>
+Match user stew
+PasswordAuthentication no
+
+or
+
+Match group dumbusers
+PasswordAuthentication no</code></pre></div>
+
+<h3 id="revert-firefox-to-init-state">Revert Firefox to init state</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">open about:support and press &lt;Refresh Firefox&gt;</code></pre></div>
+
+<h3 id="limit-mysql-and-mongodb-mem-usage-with-cgroups">Limit MySQL and MongoDB mem usage with Cgroups</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cgcreate -g memory:DBLimitedGroup
+<span class="nb">echo </span>16G &gt; /sys/fs/cgroup/memory/DBLimitedGroup/memory.limit_in_bytes
+sync<span class="p">;</span> <span class="nb">echo </span><span class="m">3</span> &gt; /proc/sys/vm/drop_caches
+cgclassify -g memory:DBLimitedGroup <span class="sb">`</span>pidof mongod<span class="sb">`</span>
+cgclassify -g memory:DBLimitedGroup <span class="sb">`</span>pidof mysqld_safe<span class="sb">`</span></code></pre></div>
+
+<h3 id="strace-using">Strace using</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>strace php 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep php.ini
+<span class="nv">$ </span>strace -e open php 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep php.ini
+<span class="nv">$ </span>strace -e open,access 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep your-filename
+<span class="nv">$ </span>strace -p PID
+<span class="c"># strace -c -p PID</span>
+<span class="nv">$ </span>strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80</code></pre></div>
 
 
       <hr />
