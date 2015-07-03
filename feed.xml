@@ -5,13 +5,84 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-03T17:53:47+03:00</updated>
+<updated>2015-07-03T18:36:35+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Playing with Sysdig]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" />
+  <id>https://jivoi.github.io/2015/07/03/playing-with-sysdig</id>
+  <updated>2015-07-03 18:32:42 +0300T00:00:00-00:00</updated>
+  <published>2015-07-03T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Learn how to use Sysdig&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sysdig.org/&quot;&gt;Sysdig Site&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sysdig.org/wiki/&quot;&gt;Sysdig Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;first-steps-with-sysdig&quot;&gt;First steps with Sysdig&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# install &lt;/span&gt;
+curl -s https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; apt-key add -
+curl -s -o /etc/apt/sources.list.d/draios.list http://download.draios.com/stable/deb/draios.list
+apt-get update
+apt-get -y install linux-headers-&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;uname -r&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+apt-get -y install sysdig
+
+&lt;span class=&quot;c&quot;&gt;# capturing and reading events&lt;/span&gt;
+sysdig -vDw filename
+sysdig -vDr filename
+
+&lt;span class=&quot;c&quot;&gt;# filtering the data&lt;/span&gt;
+sysdig -l
+sysdig -vDr filename  &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=sshd&amp;quot;&lt;/span&gt;
+sysdig -vDr filename  &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=sshd and evt.type=accept and evt.dir=&amp;lt;&amp;quot;&lt;/span&gt;
+sysdig -vDr filename  &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=sshd and evt.type=read and evt.dir=&amp;lt;&amp;quot;&lt;/span&gt;
+sysdig -s &lt;span class=&quot;m&quot;&gt;65536&lt;/span&gt; -vSzw nginx.scap &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=nginx&amp;quot;&lt;/span&gt;
+sysdig -s &lt;span class=&quot;m&quot;&gt;65536&lt;/span&gt; -vSzw httpd.scap &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=httpd&amp;quot;&lt;/span&gt;
+sysdig -r httpd.scap -j -p &lt;span class=&quot;s2&quot;&gt;&amp;quot;%evt.time %fd.directory %fd.filename&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;evt.type=open and evt.dir=&amp;lt;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# analyzing syslog with sysdig&lt;/span&gt;
+sysdig -c spy_syslog
+sysdig -c spy_syslog &lt;span class=&quot;s1&quot;&gt;&amp;#39;syslog.severity &amp;lt; 4 and proc.name=logger&amp;#39;&lt;/span&gt;
+sysdig -F -w trace.scap evt.is_syslog&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# analyzing application logs with sysdig&lt;/span&gt;
+sysdig -c spy_logs
+sysdig -c spy_logs proc.name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;httpd and evt.buffer contains GET
+sysdig -r system.scap -c spy_logs &lt;span class=&quot;s2&quot;&gt;&amp;quot;request.scap 1000&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;evt.buffer contains Database&amp;quot;&lt;/span&gt;
+-c spy_logs “request.scap 1000″ means: &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; each event selected, save 1000ms of system activity before it happened and 1000ms of activity after it happened, but just &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the thread that generated the event, and save it to request.scap
+
+“evt.buffer contains Database” is our filter &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; selecting events, which we use to isolate the specific log entry we’re interested in &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;and in fact, sysdig confirms the success of our filter by showing the one log message we wanted to isolate in this &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# lsof + filters&lt;/span&gt;
+sysdig -c lsof &lt;span class=&quot;s2&quot;&gt;&amp;quot;proc.name=sshd&amp;quot;&lt;/span&gt;
+sysdig -c lsof &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;fd.type=ipv4 and user.name=root&amp;#39;&amp;quot;&lt;/span&gt;
+sysdig -c lsof &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;fd.name contains /etc&amp;#39;&amp;quot;&lt;/span&gt;
+sysdig -c ps &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;fd.type=ipv4&amp;#39;&amp;quot;&lt;/span&gt;
+sysdig -c ps &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;#39;fd.name contains /etc or fd.type=ipv4&amp;#39;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# chisels(Lua scripts)&lt;/span&gt;
+sysdig -c topprocs_cpu
+sysdig -c topprocs_net
+sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/playing-with-sysdig/&quot;&gt;Playing with Sysdig&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -5142,82 +5213,6 @@ initrd /boot/initrd_remote.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/03/install-centos-over-centos-by-ssh/&quot;&gt;Как установить CentOS на %Linux% по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 03, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Установка CentOS из под FreeBSD по SSH]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" />
-  <id>https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh</id>
-  <updated>2014-01-02 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-02T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;Дано:&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Настроенный сервер с kickstart&lt;/li&gt;
-  &lt;li&gt;Сервер с FreeBSD любой версии который будем переустанавливать&lt;/li&gt;
-  &lt;li&gt;Прямые руки. =)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;grub2--e2fsprogs--freebsd&quot;&gt;1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/ports/sysutils/grub2&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;make install
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/ports/sysutils/e2fsprogs&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;make install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;tmp-ext2--&quot;&gt;2.Создаем на разделе /tmp ext2 файловую систему&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
-/dev/amrd0s1f on /tmp &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ufs, &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;, soft-updates&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-umount /tmp
-mke2fs /dev/amrd0s1f
-mount -t ext2fs /dev/amrd0s1f /mnt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!&lt;/p&gt;
-
-&lt;h3 id=&quot;ext2--initrd--vmlinuz--&quot;&gt;3. Копируем на ext2 раздел initrd и vmlinuz нужной версии&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz
-
-wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;grub2--mbr----&quot;&gt;4.Устанавливаем grub2 в MBR и создаем кофиг загрузки&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grub2-install /dev/amrd0
-grub-mkconfig
-/usr/local/etc/grub.d/00_header
-/usr/local/etc/grub.d/40_custom
-grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Нужно поправить /usr/local/etc/grub.d/00_header выставив default=1
-В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f&lt;/li&gt;
-  &lt;li&gt;ks файл&lt;/li&gt;
-  &lt;li&gt;IP\GATE\NETMASK!&lt;/li&gt;
-  &lt;li&gt;НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;menuentry &lt;span class=&quot;s2&quot;&gt;&amp;quot;CentOS&amp;quot;&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        insmod ext2
-        &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;(hd0,1,f)&amp;#39;&lt;/span&gt;
-        linux /vmlinuz_remote &lt;span class=&quot;nv&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US &lt;span class=&quot;nv&quot;&gt;keymap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;us &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ &lt;span class=&quot;nv&quot;&gt;ks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://ks.example.com/ks.cfg vnc &lt;span class=&quot;nv&quot;&gt;vncpassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;qwe123 &lt;span class=&quot;nv&quot;&gt;ksdevice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0 &lt;span class=&quot;nv&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.10 &lt;span class=&quot;nv&quot;&gt;netmask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;255.255.255.0 &lt;span class=&quot;nv&quot;&gt;gateway&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.1 &lt;span class=&quot;nv&quot;&gt;dns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8.8.8.8 noselinux headless&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/&quot;&gt;Установка CentOS из под FreeBSD по SSH&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 02, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

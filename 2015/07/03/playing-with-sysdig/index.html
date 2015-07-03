@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Cisco CCNA Prepare &#8211; EK</title>
-<meta name="description" content="The way that i went for CCNA Certification
+<title>Playing with Sysdig &#8211; EK</title>
+<meta name="description" content="Learn how to use Sysdig
 
 ">
-<meta name="keywords" content="network, sysadm, cisco">
+<meta name="keywords" content="sysdig, linux, sysadm">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Cisco CCNA Prepare">
-<meta name="twitter:description" content="The way that i went for CCNA Certification
+<meta name="twitter:title" content="Playing with Sysdig">
+<meta name="twitter:description" content="Learn how to use Sysdig
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,18 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cisco CCNA Prepare">
-<meta property="og:description" content="The way that i went for CCNA Certification
+<meta property="og:title" content="Playing with Sysdig">
+<meta property="og:description" content="Learn how to use Sysdig
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2013/09/01/cisco-ccna-prepare/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/03/playing-with-sysdig/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2013/09/01/cisco-ccna-prepare/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -145,46 +145,64 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2013/09/01/cisco-ccna-prepare/" rel="bookmark" title="Cisco CCNA Prepare">Cisco CCNA Prepare</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" rel="bookmark" title="Playing with Sysdig">Playing with Sysdig</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>The way that i went for CCNA Certification</p>
+      <p>Learn how to use Sysdig</p>
 
-<h3 id="what-is-ccna">What is CCNA</h3>
 <ul>
-  <li><a href="http://www.cisco.com/web/learning/certifications/associate/ccna/index.html">Cisco Site</a></li>
-  <li><a href="https://en.wikipedia.org/wiki/CCNA">Wikipedia</a></li>
+  <li><a href="http://www.sysdig.org/">Sysdig Site</a></li>
+  <li><a href="http://www.sysdig.org/wiki/">Sysdig Wiki</a></li>
 </ul>
 
-<h3 id="courses">Courses</h3>
-<ul>
-  <li>Cisco Networking Academy - <a href="https://www.netacad.com/">https://www.netacad.com/</a></li>
-  <li>CCNA Exploration</li>
-</ul>
+<h3 id="first-steps-with-sysdig">First steps with Sysdig</h3>
 
-<h3 id="read">2 Read</h3>
-<ul>
-  <li>http://habrahabr.ru/post/158315/</li>
-  <li>http://habrahabr.ru/post/111140/</li>
-  <li>http://habrahabr.ru/post/155329/</li>
-  <li>http://www.ciscolab.ru/labs/41-simulyator-iou-stroim-stend-dlya-podgotovki-k-ccie.html</li>
-</ul>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># install </span>
+curl -s https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public <span class="p">|</span> apt-key add -
+curl -s -o /etc/apt/sources.list.d/draios.list http://download.draios.com/stable/deb/draios.list
+apt-get update
+apt-get -y install linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span>
+apt-get -y install sysdig
 
-<h3 id="books">Books</h3>
-<ul>
-  <li>Одом У. - CISCO Официальное руководство по подготовке к сертификационным экзаменам CCENT/CCNA ICND1</li>
-  <li>Одом У. - CISCO Официальное руководство по подготовке к сертификационным экзаменам CCENT/CCNA ICND2</li>
-  <li>Cisco Networking Academy - CCNA Security 640-554 Student Lab Manual</li>
-</ul>
+<span class="c"># capturing and reading events</span>
+sysdig -vDw filename
+sysdig -vDr filename
 
-<h3 id="watch">2 Watch</h3>
-<ul>
-  <li>CBT Nuggets – Cisco CCNA</li>
-  <li>CBT Nuggets - CCNA Hands-on Labs Using Wireshark &amp; GNS3</li>
-  <li>CBT Nuggets - Cisco CCNA Labs: Cisco for the Real World</li>
-  <li>INE Cisco CCNA</li>
-</ul>
+<span class="c"># filtering the data</span>
+sysdig -l
+sysdig -vDr filename  <span class="s2">&quot;proc.name=sshd&quot;</span>
+sysdig -vDr filename  <span class="s2">&quot;proc.name=sshd and evt.type=accept and evt.dir=&lt;&quot;</span>
+sysdig -vDr filename  <span class="s2">&quot;proc.name=sshd and evt.type=read and evt.dir=&lt;&quot;</span>
+sysdig -s <span class="m">65536</span> -vSzw nginx.scap <span class="s2">&quot;proc.name=nginx&quot;</span>
+sysdig -s <span class="m">65536</span> -vSzw httpd.scap <span class="s2">&quot;proc.name=httpd&quot;</span>
+sysdig -r httpd.scap -j -p <span class="s2">&quot;%evt.time %fd.directory %fd.filename&quot;</span> <span class="s2">&quot;evt.type=open and evt.dir=&lt;&quot;</span>
+
+<span class="c"># analyzing syslog with sysdig</span>
+sysdig -c spy_syslog
+sysdig -c spy_syslog <span class="s1">&#39;syslog.severity &lt; 4 and proc.name=logger&#39;</span>
+sysdig -F -w trace.scap evt.is_syslog<span class="o">=</span><span class="nb">true</span>
+
+<span class="c"># analyzing application logs with sysdig</span>
+sysdig -c spy_logs
+sysdig -c spy_logs proc.name<span class="o">=</span>httpd and evt.buffer contains GET
+sysdig -r system.scap -c spy_logs <span class="s2">&quot;request.scap 1000&quot;</span> <span class="s2">&quot;evt.buffer contains Database&quot;</span>
+-c spy_logs “request.scap 1000″ means: <span class="k">for</span> each event selected, save 1000ms of system activity before it happened and 1000ms of activity after it happened, but just <span class="k">for</span> the thread that generated the event, and save it to request.scap
+
+“evt.buffer contains Database” is our filter <span class="k">for</span> selecting events, which we use to isolate the specific log entry we’re interested in <span class="o">(</span>and in fact, sysdig confirms the success of our filter by showing the one log message we wanted to isolate in this <span class="k">case</span><span class="o">)</span>
+
+<span class="c"># lsof + filters</span>
+sysdig -c lsof <span class="s2">&quot;proc.name=sshd&quot;</span>
+sysdig -c lsof <span class="s2">&quot;&#39;fd.type=ipv4 and user.name=root&#39;&quot;</span>
+sysdig -c lsof <span class="s2">&quot;&#39;fd.name contains /etc&#39;&quot;</span>
+sysdig -c ps <span class="s2">&quot;&#39;fd.type=ipv4&#39;&quot;</span>
+sysdig -c ps <span class="s2">&quot;&#39;fd.name contains /etc or fd.type=ipv4&#39;&quot;</span>
+
+<span class="c"># chisels(Lua scripts)</span>
+sysdig -c topprocs_cpu
+sysdig -c topprocs_net
+sysdig -c topconns</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -216,7 +234,7 @@
 
 
         </div>
-        <p class="byline"><strong>Cisco CCNA Prepare</strong> was published on <time datetime="2013-09-01T00:00:00+04:00">September 01, 2013</time> and last modified on <time datetime="2013-09-01">September 01, 2013</time>.</p>
+        <p class="byline"><strong>Playing with Sysdig</strong> was published on <time datetime="2015-07-03T00:00:00+03:00">July 03, 2015</time> and last modified on <time datetime="2015-07-03">July 03, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -230,11 +248,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" title="Playing with Sysdig">Playing with Sysdig</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/" title="Offensive Security Bookmarks">Offensive Security Bookmarks</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/02/sublime-text-3/" title="Sublime Text 3">Sublime Text 3</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/02/playing-with-docker/" title="Playing with Docker">Playing with Docker</a></li>
     
     </ul>
     <hr />
