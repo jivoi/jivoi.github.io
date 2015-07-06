@@ -46,13 +46,7 @@ My current way for OSCP Certifications
 - https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/
 
 ### 2 Read
-- https://github.com/pwnwiki/pwnwiki.github.io
-- http://netsec.ws/?p=262
-- http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html
-- https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/
-- http://resources.infosecinstitute.com/author/nikhil-kumar/
-- https://www.offensive-security.com/metasploit-unleashed
-- http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow
+- [Offensive Security Bookmarks](https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/)
 
 ### Books
 - Web Penetration Testing with Kali Linux
