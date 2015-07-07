@@ -401,12 +401,56 @@ cgclassify -g memory:DBLimitedGroup <span class="sb">`</span>pidof mysqld_safe<s
 
 <h3 id="strace-using">Strace using</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>strace php 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep php.ini
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># file activity common syscalls:</span>
+access <span class="o">()</span>
+close <span class="o">(</span>close file handle<span class="o">)</span>
+fchmod <span class="o">(</span>change file permissions<span class="o">)</span>
+fchown <span class="o">(</span>change file ownership<span class="o">)</span>
+fstat <span class="o">(</span>retrieve details<span class="o">)</span>
+lseek <span class="o">(</span>move through file<span class="o">)</span>
+open <span class="o">(</span>open file <span class="k">for</span> reading/writing<span class="o">)</span>
+<span class="nb">read</span> <span class="o">(</span><span class="nb">read </span>a piece of data<span class="o">)</span>
+statfs <span class="o">(</span>retrieve file system related details<span class="o">)</span>
+
+<span class="nv">$ </span>strace php 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep php.ini
 <span class="nv">$ </span>strace -e open php 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep php.ini
 <span class="nv">$ </span>strace -e open,access 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep your-filename
 <span class="nv">$ </span>strace -p PID
 <span class="c"># strace -c -p PID</span>
-<span class="nv">$ </span>strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80</code></pre></div>
+
+<span class="c"># the network common syscalls:</span>
+<span class="nb">bind</span> – link the process to a network port
+listen – allow to receive incoming connections
+socket – open a <span class="nb">local </span>or network socket
+setsockopt – define options <span class="k">for</span> an active socket
+
+<span class="nv">$ </span>strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80
+<span class="nv">$ </span>strace -e <span class="nv">trace</span><span class="o">=</span>network
+
+<span class="c"># memory common syscalls:</span>
+mmap
+munmap
+
+<span class="nv">$ </span>strace -e <span class="nv">trace</span><span class="o">=</span>memory
+
+<span class="c"># useful options and examples:</span>
+-c – See what <span class="nb">time </span>is spend and where <span class="o">(</span>combine with -S <span class="k">for</span> sorting<span class="o">)</span>
+-f – Track process including forked child processes
+-o my-process-trace.txt – Log strace output to a file
+-p <span class="m">1234</span> – Track a process by PID
+-P /tmp – Track a process when interacting with a path
+-T – Display syscall duration in the output
+
+<span class="c"># track by specific syscall group:</span>
+-e <span class="nv">trace</span><span class="o">=</span>ipc – Track communication between processes <span class="o">(</span>IPC<span class="o">)</span>
+-e <span class="nv">trace</span><span class="o">=</span>memory – Track memory syscalls
+-e <span class="nv">trace</span><span class="o">=</span>network – Track memory syscalls
+-e <span class="nv">trace</span><span class="o">=</span>process – Track process calls <span class="o">(</span>like fork, <span class="nb">exec</span><span class="o">)</span>
+-e <span class="nv">trace</span><span class="o">=</span>signal – Track process signal handling <span class="o">(</span>like HUP, <span class="nb">exit</span><span class="o">)</span>
+-e <span class="nv">trace</span><span class="o">=</span>file – Track file related syscalls
+
+<span class="c"># trace multiple syscalls:</span>
+strace -e open,close</code></pre></div>
 
 
       <hr />
@@ -453,11 +497,11 @@ cgclassify -g memory:DBLimitedGroup <span class="sb">`</span>pidof mysqld_safe<s
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
+      <li><a href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" title="Playing with DevStack">Playing with DevStack</a></li>
+    
       <li><a href="https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf/" title="Открытые базы данных РФ">Открытые базы данных РФ</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" title="Playing with Sysdig">Playing with Sysdig</a></li>
-    
-      <li><a href="https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/" title="Offensive Security Bookmarks">Offensive Security Bookmarks</a></li>
     
     </ul>
     <hr />

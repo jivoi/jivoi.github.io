@@ -5,13 +5,111 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-06T12:22:39+03:00</updated>
+<updated>2015-07-07T14:12:35+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Playing with DevStack]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" />
+  <id>https://jivoi.github.io/2015/07/07/playing-with-devstack</id>
+  <updated>2015-07-07 14:09:37 +0300T00:00:00-00:00</updated>
+  <published>2015-07-07T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Learn how to install DevStack&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.openstack.org/developer/devstack/&quot;&gt;DevStack Site&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;add-stack-user&quot;&gt;Add stack user&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd -G sudo -m -U -s /bin/bash stack
+passwd stack&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-user-sudo-permissions&quot;&gt;Add user sudo permissions&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/sudoers
+stack &lt;span class=&quot;nv&quot;&gt;ALL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=(&lt;/span&gt;ALL:ALL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; NOPASSWD: ALL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;system-configuration-for-kvm&quot;&gt;System configuration for KVM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#we will use KVM&lt;/span&gt;
+sudo rmmod kvm-intel
+sudo sh -c &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo &amp;#39;options kvm-intel nested=y&amp;#39; &amp;gt;&amp;gt; /etc/modprobe.d/dist.conf&amp;quot;&lt;/span&gt;
+sudo modprobe kvm-intel
+cat /sys/module/kvm_intel/parameters/nested
+modinfo kvm_intel &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep nested&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;download-devstack&quot;&gt;Download DevStack&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get install -y git
+git clone https://github.com/openstack-dev/devstack.git -b stable/kilo &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;devstack
+sudo mkdir /var/log/openstack
+sudo chown stack:stack /var/log/openstack&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-devstack-config&quot;&gt;Create DevStack config&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;local.conf
+&lt;span class=&quot;o&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;localrc&lt;span class=&quot;o&quot;&gt;]]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;HOST_IP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.250                        &lt;span class=&quot;c&quot;&gt;# Controller IP&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;FLAT_INTERFACE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;p2p1                          &lt;span class=&quot;c&quot;&gt;# Outside interface&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;FIXED_RANGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10.10.128.0/24                   &lt;span class=&quot;c&quot;&gt;# Virtual network&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;FIXED_NETWORK_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;254&lt;/span&gt;                       &lt;span class=&quot;c&quot;&gt;# Virtual network size&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;FLOATING_RANGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.0/24                &lt;span class=&quot;c&quot;&gt;# Outside network&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LOGFILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/log/openstack/stack.sh.log      &lt;span class=&quot;c&quot;&gt;# Log directory&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LOGDAYS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
+&lt;span class=&quot;nv&quot;&gt;ADMIN_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;admin
+&lt;span class=&quot;nv&quot;&gt;MYSQL_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;P@ssw0rd
+&lt;span class=&quot;nv&quot;&gt;RABBIT_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;P@ssw0rd
+&lt;span class=&quot;nv&quot;&gt;SERVICE_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;P@ssw0rd
+&lt;span class=&quot;nv&quot;&gt;SERVICE_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AAAAB3NzaC1yc2EAAAADAQABAAABAQCyYjfgyPazTvGpd8OaAvtU2utL8W6gWC4JdRS1J95G
+&lt;span class=&quot;nv&quot;&gt;REGION_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;DevStack                         &lt;span class=&quot;c&quot;&gt;# Region Name&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LIBVIRT_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;kvm                             &lt;span class=&quot;c&quot;&gt;# Use KVM&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;VOLUME_BACKING_FILE_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;200G&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;setup-devstack&quot;&gt;Setup DevStack&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;./stack.sh
+
+&lt;span class=&quot;c&quot;&gt;# after you will see&lt;/span&gt;
+Horizon is now available at http://192.168.0.250/
+Keystone is serving at http://192.168.0.250:5000/v2.0/
+Examples on using novaclient &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;line is in exercise.sh
+The default users are: admin and demo
+The password: admin
+This is your host ip: 192.168.0.250&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-lvm-volume&quot;&gt;Add LVM volume&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo losetup -a
+&lt;span class=&quot;c&quot;&gt;# add to /etc/rc.local&lt;/span&gt;
+losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;reboot-and-check&quot;&gt;Reboot and Check&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# after reboot&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /home/stack/devstack &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./rejoin-stack.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;openstack-images&quot;&gt;OpenStack images&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cloud-images.ubuntu.com/releases/14.04.2/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img&quot;&gt;Ubuntu-14.04-amd64&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1503.qcow20&quot;&gt;CentOS-7-x86_64&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cloudbase.it/windows-cloud-images/&quot;&gt;Windows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/07/playing-with-devstack/&quot;&gt;Playing with DevStack&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 07, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -2053,12 +2151,56 @@ cgclassify -g memory:DBLimitedGroup &lt;span class=&quot;sb&quot;&gt;`&lt;/span&
 
 &lt;h3 id=&quot;strace-using&quot;&gt;Strace using&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace php 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep php.ini
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# file activity common syscalls:&lt;/span&gt;
+access &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+close &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;close file handle&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+fchmod &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;change file permissions&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+fchown &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;change file ownership&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+fstat &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;retrieve details&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lseek &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;move through file&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+open &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;open file &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; reading/writing&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;a piece of data&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+statfs &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;retrieve file system related details&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace php 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep php.ini
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e open php 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep php.ini
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e open,access 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep your-filename
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -p PID
 &lt;span class=&quot;c&quot;&gt;# strace -c -p PID&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;span class=&quot;c&quot;&gt;# the network common syscalls:&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; – link the process to a network port
+listen – allow to receive incoming connections
+socket – open a &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;or network socket
+setsockopt – define options &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; an active socket
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network
+
+&lt;span class=&quot;c&quot;&gt;# memory common syscalls:&lt;/span&gt;
+mmap
+munmap
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strace -e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;memory
+
+&lt;span class=&quot;c&quot;&gt;# useful options and examples:&lt;/span&gt;
+-c – See what &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;is spend and where &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;combine with -S &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; sorting&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+-f – Track process including forked child processes
+-o my-process-trace.txt – Log strace output to a file
+-p &lt;span class=&quot;m&quot;&gt;1234&lt;/span&gt; – Track a process by PID
+-P /tmp – Track a process when interacting with a path
+-T – Display syscall duration in the output
+
+&lt;span class=&quot;c&quot;&gt;# track by specific syscall group:&lt;/span&gt;
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ipc – Track communication between processes &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;IPC&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;memory – Track memory syscalls
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network – Track memory syscalls
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;process – Track process calls &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;like fork, &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;signal – Track process signal handling &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;like HUP, &lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+-e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;file – Track file related syscalls
+
+&lt;span class=&quot;c&quot;&gt;# trace multiple syscalls:&lt;/span&gt;
+strace -e open,close&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
@@ -5611,86 +5753,6 @@ tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утили
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/05/answers-for-yandex/&quot;&gt;Ответы для Yandex - Вакансия 'Системный администратор Unix'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 05, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Ответы для Mail.ru - Вакансия 'Системный администратор']]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/04/answers-for-mailru/" />
-  <id>https://jivoi.github.io/2014/01/04/answers-for-mailru</id>
-  <updated>2014-01-04 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-04T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Ответы для Mail.ru. Это набор вопросов которые присылают HR на вакансию “Системный администратор”.&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;Вопрос 1:&lt;/h3&gt;
-&lt;p&gt;Что такое load average в юникс системах? (Ответ требует конкретной формулировки.)&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Значение load average показывает кол-во процессов находящихся в состояние готовности, и ждущие пока процессор освободится для их выполнения. Более подробно тут:http://knp84.livejournal.com/4835.html или вот так Load Average не является средним значением в обычном понимании среднего арифметического. Это дискретная функция, периодически рассчитываемая с момента запуска системы. При этом значение функции есть количество отрабатывающих в системе процессов в условиях экспоненциального затухания. Детали здесь: 
-http://habrahabr.ru/post/260335/&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;Вопрос 2:&lt;/h3&gt;
-&lt;p&gt;Что означает параметр MaxRequestsPerChild и в каких случаях (для чего) он применяется? (Ответ требует конкретной формулировки  + внятного объяснения для чего применяется.)&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;MaxRequestsPerChild это значение из конфигурации Apache. Она указывает сколько запросов может обработать дочерний процесс апача перед тем как он будет завершен.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;Вопрос 3:&lt;/h3&gt;
-&lt;p&gt;На сервере заканчивается место в разделе с логами. Какие процессы пишут логи неизвестно, ротейт логов не настроен. Проблему надо разрешить, сохранив сами логи.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Используя команду ls -la посмотреть значение последней модификации файлов, найти самые старые,переместить\сжать их куданить где есть место, так же можно использовать команду find c ключами -mmin\mtime и еще один способо используя команду lsof узнать какие файловые дискрипторы используются на разделе с логами.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;Вопрос 4:&lt;/h3&gt;
-&lt;p&gt;Напишите программу на bourne shell (не bash!) и/или perl, выводящую простые (делятся на только на 1 и на само себя) числа от 1 до 500.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;Ответ:&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;enter a range
- &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;rng
- &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;2
- &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3
- &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$rng&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
- &lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; - 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -le &lt;span class=&quot;nv&quot;&gt;$x&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; % &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; -ne &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
- &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
- one
- &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; -eq &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
- &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$j&lt;/span&gt; + 1&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;Вопрос 5:&lt;/h3&gt;
-&lt;p&gt;Написать регулярное выражение под которое подходит число от 1 до 1999&lt;/p&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;Ответ:&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;10\n2\n199\n10000\n&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep -P &lt;span class=&quot;s1&quot;&gt;&amp;#39;^1?\d{1,3}$&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;Вопрос 6:&lt;/h3&gt;
-&lt;p&gt;На каком уровне 7-миуровневой модели ISO OSI работает протокол udp? (ответ можо написать названием, можно номером)&lt;/p&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Транспортный уровень - 4 номер.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/04/answers-for-mailru/&quot;&gt;Ответы для Mail.ru - Вакансия 'Системный администратор'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 04, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

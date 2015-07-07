@@ -5,19 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Установка CentOS из под FreeBSD по SSH &#8211; EK</title>
-<meta name="description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<title>Playing with DevStack &#8211; EK</title>
+<meta name="description" content="Learn how to install DevStack
 
 ">
-<meta name="keywords" content="centos, freebsd">
+<meta name="keywords" content="openstack, linux, sysadm">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Установка CentOS из под FreeBSD по SSH">
-<meta name="twitter:description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<meta name="twitter:title" content="Playing with DevStack">
+<meta name="twitter:description" content="Learn how to install DevStack
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -29,19 +27,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Установка CentOS из под FreeBSD по SSH">
-<meta property="og:description" content="Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.
+<meta property="og:title" content="Playing with DevStack">
+<meta property="og:description" content="Learn how to install DevStack
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/07/playing-with-devstack/">
 <meta property="og:site_name" content="EK">
 
 
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/07/playing-with-devstack/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -148,69 +145,91 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/02/install-centos-over-freebsd-by-ssh/" rel="bookmark" title="Установка CentOS из под FreeBSD по SSH">Установка CentOS из под FreeBSD по SSH</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" rel="bookmark" title="Playing with DevStack">Playing with DevStack</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Руководство как установить CentOS из под FreeBSD по SSH.
-Задавайте вопросы в комментах, если что-то не понятно.</p>
+      <p>Learn how to install DevStack</p>
 
-<h3 id="section">Дано:</h3>
-<ol>
-  <li>Настроенный сервер с kickstart</li>
-  <li>Сервер с FreeBSD любой версии который будем переустанавливать</li>
-  <li>Прямые руки. =)</li>
-</ol>
+<ul>
+  <li><a href="http://docs.openstack.org/developer/devstack/">DevStack Site</a></li>
+</ul>
 
-<h3 id="grub2--e2fsprogs--freebsd">1.Устанавливаем нужные пакеты из портов(GRUB2 и e2fsprogs) на FreeBSD</h3>
+<h3 id="add-stack-user">Add stack user</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /usr/ports/sysutils/grub2<span class="o">&amp;&amp;</span>make install
-<span class="nb">cd</span> /usr/ports/sysutils/e2fsprogs<span class="o">&amp;&amp;</span>make install</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">useradd -G sudo -m -U -s /bin/bash stack
+passwd stack</code></pre></div>
 
-<h3 id="tmp-ext2--">2.Создаем на разделе /tmp ext2 файловую систему</h3>
+<h3 id="add-user-sudo-permissions">Add user sudo permissions</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">/dev/amrd0s1f              1.9G    155M    1.6G     9%    /tmp
-/dev/amrd0s1f on /tmp <span class="o">(</span>ufs, <span class="nb">local</span>, soft-updates<span class="o">)</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/etc/sudoers
+stack <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> NOPASSWD: ALL</code></pre></div>
 
-umount /tmp
-mke2fs /dev/amrd0s1f
-mount -t ext2fs /dev/amrd0s1f /mnt</code></pre></div>
+<h3 id="system-configuration-for-kvm">System configuration for KVM</h3>
 
-<p>Незабыть удалить из /etc/fstab, чтобы можно было загрузится в BSD если чтото пойдет не так!</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#we will use KVM</span>
+sudo rmmod kvm-intel
+sudo sh -c <span class="s2">&quot;echo &#39;options kvm-intel nested=y&#39; &gt;&gt; /etc/modprobe.d/dist.conf&quot;</span>
+sudo modprobe kvm-intel
+cat /sys/module/kvm_intel/parameters/nested
+modinfo kvm_intel <span class="p">|</span> grep nested</code></pre></div>
 
-<h3 id="ext2--initrd--vmlinuz--">3. Копируем на ext2 раздел initrd и vmlinuz нужной версии</h3>
+<h3 id="download-devstack">Download DevStack</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">fetch -o /mnt/initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-fetch -o /mnt/vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install -y git
+git clone https://github.com/openstack-dev/devstack.git -b stable/kilo <span class="o">&amp;&amp;</span> <span class="nb">cd </span>devstack
+sudo mkdir /var/log/openstack
+sudo chown stack:stack /var/log/openstack</code></pre></div>
 
-wget -O /initrd_remote.img http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/initrd.img
-wget -O /vmlinuz_remote http://mirror.yandex.ru/centos/6.0/os/x86_64/isolinux/vmlinuz</code></pre></div>
+<h3 id="create-devstack-config">Create DevStack config</h3>
 
-<h3 id="grub2--mbr----">4.Устанавливаем grub2 в MBR и создаем кофиг загрузки</h3>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">local.conf
+<span class="o">[[</span><span class="nb">local</span><span class="p">|</span>localrc<span class="o">]]</span>
+<span class="nv">HOST_IP</span><span class="o">=</span>192.168.0.250                        <span class="c"># Controller IP</span>
+<span class="nv">FLAT_INTERFACE</span><span class="o">=</span>p2p1                          <span class="c"># Outside interface</span>
+<span class="nv">FIXED_RANGE</span><span class="o">=</span>10.10.128.0/24                   <span class="c"># Virtual network</span>
+<span class="nv">FIXED_NETWORK_SIZE</span><span class="o">=</span><span class="m">254</span>                       <span class="c"># Virtual network size</span>
+<span class="nv">FLOATING_RANGE</span><span class="o">=</span>192.168.0.0/24                <span class="c"># Outside network</span>
+<span class="nv">LOGFILE</span><span class="o">=</span>/var/log/openstack/stack.sh.log      <span class="c"># Log directory</span>
+<span class="nv">LOGDAYS</span><span class="o">=</span>3
+<span class="nv">ADMIN_PASSWORD</span><span class="o">=</span>admin
+<span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>P@ssw0rd
+<span class="nv">RABBIT_PASSWORD</span><span class="o">=</span>P@ssw0rd
+<span class="nv">SERVICE_PASSWORD</span><span class="o">=</span>P@ssw0rd
+<span class="nv">SERVICE_TOKEN</span><span class="o">=</span>AAAAB3NzaC1yc2EAAAADAQABAAABAQCyYjfgyPazTvGpd8OaAvtU2utL8W6gWC4JdRS1J95G
+<span class="nv">REGION_NAME</span><span class="o">=</span>DevStack                         <span class="c"># Region Name</span>
+<span class="nv">LIBVIRT_TYPE</span><span class="o">=</span>kvm                             <span class="c"># Use KVM</span>
+<span class="nv">VOLUME_BACKING_FILE_SIZE</span><span class="o">=</span>200G</code></pre></div>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">grub2-install /dev/amrd0
-grub-mkconfig
-/usr/local/etc/grub.d/00_header
-/usr/local/etc/grub.d/40_custom
-grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
+<h3 id="setup-devstack">Setup DevStack</h3>
 
-<p>Нужно поправить /usr/local/etc/grub.d/00_header выставив default=1
-В /usr/local/etc/grub.d/40_custom прописать наш новый тип загрузки, для CentOS 6 x64 он будет следующим.</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">./stack.sh
 
-<p><strong>ИЗМЕНИТЬ ВСЕ НУЖНЫЕ ЗНАЧЕНИЯ НА ПРАВИЛЬНЫЕ!</strong></p>
+<span class="c"># after you will see</span>
+Horizon is now available at http://192.168.0.250/
+Keystone is serving at http://192.168.0.250:5000/v2.0/
+Examples on using novaclient <span class="nb">command </span>line is in exercise.sh
+The default users are: admin and demo
+The password: admin
+This is your host ip: 192.168.0.250</code></pre></div>
 
-<ol>
-  <li>root=’(hd0,1,f)’ - буква должна соответствовать букве /tmp слайса!! в нашем случае это /dev/amrd0s1f тоесть f</li>
-  <li>ks файл</li>
-  <li>IP\GATE\NETMASK!</li>
-  <li>НЕ ЗАБЫТЬ ВЫПОЛНИТЬ grub-mkconfig -o /boot/grub/grub.cfg чтобы обновился конфиг grub!!</li>
-</ol>
+<h3 id="add-lvm-volume">Add LVM volume</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">menuentry <span class="s2">&quot;CentOS&quot;</span>  <span class="o">{</span>
-        insmod ext2
-        <span class="nb">set </span><span class="nv">root</span><span class="o">=</span><span class="s1">&#39;(hd0,1,f)&#39;</span>
-        linux /vmlinuz_remote <span class="nv">lang</span><span class="o">=</span>en_US <span class="nv">keymap</span><span class="o">=</span>us <span class="nv">method</span><span class="o">=</span>http://ks.example.com/ <span class="nv">ks</span><span class="o">=</span>http://ks.example.com/ks.cfg vnc <span class="nv">vncpassword</span><span class="o">=</span>qwe123 <span class="nv">ksdevice</span><span class="o">=</span>eth0 <span class="nv">ip</span><span class="o">=</span>192.168.0.10 <span class="nv">netmask</span><span class="o">=</span>255.255.255.0 <span class="nv">gateway</span><span class="o">=</span>192.168.0.1 <span class="nv">dns</span><span class="o">=</span>8.8.8.8 noselinux headless</code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo losetup -a
+<span class="c"># add to /etc/rc.local</span>
+losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file</code></pre></div>
 
+<h3 id="reboot-and-check">Reboot and Check</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># after reboot</span>
+<span class="nb">cd</span> /home/stack/devstack <span class="o">&amp;&amp;</span> ./rejoin-stack.sh</code></pre></div>
+
+<h3 id="openstack-images">OpenStack images</h3>
+<ul>
+  <li><a href="http://cloud-images.ubuntu.com/releases/14.04.2/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img">Ubuntu-14.04-amd64</a></li>
+  <li><a href="http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1503.qcow20">CentOS-7-x86_64</a></li>
+  <li><a href="http://www.cloudbase.it/windows-cloud-images/">Windows</a></li>
+</ul>
 
       <hr />
       <footer role="contentinfo">
@@ -242,7 +261,7 @@ grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>Установка CentOS из под FreeBSD по SSH</strong> was published on <time datetime="2014-01-02T00:00:00+04:00">January 02, 2014</time> and last modified on <time datetime="2014-01-02">January 02, 2014</time>.</p>
+        <p class="byline"><strong>Playing with DevStack</strong> was published on <time datetime="2015-07-07T00:00:00+03:00">July 07, 2015</time> and last modified on <time datetime="2015-07-07">July 07, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -256,11 +275,11 @@ grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" title="Playing with DevStack">Playing with DevStack</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf/" title="Открытые базы данных РФ">Открытые базы данных РФ</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" title="Playing with Sysdig">Playing with Sysdig</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/" title="Offensive Security Bookmarks">Offensive Security Bookmarks</a></li>
     
     </ul>
     <hr />
