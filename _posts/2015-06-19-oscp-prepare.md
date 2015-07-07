@@ -68,3 +68,4 @@ My current way for OSCP Certifications
 - Packtpub - Kali Linux Web App Testing
 - Pentestit.ru video
 - Udemy - Certified Metasploit Framework Professional
+- CybraryIT - Post Exploitation Hacking
