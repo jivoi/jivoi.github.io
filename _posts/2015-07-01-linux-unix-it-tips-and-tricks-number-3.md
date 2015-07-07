@@ -257,10 +257,56 @@ cgclassify -g memory:DBLimitedGroup `pidof mysqld_safe`
 
 ### Strace using
 {% highlight bash %}
+# file activity common syscalls:
+access ()
+close (close file handle)
+fchmod (change file permissions)
+fchown (change file ownership)
+fstat (retrieve details)
+lseek (move through file)
+open (open file for reading/writing)
+read (read a piece of data)
+statfs (retrieve file system related details)
+
 $ strace php 2>&1 | grep php.ini
 $ strace -e open php 2>&1 | grep php.ini
 $ strace -e open,access 2>&1 | grep your-filename
 $ strace -p PID
 # strace -c -p PID
+
+# the network common syscalls:
+bind – link the process to a network port
+listen – allow to receive incoming connections
+socket – open a local or network socket
+setsockopt – define options for an active socket
+
 $ strace -e poll,select,connect,recvfrom,sendto nc www.news.com 80
+$ strace -e trace=network
+
+# memory common syscalls:
+mmap
+munmap
+
+$ strace -e trace=memory
+
+# useful options and examples:
+-c – See what time is spend and where (combine with -S for sorting)
+-f – Track process including forked child processes
+-o my-process-trace.txt – Log strace output to a file
+-p 1234 – Track a process by PID
+-P /tmp – Track a process when interacting with a path
+-T – Display syscall duration in the output
+
+# track by specific syscall group:
+-e trace=ipc – Track communication between processes (IPC)
+-e trace=memory – Track memory syscalls
+-e trace=network – Track memory syscalls
+-e trace=process – Track process calls (like fork, exec)
+-e trace=signal – Track process signal handling (like HUP, exit)
+-e trace=file – Track file related syscalls
+
+# trace multiple syscalls:
+strace -e open,close
 {% endhighlight %}
+
+
