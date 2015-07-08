@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-07T14:12:35+03:00</updated>
+<updated>2015-07-08T17:16:18+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -3039,6 +3039,7 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
   &lt;li&gt;Packtpub - Kali Linux Web App Testing&lt;/li&gt;
   &lt;li&gt;Pentestit.ru video&lt;/li&gt;
   &lt;li&gt;Udemy - Certified Metasploit Framework Professional&lt;/li&gt;
+  &lt;li&gt;CybraryIT - Post Exploitation Hacking&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/19/oscp-prepare/&quot;&gt;OSCP Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2015.&lt;/p&gt;</content>
@@ -3078,6 +3079,55 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 &lt;/ol&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/&quot;&gt;Kali Linux Compatible USB Wifi Adapters&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 16, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Cisco CCNA Security Prepare]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare/" />
+  <id>https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare</id>
+  <updated>2015-03-10 13:10:14 +0300T00:00:00-00:00</updated>
+  <published>2015-03-10T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;The way that i went for CCNA Security Certification&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-ccna-security&quot;&gt;What is CCNA Security&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cisco.com/web/learning/certifications/associate/ccna_security/index.html?mdfid=280563817&quot;&gt;Cisco Site&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;course-lab&quot;&gt;Course Lab&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.unetlab.com/&quot;&gt;UNetLab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;http://habrahabr.ru/post/262027/&lt;/li&gt;
+  &lt;li&gt;http://www.ciscolab.ru/labs/42-unetlab-stroim-stend-dlya-podgotovki-k-ccie-rs-sp-dc-sec.html&lt;/li&gt;
+  &lt;li&gt;http://www.sharontools.com/online-lab/&lt;/li&gt;
+  &lt;li&gt;http://sclabs.blogspot.ru/2013/05/cisco-asa-on-vmware-esxi-install-and.html&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;http://ciscoiseasy.blogspot.ru/&lt;/li&gt;
+  &lt;li&gt;http://sclabs.blogspot.ru/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Keith Barker, Scott Morris - CCNA Security 640-554 Official Cert Guide&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;CBT Nuggets - CCNA Security 640-554&lt;/li&gt;
+  &lt;li&gt;INE - CCNA Security 640-554 IINS&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare/&quot;&gt;Cisco CCNA Security Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on March 10, 2015.&lt;/p&gt;</content>
 </entry>
 
 
@@ -5642,117 +5692,6 @@ tail -f /home/hubot/hubot.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/06/install-hubot/&quot;&gt;Install Hubot on Ubuntu&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 06, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Ответы для Yandex - Вакансия 'Системный администратор Unix']]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/05/answers-for-yandex/" />
-  <id>https://jivoi.github.io/2014/01/05/answers-for-yandex</id>
-  <updated>2014-01-05 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-05T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Ответы для Yandex.ru. Это набор вопросов которые доступны на сайте yandex.ru в разделе Вакансии.&lt;/p&gt;
-
-&lt;p&gt;Ссылка на вакансию: &lt;a href=&quot;https://yandex.ru/jobs/vacancies/maintenance/adv_technology_admin/&quot;&gt;Системный администратор Unix&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;Вопрос 2:&lt;/h3&gt;
-&lt;p&gt;Вам нужно проапгрейдить ядро и операционную систему на ста одинаково настроенных серверах.
-Как вы будете решать эту задачу?&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Все зависит от конкретной ОС. В RHEL\CentOS\Fedora через yum\rpm(если есть уже собранное ядро в rpm пакете). Для Ubuntu\Debian - apt-get install или dpkg -i. Если стоит вопрос как выполнить эту команду удаленно на 100х серверах, то тут очень мгого факторов которые могут на это повлиять. Где-то есть система управления конфигурациями типа Chef\Puppet\cfengine или что-то своем самописное. В самом простом случаем можно в цикле выполнить на 100х серверах команду обновления.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; server in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat server.lst&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; ssh -t login@&lt;span class=&quot;nv&quot;&gt;$server&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;sudo yum install kernel&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;Вопрос 3:&lt;/h3&gt;
-&lt;p&gt;На сервере под управлением Linux собран программный RAID5 на десяти SCSI-дисках. Один диск в этом массиве помечен как faulty.
-Как узнать Host, Channel, ID и LUN этого диска?&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Всю основную информацию про softraid в Linux можно узнать выполнив команду cat /proc/mdstat
-Больше информации покажет команда mdadm –detail /dev/md0.
-Чтобы узнать Host, Channel, ID и LUN дисков установленных в сервере выполняем cat /proc/scsi/scsi
-Там представлена информация вида Host: scsi0 Channel: 00 Id: 01 Lun: 00&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;Вопрос 4:&lt;/h3&gt;
-&lt;p&gt;Есть сервер с Linux, на котором 16 ГБ RAM и 4 ГБ swap.
-Что нужно сделать, чтобы запущенные на сервере программы не могли получить суммарно больше 9 ГБ памяти (без изменения объема доступной ядру памяти)?&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Можно сделать через настройку системных лимитов. 
-Прописав в /etc/security/limits.conf&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;* hard as 9000000000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Второй вариант установка лимитов через linux cgroups
-создаем группу с лимитами в /etc/cgconfig.conf
-group memlimit {
-    memory {
-        memory.limit_in_bytes = 9000000000;(Задает максимальный размер памяти и пространства подкачки)
-    }
-}&lt;/p&gt;
-
-&lt;p&gt;Добавляем правило в /etc/cgrules.conf:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;newuser   memory   memlimit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Это позволить ограничить все процессы по памяти для юзера - newuser&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;Вопрос 5:&lt;/h3&gt;
-&lt;p&gt;Имеется веб-сервер с очень маленьким временем ответа на запросы. Однако пользователи из некоторых сетей, например, ADSL или домашних, жалуются, что долго загружаются страницы с этого сервера, а иногда загрузка вообще «замирает». Ping при этом без потерь и больших задержек, с других веб-узлов страницы загружаются хорошо.
-Почему такое может происходить?&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Причина тут скорей всего гдето посередине между конечным пользователем и сервером.Если есть прокси-сервер дома или в офисе то скорей всего проблема с ним, с его настройками\производительностью. Может быть проблема с софтом на компьютере пользователя - программные фильтры\фаерволлы\антивирусы и тд&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;Вопрос 6:&lt;/h3&gt;
-&lt;p&gt;Как будет выглядеть кусок конфигурационного файла Apache, который будет запрещать доступ к каталогу /var/www/restricted для клиентов, использующих браузер Browser всех версий, кроме версии 3.14?
-User-Agent для Browser выглядит как “Browser v$VERSION”.&lt;/p&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Прописываем в конфиг Apache&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /var/www/restricted&amp;gt;
-SetEnvIfNoCase User-Agent &lt;span class=&quot;s2&quot;&gt;&amp;quot;^Browser v3.14&amp;quot;&lt;/span&gt; ok
-Order Allow,Deny
-Allow from &lt;span class=&quot;nv&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ok
-Deny from all
-ErrorDocument &lt;span class=&quot;m&quot;&gt;403&lt;/span&gt; /noindex.html
-&amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;Вопрос 7:&lt;/h3&gt;
-&lt;p&gt;Вы работаете с СУБД MySQL. У вас настроена репликация с одного сервера на другой. Мониторинг показывает, что репликация не работает.
-Как вы будете чинить неработающую репликацию (мастер-база работает 24х7х365)?&lt;/p&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Для правильных действий, нужно больше информации, но я приведу примеры из личного опыта. 
-Самое просто что может быть это в настройках mysql в /etc/my.cnf прописано skip-slave-start и слэйв сервер был перезагружен, чинится просто зайти в mysql и выполнить slave start
-Следующая из распостранненых это ошибка типа   Error ‘Duplicate entry ‘123’ for key 1’ on query.. это значит что на слэйвей в базе уже есть такие данные, скорей всего это ошибка кода. Чинится это в самом простом случае пропуском данной ошибки SET GLOBAL SQL_SLAVE_SKIP_COUNTER=1; START SLAVE; ну или полным востановленим рэплики из последнего бэкапа с мастера. Сделать это можно так же несколькими способами, если есть бэкап нужно развернуть его и выставить значения для бинлога
-change master to master_log_pos=4,master_log_file=’mysql-bin.000666’;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;Вопрос 8:&lt;/h3&gt;
-&lt;p&gt;Как можно посмотреть содержимое ip-пакетов, приходящих на хост test.yandex&lt;/p&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;Ответ:&lt;/h3&gt;
-&lt;p&gt;Самое просто использовать tcpdump с выводом в STDOUT или с записью в файл и с последующим анализом&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tcpdump -X host test.yandex
-tcpdump -w /tmp/test.yandex.cap host test.yandex
-tcpdump -vvAr /tmp/test.yandex.cap - читаем содержимое дампфайла.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Есть еще другие способы.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ngrep host test.yandex
-tshark host test.yandex &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;утилита tshark входит в пакет wireshark&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/05/answers-for-yandex/&quot;&gt;Ответы для Yandex - Вакансия 'Системный администратор Unix'&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 05, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
