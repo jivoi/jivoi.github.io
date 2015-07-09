@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-08T17:16:18+03:00</updated>
+<updated>2015-07-09T17:19:37+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1936,6 +1936,25 @@ or
       &lt;li&gt;&lt;a href=&quot;#revert-firefox-to-init-state&quot; id=&quot;markdown-toc-revert-firefox-to-init-state&quot;&gt;Revert Firefox to init state&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#limit-mysql-and-mongodb-mem-usage-with-cgroups&quot; id=&quot;markdown-toc-limit-mysql-and-mongodb-mem-usage-with-cgroups&quot;&gt;Limit MySQL and MongoDB mem usage with Cgroups&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#strace-using&quot; id=&quot;markdown-toc-strace-using&quot;&gt;Strace using&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#linux-system-errors-types&quot; id=&quot;markdown-toc-linux-system-errors-types&quot;&gt;Linux System Errors Types&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#auditd&quot; id=&quot;markdown-toc-auditd&quot;&gt;Auditd&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mysql-version-from-an-frm-file&quot; id=&quot;markdown-toc-mysql-version-from-an-frm-file&quot;&gt;MySQL version from an FRM file&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#check-if-a-library-is-installed&quot; id=&quot;markdown-toc-check-if-a-library-is-installed&quot;&gt;Check if a library is installed&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#fs-in-file&quot; id=&quot;markdown-toc-fs-in-file&quot;&gt;FS in File&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#encrypt-tar-with-opensslgpg&quot; id=&quot;markdown-toc-encrypt-tar-with-opensslgpg&quot;&gt;Encrypt Tar with OpenSSL\GPG&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#split-big-archive&quot; id=&quot;markdown-toc-split-big-archive&quot;&gt;Split big archive&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#installed-pkgs-size&quot; id=&quot;markdown-toc-installed-pkgs-size&quot;&gt;Installed pkgs size&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#compare-2-directory&quot; id=&quot;markdown-toc-compare-2-directory&quot;&gt;Compare 2 directory&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#wget-all-site&quot; id=&quot;markdown-toc-wget-all-site&quot;&gt;WGet ALL site&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mount-with-ssh&quot; id=&quot;markdown-toc-mount-with-ssh&quot;&gt;Mount with SSH&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#boot-in-dos&quot; id=&quot;markdown-toc-boot-in-dos&quot;&gt;Boot in DOS&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#remove-all-tables-from-mysql-db&quot; id=&quot;markdown-toc-remove-all-tables-from-mysql-db&quot;&gt;Remove all tables from MySQL DB&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#resize-jpg-for-web&quot; id=&quot;markdown-toc-resize-jpg-for-web&quot;&gt;Resize jpg for web&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#postfix-redirect-outbound-mail&quot; id=&quot;markdown-toc-postfix-redirect-outbound-mail&quot;&gt;Postfix redirect outbound mail&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rm-argument-list-too-long&quot; id=&quot;markdown-toc-rm-argument-list-too-long&quot;&gt;RM: Argument list too long&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rootkits-check&quot; id=&quot;markdown-toc-rootkits-check&quot;&gt;Rootkits check&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#restore-deleted-files&quot; id=&quot;markdown-toc-restore-deleted-files&quot;&gt;Restore deleted files&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#flush-linux-disk-cache&quot; id=&quot;markdown-toc-flush-linux-disk-cache&quot;&gt;Flush linux disk cache&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -2201,6 +2220,130 @@ munmap
 
 &lt;span class=&quot;c&quot;&gt;# trace multiple syscalls:&lt;/span&gt;
 strace -e open,close&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;linux-system-errors-types&quot;&gt;Linux System Errors Types&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat /usr/include/asm-generic/errno.h &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;#&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;auditd&quot;&gt;Auditd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# create rule: open&lt;/span&gt;
+auditctl -a always,exit -F &lt;span class=&quot;nv&quot;&gt;arch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;b64 -F &lt;span class=&quot;nv&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8175&lt;/span&gt; -S open -k cups-open-files
+ausearch -k cups-open-files
+
+&lt;span class=&quot;c&quot;&gt;# check which process is modifying a certain directory or file&lt;/span&gt;
+auditctl -w /path/to/directory -p war
+ausearch -f /path/to/directory&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-version-from-an-frm-file&quot;&gt;MySQL version from an FRM file&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# MySQL version 5.5.32&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hexdump -s 0x33 -n &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -v -d 55_test.frm
+&lt;span class=&quot;m&quot;&gt;0000033&lt;/span&gt; 50532
+&lt;span class=&quot;c&quot;&gt;# MySQL version 5.1.73&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hexdump -s 0x33 -n &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -v -d 51_test.frm
+&lt;span class=&quot;m&quot;&gt;0000033&lt;/span&gt; 50173&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;check-if-a-library-is-installed&quot;&gt;Check if a library is installed&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldconfig -p &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep libjpeg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fs-in-file&quot;&gt;FS in File&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/tmp/disk-image &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;20480
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkfs -t ext4 -q /tmp/disk-image
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /virtual-fs
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount -o &lt;span class=&quot;nv&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/loop0 /tmp/disk-image /virtual-fs
+&lt;span class=&quot;c&quot;&gt;# add to /etc/fstab&lt;/span&gt;
+/tmp/disk-image /virtual-fs ext4 rw,loop &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;encrypt-tar-with-opensslgpg&quot;&gt;Encrypt Tar with OpenSSL\GPG&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# encrypt&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gpg -c test.tar
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tar -czv stuff&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;openssl des3 -salt -k secretpassword &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; dd &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;stuff.des3
+&lt;span class=&quot;c&quot;&gt;# decrypt&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gpg test.tar.gpg
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;stuff.des3 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;openssl des3 -d -k secretpassword&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;tar xz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;split-big-archive&quot;&gt;Split big archive&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;split -b 700m archive.tar part
+cat part* &amp;gt; archive.tar&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;installed-pkgs-size&quot;&gt;Installed pkgs size&lt;/h3&gt;
+&lt;p&gt;# freebsd&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pkg_info -as &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; perl -pe &lt;span class=&quot;s1&quot;&gt;&amp;#39;$/=&amp;quot;)&amp;quot;; s/\n*Information for (.*?):[\n\s]*Package Size:[\n\s]*(\d+)\s*\(\s*1K\-blocks\s*\)/$2 - $1\n/;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nr &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; less
+
+&lt;span class=&quot;c&quot;&gt;# ubuntu&lt;/span&gt;
+dpkg-query -W --showformat&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;${Installed-Size} ${Package}\n&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -n&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compare-2-directory&quot;&gt;Compare 2 directory&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;diff -qr dir1 dir2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wget-all-site&quot;&gt;WGet ALL site&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget -m -k -nv -np -p --user-agent&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Mozilla/5.0 (compatible; Konqueror/3.0.0/10; Linux)&amp;quot;&lt;/span&gt; http://www.rhd.ru/docs/manuals/enterprise/RHEL-5-Manual/Virtual-Server-Administration/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mount-with-ssh&quot;&gt;Mount with SSH&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install sshfs
+mkdir ~/music
+sshfs &amp;lt;remote_ip&amp;gt;:/music ~/music/
+fusermount -u ~/music/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;boot-in-dos&quot;&gt;Boot in DOS&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install syslinux
+cp /usr/share/syslinux/memdisk /boot
+wget -O /boot/Dos6.22.img http://www.allbootdisks.com/downloads/Disks/MS-DOS_Boot_Disk_Download47/Diskette%20Images/Dos6.22.img
+&lt;span class=&quot;c&quot;&gt;# add to /boot/grub/menu.lst&lt;/span&gt;
+title MSDOS
+root&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hd0,0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# Номер диска изменить на нужный&lt;/span&gt;
+kernel /memdisk
+initrd /Dos6.22.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;remove-all-tables-from-mysql-db&quot;&gt;Remove all tables from MySQL DB&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -u root -ppassword -Ddb-name -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;show tables;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -v &lt;span class=&quot;s1&quot;&gt;&amp;#39;Tables_in&amp;#39;&lt;/span&gt; &amp;gt; /tmp/tables_list
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; table in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat /tmp/tables_list&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; mysql -u root -ppassword -Ddb-name -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;drop table $table;&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;resize-jpg-for-web&quot;&gt;Resize jpg for web&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in *.jpg&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; convert -resize 640x480 -quality &lt;span class=&quot;m&quot;&gt;85&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; small-&lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;.jpg&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;postfix-redirect-outbound-mail&quot;&gt;Postfix redirect outbound mail&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# all outbound mail redirect to local &amp;lt;username&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;postconf -e &lt;span class=&quot;nv&quot;&gt;luser_relay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;username
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;postmap /etc/postfix/transport
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;postconf -e &lt;span class=&quot;nv&quot;&gt;transport_maps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt;:/etc/postfix/transport
+&lt;span class=&quot;c&quot;&gt;# add to /etc/postfix/transport&lt;/span&gt;
+localhost :
+* &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;:username&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rm-argument-list-too-long&quot;&gt;RM: Argument list too long&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs --no-run-if-empty -n &lt;span class=&quot;m&quot;&gt;500&lt;/span&gt; rm -f&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rootkits-check&quot;&gt;Rootkits check&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install rkhunter
+rkhunter –-update
+rkhunter –-check&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;restore-deleted-files&quot;&gt;Restore deleted files&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;lsof &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep storage.db
+memcached &lt;span class=&quot;m&quot;&gt;22073&lt;/span&gt; memcachedb   15u      REG                8,1 &lt;span class=&quot;m&quot;&gt;88090279936&lt;/span&gt;   &lt;span class=&quot;m&quot;&gt;14221332&lt;/span&gt; /path/memcachedb/storage.db &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+/proc/22073/fd
+find /path/memcachedb/ -inum &lt;span class=&quot;m&quot;&gt;14221332&lt;/span&gt; -exec cp &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; /var/tmp/storage.db &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;flush-linux-disk-cache&quot;&gt;Flush linux disk cache&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;sync; echo 3 &amp;gt; /proc/sys/vm/drop_caches&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>

@@ -186,6 +186,25 @@
       <li><a href="#revert-firefox-to-init-state" id="markdown-toc-revert-firefox-to-init-state">Revert Firefox to init state</a></li>
       <li><a href="#limit-mysql-and-mongodb-mem-usage-with-cgroups" id="markdown-toc-limit-mysql-and-mongodb-mem-usage-with-cgroups">Limit MySQL and MongoDB mem usage with Cgroups</a></li>
       <li><a href="#strace-using" id="markdown-toc-strace-using">Strace using</a></li>
+      <li><a href="#linux-system-errors-types" id="markdown-toc-linux-system-errors-types">Linux System Errors Types</a></li>
+      <li><a href="#auditd" id="markdown-toc-auditd">Auditd</a></li>
+      <li><a href="#mysql-version-from-an-frm-file" id="markdown-toc-mysql-version-from-an-frm-file">MySQL version from an FRM file</a></li>
+      <li><a href="#check-if-a-library-is-installed" id="markdown-toc-check-if-a-library-is-installed">Check if a library is installed</a></li>
+      <li><a href="#fs-in-file" id="markdown-toc-fs-in-file">FS in File</a></li>
+      <li><a href="#encrypt-tar-with-opensslgpg" id="markdown-toc-encrypt-tar-with-opensslgpg">Encrypt Tar with OpenSSL\GPG</a></li>
+      <li><a href="#split-big-archive" id="markdown-toc-split-big-archive">Split big archive</a></li>
+      <li><a href="#installed-pkgs-size" id="markdown-toc-installed-pkgs-size">Installed pkgs size</a></li>
+      <li><a href="#compare-2-directory" id="markdown-toc-compare-2-directory">Compare 2 directory</a></li>
+      <li><a href="#wget-all-site" id="markdown-toc-wget-all-site">WGet ALL site</a></li>
+      <li><a href="#mount-with-ssh" id="markdown-toc-mount-with-ssh">Mount with SSH</a></li>
+      <li><a href="#boot-in-dos" id="markdown-toc-boot-in-dos">Boot in DOS</a></li>
+      <li><a href="#remove-all-tables-from-mysql-db" id="markdown-toc-remove-all-tables-from-mysql-db">Remove all tables from MySQL DB</a></li>
+      <li><a href="#resize-jpg-for-web" id="markdown-toc-resize-jpg-for-web">Resize jpg for web</a></li>
+      <li><a href="#postfix-redirect-outbound-mail" id="markdown-toc-postfix-redirect-outbound-mail">Postfix redirect outbound mail</a></li>
+      <li><a href="#rm-argument-list-too-long" id="markdown-toc-rm-argument-list-too-long">RM: Argument list too long</a></li>
+      <li><a href="#rootkits-check" id="markdown-toc-rootkits-check">Rootkits check</a></li>
+      <li><a href="#restore-deleted-files" id="markdown-toc-restore-deleted-files">Restore deleted files</a></li>
+      <li><a href="#flush-linux-disk-cache" id="markdown-toc-flush-linux-disk-cache">Flush linux disk cache</a></li>
     </ul>
   </li>
 </ul>
@@ -451,6 +470,130 @@ munmap
 
 <span class="c"># trace multiple syscalls:</span>
 strace -e open,close</code></pre></div>
+
+<h3 id="linux-system-errors-types">Linux System Errors Types</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">cat /usr/include/asm-generic/errno.h <span class="p">|</span>grep <span class="s2">&quot;#&quot;</span></code></pre></div>
+
+<h3 id="auditd">Auditd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># create rule: open</span>
+auditctl -a always,exit -F <span class="nv">arch</span><span class="o">=</span>b64 -F <span class="nv">pid</span><span class="o">=</span><span class="m">8175</span> -S open -k cups-open-files
+ausearch -k cups-open-files
+
+<span class="c"># check which process is modifying a certain directory or file</span>
+auditctl -w /path/to/directory -p war
+ausearch -f /path/to/directory</code></pre></div>
+
+<h3 id="mysql-version-from-an-frm-file">MySQL version from an FRM file</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># MySQL version 5.5.32</span>
+<span class="nv">$ </span>hexdump -s 0x33 -n <span class="m">2</span> -v -d 55_test.frm
+<span class="m">0000033</span> 50532
+<span class="c"># MySQL version 5.1.73</span>
+<span class="nv">$ </span>hexdump -s 0x33 -n <span class="m">2</span> -v -d 51_test.frm
+<span class="m">0000033</span> 50173</code></pre></div>
+
+<h3 id="check-if-a-library-is-installed">Check if a library is installed</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>ldconfig -p <span class="p">|</span> grep libjpeg</code></pre></div>
+
+<h3 id="fs-in-file">FS in File</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/tmp/disk-image <span class="nv">count</span><span class="o">=</span>20480
+<span class="nv">$ </span>mkfs -t ext4 -q /tmp/disk-image
+<span class="nv">$ </span>mkdir /virtual-fs
+<span class="nv">$ </span>mount -o <span class="nv">loop</span><span class="o">=</span>/dev/loop0 /tmp/disk-image /virtual-fs
+<span class="c"># add to /etc/fstab</span>
+/tmp/disk-image /virtual-fs ext4 rw,loop <span class="m">0</span> 0</code></pre></div>
+
+<h3 id="encrypt-tar-with-opensslgpg">Encrypt Tar with OpenSSL\GPG</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># encrypt</span>
+<span class="nv">$ </span>gpg -c test.tar
+<span class="nv">$ </span>tar -czv stuff<span class="p">|</span>openssl des3 -salt -k secretpassword <span class="p">|</span> dd <span class="nv">of</span><span class="o">=</span>stuff.des3
+<span class="c"># decrypt</span>
+<span class="nv">$ </span>gpg test.tar.gpg
+<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>stuff.des3 <span class="p">|</span>openssl des3 -d -k secretpassword<span class="p">|</span>tar xz</code></pre></div>
+
+<h3 id="split-big-archive">Split big archive</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">split -b 700m archive.tar part
+cat part* &gt; archive.tar</code></pre></div>
+
+<h3 id="installed-pkgs-size">Installed pkgs size</h3>
+<p># freebsd</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pkg_info -as <span class="p">|</span> perl -pe <span class="s1">&#39;$/=&quot;)&quot;; s/\n*Information for (.*?):[\n\s]*Package Size:[\n\s]*(\d+)\s*\(\s*1K\-blocks\s*\)/$2 - $1\n/;&#39;</span> <span class="p">|</span> sort -nr <span class="p">|</span> less
+
+<span class="c"># ubuntu</span>
+dpkg-query -W --showformat<span class="o">=</span><span class="s1">&#39;${Installed-Size} ${Package}\n&#39;</span> <span class="p">|</span> sort -n</code></pre></div>
+
+<h3 id="compare-2-directory">Compare 2 directory</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">diff -qr dir1 dir2</code></pre></div>
+
+<h3 id="wget-all-site">WGet ALL site</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget -m -k -nv -np -p --user-agent<span class="o">=</span><span class="s2">&quot;Mozilla/5.0 (compatible; Konqueror/3.0.0/10; Linux)&quot;</span> http://www.rhd.ru/docs/manuals/enterprise/RHEL-5-Manual/Virtual-Server-Administration/</code></pre></div>
+
+<h3 id="mount-with-ssh">Mount with SSH</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install sshfs
+mkdir ~/music
+sshfs &lt;remote_ip&gt;:/music ~/music/
+fusermount -u ~/music/</code></pre></div>
+
+<h3 id="boot-in-dos">Boot in DOS</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install syslinux
+cp /usr/share/syslinux/memdisk /boot
+wget -O /boot/Dos6.22.img http://www.allbootdisks.com/downloads/Disks/MS-DOS_Boot_Disk_Download47/Diskette%20Images/Dos6.22.img
+<span class="c"># add to /boot/grub/menu.lst</span>
+title MSDOS
+root<span class="o">(</span>hd0,0<span class="o">)</span> <span class="c"># Номер диска изменить на нужный</span>
+kernel /memdisk
+initrd /Dos6.22.img</code></pre></div>
+
+<h3 id="remove-all-tables-from-mysql-db">Remove all tables from MySQL DB</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysql -u root -ppassword -Ddb-name -e <span class="s1">&#39;show tables;&#39;</span> <span class="p">|</span> grep -v <span class="s1">&#39;Tables_in&#39;</span> &gt; /tmp/tables_list
+<span class="k">for</span> table in <span class="sb">`</span>cat /tmp/tables_list<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> mysql -u root -ppassword -Ddb-name -e <span class="s2">&quot;drop table $table;&quot;</span> <span class="p">;</span> <span class="k">done</span></code></pre></div>
+
+<h3 id="resize-jpg-for-web">Resize jpg for web</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in *.jpg<span class="p">;</span> <span class="k">do</span> convert -resize 640x480 -quality <span class="m">85</span> <span class="nv">$i</span> small-<span class="nv">$i</span>.jpg<span class="p">;</span> <span class="k">done</span></code></pre></div>
+
+<h3 id="postfix-redirect-outbound-mail">Postfix redirect outbound mail</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># all outbound mail redirect to local &lt;username&gt;</span>
+<span class="nv">$ </span>postconf -e <span class="nv">luser_relay</span><span class="o">=</span>username
+<span class="nv">$ </span>postmap /etc/postfix/transport
+<span class="nv">$ </span>postconf -e <span class="nv">transport_maps</span><span class="o">=</span><span class="nb">hash</span>:/etc/postfix/transport
+<span class="c"># add to /etc/postfix/transport</span>
+localhost :
+* <span class="nb">local</span>:username</code></pre></div>
+
+<h3 id="rm-argument-list-too-long">RM: Argument list too long</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">find <span class="p">|</span> xargs --no-run-if-empty -n <span class="m">500</span> rm -f</code></pre></div>
+
+<h3 id="rootkits-check">Rootkits check</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">apt-get install rkhunter
+rkhunter –-update
+rkhunter –-check</code></pre></div>
+
+<h3 id="restore-deleted-files">Restore deleted files</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">lsof <span class="p">|</span> grep storage.db
+memcached <span class="m">22073</span> memcachedb   15u      REG                8,1 <span class="m">88090279936</span>   <span class="m">14221332</span> /path/memcachedb/storage.db <span class="o">(</span>deleted<span class="o">)</span>
+/proc/22073/fd
+find /path/memcachedb/ -inum <span class="m">14221332</span> -exec cp <span class="o">{}</span> /var/tmp/storage.db <span class="se">\;</span></code></pre></div>
+
+<h3 id="flush-linux-disk-cache">Flush linux disk cache</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo sh -c <span class="s1">&#39;sync; echo 3 &gt; /proc/sys/vm/drop_caches&#39;</span></code></pre></div>
 
 
       <hr />
