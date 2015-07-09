@@ -450,4 +450,5 @@ find /path/memcachedb/ -inum 14221332 -exec cp {} /var/tmp/storage.db \;
 ### Flush linux disk cache
 {% highlight bash %}
 sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
+free && sync && echo 3 > /proc/sys/vm/drop_caches && free
 {% endhighlight %}
