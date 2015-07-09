@@ -309,4 +309,145 @@ $ strace -e trace=memory
 strace -e open,close
 {% endhighlight %}
 
+### Linux System Errors Types
+{% highlight bash %}
+cat /usr/include/asm-generic/errno.h |grep "#"
+{% endhighlight %}
 
+### Auditd
+{% highlight bash %}
+# create rule: open
+auditctl -a always,exit -F arch=b64 -F pid=8175 -S open -k cups-open-files
+ausearch -k cups-open-files
+
+# check which process is modifying a certain directory or file
+auditctl -w /path/to/directory -p war
+ausearch -f /path/to/directory
+{% endhighlight %}
+
+### MySQL version from an FRM file
+{% highlight bash %}
+# MySQL version 5.5.32
+$ hexdump -s 0x33 -n 2 -v -d 55_test.frm
+0000033 50532
+# MySQL version 5.1.73
+$ hexdump -s 0x33 -n 2 -v -d 51_test.frm
+0000033 50173
+{% endhighlight %}
+
+### Check if a library is installed
+{% highlight bash %}
+$ ldconfig -p | grep libjpeg
+{% endhighlight %}
+
+### FS in File
+{% highlight bash %}
+$ dd if=/dev/zero of=/tmp/disk-image count=20480
+$ mkfs -t ext4 -q /tmp/disk-image
+$ mkdir /virtual-fs
+$ mount -o loop=/dev/loop0 /tmp/disk-image /virtual-fs
+# add to /etc/fstab
+/tmp/disk-image /virtual-fs ext4 rw,loop 0 0
+{% endhighlight %}
+
+### Encrypt Tar with OpenSSL\GPG
+{% highlight bash %}
+# encrypt
+$ gpg -c test.tar
+$ tar -czv stuff|openssl des3 -salt -k secretpassword | dd of=stuff.des3
+# decrypt
+$ gpg test.tar.gpg
+$ dd if=stuff.des3 |openssl des3 -d -k secretpassword|tar xz
+{% endhighlight %}
+
+### Split big archive
+{% highlight bash %}
+split -b 700m archive.tar part
+cat part* > archive.tar
+{% endhighlight %}
+
+### Installed pkgs size
+# freebsd
+{% highlight bash %}
+pkg_info -as | perl -pe '$/=")"; s/\n*Information for (.*?):[\n\s]*Package Size:[\n\s]*(\d+)\s*\(\s*1K\-blocks\s*\)/$2 - $1\n/;' | sort -nr | less
+
+# ubuntu
+dpkg-query -W --showformat='${Installed-Size} ${Package}\n' | sort -n
+{% endhighlight %}
+
+### Compare 2 directory
+{% highlight bash %}
+diff -qr dir1 dir2
+{% endhighlight %}
+
+### WGet ALL site
+{% highlight bash %}
+wget -m -k -nv -np -p --user-agent="Mozilla/5.0 (compatible; Konqueror/3.0.0/10; Linux)" http://www.rhd.ru/docs/manuals/enterprise/RHEL-5-Manual/Virtual-Server-Administration/
+{% endhighlight %}
+
+### Mount with SSH
+{% highlight bash %}
+apt-get install sshfs
+mkdir ~/music
+sshfs <remote_ip>:/music ~/music/
+fusermount -u ~/music/
+{% endhighlight %}
+
+### Boot in DOS
+{% highlight bash %}
+apt-get install syslinux
+cp /usr/share/syslinux/memdisk /boot
+wget -O /boot/Dos6.22.img http://www.allbootdisks.com/downloads/Disks/MS-DOS_Boot_Disk_Download47/Diskette%20Images/Dos6.22.img
+# add to /boot/grub/menu.lst
+title MSDOS
+root(hd0,0) # Номер диска изменить на нужный
+kernel /memdisk
+initrd /Dos6.22.img
+{% endhighlight %}
+
+### Remove all tables from MySQL DB
+{% highlight bash %}
+mysql -u root -ppassword -Ddb-name -e 'show tables;' | grep -v 'Tables_in' > /tmp/tables_list
+for table in `cat /tmp/tables_list`; do mysql -u root -ppassword -Ddb-name -e "drop table $table;" ; done
+{% endhighlight %}
+
+### Resize jpg for web
+{% highlight bash %}
+for i in *.jpg; do convert -resize 640x480 -quality 85 $i small-$i.jpg; done
+{% endhighlight %}
+
+### Postfix redirect outbound mail
+{% highlight bash %}
+# all outbound mail redirect to local <username>
+$ postconf -e luser_relay=username
+$ postmap /etc/postfix/transport
+$ postconf -e transport_maps=hash:/etc/postfix/transport
+# add to /etc/postfix/transport
+localhost :
+* local:username
+{% endhighlight %}
+
+### RM: Argument list too long
+{% highlight bash %}
+find | xargs --no-run-if-empty -n 500 rm -f
+{% endhighlight %}
+
+### Rootkits check
+{% highlight bash %}
+apt-get install rkhunter
+rkhunter –-update
+rkhunter –-check
+{% endhighlight %}
+
+### Restore deleted files
+{% highlight bash %}
+lsof | grep storage.db
+memcached 22073 memcachedb   15u      REG                8,1 88090279936   14221332 /path/memcachedb/storage.db (deleted)
+/proc/22073/fd
+find /path/memcachedb/ -inum 14221332 -exec cp {} /var/tmp/storage.db \;
+{% endhighlight %}
+
+### Flush linux disk cache
+{% highlight bash %}
+sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
+{% endhighlight %}
