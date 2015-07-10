@@ -593,7 +593,8 @@ find /path/memcachedb/ -inum <span class="m">14221332</span> -exec cp <span clas
 
 <h3 id="flush-linux-disk-cache">Flush linux disk cache</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo sh -c <span class="s1">&#39;sync; echo 3 &gt; /proc/sys/vm/drop_caches&#39;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo sh -c <span class="s1">&#39;sync; echo 3 &gt; /proc/sys/vm/drop_caches&#39;</span>
+free <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> <span class="nb">echo </span><span class="m">3</span> &gt; /proc/sys/vm/drop_caches <span class="o">&amp;&amp;</span> free</code></pre></div>
 
 
       <hr />
@@ -640,11 +641,11 @@ find /path/memcachedb/ -inum <span class="m">14221332</span> -exec cp <span clas
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
+      <li><a href="https://jivoi.github.io/2015/07/10/data-science-at-the-command-line/" title="Data Science at the Command Line">Data Science at the Command Line</a></li>
+    
       <li><a href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" title="Playing with DevStack">Playing with DevStack</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/04/otkrytyie-bazy-dannykh-rf/" title="Открытые базы данных РФ">Открытые базы данных РФ</a></li>
-    
-      <li><a href="https://jivoi.github.io/2015/07/03/playing-with-sysdig/" title="Playing with Sysdig">Playing with Sysdig</a></li>
     
     </ul>
     <hr />

@@ -5,13 +5,300 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-09T17:19:37+03:00</updated>
+<updated>2015-07-10T17:21:34+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Data Science at the Command Line]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/10/data-science-at-the-command-line/" />
+  <id>https://jivoi.github.io/2015/07/10/data-science-at-the-command-line</id>
+  <updated>2015-07-10 17:18:00 +0300T00:00:00-00:00</updated>
+  <published>2015-07-10T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Notes from book&lt;/p&gt;
+
+&lt;h3 id=&quot;urls&quot;&gt;Urls&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://datascienceatthecommandline.com/&quot;&gt;http://datascienceatthecommandline.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html&quot;&gt;seven-command-line-tools-for-data-science&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ch02---getting-started&quot;&gt;CH02 - Getting Started&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# install tools&lt;/span&gt;
+mkdir datascience
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;datascience
+vagrant init data-science-toolbox/data-science-at-the-command-line
+vagrant up
+
+&lt;span class=&quot;c&quot;&gt;# github&lt;/span&gt;
+git clone https://github.com/jeroenjanssens/data-science-at-the-command-line.git
+
+&lt;span class=&quot;c&quot;&gt;# jq&lt;/span&gt;
+https://stedolan.github.io/jq/download/
+
+&lt;span class=&quot;c&quot;&gt;# json2csv&lt;/span&gt;
+https://github.com/jehiah/json2csv
+go get github.com/jehiah/json2csv
+
+&lt;span class=&quot;c&quot;&gt;# xml2json&lt;/span&gt;
+https://github.com/buglabs/node-xml2json
+
+&lt;span class=&quot;c&quot;&gt;# csvkit&lt;/span&gt;
+pip install csvkit &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;in2csv, sql2csv, csvlook, csvsql&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch03---obtaining-data&quot;&gt;CH03 - Obtaining Data&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# playing with some cli tools&lt;/span&gt;
+
+parallel -j1 --progress --delay 0.1 --results results &lt;span class=&quot;s2&quot;&gt;&amp;quot;curl -sL &amp;quot;&amp;quot;&amp;#39;http://api.nytimes.com/svc/search/v2/articlesearch.json?q=New+York+&amp;#39;&amp;quot;&amp;quot;&amp;#39;Fashion+Week&amp;amp;begin_date={1}0101&amp;amp;end_date={1}1231&amp;amp;page={2}&amp;amp;api-key=&amp;#39;&amp;quot;&amp;quot;&amp;#39;&amp;lt;your-api-key&amp;gt;&amp;#39;&amp;quot;&lt;/span&gt; ::: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;2009..2013&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; ::: &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;0..99&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &amp;gt; /dev/null
+
+cat results/1/*/2/*/stdout &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;.response.docs[] | {date: .pub_date, type: .document_type, &amp;#39;&amp;#39;title: .headline.main }&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; json2csv -p -k date,type,title &amp;gt; fashion.csv
+
+&amp;lt; fashion.csv cols -c date cut -dT -f1 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; csvlook
+
+&amp;lt; fashion.csv Rio -ge &lt;span class=&quot;s1&quot;&gt;&amp;#39;g + geom_freqpoly(aes(as.Date(date), color=type), &amp;#39;&amp;#39;binwidth=7) + scale_x_date() + labs(x=&amp;quot;date&amp;quot;, title=&amp;quot;Coverage of New York&amp;#39;&amp;#39; Fashion Week in New York Times&amp;quot;)&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; display
+
+&lt;span class=&quot;c&quot;&gt;# in2csv - able to convert Microsoft Excel spreadsheets to CSV files&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;in2csv data/imdb-250.xlsx &amp;gt; data/imdb-250.csv
+
+&lt;span class=&quot;c&quot;&gt;# csvlook - nicely format the data into a table&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;in2csv data/imdb-250.xlsx &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; csvcut -c Title,Year,Rating &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; csvlook
+
+&lt;span class=&quot;c&quot;&gt;# sql2csv - querying relational databases&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sql2csv --db &lt;span class=&quot;s1&quot;&gt;&amp;#39;sqlite:///data/iris.db&amp;#39;&lt;/span&gt; --query &lt;span class=&quot;s1&quot;&gt;&amp;#39;SELECT * FROM iris &amp;#39;&amp;#39;WHERE sepal_length &amp;gt; 7.5&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# jq - commandline JSON processor&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -s http://api.randomuser.me &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq &lt;span class=&quot;s1&quot;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# curlicue - to log in api using the OAuth protocol&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curlicue-setup &lt;span class=&quot;s1&quot;&gt;&amp;#39;https://api.twitter.com/oauth/request_token&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;https://api.twitter.com/oauth/authorize?oauth_token=$oauth_token&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;https://api.twitter.com/oauth/access_token&amp;#39;&lt;/span&gt; &amp;gt; credentials
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curlicue -f credentials &lt;span class=&quot;s1&quot;&gt;&amp;#39;https://api.twitter.com/1/statuses/home_timeline.xml&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch05---scrubbing-data&quot;&gt;CH05 - Scrubbing Data&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# create file that contains 10 lines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;Line %g&amp;quot;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tee lines
+
+&lt;span class=&quot;c&quot;&gt;# print the first three lines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines head -n 3
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines sed -n &lt;span class=&quot;s1&quot;&gt;&amp;#39;1,3p&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;NR&amp;lt;=3&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# print the last three lines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines tail -n 3
+
+&lt;span class=&quot;c&quot;&gt;# remove the first three lines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines tail -n +4
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;1,3d&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines sed -n &lt;span class=&quot;s1&quot;&gt;&amp;#39;1,3!p&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# remove last three lines&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines head -n -3&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# print (or extract) specific lines&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines sed -n &amp;#39;&lt;/span&gt;4,6p&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines awk &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;NR&amp;gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&amp;amp;&amp;amp;(&lt;/span&gt;NR&amp;lt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines head -n 6 | tail -n 3&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# print odd numbered lines&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines sed -n &amp;#39;&lt;/span&gt;1~2p&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; lines awk &amp;#39;&lt;/span&gt;NR%2
+
+&lt;span class=&quot;c&quot;&gt;# print even numbered lines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines sed -n &lt;span class=&quot;s1&quot;&gt;&amp;#39;0~2p&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; lines awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;(NR+1)%2&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# grep pattern&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep -E &lt;span class=&quot;s1&quot;&gt;&amp;#39;^CHAPTER (.*)\. The&amp;#39;&lt;/span&gt; alice.txt
+
+&lt;span class=&quot;c&quot;&gt;# outputting only a certain percentage of data&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sample -r 1% &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;{line: .}&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;10000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sample -r 1% -d &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt; -s &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;{line: .}&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# extract fields&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep -i chapter alice.txt &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -d&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; -f3-
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sed -rn &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p&amp;#39;&lt;/span&gt; alice.txt &amp;gt; /dev/null
+
+&lt;span class=&quot;c&quot;&gt;# remove set of characters&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep -i chapter alice.txt &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -c 9-
+
+&lt;span class=&quot;c&quot;&gt;# create a data set of all the words that start with an “a”&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; alice.txt tr &lt;span class=&quot;s1&quot;&gt;&amp;#39;[:upper:]&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;[:lower:]&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -oE &lt;span class=&quot;s1&quot;&gt;&amp;#39;\w{2,}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -E &lt;span class=&quot;s1&quot;&gt;&amp;#39;^a.*e$&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq -c &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nr &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $2&amp;quot;,&amp;quot;$1}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; header -a word,count &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; csvlook
+
+&lt;span class=&quot;c&quot;&gt;# one character needs to be replaced&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr &lt;span class=&quot;s1&quot;&gt;&amp;#39; !&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;_?&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# to delete individual characters&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr -d -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;[a-z]&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# convert our text to uppercase&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr &lt;span class=&quot;s1&quot;&gt;&amp;#39;[a-z]&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;[A-Z]&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;hello world!&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr &lt;span class=&quot;s1&quot;&gt;&amp;#39;[:lower:]&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;[:upper:]&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# to change a word, remove repeated spaces, and remove leading spaces&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ echo &amp;#39;&lt;/span&gt; hello world!&lt;span class=&quot;s1&quot;&gt;&amp;#39; | sed -re &amp;#39;&lt;/span&gt;s/hello/bye/&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;s/&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;+/ /g&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;s/&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;+//&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# with body cmd you can apply any command-line tool to the file (i.e., everything excluding the header)&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ echo -e &amp;quot;value\n7\n2\n5\n3&amp;quot; | body sort -n&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ seq 5 | header -a count | body wc -l&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# header cmd allows us, as the name implies, to manipulate the header of a CSV file&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; tips.csv header&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ seq 5 | header -a count&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; iris.csv header -d | head&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; iris.csv  header -e &amp;#39;&lt;/span&gt;tr &lt;span class=&quot;s2&quot;&gt;&amp;quot;[:lower:]&amp;quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;[:upper:]&amp;quot;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;|head&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ seq 5 | header -a line | body wc -l | header -r count&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# cols cmd allows you to apply a certain command to only a subset of the columns&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; tips.csv cols -c day body &amp;quot;tr &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;a-z&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;A-Z&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;quot; | head -n 5 | csvlook&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# csvsql allows you to execute SQL queries directly on CSV files&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ seq 5 | header -a value | csvsql --query &amp;quot;SELECT SUM(value) AS sum FROM stdin&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ seq 5 | header -a value | csvsql --query &amp;quot;SELECT * FROM stdin&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; iris.csv csvsql --query &amp;quot;SELECT sepal_length, petal_length, sepal_width, petal_width FROM stdin&amp;quot; | csvlook&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# change the attribute &amp;quot;gender&amp;quot; to &amp;quot;sex&amp;quot; using sed&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ sed -e &amp;#39;&lt;/span&gt;s/&lt;span class=&quot;s2&quot;&gt;&amp;quot;gender&amp;quot;&lt;/span&gt;:/&lt;span class=&quot;s2&quot;&gt;&amp;quot;sex&amp;quot;&lt;/span&gt;:/g&lt;span class=&quot;s1&quot;&gt;&amp;#39; data/users.json | fold | head -n 3&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# working with HTML/XML and JSON&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ curl -sL &amp;#39;&lt;/span&gt;http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;gt; wiki.html&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; wiki.html scrape -b -e &amp;#39;&lt;/span&gt;table.wikitable &amp;gt; tr:not&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;:first-child&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; table.html xml2json &amp;gt; table.json&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; table.json jq &amp;#39;&lt;/span&gt;.&lt;span class=&quot;s1&quot;&gt;&amp;#39; | head -n 25&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; table.json jq -c &amp;#39;&lt;/span&gt;.html.body.tr&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;country: .td&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;][]&lt;/span&gt;,border:.td&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;][]&lt;/span&gt;, surface: .td&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;][]}&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;gt; countries.json&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; countries.json json2csv -p -k country,border,surface &amp;gt; countries.csv&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; countries.json json2csv -p -k country,border,surface |csvlook|head -10&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; countries.json json2csv -p -k country,border,surface |cols -c country body &amp;quot;tr &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;a-z&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;A-Z&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# csvcut cmd allow to extracted and reordered colums&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# exclude all the bills of which the party size was 4 or less&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ csvgrep -c size -i -r &amp;quot;[1-4]&amp;quot; tips.csv | csvlook&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; tips.csv awk -F, &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &amp;gt; 40.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$5&lt;/span&gt; ~ /S/&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39; | csvlook&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; tips.csv csvsql --query &amp;quot;SELECT * FROM stdin WHERE bill &amp;gt; 40 AND day LIKE &amp;#39;&lt;/span&gt;%S%&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;quot; | csvlook&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# merging columns&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; names.csv csvsql --query &amp;quot;SELECT id, first_name || &amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; || last_name AS full_name, born FROM stdin&amp;quot; | csvlook&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# splitting up Iris data set into three CSV files&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ &amp;lt; iris.csv fieldsplit -d, -k -F species -p . -s .csv&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# concatenate the files back using cat&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ cat Iris-setosa.csv &amp;lt;(&amp;lt; Iris-versicolor.csv header -d) &amp;lt;(&amp;lt; Iris-virginica.csv header -d) | sed -n &amp;#39;&lt;/span&gt;1p&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;49,54p&lt;span class=&quot;s1&quot;&gt;&amp;#39; | csvlook&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;# csvjoin cmd allow to join the two data sets&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;$ csvjoin -c species iris.csv irismeta.csv | csvcut -c sepal_length,sepal_width,species,usda_id | sed -n &amp;#39;&lt;/span&gt;1p&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;49,54p&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; csvloo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch06---managing-your-data-workflow&quot;&gt;CH06 - Managing Your Data Workflow&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# drake is command-line tool created by Factual that allows you to:&lt;/span&gt;
+• Formalize your data workflow steps in terms of input and output dependencies
+• Run specific steps of your workflow from the &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;line
+• Use inline code &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g., Python and R&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+• Store and retrieve data from external sources &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g., S3 and HDFS&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install openjdk-6-jdk
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install leiningen
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/Factual/drake.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;drake
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lein uberjar
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv drake.jar ~/.bin/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/.bin/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;java -jar drake.jar
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/flatland/drip.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;drip
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nv&quot;&gt;prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/.bin install
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/tools/drake
+
+&lt;span class=&quot;c&quot;&gt;# top 5 downloaded books of Project Gutenberg&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -s &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://www.gutenberg.org/browse/scores/top&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep -E &lt;span class=&quot;s1&quot;&gt;&amp;#39;^&amp;lt;li&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head -n &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed -E &lt;span class=&quot;s2&quot;&gt;&amp;quot;s/.*ebooks\/([0-9]+).*/\\1/&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# same step with Drakefile&lt;/span&gt;
+top-5 &amp;lt;-
+        curl -s &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://www.gutenberg.org/browse/scores/top&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        grep -E &lt;span class=&quot;s1&quot;&gt;&amp;#39;^&amp;lt;li&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        head -n &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        sed -E &lt;span class=&quot;s2&quot;&gt;&amp;quot;s/.*ebooks\/([0-9]+)\&amp;quot;&amp;gt;([^&amp;lt;]+)&amp;lt;.*/\\1,\\2/&amp;quot;&lt;/span&gt; &amp;gt; top-5
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;drake
+
+&lt;span class=&quot;c&quot;&gt;# add variables to drake 02.drake&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;NUM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;5
+&lt;span class=&quot;nv&quot;&gt;BASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;data/
+
+top.html &amp;lt;- &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;-timecheck&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        curl -s &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://www.gutenberg.org/browse/scores/top&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class=&quot;nv&quot;&gt;$OUTPUT&lt;/span&gt;
+
+top-&lt;span class=&quot;nv&quot;&gt;$[&lt;/span&gt;NUM&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &amp;lt;- top.html
+        &amp;lt; &lt;span class=&quot;nv&quot;&gt;$INPUT&lt;/span&gt; grep -E &lt;span class=&quot;s1&quot;&gt;&amp;#39;^&amp;lt;li&amp;gt;&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        head -n &lt;span class=&quot;nv&quot;&gt;$[&lt;/span&gt;NUM&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        sed -E &lt;span class=&quot;s2&quot;&gt;&amp;quot;s/.*ebooks\/([0-9]+)\&amp;quot;&amp;gt;([^&amp;lt;]+)&amp;lt;.*/\\1,\\2/&amp;quot;&lt;/span&gt; &amp;gt; &lt;span class=&quot;nv&quot;&gt;$OUTPUT&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;drake --debug -w 02.drake
+&lt;span class=&quot;nv&quot;&gt;$ NUM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; drake -w 02.drake&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch07---exploring-data&quot;&gt;CH07 - Exploring Data&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# to get the number of unique values for each column&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;csvstat data/investments2.csv --unique
+
+&lt;span class=&quot;c&quot;&gt;# csvstat gives a lot of information&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;csvstat data/datatypes.csv
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;csvstat data/investments2.csv -c 2,13,19,24&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch08---parallel-pipelines&quot;&gt;CH08 - Parallel Pipelines&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# looping over files&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find data -name &lt;span class=&quot;s1&quot;&gt;&amp;#39;*.csv&amp;#39;&lt;/span&gt; -print0 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -0 &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Processing {}&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# simple parallel processing&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1..4&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;./slow.sh &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;Processed &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# parallel - cli tool that allows us to parallelize commands and pipelines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo {}^2 | bc&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; input.csv parallel -C, &lt;span class=&quot;s2&quot;&gt;&amp;quot;mv {1} {2}&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&amp;lt; input.csv parallel -C, --header : &lt;span class=&quot;s2&quot;&gt;&amp;quot;invite {name} {email}&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -j0 &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo Hi {}&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo \&amp;quot;Hi {}\&amp;quot; &amp;gt; data/hi-{}.txt&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel --results data/outdir &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo Hi {}&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -C, -k -j100% &lt;span class=&quot;s2&quot;&gt;&amp;quot;echo &amp;#39;{1}^2&amp;#39; | bc -l&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;tail
+
+&lt;span class=&quot;c&quot;&gt;# awscli&lt;/span&gt;
+pip install awscli
+&lt;span class=&quot;c&quot;&gt;# Getting Your Access Key ID and Secret Access Key&lt;/span&gt;
+https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html
+aws configure
+aws ec2 describe-instances
+aws ec2 describe-instances &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq &lt;span class=&quot;s1&quot;&gt;&amp;#39;.Reservations[].Instances[] | {public_dns: .PublicDnsName, state: .State.Name}&amp;#39;&lt;/span&gt;
+aws ec2 describe-instances &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; jq -r &lt;span class=&quot;s1&quot;&gt;&amp;#39;.Reservations[].Instances[] | select(.State.Name==&amp;quot;running&amp;quot;) | .PublicDnsName&amp;#39;&lt;/span&gt; &amp;gt; instances
+
+&lt;span class=&quot;c&quot;&gt;# running commands on remote machines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;parallel --nonall --slf instances hostname
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;parallel --nonall --slf instances &lt;span class=&quot;s2&quot;&gt;&amp;quot;sudo apt-get install -y parallel&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Distributing Local Data Among Remote Machines&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;seq &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; parallel -N100 --pipe --slf hosts &lt;span class=&quot;s2&quot;&gt;&amp;quot;(hostname; wc -l) | paste -sd:&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ch09---modeling-data&quot;&gt;CH09 - Modeling Data&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# obtain the two data sets using  curl&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;parallel &lt;span class=&quot;s2&quot;&gt;&amp;quot;curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-{}.csv &amp;gt; wine-{}.csv&amp;quot;&lt;/span&gt; ::: red white&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/10/data-science-at-the-command-line/&quot;&gt;Data Science at the Command Line&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 10, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -2343,7 +2630,8 @@ find /path/memcachedb/ -inum &lt;span class=&quot;m&quot;&gt;14221332&lt;/span&g
 
 &lt;h3 id=&quot;flush-linux-disk-cache&quot;&gt;Flush linux disk cache&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;sync; echo 3 &amp;gt; /proc/sys/vm/drop_caches&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;sync; echo 3 &amp;gt; /proc/sys/vm/drop_caches&amp;#39;&lt;/span&gt;
+free &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sync &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &amp;gt; /proc/sys/vm/drop_caches &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; free&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
@@ -3171,6 +3459,8 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
   &lt;li&gt;Himanshu Kumar - Learning Nessus for Penetration Testing&lt;/li&gt;
   &lt;li&gt;Rtfm: Red Team Field Manual&lt;/li&gt;
   &lt;li&gt;Brian Ward - How Linux Works - What Every Superuser Should Know&lt;/li&gt;
+  &lt;li&gt;Metasploit Penetration Testing Cookbook&lt;/li&gt;
+  &lt;li&gt;Penetration Testing with Raspberry Pi&lt;/li&gt;
   &lt;li&gt;Gray Hat Hacking the Ethical Hacker’s Handbook&lt;/li&gt;
   &lt;li&gt;Black Hat Python Python Programming for Hackers and Pentesters&lt;/li&gt;
 &lt;/ul&gt;
@@ -5764,77 +6054,6 @@ export a=’myfile.txt’; echo ${}.
 &lt;p&gt;&lt;a href=&quot;http://careers.simplicable.com/careers/new/101-IT-security-interview-questions&quot;&gt;Questions Source&lt;/a&gt;&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/07/101-IT-security-interview-questions/&quot;&gt;101 IT Security Interview Questions&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 07, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Install Hubot on Ubuntu]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/06/install-hubot/" />
-  <id>https://jivoi.github.io/2014/01/06/install-hubot</id>
-  <updated>2014-01-06 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-06T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;How to install Hubot to Ubuntu linux.&lt;/p&gt;
-
-&lt;p&gt;What is Hubot: &lt;a href=&quot;https://hubot.github.com/&quot;&gt;Awesome bot for everything&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;add-new-user-and-install-nvm&quot;&gt;Add new user and install NVM&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd -m hubot
-su - hubot
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bash
-nvm install 0.10&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;install-hubot&quot;&gt;Install HUBOT&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install  generator-hubot yo coffee-script hubot hubot-xmpp
-yo hubot --defaults&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;connect-hubot-to-xmpp-room&quot;&gt;Connect Hubot to XMPP Room&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat &lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;EOF &amp;gt; /etc/init/hubot.conf&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;# hubot - xmpp bot&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;description &amp;quot;Hubot XMPP bot&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_LOG_LEVEL=&amp;quot;debug&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_HOST=&amp;quot;xmppserver.com&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_USERNAME=&amp;quot;XMPPACC&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_PASSWORD=&amp;quot;XMPPPASS&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_ROOMS=&amp;#39;XMPPROOM@conference.xmppserver.com:roompassword&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_XMPP_PORT=&amp;quot;5222&amp;quot;&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;start on filesystem or runlevel [2345]&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;stop on runlevel [!2345]&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;env HUBOT_DIR=&amp;quot;/home/hubot/&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT=&amp;quot;bin/hubot&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_ARGS=&amp;quot;-a xmpp&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_USER=&amp;#39;hubot&amp;#39; # system account&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;env HUBOT_NAME=&amp;#39;hubot&amp;#39; # what hubot listens to&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;respawn&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;respawn limit 5 60&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;exec start-stop-daemon --start --chuid ${HUBOT_USER} --chdir ${HUBOT_DIR} --exec ${HUBOT_DIR}${HUBOT} -- $HUBOT_ARGS &amp;gt;&amp;gt; /home/hubot/hubot.log 2&amp;gt;&amp;amp;1&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;configure-hubot-scripts&quot;&gt;Configure Hubot scripts&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;cat /home/hubot/hubot-scripts.json
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;shipit.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;sudo.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;9gag.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;abstract.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;commandlinefu.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;xkcd.coffee&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;yoda-quotes.coffee&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;More scripts: &lt;a href=&quot;https://github.com/hubot-scripts&quot;&gt;LINK&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;start-hubot&quot;&gt;Start Hubot&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;start hubot
-tail -f /home/hubot/hubot.log&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/06/install-hubot/&quot;&gt;Install Hubot on Ubuntu&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 06, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
