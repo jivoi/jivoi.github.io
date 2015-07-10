@@ -59,6 +59,7 @@ My current way for OSCP Certifications
 - Himanshu Kumar - Learning Nessus for Penetration Testing
 - Rtfm: Red Team Field Manual
 - Brian Ward - How Linux Works - What Every Superuser Should Know
+- Metasploit Penetration Testing Cookbook
 * Gray Hat Hacking the Ethical Hacker’s Handbook
 * Black Hat Python Python Programming for Hackers and Pentesters
 
