@@ -37,3 +37,4 @@ The way that i went for CCNA Certification
 - CBT Nuggets - CCNA Hands-on Labs Using Wireshark & GNS3
 - CBT Nuggets - Cisco CCNA Labs: Cisco for the Real World
 - INE - Cisco CCNA
+- CCNA Security 640-554 Video Boot Camp With Chris Bryant

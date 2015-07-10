@@ -11,3 +11,8 @@ image:
 comments: True
 share: 
 ---
+
+### 2 Watch
+- CybraryIT - CompTIA Security+ SY0-401
+- InfiniteSkills - CompTIA Security+ SY0-401
+- CBT Nuggets - CompTIA Security+ SY0-401
