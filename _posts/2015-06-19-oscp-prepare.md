@@ -73,3 +73,4 @@ My current way for OSCP Certifications
 - Udemy - Certified Metasploit Framework Professional
 - CybraryIT - Post Exploitation Hacking
 - InfiniteSkills - Advanced White Hat Hacking And Penetration Testing
+- InfiniteSkills - Learning Whitehat Hacking and Penetration Testing
