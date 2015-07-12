@@ -74,3 +74,4 @@ My current way for OSCP Certifications
 - CybraryIT - Post Exploitation Hacking
 - InfiniteSkills - Advanced White Hat Hacking And Penetration Testing
 - InfiniteSkills - Learning Whitehat Hacking and Penetration Testing
+- InfiniteSkills - Reverse Engineering and Exploit Development
