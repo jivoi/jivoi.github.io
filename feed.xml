@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-12T19:20:59+03:00</updated>
+<updated>2015-07-13T13:11:50+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -894,7 +894,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#tunneling--port-forwarding&quot; id=&quot;markdown-toc-tunneling--port-forwarding&quot;&gt;Tunneling &amp;amp; Port Forwarding&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#xss-cheat-codes&quot; id=&quot;markdown-toc-xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#webshells&quot; id=&quot;markdown-toc-webshells&quot;&gt;WebShells&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#sql-injection-cheat-codes&quot; id=&quot;markdown-toc-sql-injection-cheat-codes&quot;&gt;SQL Injection Cheat Codes&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#sqli-general-resources&quot; id=&quot;markdown-toc-sqli-general-resources&quot;&gt;SQLi General Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mysqli-resources&quot; id=&quot;markdown-toc-mysqli-resources&quot;&gt;MySQLi Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mssqli-resources&quot; id=&quot;markdown-toc-mssqli-resources&quot;&gt;MSSQLi Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#oracle-sqli-resources&quot; id=&quot;markdown-toc-oracle-sqli-resources&quot;&gt;Oracle SQLi Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#postgres-sqli-resources&quot; id=&quot;markdown-toc-postgres-sqli-resources&quot;&gt;Postgres SQLi Resources&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#sqlite-resources&quot; id=&quot;markdown-toc-sqlite-resources&quot;&gt;SQLite Resources&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#rfilfi-tutorials&quot; id=&quot;markdown-toc-rfilfi-tutorials&quot;&gt;RFI/LFI Tutorials&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#nasm-tutorial&quot; id=&quot;markdown-toc-nasm-tutorial&quot;&gt;NASM Tutorial&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#buffer-overflow-tutorial&quot; id=&quot;markdown-toc-buffer-overflow-tutorial&quot;&gt;Buffer Overflow Tutorial&lt;/a&gt;&lt;/li&gt;
@@ -975,7 +980,6 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements&quot;&gt;https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://w3af.org/&quot;&gt;http://w3af.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/skipfish/&quot;&gt;https://code.google.com/p/skipfish/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sqlmap.org/&quot;&gt;http://sqlmap.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214&quot;&gt;https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/&quot;&gt;https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.justanotherhacker.com/projects/graudit.html&quot;&gt;http://www.justanotherhacker.com/projects/graudit.html&lt;/a&gt;&lt;/li&gt;
@@ -1188,10 +1192,46 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/b374k/b374k&quot;&gt;https://github.com/b374k/b374k&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;sql-injection-cheat-codes&quot;&gt;SQL Injection Cheat Codes&lt;/h3&gt;
+&lt;h3 id=&quot;sqli-general-resources&quot;&gt;SQLi General Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3schools.com/sql/sql_injection.asp&quot;&gt;http://www.w3schools.com/sql/sql_injection.asp&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sqlzoo.net/hack/&quot;&gt;http://sqlzoo.net/hack/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf&quot;&gt;https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://websec.ca/kb/sql_injection&quot;&gt;http://websec.ca/kb/sql_injection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&quot;&gt;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sqlinjectionwiki.com/&quot;&gt;http://www.sqlinjectionwiki.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sqlmap.org/&quot;&gt;http://sqlmap.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf&quot;&gt;https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet&quot;&gt;https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bobby-tables.com/&quot;&gt;http://bobby-tables.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mysqli-resources&quot;&gt;MySQLi Resources&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/&quot;&gt;https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://resources.infosecinstitute.com/backdoor-sql-injection/&quot;&gt;http://resources.infosecinstitute.com/backdoor-sql-injection/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mssqli-resources&quot;&gt;MSSQLi Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://evilsql.com/main/page2.php&quot;&gt;http://evilsql.com/main/page2.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oracle-sqli-resources&quot;&gt;Oracle SQLi Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;postgres-sqli-resources&quot;&gt;Postgres SQLi Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sqlite-resources&quot;&gt;SQLite Resources&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sites.google.com/site/0x7674/home/sqlite3injectioncheatsheet&quot;&gt;https://sites.google.com/site/0x7674/home/sqlite3injectioncheatsheet&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;rfilfi-tutorials&quot;&gt;RFI/LFI Tutorials&lt;/h3&gt;
@@ -1276,8 +1316,6 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&quot;&gt;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.robvanderwoude.com/ntadmincommands.php&quot;&gt;http://www.robvanderwoude.com/ntadmincommands.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&quot;&gt;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&quot;&gt;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&quot;&gt;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
