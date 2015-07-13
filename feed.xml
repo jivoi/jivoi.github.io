@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-13T13:11:50+03:00</updated>
+<updated>2015-07-13T19:15:30+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -908,6 +908,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#reverse-engineering&quot; id=&quot;markdown-toc-reverse-engineering&quot;&gt;Reverse Engineering&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#os-cheat-sheets-and-script-syntax&quot; id=&quot;markdown-toc-os-cheat-sheets-and-script-syntax&quot;&gt;OS Cheat Sheets and Script Syntax&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#passwords-wordlists-hashes-tools&quot; id=&quot;markdown-toc-passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -970,6 +971,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;pentest-tools&quot;&gt;Pentest Tools&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/pwnwiki/pwnwiki.github.io&quot;&gt;https://github.com/pwnwiki/pwnwiki.github.io&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/sbilly/awesome-security&quot;&gt;https://github.com/sbilly/awesome-security&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/paragonie/awesome-appsec&quot;&gt;https://github.com/paragonie/awesome-appsec&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/enaqx/awesome-pentest&quot;&gt;https://github.com/enaqx/awesome-pentest&lt;/a&gt;&lt;/li&gt;
@@ -1248,9 +1250,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;buffer-overflow-tutorial&quot;&gt;Buffer Overflow Tutorial&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow&quot;&gt;http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://resources.infosecinstitute.com/author/nikhil-kumar/&quot;&gt;http://resources.infosecinstitute.com/author/nikhil-kumar/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156&quot;&gt;http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html&quot;&gt;http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148&quot;&gt;http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/&quot;&gt;https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html&quot;&gt;http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://forum.reverse4you.org/showthread.php?t=1371&quot;&gt;https://forum.reverse4you.org/showthread.php?t=1371&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html&lt;/a&gt;&lt;/li&gt;
@@ -1258,6 +1263,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html&quot;&gt;http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html&quot;&gt;http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thepcn3rd.blogspot.ru/2015/07/freeftpd-108-seh-stack-based-overflow.html&quot;&gt;http://thepcn3rd.blogspot.ru/2015/07/freeftpd-108-seh-stack-based-overflow.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;exploit-development&quot;&gt;Exploit Development&lt;/h3&gt;
@@ -1317,6 +1323,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.robvanderwoude.com/ntadmincommands.php&quot;&gt;http://www.robvanderwoude.com/ntadmincommands.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&quot;&gt;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&quot;&gt;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://danielmiessler.com/study/tcpdump/&quot;&gt;https://danielmiessler.com/study/tcpdump/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/h3&gt;
@@ -1340,6 +1347,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://ophcrack.sourceforge.net/&quot;&gt;http://ophcrack.sourceforge.net/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://inquisb.github.io/keimpx/&quot;&gt;https://inquisb.github.io/keimpx/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/&quot;&gt;http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;infosec-hiring&quot;&gt;InfoSec Hiring&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/&quot;&gt;Reddit Thread&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level&quot;&gt;PenTester Salary&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
