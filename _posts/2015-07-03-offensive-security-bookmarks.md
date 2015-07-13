@@ -80,7 +80,6 @@ All that things I need to pass OSCP, i think =)
 - [https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements](https://www.owasp.org/index.php/Category:OWASP_Fuzzing_Code_Database#tab=Statements)
 - [http://w3af.org/](http://w3af.org/)
 - [https://code.google.com/p/skipfish/](https://code.google.com/p/skipfish/)
-- [http://sqlmap.org/](http://sqlmap.org/)
 - [https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214](https://www.sans.org/reading-room/whitepapers/testing/fuzzing-approach-credentials-discovery-burp-intruder-33214)
 - [https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/](https://www.securityninja.co.uk/hacking/burp-suite-tutorial-the-intruder-tool/)
 - [http://www.justanotherhacker.com/projects/graudit.html](http://www.justanotherhacker.com/projects/graudit.html)
@@ -258,9 +257,35 @@ All that things I need to pass OSCP, i think =)
 - [http://www.r57shell.net/](http://www.r57shell.net/)
 - [https://github.com/b374k/b374k](https://github.com/b374k/b374k)
 
-### SQL Injection Cheat Codes
+### SQLi General Resources
+- [http://www.w3schools.com/sql/sql_injection.asp](http://www.w3schools.com/sql/sql_injection.asp)
+- [http://sqlzoo.net/hack/](http://sqlzoo.net/hack/)
+- [https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf](https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf)
+- [http://websec.ca/kb/sql_injection](http://websec.ca/kb/sql_injection)
+- [http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/](http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/)
+- [http://www.sqlinjectionwiki.com/](http://www.sqlinjectionwiki.com/)
+- [http://sqlmap.org/](http://sqlmap.org/)
+- [https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf](https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf)
+- [https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet](https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet)
+- [http://bobby-tables.com/](http://bobby-tables.com/)
+
+### MySQLi Resources
 - [http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/mysql-sql-injection-cheat-sheet)
+- [https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/](https://websec.wordpress.com/2010/12/04/sqli-filter-evasion-cheat-sheet-mysql/)
 - [http://resources.infosecinstitute.com/backdoor-sql-injection/](http://resources.infosecinstitute.com/backdoor-sql-injection/)
+
+### MSSQLi Resources
+- [http://evilsql.com/main/page2.php](http://evilsql.com/main/page2.php)
+- [http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)
+
+### Oracle SQLi Resources
+- [http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/oracle-sql-injection-cheat-sheet)
+
+### Postgres SQLi Resources
+- [http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/postgres-sql-injection-cheat-sheet)
+
+### SQLite Resources
+- [https://sites.google.com/site/0x7674/home/sqlite3injectioncheatsheet](https://sites.google.com/site/0x7674/home/sqlite3injectioncheatsheet)
 
 ### RFI/LFI Tutorials
 - [https://evilzone.org/tutorials/remote-file-inclusion%28rfi%29/](https://evilzone.org/tutorials/remote-file-inclusion%28rfi%29/)
@@ -331,8 +356,6 @@ All that things I need to pass OSCP, i think =)
 - [https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
 - [http://www.robvanderwoude.com/ntadmincommands.php](http://www.robvanderwoude.com/ntadmincommands.php)
 - [https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf](https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf)
-- [http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/](http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/)
-- [http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet](http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet)
 - [https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png](https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png)
 
 ### Passwords Wordlists, Hashes, Tools
