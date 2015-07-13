@@ -384,3 +384,7 @@ All that things I need to pass OSCP, i think =)
 - [http://ophcrack.sourceforge.net/](http://ophcrack.sourceforge.net/)
 - [https://inquisb.github.io/keimpx/](https://inquisb.github.io/keimpx/)
 - [http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/](http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/)
+
+### InfoSec Hiring
+- [Reddit Thread](https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/)
+- [PenTester Salary](http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level)
