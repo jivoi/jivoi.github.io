@@ -70,6 +70,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.securitytube.net/video/7735](http://www.securitytube.net/video/7735)
 
 ### Pentest Tools
+- [https://github.com/pwnwiki/pwnwiki.github.io](https://github.com/pwnwiki/pwnwiki.github.io)
 - [https://github.com/sbilly/awesome-security](https://github.com/sbilly/awesome-security)
 - [https://github.com/paragonie/awesome-appsec](https://github.com/paragonie/awesome-appsec)
 - [https://github.com/enaqx/awesome-pentest](https://github.com/enaqx/awesome-pentest)
@@ -296,9 +297,12 @@ All that things I need to pass OSCP, i think =)
 - [http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm](http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm)
 
 ### Buffer Overflow Tutorial
+- [http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow](http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow)
+- [http://resources.infosecinstitute.com/author/nikhil-kumar/](http://resources.infosecinstitute.com/author/nikhil-kumar/)
 - [http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156](http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156)
 - [http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html](http://www.savevid.com/video/athcon-hack-in-paris-demo-2.html)
 - [http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148](http://www.frequency.com/video/athcon-hack-in-paris-demo-3/11306148)
+- [https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/](https://tehaurum.wordpress.com/2015/06/22/exploit-development-stack-buffer-overflow/)
 - [http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html](http://proactivedefender.blogspot.ru/2013/05/understanding-buffer-overflows.html)
 - [https://forum.reverse4you.org/showthread.php?t=1371](https://forum.reverse4you.org/showthread.php?t=1371)
 - [http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html](http://grey-corner.blogspot.com/2010/01/beginning-stack-based-buffer-overflow.html)
@@ -306,6 +310,7 @@ All that things I need to pass OSCP, i think =)
 - [http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html](http://grey-corner.blogspot.com/2010/01/windows-buffer-overflow-tutorial.html)
 - [http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html](http://grey-corner.blogspot.com/2010/01/heap-spray-exploit-tutorial-internet.html)
 - [http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html](http://grey-corner.blogspot.com/2010/02/windows-buffer-overflow-tutorial.html)
+- [http://thepcn3rd.blogspot.ru/2015/07/freeftpd-108-seh-stack-based-overflow.html](http://thepcn3rd.blogspot.ru/2015/07/freeftpd-108-seh-stack-based-overflow.html)
 
 ### Exploit Development
 - [https://www.corelan.be/index.php/articles/](https://www.corelan.be/index.php/articles/)
@@ -357,6 +362,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.robvanderwoude.com/ntadmincommands.php](http://www.robvanderwoude.com/ntadmincommands.php)
 - [https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf](https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf)
 - [https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png](https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png)
+- [https://danielmiessler.com/study/tcpdump/](https://danielmiessler.com/study/tcpdump/)
 
 ### Passwords Wordlists, Hashes, Tools
 - [http://www.irongeek.com/i.php?page=videos/password-exploitation-class](http://www.irongeek.com/i.php?page=videos/password-exploitation-class)
