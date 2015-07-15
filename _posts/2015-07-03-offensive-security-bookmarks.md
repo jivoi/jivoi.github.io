@@ -239,6 +239,7 @@ All that things I need to pass OSCP, i think =)
 ### Tunneling & Port Forwarding
 - [https://highon.coffee/blog/reverse-shell-cheat-sheet/](https://highon.coffee/blog/reverse-shell-cheat-sheet/)
 - [https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/](https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/)
+- [http://staff.washington.edu/corey/fw/ssh-port-forwarding.html](http://staff.washington.edu/corey/fw/ssh-port-forwarding.html)
 - [http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
 - [http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html](http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html)
 - [http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html](http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html)
@@ -257,6 +258,7 @@ All that things I need to pass OSCP, i think =)
 ### WebShells
 - [http://www.r57shell.net/](http://www.r57shell.net/)
 - [https://github.com/b374k/b374k](https://github.com/b374k/b374k)
+- [https://github.com/epinna/weevely3](https://github.com/epinna/weevely3)
 
 ### SQLi General Resources
 - [http://www.w3schools.com/sql/sql_injection.asp](http://www.w3schools.com/sql/sql_injection.asp)
