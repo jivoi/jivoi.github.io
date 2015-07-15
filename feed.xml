@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-13T19:15:30+03:00</updated>
+<updated>2015-07-15T15:12:10+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -700,19 +700,19 @@ losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file&lt;/co
     &lt;p&gt;&lt;a href=&quot;http://www.nomer.org/moskva/&quot;&gt;http://www.nomer.org/moskva/&lt;/a&gt; – телефонная база г.Москвы. Содержит адреса и телефоны всех московских квартир, в которых установлен телефон, и не только МГТС.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://spravkaru.net/&quot;&gt;http://spravkaru.net/http://spravkaru.net/&lt;/a&gt; – онлайн телефонный справочник по городам и регионам России.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://spravkaru.net/&quot;&gt;http://spravkaru.net/&lt;/a&gt; – онлайн телефонный справочник по городам и регионам России.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://rossvyaz.ru/activity/num_resurs/registerNum/&quot;&gt;http://rossvyaz.ru/activity/num_resurs/registerNum/http://rossvyaz.ru/activity/num_resurs/registerNum/&lt;/a&gt; – полезный поисковик, позволяющий определить оператора по номеру или фрагменту номера телефона оператора, месторасположение и т.п.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://rossvyaz.ru/activity/num_resurs/registerNum/&quot;&gt;http://rossvyaz.ru/activity/num_resurs/registerNum/&lt;/a&gt; – полезный поисковик, позволяющий определить оператора по номеру или фрагменту номера телефона оператора, месторасположение и т.п.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://www.rospravosudie.com/&quot;&gt;http://www.rospravosudie.com/http://www.rospravosudie.com/&lt;/a&gt; – поисковик-сервис по судебным решениям в России. Содержит все опубликованные судебные решения, список судей Российской Федерации, а также список действующих адвокатов. По каждому судье можно посмотреть списки его решений. Предоставляет статистику преступлений по регионам. Является некоммерческим проектом.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.rospravosudie.com/&quot;&gt;http://www.rospravosudie.com/&lt;/a&gt; – поисковик-сервис по судебным решениям в России. Содержит все опубликованные судебные решения, список судей Российской Федерации, а также список действующих адвокатов. По каждому судье можно посмотреть списки его решений. Предоставляет статистику преступлений по регионам. Является некоммерческим проектом.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://www.salyk.kz/ru/taxpayer/interaktiv/Pages/default.aspx&quot;&gt;http://www.salyk.kz/ru/taxpayer/interaktiv/Pages/default.aspxhttp://www.salyk.kz/ru/taxpayer/interaktiv/Pages/default.aspx&lt;/a&gt; – официальный портал Налогового комитета Министерства финансов республики Казахстан. Располагает рядом удобных сервисов, включая реестр плательщиков НДС, поиск налогоплательщиков в республике и проч.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.salyk.kz/ru/taxpayer/interaktiv/Pages/default.aspx&quot;&gt;http://www.salyk.kz/ru/taxpayer/interaktiv/Pages/default.aspx&lt;/a&gt; – официальный портал Налогового комитета Министерства финансов республики Казахстан. Располагает рядом удобных сервисов, включая реестр плательщиков НДС, поиск налогоплательщиков в республике и проч.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://focus.kontur.ru/&quot;&gt;https://focus.kontur.ru/https://focus.kontur.ru/&lt;/a&gt; - лучший в Рунете по соотношению цены и качества сервис проверки клиентов, контрагентов и т.п., пользуясь официальными источниками статистики. Наряду с получением данных по отдельной организации позволяет в качестве дополнительной опции искать аффилированные между собой организации, а также пересечение по генеральным директорам, собственникам и т.п.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://focus.kontur.ru/&quot;&gt;https://focus.kontur.ru/&lt;/a&gt; - лучший в Рунете по соотношению цены и качества сервис проверки клиентов, контрагентов и т.п., пользуясь официальными источниками статистики. Наряду с получением данных по отдельной организации позволяет в качестве дополнительной опции искать аффилированные между собой организации, а также пересечение по генеральным директорам, собственникам и т.п.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://fias.nalog.ru/Public/NewsPage.aspx&quot;&gt;http://fias.nalog.ru/Public/NewsPage.aspx&lt;/a&gt; – позволяет установить наличие или отсутствие любого адреса в любом месте в стране. Если точно такого адреса нет, то система выдаст наиболее близкие.&lt;/p&gt;
@@ -721,10 +721,10 @@ losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file&lt;/co
     &lt;p&gt;&lt;a href=&quot;http://alexandr-sel.livejournal.com/33499.html#cutid1&quot;&gt;http://alexandr-sel.livejournal.com/33499.html#cutid1&lt;/a&gt; – исчерпывающая и структурированная база ресурсов для проверки компаний на территории Республики Беларусь.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://fellix13.livejournal.com/6683.html&quot;&gt;http://fellix13.livejournal.com/6683.htmlhttp://fellix13.livejournal.com/6683.html&lt;/a&gt; – необходимый набор ресурсов для проверки конрагентов на Украине от Сергея Коржова.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://fellix13.livejournal.com/6683.html&quot;&gt;http://fellix13.livejournal.com/6683.htmlhttp:/&lt;/a&gt; – необходимый набор ресурсов для проверки конрагентов на Украине от Сергея Коржова.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://mbcredit.ru/&quot;&gt;http://mbcredit.ru/http://mbcredit.ru/&lt;/a&gt; – в группу компаний Cronos входят ЗАО МБКИ, которое предоставляет качественные бизнес-справки и в режиме он-лайн осуществляет проверку кредитных историй по любым компаниям и персоналиям по конкурентным ценам, а также многое другое. Цены вполне конкурентные.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://mbcredit.ru/&quot;&gt;http://mbcredit.ru/&lt;/a&gt; – в группу компаний Cronos входят ЗАО МБКИ, которое предоставляет качественные бизнес-справки и в режиме он-лайн осуществляет проверку кредитных историй по любым компаниям и персоналиям по конкурентным ценам, а также многое другое. Цены вполне конкурентные.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://cases.pravo.ru/&quot;&gt;http://cases.pravo.ru/&lt;/a&gt; – картотека арбитражных дел. При помощи сервиса вы получаете доступ к любому делу в любом арбитражном суде. Достаточно указать известные вам параметры. Искать надо при помощи правой колонки. Поиск можно вести по участникам дела (название организации или ИНН), по фамилии судьи, по номеру дела, фильтровать по датам.&lt;/p&gt;
@@ -733,7 +733,7 @@ losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file&lt;/co
     &lt;p&gt;&lt;a href=&quot;http://www.gcourts.ru/&quot;&gt;http://www.gcourts.ru/&lt;/a&gt; – поисковик и одновременно справочник от Yandex по судам общей юрисдикции. Позволяет искать по номерам дел, ответчикам, истцам, отслеживать прохождение дел по всем инстанциям. Просто неоценимый инструмент для безопасников и разведчиков.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://service.nalog.ru/debt/&quot;&gt;https://service.nalog.ru/debt/https://service.nalog.ru/debt/&lt;/a&gt; – сервис «Узнай свою задолженность» позволяет пользователям узнавать не только свою задолженность, но осуществлять поиск информации о задолженности по имущественному, транспортному, земельному налогам, налогу на доходы физических лиц, граждан РФ.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://service.nalog.ru/debt/&quot;&gt;https://service.nalog.ru/debt/&lt;/a&gt; – сервис «Узнай свою задолженность» позволяет пользователям узнавать не только свою задолженность, но осуществлять поиск информации о задолженности по имущественному, транспортному, земельному налогам, налогу на доходы физических лиц, граждан РФ.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://www.nopassword.ru/?p=41&amp;amp;cpage=1#comment-3287&quot;&gt;http://www.nopassword.ru/?p=41&amp;amp;cpage=1#comment-3287&lt;/a&gt; – есть такая профессия в стране, уводить деньги в офшоры и сделки через них производить. На  ресурсе есть почти исчерпывающая коллекция ссылок на сайты, позволяющие отыскать нужную вам компанию в зоне ее юрисдикции и получить хоть какую-то, иногда и достаточную  информацию об искомой офшорке. Практически все ссылки рабочие, одна-две требуют обновления.&lt;/p&gt;
@@ -745,10 +745,10 @@ losetup /dev/loop0 /opt/stack/data/stack-volumes-lvmdriver-1-backing-file&lt;/co
     &lt;p&gt;&lt;a href=&quot;http://www.law-soft.ru/&quot;&gt;http://www.law-soft.ru/&lt;/a&gt; – информация о предприятиях, находящихся в стадии банкротства, обобщается из «Коммерсанта», «Российской газеты». Информация с 2007 года по настоящее время. Через расширенный поиск Yandex отлично ищется по сайту.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://egrul.nalog.ru/&quot;&gt;http://egrul.nalog.ru/http://egrul.nalog.ru/&lt;/a&gt; – отсюда можно почерпнуть сведения, внесенные в Единый Государственный Реестр Юридических Лиц.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://egrul.nalog.ru/&quot;&gt;http://egrul.nalog.ru/&lt;/a&gt; – отсюда можно почерпнуть сведения, внесенные в Единый Государственный Реестр Юридических Лиц.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://www.e-disclosure.ru/&quot;&gt;http://www.e-disclosure.ru/http://www.e-disclosure.ru/&lt;/a&gt; – сервер раскрытия информации по эмитентам ценных бумаг РФ.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.e-disclosure.ru/&quot;&gt;http://www.e-disclosure.ru/&lt;/a&gt; – сервер раскрытия информации по эмитентам ценных бумаг РФ.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;http://www.fssprus.ru/&quot;&gt;http://www.fssprus.ru/&lt;/a&gt; – картотека арбитражных дел Высшего Арбитражного Суда Российской Федерации&lt;/p&gt;
@@ -1170,6 +1170,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://highon.coffee/blog/reverse-shell-cheat-sheet/&quot;&gt;https://highon.coffee/blog/reverse-shell-cheat-sheet/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/&quot;&gt;https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://staff.washington.edu/corey/fw/ssh-port-forwarding.html&quot;&gt;http://staff.washington.edu/corey/fw/ssh-port-forwarding.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&quot;&gt;http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html&quot;&gt;http://magikh0e.ihtb.org/pubPapers/ssh_gymnastics_tunneling.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html&quot;&gt;http://www.debianadmin.com/howto-use-ssh-local-and-remote-port-forwarding.html&lt;/a&gt;&lt;/li&gt;
@@ -1192,6 +1193,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.r57shell.net/&quot;&gt;http://www.r57shell.net/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/b374k/b374k&quot;&gt;https://github.com/b374k/b374k&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/epinna/weevely3&quot;&gt;https://github.com/epinna/weevely3&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;sqli-general-resources&quot;&gt;SQLi General Resources&lt;/h3&gt;
