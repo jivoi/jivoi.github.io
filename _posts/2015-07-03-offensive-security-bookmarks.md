@@ -35,6 +35,7 @@ All that things I need to pass OSCP, i think =)
 - [https://evilzone.org/](https://evilzone.org/)
 - [http://forum.antichat.ru/](http://forum.antichat.ru/)
 - [https://rstforums.com/forum/](https://rstforums.com/forum/)
+- [http://garage4hackers.com/forum.php](http://garage4hackers.com/forum.php)
 
 ### Security Methodologies
 - [http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html](http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html)
