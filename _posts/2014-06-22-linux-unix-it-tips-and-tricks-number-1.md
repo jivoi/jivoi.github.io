@@ -5,11 +5,11 @@ modified: 2014-06-22 13:54:48 +0300
 category: [howto]
 tags: [linux,unix,sysadm]
 image:
-  feature: 
-  credit: 
-  creditlink: 
+  feature:
+  credit:
+  creditlink:
 comments: True
-share: 
+share:
 ---
 Different Linux / Unix / IT tips, notes, howto
 
@@ -106,7 +106,7 @@ mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 > /path/to/file/dump_
 Backup one database
 mysqldump -u USER -pPASSWORD DATABASE > /path/to/file/dump.sql
 mysqldump -u USER -pPASSWORD DATABASE | gzip > /path/to/outputfile.sql.gz
-mysqldump -u USER -pPASSWORD DATABASE | gzip > `date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz` 
+mysqldump -u USER -pPASSWORD DATABASE | gzip > `date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz`
 
 Backup database scheme
 mysqldump --no-data - u USER -pPASSWORD DATABASE > /path/to/file/schema.sql
@@ -141,29 +141,52 @@ dont compress = *.*
 rsync -avP server::www/ /www1/
 {% endhighlight %}
 
-### Count /tmp used disk space 
+### Count /tmp used disk space
 {% highlight bash %}
 sudo du -hs /tmp/*
 {% endhighlight %}
 
 ### Clean Yum pkg cache
 {% highlight bash %}
-Pkg cache live here - /var/cache/yum/updates 
+Pkg cache live here - /var/cache/yum/updates
 yum clean all
 {% endhighlight %}
 
 
 ### MySQL Master-Slave replication
 {% highlight bash %}
-At master
-grant REPLICATION SLAVE on *.*  to 'replication'@'IP' identified by 'P@ssw0rd';
-show master status;
+# at master /etc/my.cnf
+server-id=1
+binlog-format   = mixed
+log-bin=mysql-bin
+datadir=/var/lib/mysql
+innodb_flush_log_at_trx_commit=1
+sync_binlog=1
 
-At slave
-slave stop;
-change master to MASTER_HOST="master", MASTER_LOG_FILE="mysql-bin.000013", MASTER_LOG_POS=455758064;
-slave start;
-show slave status\G;
+CREATE USER replicant@<<slave-server-ip>>;
+GRANT REPLICATION SLAVE ON *.* TO replicant@<<slave-server-ip>> IDENTIFIED BY '<<choose-a-good-password>>';
+
+$ mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data=2 -A  > ~/dump.sql
+$ head dump.sql -n80 | grep "MASTER_LOG_POS"
+$ scp ~/dump.sql.gz mysql-user@<<slave-server-ip>>:~/
+
+# at slave /etc/my.cnf
+server-id               = 101
+binlog-format       = mixed
+log_bin                 = mysql-bin
+relay-log               = mysql-relay-bin
+log-slave-updates = 1
+read-only               = 1
+
+$ gunzip ~/dump.sql.gz
+$ mysql -u root -p < ~/dump.sql
+
+CHANGE MASTER TO MASTER_HOST='<<master-server-ip>>',MASTER_USER='replicant',MASTER_PASSWORD='<<slave-server-password>>', MASTER_LOG_FILE='<<value from above>>', MASTER_LOG_POS=<<value from above>>;
+START SLAVE;
+SHOW SLAVE STATUS \G;
+
+# fix some replication errors
+STOP SLAVE;SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;START SLAVE;
 {% endhighlight %}
 
 ### Change MySQL root password
@@ -233,7 +256,7 @@ service iptables save
 iptables -nL | grep 8080
 
 FreBSD
-ipfw add pass tcp from 127.0.0.1 to me 8080 setup 
+ipfw add pass tcp from 127.0.0.1 to me 8080 setup
 sh /usr/share/examples/ipfw/change_rules.sh
 ipfw list | grep 8080
 {% endhighlight %}
@@ -255,7 +278,7 @@ dd if=/dev/old_disk of=/dev/new_disk conv=noerror,sync
 ### Access to svn server with ssh-key
 {% highlight bash %}
 useradd svnuser
-ssh-keygen -t rsa 
+ssh-keygen -t rsa
 mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 add to ~/.ssh/authorized_keys
 no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command="/usr/bin/svnserve -t -r /www/svn"
@@ -331,7 +354,7 @@ select * from mysql.user where user='USERNAME'\G;
 @reboot         username /usr/bin/bash  /etc/startAtReboot.sh
 {% endhighlight %}
 
-### Simple rsyncd.conf 
+### Simple rsyncd.conf
 {% highlight bash %}
 /etc/rsyncd.conf
 pid file = /var/run/rsyncd.pid
@@ -363,7 +386,7 @@ username        hard    nofile          65536
 
 ### Use curl to check web site answer time
 {% highlight bash %}
-curl -w '\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n' -o /dev/null -s http://linux.com/ 
+curl -w '\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n' -o /dev/null -s http://linux.com/
 {% endhighlight %}
 
 ### Run vncserver at port 5999
@@ -371,10 +394,10 @@ curl -w '\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPre
 vncserver -geometry 1024x768 -depth 24 :99
 {% endhighlight %}
 
-### Create 200 host records in /etc/hosts 
+### Create 200 host records in /etc/hosts
 {% highlight bash %}
 192.168.99.1-200 n001-n200
-P=1; for i in $(seq -w 200); do echo "192.168.99.$P n$i"; P=$(expr $P + 1);done >>/etc/hosts 
+P=1; for i in $(seq -w 200); do echo "192.168.99.$P n$i"; P=$(expr $P + 1);done >>/etc/hosts
 {% endhighlight %}
 
 ### Com terminal for cisco
@@ -382,7 +405,7 @@ P=1; for i in $(seq -w 200); do echo "192.168.99.$P n$i"; P=$(expr $P + 1);done 
 apt-get install cutecom(minicom)
 {% endhighlight %}
 
-### Disable php for custom dir in Apache 
+### Disable php for custom dir in Apache
 {% highlight bash %}
 <Directory /var/www/htdocs/images>
     RemoveHandler .php .phtml .php3
@@ -412,7 +435,7 @@ sysctl kern.corefile=/core/%N-%P.core
 %U - username login
 
 Linux
-mkdir /core 
+mkdir /core
 chmod 777/core
 echo "/core" > /proc/sys/kernel/core_pattern
 sysctl kernel.core_pattern=/core/%P.core
@@ -447,8 +470,8 @@ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 5190 -j REDIRECT --to-ports
 ### Limit POST request size to 20MB
 {% highlight bash %}
 add to php.ini
-php_value max_execution_time 600 
-php_value upload_max_filesize 20M 
+php_value max_execution_time 600
+php_value upload_max_filesize 20M
 php_value post_max_size 20M
 {% endhighlight %}
 
