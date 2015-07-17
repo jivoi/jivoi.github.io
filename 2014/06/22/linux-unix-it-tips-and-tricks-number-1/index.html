@@ -286,7 +286,7 @@ mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 &gt; /path/to/file/du
 Backup one database
 mysqldump -u USER -pPASSWORD DATABASE &gt; /path/to/file/dump.sql
 mysqldump -u USER -pPASSWORD DATABASE <span class="p">|</span> gzip &gt; /path/to/outputfile.sql.gz
-mysqldump -u USER -pPASSWORD DATABASE <span class="p">|</span> gzip &gt; <span class="sb">`</span>date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz<span class="sb">`</span> 
+mysqldump -u USER -pPASSWORD DATABASE <span class="p">|</span> gzip &gt; <span class="sb">`</span>date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz<span class="sb">`</span>
 
 Backup database scheme
 mysqldump --no-data - u USER -pPASSWORD DATABASE &gt; /path/to/file/schema.sql
@@ -323,20 +323,43 @@ rsync -avP server::www/ /www1/</code></pre></div>
 
 <h3 id="clean-yum-pkg-cache">Clean Yum pkg cache</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">Pkg cache live here - /var/cache/yum/updates 
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Pkg cache live here - /var/cache/yum/updates
 yum clean all</code></pre></div>
 
 <h3 id="mysql-master-slave-replication">MySQL Master-Slave replication</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">At master
-grant REPLICATION SLAVE on *.*  to <span class="s1">&#39;replication&#39;</span>@<span class="s1">&#39;IP&#39;</span> identified by <span class="s1">&#39;P@ssw0rd&#39;</span><span class="p">;</span>
-show master status<span class="p">;</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># at master /etc/my.cnf</span>
+server-id<span class="o">=</span>1
+binlog-format   <span class="o">=</span> mixed
+log-bin<span class="o">=</span>mysql-bin
+<span class="nv">datadir</span><span class="o">=</span>/var/lib/mysql
+<span class="nv">innodb_flush_log_at_trx_commit</span><span class="o">=</span>1
+<span class="nv">sync_binlog</span><span class="o">=</span>1
 
-At slave
-slave stop<span class="p">;</span>
-change master to <span class="nv">MASTER_HOST</span><span class="o">=</span><span class="s2">&quot;master&quot;</span>, <span class="nv">MASTER_LOG_FILE</span><span class="o">=</span><span class="s2">&quot;mysql-bin.000013&quot;</span>, <span class="nv">MASTER_LOG_POS</span><span class="o">=</span>455758064<span class="p">;</span>
-slave start<span class="p">;</span>
-show slave status<span class="se">\G</span><span class="p">;</span></code></pre></div>
+CREATE USER replicant@<span class="s">&lt;&lt;slave-server-ip&gt;&gt;;</span>
+<span class="s">GRANT REPLICATION SLAVE ON *.* TO replicant@&lt;&lt;slave</span>-server-ip&gt;&gt; IDENTIFIED BY <span class="s1">&#39;&lt;&lt;choose-a-good-password&gt;&gt;&#39;</span><span class="p">;</span>
+
+<span class="nv">$ </span>mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data<span class="o">=</span><span class="m">2</span> -A  &gt; ~/dump.sql
+<span class="nv">$ </span>head dump.sql -n80 <span class="p">|</span> grep <span class="s2">&quot;MASTER_LOG_POS&quot;</span>
+<span class="nv">$ </span>scp ~/dump.sql.gz mysql-user@<span class="s">&lt;&lt;slave-server-ip&gt;&gt;:~/</span>
+
+<span class="s"># at slave</span> /etc/my.cnf
+server-id               <span class="o">=</span> 101
+binlog-format       <span class="o">=</span> mixed
+<span class="nv">log_bin</span>                 <span class="o">=</span> mysql-bin
+relay-log               <span class="o">=</span> mysql-relay-bin
+log-slave-updates <span class="o">=</span> 1
+<span class="nb">read</span>-only               <span class="o">=</span> 1
+
+<span class="nv">$ </span>gunzip ~/dump.sql.gz
+<span class="nv">$ </span>mysql -u root -p &lt; ~/dump.sql
+
+CHANGE MASTER TO <span class="nv">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;&lt;&lt;master-server-ip&gt;&gt;&#39;</span>,MASTER_USER<span class="o">=</span><span class="s1">&#39;replicant&#39;</span>,MASTER_PASSWORD<span class="o">=</span><span class="s1">&#39;&lt;&lt;slave-server-password&gt;&gt;&#39;</span>, <span class="nv">MASTER_LOG_FILE</span><span class="o">=</span><span class="s1">&#39;&lt;&lt;value from above&gt;&gt;&#39;</span>, <span class="nv">MASTER_LOG_POS</span><span class="o">=</span><span class="s">&lt;&lt;value from abov</span>e&gt;&gt;<span class="p">;</span>
+START SLAVE<span class="p">;</span>
+SHOW SLAVE STATUS <span class="se">\G</span><span class="p">;</span>
+
+<span class="c"># fix some replication errors</span>
+STOP SLAVE<span class="p">;</span>SET GLOBAL <span class="nv">SQL_SLAVE_SKIP_COUNTER</span> <span class="o">=</span> 1<span class="p">;</span>START SLAVE<span class="p">;</span></code></pre></div>
 
 <h3 id="change-mysql-root-password">Change MySQL root password</h3>
 
@@ -400,7 +423,7 @@ service iptables save
 iptables -nL <span class="p">|</span> grep 8080
 
 FreBSD
-ipfw add pass tcp from 127.0.0.1 to me <span class="m">8080</span> setup 
+ipfw add pass tcp from 127.0.0.1 to me <span class="m">8080</span> setup
 sh /usr/share/examples/ipfw/change_rules.sh
 ipfw list <span class="p">|</span> grep 8080</code></pre></div>
 
@@ -419,7 +442,7 @@ mdconfig -a -t vnode -f /www/swap0 -u <span class="m">0</span> <span class="o">&
 <h3 id="access-to-svn-server-with-ssh-key">Access to svn server with ssh-key</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">useradd svnuser
-ssh-keygen -t rsa 
+ssh-keygen -t rsa
 mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 add to ~/.ssh/authorized_keys
 no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command<span class="o">=</span><span class="s2">&quot;/usr/bin/svnserve -t -r /www/svn&quot;</span></code></pre></div>
@@ -557,7 +580,7 @@ sysctl kern.corefile<span class="o">=</span>/core/%N-%P.core
 %U - username login
 
 Linux
-mkdir /core 
+mkdir /core
 chmod 777/core
 <span class="nb">echo</span> <span class="s2">&quot;/core&quot;</span> &gt; /proc/sys/kernel/core_pattern
 sysctl kernel.core_pattern<span class="o">=</span>/core/%P.core</code></pre></div>
@@ -587,8 +610,8 @@ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport <span class="m">5190</span>
 <h3 id="limit-post-request-size-to-20mb">Limit POST request size to 20MB</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">add to php.ini
-php_value max_execution_time <span class="m">600</span> 
-php_value upload_max_filesize 20M 
+php_value max_execution_time 600
+php_value upload_max_filesize 20M
 php_value post_max_size 20M</code></pre></div>
 
 <h3 id="apache-error-log-limit-2g">Apache error log limit 2G</h3>

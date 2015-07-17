@@ -206,6 +206,12 @@
       <li><a href="#rootkits-check" id="markdown-toc-rootkits-check">Rootkits check</a></li>
       <li><a href="#restore-deleted-files" id="markdown-toc-restore-deleted-files">Restore deleted files</a></li>
       <li><a href="#flush-linux-disk-cache" id="markdown-toc-flush-linux-disk-cache">Flush linux disk cache</a></li>
+      <li><a href="#firewall-cmd-open-http-port-80" id="markdown-toc-firewall-cmd-open-http-port-80">Firewall-cmd open http port 80</a></li>
+      <li><a href="#auditd-1" id="markdown-toc-auditd-1">Auditd</a></li>
+      <li><a href="#create-dark-directory" id="markdown-toc-create-dark-directory">Create dark directory</a></li>
+      <li><a href="#file-attributes-linux-unix" id="markdown-toc-file-attributes-linux-unix">File attributes Linux-Unix</a></li>
+      <li><a href="#iptables-to-limit-connections" id="markdown-toc-iptables-to-limit-connections">Iptables to limit connections</a></li>
+      <li><a href="#reboot-linux-with-kernel-panic" id="markdown-toc-reboot-linux-with-kernel-panic">Reboot linux with kernel panic</a></li>
     </ul>
   </li>
 </ul>
@@ -596,6 +602,110 @@ find /path/memcachedb/ -inum <span class="m">14221332</span> -exec cp <span clas
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo sh -c <span class="s1">&#39;sync; echo 3 &gt; /proc/sys/vm/drop_caches&#39;</span>
 free <span class="o">&amp;&amp;</span> sync <span class="o">&amp;&amp;</span> <span class="nb">echo </span><span class="m">3</span> &gt; /proc/sys/vm/drop_caches <span class="o">&amp;&amp;</span> free</code></pre></div>
+
+<h3 id="firewall-cmd-open-http-port-80">Firewall-cmd open http port 80</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># open</span>
+<span class="nv">$ </span>firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>80/tcp --permanent
+<span class="nv">$ </span>firewall-cmd --reload
+<span class="nv">$ </span>iptables-save <span class="p">|</span> grep 80
+
+<span class="c"># to block</span>
+<span class="nv">$ </span>firewall-cmd --zone<span class="o">=</span>public --remove-port<span class="o">=</span>80/tcp --permanent
+<span class="nv">$ </span>firewall-cmd --reload</code></pre></div>
+
+<h3 id="auditd-1">Auditd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># install</span>
+<span class="nv">$ $ </span>sudo yum list audit audit-libs
+
+<span class="c"># /etc/audit/auditd.conf</span>
+<span class="nv">max_log_file</span> <span class="o">=</span> 30
+<span class="nv">max_log_file_action</span> <span class="o">=</span> ROTATE
+sudo service auditd restart
+
+<span class="c"># Generating Audit Reports</span>
+<span class="nv">$ </span>sudo aureport -x --summary
+<span class="nv">$ </span>sudo aureport --failed
+<span class="nv">$ </span>sudo aureport -f -i
+
+<span class="c"># view the current set of audit rules</span>
+<span class="nv">$ </span>sudo auditctl -l
+<span class="c"># current status of the audit system</span>
+<span class="nv">$ </span>sudo auditctl -s
+<span class="c"># add rule fo file</span>
+<span class="nv">$ </span>auditctl -w path_to_file -p permissions -k key_name
+<span class="nv">$ </span>sudo auditctl -w /etc/hosts -p wa -k hosts_file_change
+
+<span class="c"># /etc/audit/rules.d/audit.rules</span>
+-w /etc/hosts -p wa -k hosts_file_change
+<span class="nv">$ </span>sudo auditctl -l
+<span class="c"># add rule for dir</span>
+<span class="nv">$ </span>sudo auditctl -w /etc/sysconfig/ -p rwa -k configaccess
+<span class="nv">$ </span>sudo ausearch -k configaccess
+
+<span class="c"># system call rules</span>
+<span class="nv">$ </span>auditctl -a action,filter -S system_call -F <span class="nv">field</span><span class="o">=</span>value -k key_name
+<span class="nv">$ </span>sudo auditctl -a always,exit -F <span class="nv">arch</span><span class="o">=</span>b64 -F <span class="s2">&quot;auid&gt;=1000&quot;</span> -S rename -S renameat -k rename
+<span class="nv">$ </span>sudo auditctl -a always,exit -F <span class="nv">arch</span><span class="o">=</span>b64 -F <span class="nv">auid</span><span class="o">=</span><span class="m">1001</span> -S open -k userfileaccess
+
+<span class="c"># removing audit rules</span>
+<span class="nv">$ </span>sudo auditctl -W /etc/passwd -p wa -k passwdaccess</code></pre></div>
+
+<h3 id="create-dark-directory">Create dark directory</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># read file only if you know it name</span>
+mkdir darkroom
+chmod a-r+x darkroom</code></pre></div>
+
+<h3 id="file-attributes-linux-unix">File attributes Linux-Unix</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># linux</span>
+chattr +i vip_file
+lsattr vip_file
+chattr +a vip_file
+
+<span class="c"># freebsd</span>
+chflags schg vip_file
+chflags noschg vip_file
+ls -lo vip_file
+
+<span class="c"># freebsd flags</span>
+acrh
+opaque
+nodump
+sappnd
+schg
+sunlnk
+uappnd
+uchg
+uunlnk</code></pre></div>
+
+<h3 id="iptables-to-limit-connections">Iptables to limit connections</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">IPT</span><span class="o">=</span>/sbin/iptables
+<span class="c"># Interface id</span>
+<span class="nv">INET_IF</span><span class="o">=</span>eth0
+<span class="c"># Http Port</span>
+<span class="nv">HTTP_PORT</span><span class="o">=</span>80
+<span class="c"># Max connection in seconds</span>
+<span class="nv">SECONDS</span><span class="o">=</span>100
+<span class="c"># Max connections per IP</span>
+<span class="nv">BLOCKCOUNT</span><span class="o">=</span>10
+<span class="c"># Default action can be DROP or REJECT</span>
+<span class="nv">DACTION</span><span class="o">=</span><span class="s2">&quot;DROP&quot;</span>
+<span class="nv">$IPT</span> -I INPUT -p tcp --dport <span class="k">${</span><span class="nv">HTTP_PORT</span><span class="k">}</span> -i <span class="k">${</span><span class="nv">INET_IF</span><span class="k">}</span> -m state --state NEW -m recent --set
+<span class="nv">$IPT</span> -I INPUT -p tcp --dport <span class="k">${</span><span class="nv">HTTP_PORT</span><span class="k">}</span> -i <span class="k">${</span><span class="nv">INET_IF</span><span class="k">}</span> -m state --state NEW -m recent --update --seconds <span class="k">${</span><span class="nv">SECONDS</span><span class="k">}</span> --hitcount <span class="k">${</span><span class="nv">BLOCKCOUNT</span><span class="k">}</span> -j <span class="k">${</span><span class="nv">DACTION</span><span class="k">}</span>
+
+<span class="c"># for test we can use</span>
+ab -c <span class="m">100</span> -n <span class="m">1000</span> http://ip.ad.dr.es/
+iptables -vL</code></pre></div>
+
+<h3 id="reboot-linux-with-kernel-panic">Reboot linux with kernel panic</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/sysctl.conf</span>
+kernel.panic <span class="o">=</span> 15
+<span class="nv">$ </span>sysctl -p</code></pre></div>
 
 
       <hr />

@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-15T15:12:10+03:00</updated>
+<updated>2015-07-17T19:01:03+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -930,6 +930,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://evilzone.org/&quot;&gt;https://evilzone.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://forum.antichat.ru/&quot;&gt;http://forum.antichat.ru/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/&quot;&gt;https://rstforums.com/forum/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://garage4hackers.com/forum.php&quot;&gt;http://garage4hackers.com/forum.php&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;security-methodologies&quot;&gt;Security Methodologies&lt;/h3&gt;
@@ -2295,6 +2296,12 @@ or
       &lt;li&gt;&lt;a href=&quot;#rootkits-check&quot; id=&quot;markdown-toc-rootkits-check&quot;&gt;Rootkits check&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#restore-deleted-files&quot; id=&quot;markdown-toc-restore-deleted-files&quot;&gt;Restore deleted files&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#flush-linux-disk-cache&quot; id=&quot;markdown-toc-flush-linux-disk-cache&quot;&gt;Flush linux disk cache&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#firewall-cmd-open-http-port-80&quot; id=&quot;markdown-toc-firewall-cmd-open-http-port-80&quot;&gt;Firewall-cmd open http port 80&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#auditd-1&quot; id=&quot;markdown-toc-auditd-1&quot;&gt;Auditd&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#create-dark-directory&quot; id=&quot;markdown-toc-create-dark-directory&quot;&gt;Create dark directory&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#file-attributes-linux-unix&quot; id=&quot;markdown-toc-file-attributes-linux-unix&quot;&gt;File attributes Linux-Unix&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#iptables-to-limit-connections&quot; id=&quot;markdown-toc-iptables-to-limit-connections&quot;&gt;Iptables to limit connections&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#reboot-linux-with-kernel-panic&quot; id=&quot;markdown-toc-reboot-linux-with-kernel-panic&quot;&gt;Reboot linux with kernel panic&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -2685,6 +2692,110 @@ find /path/memcachedb/ -inum &lt;span class=&quot;m&quot;&gt;14221332&lt;/span&g
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;sync; echo 3 &amp;gt; /proc/sys/vm/drop_caches&amp;#39;&lt;/span&gt;
 free &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sync &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &amp;gt; /proc/sys/vm/drop_caches &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; free&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;firewall-cmd-open-http-port-80&quot;&gt;Firewall-cmd open http port 80&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# open&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --zone&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public --add-port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;80/tcp --permanent
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --reload
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;iptables-save &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 80
+
+&lt;span class=&quot;c&quot;&gt;# to block&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --zone&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public --remove-port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;80/tcp --permanent
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;auditd-1&quot;&gt;Auditd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# install&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ $ &lt;/span&gt;sudo yum list audit audit-libs
+
+&lt;span class=&quot;c&quot;&gt;# /etc/audit/auditd.conf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;max_log_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30
+&lt;span class=&quot;nv&quot;&gt;max_log_file_action&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ROTATE
+sudo service auditd restart
+
+&lt;span class=&quot;c&quot;&gt;# Generating Audit Reports&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo aureport -x --summary
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo aureport --failed
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo aureport -f -i
+
+&lt;span class=&quot;c&quot;&gt;# view the current set of audit rules&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -l
+&lt;span class=&quot;c&quot;&gt;# current status of the audit system&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -s
+&lt;span class=&quot;c&quot;&gt;# add rule fo file&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;auditctl -w path_to_file -p permissions -k key_name
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -w /etc/hosts -p wa -k hosts_file_change
+
+&lt;span class=&quot;c&quot;&gt;# /etc/audit/rules.d/audit.rules&lt;/span&gt;
+-w /etc/hosts -p wa -k hosts_file_change
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -l
+&lt;span class=&quot;c&quot;&gt;# add rule for dir&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -w /etc/sysconfig/ -p rwa -k configaccess
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo ausearch -k configaccess
+
+&lt;span class=&quot;c&quot;&gt;# system call rules&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;auditctl -a action,filter -S system_call -F &lt;span class=&quot;nv&quot;&gt;field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;value -k key_name
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -a always,exit -F &lt;span class=&quot;nv&quot;&gt;arch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;b64 -F &lt;span class=&quot;s2&quot;&gt;&amp;quot;auid&amp;gt;=1000&amp;quot;&lt;/span&gt; -S rename -S renameat -k rename
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -a always,exit -F &lt;span class=&quot;nv&quot;&gt;arch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;b64 -F &lt;span class=&quot;nv&quot;&gt;auid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1001&lt;/span&gt; -S open -k userfileaccess
+
+&lt;span class=&quot;c&quot;&gt;# removing audit rules&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo auditctl -W /etc/passwd -p wa -k passwdaccess&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-dark-directory&quot;&gt;Create dark directory&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# read file only if you know it name&lt;/span&gt;
+mkdir darkroom
+chmod a-r+x darkroom&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;file-attributes-linux-unix&quot;&gt;File attributes Linux-Unix&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# linux&lt;/span&gt;
+chattr +i vip_file
+lsattr vip_file
+chattr +a vip_file
+
+&lt;span class=&quot;c&quot;&gt;# freebsd&lt;/span&gt;
+chflags schg vip_file
+chflags noschg vip_file
+ls -lo vip_file
+
+&lt;span class=&quot;c&quot;&gt;# freebsd flags&lt;/span&gt;
+acrh
+opaque
+nodump
+sappnd
+schg
+sunlnk
+uappnd
+uchg
+uunlnk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;iptables-to-limit-connections&quot;&gt;Iptables to limit connections&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;IPT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/sbin/iptables
+&lt;span class=&quot;c&quot;&gt;# Interface id&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;INET_IF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0
+&lt;span class=&quot;c&quot;&gt;# Http Port&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;HTTP_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;80
+&lt;span class=&quot;c&quot;&gt;# Max connection in seconds&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100
+&lt;span class=&quot;c&quot;&gt;# Max connections per IP&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;BLOCKCOUNT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10
+&lt;span class=&quot;c&quot;&gt;# Default action can be DROP or REJECT&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;DACTION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;DROP&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -I INPUT -p tcp --dport &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HTTP_PORT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; -i &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;INET_IF&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; -m state --state NEW -m recent --set
+&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -I INPUT -p tcp --dport &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;HTTP_PORT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; -i &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;INET_IF&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; -m state --state NEW -m recent --update --seconds &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SECONDS&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; --hitcount &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;BLOCKCOUNT&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; -j &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DACTION&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# for test we can use&lt;/span&gt;
+ab -c &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt; -n &lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt; http://ip.ad.dr.es/
+iptables -vL&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;reboot-linux-with-kernel-panic&quot;&gt;Reboot linux with kernel panic&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/sysctl.conf&lt;/span&gt;
+kernel.panic &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 15
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sysctl -p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
@@ -3769,7 +3880,7 @@ mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 &amp;gt; /path/to/fil
 Backup one database
 mysqldump -u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/dump.sql
 mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; /path/to/outputfile.sql.gz
-mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; 
+mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
 
 Backup database scheme
 mysqldump --no-data - u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/schema.sql
@@ -3806,20 +3917,43 @@ rsync -avP server::www/ /www1/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Pkg cache live here - /var/cache/yum/updates 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Pkg cache live here - /var/cache/yum/updates
 yum clean all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;mysql-master-slave-replication&quot;&gt;MySQL Master-Slave replication&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;At master
-grant REPLICATION SLAVE on *.*  to &lt;span class=&quot;s1&quot;&gt;&amp;#39;replication&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-show master status&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# at master /etc/my.cnf&lt;/span&gt;
+server-id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+binlog-format   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mixed
+log-bin&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;mysql-bin
+&lt;span class=&quot;nv&quot;&gt;datadir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/lib/mysql
+&lt;span class=&quot;nv&quot;&gt;innodb_flush_log_at_trx_commit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+&lt;span class=&quot;nv&quot;&gt;sync_binlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
 
-At slave
-slave stop&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-change master to &lt;span class=&quot;nv&quot;&gt;MASTER_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;master&amp;quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;mysql-bin.000013&amp;quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_POS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;455758064&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-slave start&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-show slave status&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+CREATE USER replicant@&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;GRANT REPLICATION SLAVE ON *.* TO replicant@&amp;lt;&amp;lt;slave&lt;/span&gt;-server-ip&amp;gt;&amp;gt; IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;choose-a-good-password&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -A  &amp;gt; ~/dump.sql
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;head dump.sql -n80 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;MASTER_LOG_POS&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;scp ~/dump.sql.gz mysql-user@&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;:~/&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;# at slave&lt;/span&gt; /etc/my.cnf
+server-id               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 101
+binlog-format       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mixed
+&lt;span class=&quot;nv&quot;&gt;log_bin&lt;/span&gt;                 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mysql-bin
+relay-log               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mysql-relay-bin
+log-slave-updates &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+&lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;-only               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gunzip ~/dump.sql.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql -u root -p &amp;lt; ~/dump.sql
+
+CHANGE MASTER TO &lt;span class=&quot;nv&quot;&gt;MASTER_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;master-server-ip&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;,MASTER_USER&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;replicant&amp;#39;&lt;/span&gt;,MASTER_PASSWORD&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;slave-server-password&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;value from above&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_POS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;value from abov&lt;/span&gt;e&amp;gt;&amp;gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+START SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+SHOW SLAVE STATUS &lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# fix some replication errors&lt;/span&gt;
+STOP SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;SET GLOBAL &lt;span class=&quot;nv&quot;&gt;SQL_SLAVE_SKIP_COUNTER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;START SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;change-mysql-root-password&quot;&gt;Change MySQL root password&lt;/h3&gt;
 
@@ -3883,7 +4017,7 @@ service iptables save
 iptables -nL &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080
 
 FreBSD
-ipfw add pass tcp from 127.0.0.1 to me &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; setup 
+ipfw add pass tcp from 127.0.0.1 to me &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; setup
 sh /usr/share/examples/ipfw/change_rules.sh
 ipfw list &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -3902,7 +4036,7 @@ mdconfig -a -t vnode -f /www/swap0 -u &lt;span class=&quot;m&quot;&gt;0&lt;/span
 &lt;h3 id=&quot;access-to-svn-server-with-ssh-key&quot;&gt;Access to svn server with ssh-key&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd svnuser
-ssh-keygen -t rsa 
+ssh-keygen -t rsa
 mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
 add to ~/.ssh/authorized_keys
 no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/bin/svnserve -t -r /www/svn&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -4040,7 +4174,7 @@ sysctl kern.corefile&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%N-%P.co
 %U - username login
 
 Linux
-mkdir /core 
+mkdir /core
 chmod 777/core
 &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/core&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/kernel/core_pattern
 sysctl kernel.core_pattern&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%P.core&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -4070,8 +4204,8 @@ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport &lt;span class=&quot;m&quot
 &lt;h3 id=&quot;limit-post-request-size-to-20mb&quot;&gt;Limit POST request size to 20MB&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to php.ini
-php_value max_execution_time &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt; 
-php_value upload_max_filesize 20M 
+php_value max_execution_time 600
+php_value upload_max_filesize 20M
 php_value post_max_size 20M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;apache-error-log-limit-2g&quot;&gt;Apache error log limit 2G&lt;/h3&gt;
