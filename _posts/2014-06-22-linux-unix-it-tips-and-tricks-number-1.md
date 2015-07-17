@@ -23,9 +23,6 @@ Different Linux / Unix / IT tips, notes, howto
 </div>
 </section><!-- /#table-of-contents -->
 
-{% highlight bash %}
-{% endhighlight %}
-
 ### Phpinfo
 {% highlight bash %}
 echo "<?php phpinfo(); ?>" > file

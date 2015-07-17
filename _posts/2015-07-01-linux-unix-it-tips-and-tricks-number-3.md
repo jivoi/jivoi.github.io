@@ -452,3 +452,113 @@ find /path/memcachedb/ -inum 14221332 -exec cp {} /var/tmp/storage.db \;
 sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 free && sync && echo 3 > /proc/sys/vm/drop_caches && free
 {% endhighlight %}
+
+### Firewall-cmd open http port 80
+{% highlight bash %}
+# open
+$ firewall-cmd --zone=public --add-port=80/tcp --permanent
+$ firewall-cmd --reload
+$ iptables-save | grep 80
+
+# to block
+$ firewall-cmd --zone=public --remove-port=80/tcp --permanent
+$ firewall-cmd --reload
+{% endhighlight %}
+
+### Auditd
+{% highlight bash %}
+# install
+$ $ sudo yum list audit audit-libs
+
+# /etc/audit/auditd.conf
+max_log_file = 30
+max_log_file_action = ROTATE
+sudo service auditd restart
+
+# Generating Audit Reports
+$ sudo aureport -x --summary
+$ sudo aureport --failed
+$ sudo aureport -f -i
+
+# view the current set of audit rules
+$ sudo auditctl -l
+# current status of the audit system
+$ sudo auditctl -s
+# add rule fo file
+$ auditctl -w path_to_file -p permissions -k key_name
+$ sudo auditctl -w /etc/hosts -p wa -k hosts_file_change
+
+# /etc/audit/rules.d/audit.rules
+-w /etc/hosts -p wa -k hosts_file_change
+$ sudo auditctl -l
+# add rule for dir
+$ sudo auditctl -w /etc/sysconfig/ -p rwa -k configaccess
+$ sudo ausearch -k configaccess
+
+# system call rules
+$ auditctl -a action,filter -S system_call -F field=value -k key_name
+$ sudo auditctl -a always,exit -F arch=b64 -F "auid>=1000" -S rename -S renameat -k rename
+$ sudo auditctl -a always,exit -F arch=b64 -F auid=1001 -S open -k userfileaccess
+
+# removing audit rules
+$ sudo auditctl -W /etc/passwd -p wa -k passwdaccess
+{% endhighlight %}
+
+### Create dark directory
+{% highlight bash %}
+# read file only if you know it name
+mkdir darkroom
+chmod a-r+x darkroom
+{% endhighlight %}
+
+### File attributes Linux-Unix
+{% highlight bash %}
+# linux
+chattr +i vip_file
+lsattr vip_file
+chattr +a vip_file
+
+# freebsd
+chflags schg vip_file
+chflags noschg vip_file
+ls -lo vip_file
+
+# freebsd flags
+acrh
+opaque
+nodump
+sappnd
+schg
+sunlnk
+uappnd
+uchg
+uunlnk
+{% endhighlight %}
+
+### Iptables to limit connections
+{% highlight bash %}
+IPT=/sbin/iptables
+# Interface id
+INET_IF=eth0
+# Http Port
+HTTP_PORT=80
+# Max connection in seconds
+SECONDS=100
+# Max connections per IP
+BLOCKCOUNT=10
+# Default action can be DROP or REJECT
+DACTION="DROP"
+$IPT -I INPUT -p tcp --dport ${HTTP_PORT} -i ${INET_IF} -m state --state NEW -m recent --set
+$IPT -I INPUT -p tcp --dport ${HTTP_PORT} -i ${INET_IF} -m state --state NEW -m recent --update --seconds ${SECONDS} --hitcount ${BLOCKCOUNT} -j ${DACTION}
+
+# for test we can use
+ab -c 100 -n 1000 http://ip.ad.dr.es/
+iptables -vL
+{% endhighlight %}
+
+### Reboot linux with kernel panic
+{% highlight bash %}
+# /etc/sysctl.conf
+kernel.panic = 15
+$ sysctl -p
+{% endhighlight %}
