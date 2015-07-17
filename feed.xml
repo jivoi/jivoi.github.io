@@ -5,13 +5,156 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-17T19:01:03+03:00</updated>
+<updated>2015-07-17T19:35:22+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Learning Android]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/17/learning-android/" />
+  <id>https://jivoi.github.io/2015/07/17/learning-android</id>
+  <updated>2015-07-17 19:26:55 +0300T00:00:00-00:00</updated>
+  <published>2015-07-17T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Playing with Android OS&lt;/p&gt;
+
+&lt;h3 id=&quot;list-of-usefull-software-applications&quot;&gt;List of usefull software applications:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.android.com/sdk/index.html&quot;&gt;Android SDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code.google.com/p/android-apktool/downloads/list&quot;&gt;APKTool&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jd.benow.ca/&quot;&gt;JD-GUI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/pxb1988/dex2jar&quot;&gt;Dex2Jar&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://portswigger.net/burp/download.html&quot;&gt;Burp Proxy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://android.saz.lt/cgi-bin/download.py&quot;&gt;Andriller&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://python.org/download/releases/3.0/&quot;&gt;Python 3.0&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/viaforensics/android-forensics&quot;&gt;AFLogical&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sqlitebrowser/sqlitebrowser&quot;&gt;SQLite Browser&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mwrinfosecurity.com/products/drozer/community-edition/&quot;&gt;Drozer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://elinux.org/images/c/c2/Android-system-architecture.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The architecture of Android is divided into four different layers.
+At the bottom of it sits the Linux kernel, which has been modified for better performance in a mobile environment.&lt;/p&gt;
+
+&lt;p&gt;On top of Linux kernel sits a layer that contains some of the most important and useful libraries as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Surface Manager: This manages the windows and screens&lt;/li&gt;
+  &lt;li&gt;Media Framework: This allows the use of various types of codecs for playback and recording of different media&lt;/li&gt;
+  &lt;li&gt;SQLite: This is a lighter version of SQL used for database management&lt;/li&gt;
+  &lt;li&gt;WebKit: This is the browser rendering engine&lt;/li&gt;
+  &lt;li&gt;OpenGL: This is used to render 2D and 3D contents on the screen properly&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;No libc, Android has its own library called bionic, which we could think of as a stripped down and modified version of libc for Android. All the applications in Android run under a virtual environment, which is called Dalvik Virtual Machine (DVM). An important point to note here is that from Android Version 4.4, there is also the availability of another runtime called Android Runtime (ART), and the user is free to switch between the DVM and the ART
+runtime environments.&lt;/p&gt;
+
+&lt;p&gt;Dalvik Virtual Machine is similar to Java Virtual Machine (JVM), apart from features such as it is register-based, instead of stack-based. If we are running three different applications, there will be three different virtual instances. The Dalvik Virtual Machine executes a file format called .dex or Dalvik Executable.&lt;/p&gt;
+
+&lt;h3 id=&quot;playing-with-android-debug-bridge-adb&quot;&gt;Playing with Android Debug Bridge (ADB)&lt;/h3&gt;
+&lt;p&gt;Enable USB Debugging on your phone or device:
+Go to Settings –&amp;gt; About Phone tap “Build Number” until you get a popup that you have become a developer (about 10 times). Then go to Settings –&amp;gt; Developer –&amp;gt; USB debugging and enable it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb devices
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb shell
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;shell@hammerhead:/ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ps
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb devices
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb shell pm list packages
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dumpsys meminfo
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb logcat -d -f /data/local/logcats.log
+
+&lt;span class=&quot;c&quot;&gt;# print the properties of the device&lt;/span&gt;
+adb shell getprop
+
+&lt;span class=&quot;c&quot;&gt;# pm to list all the packages&lt;/span&gt;
+adb shell pm list packages
+
+&lt;span class=&quot;c&quot;&gt;# take a backup of any application we need&lt;/span&gt;
+adb backup &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;package name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; -f &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;destination file name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aplication.ab &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;skip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; openssl zlib -d &amp;gt; application.tar
+tar xzf application.tar
+
+&lt;span class=&quot;c&quot;&gt;# dumping and analyze application databases manually&lt;/span&gt;
+the application files are stored at  /data/data/&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;application package name&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;/
+find /data/data/* -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.db&amp;quot;&lt;/span&gt; -type f
+find /data/data/* -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.db&amp;quot;&lt;/span&gt; -type f -exec cp &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; /mnt/sdcard/BackupDBS &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# run avd from cli&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;emulator -avd &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;name of the avd&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; -http-proxy 127.0.0.1:808&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Every time a new application is initiated in the Android device, it is assigned a unique User ID (UID), which will further belong to some or the other group that is pre-defined. The groups and the permissions inside it are specified in the file in our device named  platform.xml located at  /system/etc/permissions/.&lt;/p&gt;
+
+&lt;p&gt;The applications data that we install from the Play Store or any other source will be located at  /data/data , whereas their original installation file, that is, .apk will be stored at  /data/app. Also, there are some applications that need to be purchased from the Play Store instead of just downloading it for free. These applications will be stored at  /data/app-private/. To list this dir you need to be a root. Rooting a device means we have full access and control over the entire device, which means we could see as well as modify any files we wish&lt;/p&gt;
+
+&lt;p&gt;An Android application permissions specified in a file called  AndroidManifest.xml. This file contains a list of various application-related information such as the minimum Android version required to run the program, the package name, the list of activities (screens in the application visible to the user), services (background processes of the application), and permissions required.&lt;/p&gt;
+
+&lt;p&gt;There is no Certificate Authority; instead the developers self-created certificate could sign the applications. Once the application has been uploaded, it goes for verification to Google Bouncer, which is a virtual environment created to check whether an application is malicious or legitimate. Once the check is done, the app then appears in the Play Store. Google does no signing of the application in this case.&lt;/p&gt;
+
+&lt;p&gt;We could check the signature of the application and find out who signed the application:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jarsigner -verify -certs -verbose testing.apk
+&lt;span class=&quot;c&quot;&gt;# or parse out the ASCII content of the CERT.RSA file&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;unzip testing.apk
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;META-INF
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;openssl pkcs7 -in CERT.RSA -print_certs -inform DER -out out.cer
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat out.cer&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The bootloader boots up the kernel, and launches  init , it mounts some of the important directories required for the functioning of the Android system such as  /dev, /sys, and /proc. Also, init takes the configuration for itself from the configuration files  init.rc and  init.[device-name].rc&lt;/p&gt;
+
+&lt;p&gt;We can get specific information about the device, by checking the build.prop file at /system location&lt;/p&gt;
+
+&lt;p&gt;Once everything is loaded,  init finally loads up a process known as Zygote, which is responsible for loading up the Dalvik Virtual Machines with shared libraries and minimum footprint to enable faster loading of the overall processes.&lt;/p&gt;
+
+&lt;p&gt;An Android application is an archive file of the data and resource files created.
+while developing the application. The extension of an Android application is .apk, meaning application package, which includes the following files and folders in most cases:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Classes.dex (file)&lt;/li&gt;
+  &lt;li&gt;AndroidManifest.xml (file)&lt;/li&gt;
+  &lt;li&gt;META-INF (folder)&lt;/li&gt;
+  &lt;li&gt;resources.arsc (file)&lt;/li&gt;
+  &lt;li&gt;res (folder)&lt;/li&gt;
+  &lt;li&gt;assets (folder)&lt;/li&gt;
+  &lt;li&gt;lib (folder)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;An Android application consists of various components: Activities, Services, Broadcast, Receivers, Content providers, and Shared Preferences.
+We cant simply unzip the archive package ( .apk ) and get the readable sources.&lt;/p&gt;
+
+&lt;p&gt;To convert byte codes to readable files is using a tool called dex2jar:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# open converted jar with JD-GUI to see source code&lt;/span&gt;
+http://jd.benow.ca/
+
+&lt;span class=&quot;c&quot;&gt;# converting the .dex file to smali file&lt;/span&gt;
+https://code.google.com/p/smali/w/list
+
+&lt;span class=&quot;c&quot;&gt;# decompiling application using Apktool&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apktool d WhatsApp.apk
+
+&lt;span class=&quot;c&quot;&gt;# defining application content provider  AndroidManifest.xml&lt;/span&gt;
+&amp;lt;provider
+android:name&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;com.test.example.DataProvider&amp;quot;&lt;/span&gt;
+android:authorities &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;com.test.example.DataProvider&amp;quot;&lt;/span&gt;&amp;gt;
+&amp;lt;/provider&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# install apk with adb&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;adb install app.apk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/17/learning-android/&quot;&gt;Learning Android&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 17, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -5859,392 +6002,6 @@ export a=’myfile.txt’; echo ${}.
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/08/nginx-configs/&quot;&gt;Useful nginx configs&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 08, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[101 IT Security Interview Questions]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/07/101-IT-security-interview-questions/" />
-  <id>https://jivoi.github.io/2014/01/07/101-IT-security-interview-questions</id>
-  <updated>2014-01-07 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-07T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;A huge list of it security questions with my answers =)&lt;/p&gt;
-
-&lt;h2 id=&quot;basic-concepts&quot;&gt;Basic Concepts:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is information security and how is it achieved?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are the core principles of information security?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is non-repudiation (as it applies to IT security)?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the relationship between information security and data availability?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a security policy and why do we need one?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between logical and physical security? Can you give an example of both?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Is there an acceptable level of risk?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you measure risk? Can you give an example of a specific metric that measures information security risk?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an example of risk trade-offs (e.g. risk vs cost)?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are the most common types of attack that threaten enterprise data security?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between a threat and a vulnerability?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an example of common security vulnerabilities?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Are you familiar with any security management frameworks such as ISO/IEC 27002?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you briefly discuss the role of information security in each phase of the software development lifecycle?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you describe the role of security operations in the enterprise?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is incident management?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is business continuity management? How does it relate to security?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a security control?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are the different types of security control?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you describe the information lifecycle? How do you ensure information security at each phase?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is Information Security Governance?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are your professional values? Why are professional ethics important in the information security field?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;security-audits-and-testing&quot;&gt;Security Audits and Testing:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is an IT security audit?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you test information security?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between black box and white box penetration testing?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a vulnerability scan?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is captured in a security assessment plan (security test plan)?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;access-control&quot;&gt;Access Control:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between authentication and authorization?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What types of information can be used for authentication?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is role-based access control?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is meant by the term “least privilege”?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is two-factor authentication? Does it require special hardware?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;security-architecture&quot;&gt;Security Architecture:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Why are open standards important to security solutions?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you balance demands from different stakeholders who have conflicting requirements?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is layered security architecture? Is it a good approach? Why?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you designed security measures that span overlapping information domains? Can you give me a brief overview of the solution?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you ensure that a design anticipates human error?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you ensure that a design achieves regulatory compliance?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is capability-based security? Have you incorporated this pattern into your designs? How?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me a few examples of security architecture requirements?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Who typically owns security architecture requirements and what stakeholders contribute?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What special security challenges does SOA present?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What security challenges do unified communications present?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Do you take a different approach to security architecture for a COTS vs a custom solution?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you architected a security solution that involved SaaS components? What challenges did you face?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you worked on a project in which stakeholders choose to accept identified security risks that worried you? How did you handle the situation?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;network&quot;&gt;Network:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a firewall?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Besides firewalls, what other devices are used to enforce network boundaries?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the role of network boundaries in information security?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What does a intrusion detection system do? How does it do it?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a honeypot? What type of attack does it defend against?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What technologies and approaches are used to secure information and services deployed on cloud computing infrastructure?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What information security challenges are faced in a cloud computing environment?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How does packet filtering work?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an overview of IP multicast?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you explain the difference between a packet filtering firewall and a application layer firewall?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are the layers of the OSI model?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;security-leadership&quot;&gt;Security Leadership:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you ensure that solution architects develop secure solutions?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What training do solution architects need to have in regards to IT security? What about developers?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you sell the value of IT security initiatives to executive management?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you ensure that a solution continues to be resilient in the face of evolving threats?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you avoid implementing overly complex or unnecessary security mechanisms?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you been involved with the governance of information security? What was your role? What did you accomplish?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you describe the laws and regulations that have a significant impact to information security at our organization?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the relationship between information security and privacy laws?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is security level management?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you ensure that security management is transparent and measurable?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you outline the typical responsibilities of a Chief Security Officer (CSO)?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an example of some emerging trends in information security that youre keeping an eye on?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;experience&quot;&gt;Experience:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you developed an incident response plan?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you been involved in supporting incident investigations? What was your role? What was the outcome?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you performed a risk analysis and evaluation? How did you go about it? What stakeholders did you involve?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you performed a threat assessment? What factors did you consider?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Have you performed a vulnerability assessment? What types of vulnerabilities are most difficult to identify?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In the context of a vulnerability assessment, how do you calculate the probability that a vulnerability will be exploited?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an example of a time you identified and implemented controls to mitigate a risk? How did you evaluate the controls?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How do you stay up-to-date with technology? For example, how do you keep up with new information security threats?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;cryptography&quot;&gt;Cryptography:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;How does the SSL Protocol work?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between symmetric-key cryptography and public-key cryptography?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an overview of how public-key cryptography works?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the difference between the encryption standards AES and DES?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is the role of digital certificates in encryption?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What encryption mechanisms would you recommend to an organization that wants to encrypt its outgoing emails?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an overview of IPsec? What is its purpose?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Does IPsec replace the need for SSL?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;security-incident-management&quot;&gt;Security Incident Management:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are the components of ITIL incident management?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;If our organization experienced a major security incident, what steps should we take to manage the incident?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you describe the responsibilities of an incident manager?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;threats&quot;&gt;Threats:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;In your opinion, what are the top five information security threats facing an organization such as ours?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a man-in-the-middle attack?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me an example of cross-site scripting?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is SQL injection? How is it prevented?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a buffer overflow?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is clickjacking?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;vulnerabilities&quot;&gt;Vulnerabilities:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is a insecure direct object reference? Why is it a problem?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Why is it important to validate redirects and forwards?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are some common security vulnerabilities at the information storage level?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What are some common security vulnerabilities at the transport level?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How can improper error handling expose security vulnerabilities? How?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;physical-security-integration&quot;&gt;Physical Security Integration:&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Can you give me a few examples of physical security integration?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;What is social engineering? How common is it?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;How would you secure an office environment? What about a data center?&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://careers.simplicable.com/careers/new/101-IT-security-interview-questions&quot;&gt;Questions Source&lt;/a&gt;&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/07/101-IT-security-interview-questions/&quot;&gt;101 IT Security Interview Questions&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 07, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
