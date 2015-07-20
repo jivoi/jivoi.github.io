@@ -36,6 +36,10 @@ All that things I need to pass OSCP, i think =)
 - [http://forum.antichat.ru/](http://forum.antichat.ru/)
 - [https://rstforums.com/forum/](https://rstforums.com/forum/)
 - [http://garage4hackers.com/forum.php](http://garage4hackers.com/forum.php)
+- [https://www.hellboundhackers.org/](https://www.hellboundhackers.org/)
+
+### Tor onion links
+- [http://www.hiddenwiki.info/](http://www.hiddenwiki.info/)
 
 ### Security Methodologies
 - [http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html](http://www.vulnerabilityassessment.co.uk/Penetration%20Test.html)
@@ -51,6 +55,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.irongeek.com/i.php?page=videos/aide-winter-2011](http://www.irongeek.com/i.php?page=videos/aide-winter-2011)
 - [https://lab.pentestit.ru/pentestlabs/3](https://lab.pentestit.ru/pentestlabs/3)
 - [https://trailofbits.github.io/ctf/](https://trailofbits.github.io/ctf/)
+- [http://ctf.forgottensec.com/wiki/?title=Main_Page](http://ctf.forgottensec.com/wiki/?title=Main_Page)
 - [http://smashthestack.org/](http://smashthestack.org/)
 - [http://ctf.hcesperer.org/](http://ctf.hcesperer.org/)
 - [https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic](https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic)
@@ -392,3 +397,7 @@ All that things I need to pass OSCP, i think =)
 ### InfoSec Hiring
 - [Reddit Thread](https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/)
 - [PenTester Salary](http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level)
+- [San Francisco InfoSec Jobs](http://www.calibersecurity.com/san-francisco-information-security-job-board/)
+
+### IT Certifications
+- [http://certs.infosecinstitute.com/](http://certs.infosecinstitute.com/)

@@ -44,6 +44,8 @@ My current way for OSCP Certifications
 - https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/
 - https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/
 - https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/
+- http://nwalsh.me/?p=102
+
 
 ### 2 Read
 - [Offensive Security Bookmarks](https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/)
@@ -66,7 +68,7 @@ My current way for OSCP Certifications
 * Black Hat Python Python Programming for Hackers and Pentesters
 
 ### 2 Watch
-- Баранцев - Тестирование защищенности веб-приложений 
+- Баранцев - Тестирование защищенности веб-приложений
 - Advanced Penetration Testing
 - Packtpub - Kali Linux Web App Testing
 - Pentestit.ru video
