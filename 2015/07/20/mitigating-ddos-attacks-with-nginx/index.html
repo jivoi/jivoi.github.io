@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Blogging with github &#8211; EK</title>
-<meta name="description" content="Use github and jekyll for blog
+<title>Mitigating DDoS Attacks with NGINX &#8211; EK</title>
+<meta name="description" content="Useful nginx configs for antiddos
 
 ">
-<meta name="keywords" content="blog, github">
+<meta name="keywords" content="nginx, sysadm, linux">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Blogging with github">
-<meta name="twitter:description" content="Use github and jekyll for blog
+<meta name="twitter:title" content="Mitigating DDoS Attacks with NGINX">
+<meta name="twitter:description" content="Useful nginx configs for antiddos
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,11 +27,11 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Blogging with github">
-<meta property="og:description" content="Use github and jekyll for blog
+<meta property="og:title" content="Mitigating DDoS Attacks with NGINX">
+<meta property="og:description" content="Useful nginx configs for antiddos
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2014/01/01/blogging-with-github/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/">
 <meta property="og:site_name" content="EK">
 
 
@@ -39,7 +39,7 @@
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2014/01/01/blogging-with-github/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -146,43 +146,81 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2014/01/01/blogging-with-github/" rel="bookmark" title="Blogging with github">Blogging with github</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/" rel="bookmark" title="Mitigating DDoS Attacks with NGINX">Mitigating DDoS Attacks with NGINX</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Use github and jekyll for blog</p>
+      <p>Useful nginx configs for antiddos</p>
 
-<h3 id="install-rvm-and-nvm">Install RVM and NVM</h3>
+<h3 id="limiting-the-rate-of-requests">Limiting the Rate of Requests</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">curl -sSL https://get.rvm.io <span class="p">|</span> bash -s stable --ruby
-rvm install 2.1
-rvm use 2.1 --default
-gem install bundle
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh <span class="p">|</span> bash
-nvm install 0.10
-nvm use 0.10</code></pre></div>
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">limit_req_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=one:10m</span> <span class="s">rate=30r/m</span><span class="p">;</span>
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">...</span>
+    <span class="s">location</span> <span class="s">/login.html</span> <span class="p">{</span>
+        <span class="kn">limit_req</span> <span class="s">zone=one</span><span class="p">;</span>
+    <span class="kn">...</span>
+    <span class="err">}</span>
+<span class="err">}</span></code></pre></div>
 
-<h3 id="clone-github-repo-and-install-jekyll">Clone Github Repo and install Jekyll</h3>
+<h3 id="limiting-the-number-of-connections">Limiting the Number of Connections</h3>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone -b develop https://github.com/jivoi/jivoi.github.io.git
-<span class="nb">cd </span>jivoi.github.io
-bundle install
-git clone -b master https://github.com/jivoi/jivoi.github.io.git _site
-rake new_post
-vim _posts/</code></pre></div>
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">limit_conn_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=addr:10m</span><span class="p">;</span>
 
-<h3 id="build-and-test">Build and Test</h3>
+<span class="k">server</span> <span class="p">{</span>
+    <span class="kn">...</span>
+    <span class="s">location</span> <span class="s">/store/</span> <span class="p">{</span>
+        <span class="kn">limit_conn</span> <span class="s">addr</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="kn">...</span>
+    <span class="err">}</span>
+<span class="err">}</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll b
-jekyll s --host 0.0.0.0 --watch</code></pre></div>
+<h3 id="closing-slow-connections">Closing Slow Connections</h3>
 
-<h3 id="commit-and-deploy">Commit and deploy</h3>
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">client_body_timeout</span> <span class="s">5s</span><span class="p">;</span>
+    <span class="kn">client_header_timeout</span> <span class="s">5s</span><span class="p">;</span>
+    <span class="kn">...</span>
+<span class="err">}</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">git st
-git add _posts/*
-git push -u origin develop
-git commit -a -m <span class="s2">&quot;blogging with github&quot;</span>
-rake deploy</code></pre></div>
+<h3 id="blacklisting-ip-addresses">Blacklisting IP Addresses</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">deny</span> <span class="mi">123</span><span class="s">.123.123.0/28</span><span class="p">;</span>
+    <span class="kn">deny</span> <span class="mi">123</span><span class="s">.123.123.3</span><span class="p">;</span>
+    <span class="kn">deny</span> <span class="mi">123</span><span class="s">.123.123.5</span><span class="p">;</span>
+    <span class="kn">deny</span> <span class="mi">123</span><span class="s">.123.123.7</span><span class="p">;</span>
+    <span class="kn">...</span>
+<span class="err">}</span></code></pre></div>
+
+<h3 id="whitelisting-ip-addresses">Whitelisting IP Addresses</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">allow</span> <span class="mi">192</span><span class="s">.168.1.0/24</span><span class="p">;</span>
+    <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="kn">...</span>
+<span class="err">}</span></code></pre></div>
+
+<h3 id="blocking-requests">Blocking Requests</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/foo.php</span> <span class="p">{</span>
+    <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span><span class="sr">*</span> <span class="s">foo|bar)</span> <span class="p">{</span>
+        <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kn">...</span>
+<span class="err">}</span></code></pre></div>
+
+<h3 id="limiting-connections-to-back-ends">Limiting Connections to Back-Ends</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">upstream</span> <span class="s">website</span> <span class="p">{</span>
+    <span class="kn">server</span> <span class="n">192.168.100.1</span><span class="p">:</span><span class="mi">80</span> <span class="s">max_conns=200</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="n">192.168.100.2</span><span class="p">:</span><span class="mi">80</span> <span class="s">max_conns=200</span><span class="p">;</span>
+    <span class="kn">queue</span> <span class="mi">10</span> <span class="s">timeout=30s</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
 
       <hr />
@@ -215,7 +253,7 @@ rake deploy</code></pre></div>
 
 
         </div>
-        <p class="byline"><strong>Blogging with github</strong> was published on <time datetime="2014-01-01T00:00:00+04:00">January 01, 2014</time> and last modified on <time datetime="2014-01-01">January 01, 2014</time>.</p>
+        <p class="byline"><strong>Mitigating DDoS Attacks with NGINX</strong> was published on <time datetime="2015-07-20T00:00:00+03:00">July 20, 2015</time> and last modified on <time datetime="2015-07-20">July 20, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -229,11 +267,11 @@ rake deploy</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/" title="Mitigating DDoS Attacks with NGINX">Mitigating DDoS Attacks with NGINX</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/17/learning-android/" title="Learning Android">Learning Android</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/10/data-science-at-the-command-line/" title="Data Science at the Command Line">Data Science at the Command Line</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/07/playing-with-devstack/" title="Playing with DevStack">Playing with DevStack</a></li>
     
     </ul>
     <hr />

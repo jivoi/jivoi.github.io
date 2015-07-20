@@ -5,13 +5,102 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-17T19:35:22+03:00</updated>
+<updated>2015-07-20T12:46:58+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Mitigating DDoS Attacks with NGINX]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/" />
+  <id>https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx</id>
+  <updated>2015-07-20 12:44:24 +0300T00:00:00-00:00</updated>
+  <published>2015-07-20T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Useful nginx configs for antiddos&lt;/p&gt;
+
+&lt;h3 id=&quot;limiting-the-rate-of-requests&quot;&gt;Limiting the Rate of Requests&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;limit_req_zone&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$binary_remote_addr&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;zone=one:10m&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rate=30r/m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/login.html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;limit_req&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;zone=one&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limiting-the-number-of-connections&quot;&gt;Limiting the Number of Connections&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;limit_conn_zone&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$binary_remote_addr&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;zone=addr:10m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/store/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;limit_conn&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;addr&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;closing-slow-connections&quot;&gt;Closing Slow Connections&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;client_body_timeout&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;client_header_timeout&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;5s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;blacklisting-ip-addresses&quot;&gt;Blacklisting IP Addresses&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.123.123.0/28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.123.123.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.123.123.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.123.123.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;whitelisting-ip-addresses&quot;&gt;Whitelisting IP Addresses&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;192&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.168.1.0/24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;blocking-requests&quot;&gt;Blocking Requests&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/foo.php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$http_user_agent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;foo|bar)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;403&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limiting-connections-to-back-ends&quot;&gt;Limiting Connections to Back-Ends&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;upstream&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;website&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;192.168.100.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;max_conns=200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;192.168.100.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;max_conns=200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;timeout=30s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/&quot;&gt;Mitigating DDoS Attacks with NGINX&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 20, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -1458,6 +1547,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;os-cheat-sheets-and-script-syntax&quot;&gt;OS Cheat Sheets and Script Syntax&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/Cheat_Sheets&quot;&gt;https://www.owasp.org/index.php/Cheat_Sheets&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.cheat-sheets.org/&quot;&gt;http://www.cheat-sheets.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ss64.com/nt/&quot;&gt;http://ss64.com/nt/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/22324-hacking-tools-windows.rst&quot;&gt;https://rstforums.com/forum/22324-hacking-tools-windows.rst&lt;/a&gt;&lt;/li&gt;
@@ -5651,357 +5741,6 @@ export a=’myfile.txt’; echo ${}.
 и я ушёл&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/09/choose-life/&quot;&gt;Choose Life&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 09, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Useful nginx configs]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/08/nginx-configs/" />
-  <id>https://jivoi.github.io/2014/01/08/nginx-configs</id>
-  <updated>2014-01-08 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-08T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Different configs for nginx.&lt;/p&gt;
-
-&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;                                    
-&lt;header&gt;                                                                        
-&lt;h3&gt;Contents&lt;/h3&gt;                                                               
-&lt;/header&gt;                                                                       
-&lt;div id=&quot;drawer&quot;&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#default-vhost-config&quot; id=&quot;markdown-toc-default-vhost-config&quot;&gt;Default vhost config&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#custom-502-error-page&quot; id=&quot;markdown-toc-custom-502-error-page&quot;&gt;Custom 502 error page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-somefilephp-to-somefiletxt&quot; id=&quot;markdown-toc-rewrite-somefilephp-to-somefiletxt&quot;&gt;Rewrite somefile.php to somefile.txt&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz&quot; id=&quot;markdown-toc-rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz&quot;&gt;Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#permanent-redirect-from-domain-to-wwwdomain&quot; id=&quot;markdown-toc-permanent-redirect-from-domain-to-wwwdomain&quot;&gt;Permanent redirect from domain to www.domain&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-request-from-imgsite-to-images&quot; id=&quot;markdown-toc-rewrite-request-from-imgsite-to-images&quot;&gt;Rewrite request from img/site to images&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#proxy-pass-all-request-for-one-location&quot; id=&quot;markdown-toc-proxy-pass-all-request-for-one-location&quot;&gt;Proxy pass all request for one location&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#proxy-pass-all-request-for-one-location-1&quot; id=&quot;markdown-toc-proxy-pass-all-request-for-one-location-1&quot;&gt;Proxy pass all request for one location&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru&quot; id=&quot;markdown-toc-rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru&quot;&gt;Rewrite *.domain.ru domain.ru to *.domain.newdomain.ru domain.newdomain.ru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#redirect-from-httpdomainoneru-to-httpdomaintworu&quot; id=&quot;markdown-toc-redirect-from-httpdomainoneru-to-httpdomaintworu&quot;&gt;Redirect from http://domainone.ru/ to http://domaintwo.ru&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-whole-domain-to-other-domain&quot; id=&quot;markdown-toc-rewrite-whole-domain-to-other-domain&quot;&gt;Rewrite whole domain to other domain&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#for-404-error-redirect-to--of-vhost&quot; id=&quot;markdown-toc-for-404-error-redirect-to--of-vhost&quot;&gt;For 404 error redirect to / of vhost&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#turn-on-gzip-compress&quot; id=&quot;markdown-toc-turn-on-gzip-compress&quot;&gt;Turn on gzip compress&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-all-request-to-not-exists-files-to-indexphp&quot; id=&quot;markdown-toc-rewrite-all-request-to-not-exists-files-to-indexphp&quot;&gt;Rewrite all request to not exists files to index.php&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#security-admin-location&quot; id=&quot;markdown-toc-security-admin-location&quot;&gt;Security /admin location&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-location-for-special-user-agent&quot; id=&quot;markdown-toc-rewrite-location-for-special-user-agent&quot;&gt;Rewrite location for special User-Agent&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#simple-block-of-sql-injection&quot; id=&quot;markdown-toc-simple-block-of-sql-injection&quot;&gt;Simple block of SQL Injection&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-location-name-to-get-args&quot; id=&quot;markdown-toc-rewrite-location-name-to-get-args&quot;&gt;Rewrite location name to get args&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#change-robotstxt-for-different-domain&quot; id=&quot;markdown-toc-change-robotstxt-for-different-domain&quot;&gt;Change robots.txt for different domain&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#creates-variables-suitable-for-ab-testing-also-known-as-split-testing&quot; id=&quot;markdown-toc-creates-variables-suitable-for-ab-testing-also-known-as-split-testing&quot;&gt;Creates variables suitable for A/B testing, also known as split testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#no-cache-for-502-error&quot; id=&quot;markdown-toc-no-cache-for-502-error&quot;&gt;No cache for 502 error&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet&quot; id=&quot;markdown-toc-create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet&quot;&gt;Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#custom-403-error-page&quot; id=&quot;markdown-toc-custom-403-error-page&quot;&gt;Custom 403 error page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-requests-for-special-remote-address&quot; id=&quot;markdown-toc-rewrite-requests-for-special-remote-address&quot;&gt;Rewrite requests for special remote address&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#rewrite-sub-domains-to-new-domain&quot; id=&quot;markdown-toc-rewrite-sub-domains-to-new-domain&quot;&gt;Rewrite sub domains to new domain&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#new-format-for-301-redirect&quot; id=&quot;markdown-toc-new-format-for-301-redirect&quot;&gt;New format for 301 redirect&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#location-for-static-files&quot; id=&quot;markdown-toc-location-for-static-files&quot;&gt;Location for static files&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;/div&gt;                                                                          
-&lt;/section&gt;
-&lt;!-- /#table-of-contents --&gt;
-
-&lt;h3 id=&quot;default-vhost-config&quot;&gt;Default vhost config&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log/nginx/access_log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;error_log&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/log/nginx/nginx_error_log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-                
-    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYIP/32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#dev pc&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;satisfy&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;auth_basic&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;&amp;quot;restricted&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;area&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;auth_basic_user_file&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/var/www/.htpasswd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)&lt;/span&gt;$ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-         
-    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://127.0.0.1:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/.svn/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;custom-502-error-page&quot;&gt;Custom 502 error page&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;error_page&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;502&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/empty.html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;proxy_intercept_errors&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/empty.html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt;    &lt;span class=&quot;s&quot;&gt;/var/www/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-somefilephp-to-somefiletxt&quot;&gt;Rewrite somefile.php to somefile.txt&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/somefile.php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/somefile.txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-all-requests-from-abcmysitecomxyzphp-to-mysitecomabcindexphppxyz&quot;&gt;Rewrite all requests from abc.mysite.com/xyz.php to mysite.com/abc/index.php?p=xyz&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server{&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;^(.*)\.mysite\.com$;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$subdom&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;\/(.*)\.php&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$script&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://mysite.com/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$subdom/index.php?p=$script&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;permanent-redirect-from-domain-to-wwwdomain&quot;&gt;Permanent redirect from domain to www.domain&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-apache&quot; data-lang=&quot;apache&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;VirtualHost&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;*:80&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;ServerName&lt;/span&gt;              example.com:80
-  &lt;span class=&quot;nb&quot;&gt;RedirectMatch&lt;/span&gt; permanent (.*) http://www.example.com$1
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/VirtualHost&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;example.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://www.example.com&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;or&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;^(?!&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;www\.)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://www.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host$request_uri&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;or&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;www\.(.*))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$host_without_www&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host_without_www$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-request-from-imgsite-to-images&quot;&gt;Rewrite request from img/site to images&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/img/site&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(!-f&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request_filename&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-		&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/img/site/(.*)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/images/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;proxy-pass-all-request-for-one-location&quot;&gt;Proxy pass all request for one location&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/one/two/(.*)/(.*)$&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/one/two/(.*)/(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;/two/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1/$2&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;two.domain.net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://two.domain.net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;proxy-pass-all-request-for-one-location-1&quot;&gt;Proxy pass all request for one location&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/html/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Host&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;html.example.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/html/js/id/([0-9]+)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/js/id/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;http://html.example.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-domainru-domainru-to-domainnewdomainru-domainnewdomainru&quot;&gt;Rewrite *.domain.ru domain.ru to *.domain.newdomain.ru domain.newdomain.ru&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$newdomain_host&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.newdomain.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;(.*).domain.ru)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    	&lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$newdomain_host&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1.domain.newdomain.ru&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/(.*)&lt;/span&gt;$  &lt;span class=&quot;s&quot;&gt;http://&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$newdomain_host/$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;redirect-from-httpdomainoneru-to-httpdomaintworu&quot;&gt;Redirect from http://domainone.ru/ to http://domaintwo.ru&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domainone.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://domaintwo.ru/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-whole-domain-to-other-domain&quot;&gt;Rewrite whole domain to other domain&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://newdomain.net/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;for-404-error-redirect-to--of-vhost&quot;&gt;For 404 error redirect to / of vhost&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;proxy_intercept_errors&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;error_page&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;http://newdomain.net/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;turn-on-gzip-compress&quot;&gt;Turn on gzip compress&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;gzip&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;gzip_min_length&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;gzip_buffers&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;gzip_types&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;text/plain&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;application/x-javascript&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;text/css&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-all-request-to-not-exists-files-to-indexphp&quot;&gt;Rewrite all request to not exists files to index.php&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(!-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request_filename&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^.*&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;/index.php&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;security-admin-location&quot;&gt;Security /admin location&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^~&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/admin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(!-e&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$request_filename&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;/index.php&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://127.0.0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;192&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.168.56.1/24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;deny&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-location-for-special-user-agent&quot;&gt;Rewrite location for special User-Agent&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$http_user_agent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Mozilla/5.0&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(iPhone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;CPU&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Mac&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;OS&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;en)&amp;quot;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/index.php&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;check&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;wget&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;--no-cache&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;--user-agent=&amp;quot;Mozilla/5.0&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(iPhone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;U&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;CPU&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;like&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Mac&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;OS&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;en)&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://domain.net&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;-O&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/dev/null&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;simple-block-of-sql-injection&quot;&gt;Simple block of SQL Injection&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request_uri&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;union|concat&amp;quot;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-		&lt;span class=&quot;kn&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;403&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt;      &lt;span class=&quot;s&quot;&gt;http://127.0.0.1/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-location-name-to-get-args&quot;&gt;Rewrite location name to get args&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;e.x&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/en/bla.php&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/bla.php?lang=en,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/en/bla.php?a=1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/bla.php?a=1&amp;amp;lang=en&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/en&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$args&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$args&amp;amp;lang=en&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/en/(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;change-robotstxt-for-different-domain&quot;&gt;Change robots.txt for different domain&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/robots.txt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.net&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^/robots.txt&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;/robots_domain.txt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/robots_domain.txt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;creates-variables-suitable-for-ab-testing-also-known-as-split-testing&quot;&gt;Creates variables suitable for A/B testing, also known as split testing&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;split_clients&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$cookie_ruid&amp;quot;&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;$sharding&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-				&lt;span class=&quot;kn&quot;&gt;50%&lt;/span&gt;                &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-				&lt;span class=&quot;kn&quot;&gt;50%&lt;/span&gt;                &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sharding&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;1&amp;#39;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://one.domain.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$sharding&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;2&amp;#39;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://two.domain.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;no-cache-for-502-error&quot;&gt;No cache for 502 error&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;error_page&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;502&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@502&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@502&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;add_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Pragma&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;no-cache&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;expires&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;add_header&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Cache-Control&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;no-store,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;no-cache,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;must-revalidate,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post-check=0,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pre-check=0&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;charset&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;utf-8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-	&lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;.*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/index.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-nearly-equal-redirect-from-domainnet-to-3-others-onedomainnet-twodomainnet-threedomainnet&quot;&gt;Create nearly equal redirect from domain.net to 3 others: one.domain.net, two.domain.net, three.domain.net&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.net&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;random_index&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;Create&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index1.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index2.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index3.html&lt;/span&gt; 
-
-&lt;span class=&quot;s&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/index1.html&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;&amp;lt;!DOCTYPE&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;HTML&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;PUBLIC&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;-//W3C//DTD&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;HTML&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;.0&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Transitional//EN&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http-equiv=&amp;quot;REFRESH&amp;quot;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;content=&amp;quot;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;url=http://one.domain.net&amp;quot;&amp;lt;/HEAD&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;&amp;lt;/HTML&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;custom-403-error-page&quot;&gt;Custom 403 error page&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;error_page&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;403&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/403.html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/403.html&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/err/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-requests-for-special-remote-address&quot;&gt;Rewrite requests for special remote address&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;&amp;quot;8.8.8.8&amp;quot;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$  &lt;span class=&quot;s&quot;&gt;/index2.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://backend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;rewrite-sub-domains-to-new-domain&quot;&gt;Rewrite sub domains to new domain&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.ru&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;*.domain.ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;#rewrite all subdomains on $1.b.dot.ru&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;^([a-z0-9-\.]+)\.domain.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$subd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$subd.b.dot.ru$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;#rewrite domain.ru in b.dot.ru&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$host&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;^domain.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt;$ &lt;span class=&quot;s&quot;&gt;http://b.dot.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kn&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;new-format-for-301-redirect&quot;&gt;New format for 301 redirect&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;Old&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;format:&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^(.*)&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.blabla.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;New&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;format:&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;301&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.blabla.ru&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$request_uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;location-for-static-files&quot;&gt;Location for static files&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nginx&quot; data-lang=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)&lt;/span&gt;$ &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/var/www/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/08/nginx-configs/&quot;&gt;Useful nginx configs&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 08, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
