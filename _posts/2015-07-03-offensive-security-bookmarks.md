@@ -354,6 +354,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx](http://www.mcafee.com/us/downloads/free-tools/hacmetravel.aspx)
 
 ### OS Cheat Sheets and Script Syntax
+- [https://www.owasp.org/index.php/Cheat_Sheets](https://www.owasp.org/index.php/Cheat_Sheets)
 - [http://www.cheat-sheets.org/](http://www.cheat-sheets.org/)
 - [http://ss64.com/nt/](http://ss64.com/nt/)
 - [https://rstforums.com/forum/22324-hacking-tools-windows.rst](https://rstforums.com/forum/22324-hacking-tools-windows.rst)
