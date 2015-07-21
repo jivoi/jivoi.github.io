@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-20T12:46:58+03:00</updated>
+<updated>2015-07-21T12:44:24+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1104,6 +1104,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#security-blogs&quot; id=&quot;markdown-toc-security-blogs&quot;&gt;Security Blogs&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#security-forums&quot; id=&quot;markdown-toc-security-forums&quot;&gt;Security Forums&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tor-onion-links&quot; id=&quot;markdown-toc-tor-onion-links&quot;&gt;Tor onion links&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#security-methodologies&quot; id=&quot;markdown-toc-security-methodologies&quot;&gt;Security Methodologies&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#trainingclassesvideo&quot; id=&quot;markdown-toc-trainingclassesvideo&quot;&gt;Training/Classes/Video&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pentest-tools&quot; id=&quot;markdown-toc-pentest-tools&quot;&gt;Pentest Tools&lt;/a&gt;&lt;/li&gt;
@@ -1141,6 +1142,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#os-cheat-sheets-and-script-syntax&quot; id=&quot;markdown-toc-os-cheat-sheets-and-script-syntax&quot;&gt;OS Cheat Sheets and Script Syntax&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#passwords-wordlists-hashes-tools&quot; id=&quot;markdown-toc-passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#it-certifications&quot; id=&quot;markdown-toc-it-certifications&quot;&gt;IT Certifications&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1163,6 +1165,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://forum.antichat.ru/&quot;&gt;http://forum.antichat.ru/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/&quot;&gt;https://rstforums.com/forum/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://garage4hackers.com/forum.php&quot;&gt;http://garage4hackers.com/forum.php&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hellboundhackers.org/&quot;&gt;https://www.hellboundhackers.org/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tor-onion-links&quot;&gt;Tor onion links&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.hiddenwiki.info/&quot;&gt;http://www.hiddenwiki.info/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;security-methodologies&quot;&gt;Security Methodologies&lt;/h3&gt;
@@ -1182,6 +1190,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.irongeek.com/i.php?page=videos/aide-winter-2011&quot;&gt;http://www.irongeek.com/i.php?page=videos/aide-winter-2011&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://lab.pentestit.ru/pentestlabs/3&quot;&gt;https://lab.pentestit.ru/pentestlabs/3&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://trailofbits.github.io/ctf/&quot;&gt;https://trailofbits.github.io/ctf/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ctf.forgottensec.com/wiki/?title=Main_Page&quot;&gt;http://ctf.forgottensec.com/wiki/?title=Main_Page&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://smashthestack.org/&quot;&gt;http://smashthestack.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ctf.hcesperer.org/&quot;&gt;http://ctf.hcesperer.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic&quot;&gt;https://www.google.com/calendar/feeds/noge7b1rg2dg4a8kcm1k68vbjg@group.calendar.google.com/public/basic&lt;/a&gt;&lt;/li&gt;
@@ -1589,6 +1598,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/&quot;&gt;Reddit Thread&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level&quot;&gt;PenTester Salary&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.calibersecurity.com/san-francisco-information-security-job-board/&quot;&gt;San Francisco InfoSec Jobs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;it-certifications&quot;&gt;IT Certifications&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://certs.infosecinstitute.com/&quot;&gt;http://certs.infosecinstitute.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
@@ -3837,6 +3852,7 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
   &lt;li&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/li&gt;
   &lt;li&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/li&gt;
   &lt;li&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/li&gt;
+  &lt;li&gt;http://nwalsh.me/?p=102&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
