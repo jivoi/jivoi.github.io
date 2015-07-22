@@ -21,7 +21,7 @@ My configuration
 - install BracketHighlighter
 - install Git
 - install GitGutter
-- install Side​Bar​Git
+- install SideBarGit
 - install SidebarEnhancements
 - install Soda theme
 - install Flatland theme
