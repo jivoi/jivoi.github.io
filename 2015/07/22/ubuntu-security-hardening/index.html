@@ -1,0 +1,451 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Ubuntu Security Hardening &#8211; EK</title>
+<meta name="description" content="Based on CIS and my experience
+
+">
+<meta name="keywords" content="linux, security, sysadm">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Ubuntu Security Hardening">
+<meta name="twitter:description" content="Based on CIS and my experience
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu Security Hardening">
+<meta property="og:description" content="Based on CIS and my experience
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/" rel="bookmark" title="Ubuntu Security Hardening">Ubuntu Security Hardening</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Based on CIS and my experience</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#sshd-settings" id="markdown-toc-sshd-settings">SSHD Settings</a></li>
+  <li><a href="#limit-access-to-su-cmd" id="markdown-toc-limit-access-to-su-cmd">Limit Access to SU cmd</a></li>
+  <li><a href="#network-security-systcl" id="markdown-toc-network-security-systcl">Network Security Systcl</a></li>
+  <li><a href="#php-settings" id="markdown-toc-php-settings">PHP Settings</a></li>
+  <li><a href="#apache-settings" id="markdown-toc-apache-settings">Apache Settings</a></li>
+  <li><a href="#install-apache-modsecurity" id="markdown-toc-install-apache-modsecurity">Install Apache ModSecurity</a></li>
+  <li><a href="#install-apache-modevasive" id="markdown-toc-install-apache-modevasive">Install Apache ModEvasive</a></li>
+  <li><a href="#install-rootkit-checkers" id="markdown-toc-install-rootkit-checkers">Install Rootkit Checkers</a></li>
+  <li><a href="#install-logwatch" id="markdown-toc-install-logwatch">Install Logwatch</a></li>
+  <li><a href="#automatic-security-updates" id="markdown-toc-automatic-security-updates">Automatic Security Updates</a></li>
+  <li><a href="#process-accounting" id="markdown-toc-process-accounting">Process Accounting</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="sshd-settings">SSHD Settings</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/ssh/sshd_config</span>
+PermitRootLogin no
+Port 1022
+
+<span class="nv">$ </span>service ssh reload</code></pre></div>
+
+<h3 id="limit-access-to-su-cmd">Limit Access to SU cmd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>dpkg-statoverride --update --add root sudo <span class="m">4750</span> /bin/su</code></pre></div>
+
+<h3 id="network-security-systcl">Network Security Systcl</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/sysctl.d/10-network-security.conf</span>
+<span class="c"># Ignore ICMP broadcast requests</span>
+net.ipv4.icmp_echo_ignore_broadcasts <span class="o">=</span> 1
+
+<span class="c"># Disable source packet routing</span>
+net.ipv4.conf.all.accept_source_route <span class="o">=</span> 0
+net.ipv6.conf.all.accept_source_route <span class="o">=</span> 0
+net.ipv4.conf.default.accept_source_route <span class="o">=</span> 0
+net.ipv6.conf.default.accept_source_route <span class="o">=</span> 0
+
+<span class="c"># Ignore send redirects</span>
+net.ipv4.conf.all.send_redirects <span class="o">=</span> 0
+net.ipv4.conf.default.send_redirects <span class="o">=</span> 0
+
+<span class="c"># Block SYN attacks</span>
+net.ipv4.tcp_max_syn_backlog <span class="o">=</span> 2048
+net.ipv4.tcp_synack_retries <span class="o">=</span> 2
+net.ipv4.tcp_syn_retries <span class="o">=</span> 5
+
+<span class="c"># Log Martians</span>
+net.ipv4.conf.all.log_martians <span class="o">=</span> 1
+net.ipv4.icmp_ignore_bogus_error_responses <span class="o">=</span> 1
+
+<span class="c"># Ignore ICMP redirects</span>
+net.ipv4.conf.all.accept_redirects <span class="o">=</span> 0
+net.ipv6.conf.all.accept_redirects <span class="o">=</span> 0
+net.ipv4.conf.default.accept_redirects <span class="o">=</span> 0
+net.ipv6.conf.default.accept_redirects <span class="o">=</span> 0
+
+<span class="c"># Ignore Directed pings</span>
+net.ipv4.icmp_echo_ignore_all <span class="o">=</span> 1
+
+<span class="nv">$ </span>service procps start</code></pre></div>
+
+<h3 id="php-settings">PHP Settings</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/php5/apache2/php.ini</span>
+<span class="nv">disable_functions</span> <span class="o">=</span> show_source,system,shell_exec,passthru,exec,phpinfo,popen,proc_open,allow_url_fopen
+<span class="nv">expose_php</span> <span class="o">=</span> off
+<span class="nv">display_errors</span> <span class="o">=</span> off
+<span class="nv">track_errors</span> <span class="o">=</span> off
+<span class="nv">html_errors</span> <span class="o">=</span> off</code></pre></div>
+
+<h3 id="apache-settings">Apache Settings</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/apache2/conf-enabled/security.conf</span>
+ServerTokens Prod
+ServerSignature Off
+TraceEnable Off
+Header <span class="nb">unset </span>ETag
+FileETag None
+
+<span class="nv">$ </span>a2enmod headers
+<span class="nv">$ </span>service apache2 restart</code></pre></div>
+
+<h3 id="install-apache-modsecurity">Install Apache ModSecurity</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install libapache2-mod-security2
+<span class="nv">$ </span>mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+
+<span class="c"># /etc/modsecurity/modsecurity.conf</span>
+SecRuleEngine On
+SecRequestBodyLimit 16384000
+SecRequestBodyInMemoryLimit 16384000
+
+<span class="c"># Install OWASP ModSecurity Core Rule Set</span>
+<span class="nv">$ </span>git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/owasp-modsecurity/
+<span class="nv">$ </span>mv /etc/owasp-modsecurity/modsecurity_crs_10_setup.conf.example /etc/owasp-modsecurity/modsecurity_crs_10_setup.conf
+ls /etc/owasp-modsecurity/base_rules <span class="p">|</span> xargs -I <span class="o">{}</span> ln -s /etc/owasp-modsecurity/base_rules/<span class="o">{}</span> /etc/modsecurity/activated_rules/<span class="o">{}</span>
+ls /etc/owasp-modsecurity/optional_rules <span class="p">|</span> xargs -I <span class="o">{}</span> ln -s /etc/owasp-modsecurity/optional_rules/<span class="o">{}</span> /etc/modsecurity/activated_rules/<span class="o">{}</span>
+
+<span class="c"># /etc/apache2/mods-available/owasp-modsecurity.conf</span>
+Include <span class="s2">&quot;/etc/owasp-modsecurity/activated_rules/*.conf&quot;</span>
+
+<span class="nv">$ </span>service apache2 restart</code></pre></div>
+
+<h3 id="install-apache-modevasive">Install Apache ModEvasive</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install libapache2-mod-evasive
+<span class="nv">$ </span>mkdir /var/log/mod_evasive
+<span class="nv">$ </span>chown www-data:www-data /var/log/mod_evasive
+
+<span class="c"># /etc/apache2/mods-available/evasive.conf</span>
+DOSSystemCommand
+DOSEmailNotify admin@domain.com
+
+<span class="nv">$ </span>a2enmod mod-evasive</code></pre></div>
+
+<h3 id="install-rootkit-checkers">Install Rootkit Checkers</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install rkhunter chkrootkit
+
+<span class="c"># /etc/chkrootkit.conf</span>
+<span class="nv">RUN_DAILY</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+
+<span class="c"># /etc/default/rkhunter</span>
+<span class="nv">CRON_DAILY_RUN</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">CRON_DB_UPDATE</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+
+<span class="nv">$ </span>mv /etc/cron.weekly/rkhunter /etc/cron.weekly/rkhunter_update
+<span class="nv">$ </span>mv /etc/cron.daily/rkhunter /etc/cron.weekly/rkhunter_run
+<span class="nv">$ </span>mv /etc/cron.daily/chkrootkit /etc/cron.weekly/</code></pre></div>
+
+<h3 id="install-logwatch">Install Logwatch</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install logwatch
+<span class="nv">$ </span>mv /etc/cron.daily/00logwatch /etc/cron.weekly/
+
+<span class="c"># /etc/cron.weekly/00logwatch</span>
+/usr/sbin/logwatch --output mail --range <span class="s1">&#39;between -7 days and -1 days&#39;</span></code></pre></div>
+
+<h3 id="automatic-security-updates">Automatic Security Updates</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># ONLY if you really know what you are doing</span>
+<span class="nv">$ </span>dpkg-reconfigure -plow unattended-upgrades</code></pre></div>
+
+<h3 id="process-accounting">Process Accounting</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install acct
+<span class="nv">$ </span>touch /var/log/wtmp
+
+<span class="c"># /etc/cron.weekly/acct-report</span>
+<span class="c">#!/bin/bash</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;USERS&#39; CONNECT TIMES&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+
+ac -d -p
+
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;COMMANDS BY USER&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+
+<span class="nv">users</span><span class="o">=</span><span class="k">$(</span>cat /etc/passwd <span class="p">|</span> awk -F <span class="s1">&#39;:&#39;</span> <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> sort<span class="k">)</span>
+
+<span class="k">for</span> user in <span class="nv">$users</span> <span class="p">;</span> <span class="k">do</span>
+  <span class="nv">comm</span><span class="o">=</span><span class="k">$(</span>lastcomm --user <span class="nv">$user</span> <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -nr<span class="k">)</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$comm&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;$user:&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;$comm&quot;</span>
+  <span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;COMMANDS BY FREQUENCY OF EXECUTION&quot;</span>
+<span class="nb">echo</span> <span class="s2">&quot;&quot;</span>
+
+sa <span class="p">|</span> awk <span class="s1">&#39;{print $1, $6}&#39;</span> <span class="p">|</span> sort -n <span class="p">|</span> head -n -1 <span class="p">|</span> sort -nr</code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>I'm a hacker and security researcher</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Ubuntu Security Hardening</strong> was published on <time datetime="2015-07-22T00:00:00+03:00">July 22, 2015</time> and last modified on <time datetime="2015-07-22">July 22, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/" title="Mitigating DDoS Attacks with NGINX">Mitigating DDoS Attacks with NGINX</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/17/learning-android/" title="Learning Android">Learning Android</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/10/data-science-at-the-command-line/" title="Data Science at the Command Line">Data Science at the Command Line</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+	        
+
+</body>
+</html>

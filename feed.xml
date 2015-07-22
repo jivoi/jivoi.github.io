@@ -5,13 +5,218 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-21T12:44:24+03:00</updated>
+<updated>2015-07-22T18:14:43+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Ubuntu Security Hardening]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/" />
+  <id>https://jivoi.github.io/2015/07/22/ubuntu-security-hardening</id>
+  <updated>2015-07-22 18:11:54 +0300T00:00:00-00:00</updated>
+  <published>2015-07-22T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Based on CIS and my experience&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#sshd-settings&quot; id=&quot;markdown-toc-sshd-settings&quot;&gt;SSHD Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#limit-access-to-su-cmd&quot; id=&quot;markdown-toc-limit-access-to-su-cmd&quot;&gt;Limit Access to SU cmd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#network-security-systcl&quot; id=&quot;markdown-toc-network-security-systcl&quot;&gt;Network Security Systcl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#php-settings&quot; id=&quot;markdown-toc-php-settings&quot;&gt;PHP Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#apache-settings&quot; id=&quot;markdown-toc-apache-settings&quot;&gt;Apache Settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-apache-modsecurity&quot; id=&quot;markdown-toc-install-apache-modsecurity&quot;&gt;Install Apache ModSecurity&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-apache-modevasive&quot; id=&quot;markdown-toc-install-apache-modevasive&quot;&gt;Install Apache ModEvasive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-rootkit-checkers&quot; id=&quot;markdown-toc-install-rootkit-checkers&quot;&gt;Install Rootkit Checkers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-logwatch&quot; id=&quot;markdown-toc-install-logwatch&quot;&gt;Install Logwatch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#automatic-security-updates&quot; id=&quot;markdown-toc-automatic-security-updates&quot;&gt;Automatic Security Updates&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#process-accounting&quot; id=&quot;markdown-toc-process-accounting&quot;&gt;Process Accounting&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;sshd-settings&quot;&gt;SSHD Settings&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/ssh/sshd_config&lt;/span&gt;
+PermitRootLogin no
+Port 1022
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service ssh reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;limit-access-to-su-cmd&quot;&gt;Limit Access to SU cmd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dpkg-statoverride --update --add root sudo &lt;span class=&quot;m&quot;&gt;4750&lt;/span&gt; /bin/su&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;network-security-systcl&quot;&gt;Network Security Systcl&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/sysctl.d/10-network-security.conf&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Ignore ICMP broadcast requests&lt;/span&gt;
+net.ipv4.icmp_echo_ignore_broadcasts &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+
+&lt;span class=&quot;c&quot;&gt;# Disable source packet routing&lt;/span&gt;
+net.ipv4.conf.all.accept_source_route &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv6.conf.all.accept_source_route &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv4.conf.default.accept_source_route &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv6.conf.default.accept_source_route &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+
+&lt;span class=&quot;c&quot;&gt;# Ignore send redirects&lt;/span&gt;
+net.ipv4.conf.all.send_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv4.conf.default.send_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+
+&lt;span class=&quot;c&quot;&gt;# Block SYN attacks&lt;/span&gt;
+net.ipv4.tcp_max_syn_backlog &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 2048
+net.ipv4.tcp_synack_retries &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 2
+net.ipv4.tcp_syn_retries &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5
+
+&lt;span class=&quot;c&quot;&gt;# Log Martians&lt;/span&gt;
+net.ipv4.conf.all.log_martians &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+net.ipv4.icmp_ignore_bogus_error_responses &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+
+&lt;span class=&quot;c&quot;&gt;# Ignore ICMP redirects&lt;/span&gt;
+net.ipv4.conf.all.accept_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv6.conf.all.accept_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv4.conf.default.accept_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+net.ipv6.conf.default.accept_redirects &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 0
+
+&lt;span class=&quot;c&quot;&gt;# Ignore Directed pings&lt;/span&gt;
+net.ipv4.icmp_echo_ignore_all &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service procps start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;php-settings&quot;&gt;PHP Settings&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/php5/apache2/php.ini&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;disable_functions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; show_source,system,shell_exec,passthru,exec,phpinfo,popen,proc_open,allow_url_fopen
+&lt;span class=&quot;nv&quot;&gt;expose_php&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; off
+&lt;span class=&quot;nv&quot;&gt;display_errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; off
+&lt;span class=&quot;nv&quot;&gt;track_errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; off
+&lt;span class=&quot;nv&quot;&gt;html_errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; off&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apache-settings&quot;&gt;Apache Settings&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/apache2/conf-enabled/security.conf&lt;/span&gt;
+ServerTokens Prod
+ServerSignature Off
+TraceEnable Off
+Header &lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;ETag
+FileETag None
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;a2enmod headers
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service apache2 restart&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-apache-modsecurity&quot;&gt;Install Apache ModSecurity&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install libapache2-mod-security2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+
+&lt;span class=&quot;c&quot;&gt;# /etc/modsecurity/modsecurity.conf&lt;/span&gt;
+SecRuleEngine On
+SecRequestBodyLimit 16384000
+SecRequestBodyInMemoryLimit 16384000
+
+&lt;span class=&quot;c&quot;&gt;# Install OWASP ModSecurity Core Rule Set&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/SpiderLabs/owasp-modsecurity-crs.git /etc/owasp-modsecurity/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/owasp-modsecurity/modsecurity_crs_10_setup.conf.example /etc/owasp-modsecurity/modsecurity_crs_10_setup.conf
+ls /etc/owasp-modsecurity/base_rules &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -I &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; ln -s /etc/owasp-modsecurity/base_rules/&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; /etc/modsecurity/activated_rules/&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+ls /etc/owasp-modsecurity/optional_rules &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -I &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; ln -s /etc/owasp-modsecurity/optional_rules/&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; /etc/modsecurity/activated_rules/&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# /etc/apache2/mods-available/owasp-modsecurity.conf&lt;/span&gt;
+Include &lt;span class=&quot;s2&quot;&gt;&amp;quot;/etc/owasp-modsecurity/activated_rules/*.conf&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service apache2 restart&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-apache-modevasive&quot;&gt;Install Apache ModEvasive&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install libapache2-mod-evasive
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /var/log/mod_evasive
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chown www-data:www-data /var/log/mod_evasive
+
+&lt;span class=&quot;c&quot;&gt;# /etc/apache2/mods-available/evasive.conf&lt;/span&gt;
+DOSSystemCommand
+DOSEmailNotify admin@domain.com
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;a2enmod mod-evasive&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-rootkit-checkers&quot;&gt;Install Rootkit Checkers&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install rkhunter chkrootkit
+
+&lt;span class=&quot;c&quot;&gt;# /etc/chkrootkit.conf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;RUN_DAILY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# /etc/default/rkhunter&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CRON_DAILY_RUN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CRON_DB_UPDATE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/cron.weekly/rkhunter /etc/cron.weekly/rkhunter_update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/cron.daily/rkhunter /etc/cron.weekly/rkhunter_run
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/cron.daily/chkrootkit /etc/cron.weekly/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-logwatch&quot;&gt;Install Logwatch&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install logwatch
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/cron.daily/00logwatch /etc/cron.weekly/
+
+&lt;span class=&quot;c&quot;&gt;# /etc/cron.weekly/00logwatch&lt;/span&gt;
+/usr/sbin/logwatch --output mail --range &lt;span class=&quot;s1&quot;&gt;&amp;#39;between -7 days and -1 days&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;automatic-security-updates&quot;&gt;Automatic Security Updates&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# ONLY if you really know what you are doing&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dpkg-reconfigure -plow unattended-upgrades&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;process-accounting&quot;&gt;Process Accounting&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install acct
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch /var/log/wtmp
+
+&lt;span class=&quot;c&quot;&gt;# /etc/cron.weekly/acct-report&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;USERS&amp;#39; CONNECT TIMES&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+ac -d -p
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;COMMANDS BY USER&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;cat /etc/passwd &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F &lt;span class=&quot;s1&quot;&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; user in &lt;span class=&quot;nv&quot;&gt;$users&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;comm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;lastcomm --user &lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq -c &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nr&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$comm&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$user:&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;$comm&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;COMMANDS BY FREQUENCY OF EXECUTION&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+sa &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1, $6}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -n &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head -n -1 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nr&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/&quot;&gt;Ubuntu Security Hardening&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 22, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -1633,6 +1838,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;install BracketHighlighter&lt;/li&gt;
   &lt;li&gt;install Git&lt;/li&gt;
   &lt;li&gt;install GitGutter&lt;/li&gt;
+  &lt;li&gt;install SideBarGit&lt;/li&gt;
   &lt;li&gt;install SidebarEnhancements&lt;/li&gt;
   &lt;li&gt;install Soda theme&lt;/li&gt;
   &lt;li&gt;install Flatland theme&lt;/li&gt;
@@ -5606,157 +5812,6 @@ export a=’myfile.txt’; echo ${}.
 &lt;p&gt;нет&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/&quot;&gt;Ответы с олимпиады для системных администраторов от Yandex&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 18, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Choose Life]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/01/09/choose-life/" />
-  <id>https://jivoi.github.io/2014/01/09/choose-life</id>
-  <updated>2014-01-08 13:43:49 +0400T00:00:00-00:00</updated>
-  <published>2014-01-09T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Найдено очень давно в сети, автор неизвестен.
-Иногда стоит перечитывать.&lt;/p&gt;
-
-&lt;h3 id=&quot;choose-life&quot;&gt;Choose life&lt;/h3&gt;
-
-&lt;p&gt;Choose life.&lt;/p&gt;
-
-&lt;p&gt;Choose a job.&lt;/p&gt;
-
-&lt;p&gt;Choose a career.&lt;/p&gt;
-
-&lt;p&gt;Choose a family.&lt;/p&gt;
-
-&lt;p&gt;Choose a fucking big television.&lt;/p&gt;
-
-&lt;p&gt;Choose washing  machines,  cars,  compact disc players and electrical tin openers.&lt;/p&gt;
-
-&lt;p&gt;Choose good health, low cholesterol and dental insurance.&lt;/p&gt;
-
-&lt;p&gt;Choose fixed interest mortgage repayments.&lt;/p&gt;
-
-&lt;p&gt;Choose a starter home.&lt;/p&gt;
-
-&lt;p&gt;Choose your friends.&lt;/p&gt;
-
-&lt;p&gt;Choose leisurewear and matching luggage.&lt;/p&gt;
-
-&lt;p&gt;Choose a three-piece suite on hire purchase in a range of fucking fabrics.&lt;/p&gt;
-
-&lt;p&gt;Choose DIY and wondering who the fuck you are on a Sunday morning.&lt;/p&gt;
-
-&lt;p&gt;Choose sitting  on that couch watching mind-numbing, spirit-crushing game shows, stuffing fucking junk food into your mouth.&lt;/p&gt;
-
-&lt;p&gt;Choose rotting away at the end of it all, pishing your last in a miserable home,  nothing more than an embarrassment to the selfish, fucked up brats you spawned to replace you.&lt;/p&gt;
-
-&lt;p&gt;Choose your future.&lt;/p&gt;
-
-&lt;p&gt;Choose life.&lt;/p&gt;
-
-&lt;p&gt;Задай себе вопрос, что для тебя сеть? Что и кому ты пытаешься доказать,
-просиживая дни напролёт за компом, ковыряя исходники очередного ftpd?
-Что и кому ты пытаешься доказать, порутав почередной сервер? Рано или поздно
-все приходят к подобного рода вопросам. Чувствуешь, как жизнь проходит мимо?
-Если нет, то ты весьма ограничен. Крутишься в своём микро-мире, мире
-электронов и бодов, мире телефонов и факсов, вычислительных центров и
-промышленных серверов под Sun.. ЗАЧЕМ? Лишь немногие действительно занимаются
-этим для саморазвития. Не думал ли ты когда-нибудь, зачем люди постят в BQ
-или устраивают километровые треды на форумах предаваясь размышлениям, о том
-какое ядро лучше выбрать под linux на 4х процессорную систему? Какая блять
-разница, зачем окружать себя выдуманными проблемами? Выбери жизнь.&lt;/p&gt;
-
-&lt;p&gt;Какой твой типичный день? Подъём с утра, кофе, работа, вечером домой к компу.
-Если повезёт - зальёшь пару пива с друзьями или куда-нибудь сходишь. А далее
-тебя ждёт онлайн, хорошо если ты хотя бы что-то ломаешь, а не просто пиздишь
-на очередном irc-канале, играя в маленького цифрового бога. Ты считаешь, что
-жизнь гавно? Что всё вокруг безпонтово, не имеет смысла. Или ты чувствуешь
-несправедливость, поэтому позволяешь себе ломать за WMZ или работать с
-кредами? Да.. а что у тебя с работой? Скорее всего ты пашешь как лошадь
-админом или программером, тщательно вписываешься в корпоративный этикет и
-стараешься не вызывать недовольства у начальника. С утра до вечера. У тебя
-остаётся только возможность попить пива после работы.. но это не так важно,
-ведь ты на самом деле цифровой бог, просто об этом мало кто знает. Выбери
-работу.&lt;/p&gt;
-
-&lt;p&gt;Задай себе вопрос, ты доволен своей жизнью? Скорее всего нет. У тебя есть
-мечта? Много денег, рут на pentagon.mil, дорогая машина, известность? Мда..
-Скорее всего ты считаешь что у тебя тотально не хватает времени, потому что
-ты вынужен тратить его туда-сюда на всякие выдуманные дела. Всё расписано на
-неделю-две вперёд? Это то, о чём ты так давно мечтал? Это то, ради чего ты
-жил?&lt;/p&gt;
-
-&lt;p&gt;Рано или поздно приходится что-то менять в своей жизни. Люди на самом деле
-очень боятся перемен. Потому что не успели они спрятаться от старых проблем,
-как появляются новые. Люди привязываются к вещам, к деньгам, к работе, к
-алкоголю, кофеиниу, никотину, к автомобилю и транспорту в целом, к ёбаной
-сотовой связи, телевидению, интернету и электричеству. Система ставит на
-рельсы, сойти с которых для большинства не просто.. На самом деле, большинство
-людей даже не отадёт себе отчёта в том, что их жизнь катится по рельсам.&lt;/p&gt;
-
-&lt;p&gt;Скорее всего ты читал (или смотрел фильм) “Fight Club”, “Trainspotting”,
-“American Beauty”? Задело ли тебя это? Нет.. а может быть и да. Что ты
-сделал, чтобы сойти с пути навязанному тебе системой? Что ты сделал, чтобы
-жизнь стала разнообразнее? Что ты оставишь после себя? Занимаешься ли ты
-каким-нибудь артом? Скорее всего ты подумал что это несомненно “круто” и
-правильно, но не про тебя.&lt;/p&gt;
-
-&lt;p&gt;Хорошо, поставлю вопрос прямо. ТЫ ГОТОВ ИЗМЕНИТЬ СВОЮ ЖИЗНЬ? Не когда-нибудь
-потом, а прямо сейчас? Большинство людей ответит “нет” или “незнаю”, кто-то
-вместо этого скажет “потом” что по сути одно и то же. Готов сменить ориентиры
-в жизни? Заняться чем-нибудь действительно стоящим? Верни жизнь в свои руки.
-Пойми, что ПО ДРУГОМУ - не значит плохо, не значит неправильно.&lt;/p&gt;
-
-&lt;p&gt;Для того чтобы измениться не обязательно уволняться с работы, варить дома мыло
-и собирать отряды мартышек-астронавтов. Все кроется в тебе, измени своё
-отношение к вещам, от которых ты зависишь. Перестань париться по поводу того
-сколько будет стоит тебе звонок кенту на мегафон с билайна, перестань думать о
-вещах, хватит каждый раз пересчитывать деньги и думать сколько копеек ты мог
-бы сэкономить. Забудь о том, кто сколько и чего тебе должен.&lt;/p&gt;
-
-&lt;p&gt;Перестань зависеть от мобилы, телевизора, компа. Забей на газеты и бульварное
-чтиво. Забей на религию, выборы, митинги и прочие лохотроны системы. Посмотри
-прямо на свои проблемы, поставь перед собой цель. Как ты проводишь свободное
-время? Отсыпаешься, бухаешь или всячески пытаешься развлечься? А что если
-попробовать проводить время иначе? Ты скажешь а что же тогда делать? Остаётся
-пустота.. Если ты понимаешь что твоя жизнь пуста, ты становишься на шаг ближе
-к освобождению.&lt;/p&gt;
-
-&lt;p&gt;Люди которые тебя окружают, которых ты считаешь друзьями, приятелями,
-большинство из них удерживает тебя на месте. Большинству из них на тебя похуй.
-Забей на одноразовых друзей, приятелей по интернету которые могут пиздить
-ниочём целую вечность. Оставь в своей жизни только настоящих френдов. Если ты
-считаешь, что у тебя весь контакт лист в 40 рыл состоит исключительно из
-друзей то ты наивен. Перестань лгать. Перестань разговаривать ниочём со всеми
-подряд. Почисть свой контакт лист, поудаляй с мобилы телефоны которые на самом
-деле тебе не нужны. Так или иначе ты поймёшь что большинство людей вспоминают
-о тебе, только когда им что-то от тебя надо. Ты больше чем твой банковский
-счёт, номер медицинской страховки, запись в телефоне, номер в контакт-листе
-или статус + ник + bnc на канале в ире. Ещё шаг вперёд.&lt;/p&gt;
-
-&lt;p&gt;Убей в себе слабость. Убей привычки, от которых ты бы хотел избавиться но
-тебе было лень.. Зависишь от сигарет, алкоголя или наркоты, обещаешь себе
-обязательно завязать “как-нибдь потом”? Время пришло, совершенствуй себя.
-Суть не в том, чтобы полность отгородиться от всего что “вредно” или плохо,
-а в том чтобы не зависеть от этого. В конце концов, зло это лишь точка зрения.&lt;/p&gt;
-
-&lt;p&gt;Открой для себя что-то новое, расширь границы. Мир “электронов и бодов,
-факсов и телефонных сетей” конечно интересен, но со временем ты поймёшь что
-это не так уж и важно. Пойми, что изменяться, двигаться вперёд, развиваться
-это естественный процесс. И чем раньше ты это поймёшь, тем раньше перестанешь
-зависеть от системы.&lt;/p&gt;
-
-&lt;p&gt;Сцена?..
-Это ничего не значило.. сначала было весело, а потом стало скучно..
-и я ушёл&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/01/09/choose-life/&quot;&gt;Choose Life&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 09, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
