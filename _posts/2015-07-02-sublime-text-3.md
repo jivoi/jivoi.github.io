@@ -5,11 +5,11 @@ modified: 2015-07-02 15:30:48 +0300
 category: [howto]
 tags: [sublime,linux]
 image:
-  feature: 
-  credit: 
-  creditlink: 
+  feature:
+  credit:
+  creditlink:
 comments: True
-share: 
+share:
 ---
 My configuration
 
@@ -21,6 +21,7 @@ My configuration
 - install BracketHighlighter
 - install Git
 - install GitGutter
+- install Side​Bar​Git
 - install SidebarEnhancements
 - install Soda theme
 - install Flatland theme
@@ -28,7 +29,7 @@ My configuration
 - install gosublime
 - install terminal
 
-### Install Settings - User 
+### Install Settings - User
 {% highlight bash %}
 {% github_sample /jivoi/dotfiles/blob/master/sublime/Preferences.sublime-settings %}
 {% endhighlight %}
