@@ -5,11 +5,11 @@ modified: 2015-07-17 19:26:55 +0300
 category: [howto]
 tags: [android,linux]
 image:
-  feature: 
-  credit: 
-  creditlink: 
+  feature:
+  credit:
+  creditlink:
 comments: True
-share: 
+share:
 ---
 Playing with Android OS
 
@@ -24,6 +24,10 @@ Playing with Android OS
 - [AFLogical](https://github.com/viaforensics/android-forensics)
 - [SQLite Browser](https://github.com/sqlitebrowser/sqlitebrowser)
 - [Drozer](https://www.mwrinfosecurity.com/products/drozer/community-edition/)
+
+### Links
+- [https://mobilesecuritywiki.com/](https://mobilesecuritywiki.com/)
+- [https://manifestsecurity.com/](https://manifestsecurity.com/)
 
 {%img http://elinux.org/images/c/c2/Android-system-architecture.jpg %}
 

@@ -34,7 +34,12 @@ All that things I need to pass OSCP, i think =)
 - [https://www.ethicalhacker.net/forums/index.php](https://www.ethicalhacker.net/forums/index.php)
 - [https://evilzone.org/](https://evilzone.org/)
 - [http://forum.antichat.ru/](http://forum.antichat.ru/)
+- [https://forum.xeksec.com/](https://forum.xeksec.com/)
+- [https://rdot.org/forum/](https://rdot.org/forum/)
+- [https://forum.zloy.bz/](https://forum.zloy.bz/)
+- [https://forum.reverse4you.org/](https://forum.reverse4you.org/)
 - [https://rstforums.com/forum/](https://rstforums.com/forum/)
+- [http://www.truehackers.ru/forum/index.php](http://www.truehackers.ru/forum/index.php)
 - [http://garage4hackers.com/forum.php](http://garage4hackers.com/forum.php)
 - [https://www.hellboundhackers.org/](https://www.hellboundhackers.org/)
 
@@ -183,6 +188,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.my-ip-neighbors.com/](http://www.my-ip-neighbors.com/)
 
 ### Phase 1.2 - Tools
+- [OSINT Tools](http://www.subliminalhacking.net/2012/12/27/osint-tools-recommendations-list/)
 - [http://www.edge-security.com/theharvester.php](http://www.edge-security.com/theharvester.php)
 - [http://www.edge-security.com/metagoofil.php](http://www.edge-security.com/metagoofil.php)
 - [http://www.paterva.com/web6/](http://www.paterva.com/web6/)
@@ -401,3 +407,6 @@ All that things I need to pass OSCP, i think =)
 
 ### IT Certifications
 - [http://certs.infosecinstitute.com/](http://certs.infosecinstitute.com/)
+
+### Links Collections
+- [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
