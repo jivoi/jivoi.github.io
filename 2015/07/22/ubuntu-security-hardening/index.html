@@ -161,6 +161,7 @@
   <li><a href="#sshd-settings" id="markdown-toc-sshd-settings">SSHD Settings</a></li>
   <li><a href="#limit-access-to-su-cmd" id="markdown-toc-limit-access-to-su-cmd">Limit Access to SU cmd</a></li>
   <li><a href="#network-security-systcl" id="markdown-toc-network-security-systcl">Network Security Systcl</a></li>
+  <li><a href="#firewall-with-ufw" id="markdown-toc-firewall-with-ufw">Firewall with UFW</a></li>
   <li><a href="#php-settings" id="markdown-toc-php-settings">PHP Settings</a></li>
   <li><a href="#apache-settings" id="markdown-toc-apache-settings">Apache Settings</a></li>
   <li><a href="#install-apache-modsecurity" id="markdown-toc-install-apache-modsecurity">Install Apache ModSecurity</a></li>
@@ -222,6 +223,23 @@ net.ipv6.conf.default.accept_redirects <span class="o">=</span> 0
 net.ipv4.icmp_echo_ignore_all <span class="o">=</span> 1
 
 <span class="nv">$ </span>service procps start</code></pre></div>
+
+<h3 id="firewall-with-ufw">Firewall with UFW</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># install packegs</span>
+<span class="nv">$ </span>apt-get install ufw
+<span class="nv">$ </span>ufw status verbose
+<span class="nv">$ </span>ufw default allow incoming
+<span class="nv">$ </span>ufw default allow outgoing
+<span class="nv">$ </span>ufw <span class="nb">enable</span>
+<span class="c"># add rules</span>
+<span class="nv">$ </span>ufw allow ssh
+<span class="nv">$ </span>ufw allow 1022/tcp
+<span class="nv">$ </span>ufw allow from 192.168.1.1
+<span class="nv">$ </span>ufw allow 80/tcp
+<span class="nv">$ </span>ufw default deny incoming
+<span class="c"># resetting all rules to defauls</span>
+<span class="nv">$ </span>ufw reset</code></pre></div>
 
 <h3 id="php-settings">PHP Settings</h3>
 
