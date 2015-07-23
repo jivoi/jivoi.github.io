@@ -316,6 +316,7 @@ All that things I need to pass OSCP, i think =)
 - [http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm](http://ccm.net/faq/1559-compiling-an-assembly-program-with-nasm)
 
 ### Buffer Overflow Tutorial
+- [http://www.madirish.net/142](http://www.madirish.net/142)
 - [http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow](http://n01g3l.tumblr.com/post/49036035399/linux-crossfire-v1-90-buffer-overflow)
 - [http://resources.infosecinstitute.com/author/nikhil-kumar/](http://resources.infosecinstitute.com/author/nikhil-kumar/)
 - [http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156](http://www.frequency.com/video/athcon-hack-in-paris-demo-1/40181156)
