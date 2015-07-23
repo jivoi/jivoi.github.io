@@ -116,6 +116,7 @@ All that things I need to pass OSCP, i think =)
 - [http://magikh0e.ihtb.org/pubPapers/](http://magikh0e.ihtb.org/pubPapers/)
 
 ### Metasploit
+- [http://resources.metasploit.com/](http://resources.metasploit.com/)
 - [http://netsec.ws/?p=262](http://netsec.ws/?p=262)
 - [http://seclists.org/metasploit/](http://seclists.org/metasploit/)
 - [https://www.offensive-security.com/metasploit-unleashed/Introduction/](https://www.offensive-security.com/metasploit-unleashed/Introduction/)
