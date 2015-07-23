@@ -28,7 +28,7 @@ kramdown:
 owner:
   name: EK
   avatar: avatar.jpg
-  bio: "I'm a hacker and security researcher"
+  bio: "Totally not a hacker"
   email: ekoz@protonmail.com
   disqus-shortname: httpjivoigithubcom
   twitter: jivoi
