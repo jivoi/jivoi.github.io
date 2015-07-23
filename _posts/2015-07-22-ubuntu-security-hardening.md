@@ -117,6 +117,7 @@ $ service apache2 restart
 
 ### Install Apache ModSecurity
 {% highlight bash %}
+# http://habrahabr.ru/post/228339/
 $ apt-get install libapache2-mod-security2
 $ mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 

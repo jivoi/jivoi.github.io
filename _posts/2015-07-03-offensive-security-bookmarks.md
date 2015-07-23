@@ -403,6 +403,7 @@ All that things I need to pass OSCP, i think =)
 
 ### InfoSec Hiring
 - [Reddit Thread](https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/)
+- [Careers Stackoverflow](https://careers.stackoverflow.com/jobs/tag/penetration-testing)
 - [PenTester Salary](http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level)
 - [San Francisco InfoSec Jobs](http://www.calibersecurity.com/san-francisco-information-security-job-board/)
 
