@@ -42,8 +42,9 @@ All that things I need to pass OSCP, i think =)
 - [http://www.truehackers.ru/forum/index.php](http://www.truehackers.ru/forum/index.php)
 - [http://garage4hackers.com/forum.php](http://garage4hackers.com/forum.php)
 - [https://www.hellboundhackers.org/](https://www.hellboundhackers.org/)
+- [http://www.lockpicking101.com/](http://www.lockpicking101.com/)
 
-### Tor onion links
+### Tor Onion Links
 - [http://www.hiddenwiki.info/](http://www.hiddenwiki.info/)
 
 ### Security Methodologies
@@ -157,7 +158,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/](http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/)
 - [http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/](http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/)
 - [http://www.slideshare.net/Laramies/tactical-information-gathering](http://www.slideshare.net/Laramies/tactical-information-gathering)
-- [http://www.infond.fr/2010/05/toturial-footprinting.html](http://www.infond.fr/2010/05/toturial-footprinting.html)
+- [http://www.infond.fr/2010/05/toturial-footprinting.html](http://www.infond.fr/2010/05/toturial-footprinting.htm)
 
 ### Phase 1.1 - People and Orginizational
 - [http://www.spokeo.com/](http://www.spokeo.com/)
@@ -281,6 +282,7 @@ All that things I need to pass OSCP, i think =)
 - [https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf](https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf)
 - [http://websec.ca/kb/sql_injection](http://websec.ca/kb/sql_injection)
 - [http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/](http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/)
+- [http://www.unixwiz.net/techtips/sql-injection.html](http://www.unixwiz.net/techtips/sql-injection.html)
 - [http://www.sqlinjectionwiki.com/](http://www.sqlinjectionwiki.com/)
 - [http://sqlmap.org/](http://sqlmap.org/)
 - [https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf](https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf)
@@ -415,3 +417,6 @@ All that things I need to pass OSCP, i think =)
 ### Links Collections
 - [http://in-addr.nl/security-links.php](http://in-addr.nl/security-links.php)
 - [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
+
+### Books
+- [Amazon Security Books](http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&bbn=5&ie=UTF8&qid=1437666303&rnid=5)
