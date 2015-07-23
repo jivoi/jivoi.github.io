@@ -411,4 +411,5 @@ All that things I need to pass OSCP, i think =)
 - [http://certs.infosecinstitute.com/](http://certs.infosecinstitute.com/)
 
 ### Links Collections
+- [http://in-addr.nl/security-links.php](http://in-addr.nl/security-links.php)
 - [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
