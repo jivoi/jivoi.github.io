@@ -5,11 +5,11 @@ modified: 2015-07-22 18:11:54 +0300
 category: [howto]
 tags: [linux,security,sysadm]
 image:
-  feature: 
-  credit: 
-  creditlink: 
+  feature:
+  credit:
+  creditlink:
 comments: True
-share: 
+share:
 ---
 Based on CIS and my experience
 
@@ -72,6 +72,24 @@ net.ipv6.conf.default.accept_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 
 $ service procps start
+{% endhighlight %}
+
+### Firewall with UFW
+{% highlight bash %}
+# install packegs
+$ apt-get install ufw
+$ ufw status verbose
+$ ufw default allow incoming
+$ ufw default allow outgoing
+$ ufw enable
+# add rules
+$ ufw allow ssh
+$ ufw allow 1022/tcp
+$ ufw allow from 192.168.1.1
+$ ufw allow 80/tcp
+$ ufw default deny incoming
+# resetting all rules to defauls
+$ ufw reset
 {% endhighlight %}
 
 ### PHP Settings
