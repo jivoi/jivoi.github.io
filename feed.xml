@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-23T17:13:43+03:00</updated>
+<updated>2015-07-23T18:57:07+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1334,7 +1334,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#security-blogs&quot; id=&quot;markdown-toc-security-blogs&quot;&gt;Security Blogs&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#security-forums&quot; id=&quot;markdown-toc-security-forums&quot;&gt;Security Forums&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#tor-onion-links&quot; id=&quot;markdown-toc-tor-onion-links&quot;&gt;Tor onion links&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tor-onion-links&quot; id=&quot;markdown-toc-tor-onion-links&quot;&gt;Tor Onion Links&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#security-methodologies&quot; id=&quot;markdown-toc-security-methodologies&quot;&gt;Security Methodologies&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#trainingclassesvideo&quot; id=&quot;markdown-toc-trainingclassesvideo&quot;&gt;Training/Classes/Video&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#pentest-tools&quot; id=&quot;markdown-toc-pentest-tools&quot;&gt;Pentest Tools&lt;/a&gt;&lt;/li&gt;
@@ -1374,6 +1374,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#it-certifications&quot; id=&quot;markdown-toc-it-certifications&quot;&gt;IT Certifications&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#links-collections&quot; id=&quot;markdown-toc-links-collections&quot;&gt;Links Collections&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#books&quot; id=&quot;markdown-toc-books&quot;&gt;Books&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1402,9 +1403,10 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.truehackers.ru/forum/index.php&quot;&gt;http://www.truehackers.ru/forum/index.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://garage4hackers.com/forum.php&quot;&gt;http://garage4hackers.com/forum.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.hellboundhackers.org/&quot;&gt;https://www.hellboundhackers.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.lockpicking101.com/&quot;&gt;http://www.lockpicking101.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;tor-onion-links&quot;&gt;Tor onion links&lt;/h3&gt;
+&lt;h3 id=&quot;tor-onion-links&quot;&gt;Tor Onion Links&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.hiddenwiki.info/&quot;&gt;http://www.hiddenwiki.info/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1535,7 +1537,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/&quot;&gt;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-%E2%80%93-part-2-blogs-message-boards-and-metadata/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/&quot;&gt;http://www.spylogic.net/2009/10/enterprise-open-source-intelligence-gathering-part-3-monitoring/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.slideshare.net/Laramies/tactical-information-gathering&quot;&gt;http://www.slideshare.net/Laramies/tactical-information-gathering&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.infond.fr/2010/05/toturial-footprinting.html&quot;&gt;http://www.infond.fr/2010/05/toturial-footprinting.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infond.fr/2010/05/toturial-footprinting.htm&quot;&gt;http://www.infond.fr/2010/05/toturial-footprinting.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;phase-11---people-and-orginizational&quot;&gt;Phase 1.1 - People and Orginizational&lt;/h3&gt;
@@ -1626,6 +1628,8 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;windows-previlige-escalation&quot;&gt;Windows Previlige Escalation&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;[https://labs.mwrinfosecurity.com/system/assets/760/original/Windows_Services_-&lt;em&gt;All_roads_lead_to_SYSTEM.pdf](https://labs.mwrinfosecurity.com/system/assets/760/original/Windows_Services&lt;/em&gt;-_All_roads_lead_to_SYSTEM.pdf)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://travisaltman.com/windows-privilege-escalation-via-weak-service-permissions/&quot;&gt;http://travisaltman.com/windows-privilege-escalation-via-weak-service-permissions/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/0xdeafbeef/PSSecSnapshot&quot;&gt;https://github.com/0xdeafbeef/PSSecSnapshot&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://it-ovid.blogspot.com/2012/02/windows-privilege-escalation.html&quot;&gt;http://it-ovid.blogspot.com/2012/02/windows-privilege-escalation.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.fuzzysecurity.com/tutorials/16.html&quot;&gt;http://www.fuzzysecurity.com/tutorials/16.html&lt;/a&gt;&lt;/li&gt;
@@ -1683,6 +1687,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf&quot;&gt;https://information.rapid7.com/rs/rapid7/images/R7%20SQL_Injection_Cheat_Sheet.v1.pdf&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://websec.ca/kb/sql_injection&quot;&gt;http://websec.ca/kb/sql_injection&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&quot;&gt;http://ferruh.mavituna.com/sql-injection-cheatsheet-oku/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.unixwiz.net/techtips/sql-injection.html&quot;&gt;http://www.unixwiz.net/techtips/sql-injection.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.sqlinjectionwiki.com/&quot;&gt;http://www.sqlinjectionwiki.com/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://sqlmap.org/&quot;&gt;http://sqlmap.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf&quot;&gt;https://packetstorm.sigterm.no/papers/cheatsheets/sqlmap-cheatsheet-1.0-SDB.pdf&lt;/a&gt;&lt;/li&gt;
@@ -1847,7 +1852,13 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;links-collections&quot;&gt;Links Collections&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://in-addr.nl/security-links.php&quot;&gt;http://in-addr.nl/security-links.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ser-storchak.blogspot.ru/p/blog-page_16.html&quot;&gt;http://ser-storchak.blogspot.ru/p/blog-page_16.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&amp;amp;rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&amp;amp;bbn=5&amp;amp;ie=UTF8&amp;amp;qid=1437666303&amp;amp;rnid=5&quot;&gt;Amazon Security Books&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
