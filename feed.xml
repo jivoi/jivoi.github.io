@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-23T13:57:28+03:00</updated>
+<updated>2015-07-23T17:13:43+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -140,7 +140,8 @@ FileETag None
 
 &lt;h3 id=&quot;install-apache-modsecurity&quot;&gt;Install Apache ModSecurity&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install libapache2-mod-security2
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# http://habrahabr.ru/post/228339/&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install libapache2-mod-security2
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
 
 &lt;span class=&quot;c&quot;&gt;# /etc/modsecurity/modsecurity.conf&lt;/span&gt;
@@ -352,6 +353,12 @@ sa &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&qu
   &lt;li&gt;&lt;a href=&quot;https://github.com/viaforensics/android-forensics&quot;&gt;AFLogical&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/sqlitebrowser/sqlitebrowser&quot;&gt;SQLite Browser&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.mwrinfosecurity.com/products/drozer/community-edition/&quot;&gt;Drozer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;links&quot;&gt;Links&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mobilesecuritywiki.com/&quot;&gt;https://mobilesecuritywiki.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://manifestsecurity.com/&quot;&gt;https://manifestsecurity.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://elinux.org/images/c/c2/Android-system-architecture.jpg&quot; /&gt;&lt;/p&gt;
@@ -1366,6 +1373,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#passwords-wordlists-hashes-tools&quot; id=&quot;markdown-toc-passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#it-certifications&quot; id=&quot;markdown-toc-it-certifications&quot;&gt;IT Certifications&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#links-collections&quot; id=&quot;markdown-toc-links-collections&quot;&gt;Links Collections&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1386,7 +1394,12 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.ethicalhacker.net/forums/index.php&quot;&gt;https://www.ethicalhacker.net/forums/index.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://evilzone.org/&quot;&gt;https://evilzone.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://forum.antichat.ru/&quot;&gt;http://forum.antichat.ru/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.xeksec.com/&quot;&gt;https://forum.xeksec.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rdot.org/forum/&quot;&gt;https://rdot.org/forum/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.zloy.bz/&quot;&gt;https://forum.zloy.bz/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://forum.reverse4you.org/&quot;&gt;https://forum.reverse4you.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://rstforums.com/forum/&quot;&gt;https://rstforums.com/forum/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.truehackers.ru/forum/index.php&quot;&gt;http://www.truehackers.ru/forum/index.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://garage4hackers.com/forum.php&quot;&gt;http://garage4hackers.com/forum.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.hellboundhackers.org/&quot;&gt;https://www.hellboundhackers.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1475,6 +1488,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;metasploit&quot;&gt;Metasploit&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://resources.metasploit.com/&quot;&gt;http://resources.metasploit.com/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://netsec.ws/?p=262&quot;&gt;http://netsec.ws/?p=262&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://seclists.org/metasploit/&quot;&gt;http://seclists.org/metasploit/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.offensive-security.com/metasploit-unleashed/Introduction/&quot;&gt;https://www.offensive-security.com/metasploit-unleashed/Introduction/&lt;/a&gt;&lt;/li&gt;
@@ -1559,6 +1573,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;phase-12---tools&quot;&gt;Phase 1.2 - Tools&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.subliminalhacking.net/2012/12/27/osint-tools-recommendations-list/&quot;&gt;OSINT Tools&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.edge-security.com/theharvester.php&quot;&gt;http://www.edge-security.com/theharvester.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.edge-security.com/metagoofil.php&quot;&gt;http://www.edge-security.com/metagoofil.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.paterva.com/web6/&quot;&gt;http://www.paterva.com/web6/&lt;/a&gt;&lt;/li&gt;
@@ -1820,6 +1835,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;infosec-hiring&quot;&gt;InfoSec Hiring&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/&quot;&gt;Reddit Thread&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://careers.stackoverflow.com/jobs/tag/penetration-testing&quot;&gt;Careers Stackoverflow&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level&quot;&gt;PenTester Salary&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.calibersecurity.com/san-francisco-information-security-job-board/&quot;&gt;San Francisco InfoSec Jobs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1827,6 +1843,11 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;it-certifications&quot;&gt;IT Certifications&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://certs.infosecinstitute.com/&quot;&gt;http://certs.infosecinstitute.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;links-collections&quot;&gt;Links Collections&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ser-storchak.blogspot.ru/p/blog-page_16.html&quot;&gt;http://ser-storchak.blogspot.ru/p/blog-page_16.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
