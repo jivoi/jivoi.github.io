@@ -13,14 +13,14 @@ share:
 ---
 Different configs for nginx.
 
-<section id="table-of-contents" class="toc">                                    
-<header>                                                                        
-<h3>Contents</h3>                                                               
-</header>                                                                       
-<div id="drawer" markdown="1">                                                  
-*  Auto generated table of contents                                             
-{:toc}                                                                          
-</div>                                                                          
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer" markdown="1">
+*  Auto generated table of contents
+{:toc}
+</div>
 </section><!-- /#table-of-contents -->
 
 ### Default vhost config
@@ -30,7 +30,7 @@ listen 80;
     server_name _;
     access_log /var/log/nginx/access_log;
     error_log /var/log/nginx/nginx_error_log;
-                
+
     allow MYIP/32; #dev pc
     satisfy any;
     auth_basic  "restricted area";
@@ -39,7 +39,7 @@ listen 80;
     location ~* ^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)$ {
         root /var/www/;
     }
-         
+
     location / {
 	proxy_pass http://127.0.0.1:80;
     }
@@ -102,7 +102,7 @@ or
 
 if ($host ~* www\.(.*)) {
     set $host_without_www $1;
-    rewrite ^(.*)$ http://$host_without_www$1 permanent; 
+    rewrite ^(.*)$ http://$host_without_www$1 permanent;
 }
 
 {% endhighlight %}
@@ -110,7 +110,7 @@ if ($host ~* www\.(.*)) {
 ### Rewrite request from img/site to images
 {% highlight nginx %}
 location /img/site {
-	if (!-f $request_filename) { 
+	if (!-f $request_filename) {
 		rewrite ^/img/site/(.*) /images/$1 break;
 	}
 }
@@ -281,7 +281,7 @@ server {
     }
 }
 
-Create 3 files in /var/www index1.html index2.html index3.html 
+Create 3 files in /var/www index1.html index2.html index3.html
 
 cat /var/www/index1.html
 
@@ -305,7 +305,7 @@ location = /403.html {
 {% highlight nginx %}
 location  / {
     if ($remote_addr ~ "8.8.8.8") {
-        rewrite  ^(.*)$  /index2.html break;  
+        rewrite  ^(.*)$  /index2.html break;
     }
     proxy_pass http://backend;
 }
@@ -343,5 +343,21 @@ return 301 https://www.blabla.ru$request_uri;
 {% highlight nginx %}
 location ~* ^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)$ {
     root /var/www/;
+}
+{% endhighlight %}
+
+### Time Based Rewriting Rules
+{% highlight nginx %}
+# rule will work from 2:00 AM to 4:00 AM
+location / {
+  rewrite_by_lua '
+    local current_time = os.time()
+    local start_time = os.time({year=2015,month=7,day=22,hour=02,min=0,sec=0})
+    local end_time = os.time({year=2015,month=7,day=22,hour=04,min=00,sec=0})
+
+    if current_time >= start_time and current_time <= end_time then
+      return ngx.redirect("https://yoursite.com/maintenance.html")
+    end
+  ';
 }
 {% endhighlight %}
