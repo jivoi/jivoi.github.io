@@ -5,13 +5,103 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-28T18:17:06+03:00</updated>
+<updated>2015-07-29T15:03:30+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[LB with Haproxy]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/" />
+  <id>https://jivoi.github.io/2015/07/29/lb-with-haproxy</id>
+  <updated>2015-07-29 14:56:16 +0300T00:00:00-00:00</updated>
+  <published>2015-07-29T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Simple HTTP\HTTPS Load Balancing with Haproxy&lt;/p&gt;
+
+&lt;h3 id=&quot;install-haproxy&quot;&gt;Install Haproxy&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;add-apt-repository -y ppa:vbernat/haproxy-1.5
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install -y haproxy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;simple-haproxycfg&quot;&gt;Simple Haproxy.cfg&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/haproxy/haproxy.cfg&lt;/span&gt;
+
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode &lt;span class=&quot;m&quot;&gt;660&lt;/span&gt; level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+    &lt;span class=&quot;c&quot;&gt;# Default SSL material locations&lt;/span&gt;
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+    &lt;span class=&quot;c&quot;&gt;# Default ciphers to use on SSL-enabled listening sockets.&lt;/span&gt;
+    ssl-default-bind-ciphers kEECDH+aRSA+AES:kRSA+AES:+AES256:RC4-SHA:!kEDH:!LOW:!EXP:!MD5:!aNULL:!eNULL
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    errorfile &lt;span class=&quot;m&quot;&gt;400&lt;/span&gt; /etc/haproxy/errors/400.http
+    errorfile &lt;span class=&quot;m&quot;&gt;403&lt;/span&gt; /etc/haproxy/errors/403.http
+    errorfile &lt;span class=&quot;m&quot;&gt;408&lt;/span&gt; /etc/haproxy/errors/408.http
+    errorfile &lt;span class=&quot;m&quot;&gt;500&lt;/span&gt; /etc/haproxy/errors/500.http
+    errorfile &lt;span class=&quot;m&quot;&gt;502&lt;/span&gt; /etc/haproxy/errors/502.http
+    errorfile &lt;span class=&quot;m&quot;&gt;503&lt;/span&gt; /etc/haproxy/errors/503.http
+    errorfile &lt;span class=&quot;m&quot;&gt;504&lt;/span&gt; /etc/haproxy/errors/504.http
+
+frontend localhost
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; *:80
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; *:443
+    option tcplog
+    mode tcp
+    default_backend webnodes
+
+backend webnodes
+    mode tcp
+    balance roundrobin
+    option ssl-hello-chk
+    option forwardfor
+    http-request &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-header X-Forwarded-Port %&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;dst_port&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    http-request add-header X-Forwarded-Proto https &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; ssl_fc &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    option httpchk HEAD / HTTP/1.1&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;Host:localhost
+    server web01 192.168.56.1:443 check
+    server web02 192.168.56.2:443 check
+
+listen stats *:1936
+    stats &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;    &lt;/span&gt;stats uri /
+    stats hide-version
+    stats auth someuser:password&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;start-haproxy&quot;&gt;Start Haproxy&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service haproxy restart&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/29/lb-with-haproxy/&quot;&gt;LB with Haproxy&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 29, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -1374,7 +1464,6 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#it-certifications&quot; id=&quot;markdown-toc-it-certifications&quot;&gt;IT Certifications&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#links-collections&quot; id=&quot;markdown-toc-links-collections&quot;&gt;Links Collections&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#books&quot; id=&quot;markdown-toc-books&quot;&gt;Books&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1840,7 +1929,10 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;infosec-hiring&quot;&gt;InfoSec Hiring&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/&quot;&gt;Reddit Thread&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/&quot;&gt;Reddit Thread Q3 2015&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsec/comments/31gag9/rnetsecs_q2_2015_information_security_hiring/&quot;&gt;Reddit Thread Q2 2015&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1TytbnvqekJEF0jxLANe6sNa5fu05dFaHEP7zudlJej0/htmlview?sle=true&quot;&gt;ShmooCon Hiring List 2015&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://isc.sans.edu/jobs/&quot;&gt;SANS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://careers.stackoverflow.com/jobs/tag/penetration-testing&quot;&gt;Careers Stackoverflow&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level&quot;&gt;PenTester Salary&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.calibersecurity.com/san-francisco-information-security-job-board/&quot;&gt;San Francisco InfoSec Jobs&lt;/a&gt;&lt;/li&gt;
@@ -1855,11 +1947,9 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://in-addr.nl/security-links.php&quot;&gt;http://in-addr.nl/security-links.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ser-storchak.blogspot.ru/p/blog-page_16.html&quot;&gt;http://ser-storchak.blogspot.ru/p/blog-page_16.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&amp;amp;rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&amp;amp;bbn=5&amp;amp;ie=UTF8&amp;amp;qid=1437666303&amp;amp;rnid=5&quot;&gt;Amazon Security Books&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsecstudents/wiki/index&quot;&gt;Reddit NetsecStudents Wiki&lt;/a&gt;
+### Books&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&amp;amp;rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&amp;amp;bbn=5&amp;amp;ie=UTF8&amp;amp;qid=1437666303&amp;amp;rnid=5&quot;&gt;Security Books at Amazon&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
@@ -4743,1141 +4833,6 @@ recompile from &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Ответы с олимпиады для системных администраторов от Yandex]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/" />
-  <id>https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex</id>
-  <updated>2014-06-18 17:39:24 +0400T00:00:00-00:00</updated>
-  <published>2014-06-18T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Ответы с олимпиады для системных администраторов от Yandex.
-Много интересных вопросов.&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;Ответы на вопросы первой игры первого тура:&lt;/h2&gt;
-
-&lt;h4 id=&quot;section-1&quot;&gt;Вопрос 1.&lt;/h4&gt;
-&lt;p&gt;С помощью каких комбинаций клавиш в текстовых редакторах vi или vim скопировать в буфер 4 строки, начиная со строки, где находится курсор?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-2&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Способов много,  навскидку можно ответить, что это можно сделать с помощью:  4yy, либо y4y, либо 4ddkp, либо v курсор y, либо 4+Shift+y&lt;/p&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;Вопрос  2.&lt;/h4&gt;
-&lt;p&gt;Вы в bash запустили команду echo $[5/2]. Какой будет результат?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-4&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ну тут все просто, ответ  2&lt;/p&gt;
-
-&lt;h4 id=&quot;section-5&quot;&gt;Вопрос 3.&lt;/h4&gt;
-&lt;p&gt;В bash вы хотите сравнить два числа.  Какой оператор сравнения нужно применить, если нужно узнать,  что первое значение больше или равно второму?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-6&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Обычно применяют  -ge&lt;/p&gt;
-
-&lt;h4 id=&quot;section-7&quot;&gt;Вопрос 4.&lt;/h4&gt;
-&lt;p&gt;Вам нужно запустить web-сервер Apache на порту 3128. С помощью  какой директивы в конфигурационном файле это можно сделать?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-8&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Listen  или Port&lt;/p&gt;
-
-&lt;h4 id=&quot;section-9&quot;&gt;Вопрос 5.&lt;/h4&gt;
-&lt;p&gt;Как в Linux узнать текущий рабочий каталог процесса с pid = 4556?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-10&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Его можно найти в файлике /proc/4556/cwd&lt;/p&gt;
-
-&lt;h4 id=&quot;section-11&quot;&gt;Вопрос 6.&lt;/h4&gt;
-&lt;p&gt;Как в Unix посмотреть какие файлы или устройства  использует процесс с pid = 85003?&lt;br /&gt;
-Вообще этот вопрос вызвал много споров.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-12&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Мы принимали следующие ответы:
-Для Linux: никак или в ответе должно было быть упоминание, что это можно сделать с помощью дополнительной настройки ядра, например, sysctl -w kernel.pid_max = (число &amp;gt; 85003). По умолчанию значение переменной kernel.pid_max = 32768;
-Для FreeBSD: fstat -p 85003 или установить lsof, а потом посмотреть с помощью lsof -p 85003. Утилиты lsof и procfs по умолчанию не установлены;
-Для Solaris мы принимали ответ, что можно сделать с помощью утилиты pfiles.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-13&quot;&gt;Вопрос 7.&lt;/h4&gt;
-&lt;p&gt;Какие из перечисленных типов хранилищ в MySQL  поддерживают транзакционность:  MyISAM, Memory, InnoDB, Archive, NDB, CSV?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-14&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Ну тут, конечно, все вспомнили InnoDB, но и NDB тоже поддерживает транзакции.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-15&quot;&gt;Вопрос 8.&lt;/h4&gt;
-&lt;p&gt;Как в PostgreSQL очистить файлы баз данных от уже удалённых записей?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-16&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Вот уже много лет,  любимой командой администраторов PostgreSQL  является VACUUM FULL.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-17&quot;&gt;Вопрос 9.&lt;/h4&gt;
-&lt;p&gt;Как очистить лог-файл /var/log/log, открытый  работающим процессом?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-18&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Тут как и в пером вопросе тоже сразу можно привести массу вариантов:  $echo –n &amp;gt; /var/log/log  или $ &amp;gt; /var/log/log или $ cat /dev/null &amp;gt; /var/log/log .&lt;/p&gt;
-
-&lt;h4 id=&quot;section-19&quot;&gt;Вопрос 10.&lt;/h4&gt;
-&lt;p&gt;Вы зашли на сервер с Linux с помощью ssh. Как перегрузить этот сервер по sysrq-b?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-20&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;вот такой командой - $ echo b &amp;gt; /proc/sysrq-trigger&lt;/p&gt;
-
-&lt;h4 id=&quot;section-21&quot;&gt;Вопрос 11.&lt;/h4&gt;
-&lt;p&gt;Как подсчитать количество строк в текстовом файле file.txt?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-22&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Ну тут тоже самый привычный и распространенный сценарий у васех администраторов - $wc -l file.txt  .&lt;/p&gt;
-
-&lt;h4 id=&quot;section-23&quot;&gt;Вопрос 12.&lt;/h4&gt;
-&lt;p&gt;Как найти подстроку  в файле, сжатом с помощью gzip?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-24&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Тоже вот прям сходу пара вариантов:  $zgrep  stroka  file или $zcat  file | grep stroka&lt;/p&gt;
-
-&lt;h4 id=&quot;section-25&quot;&gt;Вопрос 13.&lt;/h4&gt;
-&lt;p&gt;Какой утилитой в Linux можно проверить состояние и включить/выключить кеширование на запись для SAS/SATA устройства (диска)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-26&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;hdparm в случае SATA или  sdparm  в случае SAS/SATA.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-27&quot;&gt;Вопрос 14.&lt;/h4&gt;
-&lt;p&gt;Как посмотреть версию и возможные параметры модуля e1000e для загруженного в настоящий момент ядра в Linux?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-28&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;modinfo e1000e&lt;/p&gt;
-
-&lt;h4 id=&quot;section-29&quot;&gt;Вопрос 15.&lt;/h4&gt;
-&lt;p&gt;Как в командной строке bash повторить команду, которую вы набирали ранее?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-30&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Тоже навскидку 3 варианта: Ctrl+r или !- или курсорные клавиши&lt;/p&gt;
-
-&lt;h4 id=&quot;section-31&quot;&gt;Вопрос 16.&lt;/h4&gt;
-&lt;p&gt;Какой командой в Linux можно разрешить dump corefile-ов в текущей сессии без ограничения по размеру?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-32&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ulimit -c unlimited&lt;/p&gt;
-
-&lt;h4 id=&quot;section-33&quot;&gt;Вопрос 17.&lt;/h4&gt;
-&lt;p&gt;Как записать 100 пакетов на интерфейсе eth0 в файл mytrace.raw, не ограничивая длину захваченного (captured) пакета?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-34&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;tcpdump -i eth0 -c 100 -s 0 -w mytrace.raw&lt;/p&gt;
-
-&lt;h4 id=&quot;section-35&quot;&gt;Вопрос 18.&lt;/h4&gt;
-&lt;p&gt;Как изменить процент зарезервированного для root-а места на файловой системе ext3 до 2%, смонтированной в /filesystem в Linux?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-36&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;tune2fs -m2 /filesystem&lt;/p&gt;
-
-&lt;h4 id=&quot;section-37&quot;&gt;Вопрос 19.&lt;/h4&gt;
-&lt;p&gt;Как в Linux смонтировать файловую систему tmpfs размеров 2Гб в /tmpfs?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-38&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mount none /tmpfs -t tmpfs -o size=2g&lt;/p&gt;
-
-&lt;h4 id=&quot;section-39&quot;&gt;Вопрос 20.&lt;/h4&gt;
-&lt;p&gt;Как посмотреть таблицы NAT в «файрволе» на сервере с Linux (ядро 2.6.X)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-40&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;iptables -L -t nat&lt;/p&gt;
-
-&lt;h4 id=&quot;section-41&quot;&gt;Вопрос 21.&lt;/h4&gt;
-&lt;p&gt;Какой утилитой в Linux можно посмотреть, какие системные вызовы делает работающий процесс?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-42&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Любимой утилитой всех системных администраторов - strace&lt;/p&gt;
-
-&lt;h4 id=&quot;section-43&quot;&gt;Вопрос 22.&lt;/h4&gt;
-&lt;p&gt;Как посмотреть процессы пользователя vasya, отсортировав их по resident size в порядке убывания?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-44&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Вообще вариантов ответа очень много, но вот, например один из них: ps nu -U vasya –sort -rss&lt;/p&gt;
-
-&lt;h4 id=&quot;section-45&quot;&gt;Вопрос 23.&lt;/h4&gt;
-&lt;p&gt;Как смонтировать каталог /var/log/mydaemon в /mydaemon?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-46&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mount /var/log/mydaemon /mydaemon -o bind&lt;/p&gt;
-
-&lt;h4 id=&quot;section-47&quot;&gt;Вопрос 24.&lt;/h4&gt;
-&lt;p&gt;Какое максимальное число адресов можно использовать в ipv4 сети /26?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-48&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Ответ 62, потому что 2 адреса из 64: Широковещательный адрес и Адрес сети – являются служебными.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-49&quot;&gt;Вопрос 25.&lt;/h4&gt;
-&lt;p&gt;Как затереть нулями первые 64Мб диска /dev/sda?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-50&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;dd if=/dev/zero of=/dev/sda bs=64M count=1 или dd if=/dev/zero of=/dev/sda bs=1M count=64&lt;/p&gt;
-
-&lt;h4 id=&quot;section-51&quot;&gt;Вопрос 26.&lt;/h4&gt;
-&lt;p&gt;Какова последовательность пакетов tcp при установке соединения (укажите типы пакетов)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-52&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;хост A посылает хосту B пакет с установленным битом SYN и 32-битным значением ISSa в поле Sequence Number
-хост B отвечает хосту A пакетом с установленными битами SYN и ACK, 32-битным значением ISSb в поле Sequence Number, и значением (ISSa+1) в поле ACK
-хост A отвечает хосту B пакетом с установленным битом ACK, значением (ISSa+1) в поле Sequence Number, и значением (ISSb+1) в поле ACK.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-53&quot;&gt;Вопрос 27.&lt;/h4&gt;
-&lt;p&gt;Какой параметр ядра отвечает за максимальный размер памяти, доступный для выделения процессам в Linux?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-54&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;vm.overcommit_ratio&lt;/p&gt;
-
-&lt;h4 id=&quot;section-55&quot;&gt;Вопрос 28.&lt;/h4&gt;
-&lt;p&gt;Как в Linux сделать так, чтобы core-файлы сохранялись c именем /var/tmp/core.{pid}?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-56&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;sysctl -w kernel.core_pattern=”/var/tmp/core.%p”&lt;/p&gt;
-
-&lt;h4 id=&quot;section-57&quot;&gt;Вопрос 29.&lt;/h4&gt;
-&lt;p&gt;Как одной командой «сбросить» все переменные окружения (сделать «пустое» окружение) в текущей сессии в Linux?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-58&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;env -i&lt;/p&gt;
-
-&lt;h4 id=&quot;section-59&quot;&gt;Вопрос 30.&lt;/h4&gt;
-&lt;p&gt;Как включить jumbo-frames на сетевом интерфейсе eth0?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-60&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ifconfig eth0 mtu 9000&lt;/p&gt;
-
-&lt;h2 id=&quot;section-61&quot;&gt;Ответы на вопросы второй игры первого тура:&lt;/h2&gt;
-
-&lt;h4 id=&quot;section-62&quot;&gt;Вопрос 1.&lt;/h4&gt;
-&lt;p&gt;Напишите чему будет равен mss, если Вы используете IPv6 и mtu=1450?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-63&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1390, при использовании TCP поверх IPv6, MSS должно быть вычислено как максимальная длина пакета минус 60 октетов, так как минимальная длина заголовка IPv6 (т.e., IPv6 заголовок без заголовков расширения) на 20 октетов больше, чем для IPv4.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-64&quot;&gt;Вопрос 2.&lt;/h4&gt;
-&lt;p&gt;Что в bash напечатает команда echo $((5/2))?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-65&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Как ни странно, но ответ такой же, как и в первой игре – 2&lt;/p&gt;
-
-&lt;h4 id=&quot;section-66&quot;&gt;Вопрос 3.&lt;/h4&gt;
-&lt;p&gt;Приведите пример команды, которая напечатает ‘Y’ , если файл/var/tmp/core существует и он ненулевого размера (используя средства bash и coreutils)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-67&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Например, можно сделать это  вот таким способом  $test -s /var/tmp/core &amp;amp;&amp;amp; echo ‘Y’ или вот таким $ [ -s /var/tmp/core ] &amp;amp;&amp;amp; echo ‘Y’&lt;/p&gt;
-
-&lt;h4 id=&quot;section-68&quot;&gt;Вопрос 4.&lt;/h4&gt;
-&lt;p&gt;С помощью какой директивы в Apache 1.3 можно указать e-mail для связи на стандартной страничке Internal Server Error?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-69&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ServerAdmin&lt;/p&gt;
-
-&lt;h4 id=&quot;section-70&quot;&gt;Вопрос 5.&lt;/h4&gt;
-&lt;p&gt;Как в Linux вывести все переменные окружения, с которыми работает процесс с pid = 5671, в виде списка, где каждая переменная на отдельной строке?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-71&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;На этот  вопрос в шаблоне для проверки забито очень много разных вариантов,  вот парочка из них:  $/proc/5671/environ | strings или $sudo cat /proc/2236/environ | sed ‘s/\x00/\n/g’&lt;/p&gt;
-
-&lt;h4 id=&quot;section-72&quot;&gt;Вопрос 6.&lt;/h4&gt;
-&lt;p&gt;Как в Linux или FreeBSD открыть tcp порт 74022 в режиме Listen при помощи утилиты пакета netcat?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-73&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;никак нельзя посмотреть, так как такого порта не может быть.  В протоколе TCP поле “Порт назначения” (DESTINATION PORT) занимает 2 байта, поэтому номер порта не может превышать два в шестнадцатой степени.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-74&quot;&gt;Вопрос 7.&lt;/h4&gt;
-&lt;p&gt;Как в MySQL посмотреть список текущих сессий?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-75&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;show processlist в консоли mysql или спецальной утилитой mysqladmin с ключиком processlist,  вообщем ключевое слово – processlist.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-76&quot;&gt;Вопрос 8.&lt;/h4&gt;
-&lt;p&gt;Как в PostgreSQL посмотреть список текущих сессий?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-77&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Тут нужно делать специальный запрос  в базе:  SELECT * from pg_stat_activity. Или так: $ps axu | grep postgre&lt;/p&gt;
-
-&lt;h4 id=&quot;section-78&quot;&gt;Вопрос 9.&lt;/h4&gt;
-&lt;p&gt;У Вас на сервере есть древовидная структура директорий с несколькими миллионами файлов. Напишите пример команды, которая удалит все файлы, не трогая структуру каталогов?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-79&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Это  один из наших любимых вопросов на собеседованиях   Конечно же, это легко делается с помощью команды find.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-80&quot;&gt;Вопрос 10.&lt;/h4&gt;
-&lt;p&gt;Как не перезагружая операционную систему Linux (ядро 2.6.X), разрешить автоматическую перезагрузку через 10 секунд после того, как произошел kernel panic?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-81&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;$sysctl -w kernel.panic=10 или $echo 10 &amp;gt; /proc/sys/kernel/panic&lt;/p&gt;
-
-&lt;h4 id=&quot;section-82&quot;&gt;Вопрос 11.&lt;/h4&gt;
-&lt;p&gt;Напишите пример команд из coreutils, при помощи которых можно разбить содержимое текстового файла на три примерно равных части и поместить их в три разных файла?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-83&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Ну тут опять очень много вариантов, но это точно можно сделать с помощью команд split, dd,  tail или head.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-84&quot;&gt;Вопрос 12.&lt;/h4&gt;
-&lt;p&gt;Как посмотреть в содержимое initrd, собранного mkinitramfs?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-85&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;$zcat |cpio -i –make-directories или разархивировать с помощью команды gunzip, а потом  сказать $mount -o loop initrd.img /mnt/initrd&lt;/p&gt;
-
-&lt;h4 id=&quot;section-86&quot;&gt;Вопрос 13.&lt;/h4&gt;
-&lt;p&gt;Какой утилитой в Linux посмотреть время наработки диска в часах?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-87&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Например, это можно сделать с помощью smartctl или sg_utils.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-88&quot;&gt;Вопрос 14.&lt;/h4&gt;
-&lt;p&gt;Как в Linux (2.6.X) безопасно выгрузить модуль ядра e1000e?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-89&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;С помощью команды $modprobe -r e1000e&lt;/p&gt;
-
-&lt;h4 id=&quot;section-90&quot;&gt;Вопрос 15.&lt;/h4&gt;
-&lt;p&gt;Как в терминале bash при помощи одной служебной комбинации клавиш слово dpgk превратить в dpkg, если курсор стоит на букве k?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-91&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Эта комбинация клавиш -  ctrl-T&lt;/p&gt;
-
-&lt;h4 id=&quot;section-92&quot;&gt;Вопрос 16.&lt;/h4&gt;
-&lt;p&gt;Как в Linux посмотреть лимиты на количество открытых файлов, действующие в текущей сессии?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-93&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Раз надо посмотреть лимиты, то  логично это делать с помощью команды ulimit -n или ulimit –a&lt;/p&gt;
-
-&lt;h4 id=&quot;section-94&quot;&gt;Вопрос 17.&lt;/h4&gt;
-&lt;p&gt;Какими командами можно узнать mac-адрес сервера, доступа к которому у Вас нет, и он находится вашем сегменте ethernet сети? При этом известен его ip и до этого момента обмена ip-пакетами с этим сервером не было.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-95&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Для начала надо с ним обменяться пакетами. Например, это можно сделать с помощью команды ping, ну а потом можно посмотреть его mac  в arp таблице с помощью команды arp.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-96&quot;&gt;Вопрос 18.&lt;/h4&gt;
-&lt;p&gt;Какой командой в Linux посмотреть размер журнала файловой системы ext3, смонтированной в /dev/sda1?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-97&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;dumpe2fs -h /dev/sda1&lt;/p&gt;
-
-&lt;h4 id=&quot;section-98&quot;&gt;Вопрос 19.&lt;/h4&gt;
-&lt;p&gt;Как в Linux изменить размер файловой системы tmpfs, смонтированной в /tmpfs с 2 до 4 гигабайт, без потери ее содержимого?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-99&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mount /tmpfs -o remount, size=4g&lt;/p&gt;
-
-&lt;h4 id=&quot;section-100&quot;&gt;Вопрос 20.&lt;/h4&gt;
-&lt;p&gt;Как в Linux (ядро 2.6.X) одной командой посмотреть содержимое всех таблиц в firewall?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-101&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Это можно сделать командой iptables-save&lt;/p&gt;
-
-&lt;h4 id=&quot;section-102&quot;&gt;Вопрос 21.&lt;/h4&gt;
-&lt;p&gt;Какой командой посмотреть, какие из необходимых программе библиотек недоступны при ее запуске?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-103&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;С помощью любимой команды системных администраторов - strace или можно использовать ldd или gdb.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-104&quot;&gt;Вопрос 22.&lt;/h4&gt;
-&lt;p&gt;Как посмотреть «дерево» процессов?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-105&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Тут тоже сразу можно привести несколько вариантов: pstree или ps ax –forest или ps axf или ps ax -H&lt;/p&gt;
-
-&lt;h4 id=&quot;section-106&quot;&gt;Вопрос 23.&lt;/h4&gt;
-&lt;p&gt;Как в Linux прочитать файл /serial.txt, находящейся в ISO9660-образе winxpsp4.iso?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-107&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;По ощущениям вопрос всем очень понравился, запоминайте ответ!  mount -o loop -t iso9660 winxpsp4.iso /mnt;; cat /mnt/serial.txt&lt;/p&gt;
-
-&lt;h4 id=&quot;section-108&quot;&gt;Вопрос 24.&lt;/h4&gt;
-&lt;p&gt;Что неправильно в параметрах конфигурации интерфейса: 
-address 192.168.1.191 
-netmask 255.255.255.192 
-network 192.168.1.128 
-gateway 192.168.1.129 
-mtu 1450 ?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-109&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Адрес хоста (address) совпадает с адресом бродкаста (broadcast) сегмента сети.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-110&quot;&gt;Вопрос 25.&lt;/h4&gt;
-&lt;p&gt;Как скопировать данные с поврежденного диска /dev/sda на целый /dev/sdb, пропустив только сбойные сектора?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-111&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Классический вариант - dd if=/dev/sda of=/dev/sdb conv=sync,noerror.
-Параметр “conv=sync,noerror” указывает dd не читать блок, если при этом происходит ошибка, но записать в архивируемый файл-образ данные (недостающие входные данные будут заменены нулевыми байтами).
-Еще есть  утилиты dd_rescue и ddrescue,  с помощью которых тоже можно решить задачу.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-112&quot;&gt;Вопрос 26.&lt;/h4&gt;
-&lt;p&gt;Какой флаг должен быть установлен в tcp пакете, чтобы соединение было немедленно прекращено?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-113&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;RST&lt;/p&gt;
-
-&lt;h4 id=&quot;section-114&quot;&gt;Вопрос 27.&lt;/h4&gt;
-&lt;p&gt;Как в Linux запретить выделение более 90% физической памяти процессам, при условии, что swap выключен?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-115&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;канонический ответ согласно документации:
-$sysctl -w vm.overcommit_memory=2; sysctl -w vm.overcommit_ratio=90 или 
-$echo 2 &amp;gt; /proc/sys/vm/overcommit_memory; echo 90 &amp;gt; /proc/sys/vm/overcommit_ratio&lt;/p&gt;
-
-&lt;h4 id=&quot;section-116&quot;&gt;Вопрос 28.&lt;/h4&gt;
-&lt;p&gt;Как в Linux разрешить маршрутизацию ipv4 пакетов?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-117&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;sysctl -w net.ipv4.ip_forward=1 или echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&lt;/p&gt;
-
-&lt;h4 id=&quot;section-118&quot;&gt;Вопрос 29.&lt;/h4&gt;
-&lt;p&gt;Есть файл file со строками: 
-1 
-10 
-45 
-6 
-1 
-5 
-7 
-10 
-Как при помощи утилит, входящих в coreutils, узнать какие строки присутствуют в файле более 1 раза, и сколько раз повторяется каждая строка?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-119&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;cat file|sort|uniq -dc&lt;/p&gt;
-
-&lt;h4 id=&quot;section-120&quot;&gt;Вопрос 30.&lt;/h4&gt;
-&lt;p&gt;Вы зашли на сервер example.com и запустили там команду wget http://example.com Как посмотреть траффик этого соединения с помощью команды tcpdump?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-121&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;tcpdump -i lo или -i any
-Для общения  между сетевым клиентским программным обеспечением и серверным приложением, расположенном на том же компьютере используется интерфейс loopback.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-122&quot;&gt;Ответы на вопросы второго тура:&lt;/h2&gt;
-
-&lt;h4 id=&quot;section-123&quot;&gt;Вопрос 1.&lt;/h4&gt;
-&lt;p&gt;Есть сервер, на котором сконфигурированы интерфейсы&lt;br /&gt;
-eth0 - ip 1.2.3.4, netmask /25, gateway 1.2.3.1&lt;/p&gt;
-
-&lt;p&gt;и
-eth1 - ip 5.6.7.8, netmask /25, gateway 5.6.7.1. 
-Есть клиенты, которые работают с этим сервером,  и они находятся за пределами описанных выше сетей. Вам необходимо, что бы ответы на запросы отправлялись  через тот же интерфейс, через который они были получены.
-Напишите последовательность команд, которая позволяет это сделать. Для решения задачи используйте статическую маршрутизацию.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-124&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ip rule add from 1.2.3.4 lookup 200 priority 200 
-ip route add default via 1.2.3.1 dev eth0 src 1.2.3.4 table 200 
-ip route add default via 5.6.7.1&lt;/p&gt;
-
-&lt;h4 id=&quot;section-125&quot;&gt;Вопрос 2.&lt;/h4&gt;
-&lt;p&gt;Как в командном режиме vi или vim в текстовом файле заменить в каждой строке файла первые сочетания цифр, которые начинаются с  цифры 3, а заканчиваются на цифру 6 (между тройкой и шестеркой могут быть одна или две любых цифры), на подстроку 444?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-126&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;:%s/3[0-9]{1,2}6/444/  или  :%s/3\d\d?6/444/&lt;/p&gt;
-
-&lt;h4 id=&quot;section-127&quot;&gt;Вопрос 3.&lt;/h4&gt;
-&lt;p&gt;На сервере c помощью mdadm собран программный raid 10 на четырех дисках со следующим параметрами:
-near=2
-far=1
-Нумерация дисков начинается с нуля. 
-Какое максимальное количество дисков можно одновременно вынуть из raid-массива не нарушая его работоспособность?
-Напишите номер или номера этих дисков.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-128&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2 штуки;  0 и 2 или 1 и 3&lt;/p&gt;
-
-&lt;h4 id=&quot;section-129&quot;&gt;Вопрос 4.&lt;/h4&gt;
-&lt;p&gt;Задачи, работающие на Вашем сервере,  требуют большого количества вычислительных мощностей.  Вы подозреваете, что governor может необоснованно занижать частоту процессоров. Напишите команды, которыми можно заставить процессоры работать всегда на максимальной частоте, не перегружая сервер и не устанавливая дополнительных утилит.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-130&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;$echo userspace &amp;gt;/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-$cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq &amp;gt;/sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed&lt;/p&gt;
-
-&lt;h4 id=&quot;section-131&quot;&gt;Вопрос 5.&lt;/h4&gt;
-&lt;p&gt;У вас есть сервер с операционной системой Linux.  Памяти на этом сервере 1 гигабайт.  Там работает процесс, у которого сегмент кода  занимает 500 мегабайт, столько же занимает сегмент данных. Запускаем второй такой же процесс.&lt;/p&gt;
-
-&lt;p&gt;Мы промаркировали страницы памяти по типам:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;код первого процесса;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;данные первого процесса;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;код второго процесса;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;ul&gt;
-      &lt;li&gt;данные второго процесса.
-Напишите все номера типов страниц,  которые могут оказаться в swap.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-132&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2 и 4 
-В swap не попадают страницы с маппингом сегмента кода, так как они всегда могут быть перечитаны с диска.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-133&quot;&gt;Вопрос 6.&lt;/h4&gt;
-&lt;p&gt;Есть сервер про который известно,  что на нем есть SATA диск с файловой системой ext3, 32 гигабайта памяти, нет swap и включить его нельзя. Вы запускаете параллельно команды 
-dd if=/dev/zero of=/opt/testfiles/tesfile1 bs=1G count=64
-и 
-dd if=/dev/zero of=/opt/testfiles/tesfile2 bs=1G count=64.
-Через несколько минут сервер уходит в iowait, команды в консоли очень медленно работают, еще через несколько минут сервер падает с OOM в kernel panic. 
-Если Вы запускаете 
-dd if=/dev/zero of=/opt/testfiles/tesfile1 bs=1G count=18
-и
-dd if=/dev/zero of=/opt/testfiles/tesfile2 bs=1G count=18
-то описанного эффекта не наступает. 
-Как можно бороться с описанной проблемой,  не ограничивая дисковую активность на сервере и не изменяя его аппаратных характеристик?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-134&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Выключить кэш на запись: 
-$sysctl -w vm.dirty_ratio = 0 
-или перемонтировать файловую систему в sync: 
-$mount -o remount,sync /mountpoint&lt;/p&gt;
-
-&lt;h4 id=&quot;section-135&quot;&gt;Вопрос 7.&lt;/h4&gt;
-&lt;p&gt;У Вас есть два сервера S и R.
-На S (IP = 192.168.1.2) на 80 порту запущен сайт, и он недоступен из внешней сети. 
-R используется в качестве шлюза по умолчанию для сервера S и доступен из внешней сети по адресу 1.2.3.4. 
-Чтобы обеспечить доступ к сайту из внешней сети,  на R настроен DNAT: 
-1.2.3.4:80-&amp;gt;192.168.1.2:80
-Вы проверяете работу этой схемы, находясь на сервере S, командой telnet 1.2.3.4 80.
-Почему у Вас не получилось установить соединение?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-136&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Ключевые слова в ответе на этот вопрос: martian packets или марсианские пакеты - пакеты с неизвестным маршрутом к источнику. Получение таких пакетов не ожидается системой Linux, особенно учитывая то, откуда они прибыли (например, пакеты, получаемые от внутренней машины, но приходящие на внешний интерфейс).&lt;/p&gt;
-
-&lt;h4 id=&quot;section-137&quot;&gt;Вопрос 8.&lt;/h4&gt;
-&lt;p&gt;На сервере c помощью mdadm был собран программный raid 0 на четырех дисках.  В какой-то момент в серверной проходила уборщица,  и неожиданно у сервера исчезло питание. Когда сервер включили, выяснилось, что  рейд полностью развалился (mdadm не видит суперблоков). 
-Каким образом можно восстановить данные (собрать рейд) на этой машине? Приведите пример команды.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-138&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Необходимо пересоздать массив, и поскольку это stripe, и ресинхронизации делаться при создании не будет, данные с большой вероятностью удастся оттуда достать.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-139&quot;&gt;Вопрос 9.&lt;/h4&gt;
-&lt;p&gt;Внезапно на web сервере с Linux выросла нагрузка. Вы зашли на него и обнаружили, что из 1000 соединений 990 приходит с адреса ipv6 ::ffff:1.2.3.4.  Вы подозреваете, что это DOS-атака, и хотите заблокировать соединения с этого адреса. Какой командой Вы это сделаете?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-140&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;iptables -A INPUT -s 1.2.3.4 -j REJECT&lt;/p&gt;
-
-&lt;h4 id=&quot;section-141&quot;&gt;Вопрос 10.&lt;/h4&gt;
-&lt;p&gt;На 1.2.3.4: 443 отвечают 3 сайта: 
-forbar.tj, 
-foo.ec и 
-bar.ag 
-по протоколу https.
-Сколько должно быть сертификатов для этих web сайтов, и что должно в них быть прописано согласно RFC, чтобы браузеры могли им доверять?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-142&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;сертификат должен быть один;
-все три хоста должны быть описаны в X509v3 Subject Alternative Name&lt;/p&gt;
-
-&lt;h4 id=&quot;section-143&quot;&gt;Вопрос 11.&lt;/h4&gt;
-&lt;p&gt;На сервере запустили форк-бомбу.  У Вас есть открытая ssh-сессия на машину. Серверу в настоящий момент настолько плохо,  что нельзя даже запустить ps, так как закончились pid-ы.  Родительский и дочерние процессы форк-бомбы называются someprogram.bin
-Каким образом можно убить все процессы someprogram.bin?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-144&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;exec busybox/python, откуда в цикле убить все процессы не порождая новых процессов.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-145&quot;&gt;Вопрос 12.&lt;/h4&gt;
-&lt;p&gt;Приведите пример команды, которая позволяет настроить  в Linux маршрутизацию пакетов с source-address  192.168.1.1/24 в сеть 192.168.2.0/24 через маршрутизаторы 192.168.1.128 и 192.168.1.253 таким образом, чтобы в случае недоступности первого использовался второй маршрутизатор (автоматически).&lt;/p&gt;
-
-&lt;h4 id=&quot;section-146&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ip route add 192.168.2.0/24 src 192.168.1.1 nexthop via 192.168.1.128 dev eth0 weight 1 nexthop via 192.168.1.253 dev eth0 weight 2 или использовать метрики&lt;/p&gt;
-
-&lt;h4 id=&quot;section-147&quot;&gt;Вопрос 13.&lt;/h4&gt;
-&lt;p&gt;В какой пропорции разложится входящая нагрузка в etherchannel, собранный из 2 портов с алгоритмом хеширования по MAC-адресам,  если входящий трафик генерируется нечетным количеством машин (N).&lt;/p&gt;
-
-&lt;h4 id=&quot;section-148&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;((N-1)/2)+1:(N-1)/2 или (n-1)/(n+1)&lt;/p&gt;
-
-&lt;h4 id=&quot;section-149&quot;&gt;Вопрос 14.&lt;/h4&gt;
-&lt;p&gt;У Вас на сервере запущено приложение, которое хранит все данные в одном файле /var/spool/veryimportantinformation.dat
-Вы случайно удалили этот файл, попытались найти резервную копию, но не нашли ее. Приложение все еще работает. Как восстановить этот файл?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-150&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Нужно узнать $PID приложения и поискать содержимое удаленного файла в /proc/$PID/fd/.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-151&quot;&gt;Вопрос 15.&lt;/h4&gt;
-&lt;p&gt;У Вас в зоне foobar.tj есть следующие записи:
-a IN A 1.2.3.4
-b CNAME a
-MX 10 mail.foo.ec
-g IN A 1.2.3.2
-* IN CNAME b
-Надо ли что-то надо изменить в зоне, чтобы можно было принимать почту для z.foobar.tj на сервер mail.foo.ec?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-152&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;В зоне допущена ошибка, и при попытке загрузить ее в самом распространенном DNS сервере Bind 9, вы увидите сообщение:
-dns_master_load: /etc/bind/foobar.tj:3: b.foobar.tj: CNAME and other data
-И зона банально не загрузится.
-Соответственно, эту ошибку тоже придется исправить. Например, явно прописав:
-b IN A 1.2.3.4
-MX 10 mail.foo.ec.
-Ну и дописав явно запись:
-z MX 10 mail.foo.ec.
-Не забывая, конечно, ставить точки, иначе почта будет пытаться уйти на хост mail.foo.ec.foobar.tj.&lt;/p&gt;
-
-&lt;h2 id=&quot;section-153&quot;&gt;Вопросы и ответы ФИНАЛА:&lt;/h2&gt;
-
-&lt;h4 id=&quot;section-154&quot;&gt;Вопрос 1.&lt;/h4&gt;
-&lt;p&gt;Укажите размер обычных и больших страниц памяти в Linux x86/x86_64 (по умолчанию, ответ в кб)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-155&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;4кб, 2048кб&lt;/p&gt;
-
-&lt;h4 id=&quot;section-156&quot;&gt;Вопрос 2.&lt;/h4&gt;
-&lt;p&gt;Вам достался в наследство сервер от администратора, который любил фильм «Матрица», и каждый раз, когда вы заходите на него, система приветствует вас сообщением:
-Linux yandex-games #ya1 SMP Mon Sep 20 5:43:25 MSD 2010 x86_64 GNU/Linux&lt;/p&gt;
-
-&lt;p&gt;The Matrix is a system, Neo. That system is our enemy. But when youre inside, you look around, what do you see? Businessmen, teachers, lawyers, carpenters. The very minds of the people we are trying to save. But until we do, these people are still a part of that system, and that makes them our enemy. You have to understand, most of these people are not ready to be unplugged. And many of them are so inured, so hopelessly dependent 
-on the system, that they will fight to protect it.&lt;/p&gt;
-
-&lt;p&gt;root@yandex:#
-Вам же больше нравятся цитаты из фильма «Сеть», и Вы хотите заменить приветствие. Напишите все возможные варианты из перечисленных ниже, где вы будете искать цитату Морфеуса:&lt;/p&gt;
-
-&lt;p&gt;1./etc/issue
-2./etc/motd
-3./etc/debconf.conf
-4./etc/pam.d/login
-5./etc/adduser.conf
-6./etc/hostname
-7./etc/environment&lt;/p&gt;
-
-&lt;h4 id=&quot;section-157&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1, 2, 4&lt;/p&gt;
-
-&lt;h4 id=&quot;section-158&quot;&gt;Вопрос 3.&lt;/h4&gt;
-&lt;p&gt;Ваш пакет приходит на порт веб-сервера, работающего под управлением ОС linux.
-В каком порядке по цепочкам таблиц iptables проследует этот пакет?
-В качестве ответа принимаются варианты из нескольких пунктов в порядке возрастания (например: 1,2,5,10).&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;nat PREROUTING&lt;/li&gt;
-  &lt;li&gt;mangle PREROUTING&lt;/li&gt;
-  &lt;li&gt;filter INPUT&lt;/li&gt;
-  &lt;li&gt;mangle INPUT&lt;/li&gt;
-  &lt;li&gt;filter FORWARD&lt;/li&gt;
-  &lt;li&gt;mangle FORWARD&lt;/li&gt;
-  &lt;li&gt;filter OUTPUT&lt;/li&gt;
-  &lt;li&gt;mangle OUTPUT&lt;/li&gt;
-  &lt;li&gt;nat OUTPUT&lt;/li&gt;
-  &lt;li&gt;nat POSTROUTING&lt;/li&gt;
-  &lt;li&gt;mangle POSTROUTING&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-159&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1,2,3,4&lt;/p&gt;
-
-&lt;h4 id=&quot;section-160&quot;&gt;Вопрос 4.&lt;/h4&gt;
-&lt;p&gt;Вы хотите, чтобы ваш сервер не «пинговался», но продолжал принимать и отвечать на все остальные icmp сообщения.
-Какой (или какими) командами iptables из списка можно это сделать? Перечислите все варианты.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;iptables -I OUTPUT -p icmp –icmp-type timestamp-reply -j DROP&lt;/li&gt;
-  &lt;li&gt;iptables -I OUTPUT -p icmp –icmp-type echo-reply -j DROP&lt;/li&gt;
-  &lt;li&gt;iptables -I INPUT -p icmp –icmp-type precedence-cutoff -j DROP&lt;/li&gt;
-  &lt;li&gt;iptables -I INPUT -p icmp –icmp-type echo-request -j DROP&lt;/li&gt;
-  &lt;li&gt;iptables -I INPUT -p icmp –icmp-type timestamp-request -j DROP&lt;/li&gt;
-  &lt;li&gt;iptables -I INPUT -p icmp –icmp-type echo-reply -j DROP&lt;/li&gt;
-  &lt;li&gt;правильные ответы отсутствуют&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-161&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2, 4&lt;/p&gt;
-
-&lt;h4 id=&quot;section-162&quot;&gt;Вопрос 5.&lt;/h4&gt;
-&lt;p&gt;Ваш пакет проходит через роутер под управлением ОС Linux. 
-В каком порядке данный пакет проходит по цепочкам таблиц iptables?
-В качестве ответа принимаются варианты из нескольких пунктов 
-в правильном порядке (например 1,2,3,4).&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;nat PREROUTING&lt;/li&gt;
-  &lt;li&gt;mangle PREROUTING
-3, filter INPUT&lt;/li&gt;
-  &lt;li&gt;mangle INPUT&lt;/li&gt;
-  &lt;li&gt;filter FORWARD&lt;/li&gt;
-  &lt;li&gt;mangle FORWARD&lt;/li&gt;
-  &lt;li&gt;filter OUTPUT&lt;/li&gt;
-  &lt;li&gt;mangle OUTPUT&lt;/li&gt;
-  &lt;li&gt;nat OUTPUT&lt;/li&gt;
-  &lt;li&gt;nat POSTROUTING&lt;/li&gt;
-  &lt;li&gt;mangle POSTROUTING&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-163&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1,2,5,6,11,10&lt;/p&gt;
-
-&lt;h4 id=&quot;section-164&quot;&gt;Вопрос 6.&lt;/h4&gt;
-&lt;p&gt;Напишите тип DNS-записи, которая связывает имя хоста с адресом протокола IPv6 в файле зоны.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-165&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;AAAA&lt;/p&gt;
-
-&lt;h4 id=&quot;section-166&quot;&gt;Вопрос 7.&lt;/h4&gt;
-&lt;p&gt;Какие в ядре Linux существуют аллокаторы памяти?
-Выберите все варианты:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;SLAB&lt;/li&gt;
-  &lt;li&gt;SLOPE&lt;/li&gt;
-  &lt;li&gt;SLEEP&lt;/li&gt;
-  &lt;li&gt;SLOB&lt;/li&gt;
-  &lt;li&gt;SLIP&lt;/li&gt;
-  &lt;li&gt;SLEB&lt;/li&gt;
-  &lt;li&gt;SLUB&lt;/li&gt;
-  &lt;li&gt;SLURM&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-167&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1,5,8&lt;/p&gt;
-
-&lt;h4 id=&quot;section-168&quot;&gt;Вопрос 8.&lt;/h4&gt;
-&lt;p&gt;C помощью какого драйвера/дисциплины можно шейпить входящий на интерфейс машины трафик?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;htb&lt;/li&gt;
-  &lt;li&gt;sfq&lt;/li&gt;
-  &lt;li&gt;ifb&lt;/li&gt;
-  &lt;li&gt;hfsc&lt;/li&gt;
-  &lt;li&gt;tfb&lt;/li&gt;
-  &lt;li&gt;imq&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-169&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;3, 6&lt;/p&gt;
-
-&lt;h4 id=&quot;section-170&quot;&gt;Вопрос 9.&lt;/h4&gt;
-&lt;p&gt;Можно ли передать управление компьютером на другой компьютер с помощью Transfer Control Protocol ((да/нет)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-171&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;да&lt;/p&gt;
-
-&lt;h4 id=&quot;section-172&quot;&gt;Вопрос 10.&lt;/h4&gt;
-&lt;p&gt;Какая из нижеперечисленных баз данных не является реляционной?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;PostgreSQL&lt;/li&gt;
-  &lt;li&gt;SqlLite&lt;/li&gt;
-  &lt;li&gt;Bdb&lt;/li&gt;
-  &lt;li&gt;MySQL&lt;/li&gt;
-  &lt;li&gt;Oracle&lt;/li&gt;
-  &lt;li&gt;MongoDb&lt;/li&gt;
-  &lt;li&gt;Drizzle&lt;/li&gt;
-  &lt;li&gt;CouchDB&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-173&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;3, 6, 8&lt;/p&gt;
-
-&lt;h4 id=&quot;section-174&quot;&gt;Вопрос 11.&lt;/h4&gt;
-&lt;p&gt;Вы установили на сервер свой любимый шелл tcsh в каталог /usr/bin/.
-При запуске команды chsh -s /usr/bin/tcsh Вам сообщили:
-tcsh is an invalid shell.
-Куда надо прописать строчку /usr/bin/tcsh, 
-чтобы вы и другие пользователи имели возможность 
-менять себе shell с помощью команды chsh?&lt;/p&gt;
-
-&lt;h4 id=&quot;etcshells&quot;&gt;Ответ:/etc/shells&lt;/h4&gt;
-
-&lt;h4 id=&quot;section-175&quot;&gt;Вопрос 12.&lt;/h4&gt;
-&lt;p&gt;Какое минимальное количество нажатий комбинации клавиш Ctrl-T в bash превратит слово СИСЯРО в слово РОССИЯ?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-176&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;9&lt;/p&gt;
-
-&lt;h4 id=&quot;section-177&quot;&gt;Вопрос 13.&lt;/h4&gt;
-&lt;p&gt;Какая директива в конфигурационном файле зоны test.ru отвечает за допустимое время хранения зоны в кэшах неответственных DNS-серверов?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-178&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ttl&lt;/p&gt;
-
-&lt;h4 id=&quot;section-179&quot;&gt;Вопрос 14.&lt;/h4&gt;
-&lt;p&gt;Какая cli-команда используется для управления LVS?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-180&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ipvsadm&lt;/p&gt;
-
-&lt;h4 id=&quot;section-181&quot;&gt;Вопрос 15.&lt;/h4&gt;
-&lt;p&gt;Какая cli-утилита в Linux используется для настройки traffic shaping c classful queuing disciplines?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-182&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;tc&lt;/p&gt;
-
-&lt;h4 id=&quot;section-183&quot;&gt;Вопрос 16.&lt;/h4&gt;
-&lt;p&gt;Где в /proc посмотреть параметры, c которыми было загружено ядро Linux?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-184&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;cmdline&lt;/p&gt;
-
-&lt;h4 id=&quot;section-185&quot;&gt;Вопрос 17.&lt;/h4&gt;
-&lt;p&gt;Как зовут любимого пингвина Линуса?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-186&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Tux Такс Тукс - мы принимали любой ответ на этот вопрос&lt;/p&gt;
-
-&lt;h4 id=&quot;section-187&quot;&gt;Вопрос 18.&lt;/h4&gt;
-&lt;p&gt;На значение какого параметра в 32-битных системах, показывающегося в /proc/meminfo, влияют настройки overcommit?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-188&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;CommitLimit&lt;/p&gt;
-
-&lt;h4 id=&quot;section-189&quot;&gt;Вопрос 19.&lt;/h4&gt;
-&lt;p&gt;Есть зона yandex.ru в ней есть запись:
-@ IN SOA ns1.yandex.ru. sysadmin.yandex-team.ru. (
-2010111900 ;
-1800 ;
-900 ;
-2592000 ;
-900 ) ;&lt;/p&gt;
-
-&lt;p&gt;Случилась неприятность, вторичный сервер, обслуживающий один из наших ДЦ, не может соединиться с первичным.
-Напишите время в минутах, через которое данные зоны на вторичном сервере устареют и будут считаться недействительными.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-190&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;43200&lt;/p&gt;
-
-&lt;h4 id=&quot;section-191&quot;&gt;Вопрос 20.&lt;/h4&gt;
-&lt;p&gt;Какими из перечисленных ниже команд можно проверить, открыт ли tcp-порт на удаленном компьютере 
-(напишите номера правильных ответов):&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;curl&lt;/li&gt;
-  &lt;li&gt;nc&lt;/li&gt;
-  &lt;li&gt;cm&lt;/li&gt;
-  &lt;li&gt;nm&lt;/li&gt;
-  &lt;li&gt;nmap&lt;/li&gt;
-  &lt;li&gt;rsync&lt;/li&gt;
-  &lt;li&gt;telnet&lt;/li&gt;
-  &lt;li&gt;lsof&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-192&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1, 2, 5, 6, 7&lt;/p&gt;
-
-&lt;h4 id=&quot;section-193&quot;&gt;Вопрос 21.&lt;/h4&gt;
-&lt;p&gt;Как в Linux называется тип памяти, в котором размещаются данные, не ассоциированные ни с каким файлом на файловой системе?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-194&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;AnonPages/anonymous pages/анонимные страницы&lt;/p&gt;
-
-&lt;h4 id=&quot;section-195&quot;&gt;Вопрос 22.&lt;/h4&gt;
-&lt;p&gt;«90x60x90 – это?»&lt;/p&gt;
-
-&lt;h4 id=&quot;section-196&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;486000, но вообще и на этот вопрос мы принимали любой ответ, но наши участники оказались серьезными людьми и честно перемножили эти цифры&lt;/p&gt;
-
-&lt;h4 id=&quot;section-197&quot;&gt;Вопрос 23.&lt;/h4&gt;
-&lt;p&gt;Как «сбросить» страничный кеш в Linux (и только его)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-198&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;echo 1 &amp;gt; /proc/sys/vm/drop_caches или sysctl -w vm.drop_caches=1&lt;/p&gt;
-
-&lt;h4 id=&quot;section-199&quot;&gt;Вопрос 24.&lt;/h4&gt;
-&lt;p&gt;Есть зона yandex.ru в ней есть запись:
-@ IN SOA ns1.yandex.ru. sysadmin.yandex-team.ru. (
-2010111900 ;
-1800 ;
-900 ;
-2592000 ;
-900 ) ;
-Напишите, с какой частотой (в минутах) вторичному DNS-серверу ns2.yandex.ru следует проверять актуальность информации для зоны yandex.ru.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-200&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;30&lt;/p&gt;
-
-&lt;h4 id=&quot;section-201&quot;&gt;Вопрос 25.&lt;/h4&gt;
-&lt;p&gt;Каким должно быть значение переменной ${value} в команде echo ${value} &amp;gt; /proc/sysrq-trigger, если Вы хотите послать сигнал 15 все процессам в Linux, кроме init?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-202&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;e&lt;/p&gt;
-
-&lt;h4 id=&quot;section-203&quot;&gt;Вопрос 26.&lt;/h4&gt;
-&lt;p&gt;Вы выполнили следующую команду:
-rsync -avH sourcehost::sourceshare/filename desthost::destshare
-Какие характеристики файлов при этом скопировались:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;владелец;&lt;/li&gt;
-  &lt;li&gt;права доступа;&lt;/li&gt;
-  &lt;li&gt;время создания&lt;/li&gt;
-  &lt;li&gt;никакие&lt;/li&gt;
-  &lt;li&gt;владелец и права доступа;&lt;/li&gt;
-  &lt;li&gt;права доступа и время создания;&lt;/li&gt;
-  &lt;li&gt;владелец, права доступа и время создания;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-204&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;7&lt;/p&gt;
-
-&lt;h4 id=&quot;section-205&quot;&gt;Вопрос 27.&lt;/h4&gt;
-&lt;p&gt;Что едят пингвины?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-206&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;планктон, рыбу и головоногих моллюсков и еще много чего еще&lt;/p&gt;
-
-&lt;h4 id=&quot;section-207&quot;&gt;Вопрос 28.&lt;/h4&gt;
-&lt;p&gt;В выводе ps Вы видите процесс
-19355 pts/12 T 0:00 someprogram.bin
-Какой сигнал (укажите буквенное именование сигнала) необходимо послать для того, чтобы someprogram.bin продолжил исполняться?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-208&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;CONT&lt;/p&gt;
-
-&lt;h4 id=&quot;section-209&quot;&gt;Вопрос 29.&lt;/h4&gt;
-&lt;p&gt;Вы хотите, чтобы в текущей сессии bash все файлы создавались с правами u=rw,g=w,o=w.
-Какую встроенную команду bash надо использовать и с какими параметрами?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-210&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;umask 0155&lt;/p&gt;
-
-&lt;h4 id=&quot;section-211&quot;&gt;Вопрос 30.&lt;/h4&gt;
-&lt;p&gt;Напишите одну команду с аргументами, с помощью которой в Linux можно создать символьное устройство
-mydev (minor/major 5/1) c правами u=rw,g=r,o=r&lt;/p&gt;
-
-&lt;h4 id=&quot;section-212&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mknod -m644 mydev c 1 5&lt;/p&gt;
-
-&lt;h4 id=&quot;section-213&quot;&gt;Вопрос 31.&lt;/h4&gt;
-&lt;p&gt;Сколько трехюнитовых серверов можно разместить в 39-юнитовой стойке при условии, что 12 и 13 юниты заняты свитчами (счет с единицы)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-214&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;11&lt;/p&gt;
-
-&lt;h4 id=&quot;section-215&quot;&gt;Вопрос 32.&lt;/h4&gt;
-&lt;p&gt;Какой протокол транспортного уровня модели OSI/ISO используется для AXFR-запросов в DNS?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-216&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;tcp&lt;/p&gt;
-
-&lt;h4 id=&quot;section-217&quot;&gt;Вопрос 33.&lt;/h4&gt;
-&lt;p&gt;Про что вы думаете, если видите красного черта?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-218&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;Вообще про FreeBSD, но чем черт не шутит?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-219&quot;&gt;Вопрос 34.&lt;/h4&gt;
-&lt;p&gt;Сколько адресов содержит сеть /17 (включая все зарезервированные)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-220&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;32768&lt;/p&gt;
-
-&lt;h4 id=&quot;section-221&quot;&gt;Вопрос 35.&lt;/h4&gt;
-&lt;p&gt;Какой командой можно запретить всем пользователям (включая root) удалить файл с файловой системы ext3 при условии, что в системе выключены дополнительные системы контроля доступа (selinux, apparmor, etc.)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-222&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;chattr&lt;/p&gt;
-
-&lt;h4 id=&quot;section-223&quot;&gt;Вопрос 36.&lt;/h4&gt;
-&lt;p&gt;Какие из перечисленных ниже вариантов значения TTL нужно написать в зоне test.ru, если у вас есть задача отдавать новые данные по всему миру максимум через 3 часа после обновления зоны:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;3H&lt;/li&gt;
-  &lt;li&gt;180m&lt;/li&gt;
-  &lt;li&gt;10800&lt;/li&gt;
-  &lt;li&gt;1080p&lt;/li&gt;
-  &lt;li&gt;10800s&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-224&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1,2,3,5&lt;/p&gt;
-
-&lt;h4 id=&quot;section-225&quot;&gt;Вопрос 37.&lt;/h4&gt;
-&lt;p&gt;Вы в Linux выполнили в bash команду 
-«grep processor /proc/cpuinfo | sort | tail -1 | cut -f2 -d:»
-на шестнадцатиядерном компьютере. Какую строку Вы получили?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-226&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;9&lt;/p&gt;
-
-&lt;h4 id=&quot;section-227&quot;&gt;Вопрос 38.&lt;/h4&gt;
-&lt;p&gt;Какой код ответа HTTP требует, чтобы пользователь заплатил деньги?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-228&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;402&lt;/p&gt;
-
-&lt;h4 id=&quot;section-229&quot;&gt;Вопрос 39.&lt;/h4&gt;
-&lt;p&gt;Напишите номер уровня модели OSI/ISO, c протоколом которого работает команда arp?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-230&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2&lt;/p&gt;
-
-&lt;h4 id=&quot;section-231&quot;&gt;Вопрос 40.&lt;/h4&gt;
-&lt;p&gt;Какая из перечисленных ниже строчек файла syslog.conf позволяет записывать в текстовый лог-файл все критические события от ядра:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;auth,authpriv.* /var/log/auth.log&lt;/li&gt;
-  &lt;li&gt;*;auth,authpriv.none -/var/log/syslog&lt;/li&gt;
-  &lt;li&gt;cron.* /var/log/cron.log&lt;/li&gt;
-  &lt;li&gt;daemon.* -/var/log/daemon.log&lt;/li&gt;
-  &lt;li&gt;kern.* -/var/log/kern.log&lt;/li&gt;
-  &lt;li&gt;lpr.* -/var/log/lpr.log&lt;/li&gt;
-  &lt;li&gt;mail.* -/var/log/mail.log&lt;/li&gt;
-  &lt;li&gt;user.* -/var/log/user.log&lt;/li&gt;
-  &lt;li&gt;kern.crit root, vasya&lt;/li&gt;
-  &lt;li&gt;kern.crit @vasya&lt;/li&gt;
-  &lt;li&gt;*.crit /var/log/crit/log&lt;/li&gt;
-  &lt;li&gt;*.crit /dev/console&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-232&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;5,11&lt;/p&gt;
-
-&lt;h4 id=&quot;section-233&quot;&gt;Вопрос 41.&lt;/h4&gt;
-&lt;p&gt;Какие права будут у файла (напишите восьмеричное представление), если Вы его создали командой umask 0156; touch myfile?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-234&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;620&lt;/p&gt;
-
-&lt;h4 id=&quot;section-235&quot;&gt;Вопрос 42.&lt;/h4&gt;
-&lt;p&gt;Что едят красные черти?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-236&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;тут мы и сами не знали ответа, по этому не ограничивали участников&lt;/p&gt;
-
-&lt;h4 id=&quot;section-237&quot;&gt;Вопрос 43.&lt;/h4&gt;
-&lt;p&gt;В каком веке закончится UnixTime на 32-битных архитектурах?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-238&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;21&lt;/p&gt;
-
-&lt;h4 id=&quot;section-239&quot;&gt;Вопрос 44.&lt;/h4&gt;
-&lt;p&gt;Как в Linux называется утилита для создания/управления правилами, затрагивающими трафик на bridge интерфейсах?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-240&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;ebtables&lt;/p&gt;
-
-&lt;h4 id=&quot;section-241&quot;&gt;Вопрос 45.&lt;/h4&gt;
-&lt;p&gt;В какой таблице iptables можно использовать цели “-j CONNMARK” и “-j MARK” (пометка соединения)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-242&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mangle&lt;/p&gt;
-
-&lt;h4 id=&quot;section-243&quot;&gt;Вопрос 46.&lt;/h4&gt;
-&lt;p&gt;Отметьте все сети из списка, которые не являются маршрутизируемыми в глобальной сети Интернет?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;10.0.0.0/8&lt;/li&gt;
-  &lt;li&gt;192.168.0.0/16&lt;/li&gt;
-  &lt;li&gt;182.168.0.0/16&lt;/li&gt;
-  &lt;li&gt;172.16.0.0/16&lt;/li&gt;
-  &lt;li&gt;225.0.0.0/8&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-244&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1,2,4&lt;/p&gt;
-
-&lt;h4 id=&quot;section-245&quot;&gt;Вопрос 47.&lt;/h4&gt;
-&lt;p&gt;В какой таблице iptables можно изменять значение MSS?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-246&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;mangle&lt;/p&gt;
-
-&lt;h4 id=&quot;section-247&quot;&gt;Вопрос 48.&lt;/h4&gt;
-&lt;p&gt;Какой ключик надо обязательно не забыть сказать mdadm-у, если у нас под руками есть развалившийся raid10 массив из шести дисков, который не собирается по mdadm –assemble, и мы хотим попробовать собрать его через mdadm –create (сохранив те же параметры рейда и порядок дисков)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-248&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;–assume-clean&lt;/p&gt;
-
-&lt;h4 id=&quot;section-249&quot;&gt;Вопрос 49.&lt;/h4&gt;
-&lt;p&gt;С помощью какого модуля ядра можно отправить последние сообщения перед аварийной остановкой системы (kernel panic) на соседний сервер, который находится в том же сегменте сети?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-250&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;netconsole&lt;/p&gt;
-
-&lt;h4 id=&quot;section-251&quot;&gt;Вопрос 50.&lt;/h4&gt;
-&lt;p&gt;У вас есть свеженалитая host-система с Ubuntu 10.04 с ванильным ядром. 
-Вам позарез необходимо поэксперементировать с новой файловой системой POHMELFS и ядром 2.6.37, но перезагружать сервер вы не можете. 
-Какая из перечисленных ниже систем виртуализации не подходит для этой задачи?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Xen&lt;/li&gt;
-  &lt;li&gt;OpenVz&lt;/li&gt;
-  &lt;li&gt;Kvm&lt;/li&gt;
-  &lt;li&gt;Virtuozzo&lt;/li&gt;
-  &lt;li&gt;VmWare server&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-252&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1, 2, 4&lt;/p&gt;
-
-&lt;h4 id=&quot;section-253&quot;&gt;Вопрос 51.&lt;/h4&gt;
-&lt;p&gt;Какой класс сетей из перечисленных ниже имеет по умолчанию наибольшее количество хостов:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;А&lt;/li&gt;
-  &lt;li&gt;B&lt;/li&gt;
-  &lt;li&gt;C&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-254&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;1&lt;/p&gt;
-
-&lt;h4 id=&quot;section-255&quot;&gt;Вопрос 52.&lt;/h4&gt;
-&lt;p&gt;На linux маршрутизаторе пакеты маркируются с помощью iptables (-j MARK –set-mark XXX). 
-Возможно ли на другой машине, находящейся в том же сегменте локальной сети, прочитать эту метку?&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;да, с помощью iptables .. -m mark –mark XXX&lt;/li&gt;
-  &lt;li&gt;нет&lt;/li&gt;
-  &lt;li&gt;да, если порт свитча, в который воткнута машина,
-находится в режиме mirror&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-256&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2&lt;/p&gt;
-
-&lt;h4 id=&quot;section-257&quot;&gt;Вопрос 53.&lt;/h4&gt;
-&lt;p&gt;Осуществляется передача данных по TCP через канал с latency в 1,5c и 15%-ной потерей пакетов. Достигнута максимальная пропускная способность этого канала. 
-Вы можете:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Выключить Selective Acknolegments&lt;/li&gt;
-  &lt;li&gt;Включить Selective Acknolegments&lt;/li&gt;
-  &lt;li&gt;Увеличить объем памяти доступный стеку TCP&lt;/li&gt;
-  &lt;li&gt;Уменьшить объем памяти доступный стеку TCP
-Что из пречисленного поможет вам увеличить скорость передачи данных? Укажите все возможные варианты.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;section-258&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;2&lt;/p&gt;
-
-&lt;h4 id=&quot;section-259&quot;&gt;Вопрос 54.&lt;/h4&gt;
-&lt;p&gt;В сессии bash Вы пишете команду:
-export a=’myfile.txt’; echo ${}.
-На что нужно заменить (используя matching prefix/suffix patterns в bash), чтобы в результате исполнения было выведено “txt” без кавычек?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-260&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;a#&lt;em&gt;. или a##&lt;/em&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;section-261&quot;&gt;Вопрос 55.&lt;/h4&gt;
-&lt;p&gt;Будут ли кешироваться в страничном кеше (pagecahe) обращения к ramdisk (да/нет)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-262&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;да&lt;/p&gt;
-
-&lt;h4 id=&quot;section-263&quot;&gt;Вопрос 56.&lt;/h4&gt;
-&lt;p&gt;Будут ли кешироваться в страничном кеше (pagecahe) обращения к /dev/shm( type: tmpfs) (да/нет)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-264&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;да&lt;/p&gt;
-
-&lt;h4 id=&quot;section-265&quot;&gt;Вопрос 57.&lt;/h4&gt;
-&lt;p&gt;Клиент соединяется с сервером по протоколу https. При этом клиент авторизуется с помощью сертификата. 
-У Вас есть доступ к сертификатам сервера и клиента (и только к ним). Можете ли Вы расшифровать подслушанный трафик (да/нет)?&lt;/p&gt;
-
-&lt;h4 id=&quot;section-266&quot;&gt;Ответ:&lt;/h4&gt;
-&lt;p&gt;нет&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/18/otviety-s-olimpiady-dlia-sistiemnykh-administratorov-ot-yandex/&quot;&gt;Ответы с олимпиады для системных администраторов от Yandex&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 18, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

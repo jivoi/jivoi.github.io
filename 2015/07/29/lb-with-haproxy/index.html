@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Kali Linux Compatible USB Wifi Adapters &#8211; EK</title>
-<meta name="description" content="Below are the most stable usb wifi adapters:
+<title>LB with Haproxy &#8211; EK</title>
+<meta name="description" content="Simple HTTP\HTTPS Load Balancing with Haproxy
 
 ">
-<meta name="keywords" content="kali, linux, wifi">
+<meta name="keywords" content="linux, haproxy, sysadm">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta name="twitter:description" content="Below are the most stable usb wifi adapters:
+<meta name="twitter:title" content="LB with Haproxy">
+<meta name="twitter:description" content="Simple HTTP\HTTPS Load Balancing with Haproxy
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,11 +27,11 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta property="og:description" content="Below are the most stable usb wifi adapters:
+<meta property="og:title" content="LB with Haproxy">
+<meta property="og:description" content="Simple HTTP\HTTPS Load Balancing with Haproxy
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<meta property="og:url" content="https://jivoi.github.io/2015/07/29/lb-with-haproxy/">
 <meta property="og:site_name" content="EK">
 
 
@@ -39,7 +39,7 @@
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<link rel="canonical" href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -146,29 +146,83 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" rel="bookmark" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></h1>
+        <h1><a href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/" rel="bookmark" title="LB with Haproxy">LB with Haproxy</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Below are the most stable usb wifi adapters:</p>
+      <p>Simple HTTP\HTTPS Load Balancing with Haproxy</p>
 
-<h3 id="atheros-ar9271-chipset--ieee-80211bgn">Atheros AR9271 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NHA</li>
-  <li>TP-LINK TP-WN722N or TP-WN722NC</li>
-</ol>
+<h3 id="install-haproxy">Install Haproxy</h3>
 
-<h3 id="ralink-rt3070-chipset--ieee-80211bgn">Ralink RT3070 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NH</li>
-  <li>Alfa AWUS036NEH</li>
-</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>add-apt-repository -y ppa:vbernat/haproxy-1.5
+<span class="nv">$ </span>apt-get update
+<span class="nv">$ </span>apt-get install -y haproxy</code></pre></div>
 
-<h3 id="realtek-rtl8187l-chipset--ieee-80211bg">Realtek RTL8187L Chipset – IEEE 802.11B/G</h3>
-<ol>
-  <li>Alfa AWUS036H</li>
-  <li>Alfa AWUS036EW</li>
-</ol>
+<h3 id="simple-haproxycfg">Simple Haproxy.cfg</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/haproxy/haproxy.cfg</span>
+
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode <span class="m">660</span> level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+    <span class="c"># Default SSL material locations</span>
+    ca-base /etc/ssl/certs
+    crt-base /etc/ssl/private
+
+    <span class="c"># Default ciphers to use on SSL-enabled listening sockets.</span>
+    ssl-default-bind-ciphers kEECDH+aRSA+AES:kRSA+AES:+AES256:RC4-SHA:!kEDH:!LOW:!EXP:!MD5:!aNULL:!eNULL
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    errorfile <span class="m">400</span> /etc/haproxy/errors/400.http
+    errorfile <span class="m">403</span> /etc/haproxy/errors/403.http
+    errorfile <span class="m">408</span> /etc/haproxy/errors/408.http
+    errorfile <span class="m">500</span> /etc/haproxy/errors/500.http
+    errorfile <span class="m">502</span> /etc/haproxy/errors/502.http
+    errorfile <span class="m">503</span> /etc/haproxy/errors/503.http
+    errorfile <span class="m">504</span> /etc/haproxy/errors/504.http
+
+frontend localhost
+    <span class="nb">bind</span> *:80
+    <span class="nb">bind</span> *:443
+    option tcplog
+    mode tcp
+    default_backend webnodes
+
+backend webnodes
+    mode tcp
+    balance roundrobin
+    option ssl-hello-chk
+    option forwardfor
+    http-request <span class="nb">set</span>-header X-Forwarded-Port %<span class="o">[</span>dst_port<span class="o">]</span>
+    http-request add-header X-Forwarded-Proto https <span class="k">if</span> <span class="o">{</span> ssl_fc <span class="o">}</span>
+    option httpchk HEAD / HTTP/1.1<span class="se">\r\n</span>Host:localhost
+    server web01 192.168.56.1:443 check
+    server web02 192.168.56.2:443 check
+
+listen stats *:1936
+    stats <span class="nb">enable</span>
+<span class="nb">    </span>stats uri /
+    stats hide-version
+    stats auth someuser:password</code></pre></div>
+
+<h3 id="start-haproxy">Start Haproxy</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>service haproxy restart</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -200,7 +254,7 @@
 
 
         </div>
-        <p class="byline"><strong>Kali Linux Compatible USB Wifi Adapters</strong> was published on <time datetime="2015-06-16T00:00:00+03:00">June 16, 2015</time> and last modified on <time datetime="2015-06-16">June 16, 2015</time>.</p>
+        <p class="byline"><strong>LB with Haproxy</strong> was published on <time datetime="2015-07-29T00:00:00+03:00">July 29, 2015</time> and last modified on <time datetime="2015-07-29">July 29, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -214,11 +268,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/" title="LB with Haproxy">LB with Haproxy</a></li>
-    
       <li><a href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/" title="Ubuntu Security Hardening">Ubuntu Security Hardening</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/20/mitigating-ddos-attacks-with-nginx/" title="Mitigating DDoS Attacks with NGINX">Mitigating DDoS Attacks with NGINX</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/17/learning-android/" title="Learning Android">Learning Android</a></li>
     
     </ul>
     <hr />
