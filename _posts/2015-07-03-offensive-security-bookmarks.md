@@ -407,7 +407,10 @@ All that things I need to pass OSCP, i think =)
 - [http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/](http://null-byte.wonderhowto.com/how-to/hack-like-pro-crack-passwords-part-3-using-hashcat-0156543/)
 
 ### InfoSec Hiring
-- [Reddit Thread](https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/)
+- [Reddit Thread Q3 2015](https://www.reddit.com/r/netsec/comments/3bpdci/rnetsecs_q3_2015_information_security_hiring/)
+- [Reddit Thread Q2 2015](https://www.reddit.com/r/netsec/comments/31gag9/rnetsecs_q2_2015_information_security_hiring/)
+- [ShmooCon Hiring List 2015](https://docs.google.com/spreadsheets/d/1TytbnvqekJEF0jxLANe6sNa5fu05dFaHEP7zudlJej0/htmlview?sle=true)
+- [SANS](https://isc.sans.edu/jobs/)
 - [Careers Stackoverflow](https://careers.stackoverflow.com/jobs/tag/penetration-testing)
 - [PenTester Salary](http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level)
 - [San Francisco InfoSec Jobs](http://www.calibersecurity.com/san-francisco-information-security-job-board/)
@@ -418,6 +421,6 @@ All that things I need to pass OSCP, i think =)
 ### Links Collections
 - [http://in-addr.nl/security-links.php](http://in-addr.nl/security-links.php)
 - [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
-
+- [Reddit NetsecStudents Wiki](https://www.reddit.com/r/netsecstudents/wiki/index)
 ### Books
-- [Amazon Security Books](http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&bbn=5&ie=UTF8&qid=1437666303&rnid=5)
+- [Security Books at Amazon](http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&bbn=5&ie=UTF8&qid=1437666303&rnid=5)
