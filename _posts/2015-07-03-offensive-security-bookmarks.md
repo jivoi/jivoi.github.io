@@ -422,5 +422,8 @@ All that things I need to pass OSCP, i think =)
 - [http://in-addr.nl/security-links.php](http://in-addr.nl/security-links.php)
 - [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
 - [Reddit NetsecStudents Wiki](https://www.reddit.com/r/netsecstudents/wiki/index)
+
 ### Books
 - [Security Books at Amazon](http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&bbn=5&ie=UTF8&qid=1437666303&rnid=5)
+- [A Bug Hunter's Reading List](http://www.amazon.com/A-Bug-Hunters-Reading-List/lm/R21POHD6Y2DOLQ)
+- [An Application Security Reading List](http://www.amazon.com/lm/R2EN4JTQOCHNBA/ref=cm_lm_pthnk_view)
