@@ -384,6 +384,7 @@ All that things I need to pass OSCP, i think =)
 - [https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf](https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf)
 - [https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png](https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png)
 - [https://danielmiessler.com/study/tcpdump/](https://danielmiessler.com/study/tcpdump/)
+- [http://www.infosecwriters.com/Papers/nessusNMAPcheatSheet.pdf](http://www.infosecwriters.com/Papers/nessusNMAPcheatSheet.pdf)
 
 ### Passwords Wordlists, Hashes, Tools
 - [http://www.irongeek.com/i.php?page=videos/password-exploitation-class](http://www.irongeek.com/i.php?page=videos/password-exploitation-class)
