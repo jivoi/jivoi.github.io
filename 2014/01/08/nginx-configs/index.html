@@ -152,10 +152,10 @@
     <div class="article-wrap">
       <p>Different configs for nginx.</p>
 
-<section id="table-of-contents" class="toc">                                    
-<header>                                                                        
-<h3>Contents</h3>                                                               
-</header>                                                                       
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
 <div id="drawer">
 <ul id="markdown-toc">
   <li><a href="#default-vhost-config" id="markdown-toc-default-vhost-config">Default vhost config</a></li>
@@ -185,9 +185,10 @@
   <li><a href="#rewrite-sub-domains-to-new-domain" id="markdown-toc-rewrite-sub-domains-to-new-domain">Rewrite sub domains to new domain</a></li>
   <li><a href="#new-format-for-301-redirect" id="markdown-toc-new-format-for-301-redirect">New format for 301 redirect</a></li>
   <li><a href="#location-for-static-files" id="markdown-toc-location-for-static-files">Location for static files</a></li>
+  <li><a href="#time-based-rewriting-rules" id="markdown-toc-time-based-rewriting-rules">Time Based Rewriting Rules</a></li>
 </ul>
 
-  </div>                                                                          
+  </div>
 </section>
 <!-- /#table-of-contents -->
 
@@ -198,7 +199,7 @@
     <span class="kn">server_name</span> <span class="s">_</span><span class="p">;</span>
     <span class="kn">access_log</span> <span class="s">/var/log/nginx/access_log</span><span class="p">;</span>
     <span class="kn">error_log</span> <span class="s">/var/log/nginx/nginx_error_log</span><span class="p">;</span>
-                
+
     <span class="kn">allow</span> <span class="s">MYIP/32</span><span class="p">;</span> <span class="c1">#dev pc</span>
     <span class="kn">satisfy</span> <span class="s">any</span><span class="p">;</span>
     <span class="kn">auth_basic</span>  <span class="s">&quot;restricted</span> <span class="s">area&quot;</span><span class="p">;</span>
@@ -207,7 +208,7 @@
     <span class="kn">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">^.+\.(jpe?g|gif|css|js|ico|png|bmp|xml|swf|ico|flv|exe|zip|rar|htm|html)</span>$ <span class="p">{</span>
         <span class="kn">root</span> <span class="s">/var/www/</span><span class="p">;</span>
     <span class="p">}</span>
-         
+
     <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
 	<span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:80</span><span class="p">;</span>
     <span class="p">}</span>
@@ -264,13 +265,13 @@
 
 <span class="s">if</span> <span class="s">(</span><span class="nv">$host</span> <span class="p">~</span><span class="sr">*</span> <span class="s">www\.(.*))</span> <span class="p">{</span>
     <span class="kn">set</span> <span class="nv">$host_without_www</span> <span class="nv">$1</span><span class="p">;</span>
-    <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://</span><span class="nv">$host_without_www$1</span> <span class="s">permanent</span><span class="p">;</span> 
+    <span class="kn">rewrite</span> <span class="s">^(.*)</span>$ <span class="s">http://</span><span class="nv">$host_without_www$1</span> <span class="s">permanent</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 
 <h3 id="rewrite-request-from-imgsite-to-images">Rewrite request from img/site to images</h3>
 
 <div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span> <span class="s">/img/site</span> <span class="p">{</span>
-	<span class="kn">if</span> <span class="s">(!-f</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span> 
+	<span class="kn">if</span> <span class="s">(!-f</span> <span class="nv">$request_filename</span><span class="s">)</span> <span class="p">{</span>
 		<span class="kn">rewrite</span> <span class="s">^/img/site/(.*)</span> <span class="s">/images/</span><span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
 	<span class="p">}</span>
 <span class="p">}</span></code></pre></div>
@@ -425,7 +426,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">Create</span> <span class="mi">3</span> <span class="s">files</span> <span class="s">in</span> <span class="s">/var/www</span> <span class="s">index1.html</span> <span class="s">index2.html</span> <span class="s">index3.html</span> 
+<span class="k">Create</span> <span class="mi">3</span> <span class="s">files</span> <span class="s">in</span> <span class="s">/var/www</span> <span class="s">index1.html</span> <span class="s">index2.html</span> <span class="s">index3.html</span>
 
 <span class="s">cat</span> <span class="s">/var/www/index1.html</span>
 
@@ -447,7 +448,7 @@
 
 <div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">location</span>  <span class="s">/</span> <span class="p">{</span>
     <span class="kn">if</span> <span class="s">(</span><span class="nv">$remote_addr</span> <span class="p">~</span> <span class="sr">&quot;8.8.8.8&quot;)</span> <span class="p">{</span>
-        <span class="kn">rewrite</span>  <span class="s">^(.*)</span>$  <span class="s">/index2.html</span> <span class="s">break</span><span class="p">;</span>  
+        <span class="kn">rewrite</span>  <span class="s">^(.*)</span>$  <span class="s">/index2.html</span> <span class="s">break</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kn">proxy_pass</span> <span class="s">http://backend</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
@@ -484,6 +485,20 @@
     <span class="kn">root</span> <span class="s">/var/www/</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
 
+<h3 id="time-based-rewriting-rules">Time Based Rewriting Rules</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="c1"># rule will work from 2:00 AM to 4:00 AM</span>
+<span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+  <span class="kn">rewrite_by_lua</span> <span class="s">&#39;</span>
+    <span class="s">local</span> <span class="s">current_time</span> <span class="p">=</span> <span class="s">os.time()</span>
+    <span class="s">local</span> <span class="s">start_time</span> <span class="p">=</span> <span class="s">os.time(</span><span class="p">{</span><span class="kn">year=2015,month=7,day=22,hour=02,min=0,sec=0})</span>
+    <span class="s">local</span> <span class="s">end_time</span> <span class="p">=</span> <span class="s">os.time(</span><span class="p">{</span><span class="kn">year=2015,month=7,day=22,hour=04,min=00,sec=0})</span>
+
+    <span class="s">if</span> <span class="s">current_time</span> <span class="s">&gt;=</span> <span class="s">start_time</span> <span class="s">and</span> <span class="s">current_time</span> <span class="s">&lt;=</span> <span class="s">end_time</span> <span class="s">then</span>
+      <span class="s">return</span> <span class="s">ngx.redirect(&quot;https://yoursite.com/maintenance.html&quot;)</span>
+    <span class="s">end</span>
+  <span class="s">&#39;</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
       <hr />
       <footer role="contentinfo">

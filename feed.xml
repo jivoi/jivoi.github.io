@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-29T15:03:30+03:00</updated>
+<updated>2015-07-31T18:08:08+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1464,6 +1464,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#infosec-hiring&quot; id=&quot;markdown-toc-infosec-hiring&quot;&gt;InfoSec Hiring&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#it-certifications&quot; id=&quot;markdown-toc-it-certifications&quot;&gt;IT Certifications&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#links-collections&quot; id=&quot;markdown-toc-links-collections&quot;&gt;Links Collections&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#books&quot; id=&quot;markdown-toc-books&quot;&gt;Books&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1902,6 +1903,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&quot;&gt;https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&quot;&gt;https://countuponsecurity.files.wordpress.com/2015/06/jtr-cheatsheetimg.png&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://danielmiessler.com/study/tcpdump/&quot;&gt;https://danielmiessler.com/study/tcpdump/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infosecwriters.com/Papers/nessusNMAPcheatSheet.pdf&quot;&gt;http://www.infosecwriters.com/Papers/nessusNMAPcheatSheet.pdf&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;passwords-wordlists-hashes-tools&quot;&gt;Passwords Wordlists, Hashes, Tools&lt;/h3&gt;
@@ -1947,9 +1949,14 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://in-addr.nl/security-links.php&quot;&gt;http://in-addr.nl/security-links.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ser-storchak.blogspot.ru/p/blog-page_16.html&quot;&gt;http://ser-storchak.blogspot.ru/p/blog-page_16.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsecstudents/wiki/index&quot;&gt;Reddit NetsecStudents Wiki&lt;/a&gt;
-### Books&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsecstudents/wiki/index&quot;&gt;Reddit NetsecStudents Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
+&lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&amp;amp;rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&amp;amp;bbn=5&amp;amp;ie=UTF8&amp;amp;qid=1437666303&amp;amp;rnid=5&quot;&gt;Security Books at Amazon&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/A-Bug-Hunters-Reading-List/lm/R21POHD6Y2DOLQ&quot;&gt;A Bug Hunter’s Reading List&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/lm/R2EN4JTQOCHNBA/ref=cm_lm_pthnk_view&quot;&gt;An Application Security Reading List&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 03, 2015.&lt;/p&gt;</content>
