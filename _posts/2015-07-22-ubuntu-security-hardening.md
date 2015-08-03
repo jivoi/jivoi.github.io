@@ -147,8 +147,15 @@ $ chown www-data:www-data /var/log/mod_evasive
 # /etc/apache2/mods-available/evasive.conf
 DOSSystemCommand
 DOSEmailNotify admin@domain.com
+DOSWhitelist 111.111.111.111
+DOSPageCount 20
+DOSSiteCount 100
+DOSBlockingPeriod 300
 
 $ a2enmod mod-evasive
+
+# for test
+$ perl /usr/share/doc/libapache2-mod-evasive/examples/test.pl
 {% endhighlight %}
 
 ### Install Rootkit Checkers
