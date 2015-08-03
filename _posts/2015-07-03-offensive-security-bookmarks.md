@@ -99,6 +99,7 @@ All that things I need to pass OSCP, i think =)
 - [https://packetstormsecurity.com/files/tags/tool](https://packetstormsecurity.com/files/tags/tool)
 
 ### Pentest Lab ISO-VMs
+- [http://www.amanhardikar.com/mindmaps/PracticeUrls.html](http://www.amanhardikar.com/mindmaps/PracticeUrls.html)
 - [https://www.kali.org/](https://www.kali.org/)
 - [https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project](https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project)
 - [http://blackarch.org/](http://blackarch.org/)
@@ -423,6 +424,7 @@ All that things I need to pass OSCP, i think =)
 - [http://in-addr.nl/security-links.php](http://in-addr.nl/security-links.php)
 - [http://ser-storchak.blogspot.ru/p/blog-page_16.html](http://ser-storchak.blogspot.ru/p/blog-page_16.html)
 - [Reddit NetsecStudents Wiki](https://www.reddit.com/r/netsecstudents/wiki/index)
+- [https://www.vulnhub.com/resources/](https://www.vulnhub.com/resources/)
 
 ### Books
 - [Security Books at Amazon](http://www.amazon.com/s/ref=lp_5_nr_n_14?fst=as%3Aoff&rh=n%3A283155%2Cn%3A%211000%2Cn%3A5%2Cn%3A377560011&bbn=5&ie=UTF8&qid=1437666303&rnid=5)
