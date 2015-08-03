@@ -293,8 +293,15 @@ Include <span class="s2">&quot;/etc/owasp-modsecurity/activated_rules/*.conf&quo
 <span class="c"># /etc/apache2/mods-available/evasive.conf</span>
 DOSSystemCommand
 DOSEmailNotify admin@domain.com
+DOSWhitelist 111.111.111.111
+DOSPageCount 20
+DOSSiteCount 100
+DOSBlockingPeriod 300
 
-<span class="nv">$ </span>a2enmod mod-evasive</code></pre></div>
+<span class="nv">$ </span>a2enmod mod-evasive
+
+<span class="c"># for test</span>
+<span class="nv">$ </span>perl /usr/share/doc/libapache2-mod-evasive/examples/test.pl</code></pre></div>
 
 <h3 id="install-rootkit-checkers">Install Rootkit Checkers</h3>
 

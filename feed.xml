@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-07-31T18:08:08+03:00</updated>
+<updated>2015-08-03T17:37:43+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -259,8 +259,15 @@ Include &lt;span class=&quot;s2&quot;&gt;&amp;quot;/etc/owasp-modsecurity/activa
 &lt;span class=&quot;c&quot;&gt;# /etc/apache2/mods-available/evasive.conf&lt;/span&gt;
 DOSSystemCommand
 DOSEmailNotify admin@domain.com
+DOSWhitelist 111.111.111.111
+DOSPageCount 20
+DOSSiteCount 100
+DOSBlockingPeriod 300
 
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;a2enmod mod-evasive&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;a2enmod mod-evasive
+
+&lt;span class=&quot;c&quot;&gt;# for test&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;perl /usr/share/doc/libapache2-mod-evasive/examples/test.pl&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;install-rootkit-checkers&quot;&gt;Install Rootkit Checkers&lt;/h3&gt;
 
@@ -1560,6 +1567,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;pentest-lab-iso-vms&quot;&gt;Pentest Lab ISO-VMs&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amanhardikar.com/mindmaps/PracticeUrls.html&quot;&gt;http://www.amanhardikar.com/mindmaps/PracticeUrls.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.kali.org/&quot;&gt;https://www.kali.org/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project&quot;&gt;https://www.owasp.org/index.php/OWASP_Web_Testing_Environment_Project&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://blackarch.org/&quot;&gt;http://blackarch.org/&lt;/a&gt;&lt;/li&gt;
@@ -1874,6 +1882,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;reverse-engineering&quot;&gt;Reverse Engineering&lt;/h3&gt;
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cyberguerrilla.org/blog/what-the-blackhats-dont-want-you-to-know-series/&quot;&gt;https://www.cyberguerrilla.org/blog/what-the-blackhats-dont-want-you-to-know-series/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html&quot;&gt;http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.woodmann.com/TiGa/idaseries.html&quot;&gt;http://www.woodmann.com/TiGa/idaseries.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://visi.kenshoto.com/viki/MainPage&quot;&gt;http://visi.kenshoto.com/viki/MainPage&lt;/a&gt;&lt;/li&gt;
@@ -1950,6 +1959,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://in-addr.nl/security-links.php&quot;&gt;http://in-addr.nl/security-links.php&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ser-storchak.blogspot.ru/p/blog-page_16.html&quot;&gt;http://ser-storchak.blogspot.ru/p/blog-page_16.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/netsecstudents/wiki/index&quot;&gt;Reddit NetsecStudents Wiki&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.vulnhub.com/resources/&quot;&gt;https://www.vulnhub.com/resources/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
