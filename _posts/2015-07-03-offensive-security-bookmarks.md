@@ -358,6 +358,7 @@ All that things I need to pass OSCP, i think =)
 - [http://shell-storm.org/shellcode/](http://shell-storm.org/shellcode/)
 
 ### Reverse Engineering
+- [https://www.cyberguerrilla.org/blog/what-the-blackhats-dont-want-you-to-know-series/](https://www.cyberguerrilla.org/blog/what-the-blackhats-dont-want-you-to-know-series/)
 - [http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html](http://fumalwareanalysis.blogspot.ru/p/malware-analysis-tutorials-reverse.html)
 - [http://www.woodmann.com/TiGa/idaseries.html](http://www.woodmann.com/TiGa/idaseries.html)
 - [http://visi.kenshoto.com/viki/MainPage](http://visi.kenshoto.com/viki/MainPage)
