@@ -254,6 +254,7 @@ All that things I need to pass OSCP, i think =)
 - [http://insidetrust.blogspot.nl/2011/04/quick-guide-to-linux-privilege.html](http://insidetrust.blogspot.nl/2011/04/quick-guide-to-linux-privilege.html)
 
 ### Tunneling & Port Forwarding
+- [https://www.sans.org/reading-room/whitepapers/testing/tunneling-pivoting-web-application-penetration-testing-36117](https://www.sans.org/reading-room/whitepapers/testing/tunneling-pivoting-web-application-penetration-testing-36117)
 - [https://highon.coffee/blog/reverse-shell-cheat-sheet/](https://highon.coffee/blog/reverse-shell-cheat-sheet/)
 - [https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/](https://highon.coffee/blog/ssh-meterpreter-pivoting-techniques/)
 - [http://staff.washington.edu/corey/fw/ssh-port-forwarding.html](http://staff.washington.edu/corey/fw/ssh-port-forwarding.html)
