@@ -15,8 +15,9 @@ Learn how to use Docker
 
 - [Docker Site](https://www.docker.com/)
 - [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software))
+- [Awesome Docker/](https://veggiemonk.github.io/awesome-docker/)
 
-### First steps with Docker 
+### First steps with Docker
 {% highlight bash %}
 # install docker
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
@@ -57,7 +58,7 @@ sudo docker ps
 sudo docker commit <container id> baseimage-nginx
 sudo docker stop <container id>
 
-# launch nginx image 
+# launch nginx image
 sudo docker run --name docker-nginx --dns 192.168.0.1 -p 127.0.0.1:222:22 -p 127.0.0.1:8080:80 -d -i -t baseimage-nginx /sbin/my_init
 curl localhost:8080
 
@@ -67,7 +68,7 @@ sudo docker stop docker-nginx
 # rollback to last image version
 sudo docker run -i -t baseimage-nginx:latest /sbin/my_init --skip-startup-files -- bash -l
 
-# export container image 
+# export container image
 sudo docker save -o baseimage-nginx.img baseimage-nginx
 
 # import container image
