@@ -155,6 +155,7 @@
 <ul>
   <li><a href="https://www.docker.com/">Docker Site</a></li>
   <li><a href="https://en.wikipedia.org/wiki/Docker_(software)">Wikipedia</a></li>
+  <li><a href="https://veggiemonk.github.io/awesome-docker/">Awesome Docker/</a></li>
 </ul>
 
 <h3 id="first-steps-with-docker">First steps with Docker</h3>
@@ -198,7 +199,7 @@ sudo docker ps
 sudo docker commit &lt;container id&gt; baseimage-nginx
 sudo docker stop &lt;container id&gt;
 
-<span class="c"># launch nginx image </span>
+<span class="c"># launch nginx image</span>
 sudo docker run --name docker-nginx --dns 192.168.0.1 -p 127.0.0.1:222:22 -p 127.0.0.1:8080:80 -d -i -t baseimage-nginx /sbin/my_init
 curl localhost:8080
 
@@ -208,7 +209,7 @@ sudo docker stop docker-nginx
 <span class="c"># rollback to last image version</span>
 sudo docker run -i -t baseimage-nginx:latest /sbin/my_init --skip-startup-files -- bash -l
 
-<span class="c"># export container image </span>
+<span class="c"># export container image</span>
 sudo docker save -o baseimage-nginx.img baseimage-nginx
 
 <span class="c"># import container image</span>
