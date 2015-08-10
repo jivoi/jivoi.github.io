@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-08-07T17:12:59+03:00</updated>
+<updated>2015-08-10T15:52:06+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -4208,33 +4208,33 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 
 &lt;h3 id=&quot;oscp-reviews&quot;&gt;OSCP Reviews&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;http://0xdeadcode.se/archives/165&lt;/li&gt;
-  &lt;li&gt;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&lt;/li&gt;
-  &lt;li&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/li&gt;
-  &lt;li&gt;http://blog.pauldrapeau.com/oscp/&lt;/li&gt;
-  &lt;li&gt;http://buffered.io/posts/oscp-and-me/&lt;/li&gt;
-  &lt;li&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/li&gt;
-  &lt;li&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/li&gt;
-  &lt;li&gt;http://netsec.ws/?p=398&lt;/li&gt;
-  &lt;li&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/li&gt;
-  &lt;li&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/li&gt;
-  &lt;li&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/li&gt;
-  &lt;li&gt;http://www.en-lightn.com/?p=941&lt;/li&gt;
-  &lt;li&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/li&gt;
-  &lt;li&gt;http://www.jasonbernier.com/oscp-review/&lt;/li&gt;
-  &lt;li&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/li&gt;
-  &lt;li&gt;http://www.mogozobo.com/?p=1831&lt;/li&gt;
-  &lt;li&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/li&gt;
-  &lt;li&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/li&gt;
-  &lt;li&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/li&gt;
-  &lt;li&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/li&gt;
-  &lt;li&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/li&gt;
-  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&lt;/li&gt;
-  &lt;li&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks/&lt;/li&gt;
-  &lt;li&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/li&gt;
-  &lt;li&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/li&gt;
-  &lt;li&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/li&gt;
-  &lt;li&gt;http://nwalsh.me/?p=102&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://0xdeadcode.se/archives/165&quot;&gt;http://0xdeadcode.se/archives/165&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&quot;&gt;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&quot;&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.pauldrapeau.com/oscp/&quot;&gt;http://blog.pauldrapeau.com/oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://buffered.io/posts/oscp-and-me/&quot;&gt;http://buffered.io/posts/oscp-and-me/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://fourfourfourfour.co/2014/04/20/oscp-review/&quot;&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&quot;&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://netsec.ws/?p=398&quot;&gt;http://netsec.ws/?p=398&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://overflowsecurity.com/oscp-review-eagle11/&quot;&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&quot;&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&quot;&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.en-lightn.com/?p=941&quot;&gt;http://www.en-lightn.com/?p=941&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&quot;&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jasonbernier.com/oscp-review/&quot;&gt;http://www.jasonbernier.com/oscp-review/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&quot;&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mogozobo.com/?p=1831&quot;&gt;http://www.mogozobo.com/?p=1831&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&quot;&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&quot;&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.securitysift.com/offsec-pwb-oscp/&quot;&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&quot;&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://n3ko1.github.io/certification/2015/05/27/oscp---offensive-security-certified-professional/&quot;&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&quot;&gt;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks&quot;&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&quot;&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&quot;&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&quot;&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nwalsh.me/?p=102&quot;&gt;http://nwalsh.me/?p=102&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
@@ -4244,34 +4244,33 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 
 &lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;Web Penetration Testing with Kali Linux&lt;/li&gt;
-  &lt;li&gt;Penetration Testing: A Hands-On Introduction to Hacking&lt;/li&gt;
-  &lt;li&gt;Mastering Kali Linux for Advanced Penetration Testing&lt;/li&gt;
-  &lt;li&gt;Building Virtual Pentesting Labs for Advanced Penetration Testing&lt;/li&gt;
-  &lt;li&gt;Penetration Testing with the Bash shell&lt;/li&gt;
-  &lt;li&gt;Lee Allen - Advanced Penetration Testing for Highly-Secured Environments, The Ultimate Security Guide&lt;/li&gt;
-  &lt;li&gt;Metasploit. The Penetration Tester-s Guide.&lt;/li&gt;
-  &lt;li&gt;Himanshu Kumar - Learning Nessus for Penetration Testing&lt;/li&gt;
-  &lt;li&gt;Rtfm: Red Team Field Manual&lt;/li&gt;
-  &lt;li&gt;Brian Ward - How Linux Works - What Every Superuser Should Know&lt;/li&gt;
-  &lt;li&gt;Metasploit Penetration Testing Cookbook&lt;/li&gt;
-  &lt;li&gt;Penetration Testing with Raspberry Pi&lt;/li&gt;
-  &lt;li&gt;Penetration Testing with the Bash shell&lt;/li&gt;
-  &lt;li&gt;Gray Hat Hacking the Ethical Hacker’s Handbook&lt;/li&gt;
-  &lt;li&gt;Black Hat Python Python Programming for Hackers and Pentesters&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Web-Penetration-Testing-Kali-Linux/dp/1782163166&quot;&gt;Web Penetration Testing with Kali Linux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-Hands-On-Introduction-Hacking/dp/1593275641&quot;&gt;Penetration Testing: A Hands-On Introduction to Hacking&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Mastering-Linux-Advanced-Penetration-Testing/dp/1782163123&quot;&gt;Mastering Kali Linux for Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Building-Virtual-Pentesting-Advanced-Penetration/dp/1783284773&quot;&gt;Building Virtual Pentesting Labs for Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-shell-Keith-Makan/dp/1849695105&quot;&gt;Penetration Testing with the Bash shell&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Advanced-Penetration-Testing-Highly-Secured-Environments/dp/1849517746&quot;&gt;Advanced Penetration Testing for Highly-Secured Environments: The Ultimate Security Guide&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Metasploit-The-Penetration-Testers-Guide/dp/159327288X&quot;&gt;Metasploit: The Penetration Tester-s Guide&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Learning-Nessus-Penetration-Testing-Himanshu/dp/1783550996&quot;&gt;Learning Nessus for Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Rtfm-Red-Team-Field-Manual/dp/1494295504&quot;&gt;Rtfm: Red Team Field Manual&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/How-Linux-Works-Superuser-Should/dp/1593270356&quot;&gt;How Linux Works: What Every Superuser Should Know&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Metasploit-Penetration-Testing-Cookbook-Abhinav/dp/1849517428&quot;&gt;Metasploit Penetration Testing Cookbook&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-Raspberry-Joseph-Muniz/dp/1784396435&quot;&gt;Penetration Testing with Raspberry Pi&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Hacking-Ethical-Hackers-Handbook-Edition/dp/0071742557&quot;&gt;Gray Hat Hacking the Ethical Hacker’s Handbook&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Black-Hat-Python-Programming-Pentesters/dp/1593275900&quot;&gt;Black Hat Python Python Programming for Hackers and Pentesters&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;Баранцев - Тестирование защищенности веб-приложений&lt;/li&gt;
-  &lt;li&gt;Advanced Penetration Testing&lt;/li&gt;
-  &lt;li&gt;Packtpub - Kali Linux Web App Testing&lt;/li&gt;
-  &lt;li&gt;Pentestit.ru video&lt;/li&gt;
-  &lt;li&gt;Udemy - Certified Metasploit Framework Professional&lt;/li&gt;
-  &lt;li&gt;CybraryIT - Post Exploitation Hacking&lt;/li&gt;
-  &lt;li&gt;InfiniteSkills - Advanced White Hat Hacking And Penetration Testing&lt;/li&gt;
-  &lt;li&gt;InfiniteSkills - Learning Whitehat Hacking and Penetration Testing&lt;/li&gt;
-  &lt;li&gt;InfiniteSkills - Reverse Engineering and Exploit Development&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://software-testing.ru/trainings/schedule?task=3&amp;amp;cid=189&quot;&gt;Баранцев - Тестирование защищенности веб-приложений - RUS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/user/PentestITLab/videos&quot;&gt;Pentestit.ru Video - RUS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.packtpub.com/web-development/kali-linux-web-app-testingvideo&quot;&gt;Packtpub - Kali Linux Web App Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.coursetalk.com/providers/udemy/courses/certified-metasploit-framework-professional-module-1&quot;&gt;Udemy - Certified Metasploit Framework Professional&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cybrary.it/course/advanced-penetration-testing/&quot;&gt;CybraryIT - Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cybrary.it/course/post-exploitation-hacking/&quot;&gt;CybraryIT - Post Exploitation Hacking&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/advanced-white-hat-hacking-and-penetration-testing.html&quot;&gt;InfiniteSkills - Advanced White Hat Hacking And Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/learning-whitehat-hacking-and-penetration-testing.html&quot;&gt;InfiniteSkills - Learning Whitehat Hacking and Penetration Testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/reverse-engineering-and-exploit-development.html&quot;&gt;InfiniteSkills - Reverse Engineering and Exploit Development&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/19/oscp-prepare/&quot;&gt;OSCP Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2015.&lt;/p&gt;</content>
