@@ -379,4 +379,4 @@ add_header X-Content-Type-Options "nosniff" always;
 
 # check header
 https://securityheaders.io/
-{% endhighlig
+{% endhighlight %}
