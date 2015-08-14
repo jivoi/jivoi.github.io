@@ -361,3 +361,22 @@ location / {
   ';
 }
 {% endhighlight %}
+
+### Hardening HTTP response headers
+{% highlight nginx %}
+add_header Content-Security-Policy "default-src https: data: 'unsafe-inline' 'unsafe-eval'" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubdomains" always;
+add_header Public-Key-Pins "pin-sha256='X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=';
+pin-sha256='MHJYVThihUrJcxW6wcqyOISTXIsInsdj3xK8QrZbHec=';
+pin-sha256='isi41AizREkLvvft0IRW4u3XMFR2Yg7bvrF7padyCJg=';
+includeSubdomains; max-age=2592000" always;
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Xss-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+
+# change nginx server header
+./src/http/ngx_http_header_filter_module.c
+
+# check header
+https://securityheaders.io/
+{% endhighlig
