@@ -5,13 +5,470 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-08-12T18:17:35+03:00</updated>
+<updated>2015-08-14T16:34:52+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Free #aaS Resources List]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/08/14/free-aas-resources-list/" />
+  <id>https://jivoi.github.io/2015/08/14/free-aas-resources-list</id>
+  <updated>2015-08-14 14:06:18 +0300T00:00:00-00:00</updated>
+  <published>2015-08-14T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;The list of software (SaaS, PaaS, IaaS, etc.) and other offerings which have a free service or tier.
+The scope of this list is limited to things infrastructure developers - System Administrator, DevOps Practitioners, etc.&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#source-code-repos&quot; id=&quot;markdown-toc-source-code-repos&quot;&gt;Source Code Repos&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tools-for-teams--collaboration&quot; id=&quot;markdown-toc-tools-for-teams--collaboration&quot;&gt;Tools for teams &amp;amp; Collaboration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#code-quality&quot; id=&quot;markdown-toc-code-quality&quot;&gt;Code Quality&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#code-search-and-browsing&quot; id=&quot;markdown-toc-code-search-and-browsing&quot;&gt;Code Search and Browsing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ci--cd&quot; id=&quot;markdown-toc-ci--cd&quot;&gt;CI / CD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#security-and-pki&quot; id=&quot;markdown-toc-security-and-pki&quot;&gt;Security and PKI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#management-systems&quot; id=&quot;markdown-toc-management-systems&quot;&gt;Management Systems&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#log-management&quot; id=&quot;markdown-toc-log-management&quot;&gt;Log Management&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#translation-management&quot; id=&quot;markdown-toc-translation-management&quot;&gt;Translation Management&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#analytics&quot; id=&quot;markdown-toc-analytics&quot;&gt;Analytics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#monitoring&quot; id=&quot;markdown-toc-monitoring&quot;&gt;Monitoring&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#crash--exception-handling&quot; id=&quot;markdown-toc-crash--exception-handling&quot;&gt;Crash / Exception handling&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#search&quot; id=&quot;markdown-toc-search&quot;&gt;Search&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#email&quot; id=&quot;markdown-toc-email&quot;&gt;Email&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#cdn-and-protection&quot; id=&quot;markdown-toc-cdn-and-protection&quot;&gt;CDN and Protection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#paas&quot; id=&quot;markdown-toc-paas&quot;&gt;PaaS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#baas&quot; id=&quot;markdown-toc-baas&quot;&gt;BaaS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#web-hosting&quot; id=&quot;markdown-toc-web-hosting&quot;&gt;Web Hosting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#iaas&quot; id=&quot;markdown-toc-iaas&quot;&gt;IaaS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dbaas&quot; id=&quot;markdown-toc-dbaas&quot;&gt;DBaaS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#stun-webrtc-web-socket-servers-and-other-routers&quot; id=&quot;markdown-toc-stun-webrtc-web-socket-servers-and-other-routers&quot;&gt;STUN, WebRTC, Web Socket Servers and other Routers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#issue-tracking--project-management&quot; id=&quot;markdown-toc-issue-tracking--project-management&quot;&gt;Issue tracking / Project management&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#storage-and-media-processing&quot; id=&quot;markdown-toc-storage-and-media-processing&quot;&gt;Storage and Media Processing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#data-visualization-on-maps&quot; id=&quot;markdown-toc-data-visualization-on-maps&quot;&gt;Data Visualization on Maps&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#package-build-systems&quot; id=&quot;markdown-toc-package-build-systems&quot;&gt;Package Build Systems&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ide-and-code-editing&quot; id=&quot;markdown-toc-ide-and-code-editing&quot;&gt;IDE and Code Editing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#analytics-events-andstatistics&quot; id=&quot;markdown-toc-analytics-events-andstatistics&quot;&gt;Analytics, Events andStatistics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#international-mobile-number-verification-api-and-sdk&quot; id=&quot;markdown-toc-international-mobile-number-verification-api-and-sdk&quot;&gt;International Mobile number verification API and SDK&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#payment--billing-integration&quot; id=&quot;markdown-toc-payment--billing-integration&quot;&gt;Payment / Billing Integration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-packs&quot; id=&quot;markdown-toc-other-packs&quot;&gt;Other Packs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#docker-related&quot; id=&quot;markdown-toc-docker-related&quot;&gt;Docker Related&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#alternate-container-hosting&quot; id=&quot;markdown-toc-alternate-container-hosting&quot;&gt;Alternate container hosting&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#vagrant-related&quot; id=&quot;markdown-toc-vagrant-related&quot;&gt;Vagrant Related&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#vagrant-box-indexes&quot; id=&quot;markdown-toc-vagrant-box-indexes&quot;&gt;Vagrant box indexes&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#data-mining&quot; id=&quot;markdown-toc-data-mining&quot;&gt;Data mining&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;source-code-repos&quot;&gt;Source Code Repos&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bitbucket.org/&quot;&gt;https://bitbucket.org/&lt;/a&gt; - Unlimited public and private git repos for small teams&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://chiselapp.com/&quot;&gt;http://chiselapp.com/&lt;/a&gt; - Unlimited public and private Fossil repositories&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com&quot;&gt;https://github.com&lt;/a&gt; - Free for an unlimited number of public repositories&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://about.gitlab.com/&quot;&gt;https://about.gitlab.com/&lt;/a&gt; - Unlimited public and private git repos with unlimited collaborators&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hub.jazz.net/&quot;&gt;https://hub.jazz.net/&lt;/a&gt; - Unlimited public repos, private repos free for up to 3 accounts.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://visualstudio.com&quot;&gt;https://visualstudio.com&lt;/a&gt; - Free unlimited private repos (Git and TFS) for up to 5 users per team&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://assembla.com&quot;&gt;https://assembla.com&lt;/a&gt; - Free repo hosting in a free plan.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tools-for-teams--collaboration&quot;&gt;Tools for teams &amp;amp; Collaboration&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://appear.in/&quot;&gt;http://appear.in/&lt;/a&gt; - One click video conversations, for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.hall.com/&quot;&gt;http://www.hall.com/&lt;/a&gt; - Free for unlimited users with some feature limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.flowdock.com/&quot;&gt;https://www.flowdock.com/&lt;/a&gt; - Chat and inbox, free for teams of 5 or less&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://slack.com&quot;&gt;https://slack.com&lt;/a&gt; - Free for unlimited users with some feature limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hipchat.com&quot;&gt;https://hipchat.com&lt;/a&gt; - Free for unlimited users with some feature limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gitter.im&quot;&gt;https://gitter.im&lt;/a&gt; - “Chat, for GitHub”. Unlimited public &amp;amp; private rooms, free for teams of up to 25&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.google.com/hangouts/&quot;&gt;http://www.google.com/hangouts/&lt;/a&gt; - One place for all your Conversations, for free (Need Google Account)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kato.im&quot;&gt;https://kato.im&lt;/a&gt; - Team Chat &amp;amp; Collaboration, free for unlimited users with some feature limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://seafile.com/&quot;&gt;http://seafile.com/&lt;/a&gt; - Private or cloud storage, file sharing, sync, discussions. Private version is full. Cloud version has just 1 GB.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sameroom.io&quot;&gt;https://sameroom.io&lt;/a&gt; - Free for unlimited users with some feature limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://yammer.com/&quot;&gt;https://yammer.com/&lt;/a&gt; - Private social network standalone or for MS Office 365. Free, just a bit less admin tools and users management features.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.blockspring.com/&quot;&gt;https://www.blockspring.com/&lt;/a&gt; - Share scripts with anyone on your team: cross language and with spreadsheet users. Free for 5 million runs a month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://helpmonks.com/&quot;&gt;https://helpmonks.com/&lt;/a&gt; - Shared inbox for teams - Free for open source projects and non-profit organizations.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://typetalk.in/&quot;&gt;http://typetalk.in/&lt;/a&gt; - Share and discuss ideas with your team through instant messaging on the web or on your mobile.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;code-quality&quot;&gt;Code Quality&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tachikoma.io&quot;&gt;http://tachikoma.io&lt;/a&gt; - Dependency Update for Ruby, Node.js, Perl projects - free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://landscape.io/&quot;&gt;https://landscape.io/&lt;/a&gt; - Code Quality for Python projects, free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeclimate.com/&quot;&gt;https://codeclimate.com/&lt;/a&gt; - Automated code review, free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://houndci.com/&quot;&gt;https://houndci.com/&lt;/a&gt; - Comments on github commits about code quality - free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://coveralls.io/&quot;&gt;https://coveralls.io/&lt;/a&gt; - Display test coverage reports - free for open source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scrutinizer-ci.com/&quot;&gt;https://scrutinizer-ci.com/&lt;/a&gt; - Continuous inspection platform - free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codecov.io/&quot;&gt;https://codecov.io/&lt;/a&gt; - Code coverage tool (SaaS), free for 1 private project and no restrictions for publics repos&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://insight.sensiolabs.com/&quot;&gt;https://insight.sensiolabs.com/&lt;/a&gt; - Code Quality for PHP/Symfony projects, free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.codacy.com/&quot;&gt;https://www.codacy.com/&lt;/a&gt; - Automated code reviews for PHP, Python, Javascript, Scala and CSS - free for open source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pullreview.com&quot;&gt;https://www.pullreview.com&lt;/a&gt; - Automated Code Review for Ruby in GitHub, Bitbucket and Gitlab - free for Open Source&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;code-search-and-browsing&quot;&gt;Code Search and Browsing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sourcegraph.com/&quot;&gt;https://sourcegraph.com/&lt;/a&gt; - Java, Go, Python, Node.js, etc., code search/cross-references - free for open source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://searchcode.com/&quot;&gt;https://searchcode.com/&lt;/a&gt; - comprehensive text-based code search - free for open source&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ci--cd&quot;&gt;CI / CD&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codeship.com/&quot;&gt;https://codeship.com/&lt;/a&gt; - 100 private builds / month, 5 private projects.Unlimited for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://circleci.com&quot;&gt;https://circleci.com&lt;/a&gt; - Free for one concurrent build&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://travis-ci.org&quot;&gt;https://travis-ci.org&lt;/a&gt; - Free for public Github repositories.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wercker.com/&quot;&gt;http://wercker.com/&lt;/a&gt; - Free for public and private repositories&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://drone.io/&quot;&gt;https://drone.io/&lt;/a&gt; - CI platform that includes browser testing, free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://semaphoreci.com/&quot;&gt;https://semaphoreci.com/&lt;/a&gt; - 100 private builds / month. Unlimited for Open Source.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.shippable.com/&quot;&gt;http://www.shippable.com/&lt;/a&gt; - Free for 1 build container, private and public repos, unlimited builds.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://snap-ci.com&quot;&gt;https://snap-ci.com&lt;/a&gt; - Free for public repositories, 1 build at the time&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.appveyor.com/&quot;&gt;http://www.appveyor.com/&lt;/a&gt; - CD service for Windows. Free for open-source projects.&lt;/li&gt;
+  &lt;li&gt;[&lt;a href=&quot;https://github.com/ligurio/Continuous-Integration-services&quot;&gt;https://github.com/ligurio/Continuous-Integration-services&lt;/a&gt; - Comparison of Continuous Integration services&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://saucelabs.com/&quot;&gt;https://saucelabs.com/&lt;/a&gt; - CI with scalable testing for mobile and web apps, free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ftploy.com/&quot;&gt;http://ftploy.com/&lt;/a&gt; - 1 project w/unlimited deployments&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deployhq.com/&quot;&gt;https://deployhq.com/&lt;/a&gt; - 1 project w/10 daily deployments&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hub.jazz.net/&quot;&gt;https://hub.jazz.net/&lt;/a&gt; - 60 minutes of free build time / month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://styleci.io/&quot;&gt;https://styleci.io/&lt;/a&gt; - Public GitHub repositories only.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;security-and-pki&quot;&gt;Security and PKI&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vaddy.net&quot;&gt;http://vaddy.net&lt;/a&gt; - Continuous web security testing with continuous integration (CI) tools. 3 domains, 10 scan history for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.globalsign.com/en/ssl/ssl-open-source/&quot;&gt;https://www.globalsign.com/en/ssl/ssl-open-source/&lt;/a&gt; - Free SSL certs for Open Source projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.startssl.com/&quot;&gt;https://www.startssl.com/&lt;/a&gt; - Free SSL certs&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stormpath.com/&quot;&gt;https://stormpath.com/&lt;/a&gt; - Free user management, authentication, social login, and SSO.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.com/&quot;&gt;https://auth0.com/&lt;/a&gt; - Hosted free for development SSO&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://getclef.com/&quot;&gt;https://getclef.com/&lt;/a&gt; - New take on auth unlimited free tier for anyone not using premium features&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ringcaptcha.com/&quot;&gt;https://ringcaptcha.com/&lt;/a&gt; - Tools to use phone number as id, available for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ssllabs.com/ssltest/&quot;&gt;https://www.ssllabs.com/ssltest/&lt;/a&gt; - Very deep analysis of the configuration of any SSL web server&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://qualys.com/forms/freescan/owasp/&quot;&gt;https://qualys.com/forms/freescan/owasp/&lt;/a&gt; - Find web app vulnerabilities, audit for OWASP Risks&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.alienvault.com/open-threat-exchange/threatfinder&quot;&gt;https://www.alienvault.com/open-threat-exchange/threatfinder&lt;/a&gt; - Uncovers compromised systems in your network&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://duosecurity.com&quot;&gt;https://duosecurity.com&lt;/a&gt; - Two-factor authentication (2FA) for website or app. Free 10 users, all authentication methods, unlimited, integrations, hardware tokens.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;management-systems&quot;&gt;Management Systems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://opbeat.com/&quot;&gt;https://opbeat.com/&lt;/a&gt; - Release, deploy, monitor. Free for 3 users&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bitnami.com/&quot;&gt;https://bitnami.com/&lt;/a&gt; - Deploy prepared apps on IaaS. Management of 1 AWS micro instance free&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;log-management&quot;&gt;Log Management&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://papertrailapp.com/&quot;&gt;https://papertrailapp.com/&lt;/a&gt; - 48 hours search, 7 day archive, 100MB/month&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://logentries.com/&quot;&gt;https://logentries.com/&lt;/a&gt; - Free up to 5GB/month with 7 day retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.loggly.com/&quot;&gt;https://www.loggly.com/&lt;/a&gt; - Free for a single user, see the lite option&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sematext.com/logsene&quot;&gt;http://sematext.com/logsene&lt;/a&gt; - Free for 1M logs, unlimited retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sumologic.com&quot;&gt;https://www.sumologic.com&lt;/a&gt; - Free up to 500MB/day, 7 day retention&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;translation-management&quot;&gt;Translation Management&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lingohub.com&quot;&gt;https://lingohub.com&lt;/a&gt; - free up to 3 users, Open Source projects are always free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.getlocalization.com/&quot;&gt;https://www.getlocalization.com/&lt;/a&gt; - free for public projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://webtranslateit.com&quot;&gt;http://webtranslateit.com&lt;/a&gt; - free up to 500 strings&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://transifex.com&quot;&gt;http://transifex.com&lt;/a&gt; - free for Open Source projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.oneskyapp.com/&quot;&gt;http://www.oneskyapp.com/&lt;/a&gt; - limited free edition for up to 5 users, free for Open Source projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://crowdin.com&quot;&gt;https://crowdin.com&lt;/a&gt; - Unlimited projects, unlimited strings and collaborators for Open Source projects&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;analytics&quot;&gt;Analytics&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.splunk.com/en_us/products/splunk-cloud.html&quot;&gt;http://www.splunk.com/en&lt;/a&gt; - Upload 5GB of data per day up to 28GB of total data stored&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://parse.com&quot;&gt;https://parse.com&lt;/a&gt; - Unlimited free analytics&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keen.io&quot;&gt;https://keen.io&lt;/a&gt; - Up to 50,000 events/month free&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;monitoring&quot;&gt;Monitoring&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.appneta.com&quot;&gt;http://www.appneta.com&lt;/a&gt; - Free with 1 hour data retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.thousandeyes.com&quot;&gt;https://www.thousandeyes.com-&lt;/a&gt; - Network &amp;amp; user experience monitoring. 3 locations, plus 20 data feeds of major web services free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.datadoghq.com/&quot;&gt;https://www.datadoghq.com/&lt;/a&gt; - Free for up to 5 nodes&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.stackdriver.com/&quot;&gt;http://www.stackdriver.com/&lt;/a&gt; - Free for up to 10 nodes/services&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://keymetrics.io/&quot;&gt;https://keymetrics.io/&lt;/a&gt; - Free for 2 servers with 7 days data retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://newrelic.com/&quot;&gt;http://newrelic.com/&lt;/a&gt; - Free with 24 hour data retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nodequery.com/&quot;&gt;https://nodequery.com/&lt;/a&gt; - Free basic server monitor up to 10 servers&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pingdom.com/free/&quot;&gt;https://www.pingdom.com/free/&lt;/a&gt; - 1 site free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.watchsumo.com/&quot;&gt;http://www.watchsumo.com/&lt;/a&gt; - Free website uptime monitoring&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.opsgenie.com/&quot;&gt;https://www.opsgenie.com/&lt;/a&gt; - Alert management with mobile push. 600 free alerts for 2 users a month&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.runscope.com/&quot;&gt;https://www.runscope.com/&lt;/a&gt; - Monitor and log API usage.Single user 10,000 request/month free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.circonus.com/&quot;&gt;http://www.circonus.com/&lt;/a&gt; - Free for 20 metrics&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://uptimerobot.com/&quot;&gt;https://uptimerobot.com/&lt;/a&gt; - Website monitoring, 50 monitors free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.statuscake.com/&quot;&gt;https://www.statuscake.com/&lt;/a&gt; - Website monitoring, unlimited tests free with limitations&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.boundary.com/&quot;&gt;http://www.boundary.com/&lt;/a&gt; - Free 1 second resolution for up to 10 servers&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ghostinspector.com/&quot;&gt;https://ghostinspector.com/&lt;/a&gt; - Free website and web application monitoring. Single user, 100 test runs per month&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://java-monitor.com/&quot;&gt;http://java-monitor.com/&lt;/a&gt; - Free monitoring of JVM’s and uptime&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sematext.com/spm&quot;&gt;http://sematext.com/spm&lt;/a&gt; - Free for 24h metrics, unlimited number of servers, 10 custom metrics, 500K custom metrics data points, unlimited dashboards, users, etc.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sealion.com/&quot;&gt;https://sealion.com/&lt;/a&gt; - Free up to 2 servers, 3 days data retention, graphs and raw command output history (&lt;code&gt;top&lt;/code&gt;, &lt;code&gt;ps&lt;/code&gt;, &lt;code&gt;ifconfig&lt;/code&gt;, &lt;code&gt;netstat&lt;/code&gt;, &lt;code&gt;iostat&lt;/code&gt;, &lt;code&gt;free&lt;/code&gt;, custom, etc.)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.stathat.com&quot;&gt;https://www.stathat.com&lt;/a&gt; - Get started with ten stats for free, no expiration.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.skylight.io&quot;&gt;https://www.skylight.io&lt;/a&gt; - Free for first 100k requests&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.appdynamics.com&quot;&gt;https://www.appdynamics.com&lt;/a&gt; - Free for 24h metrics, application performance management agents limited to one Java, one .NET, one PHP, and one Node.js&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deadmanssnitch.com&quot;&gt;https://deadmanssnitch.com&lt;/a&gt; - Monitoring for cron jobs. 1 free snitch (monitor) - more available if you refer others to sign up&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;crash--exception-handling&quot;&gt;Crash / Exception handling&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://rollbar.com/&quot;&gt;https://rollbar.com/&lt;/a&gt; - Exception and error monitoring, free plan - 5000 errors/month, unlimited users, 30 days retention.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bugsnag.com/&quot;&gt;https://bugsnag.com/&lt;/a&gt; - Free for up to 2000 errors a month after the initial trial&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://airbrake.io/&quot;&gt;https://airbrake.io/&lt;/a&gt; - Free for 1 project, 1 user, 2 errors per minute, 2 day retention&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://getsentry.com/&quot;&gt;http://getsentry.com/&lt;/a&gt; - Sentry tracks app exceptions in realtime, has a small free plan. Free, unrestricted use if self-hosted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;search&quot;&gt;Search&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.algolia.com&quot;&gt;https://www.algolia.com&lt;/a&gt; - Hosted search-as-you-type (instant). Free hacker plan up to 1,000 documents and 50,000 operations. Bigger free plans available for community/open source projects.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://swiftype.com&quot;&gt;https://swiftype.com&lt;/a&gt; - hosted search solution (API and crawler). Free for a single search engine with up to 1000 documents. Free upgrade to Premium level for open-source projects.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bonsai.io&quot;&gt;https://bonsai.io&lt;/a&gt; - Free 1GB memory and 1GB storage.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.searchly.com&quot;&gt;http://www.searchly.com&lt;/a&gt; - Free 2 Indices and 5MB storage.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;email&quot;&gt;Email&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.sparkpost.com/&quot;&gt;http://www.sparkpost.com/&lt;/a&gt; - First 10,000 emails per month are free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mailgun.com/&quot;&gt;http://www.mailgun.com/&lt;/a&gt; - First 10,000 emails per month are free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mailchimp.com/&quot;&gt;http://mailchimp.com/&lt;/a&gt; - 2,000 subscribers and 12,000 emails per month are free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sendloop.com/&quot;&gt;https://sendloop.com/&lt;/a&gt; - 2,000 subscribers and 10,000 email delivery every month is free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sendgrid.com/&quot;&gt;http://sendgrid.com/&lt;/a&gt; - 400 emails per day for free/25,000 free transactional emails per month for emails sent from a Google compute instance&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mandrill.com/&quot;&gt;http://mandrill.com/&lt;/a&gt; - First 12,000 emails per month are free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.phplist.com/&quot;&gt;https://www.phplist.com/&lt;/a&gt; - Hosted version allow 300 mails per month for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mailjet.com/&quot;&gt;https://www.mailjet.com/&lt;/a&gt; - 6000 mails per month for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.sendinblue.com/&quot;&gt;https://www.sendinblue.com/&lt;/a&gt; - 9000 mails per month for free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mailtrap.io&quot;&gt;https://mailtrap.io&lt;/a&gt; - fake SMTP server for development, free plan with 1 inbox, 50 messages, no team members, 2 emails/sec, no forward rules&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mailstache.io&quot;&gt;https://mailstache.io&lt;/a&gt; - 4 Mailboxes @ 1GB each for up to 2 custom domains.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://postmarkapp.com&quot;&gt;https://postmarkapp.com&lt;/a&gt; - First 25,000 emails are free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zoho.com/mail/&quot;&gt;https://www.zoho.com/mail/&lt;/a&gt; - Free Email management and collaboration for up to 10 users.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://moosend.com/&quot;&gt;http://moosend.com/&lt;/a&gt; — Mailing list management service. Free account for 6 months for startups.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cdn-and-protection&quot;&gt;CDN and Protection&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cloudflare.com/&quot;&gt;http://www.cloudflare.com/&lt;/a&gt; - Basic service is free, good for a blog&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.bootstrapcdn.com/&quot;&gt;http://www.bootstrapcdn.com/&lt;/a&gt; - CDN for bootstrap, bootswatch and font awesome&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://surge.sh&quot;&gt;https://surge.sh&lt;/a&gt; - Zero-bullshit, single–command, bring your own source control web publishing CDN.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cdnjs.com/&quot;&gt;https://cdnjs.com/&lt;/a&gt; - CDN for JavaScript libraries, CSS libraries, SWF, images, etc!&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jsdelivr.com/&quot;&gt;http://www.jsdelivr.com/&lt;/a&gt; - super-fast CDN of OSS (JS, CSS, fonts) for developers and webmasters, accepts PRs to add more&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.google.com/speed/libraries/&quot;&gt;https://developers.google.com/speed/libraries/&lt;/a&gt; - The Google Hosted Libraries is a content distribution network for the most popular, open-source JavaScript libraries.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.asp.net/ajax/cdn&quot;&gt;https://www.asp.net/ajax/cdn&lt;/a&gt; - The Microsoft Ajax Content Delivery Network (CDN) hosts popular third party JavaScript libraries such as jQuery and enables you to easily add them to your Web application&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://toranproxy.com/&quot;&gt;https://toranproxy.com/&lt;/a&gt; - Proxy for Packagist and GitHub. Never fail CD. Free for personal use, 1 developer, no support.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://rawgit.com&quot;&gt;http://rawgit.com&lt;/a&gt; - free limited traffic, serves raw files directly from GitHub with proper Content-Type headers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;paas&quot;&gt;PaaS&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.google.com/appengine/&quot;&gt;https://cloud.google.com/appengine/&lt;/a&gt; - Google App Engine gives 28 instance hours free, 1Gb NoSQL Database and more.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.engineyard.com&quot;&gt;https://www.engineyard.com&lt;/a&gt; - Engine Yard provides 500 free hours&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://azure.microsoft.com/&quot;&gt;http://azure.microsoft.com/&lt;/a&gt; - MS Azure gives $200 worth of free usage for a trial&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hpcloud.com/&quot;&gt;http://hpcloud.com/&lt;/a&gt; - $300 credit over 90 days.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://appharbor.com/&quot;&gt;https://appharbor.com/&lt;/a&gt; - A .Net PaaS that provides 1 free worker&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shellycloud.com/&quot;&gt;https://shellycloud.com/&lt;/a&gt; - Platform for hosting Ruby and Ruby on Rails apps. Shelly Cloud gives €20 free credit&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.heroku.com/&quot;&gt;https://www.heroku.com/&lt;/a&gt; - Host your apps in the cloud, free for single process apps&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.firebase.com/&quot;&gt;https://www.firebase.com/&lt;/a&gt; - Build realtime apps, free plan has 50 Max Connections, 5 GB Data Transfer, 100 MB Data Storage. 1 GB Hosting Storage and 100 GB Hosting Transfer.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bluemix.net/&quot;&gt;https://bluemix.net/&lt;/a&gt; - IBM PaaS with a monthly free allowance&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.openshift.com/&quot;&gt;https://www.openshift.com/&lt;/a&gt; - Red Hat PaaS, free tier provides three small gears (each with 512MB memory, 1GB storage.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://scalingo.com&quot;&gt;https://scalingo.com&lt;/a&gt; - Free Tier, up to 3 apps, 1 container each, combined with data store addons free tier&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://algorithmia.com&quot;&gt;https://algorithmia.com&lt;/a&gt; - Host algorithms for free - includes 10,000 credits (seconds of on-demand execution time) free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bigml.com/&quot;&gt;https://bigml.com/&lt;/a&gt; - Hosted machine learning algorithms. Unlimited free tasks for development, limit of 16MB data per task&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.activestate.com/stackato/&quot;&gt;https://www.activestate.com/stackato/&lt;/a&gt; - Enterprise-hardened Cloud Foundry PaaS from ActiveState, for private, public and hybrid cloud, free up to 20GB&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.outsystems.com/&quot;&gt;http://www.outsystems.com/&lt;/a&gt; - Enterprise web development PaaS for on-premise or cloud, free “personal environment” offering allows for unlimited code and up to 1GB database.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://platform.telerik.com/&quot;&gt;https://platform.telerik.com/&lt;/a&gt; - Build and deploy mobile applications using Javascript. Free plan has 100 MB Data Storage, 1GB File storage, 5GB Bandwidth, 1 million push notifications for BaaS offering, 100 active devices for analytics.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://scn.sap.com/docs/DOC-56411&quot;&gt;http://scn.sap.com/docs/DOC-56411&lt;/a&gt; - The in-memory Platform-as-a-Service offering from SAP. Free developer accounts come with 1GB structured, 1GB unstructured, 1GB of Git data and allow you to run HTML5, Java and HANA XS apps.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mendix.com/&quot;&gt;https://www.mendix.com/&lt;/a&gt; - Rapid Application Development for Enterprises - Unlimited number of free sandbox environments supporting 10 users, 100MB of files and 100MB database storage each.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;baas&quot;&gt;BaaS&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://apigee.com/docs/api-baas&quot;&gt;http://apigee.com/docs/api-baas&lt;/a&gt; - Unlimited trial includes NoSQL data store with 25GB of storage, user and permission management, geolocation, 10,000,000 push notifications per month, remote configuration, beta and A/B split testing, APM, fully API driven.Accessible and manageable via UI, SDK, and API.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://appacitive.com/&quot;&gt;http://appacitive.com/&lt;/a&gt; - Mobile backend, free for the first 3 months with 100k API calls,Push notifications.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bip.io/&quot;&gt;https://bip.io/&lt;/a&gt; - A web-automation platform for easily connecting web services. Fully open GPLv3 to power the backend of your open-source project.Commercial OEM License available.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.blockspring.com/&quot;&gt;https://www.blockspring.com/&lt;/a&gt; - Cloud functions. Free for 5 million runs a month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.contentful.com&quot;&gt;https://www.contentful.com&lt;/a&gt; - Content as a Service. Content Management &amp;amp; Delivery APIs in the cloud. 3 users, 3 spaces (repositories) and 1,000,000 API requests per month for free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.kinvey.com&quot;&gt;http://www.kinvey.com&lt;/a&gt; - Mobile backend, starter plan has unlimited requests per second, with 2 GB of data storage, as well as push notifications for up 5,000,000 unique recipients. Enterprise application support.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://konacloud.io&quot;&gt;http://konacloud.io&lt;/a&gt; - Web and Mobile Backend as a Service, with 5 GB free account.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://layer.com/&quot;&gt;https://layer.com/&lt;/a&gt; - The full-stack building block for communications.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.parse.com&quot;&gt;https://www.parse.com&lt;/a&gt; - Mobile backends, free plan has 30 requests per second, with 20 GB of file and database storage, as well as push notifications for up to 1,000,000 unique recipients.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://quickblox.com/&quot;&gt;http://quickblox.com/&lt;/a&gt; - A communication backend for instant messaging, video and voice calling, and push notifications&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;web-hosting&quot;&gt;Web Hosting&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.simplybuilt.com&quot;&gt;https://www.simplybuilt.com&lt;/a&gt; - SimplyBuilt offers free website building and hosting for open source projects. Simple alternative to GitHub Pages.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.devport.co&quot;&gt;http://www.devport.co&lt;/a&gt; - Turn GitHub projects, Apps, and websites into a personal developer portfolio.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.netlify.com&quot;&gt;https://www.netlify.com&lt;/a&gt; - Builds, deploy and hosts static site or app, free for 100 MB data and 1 GB bandwidth.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://divshot.com/&quot;&gt;https://divshot.com/&lt;/a&gt; - Static Web Hosting for Developers, free basic apps, 1 GB bandwidth, 100 MB storage, custom domains, subdomain SSL.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;iaas&quot;&gt;IaaS&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://aws.amazon.com/free/&quot;&gt;http://aws.amazon.com/free/&lt;/a&gt; - AWS Free Tier - Free for 12 months&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://exoscale.ch/&quot;&gt;https://exoscale.ch/&lt;/a&gt; - Free resources for Open Source projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.rackspace.com/&quot;&gt;https://developer.rackspace.com/&lt;/a&gt; - Rackspace Cloud gives $50/month for 12 months&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.google.com/compute/&quot;&gt;https://cloud.google.com/compute/&lt;/a&gt; - Google Compute Engine gives $300 over 60 days&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.google.com/container-engine/&quot;&gt;https://cloud.google.com/container-engine/&lt;/a&gt; - Google Container Engine for run Docker containers(Alpha). Pricing: same of Google Compute Engine.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nsone.net/&quot;&gt;https://nsone.net/&lt;/a&gt; - Data Driven DNS, automatic traffic management, 1M free Queries&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.rackspace.com/signup/&quot;&gt;https://developer.rackspace.com/signup/&lt;/a&gt; - Get $50/month for 12 months to use toward cloud services.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dbaas&quot;&gt;DBaaS&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mongolab.com/&quot;&gt;https://mongolab.com/&lt;/a&gt; - MongoDB as a service (500mb free)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloudant.com/&quot;&gt;https://cloudant.com/&lt;/a&gt; - Hosted database from IBM, free if usage is below $50/month&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://realm.io&quot;&gt;https://realm.io&lt;/a&gt; - Free to use even for commercial projects, under Apache 2.0 License&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://orchestrate.io/&quot;&gt;https://orchestrate.io/&lt;/a&gt; - 1 application free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://redislabs.com/redis-cloud&quot;&gt;https://redislabs.com/redis-cloud&lt;/a&gt; - Redis as a Service (25 mb free)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.backand.com/&quot;&gt;https://www.backand.com/&lt;/a&gt; - Back-end as a service (for AngularJS)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.zenginehq.com&quot;&gt;http://www.zenginehq.com&lt;/a&gt; - Build business workflow apps in minutes - free for single users&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://parsehub.com/&quot;&gt;https://parsehub.com/&lt;/a&gt; — Extract data from dynamic sites, turn dynamic websites into APIs, 5 projects free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://import.io/&quot;&gt;https://import.io/&lt;/a&gt; - Easily turn websites into APIs, completely free for life.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kimonolabs.com&quot;&gt;https://kimonolabs.com&lt;/a&gt; - “Turn websites into structured APIs from your browser in seconds”, free for public APIs, up to 20 million pages fetch / month. Supports scheduling, JSON, CSV, post-auth, …&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://redsmin.com/&quot;&gt;https://redsmin.com/&lt;/a&gt; - Online real-time monitoring and administration service for Redis, 1 Redis instance free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://graphstory.com/&quot;&gt;http://graphstory.com/&lt;/a&gt; - GraphStory offers Neo4j (a Graph Database) as a service&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.elephantsql.com/&quot;&gt;http://www.elephantsql.com/&lt;/a&gt; - PostgreSQL as a service (20mb free)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;stun-webrtc-web-socket-servers-and-other-routers&quot;&gt;STUN, WebRTC, Web Socket Servers and other Routers&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pusher.com.&quot;&gt;https://pusher.com.&lt;/a&gt; - Hosted Web Sockets broker. Free for up to 20 simultaneous connections and 100k messages a day.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;stun:stun.l.google.com:19302&quot;&gt;stun:stun.l.google.com:19302&lt;/a&gt; - Google STUN&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;stun:global.stun.twilio.com:3478?transport=udp&quot;&gt;stun:global.stun.twilio.com:3478?transport=udp&lt;/a&gt; - Twilio STUN&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.segment.com.&quot;&gt;https://www.segment.com.&lt;/a&gt; - Hub to translate and route events to other third party services. 100k events a month free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ngrok.com/&quot;&gt;https://ngrok.com/&lt;/a&gt; - expose locally running servers over a tunnel to a public URL&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;issue-tracking--project-management&quot;&gt;Issue tracking / Project management&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.pivotaltracker.com/community/public-projects&quot;&gt;https://www.pivotaltracker.com/community/public-projects&lt;/a&gt; - Pivotal Tracker. Free for public projects.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.atlassian.com/opensource/overview&quot;&gt;https://www.atlassian.com/opensource/overview&lt;/a&gt; - Free Jira etc for Open Source projects&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kanbanflow.com/&quot;&gt;https://kanbanflow.com/&lt;/a&gt; - Board based project management. Free (premium version with more options).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kanbanpad.com/&quot;&gt;https://kanbanpad.com/&lt;/a&gt; - Board based project management. Free (premium version with more options).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kanbanery.com/&quot;&gt;https://kanbanery.com/&lt;/a&gt; - Board based project management. Free for 2 users (premium tiers with more options).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zenhub.io/&quot;&gt;https://zenhub.io/&lt;/a&gt; - The only project management solution inside GitHub. Free for public repos, OSS, and non-profits.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://trello.com/&quot;&gt;https://trello.com/&lt;/a&gt; - Board based project management. Free&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://waffle.io/&quot;&gt;https://waffle.io/&lt;/a&gt; - Board based project management solution from your existing GitHub Issues. Free for open-source.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://huboard.com/&quot;&gt;https://huboard.com/&lt;/a&gt; - Instant project management for your GitHub issues. Free for open-source.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://taiga.io/&quot;&gt;https://taiga.io/&lt;/a&gt; - Project management platform for startups and agile developers. Free for open-source.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/youtrack/buy/open&quot;&gt;https://www.jetbrains.com/youtrack/buy/open&lt;/a&gt;_source_incloud.jsp - Free hosted YouTrack (InCloud) for FOSS projects (private projects free for 10 users: &lt;a href=&quot;https://www.jetbrains.com/youtrack/buy/&quot;&gt;https://www.jetbrains.com/youtrack/buy/&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com&quot;&gt;https://github.com&lt;/a&gt; - In addition to its git storage facility, github offers basic issue tracking&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://asana.com&quot;&gt;https://asana.com&lt;/a&gt; - Free for private project with collaborators.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.acunote.com/&quot;&gt;http://www.acunote.com/&lt;/a&gt; - Free project management and SCRUM software for up to 5 team members.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://gliffy.com/&quot;&gt;http://gliffy.com/&lt;/a&gt; - Online diagrams: flowchart, UML, wireframe… Also Plugins for Jira &amp;amp; Confluence. 5 diagrams and 2 MB free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cacoo.com/&quot;&gt;https://cacoo.com/&lt;/a&gt; - Online diagrams in real time: flowchart, UML, network. Free max. 15 users/diagram, 25 sheets.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.draw.io/&quot;&gt;https://www.draw.io/&lt;/a&gt; - Online diagrams stored locally, in Google Drive, OneDrive or Dropbox. Free for all features and storage levels.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hub.jazz.net/&quot;&gt;https://hub.jazz.net/&lt;/a&gt; - IBM Bluemix’s project management services. Free for public projects, free for up to 3 users for private projects.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://leankit.com/&quot;&gt;http://leankit.com/&lt;/a&gt; - Kanban board, that visualizes your workflow. Free up to 10 users.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.visualstudio.com/products/what-is-visual-studio-online-vs&quot;&gt;https://www.visualstudio.com/products/what-is-visual-studio-online-vs&lt;/a&gt; - Unlimited free private code repositories; Tracks bugs, work items, feedback and more.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://testlio.com&quot;&gt;https://testlio.com&lt;/a&gt; - Issue tracking, test management and beta testing platform. Free for private use.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;storage-and-media-processing&quot;&gt;Storage and Media Processing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.aerofs.com/&quot;&gt;https://www.aerofs.com/&lt;/a&gt; - P2P file syncing, free for up to 30 users&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cloudinary.com&quot;&gt;http://cloudinary.com&lt;/a&gt; - Image upload, powerful manipulations, storage, and delivery for sites and apps, with libraries for Ruby, Python, Java, PHP, Objective-C and more. Perpetual free tier includes 7500 images/month, 2gb storage, 5gb bandwidth.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://plot.ly&quot;&gt;https://plot.ly&lt;/a&gt; - graph and share your data. Free tier includes unlimited public files and 10 private files.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://transloadit.com&quot;&gt;https://transloadit.com&lt;/a&gt; - Handles file uploads &amp;amp; encoding of video, audio, images, documents. Free for open source &amp;amp; other do-gooders. Commercial applications get the first GB free for test driving.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://podio.com/&quot;&gt;https://podio.com/&lt;/a&gt; - You can use Podio with a team of up to five people and try out the features of the Basic Plan - except User Management.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://shrinkray.io&quot;&gt;https://shrinkray.io&lt;/a&gt; - free image optimization of Github repos&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cine.io&quot;&gt;https://www.cine.io&lt;/a&gt; - Scalable video broadcasting and p2p real-time video chat for iOS, Android, and web. Free tiers available for developers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;data-visualization-on-maps&quot;&gt;Data Visualization on Maps&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://geocod.io&quot;&gt;http://geocod.io&lt;/a&gt; - Geocoding via API or CSV Upload. 2.500 free queries per day.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://gogeo.io/&quot;&gt;http://gogeo.io/&lt;/a&gt; - Maps and geospatial services with an easy to use API and support for big data&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cartodb.com&quot;&gt;https://cartodb.com&lt;/a&gt; - Create maps and geospatial APIs from your data and public data.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.giscloud.com&quot;&gt;http://www.giscloud.com&lt;/a&gt; - Visualize, analyze and share geo data online.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mapbox.com/&quot;&gt;https://www.mapbox.com/&lt;/a&gt; - Maps, geospatial services, and SDKs for displaying map data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;package-build-systems&quot;&gt;Package Build Systems&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://build.opensuse.org/&quot;&gt;https://build.opensuse.org/&lt;/a&gt; - package build service for multiple distros (SUSE, EL, Fedora, Debian etc.)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://copr.fedoraproject.org/&quot;&gt;https://copr.fedoraproject.org/&lt;/a&gt; - mock-based RPM build service for Fedora and EL&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.launchpad.net/Packaging&quot;&gt;https://help.launchpad.net/Packaging&lt;/a&gt; - Ubuntu and Debian build service&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ide-and-code-editing&quot;&gt;IDE and Code Editing&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://c9.io&quot;&gt;https://c9.io&lt;/a&gt; - IDE in a browser. Incorporates an Ubuntu virtual machine and in-browser terminal access. Integrates with github and bitbucket, but also adds SFTP and generic Git access.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://koding.com&quot;&gt;https://koding.com&lt;/a&gt; - IDE in a browser. Features: Full sudo access - VMs hosted on Amazon EC2 - SSH Access - Real EC2 VM, no LXCs/hypervising - Custom sub-domains - Publicly accessible IP - Ubuntu 14.04 - IDE/Terminal/Collaboration&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.nitrous.io&quot;&gt;https://www.nitrous.io&lt;/a&gt; - Private Linux instance(s) with interactive collaboration.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://visualstudio.com/free&quot;&gt;http://visualstudio.com/free&lt;/a&gt; - Fully-featured IDE with thousands of extensions, cross-platform app development (Microsoft extensions available for download for iOS and Android), desktop, web and cloud development, multi-language support (C#, C++, JavaScript, Python, PHP and more).&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.sagemath.com&quot;&gt;https://cloud.sagemath.com&lt;/a&gt; - Collaborative mathematics-oriented IDE in a browser, with support for Python, LaTeX, IPython Notebooks, etc.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wakatime.com&quot;&gt;https://wakatime.com&lt;/a&gt; - quantified self metrics about your coding activity, using text editor plugins - Limited plan for free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codenvy.com/&quot;&gt;https://codenvy.com/&lt;/a&gt; - IDE in a browser, collaborative, git integration, build and run your app in customizable Docker-based runners (free 512Mb RAM to distribute between you runners), pre-integrated deploy to Google Apps.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://apiary.io/&quot;&gt;https://apiary.io/&lt;/a&gt; - Collaborative design API with instant API mock and generated documentation (Free for unlimited API blueprints and unlimited user with one admin account and hosted documentation)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.mockable.io/&quot;&gt;https://www.mockable.io/&lt;/a&gt; - Mockable is a simple configurable service to mock out RESTful API or SOAP web-services. This online service allows you to quickly define REST API or SOAP endpoints and have them return JSON or XML data.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jetbrains.com/products.html&quot;&gt;https://www.jetbrains.com/products.html&lt;/a&gt; - Productivity tools, IDEs and deploy tools. Free license for students, teachers, open source projects, and user groups.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://readme.io/&quot;&gt;https://readme.io/&lt;/a&gt; - Beautiful documentations made easy - free for Open Source&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx&quot;&gt;https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx&lt;/a&gt; - Visual Studio. Not only for Windows and .NET&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://codio.com/&quot;&gt;https://codio.com/&lt;/a&gt; - Codio is a cloud-based computer programming platform for universities, schools, and developer professionals.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.stackhive.com/&quot;&gt;http://www.stackhive.com/&lt;/a&gt; - Cloud based IDE in browser that supports HTML5/CSS3/jQuery/Bootstrap&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.tadpoledb.com/&quot;&gt;http://www.tadpoledb.com/&lt;/a&gt; - IDE in browser Database tool. Support Amazon RDS, Apache Hive, Apache Tajo, CUBRID, MariaDB, MySQL, Oracle, SQLite, MSSQL, PostgreSQL and MongoDB databases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;analytics-events-andstatistics&quot;&gt;Analytics, Events andStatistics&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.librato.com/&quot;&gt;https://www.librato.com/&lt;/a&gt; - Event/Data collection service with analysis and graphs. Limited plan for free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://google.com/analytics/&quot;&gt;https://google.com/analytics/&lt;/a&gt; - Google Analytics&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://heapanalytics.com/&quot;&gt;https://heapanalytics.com/&lt;/a&gt; - Automatically captures every user action in iOS or web apps. Free for up to 5,000 visits per month.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sematext.com/search-analytics&quot;&gt;http://sematext.com/search-analytics&lt;/a&gt; - Free for up to 50K actions/month, 1 day data retention, unlimited dashboards, users, etc.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://usabilityhub.com&quot;&gt;https://usabilityhub.com&lt;/a&gt; - Test designs and mockups on real people, track visitors. Free for one user, unlimited tests.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gosquared.com&quot;&gt;https://gosquared.com&lt;/a&gt; - Track up to 1,000 data points for free.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mixpanel.com&quot;&gt;https://mixpanel.com&lt;/a&gt; - Free 25000 points or 200000 with their badge on your site.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;international-mobile-number-verification-api-and-sdk&quot;&gt;International Mobile number verification API and SDK&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cognalys.com&quot;&gt;https://www.cognalys.com&lt;/a&gt; - Freemium mobile number verification through an innovative and reliable method than using SMS gateway. Free accounts will have 70 Tries and 50 verifications per day.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;payment--billing-integration&quot;&gt;Payment / Billing Integration&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.braintreepayments.com&quot;&gt;https://www.braintreepayments.com&lt;/a&gt; - Credit Card, Paypal, Venmo, Bitcoin, Apple Pay integration. Single and Recurrent Payments. First $50 are free of charge.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;other-packs&quot;&gt;Other Packs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://education.github.com/pack&quot;&gt;https://education.github.com/pack&lt;/a&gt; - As long as you’re a student at a recognized university&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;docker-related&quot;&gt;Docker Related&lt;/h3&gt;
+
+&lt;h4 id=&quot;alternate-container-hosting&quot;&gt;Alternate container hosting&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://quay.io/&quot;&gt;https://quay.io/&lt;/a&gt; - Unlimited free public containers&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;vagrant-related&quot;&gt;Vagrant Related&lt;/h3&gt;
+
+&lt;h4 id=&quot;vagrant-box-indexes&quot;&gt;Vagrant box indexes&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://atlas.hashicorp.com/boxes/search&quot;&gt;https://atlas.hashicorp.com/boxes/search&lt;/a&gt; - HashiCorp’s index of boxes&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vagrantbox.es&quot;&gt;http://vagrantbox.es&lt;/a&gt; - An alternative public box index&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;data-mining&quot;&gt;Data mining&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.monkeylearn.com/&quot;&gt;http://www.monkeylearn.com/&lt;/a&gt; - Text mining in the cloud, 1,000 queries for free per month.&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/14/free-aas-resources-list/&quot;&gt;Free #aaS Resources List&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on August 14, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -4361,499 +4818,6 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare/&quot;&gt;Cisco CCNA Security Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on March 10, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #1]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/" />
-  <id>https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1</id>
-  <updated>2014-06-22 14:54:48 +0400T00:00:00-00:00</updated>
-  <published>2014-06-22T00:00:00+04:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto&lt;/p&gt;
-
-&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
-&lt;header&gt;
-&lt;h3&gt;Contents&lt;/h3&gt;
-&lt;/header&gt;
-&lt;div id=&quot;drawer&quot;&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#phpinfo&quot; id=&quot;markdown-toc-phpinfo&quot;&gt;Phpinfo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#apache-virtualhost&quot; id=&quot;markdown-toc-apache-virtualhost&quot;&gt;Apache VirtualHost&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#grant-all-access-to-mysql-db&quot; id=&quot;markdown-toc-grant-all-access-to-mysql-db&quot;&gt;Grant all access to MySQL DB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#check-disk-with-dd&quot; id=&quot;markdown-toc-check-disk-with-dd&quot;&gt;Check disk with DD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#manual-install-php-extensions&quot; id=&quot;markdown-toc-manual-install-php-extensions&quot;&gt;Manual install php extensions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-mysql-db&quot; id=&quot;markdown-toc-create-mysql-db&quot;&gt;Create MySQL DB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#update-user-grants-for-mysql-db&quot; id=&quot;markdown-toc-update-user-grants-for-mysql-db&quot;&gt;Update user grants for MySQL DB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#skip-mysql-db-replication-error&quot; id=&quot;markdown-toc-skip-mysql-db-replication-error&quot;&gt;Skip MySQL DB Replication error&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#simple-mysql-db-backuprestore-commands&quot; id=&quot;markdown-toc-simple-mysql-db-backuprestore-commands&quot;&gt;Simple MySQL DB backup\restore commands&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#run-crontab-task-with-lockf-or-lockfile&quot; id=&quot;markdown-toc-run-crontab-task-with-lockf-or-lockfile&quot;&gt;Run crontab task with lockf or lockfile&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#run-crontab-everyday-except-saturday&quot; id=&quot;markdown-toc-run-crontab-everyday-except-saturday&quot;&gt;Run crontab everyday except Saturday&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-rsync-share&quot; id=&quot;markdown-toc-create-rsync-share&quot;&gt;Create rsync share&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#count-tmp-used-disk-space&quot; id=&quot;markdown-toc-count-tmp-used-disk-space&quot;&gt;Count /tmp used disk space&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#clean-yum-pkg-cache&quot; id=&quot;markdown-toc-clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-master-slave-replication&quot; id=&quot;markdown-toc-mysql-master-slave-replication&quot;&gt;MySQL Master-Slave replication&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#change-mysql-root-password&quot; id=&quot;markdown-toc-change-mysql-root-password&quot;&gt;Change MySQL root password&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#megarc-raid-cmd&quot; id=&quot;markdown-toc-megarc-raid-cmd&quot;&gt;Megarc raid cmd&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#megacli-raid-cmd&quot; id=&quot;markdown-toc-megacli-raid-cmd&quot;&gt;Megacli raid cmd&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ssh-tunnel&quot; id=&quot;markdown-toc-ssh-tunnel&quot;&gt;SSH tunnel&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ram-disk-freebsd&quot; id=&quot;markdown-toc-ram-disk-freebsd&quot;&gt;Ram disk FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#add-firewall-rules-linux-or-freebsd&quot; id=&quot;markdown-toc-add-firewall-rules-linux-or-freebsd&quot;&gt;Add firewall rules Linux or FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#add-6g-swap-to-freebsd&quot; id=&quot;markdown-toc-add-6g-swap-to-freebsd&quot;&gt;Add 6G swap to FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd&quot; id=&quot;markdown-toc-clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#access-to-svn-server-with-ssh-key&quot; id=&quot;markdown-toc-access-to-svn-server-with-ssh-key&quot;&gt;Access to svn server with ssh-key&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-iso-image-with-dd&quot; id=&quot;markdown-toc-create-iso-image-with-dd&quot;&gt;Create iso image with dd&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-swap-in-linux&quot; id=&quot;markdown-toc-create-swap-in-linux&quot;&gt;Create swap in Linux&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#split-big-file-in-small-parts&quot; id=&quot;markdown-toc-split-big-file-in-small-parts&quot;&gt;Split big file in small parts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#show-postresql-status&quot; id=&quot;markdown-toc-show-postresql-status&quot;&gt;Show PostreSQL status&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#soft-raid-freebsd&quot; id=&quot;markdown-toc-soft-raid-freebsd&quot;&gt;Soft Raid FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#test-channel-speed&quot; id=&quot;markdown-toc-test-channel-speed&quot;&gt;Test channel speed&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#patch-apply&quot; id=&quot;markdown-toc-patch-apply&quot;&gt;Patch apply&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#revoke-all-grant-and-remove-mysql-user&quot; id=&quot;markdown-toc-revoke-all-grant-and-remove-mysql-user&quot;&gt;Revoke all grant and remove MySQL user&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#cron-task-start-at-reboot&quot; id=&quot;markdown-toc-cron-task-start-at-reboot&quot;&gt;Cron task start at reboot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#simple-rsyncdconf&quot; id=&quot;markdown-toc-simple-rsyncdconf&quot;&gt;Simple rsyncd.conf&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#open-files-limit&quot; id=&quot;markdown-toc-open-files-limit&quot;&gt;Open files limit&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#use-curl-to-check-web-site-answer-time&quot; id=&quot;markdown-toc-use-curl-to-check-web-site-answer-time&quot;&gt;Use curl to check web site answer time&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#run-vncserver-at-port-5999&quot; id=&quot;markdown-toc-run-vncserver-at-port-5999&quot;&gt;Run vncserver at port 5999&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-200-host-records-in-etchosts&quot; id=&quot;markdown-toc-create-200-host-records-in-etchosts&quot;&gt;Create 200 host records in /etc/hosts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#com-terminal-for-cisco&quot; id=&quot;markdown-toc-com-terminal-for-cisco&quot;&gt;Com terminal for cisco&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#disable-php-for-custom-dir-in-apache&quot; id=&quot;markdown-toc-disable-php-for-custom-dir-in-apache&quot;&gt;Disable php for custom dir in Apache&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#print-all-ps-pids-with-owner-root&quot; id=&quot;markdown-toc-print-all-ps-pids-with-owner-root&quot;&gt;Print all ps pids with owner root&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#set-expired-password-for-freebsd-user&quot; id=&quot;markdown-toc-set-expired-password-for-freebsd-user&quot;&gt;Set expired password for FreeBSD user&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#enable-coredumps-in-freebsd-or-linux&quot; id=&quot;markdown-toc-enable-coredumps-in-freebsd-or-linux&quot;&gt;Enable coredumps in FreeBSD or Linux&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#enable-coredumps-in-nginx&quot; id=&quot;markdown-toc-enable-coredumps-in-nginx&quot;&gt;Enable coredumps in NginX&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#add-alias-to-network-interface-in-freebsd&quot; id=&quot;markdown-toc-add-alias-to-network-interface-in-freebsd&quot;&gt;Add alias to network interface in FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#print-all-locked-request-in-mysql&quot; id=&quot;markdown-toc-print-all-locked-request-in-mysql&quot;&gt;Print all locked request in MySQL&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#redirect-port-from-5190-to-5222-with-iptables&quot; id=&quot;markdown-toc-redirect-port-from-5190-to-5222-with-iptables&quot;&gt;Redirect port from 5190 to 5222 with iptables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#limit-post-request-size-to-20mb&quot; id=&quot;markdown-toc-limit-post-request-size-to-20mb&quot;&gt;Limit POST request size to 20MB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#apache-error-log-limit-2g&quot; id=&quot;markdown-toc-apache-error-log-limit-2g&quot;&gt;Apache error log limit 2G&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#change-nginx-version-number&quot; id=&quot;markdown-toc-change-nginx-version-number&quot;&gt;Change nginx version number&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;/div&gt;
-&lt;/section&gt;
-&lt;!-- /#table-of-contents --&gt;
-
-&lt;h3 id=&quot;phpinfo&quot;&gt;Phpinfo&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt;?php phpinfo(); ?&amp;gt;&amp;quot;&lt;/span&gt; &amp;gt; file
-root@linux: ~ &lt;span class=&quot;c&quot;&gt;# php -i&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;apache-virtualhost&quot;&gt;Apache VirtualHost&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory ~ &lt;span class=&quot;s2&quot;&gt;&amp;quot;.*\.svn&amp;quot;&lt;/span&gt;&amp;gt;
-    Order allow,deny
-    Deny from all
-    Satisfy All
-&amp;lt;/Directory&amp;gt;
-
-&amp;lt;VirtualHost 127.0.0.1:80&amp;gt;
-    ServerName vhost1
-    ErrorLog /logs/vhost1/error_log
-    DocumentRoot /www/vhost1/htdocs
-    &amp;lt;Directory /www/vhost1/htdocs&amp;gt;
-		AllowOverride All
-    &amp;lt;/Directory&amp;gt;
-&amp;lt;/VirtualHost&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;grant-all-access-to-mysql-db&quot;&gt;Grant all access to MySQL DB&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grant all privileges on user.* to user@&lt;span class=&quot;s2&quot;&gt;&amp;quot;%&amp;quot;&lt;/span&gt; identified by &lt;span class=&quot;s2&quot;&gt;&amp;quot;P@ssw0rd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;check-disk-with-dd&quot;&gt;Check disk with DD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/da0 &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/null bs8
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; progress Ctrl+T to send USR1 or &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; -USR1 DDPID&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;manual-install-php-extensions&quot;&gt;Manual install php extensions&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PHP_PREFIX&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin/pecl uninstall memcache
-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PHP_PREFIX&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/bin/pecl install memcache
-
-add to php.ini
-&lt;span class=&quot;nv&quot;&gt;extension&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;memcache
-
-Build extension from &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;
-wget memcache-2.2.5.tgz
-/usr/local/php/bin/phpize
-./configure --with-php-config&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/php/bin/php-config&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-mysql-db&quot;&gt;Create MySQL DB&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;CREATE DATABASE TEST default charset utf8&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-grant all on testuser.*  to &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;update-user-grants-for-mysql-db&quot;&gt;Update user grants for MySQL DB&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;update user &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PASSWORD&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-show grants &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-revoke all on TEST.*  from &lt;span class=&quot;s1&quot;&gt;&amp;#39;testuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;SOMEIP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;skip-mysql-db-replication-error&quot;&gt;Skip MySQL DB Replication error&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;show slave status&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-SET GLOBAL &lt;span class=&quot;nv&quot;&gt;SQL_SLAVE_SKIP_COUNTER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; N&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;simple-mysql-db-backuprestore-commands&quot;&gt;Simple MySQL DB backup\restore commands&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Backup all db server
-mysqldump --master-data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; --opt --single-transaction --all-databases &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip -9 -c &amp;gt; /www/backup/&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;hostname&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +%Y%m%d&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.sql.gz
-
-Backup only tables
-mysqldump &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; --tables tag_table &amp;gt; /backup/test.tag_table.sql
-mysqldump -u USER -pPASSWORD DATABASE TABLE1 TABLE2 TABLE3 &amp;gt; /path/to/file/dump_table.sql
-
-Backup one database
-mysqldump -u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/dump.sql
-mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; /path/to/outputfile.sql.gz
-mysqldump -u USER -pPASSWORD DATABASE &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; gzip &amp;gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date +/path/to/outputfile.sql.%Y%m%d.%H%M%S.gz&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-
-Backup database scheme
-mysqldump --no-data - u USER -pPASSWORD DATABASE &amp;gt; /path/to/file/schema.sql
-
-Restore database
-mysql -u USER -pPASSWORD DATABASE &amp;lt; /path/to/dump.sql
-gunzip &amp;lt; /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE
-zcat /path/to/outputfile.sql.gz &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mysql -u USER -pPASSWORD DATABASE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;run-crontab-task-with-lockf-or-lockfile&quot;&gt;Run crontab task with lockf or lockfile&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;*/5 * * * * userlogin /usr/bin/lockf -st &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; /tmp/5min.lock  sh cron1.sh
-*/5 * * * * userlogin lockfile -s0 -r0 /tmp/5min.lock &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sh cron1.sh &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; rm -f /tmp/5min.lock&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;run-crontab-everyday-except-saturday&quot;&gt;Run crontab everyday except Saturday&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; * * * 0,1,2,3,4,6 userlogin sh cron1.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-rsync-share&quot;&gt;Create rsync share&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rsyncd.conf
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;www&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /www
-&lt;span class=&quot;nv&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
-&lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
-hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 10.0.0.0/8
-dont &lt;span class=&quot;nv&quot;&gt;compress&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *.*
-
-rsync -avP server::www/ /www1/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;count-tmp-used-disk-space&quot;&gt;Count /tmp used disk space&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo du -hs /tmp/*&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clean-yum-pkg-cache&quot;&gt;Clean Yum pkg cache&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Pkg cache live here - /var/cache/yum/updates
-yum clean all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-master-slave-replication&quot;&gt;MySQL Master-Slave replication&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# at master /etc/my.cnf&lt;/span&gt;
-server-id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-binlog-format   &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mixed
-log-bin&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;mysql-bin
-&lt;span class=&quot;nv&quot;&gt;datadir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/lib/mysql
-&lt;span class=&quot;nv&quot;&gt;innodb_flush_log_at_trx_commit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-&lt;span class=&quot;nv&quot;&gt;sync_binlog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-
-CREATE USER replicant@&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;GRANT REPLICATION SLAVE ON *.* TO replicant@&amp;lt;&amp;lt;slave&lt;/span&gt;-server-ip&amp;gt;&amp;gt; IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;choose-a-good-password&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysqldump --skip-lock-tables --single-transaction --flush-logs --hex-blob --master-data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -A  &amp;gt; ~/dump.sql
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;head dump.sql -n80 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;MASTER_LOG_POS&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;scp ~/dump.sql.gz mysql-user@&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;slave-server-ip&amp;gt;&amp;gt;:~/&lt;/span&gt;
-
-&lt;span class=&quot;s&quot;&gt;# at slave&lt;/span&gt; /etc/my.cnf
-server-id               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 101
-binlog-format       &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mixed
-&lt;span class=&quot;nv&quot;&gt;log_bin&lt;/span&gt;                 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mysql-bin
-relay-log               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; mysql-relay-bin
-log-slave-updates &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
-&lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;-only               &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gunzip ~/dump.sql.gz
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql -u root -p &amp;lt; ~/dump.sql
-
-CHANGE MASTER TO &lt;span class=&quot;nv&quot;&gt;MASTER_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;master-server-ip&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;,MASTER_USER&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;replicant&amp;#39;&lt;/span&gt;,MASTER_PASSWORD&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;slave-server-password&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;&amp;lt;value from above&amp;gt;&amp;gt;&amp;#39;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;MASTER_LOG_POS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;value from abov&lt;/span&gt;e&amp;gt;&amp;gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-START SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-SHOW SLAVE STATUS &lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# fix some replication errors&lt;/span&gt;
-STOP SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;SET GLOBAL &lt;span class=&quot;nv&quot;&gt;SQL_SLAVE_SKIP_COUNTER&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;START SLAVE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;change-mysql-root-password&quot;&gt;Change MySQL root password&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;use mysql&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;update user &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;password&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-flush privileges&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;megarc-raid-cmd&quot;&gt;Megarc raid cmd&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;megarc -dispCfg -a0
-run rebuild
-megarc -dorbld -a0 -rbldarray&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;0:1&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-http://www.freebsdwiki.net/index.php/Megarc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;megacli-raid-cmd&quot;&gt;Megacli raid cmd&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS
-http://tools.rapidsoft.de/perc/perc-cheat-sheet.html
-server:~# megacli -AdpGetProp RebuildRate -a0
-Adapter 0: Rebuild &lt;span class=&quot;nv&quot;&gt;Rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30%
-server:~# megacli -AdpSetProp RebuildRate &lt;span class=&quot;m&quot;&gt;60&lt;/span&gt; -a0
-Adapter 0: Set rebuild rate to 60% success.
-LINUX
-server:~# cat /proc/sys/dev/raid/speed_limit_min
-1000
-server:~# cat /proc/sys/dev/raid/speed_limit_max
-200000
-
-Speed up limit to &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt; mb&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;
-server:~# &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50000&lt;/span&gt; &amp;gt; /proc/sys/dev/raid/speed_limit_min&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;ssh-tunnel&quot;&gt;SSH tunnel&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Local Port Forwarding
-ssh -L 3306:localhost:3306 username@hostname
-telnet localhost 3306
-
-Remote Port Forwarding
-ssh -R 9000:localhost:8001 username@hostname
-ssh -R 2222:localhost:22 username@hostname - SSH
-ssh -R 2223:localhost:5902 username@hostname - VNC
-autossh -M &lt;span class=&quot;m&quot;&gt;20000&lt;/span&gt; -f -R 2222:localhost:80 username@hostname
-telnet someserver &lt;span class=&quot;m&quot;&gt;9000&lt;/span&gt; -&amp;gt; go to localhost:8001&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;ram-disk-freebsd&quot;&gt;Ram disk FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rc.conf
-&lt;span class=&quot;nv&quot;&gt;mdconfig_md0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-t malloc -s 512m -u 0&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_newfs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;-U&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_owner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;www&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_perms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;775&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;mdconfig_md0_cmd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;chown www:www /www/ramdisk&amp;quot;&lt;/span&gt;
-mkdir -p /www/ramdisk
-/etc/rc.d/mdconfig start
-df -h&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-firewall-rules-linux-or-freebsd&quot;&gt;Add firewall rules Linux or FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Linux
-iptables -A INPUT -s 127.0.0.1 -p tcp --dport &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; -j ACCEPT
-service iptables save
-iptables -nL &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080
-
-FreBSD
-ipfw add pass tcp from 127.0.0.1 to me &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; setup
-sh /usr/share/examples/ipfw/change_rules.sh
-ipfw list &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep 8080&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-6g-swap-to-freebsd&quot;&gt;Add 6G swap to FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/www/swap0 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6144
-chmod &lt;span class=&quot;m&quot;&gt;0600&lt;/span&gt; /www/swap0
-/etc/rc.conf
-&lt;span class=&quot;nv&quot;&gt;swapfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/www/swap0&amp;quot;&lt;/span&gt;
-mdconfig -a -t vnode -f /www/swap0 -u &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; swapon /dev/md0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clone-disk-with-dd&quot;&gt;Clone disk with dd&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/old_disk &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/new_disk &lt;span class=&quot;nv&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;noerror,sync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;access-to-svn-server-with-ssh-key&quot;&gt;Access to svn server with ssh-key&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd svnuser
-ssh-keygen -t rsa
-mv ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys
-add to ~/.ssh/authorized_keys
-no-pty,no-port-forwarding,no-X11-forwarding,no-agent-forwarding,command&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/usr/bin/svnserve -t -r /www/svn&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-iso-image-with-dd&quot;&gt;Create iso image with dd&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/scd0 &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/tmp/isoimage.iso
-sudo mount -t udf,iso9660  -o loop /tmp/isoimage.iso /mnt/cdrom/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-swap-in-linux&quot;&gt;Create swap in Linux&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fdisk /dev/sda
-mkswap -L &lt;span class=&quot;s1&quot;&gt;&amp;#39;swap&amp;#39;&lt;/span&gt; /dev/sda6
-swapon -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;split-big-file-in-small-parts&quot;&gt;Split big file in small parts&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;split -b1m large.mp3 large.mp3.
-collect back
-cat large.mp3.* &amp;gt; large.mp3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-postresql-status&quot;&gt;Show PostreSQL status&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from pg_stat_activity&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;soft-raid-freebsd&quot;&gt;Soft Raid FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;geom_mirror_load=&amp;quot;YES&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader.conf
-sysctl kern.geom.debugflags&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;16
-gmirror label -v -b round-robin -s &lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; gm0 /dev/mfid0
-change /etc/fstab /dev/mfid0s2a to /dev/mirror/gm0s1a
-reboot
-gmirror list
-gmirror status
-gmirror insert gm0 /dev/mfid1
-gmirror configure -b round-robin -s &lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; gm*
-gmirror remove gm0 /dev/mfid1
-gmirror foreget -v gm0
-gmirror rebuild -v gm1 /dev/fmid3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;test-channel-speed&quot;&gt;Test channel speed&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;at server:
-iperf -s
-at client:
-iperf -V -c SERVERIP -t 6000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;patch-apply&quot;&gt;Patch apply&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;patch --dry-run -p1 &amp;lt; patchfile.patch
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; all ok
-patch -p1 &amp;lt; patchfile.patch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;revoke-all-grant-and-remove-mysql-user&quot;&gt;Revoke all grant and remove MySQL user&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;REVOKE ALL PRIVILEGES on &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;DBNAME&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;.* from &lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-drop user &lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;IP&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from mysql.user&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from mysql.user where &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;USERNAME&amp;#39;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;cron-task-start-at-reboot&quot;&gt;Cron task start at reboot&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/crontab
-@reboot         username /usr/bin/bash  /etc/startAtReboot.sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;simple-rsyncdconf&quot;&gt;Simple rsyncd.conf&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/rsyncd.conf
-pid &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /var/run/rsyncd.pid
-use &lt;span class=&quot;nv&quot;&gt;chroot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
-&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nobody
-&lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; nobody
-hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 192.168.56.0/24
-hosts &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *
-pid &lt;span class=&quot;nv&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /var/run/rsyncd.pid
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/test
-&lt;span class=&quot;nv&quot;&gt;comment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;only&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
-hosts &lt;span class=&quot;nv&quot;&gt;allow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 10.0.0.1
-hosts &lt;span class=&quot;nv&quot;&gt;deny&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *
-
-To start
-rsync --daemon&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;open-files-limit&quot;&gt;Open files limit&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://ss64.com/bash/limits.conf.html
-/etc/security/limits.conf
-*               hard    nofile          65535
-*               soft    nofile          65535
-username        hard    nofile          65536&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;use-curl-to-check-web-site-answer-time&quot;&gt;Use curl to check web site answer time&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;curl -w &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nLookup time:\t%{time_namelookup}\nConnect time:\t%{time_connect}\nPreXfer time:\t%{time_pretransfer}\nStartXfer time:\t%{time_starttransfer}\n\nTotal time:\t%{time_total}\n&amp;#39;&lt;/span&gt; -o /dev/null -s http://linux.com/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;run-vncserver-at-port-5999&quot;&gt;Run vncserver at port 5999&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vncserver -geometry 1024x768 -depth &lt;span class=&quot;m&quot;&gt;24&lt;/span&gt; :99&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-200-host-records-in-etchosts&quot;&gt;Create 200 host records in /etc/hosts&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;192.168.99.1-200 n001-n200
-&lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;seq -w 200&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;192.168.99.$P n$i&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;P&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;expr &lt;span class=&quot;nv&quot;&gt;$P&lt;/span&gt; + 1&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &amp;gt;&amp;gt;/etc/hosts&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;com-terminal-for-cisco&quot;&gt;Com terminal for cisco&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install cutecom&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;minicom&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;disable-php-for-custom-dir-in-apache&quot;&gt;Disable php for custom dir in Apache&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /var/www/htdocs/images&amp;gt;
-    RemoveHandler .php .phtml .php3
-    AddType application/x-httpd-php-source .php .phtml .php3
-    Allow from all
- &amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;print-all-ps-pids-with-owner-root&quot;&gt;Print all ps pids with owner root&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ps -aux &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{if ($1 == &amp;quot;root&amp;quot;) print $2}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;set-expired-password-for-freebsd-user&quot;&gt;Set expired password for FreeBSD user&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;P@ssw0rd&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sudo /usr/sbin/pw usermod username -h0 -p 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;enable-coredumps-in-freebsd-or-linux&quot;&gt;Enable coredumps in FreeBSD or Linux&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;FreeBSD
-sysctl kern.coredump&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-sysctl kern.sugid_coredump&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
-sysctl kern.corefile&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%N-%P.core
-%N - name of process
-%P - PID
-%U - username login
-
-Linux
-mkdir /core
-chmod 777/core
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/core&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/kernel/core_pattern
-sysctl kernel.core_pattern&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/core/%P.core&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;enable-coredumps-in-nginx&quot;&gt;Enable coredumps in NginX&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Need to compile nginx with --with-debug
-Add to nginx.conf
-worker_rlimit_core 50m&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-working_directory /core/&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;www soft core unlimited&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/security/limits.conf
-/etc/init.d/httpd restart&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-alias-to-network-interface-in-freebsd&quot;&gt;Add alias to network interface in FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ifconfig em0 &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;192.168.56.100/32&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;print-all-locked-request-in-mysql&quot;&gt;Print all locked request in MySQL&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;show full processlist&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;Locked&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;redirect-port-from-5190-to-5222-with-iptables&quot;&gt;Redirect port from 5190 to 5222 with iptables&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;iptables -A INPUT -p tcp --dport &lt;span class=&quot;m&quot;&gt;5190&lt;/span&gt; -j ACCEPT
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport &lt;span class=&quot;m&quot;&gt;5190&lt;/span&gt; -j REDIRECT --to-ports 5222&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;limit-post-request-size-to-20mb&quot;&gt;Limit POST request size to 20MB&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to php.ini
-php_value max_execution_time 600
-php_value upload_max_filesize 20M
-php_value post_max_size 20M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;apache-error-log-limit-2g&quot;&gt;Apache error log limit 2G&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;notice&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; child pid &lt;span class=&quot;m&quot;&gt;15443&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;signal File size limit exceeded &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;25&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-some where you have log file size more than 2G, find it
-find /logs/* -size +2000000k&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;change-nginx-version-number&quot;&gt;Change nginx version number&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;src/core/nginx.h
-nginx version: nginx/0.7.62
-recompile from &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Linux-Unix-IT Tips and Tricks #1&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 22, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
