@@ -186,6 +186,7 @@
   <li><a href="#new-format-for-301-redirect" id="markdown-toc-new-format-for-301-redirect">New format for 301 redirect</a></li>
   <li><a href="#location-for-static-files" id="markdown-toc-location-for-static-files">Location for static files</a></li>
   <li><a href="#time-based-rewriting-rules" id="markdown-toc-time-based-rewriting-rules">Time Based Rewriting Rules</a></li>
+  <li><a href="#hardening-http-response-headers" id="markdown-toc-hardening-http-response-headers">Hardening HTTP response headers</a></li>
 </ul>
 
   </div>
@@ -499,6 +500,25 @@
     <span class="s">end</span>
   <span class="s">&#39;</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
+
+<h3 id="hardening-http-response-headers">Hardening HTTP response headers</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="k">add_header</span> <span class="s">Content-Security-Policy</span> <span class="s">&quot;default-src</span> <span class="s">https:</span> <span class="s">data:</span> <span class="s">&#39;unsafe-inline&#39;</span> <span class="s">&#39;unsafe-eval&#39;&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&quot;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubdomains&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">Public-Key-Pins</span> <span class="s">&quot;pin-sha256=&#39;X3pGTSOuJeEVw989IJ/cEtXUEmy52zs1TZQrU06KUKg=&#39;</span><span class="p">;</span>
+<span class="k">pin-sha256=&#39;MHJYVThihUrJcxW6wcqyOISTXIsInsdj3xK8QrZbHec=&#39;</span><span class="p">;</span>
+<span class="k">pin-sha256=&#39;isi41AizREkLvvft0IRW4u3XMFR2Yg7bvrF7padyCJg=&#39;</span><span class="p">;</span>
+<span class="k">includeSubdomains</span><span class="p">;</span> <span class="k">max-age=2592000&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">&quot;SAMEORIGIN&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Xss-Protection</span> <span class="s">&quot;1</span><span class="p">;</span> <span class="k">mode=block&quot;</span> <span class="s">always</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">&quot;nosniff&quot;</span> <span class="s">always</span><span class="p">;</span>
+
+<span class="c1"># change nginx server header</span>
+<span class="k">./src/http/ngx_http_header_filter_module.c</span>
+
+<span class="c1"># check header</span>
+<span class="s">https://securityheaders.io/</span></code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">

