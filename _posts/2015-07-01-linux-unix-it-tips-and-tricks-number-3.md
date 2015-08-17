@@ -1,15 +1,15 @@
 ---
 layout: post
-title: " Linux-Unix-IT Tips and Tricks #3"
+title: "Linux-Unix-IT Tips and Tricks #3"
 modified: 2015-07-01 17:23:41 +0300
 category: [howto]
 tags: [linux,unix,sysadm]
 image:
-  feature: 
-  credit: 
-  creditlink: 
+  feature:
+  credit:
+  creditlink:
 comments: True
-share: 
+share:
 ---
 Different Linux / Unix / IT tips, notes, howto part 3
 
@@ -26,6 +26,7 @@ Different Linux / Unix / IT tips, notes, howto part 3
 ### Other parts
 [Part 1](https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/)
 [Part 2](https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/)
+[Part 3](https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/)
 
 ### Speed up MySQL Import
 {% highlight bash %}

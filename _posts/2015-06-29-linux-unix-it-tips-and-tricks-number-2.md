@@ -23,6 +23,11 @@ Different Linux / Unix / IT tips, notes, howto part 2
 </div>
 </section><!-- /#table-of-contents -->
 
+### Other parts
+[Part 1](https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/)
+[Part 2](https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/)
+[Part 3](https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/)
+
 ### MySQL log rotate
 {% highlight bash %}
 /etc/logrotate.d/mysql
@@ -128,7 +133,7 @@ reload
 ### Boot CentOS in a Single-User Mode
 {% highlight bash %}
 add to grub line that start with kernel - single
-or 
+or
 init=/bin/sh
 {% endhighlight %}
 
@@ -152,11 +157,11 @@ for i in `rpm -qa`; do echo $i; rpm -ql $i; done
 ### Find duplicate files in Linux
 {% highlight bash %}
 for i in `find *`; do [ -f "$i" ] && echo "`md5sum \"$i\"`"; done | sort | awk -- '{ if (LAST==$1) print; else LAST=$1 }
-or 
+or
 find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk '{print $2}'
 {% endhighlight %}
 
-### SSH+SVN error 
+### SSH+SVN error
 {% highlight bash %}
 ssh svn: Network connection closed unexpectedly
 This mean that you dont have sshkey fingerprint in know_hosts
@@ -318,7 +323,7 @@ tunefs -m 1 /dev/stripe/st0a
 {% highlight bash %}
 :%s/\s\+$//
 delete blank lines
-:g/^$/d 
+:g/^$/d
 {% endhighlight %}
 
 ### Disable Apache dir listing
@@ -352,7 +357,7 @@ authconfig --test | grep hashing
 authconfig --passalgo=sha512 --update
 {% endhighlight %}
 
-### Linux Pkg search 
+### Linux Pkg search
 {% highlight bash %}
 http://pkgs.org/
 {% endhighlight %}
@@ -381,14 +386,14 @@ reboot
 perl -e 'chmod 0755, "/bin/chmod"'
 python -c 'import os; os.chmod("chmod", 0755)'
 
-or 
+or
 
 cp /bin/sh ~/chmod2
 cat /bin/chmod > ~/chmod2
 sudo ~/chmod2 +x /bin/chmod
 rm ~/chmod2
 
-or 
+or
 
 sudo apt-get --reinstall install `dpkg -S /bin/chmod | cut -f1 -d:`
 
@@ -404,7 +409,7 @@ or
 /lib/ld-linux-x86-64.so.2 /bin/chown +x /bin/chown
 {% endhighlight %}
 
-### Get webserver http code answer 
+### Get webserver http code answer
 {% highlight bash %}
 wget --server-response -T 5 -t 1 http://ya.ru 2>&1 | awk '/^  HTTP/{print $2}'
 {% endhighlight %}
@@ -507,7 +512,7 @@ tacacs-server key SecretKeyCisco
 
 ### Show FreeBSD kernel config
 {% highlight bash %}
-sysctl -b kern.conftxt 
+sysctl -b kern.conftxt
 {% endhighlight %}
 
 ### HTTP redirect with HTML and JavaScript
