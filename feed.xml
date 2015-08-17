@@ -5,13 +5,321 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-08-14T18:35:40+03:00</updated>
+<updated>2015-08-17T16:46:22+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #4]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/" />
+  <id>https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4</id>
+  <updated>2015-08-17 16:09:08 +0300T00:00:00-00:00</updated>
+  <published>2015-08-17T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto part 4&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other parts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#who-is-writing-to-a-mysql-replica&quot; id=&quot;markdown-toc-who-is-writing-to-a-mysql-replica&quot;&gt;Who is writing to a mysql replica&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#display-mount-fs-in-nice-layout&quot; id=&quot;markdown-toc-display-mount-fs-in-nice-layout&quot;&gt;Display Mount FS in Nice Layout&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#freebsd-version&quot; id=&quot;markdown-toc-freebsd-version&quot;&gt;FreeBSD version&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linux-namespaces-implementations&quot; id=&quot;markdown-toc-linux-namespaces-implementations&quot;&gt;Linux namespaces implementations&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#firewalld-in-centos7rhel&quot; id=&quot;markdown-toc-firewalld-in-centos7rhel&quot;&gt;Firewalld in CentOS7\RHEL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#encrypt-linux-home-dir&quot; id=&quot;markdown-toc-encrypt-linux-home-dir&quot;&gt;Encrypt Linux Home Dir&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#moreutils&quot; id=&quot;markdown-toc-moreutils&quot;&gt;Moreutils&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#send-squid-accesslog-to-siem&quot; id=&quot;markdown-toc-send-squid-accesslog-to-siem&quot;&gt;Send Squid access_log to SIEM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#send-hp-ux-syslogd-to-siem&quot; id=&quot;markdown-toc-send-hp-ux-syslogd-to-siem&quot;&gt;Send HP-UX syslogd to SIEM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#freebsd-vagrant&quot; id=&quot;markdown-toc-freebsd-vagrant&quot;&gt;FreeBSD Vagrant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#lxc-centos7-container&quot; id=&quot;markdown-toc-lxc-centos7-container&quot;&gt;LXC CentOS7 Container&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#manage-logging-in-systemd&quot; id=&quot;markdown-toc-manage-logging-in-systemd&quot;&gt;Manage logging in Systemd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#systemd-cgroups&quot; id=&quot;markdown-toc-systemd-cgroups&quot;&gt;Systemd cgroups&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#systemd-targetsrun-levels&quot; id=&quot;markdown-toc-systemd-targetsrun-levels&quot;&gt;Systemd Targets/Run levels&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;who-is-writing-to-a-mysql-replica&quot;&gt;Who is writing to a mysql replica&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# if you are using 5.6, you can do it!&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http://dev.mysql.com/doc/en/connection-summary-tables.html&lt;/span&gt;
+mysql&amp;gt; desc performance_schema.events_statements_summary_by_user_by_event_name&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; user, event_name, count_star, sum_timer_wait, sum_rows_affected
+    -&amp;gt;   from performance_schema.events_statements_summary_by_user_by_event_name
+    -&amp;gt;  where sum_timer_wait &amp;gt; 0
+    -&amp;gt;  order by user, sum_timer_wait desc&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from sys.user_summary_by_statement_type&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; slave1 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;localhost&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;msandbox&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from user_summary_by_statement_type&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; slave1 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;localhost&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;msandbox&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; SELECT * FROM sys.user_summary_by_statement_type WHERE user !&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;background&amp;#39;&lt;/span&gt; AND rows_affected &amp;gt; 0&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; slave1 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;localhost&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;msandbox&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sys&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt; SELECT * FROM performance_schema.events_statements_summary_by_user_by_event_name WHERE user IS NOT NULL AND sum_rows_affected &amp;gt; 0&lt;span class=&quot;se&quot;&gt;\G&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;display-mount-fs-in-nice-layout&quot;&gt;Display Mount FS in Nice Layout&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; column -t&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;freebsd-version&quot;&gt;FreeBSD version&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# to see the version and patch level of the installed kernel:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;freebsd-verion -k
+&lt;span class=&quot;c&quot;&gt;# to see the version and patch level of the installed userland:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;freebsd-verion -u
+&lt;span class=&quot;c&quot;&gt;# to find out if FreeBSD kernel is running in 32bit or 64bit mode:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;getconf LONG_BIT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;linux-namespaces-implementations&quot;&gt;Linux namespaces implementations&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Linux namespaces implementations:&lt;/span&gt;
+- mnt: mount points and filesystems isolation
+- pid: process isolation
+- net: network stack isolation &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;contains its own routes, network devices and iptables rules&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+- ipc: System V IPC isolation
+- uts: hostname isolation
+- user: user isolation by means of UIDs
+
+&lt;span class=&quot;c&quot;&gt;# network namespace&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip netns add ns1
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip netns
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip netns &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;ns1 ip link&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;firewalld-in-centos7rhel&quot;&gt;Firewalld in CentOS7\RHEL&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl status firewalld
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --state
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --get-default-zone
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --get-active-zones
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --zone&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public --list-all
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --reload
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --list-services
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --permanent --add-service&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ssh
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --zone&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public --add-port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;514/udp
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --zone&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;public --add-forward-port&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;22:proto&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;tcp:toport&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3753
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-cmd --direct --add-rule ipv4 filter INPUT &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; -p tcp --dport &lt;span class=&quot;m&quot;&gt;9000&lt;/span&gt; -j ACCEPT
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;firewall-offline-cmd --direct --add-rule ipv4 filter INPUT &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; -p tcp -m state --state NEW -m tcp --dport &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; -j ACCEPT
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl disable firewalld
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl stop firewalld&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;encrypt-linux-home-dir&quot;&gt;Encrypt Linux Home Dir&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install ecryptfs-utils
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo ecryptfs-migrate-home -u &amp;lt;login&amp;gt;
+&lt;span class=&quot;c&quot;&gt;# after login&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ecryptfs-unwrap-passphrase
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ecryptfs-add-passphrase
+&lt;span class=&quot;c&quot;&gt;# change passpharase&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ecryptfs-rewrap-passphrase /home/&lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;/.ecryptfs/wrapped-passphrase&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;moreutils&quot;&gt;Moreutils&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;chronic - runs a &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;quietly unless it fails
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; * * * chronic backup &lt;span class=&quot;c&quot;&gt;# instead of backup &amp;gt;/dev/null 2&amp;gt;&amp;amp;1&lt;/span&gt;
+
+combine - combine sets of lines from two files using boolean operations
+errno - look up errno names and descriptions
+ifdata - get network interface info without parsing ifconfig output
+ifne - Run &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; the standard input is not empty
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find . -name core &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; ifne mail -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;Core files found&amp;quot;&lt;/span&gt; root
+isutf8 - check whether files are valid UTF-8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;send-squid-accesslog-to-siem&quot;&gt;Send Squid access_log to SIEM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# http://wiki.squid-cache.org/Features/LogModules&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /etc/squid/squid.conf&lt;/span&gt;
+access_log syslog:local6.info
+
+&lt;span class=&quot;c&quot;&gt;# /etc/rsyslog.conf&lt;/span&gt;
+local6.info @SIEMIP:514
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl restart squid.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;send-hp-ux-syslogd-to-siem&quot;&gt;Send HP-UX syslogd to SIEM&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/syslog.conf&lt;/span&gt;
+*.* @&amp;lt;SIEM_IP&amp;gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; -HUP &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;cat /etc/syslog.pid&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+or
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/sbin/init.d/syslog stop
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/sbin/init.d/syslog start&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;freebsd-vagrant&quot;&gt;FreeBSD Vagrant&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://atlas.hashicorp.com/FreeBSD/&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Vagrantfile&lt;/span&gt;
+Vagrant.configure&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;config&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+  config.vm.synced_folder &lt;span class=&quot;s2&quot;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&amp;quot;/vagrant&amp;quot;&lt;/span&gt;, id: &lt;span class=&quot;s2&quot;&gt;&amp;quot;vagrant-root&amp;quot;&lt;/span&gt;, disabled: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;  &lt;/span&gt;config.vm.box &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;freebsd/FreeBSD-11.0-CURRENT&amp;quot;&lt;/span&gt;
+  config.ssh.shell &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;sh&amp;quot;&lt;/span&gt;
+  config.vm.base_mac &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;080027D14C66&amp;quot;&lt;/span&gt;
+end
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vagrant up
+
+or
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vagrant init freebsd/FreeBSD-10.2-RELEASE&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; vagrant up --provider virtualbox&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;lxc-centos7-container&quot;&gt;LXC CentOS7 Container&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum -y install libvirt virt-install
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl start libvirtd
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum -y --installroot&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/var/lib/libvirt/filesystems/centos7 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+--releasever&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; install systemd passwd yum &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+centos-release vim-minimal procps-ng iproute &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+net-tools dhclient policycoreutils
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chroot /var/lib/libvirt/filesystems/centos7/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;passwd root
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;pts/0&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /var/lib/libvirt/filesystems/centos7/etc/securetty
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virt-install --connect lxc:// --name centos7 --ram &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt; --filesystem /var/lib/libvirt/filesystems/centos7,/
+Escape character is ^&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virsh --connect lxc:// console centos7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;manage-logging-in-systemd&quot;&gt;Manage logging in Systemd&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# set timedate&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;timedatectl list-timezones
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;timedatectl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-timezone Europe/Moscow
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;timedatectl status
+
+&lt;span class=&quot;c&quot;&gt;# to watch all logs&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl
+
+&lt;span class=&quot;c&quot;&gt;# logs from last boot&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -b
+
+&lt;span class=&quot;c&quot;&gt;# filter logs with datetime&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --since &lt;span class=&quot;s2&quot;&gt;&amp;quot;2015-07-20 17:15:00&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --since yesterday
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --since 09:00 --until now
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --since 10:00 --until &lt;span class=&quot;s2&quot;&gt;&amp;quot;1 hour ago&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# filter logs with service name&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -u sshd.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -u nginx.service --since yesterday
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -u nginx.service -u php-fpm.service —since today
+
+&lt;span class=&quot;c&quot;&gt;# filter logs with proccess, users or groups name&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl &lt;span class=&quot;nv&quot;&gt;_PID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1229&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sshd&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl &lt;span class=&quot;nv&quot;&gt;_UID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;99&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;99&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nobody&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;99&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nobody&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;99&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;nobody&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -F _UID
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -F _GUID
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man systemd.journal-fields
+
+&lt;span class=&quot;c&quot;&gt;# filter logs with path&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl /usr/sbin/sshd
+
+&lt;span class=&quot;c&quot;&gt;# see kernel logs&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -k
+
+&lt;span class=&quot;c&quot;&gt;# filter logs with error level&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -p &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; -b
+&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; — EMERG
+&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; — ALERT
+&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; — CRIT
+&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; — ERR
+&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; — WARNING
+&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; — NOTICE
+&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; — INFO
+&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; —DEBUG
+
+&lt;span class=&quot;c&quot;&gt;# write logs to stdout (default use less)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --no-pager
+
+&lt;span class=&quot;c&quot;&gt;# write logs with formating&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl  -u sshd.service -o json
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl  -u sshd.service -o json-pretty
+
+&lt;span class=&quot;c&quot;&gt;# formats:&lt;/span&gt;
+cat
+&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt;
+short
+short-iso
+short-monotonic
+short-precise
+verbose
+
+&lt;span class=&quot;c&quot;&gt;# see new logs&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -n
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -n 20
+
+&lt;span class=&quot;c&quot;&gt;# see logs in tail mode&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl -f
+
+&lt;span class=&quot;c&quot;&gt;# count logs space usage&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --disk-usage
+
+&lt;span class=&quot;c&quot;&gt;# rotate logs&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --vacuum-size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1G
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;journalctl --vacuum-time&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1years
+
+&lt;span class=&quot;c&quot;&gt;# write logs to syslog&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /etc/systemd/journald.conf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ForwardToSyslog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;yes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;systemd-cgroups&quot;&gt;Systemd cgroups&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To get the full hierarchy of control groups, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemd-cgls
+
+&lt;span class=&quot;c&quot;&gt;# To get the list of control group ordered by CPU, memory and disk I/O load, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemd-cgtop
+
+&lt;span class=&quot;c&quot;&gt;# To put resource limits on a service (here 500 CPUShares), type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-property httpd.service &lt;span class=&quot;nv&quot;&gt;CPUShares&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;500
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl show -p CPUShares httpd.service
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl show httpd.service &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep CPUShares
+
+&lt;span class=&quot;c&quot;&gt;# cgroup slices&lt;/span&gt;
+systemctl status user-&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;UID&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;.slice
+
+&lt;span class=&quot;c&quot;&gt;# For example, if we want to limit cpu.shares of all processes of user with UID 1000:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-property user-1000.slice &lt;span class=&quot;nv&quot;&gt;CPUShares&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;100
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl daemon-reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;systemd-targetsrun-levels&quot;&gt;Systemd Targets/Run levels&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To get the current default run level, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl get-default
+
+&lt;span class=&quot;c&quot;&gt;# To move to maintenance mode, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl rescue
+
+&lt;span class=&quot;c&quot;&gt;# To set the default run level to non-graphical mode, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-default multi-user.target
+
+&lt;span class=&quot;c&quot;&gt;# To set the default run level to graphical mode, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-default graphical.target
+
+&lt;span class=&quot;c&quot;&gt;# To stop, reboot a server, suspend it or put it into hibernation, type:&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl poweroff
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl reboot
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;suspend&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl hibernate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/&quot;&gt;Linux-Unix-IT Tips and Tricks #4&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on August 17, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -3340,7 +3648,7 @@ https://localhost:3790
 
 
 <entry>
-  <title type="html"><![CDATA[ Linux-Unix-IT Tips and Tricks #3]]></title>
+  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #3]]></title>
   <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/" />
   <id>https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3</id>
   <updated>2015-07-01 17:23:41 +0300T00:00:00-00:00</updated>
@@ -3423,7 +3731,8 @@ https://localhost:3790
 
 &lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
-&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;speed-up-mysql-import&quot;&gt;Speed up MySQL Import&lt;/h3&gt;
 
@@ -3909,7 +4218,7 @@ kernel.panic &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 15
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sysctl -p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt; Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
 </entry>
 
 
@@ -3993,6 +4302,7 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
 &lt;/header&gt;
 &lt;div id=&quot;drawer&quot;&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other parts&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#mysql-log-rotate&quot; id=&quot;markdown-toc-mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#mysql-dump-with-proceduresfunctionstriggers&quot; id=&quot;markdown-toc-mysql-dump-with-proceduresfunctionstriggers&quot;&gt;MySQL dump with procedures/functions/triggers&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#show-last-login-history&quot; id=&quot;markdown-toc-show-last-login-history&quot;&gt;Show last login history&lt;/a&gt;&lt;/li&gt;
@@ -4051,6 +4361,11 @@ Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
   &lt;/div&gt;
 &lt;/section&gt;
 &lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;
+&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/h3&gt;
 
@@ -4148,7 +4463,7 @@ reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;boot-centos-in-a-single-user-mode&quot;&gt;Boot CentOS in a Single-User Mode&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to grub line that start with kernel - single
-or 
+or
 &lt;span class=&quot;nv&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;delete-mysql-binary-logs&quot;&gt;Delete MySQL binary logs&lt;/h3&gt;
@@ -4168,7 +4483,7 @@ PURGE BINARY LOGS TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysqld-bin.000123
 &lt;h3 id=&quot;find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find *&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;`md5sum \&amp;quot;$i\&amp;quot;`&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -- &lt;span class=&quot;s1&quot;&gt;&amp;#39;{ if (LAST==$1) print; else LAST=$1 }&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;or &lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;or&lt;/span&gt;
 &lt;span class=&quot;s1&quot;&gt;find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;print &lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;sshsvn-error&quot;&gt;SSH+SVN error&lt;/h3&gt;
@@ -4373,14 +4688,14 @@ reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;chmod 0755, &amp;quot;/bin/chmod&amp;quot;&amp;#39;&lt;/span&gt;
 python -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;import os; os.chmod(&amp;quot;chmod&amp;quot;, 0755)&amp;#39;&lt;/span&gt;
 
-or 
+or
 
 cp /bin/sh ~/chmod2
 cat /bin/chmod &amp;gt; ~/chmod2
 sudo ~/chmod2 +x /bin/chmod
 rm ~/chmod2
 
-or 
+or
 
 sudo apt-get --reinstall install &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dpkg -S /bin/chmod &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f1 -d:&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
 
@@ -4791,55 +5106,6 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 &lt;/ol&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/&quot;&gt;Kali Linux Compatible USB Wifi Adapters&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 16, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Cisco CCNA Security Prepare]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare/" />
-  <id>https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare</id>
-  <updated>2015-03-10 13:10:14 +0300T00:00:00-00:00</updated>
-  <published>2015-03-10T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;The way that i went for CCNA Security Certification&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-ccna-security&quot;&gt;What is CCNA Security&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cisco.com/web/learning/certifications/associate/ccna_security/index.html?mdfid=280563817&quot;&gt;Cisco Site&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;course-lab&quot;&gt;Course Lab&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.unetlab.com/&quot;&gt;UNetLab&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;http://habrahabr.ru/post/262027/&lt;/li&gt;
-  &lt;li&gt;http://www.ciscolab.ru/labs/42-unetlab-stroim-stend-dlya-podgotovki-k-ccie-rs-sp-dc-sec.html&lt;/li&gt;
-  &lt;li&gt;http://www.sharontools.com/online-lab/&lt;/li&gt;
-  &lt;li&gt;http://sclabs.blogspot.ru/2013/05/cisco-asa-on-vmware-esxi-install-and.html&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;http://ciscoiseasy.blogspot.ru/&lt;/li&gt;
-  &lt;li&gt;http://sclabs.blogspot.ru/&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Keith Barker, Scott Morris - CCNA Security 640-554 Official Cert Guide&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;CBT Nuggets - CCNA Security 640-554&lt;/li&gt;
-  &lt;li&gt;INE - CCNA Security 640-554 IINS&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/03/10/cisco-ccna-security-prepare/&quot;&gt;Cisco CCNA Security Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on March 10, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>

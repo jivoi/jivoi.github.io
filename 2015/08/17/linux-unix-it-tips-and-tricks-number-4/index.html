@@ -1,0 +1,554 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Linux-Unix-IT Tips and Tricks #4 &#8211; EK</title>
+<meta name="description" content="Different Linux / Unix / IT tips, notes, howto part 4
+
+">
+<meta name="keywords" content="linux, unix, sysadm">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Linux-Unix-IT Tips and Tricks #4">
+<meta name="twitter:description" content="Different Linux / Unix / IT tips, notes, howto part 4
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-Unix-IT Tips and Tricks #4">
+<meta property="og:description" content="Different Linux / Unix / IT tips, notes, howto part 4
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/" rel="bookmark" title="Linux-Unix-IT Tips and Tricks #4">Linux-Unix-IT Tips and Tricks #4</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>Different Linux / Unix / IT tips, notes, howto part 4</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#other-parts" id="markdown-toc-other-parts">Other parts</a></li>
+  <li><a href="#who-is-writing-to-a-mysql-replica" id="markdown-toc-who-is-writing-to-a-mysql-replica">Who is writing to a mysql replica</a></li>
+  <li><a href="#display-mount-fs-in-nice-layout" id="markdown-toc-display-mount-fs-in-nice-layout">Display Mount FS in Nice Layout</a></li>
+  <li><a href="#freebsd-version" id="markdown-toc-freebsd-version">FreeBSD version</a></li>
+  <li><a href="#linux-namespaces-implementations" id="markdown-toc-linux-namespaces-implementations">Linux namespaces implementations</a></li>
+  <li><a href="#firewalld-in-centos7rhel" id="markdown-toc-firewalld-in-centos7rhel">Firewalld in CentOS7\RHEL</a></li>
+  <li><a href="#encrypt-linux-home-dir" id="markdown-toc-encrypt-linux-home-dir">Encrypt Linux Home Dir</a></li>
+  <li><a href="#moreutils" id="markdown-toc-moreutils">Moreutils</a></li>
+  <li><a href="#send-squid-accesslog-to-siem" id="markdown-toc-send-squid-accesslog-to-siem">Send Squid access_log to SIEM</a></li>
+  <li><a href="#send-hp-ux-syslogd-to-siem" id="markdown-toc-send-hp-ux-syslogd-to-siem">Send HP-UX syslogd to SIEM</a></li>
+  <li><a href="#freebsd-vagrant" id="markdown-toc-freebsd-vagrant">FreeBSD Vagrant</a></li>
+  <li><a href="#lxc-centos7-container" id="markdown-toc-lxc-centos7-container">LXC CentOS7 Container</a></li>
+  <li><a href="#manage-logging-in-systemd" id="markdown-toc-manage-logging-in-systemd">Manage logging in Systemd</a></li>
+  <li><a href="#systemd-cgroups" id="markdown-toc-systemd-cgroups">Systemd cgroups</a></li>
+  <li><a href="#systemd-targetsrun-levels" id="markdown-toc-systemd-targetsrun-levels">Systemd Targets/Run levels</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="other-parts">Other parts</h3>
+<p><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/">Part 1</a>
+<a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/">Part 2</a>
+<a href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/">Part 3</a></p>
+
+<h3 id="who-is-writing-to-a-mysql-replica">Who is writing to a mysql replica</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># if you are using 5.6, you can do it!</span>
+<span class="c"># http://dev.mysql.com/doc/en/connection-summary-tables.html</span>
+mysql&gt; desc performance_schema.events_statements_summary_by_user_by_event_name<span class="p">;</span>
+mysql&gt; <span class="k">select</span> user, event_name, count_star, sum_timer_wait, sum_rows_affected
+    -&gt;   from performance_schema.events_statements_summary_by_user_by_event_name
+    -&gt;  where sum_timer_wait &gt; 0
+    -&gt;  order by user, sum_timer_wait desc<span class="p">;</span>
+mysql&gt; <span class="k">select</span> * from sys.user_summary_by_statement_type<span class="p">;</span>
+mysql&gt; slave1 <span class="o">[</span>localhost<span class="o">]</span> <span class="o">{</span>msandbox<span class="o">}</span> <span class="o">(</span>sys<span class="o">)</span> &gt; <span class="k">select</span> * from user_summary_by_statement_type<span class="p">;</span>
+mysql&gt; slave1 <span class="o">[</span>localhost<span class="o">]</span> <span class="o">{</span>msandbox<span class="o">}</span> <span class="o">(</span>sys<span class="o">)</span> &gt; SELECT * FROM sys.user_summary_by_statement_type WHERE user !<span class="o">=</span> <span class="s1">&#39;background&#39;</span> AND rows_affected &gt; 0<span class="p">;</span>
+mysql&gt; slave1 <span class="o">[</span>localhost<span class="o">]</span> <span class="o">{</span>msandbox<span class="o">}</span> <span class="o">(</span>sys<span class="o">)</span> &gt; SELECT * FROM performance_schema.events_statements_summary_by_user_by_event_name WHERE user IS NOT NULL AND sum_rows_affected &gt; 0<span class="se">\G</span></code></pre></div>
+
+<h3 id="display-mount-fs-in-nice-layout">Display Mount FS in Nice Layout</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mount <span class="p">|</span> column -t</code></pre></div>
+
+<h3 id="freebsd-version">FreeBSD version</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># to see the version and patch level of the installed kernel:</span>
+<span class="nv">$ </span>freebsd-verion -k
+<span class="c"># to see the version and patch level of the installed userland:</span>
+<span class="nv">$ </span>freebsd-verion -u
+<span class="c"># to find out if FreeBSD kernel is running in 32bit or 64bit mode:</span>
+<span class="nv">$ </span>getconf LONG_BIT</code></pre></div>
+
+<h3 id="linux-namespaces-implementations">Linux namespaces implementations</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Linux namespaces implementations:</span>
+- mnt: mount points and filesystems isolation
+- pid: process isolation
+- net: network stack isolation <span class="o">(</span>contains its own routes, network devices and iptables rules<span class="o">)</span>
+- ipc: System V IPC isolation
+- uts: hostname isolation
+- user: user isolation by means of UIDs
+
+<span class="c"># network namespace</span>
+<span class="nv">$ </span>ip netns add ns1
+<span class="nv">$ </span>ip netns
+<span class="nv">$ </span>ip netns <span class="nb">exec </span>ns1 ip link</code></pre></div>
+
+<h3 id="firewalld-in-centos7rhel">Firewalld in CentOS7\RHEL</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>systemctl status firewalld
+<span class="nv">$ </span>firewall-cmd --state
+<span class="nv">$ </span>firewall-cmd --get-default-zone
+<span class="nv">$ </span>firewall-cmd --get-active-zones
+<span class="nv">$ </span>firewall-cmd --zone<span class="o">=</span>public --list-all
+<span class="nv">$ </span>firewall-cmd --reload
+<span class="nv">$ </span>firewall-cmd --list-services
+<span class="nv">$ </span>firewall-cmd --permanent --add-service<span class="o">=</span>ssh
+<span class="nv">$ </span>firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>514/udp
+<span class="nv">$ </span>firewall-cmd --zone<span class="o">=</span>public --add-forward-port<span class="o">=</span><span class="nv">port</span><span class="o">=</span>22:proto<span class="o">=</span>tcp:toport<span class="o">=</span>3753
+<span class="nv">$ </span>firewall-cmd --direct --add-rule ipv4 filter INPUT <span class="m">0</span> -p tcp --dport <span class="m">9000</span> -j ACCEPT
+<span class="nv">$ </span>firewall-offline-cmd --direct --add-rule ipv4 filter INPUT <span class="m">0</span> -p tcp -m state --state NEW -m tcp --dport <span class="m">22</span> -j ACCEPT
+<span class="nv">$ </span>systemctl disable firewalld
+<span class="nv">$ </span>systemctl stop firewalld</code></pre></div>
+
+<h3 id="encrypt-linux-home-dir">Encrypt Linux Home Dir</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install ecryptfs-utils
+<span class="nv">$ </span>sudo ecryptfs-migrate-home -u &lt;login&gt;
+<span class="c"># after login</span>
+<span class="nv">$ </span>ecryptfs-unwrap-passphrase
+<span class="nv">$ </span>ecryptfs-add-passphrase
+<span class="c"># change passpharase</span>
+<span class="nv">$ </span>ecryptfs-rewrap-passphrase /home/<span class="nv">$USER</span>/.ecryptfs/wrapped-passphrase</code></pre></div>
+
+<h3 id="moreutils">Moreutils</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">chronic - runs a <span class="nb">command </span>quietly unless it fails
+<span class="nv">$ </span><span class="m">0</span> <span class="m">1</span> * * * chronic backup <span class="c"># instead of backup &gt;/dev/null 2&gt;&amp;1</span>
+
+combine - combine sets of lines from two files using boolean operations
+errno - look up errno names and descriptions
+ifdata - get network interface info without parsing ifconfig output
+ifne - Run <span class="nb">command </span><span class="k">if</span> the standard input is not empty
+<span class="nv">$ </span>find . -name core <span class="p">|</span> ifne mail -s <span class="s2">&quot;Core files found&quot;</span> root
+isutf8 - check whether files are valid UTF-8</code></pre></div>
+
+<h3 id="send-squid-accesslog-to-siem">Send Squid access_log to SIEM</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># http://wiki.squid-cache.org/Features/LogModules</span>
+<span class="c"># /etc/squid/squid.conf</span>
+access_log syslog:local6.info
+
+<span class="c"># /etc/rsyslog.conf</span>
+local6.info @SIEMIP:514
+<span class="nv">$ </span>systemctl restart squid.service</code></pre></div>
+
+<h3 id="send-hp-ux-syslogd-to-siem">Send HP-UX syslogd to SIEM</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/syslog.conf</span>
+*.* @&lt;SIEM_IP&gt;
+
+<span class="nv">$ </span><span class="nb">kill</span> -HUP <span class="sb">`</span>cat /etc/syslog.pid<span class="sb">`</span>
+or
+<span class="nv">$ </span>/sbin/init.d/syslog stop
+<span class="nv">$ </span>/sbin/init.d/syslog start</code></pre></div>
+
+<h3 id="freebsd-vagrant">FreeBSD Vagrant</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># https://atlas.hashicorp.com/FreeBSD/</span>
+
+<span class="c"># Vagrantfile</span>
+Vagrant.configure<span class="o">(</span><span class="s2">&quot;2&quot;</span><span class="o">)</span> <span class="k">do</span> <span class="p">|</span>config<span class="p">|</span>
+  config.vm.synced_folder <span class="s2">&quot;.&quot;</span>, <span class="s2">&quot;/vagrant&quot;</span>, id: <span class="s2">&quot;vagrant-root&quot;</span>, disabled: <span class="nb">true</span>
+<span class="nb">  </span>config.vm.box <span class="o">=</span> <span class="s2">&quot;freebsd/FreeBSD-11.0-CURRENT&quot;</span>
+  config.ssh.shell <span class="o">=</span> <span class="s2">&quot;sh&quot;</span>
+  config.vm.base_mac <span class="o">=</span> <span class="s2">&quot;080027D14C66&quot;</span>
+end
+<span class="nv">$ </span>vagrant up
+
+or
+<span class="nv">$ </span>vagrant init freebsd/FreeBSD-10.2-RELEASE<span class="p">;</span> vagrant up --provider virtualbox</code></pre></div>
+
+<h3 id="lxc-centos7-container">LXC CentOS7 Container</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>yum -y install libvirt virt-install
+<span class="nv">$ </span>systemctl start libvirtd
+
+<span class="nv">$ </span>yum -y --installroot<span class="o">=</span>/var/lib/libvirt/filesystems/centos7 <span class="se">\</span>
+--releasever<span class="o">=</span><span class="m">7</span> install systemd passwd yum <span class="se">\</span>
+centos-release vim-minimal procps-ng iproute <span class="se">\</span>
+net-tools dhclient policycoreutils
+
+<span class="nv">$ </span>chroot /var/lib/libvirt/filesystems/centos7/
+<span class="nv">$ </span>passwd root
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;pts/0&quot;</span> &gt;&gt; /var/lib/libvirt/filesystems/centos7/etc/securetty
+
+<span class="nv">$ </span>virt-install --connect lxc:// --name centos7 --ram <span class="m">256</span> --filesystem /var/lib/libvirt/filesystems/centos7,/
+Escape character is ^<span class="o">]</span>
+<span class="nv">$ </span>virsh --connect lxc:// console centos7</code></pre></div>
+
+<h3 id="manage-logging-in-systemd">Manage logging in Systemd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># set timedate</span>
+<span class="nv">$ </span>timedatectl list-timezones
+<span class="nv">$ </span>timedatectl <span class="nb">set</span>-timezone Europe/Moscow
+<span class="nv">$ </span>timedatectl status
+
+<span class="c"># to watch all logs</span>
+<span class="nv">$ </span>journalctl
+
+<span class="c"># logs from last boot</span>
+<span class="nv">$ </span>journalctl -b
+
+<span class="c"># filter logs with datetime</span>
+<span class="nv">$ </span>journalctl --since <span class="s2">&quot;2015-07-20 17:15:00&quot;</span>
+<span class="nv">$ </span>journalctl --since yesterday
+<span class="nv">$ </span>journalctl --since 09:00 --until now
+<span class="nv">$ </span>journalctl --since 10:00 --until <span class="s2">&quot;1 hour ago&quot;</span>
+
+<span class="c"># filter logs with service name</span>
+<span class="nv">$ </span>journalctl -u sshd.service
+<span class="nv">$ </span>journalctl -u nginx.service --since yesterday
+<span class="nv">$ </span>journalctl -u nginx.service -u php-fpm.service —since today
+
+<span class="c"># filter logs with proccess, users or groups name</span>
+<span class="nv">$ </span>journalctl <span class="nv">_PID</span><span class="o">=</span><span class="m">1229</span> <span class="o">(</span>sshd<span class="o">)</span>
+<span class="nv">$ </span>journalctl <span class="nv">_UID</span><span class="o">=</span><span class="m">99</span> <span class="o">(</span><span class="nv">uid</span><span class="o">=</span>99<span class="o">(</span>nobody<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>99<span class="o">(</span>nobody<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>99<span class="o">(</span>nobody<span class="o">))</span>
+<span class="nv">$ </span>journalctl -F _UID
+<span class="nv">$ </span>journalctl -F _GUID
+<span class="nv">$ </span>man systemd.journal-fields
+
+<span class="c"># filter logs with path</span>
+<span class="nv">$ </span>journalctl /usr/sbin/sshd
+
+<span class="c"># see kernel logs</span>
+<span class="nv">$ </span>journalctl -k
+
+<span class="c"># filter logs with error level</span>
+<span class="nv">$ </span>journalctl -p <span class="m">3</span> -b
+<span class="m">0</span> — EMERG
+<span class="m">1</span> — ALERT
+<span class="m">2</span> — CRIT
+<span class="m">3</span> — ERR
+<span class="m">4</span> — WARNING
+<span class="m">5</span> — NOTICE
+<span class="m">6</span> — INFO
+<span class="m">7</span> —DEBUG
+
+<span class="c"># write logs to stdout (default use less)</span>
+<span class="nv">$ </span>journalctl --no-pager
+
+<span class="c"># write logs with formating</span>
+<span class="nv">$ </span>journalctl  -u sshd.service -o json
+<span class="nv">$ </span>journalctl  -u sshd.service -o json-pretty
+
+<span class="c"># formats:</span>
+cat
+<span class="nb">export</span>
+short
+short-iso
+short-monotonic
+short-precise
+verbose
+
+<span class="c"># see new logs</span>
+<span class="nv">$ </span>journalctl -n
+<span class="nv">$ </span>journalctl -n 20
+
+<span class="c"># see logs in tail mode</span>
+<span class="nv">$ </span>journalctl -f
+
+<span class="c"># count logs space usage</span>
+<span class="nv">$ </span>journalctl --disk-usage
+
+<span class="c"># rotate logs</span>
+<span class="nv">$ </span>journalctl --vacuum-size<span class="o">=</span>1G
+<span class="nv">$ </span>journalctl --vacuum-time<span class="o">=</span>1years
+
+<span class="c"># write logs to syslog</span>
+<span class="c"># /etc/systemd/journald.conf</span>
+<span class="nv">ForwardToSyslog</span><span class="o">=</span>yes</code></pre></div>
+
+<h3 id="systemd-cgroups">Systemd cgroups</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># To get the full hierarchy of control groups, type:</span>
+<span class="nv">$ </span>systemd-cgls
+
+<span class="c"># To get the list of control group ordered by CPU, memory and disk I/O load, type:</span>
+<span class="nv">$ </span>systemd-cgtop
+
+<span class="c"># To put resource limits on a service (here 500 CPUShares), type:</span>
+<span class="nv">$ </span>systemctl <span class="nb">set</span>-property httpd.service <span class="nv">CPUShares</span><span class="o">=</span>500
+<span class="nv">$ </span>systemctl show -p CPUShares httpd.service
+<span class="nv">$ </span>systemctl show httpd.service <span class="p">|</span> grep CPUShares
+
+<span class="c"># cgroup slices</span>
+systemctl status user-<span class="k">${</span><span class="nv">UID</span><span class="k">}</span>.slice
+
+<span class="c"># For example, if we want to limit cpu.shares of all processes of user with UID 1000:</span>
+<span class="nv">$ </span>systemctl <span class="nb">set</span>-property user-1000.slice <span class="nv">CPUShares</span><span class="o">=</span>100
+<span class="nv">$ </span>systemctl daemon-reload</code></pre></div>
+
+<h3 id="systemd-targetsrun-levels">Systemd Targets/Run levels</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># To get the current default run level, type:</span>
+<span class="nv">$ </span>systemctl get-default
+
+<span class="c"># To move to maintenance mode, type:</span>
+<span class="nv">$ </span>systemctl rescue
+
+<span class="c"># To set the default run level to non-graphical mode, type:</span>
+<span class="nv">$ </span>systemctl <span class="nb">set</span>-default multi-user.target
+
+<span class="c"># To set the default run level to graphical mode, type:</span>
+<span class="nv">$ </span>systemctl <span class="nb">set</span>-default graphical.target
+
+<span class="c"># To stop, reboot a server, suspend it or put it into hibernation, type:</span>
+<span class="nv">$ </span>systemctl poweroff
+<span class="nv">$ </span>systemctl reboot
+<span class="nv">$ </span>systemctl <span class="nb">suspend</span>
+<span class="nv">$ </span>systemctl hibernate</code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Linux-Unix-IT Tips and Tricks #4</strong> was published on <time datetime="2015-08-17T00:00:00+03:00">August 17, 2015</time> and last modified on <time datetime="2015-08-17">August 17, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/08/14/free-aas-resources-list/" title="Free #aaS Resources List">Free #aaS Resources List</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/" title="LB with Haproxy">LB with Haproxy</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/" title="Ubuntu Security Hardening">Ubuntu Security Hardening</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+	        
+
+</body>
+</html>

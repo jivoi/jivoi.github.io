@@ -158,6 +158,7 @@
 </header>
 <div id="drawer">
 <ul id="markdown-toc">
+  <li><a href="#other-parts" id="markdown-toc-other-parts">Other parts</a></li>
   <li><a href="#mysql-log-rotate" id="markdown-toc-mysql-log-rotate">MySQL log rotate</a></li>
   <li><a href="#mysql-dump-with-proceduresfunctionstriggers" id="markdown-toc-mysql-dump-with-proceduresfunctionstriggers">MySQL dump with procedures/functions/triggers</a></li>
   <li><a href="#show-last-login-history" id="markdown-toc-show-last-login-history">Show last login history</a></li>
@@ -216,6 +217,11 @@
   </div>
 </section>
 <!-- /#table-of-contents -->
+
+<h3 id="other-parts">Other parts</h3>
+<p><a href="https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/">Part 1</a>
+<a href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/">Part 2</a>
+<a href="https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/">Part 3</a></p>
 
 <h3 id="mysql-log-rotate">MySQL log rotate</h3>
 
@@ -313,7 +319,7 @@ reload</code></pre></div>
 <h3 id="boot-centos-in-a-single-user-mode">Boot CentOS in a Single-User Mode</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">add to grub line that start with kernel - single
-or 
+or
 <span class="nv">init</span><span class="o">=</span>/bin/sh</code></pre></div>
 
 <h3 id="delete-mysql-binary-logs">Delete MySQL binary logs</h3>
@@ -333,7 +339,7 @@ PURGE BINARY LOGS TO <span class="s1">&#39;mysqld-bin.000123&#39;</span><span cl
 <h3 id="find-duplicate-files-in-linux">Find duplicate files in Linux</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="k">for</span> i in <span class="sb">`</span>find *<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="o">[</span> -f <span class="s2">&quot;$i&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;`md5sum \&quot;$i\&quot;`&quot;</span><span class="p">;</span> <span class="k">done</span> <span class="p">|</span> sort <span class="p">|</span> awk -- <span class="s1">&#39;{ if (LAST==$1) print; else LAST=$1 }</span>
-<span class="s1">or </span>
+<span class="s1">or</span>
 <span class="s1">find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &#39;</span><span class="o">{</span>print <span class="nv">$2</span><span class="o">}</span><span class="err">&#39;</span></code></pre></div>
 
 <h3 id="sshsvn-error">SSH+SVN error</h3>
@@ -538,14 +544,14 @@ reboot</code></pre></div>
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">perl -e <span class="s1">&#39;chmod 0755, &quot;/bin/chmod&quot;&#39;</span>
 python -c <span class="s1">&#39;import os; os.chmod(&quot;chmod&quot;, 0755)&#39;</span>
 
-or 
+or
 
 cp /bin/sh ~/chmod2
 cat /bin/chmod &gt; ~/chmod2
 sudo ~/chmod2 +x /bin/chmod
 rm ~/chmod2
 
-or 
+or
 
 sudo apt-get --reinstall install <span class="sb">`</span>dpkg -S /bin/chmod <span class="p">|</span> cut -f1 -d:<span class="sb">`</span>
 
@@ -715,11 +721,11 @@ tacacs-server key SecretKeyCisco</code></pre></div>
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
+      <li><a href="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/" title="Linux-Unix-IT Tips and Tricks #4">Linux-Unix-IT Tips and Tricks #4</a></li>
+    
       <li><a href="https://jivoi.github.io/2015/08/14/free-aas-resources-list/" title="Free #aaS Resources List">Free #aaS Resources List</a></li>
     
       <li><a href="https://jivoi.github.io/2015/07/29/lb-with-haproxy/" title="LB with Haproxy">LB with Haproxy</a></li>
-    
-      <li><a href="https://jivoi.github.io/2015/07/22/ubuntu-security-hardening/" title="Ubuntu Security Hardening">Ubuntu Security Hardening</a></li>
     
     </ul>
     <hr />
