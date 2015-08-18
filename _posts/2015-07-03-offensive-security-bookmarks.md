@@ -43,6 +43,7 @@ All that things I need to pass OSCP, i think =)
 - [http://garage4hackers.com/forum.php](http://garage4hackers.com/forum.php)
 - [https://www.hellboundhackers.org/](https://www.hellboundhackers.org/)
 - [http://www.lockpicking101.com/](http://www.lockpicking101.com/)
+- [https://www.xploitworld.com/index.php](https://www.xploitworld.com/index.php)
 
 ### Tor Onion Links
 - [http://www.hiddenwiki.info/](http://www.hiddenwiki.info/)

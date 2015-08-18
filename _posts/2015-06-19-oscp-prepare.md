@@ -16,6 +16,7 @@ My current way for OSCP Certifications
 ### What is OSCP?
 - [What is OSCP](https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/)
 - [Course Syllabus](http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf)
+- [PWK MindMAP](https://firebitsbr.files.wordpress.com/2015/04/pentest-with-kali-by-firebits-rev01.png)
 
 ### OSCP Reviews
 - [http://0xdeadcode.se/archives/165](http://0xdeadcode.se/archives/165)
