@@ -380,3 +380,95 @@ add_header X-Content-Type-Options "nosniff" always;
 # check header
 https://securityheaders.io/
 {% endhighlight %}
+
+### Use ngx_http_map_module
+{% highlight nginx %}
+# http://nginx.org/en/docs/http/ngx_http_map_module.html#map
+
+# old way
+if ($http_user_agent ~ "HackYou") {
+    set $block "A";
+}
+
+if ($method = "POST") {
+    set $block "${block}B";
+}
+
+if ($uri = "/admin/some/url") {
+    set $block "${block}C";
+}
+
+if ($block = "ABC") {
+    return 403;
+}
+
+# use map
+map "$http_user_agent:$method:$uri" $block {
+    "HackYou:POST:/admin/some/url"  "1";
+}
+
+if ($block) {
+    return 403;
+}
+
+# http old way
+if ($arg_a = "1") {
+    add_header X-one "one";
+}
+add_header X-two "two";
+
+# http  use map
+map $arg_a $header_one {
+    "1"    "one";
+}
+
+add_header X-one $header_one;
+add_header X-two "two";
+
+# upstream old way
+location /some/url/ {
+    if ($cookie_userid ~ "~^[0-4]") { rewrite ^(.+)$ /old/$1 last; }
+    if ($cookie_userid ~ "~^[5-9]") { rewrite ^(.+)$ /new/$1 last; }
+
+    proxy_pass http://default_php_backend;
+}
+
+location /old/some/url/ {
+    internal;
+    rewrite    ^/old/(.+)$ $1 break;
+    proxy_pass http://old_php_backend;
+}
+
+location /new/some/url/ {
+    internal;
+    rewrite    ^/new/(.+)$ $1 break;
+    proxy_pass http://new_php_backend;
+}
+
+# upstream use map
+map $cookie_userid     $php_backend {
+    "~^[0-4]"          "old_php_backend";
+    "~^[5-9]"          "new_php_backend";
+    default        "default_php_backend";
+}
+
+location /some/url/ {
+    proxy_pass http://$php_backend;
+}
+{% endhighlight %}
+
+### Right limit speed to Nginx
+{% highlight nginx %}
+# https://github.com/yaoweibin/nginx_limit_speed_module
+http {
+    limit_speed_zone  one  $binary_remote_addr  10m;
+    server {
+        location /download/ {
+            limit_speed  one  100k;
+        }
+    }
+}
+
+#./configure
+--add-module=/путь до папки с модулем/nginx_limit_speed_module
+{% endhighlight %}
