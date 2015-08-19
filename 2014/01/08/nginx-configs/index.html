@@ -187,6 +187,8 @@
   <li><a href="#location-for-static-files" id="markdown-toc-location-for-static-files">Location for static files</a></li>
   <li><a href="#time-based-rewriting-rules" id="markdown-toc-time-based-rewriting-rules">Time Based Rewriting Rules</a></li>
   <li><a href="#hardening-http-response-headers" id="markdown-toc-hardening-http-response-headers">Hardening HTTP response headers</a></li>
+  <li><a href="#use-ngxhttpmapmodule" id="markdown-toc-use-ngxhttpmapmodule">Use ngx_http_map_module</a></li>
+  <li><a href="#right-limit-speed-to-nginx" id="markdown-toc-right-limit-speed-to-nginx">Right limit speed to Nginx</a></li>
 </ul>
 
   </div>
@@ -519,6 +521,95 @@
 <span class="c1"># check header</span>
 <span class="s">https://securityheaders.io/</span></code></pre></div>
 
+<h3 id="use-ngxhttpmapmodule">Use ngx_http_map_module</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="c1"># http://nginx.org/en/docs/http/ngx_http_map_module.html#map</span>
+
+<span class="c1"># old way</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$http_user_agent</span> <span class="p">~</span> <span class="sr">&quot;HackYou&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block</span> <span class="s">&quot;A&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$method</span> <span class="p">=</span> <span class="s">&quot;POST&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block</span> <span class="s">&quot;</span><span class="nv">${block}B&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$uri</span> <span class="p">=</span> <span class="s">&quot;/admin/some/url&quot;)</span> <span class="p">{</span>
+    <span class="kn">set</span> <span class="nv">$block</span> <span class="s">&quot;</span><span class="nv">${block}C&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$block</span> <span class="p">=</span> <span class="s">&quot;ABC&quot;)</span> <span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># use map</span>
+<span class="k">map</span> <span class="s">&quot;</span><span class="nv">$http_user_agent:$method:$uri&quot;</span> <span class="nv">$block</span> <span class="p">{</span>
+    <span class="kn">&quot;HackYou:POST:/admin/some/url&quot;</span>  <span class="s">&quot;1&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="s">(</span><span class="nv">$block</span><span class="s">)</span> <span class="p">{</span>
+    <span class="kn">return</span> <span class="mi">403</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># http old way</span>
+<span class="k">if</span> <span class="s">(</span><span class="nv">$arg_a</span> <span class="p">=</span> <span class="s">&quot;1&quot;)</span> <span class="p">{</span>
+    <span class="kn">add_header</span> <span class="s">X-one</span> <span class="s">&quot;one&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">add_header</span> <span class="s">X-two</span> <span class="s">&quot;two&quot;</span><span class="p">;</span>
+
+<span class="c1"># http  use map</span>
+<span class="k">map</span> <span class="nv">$arg_a</span> <span class="nv">$header_one</span> <span class="p">{</span>
+    <span class="kn">&quot;1&quot;</span>    <span class="s">&quot;one&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">add_header</span> <span class="s">X-one</span> <span class="nv">$header_one</span><span class="p">;</span>
+<span class="k">add_header</span> <span class="s">X-two</span> <span class="s">&quot;two&quot;</span><span class="p">;</span>
+
+<span class="c1"># upstream old way</span>
+<span class="k">location</span> <span class="s">/some/url/</span> <span class="p">{</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$cookie_userid</span> <span class="p">~</span> <span class="sr">&quot;~^[0-4]&quot;)</span> <span class="p">{</span> <span class="kn">rewrite</span> <span class="s">^(.+)</span>$ <span class="s">/old/</span><span class="nv">$1</span> <span class="s">last</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kn">if</span> <span class="s">(</span><span class="nv">$cookie_userid</span> <span class="p">~</span> <span class="sr">&quot;~^[5-9]&quot;)</span> <span class="p">{</span> <span class="kn">rewrite</span> <span class="s">^(.+)</span>$ <span class="s">/new/</span><span class="nv">$1</span> <span class="s">last</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kn">proxy_pass</span> <span class="s">http://default_php_backend</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="s">/old/some/url/</span> <span class="p">{</span>
+    <span class="kn">internal</span><span class="p">;</span>
+    <span class="kn">rewrite</span>    <span class="s">^/old/(.+)</span>$ <span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://old_php_backend</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="s">/new/some/url/</span> <span class="p">{</span>
+    <span class="kn">internal</span><span class="p">;</span>
+    <span class="kn">rewrite</span>    <span class="s">^/new/(.+)</span>$ <span class="nv">$1</span> <span class="s">break</span><span class="p">;</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://new_php_backend</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1"># upstream use map</span>
+<span class="k">map</span> <span class="nv">$cookie_userid</span>     <span class="nv">$php_backend</span> <span class="p">{</span>
+    <span class="kn">&quot;~^[0-4]&quot;</span>          <span class="s">&quot;old_php_backend&quot;</span><span class="p">;</span>
+    <span class="kn">&quot;~^[5-9]&quot;</span>          <span class="s">&quot;new_php_backend&quot;</span><span class="p">;</span>
+    <span class="kn">default</span>        <span class="s">&quot;default_php_backend&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="s">/some/url/</span> <span class="p">{</span>
+    <span class="kn">proxy_pass</span> <span class="s">http://</span><span class="nv">$php_backend</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="right-limit-speed-to-nginx">Right limit speed to Nginx</h3>
+
+<div class="highlight"><pre><code class="language-nginx" data-lang="nginx"><span class="c1"># https://github.com/yaoweibin/nginx_limit_speed_module</span>
+<span class="k">http</span> <span class="p">{</span>
+    <span class="kn">limit_speed_zone</span>  <span class="no">on</span><span class="s">e</span>  <span class="nv">$binary_remote_addr</span>  <span class="mi">10m</span><span class="p">;</span>
+    <span class="kn">server</span> <span class="p">{</span>
+        <span class="kn">location</span> <span class="s">/download/</span> <span class="p">{</span>
+            <span class="kn">limit_speed</span>  <span class="no">on</span><span class="s">e</span>  <span class="mi">100k</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">#./configure</span>
+<span class="k">--add-module=/путь</span> <span class="s">до</span> <span class="s">папки</span> <span class="s">с</span> <span class="s">модулем/nginx_limit_speed_module</span></code></pre></div>
 
       <hr />
       <footer role="contentinfo">
