@@ -175,6 +175,39 @@ Escape character is ^]
 $ virsh --connect lxc:// console centos7
 {% endhighlight %}
 
+### Systemd-nspawn CentOS7 Container
+{% highlight bash %}
+$ yum -y --installroot=/var/lib/libvirt/filesystems/centos7 \
+--releasever=7 install systemd passwd yum \
+centos-release vim-minimal procps-ng iproute \
+net-tools dhclient policycoreutils
+
+$ systemd-nspawn -D /var/lib/libvirt/filesystems/centos7 --machine centos_container -b -n
+$ machinectl login centos_container
+$ systemctl stop machine-centos_container.scope
+{% endhighlight %}
+
+### Simple Systemd
+{% highlight bash %}
+# http://rus-linux.net/MyLDP/boot/img/systemd/systemd4_1.png
+# get service states
+$ systemctl list-unit-files -t service
+$ systemctl list-units -t service --all
+$ systemctl is-enabled sshd.service; echo $?
+
+# enable service
+systemctl enable clamd@scan.service
+
+# systemd analyze speed
+$ systemd-analyze blame
+
+# check service depends
+systemctl list-dependencies firewalld.service
+
+# reload all daemons
+systemctl daemon-reload
+{% endhighlight %}
+
 ### Manage logging in Systemd
 {% highlight bash %}
 # set timedate
@@ -299,3 +332,17 @@ $ systemctl reboot
 $ systemctl suspend
 $ systemctl hibernate
 {% endhighlight %}
+
+### DebTree — pkg dependency graphs
+{% highlight bash %}
+$ apt-get install debtree
+$ debtree nginx
+# Generate the dependency graph
+$ debtree dpkg >dpkg.dot
+#  generate an SVG image from the `.dot'
+$ dot -Tsvg -o dpkg.svg dpkg.dot
+# Generate  graph for package dpkg as PNG image
+$ debtree dpkg | dot -Tpng >dpkg.png
+{% endhighlight %}
+
+
