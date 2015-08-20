@@ -170,9 +170,12 @@
   <li><a href="#send-hp-ux-syslogd-to-siem" id="markdown-toc-send-hp-ux-syslogd-to-siem">Send HP-UX syslogd to SIEM</a></li>
   <li><a href="#freebsd-vagrant" id="markdown-toc-freebsd-vagrant">FreeBSD Vagrant</a></li>
   <li><a href="#lxc-centos7-container" id="markdown-toc-lxc-centos7-container">LXC CentOS7 Container</a></li>
+  <li><a href="#systemd-nspawn-centos7-container" id="markdown-toc-systemd-nspawn-centos7-container">Systemd-nspawn CentOS7 Container</a></li>
+  <li><a href="#simple-systemd" id="markdown-toc-simple-systemd">Simple Systemd</a></li>
   <li><a href="#manage-logging-in-systemd" id="markdown-toc-manage-logging-in-systemd">Manage logging in Systemd</a></li>
   <li><a href="#systemd-cgroups" id="markdown-toc-systemd-cgroups">Systemd cgroups</a></li>
   <li><a href="#systemd-targetsrun-levels" id="markdown-toc-systemd-targetsrun-levels">Systemd Targets/Run levels</a></li>
+  <li><a href="#debtree--pkg-dependency-graphs" id="markdown-toc-debtree--pkg-dependency-graphs">DebTree — pkg dependency graphs</a></li>
 </ul>
 
   </div>
@@ -319,6 +322,37 @@ net-tools dhclient policycoreutils
 Escape character is ^<span class="o">]</span>
 <span class="nv">$ </span>virsh --connect lxc:// console centos7</code></pre></div>
 
+<h3 id="systemd-nspawn-centos7-container">Systemd-nspawn CentOS7 Container</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>yum -y --installroot<span class="o">=</span>/var/lib/libvirt/filesystems/centos7 <span class="se">\</span>
+--releasever<span class="o">=</span><span class="m">7</span> install systemd passwd yum <span class="se">\</span>
+centos-release vim-minimal procps-ng iproute <span class="se">\</span>
+net-tools dhclient policycoreutils
+
+<span class="nv">$ </span>systemd-nspawn -D /var/lib/libvirt/filesystems/centos7 --machine centos_container -b -n
+<span class="nv">$ </span>machinectl login centos_container
+<span class="nv">$ </span>systemctl stop machine-centos_container.scope</code></pre></div>
+
+<h3 id="simple-systemd">Simple Systemd</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># http://rus-linux.net/MyLDP/boot/img/systemd/systemd4_1.png</span>
+<span class="c"># get service states</span>
+<span class="nv">$ </span>systemctl list-unit-files -t service
+<span class="nv">$ </span>systemctl list-units -t service --all
+<span class="nv">$ </span>systemctl is-enabled sshd.service<span class="p">;</span> <span class="nb">echo</span> <span class="nv">$?</span>
+
+<span class="c"># enable service</span>
+systemctl <span class="nb">enable </span>clamd@scan.service
+
+<span class="c"># systemd analyze speed</span>
+<span class="nv">$ </span>systemd-analyze blame
+
+<span class="c"># check service depends</span>
+systemctl list-dependencies firewalld.service
+
+<span class="c"># reload all daemons</span>
+systemctl daemon-reload</code></pre></div>
+
 <h3 id="manage-logging-in-systemd">Manage logging in Systemd</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># set timedate</span>
@@ -440,6 +474,17 @@ systemctl status user-<span class="k">${</span><span class="nv">UID</span><span 
 <span class="nv">$ </span>systemctl reboot
 <span class="nv">$ </span>systemctl <span class="nb">suspend</span>
 <span class="nv">$ </span>systemctl hibernate</code></pre></div>
+
+<h3 id="debtree--pkg-dependency-graphs">DebTree — pkg dependency graphs</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>apt-get install debtree
+<span class="nv">$ </span>debtree nginx
+<span class="c"># Generate the dependency graph</span>
+<span class="nv">$ </span>debtree dpkg &gt;dpkg.dot
+<span class="c">#  generate an SVG image from the `.dot&#39;</span>
+<span class="nv">$ </span>dot -Tsvg -o dpkg.svg dpkg.dot
+<span class="c"># Generate  graph for package dpkg as PNG image</span>
+<span class="nv">$ </span>debtree dpkg <span class="p">|</span> dot -Tpng &gt;dpkg.png</code></pre></div>
 
 
       <hr />
