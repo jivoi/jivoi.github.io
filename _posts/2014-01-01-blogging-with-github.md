@@ -17,7 +17,7 @@ Use github and jekyll for blog
 {% highlight bash %}
 curl -sSL https://get.rvm.io | bash -s stable --ruby
 rvm install 2.1
-rvm use 2.1 --default
+rvm --default use 2.1 
 gem install bundle
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh | bash
 nvm install 0.10
@@ -38,6 +38,7 @@ vim _posts/
 {% highlight bash %}
 jekyll b
 jekyll s --host 0.0.0.0 --watch
+rake b
 {% endhighlight %}
 
 ### Commit and deploy
