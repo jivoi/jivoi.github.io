@@ -76,3 +76,7 @@ My current way for OSCP Certifications
 - [InfiniteSkills - Advanced White Hat Hacking And Penetration Testing](http://www.infiniteskills.com/training/advanced-white-hat-hacking-and-penetration-testing.html)
 - [InfiniteSkills - Learning Whitehat Hacking and Penetration Testing](http://www.infiniteskills.com/training/learning-whitehat-hacking-and-penetration-testing.html)
 - [InfiniteSkills - Reverse Engineering and Exploit Development](http://www.infiniteskills.com/training/reverse-engineering-and-exploit-development.html)
+
+### After OSCP
+- [Offensive Security Certified Expert (OSCE)](https://www.offensive-security.com/information-security-certifications/osce-offensive-security-certified-expert/)
+- [OSCP and CRT Equivalency](http://www.crest-approved.org/professional-qualifications/oscp-and-crt-equivalency/index.html)
