@@ -13,7 +13,7 @@ share:
 ---
 Resources to help you get awesome IT job
 
-### Job search
+### Job Search
 - [http://www.glassdoor.com/](http://www.glassdoor.com/)
 - [http://www.dice.com/](http://www.dice.com/)
 - [http://www.monster.com/](http://www.monster.com/)

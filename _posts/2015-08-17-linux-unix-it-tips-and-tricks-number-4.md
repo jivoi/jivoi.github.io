@@ -24,10 +24,10 @@ Different Linux / Unix / IT tips, notes, howto part 4
 </div>
 </section><!-- /#table-of-contents -->
 
-### Other parts
-[Part 1](https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/)
-[Part 2](https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/)
-[Part 3](https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/)
+### Other Parts
+- [Part 1](https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/)
+- [Part 2](https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/)
+- [Part 3](https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/)
 
 ### Who is writing to a mysql replica
 {% highlight bash %}
