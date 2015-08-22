@@ -156,7 +156,7 @@
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">curl -sSL https://get.rvm.io <span class="p">|</span> bash -s stable --ruby
 rvm install 2.1
-rvm use 2.1 --default
+rvm --default use 2.1 
 gem install bundle
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.24.1/install.sh <span class="p">|</span> bash
 nvm install 0.10
@@ -174,7 +174,8 @@ vim _posts/</code></pre></div>
 <h3 id="build-and-test">Build and Test</h3>
 
 <div class="highlight"><pre><code class="language-bash" data-lang="bash">jekyll b
-jekyll s --host 0.0.0.0 --watch</code></pre></div>
+jekyll s --host 0.0.0.0 --watch
+rake b</code></pre></div>
 
 <h3 id="commit-and-deploy">Commit and deploy</h3>
 
