@@ -13,9 +13,14 @@ share:
 ---
 Learn how to use Docker
 
+### Sites
 - [Docker Site](https://www.docker.com/)
 - [Wikipedia](https://en.wikipedia.org/wiki/Docker_(software))
 - [Awesome Docker/](https://veggiemonk.github.io/awesome-docker/)
+
+### Video
+- [Pluralsight - Docker Deep Dive](http://www.pluralsight.com/courses/docker-deep-dive)
+
 
 ### First steps with Docker
 {% highlight bash %}
