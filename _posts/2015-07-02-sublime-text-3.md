@@ -28,6 +28,7 @@ My configuration
 - install SublimeCodeIntel
 - install gosublime
 - install terminal
+- install Javatar
 
 ### Install Settings - User
 {% highlight bash %}
