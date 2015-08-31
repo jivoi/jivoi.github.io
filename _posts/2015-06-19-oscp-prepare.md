@@ -19,6 +19,7 @@ My current way for OSCP Certifications
 - [PWK MindMAP](https://firebitsbr.files.wordpress.com/2015/04/pentest-with-kali-by-firebits-rev01.png)
 
 ### OSCP Reviews
+- [http://habrahabr.ru/post/265757/](http://habrahabr.ru/post/265757/)
 - [http://0xdeadcode.se/archives/165](http://0xdeadcode.se/archives/165)
 - [http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/](http://blog.l3g3ndary.org/2014/08/05/oscp-my-chronicle/)
 - [http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/](http://blog.nullmode.com/blog/2013/05/11/penetration-testing-with-backtrack-oscp/)
