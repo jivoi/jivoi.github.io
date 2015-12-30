@@ -5,13 +5,405 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2015-11-01T01:30:58+03:00</updated>
+<updated>2015-12-30T15:55:11+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[ArchLinux Installation Guide]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/" />
+  <id>https://jivoi.github.io/2015/12/30/archlinux-installation-guide</id>
+  <updated>2015-12-30 13:17:40 +0300T00:00:00-00:00</updated>
+  <published>2015-12-30T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;This is MY guide for installing ArchLinux from the official liveCD image.&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#download-and-boot&quot; id=&quot;markdown-toc-download-and-boot&quot;&gt;Download and Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#network-configuration&quot; id=&quot;markdown-toc-network-configuration&quot;&gt;Network Configuration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-partitions&quot; id=&quot;markdown-toc-create-partitions&quot;&gt;Create partitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#format-and-activate-partitions&quot; id=&quot;markdown-toc-format-and-activate-partitions&quot;&gt;Format and activate partitions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-the-base-packages&quot; id=&quot;markdown-toc-install-the-base-packages&quot;&gt;Install the base packages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#generate-fstab&quot; id=&quot;markdown-toc-generate-fstab&quot;&gt;Generate fstab&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#enter-the-new-system&quot; id=&quot;markdown-toc-enter-the-new-system&quot;&gt;Enter the new system&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#set-fastmirrors&quot; id=&quot;markdown-toc-set-fastmirrors&quot;&gt;Set fastmirrors&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#setup-system-clock&quot; id=&quot;markdown-toc-setup-system-clock&quot;&gt;Setup system clock&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#set-the-hostname&quot; id=&quot;markdown-toc-set-the-hostname&quot;&gt;Set the hostname&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#language-and-location-settings&quot; id=&quot;markdown-toc-language-and-location-settings&quot;&gt;Language and location settings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#set-root-password&quot; id=&quot;markdown-toc-set-root-password&quot;&gt;Set root password&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#add-real-user&quot; id=&quot;markdown-toc-add-real-user&quot;&gt;Add real user&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#add-user-to-sudo&quot; id=&quot;markdown-toc-add-user-to-sudo&quot;&gt;Add user to sudo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#configure-repositories&quot; id=&quot;markdown-toc-configure-repositories&quot;&gt;Configure repositories&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-grub&quot; id=&quot;markdown-toc-install-grub&quot;&gt;Install grub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#wired-packages&quot; id=&quot;markdown-toc-wired-packages&quot;&gt;Wired packages&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-openssh&quot; id=&quot;markdown-toc-install-openssh&quot;&gt;Install OpenSSH&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reboot-into-the-new-system&quot; id=&quot;markdown-toc-reboot-into-the-new-system&quot;&gt;Reboot into the new system&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#login-and-setup-network&quot; id=&quot;markdown-toc-login-and-setup-network&quot;&gt;Login and setup network&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-x&quot; id=&quot;markdown-toc-install-x&quot;&gt;Install X&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#kde5-plasma&quot; id=&quot;markdown-toc-kde5-plasma&quot;&gt;KDE5 Plasma&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#sound&quot; id=&quot;markdown-toc-sound&quot;&gt;Sound&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#font-rendering&quot; id=&quot;markdown-toc-font-rendering&quot;&gt;Font Rendering&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#software&quot; id=&quot;markdown-toc-software&quot;&gt;Software&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#virtualbox&quot; id=&quot;markdown-toc-virtualbox&quot;&gt;VirtualBox&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#printer&quot; id=&quot;markdown-toc-printer&quot;&gt;Printer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reshift&quot; id=&quot;markdown-toc-reshift&quot;&gt;Reshift&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#hdd-load-cycle-count&quot; id=&quot;markdown-toc-hdd-load-cycle-count&quot;&gt;HDD load cycle count&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#sysctl&quot; id=&quot;markdown-toc-sysctl&quot;&gt;Sysctl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#encrypt-user-home-with-ecryptfs&quot; id=&quot;markdown-toc-encrypt-user-home-with-ecryptfs&quot;&gt;Encrypt User Home with ecryptfs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#grub2-speedup&quot; id=&quot;markdown-toc-grub2-speedup&quot;&gt;GRUB2 Speedup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#grub2-password&quot; id=&quot;markdown-toc-grub2-password&quot;&gt;GRUB2 Password&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#improve-ext4-performance&quot; id=&quot;markdown-toc-improve-ext4-performance&quot;&gt;Improve ext4 performance&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#system-speedup&quot; id=&quot;markdown-toc-system-speedup&quot;&gt;System Speedup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#save-installed-pkg-list&quot; id=&quot;markdown-toc-save-installed-pkg-list&quot;&gt;Save installed pkg list&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#iptables-rules&quot; id=&quot;markdown-toc-iptables-rules&quot;&gt;IPtables rules&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;download-and-boot&quot;&gt;Download and Boot&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.archlinux.org/download/&quot;&gt;Download and boot with CD\USB&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;network-configuration&quot;&gt;Network Configuration&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ip link &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;wlp3s0 up
+wifi-menu wlp3s0
+ip addr
+ping -c &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; www.google.com
+passwd root
+systemctl start sshd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-partitions&quot;&gt;Create partitions&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Remove old partitions then create the following partitions:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 2MB, type EF02 (BIOS partition). This is used by GRUB2/BIOS-GPT.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 1000MB, type 0800 (Linux). This will store /boot (/dev/sda2)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 4GB, type XXX (swap). This is our swap partition. (/dev/sda3)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Remaining space, type 0800 (Linux). Store both / and /home. (/dev/sda4).&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# You can have a separate /home if you prefer.&lt;/span&gt;
+cgdisk /dev/sda&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;format-and-activate-partitions&quot;&gt;Format and activate partitions&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkfs.ext4 /dev/sda2
+mkswap /dev/sda3 &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; swapon /dev/sda3
+mkfs.ext4 /dev/sda3
+mount /dev/sda4 /mnt&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; mkdir /mnt/boot&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; mount /dev/sda2 /mnt/boot
+mkdir /mnt/home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-the-base-packages&quot;&gt;Install the base packages&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacstrap -i /mnt base base-devel dialog wpa_supplicant&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;generate-fstab&quot;&gt;Generate fstab&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;genfstab -pU /mnt &amp;gt;&amp;gt; /mnt/etc/fstab
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tmpfs /tmp    tmpfs   defaults,noatime,mode=1777  0   0&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /mnt/etc/fstab&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enter-the-new-system&quot;&gt;Enter the new system&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;arch-chroot /mnt /bin/bash&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-fastmirrors&quot;&gt;Set fastmirrors&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -S reflector
+reflector -c RU -c FR -c GE --sort rate -p http --save /etc/pacman.d/mirrorlist&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;setup-system-clock&quot;&gt;Setup system clock&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ln -s /usr/share/zoneinfo/Europe/SubZone /etc/localtime&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-the-hostname&quot;&gt;Set the hostname&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;MYHOSTNAME &amp;gt; /etc/hostname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;language-and-location-settings&quot;&gt;Language and location settings&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mv /etc/locale.gen&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;,.orig&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;en_US.UTF-8 UTF-8&amp;quot;&lt;/span&gt; &amp;gt; /etc/locale.gen
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;ru_RU.UTF-8 UTF-8&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/locale.gen
+locale-gen
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8 &amp;gt; /etc/locale.conf
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;KEYMAP=&amp;quot;us&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/vconsole.conf
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LANG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;en_US.UTF-8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-root-password&quot;&gt;Set root password&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;passwd root&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-real-user&quot;&gt;Add real user&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;useradd -m -g users -G audio,lp,optical,storage,video,wheel,power,network -s /bin/bash MYUSERNAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-user-to-sudo&quot;&gt;Add user to sudo&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;passwd MYUSERNAME
+pacman -S sudo
+&lt;span class=&quot;c&quot;&gt;# Uncomment the line &amp;#39;%wheel ALL=(ALL) ALL&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;EDITOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;nano&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; visudo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;configure-repositories&quot;&gt;Configure repositories&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;nano /etc/pacman.conf
+Color
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;multilib&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;Include&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/pacman.d/mirrorlist
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;archlinuxfr&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SigLevel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Never
+&lt;span class=&quot;nv&quot;&gt;Server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; http://repo.archlinux.fr/&lt;span class=&quot;nv&quot;&gt;$arch&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;infinality-bundle&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SigLevel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Never
+&lt;span class=&quot;nv&quot;&gt;Server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; http://bohoomil.com/repo/&lt;span class=&quot;nv&quot;&gt;$arch&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;infinality-bundle-fonts&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SigLevel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Never
+&lt;span class=&quot;nv&quot;&gt;Server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; http://bohoomil.com/repo/fonts
+
+sudo pacman-key -r 962DDE58
+sudo pacman-key –lsign-key 962DDE58
+pacman -Sy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-grub&quot;&gt;Install grub&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -S grub os-prober
+grub-install --target&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;i386-pc --recheck /dev/sda
+grub-install --target&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;x86_64-efi --efi-directory&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/boot
+grub-mkconfig -o /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wired-packages&quot;&gt;Wired packages&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -S iw wpa_supplicant dialog wireless_tools wpa_actiond&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-openssh&quot;&gt;Install OpenSSH&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -S openssh
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;sshd
+nano /etc/ssh/sshd_config&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;reboot-into-the-new-system&quot;&gt;Reboot into the new system&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+umount -R /mnt
+reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;login-and-setup-network&quot;&gt;Login and setup network&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo wifi-menu -o
+sudo netctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;WIFI_PROFILE&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;install-x&quot;&gt;Install X&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S xorg-server xorg-server-utils xorg-xinit libva-intel-driver intel-gpu-tools xf86-video-intel xf86-input-synaptics xorg-twm xorg-xclock xterm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;kde5-plasma&quot;&gt;KDE5 Plasma&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S plasma-desktop plasma-nm plasma-pa bluedevil kscreen dolphin dolphin-plugins kdeplasma-addons kdeconnect sddm sddm-kcm kwalletmanager print-manager sni-qt lib32-sni-qt kdegraphics-ksnapshot networkmanager network-manager-applet kde-gtk-config gwenview sni-qt lib32-sni-qt
+yaourt -S papirus-icons
+yaourt -S breeze-gtk-git
+yaourt -S xembed-sni-proxy-git
+systemctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;-default graphical.target
+systemctl disable kdm.service
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;sddm.service
+systemctl disable dhcpcd.service
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;NetworkManager.service
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;cronie.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sound&quot;&gt;Sound&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S alsa-utils alsa-oss&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;font-rendering&quot;&gt;Font Rendering&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S ttf-ubuntu-font-family ttf-liberation ttf-gentium ttf-droid ttf-bitstream-vera ttf-dejavu ttf-font terminus-font
+yaourt -S ttf-ms-fonts ttf-mac-fonts
+pacman -Syyu &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;fontconfig,freetype2,cairo&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;-infinality-ultimate
+cat /etc/fonts/local.conf &amp;gt;  ~/.config/fontconfig/fonts.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;software&quot;&gt;Software&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S yaourt bash-completion git mercurial subversion cpupower vlc gstreamer0.10-plugins jdk8-openjdk flashplugin ntfs-3g ntfsprogs ntp lshw pm-utils powertop acpid xfsprogs pidgin pidgin-sipe pidgin-libnotify purple-plugin-pack gparted dosfstools ntfsprogs intel-ucode chromium firefox dbus sudo acpi pm-utils vbetool p7zip youtube-dl ntfs-3g transmission-qt net-tools rsync unrar unzip wget zip htop redshift dropbox sublime-text-dev iptables atop clementine curl gsmartcontrol keychain nmap rdesktop screen smartmontools tmux vim workrave moreutils strace lm_sensors kde-wallpapers krusader kde-l10n-ru evince k3b ecryptfs-utils iotop speedtest-cli torsocks hdparm ack konsole plasma-workspace-wallpapers ipython  networkmanager-openvpn openvpn virtualbox x11vnc scrot ecryptfs-utils lsof libreoffice udisks laptop-detect horst colordiff keepass dmidecode archlinux-keyring ark vim-systemd namcap ddrescue testdisk cabextract cpio lzop sshfs fuse ifuse dkms i7z usb_modeswitch gst-plugins-good gst-libav libdvdcss ffmpeg speex x264 x265 xvidcore android-tools gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-base-libs gst-plugins-good dnsutils wireshark-qt socat tcpflow
+
+yaourt -S chromium-pepper-flash keepass-plugin-http
+yaourt -S krop&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;virtualbox&quot;&gt;VirtualBox&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo pacman -S virtualbox virtualbox-guest-iso linux-headers virtualbox-guest-modules xf86-video-vesa
+yaourt virtualbox-ext-oracle
+gpasswd -a username vboxusers
+&lt;span class=&quot;c&quot;&gt;# Load module on boot&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Edit /etc/modules-load.d/virtualbox.conf and add: vboxdrv&lt;/span&gt;
+sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;cat &amp;gt;&amp;gt; /etc/modules-load.d/virtualbox.conf &amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;vboxguest&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;vboxsf&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;vboxvideo&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;EOF&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;printer&quot;&gt;Printer&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -S cups ghostscript gsfonts
+&lt;span class=&quot;c&quot;&gt;# groupadd -g107 lpadmin&lt;/span&gt;
+/etc/cups/cups-files.conf
+&lt;span class=&quot;c&quot;&gt;# Administrator user group...&lt;/span&gt;
+SystemGroup sys root lpadmin
+
+systemctl start org.cups.cupsd.service
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;org.cups.cupsd.service
+systemctl disable org.cups.cupsd.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;reshift&quot;&gt;Reshift&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/usr/bin/redshift -c /dev/null -l 55.8 37.6 -t &lt;span class=&quot;m&quot;&gt;5500&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3700&lt;/span&gt; -g 1.00 1.00 1.00 -b 1.00
+
+&lt;span class=&quot;c&quot;&gt;# ~/.config/redshift.conf&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;redshift&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+temp-day&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;5500
+temp-night&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3700
+&lt;span class=&quot;nv&quot;&gt;brightness&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.00
+&lt;span class=&quot;nv&quot;&gt;gamma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.00
+location-provider&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;manual
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;manual&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;lat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;55.6
+&lt;span class=&quot;nv&quot;&gt;lon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;37.6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;hdd-load-cycle-count&quot;&gt;HDD load cycle count&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo hdparm -B &lt;span class=&quot;m&quot;&gt;255&lt;/span&gt; /dev/sda
+
+sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;cat &amp;gt;&amp;gt; /etc/udev/rules.d/50-hdparm.rules &amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;ACTION==&amp;quot;add&amp;quot;, SUBSYSTEM==&amp;quot;block&amp;quot;, KERNEL==&amp;quot;sda&amp;quot;, RUN+=&amp;quot;/usr/sbin/hdparm -B 254 -S 0 /dev/sda&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;EOF&amp;#39;&lt;/span&gt;
+
+sudo sh -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;cat &amp;gt;&amp;gt; /usr/lib/systemd/system-sleep/hdparm_set &amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;/usr/sbin/hdparm -B 254 -S 0 /dev/sda&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;EOF&amp;#39;&lt;/span&gt;
+
+chmod +x /usr/lib/systemd/system-sleep/hdparm_set&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sysctl&quot;&gt;Sysctl&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;vm.swappiness=10&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;vm.vfs_cache_pressure=50&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;encrypt-user-home-with-ecryptfs&quot;&gt;Encrypt User Home with ecryptfs&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;ecryptfs&amp;quot;&lt;/span&gt; &amp;gt; /etc/modules-load.d/ecryptfs.conf
+modprobe ecryptfs
+sudo ecryptfs-migrate-home -u login
+ecryptfs-mount-private
+ecryptfs-umount-private
+
+cat /etc/pam.d/system-auth
+&lt;span class=&quot;c&quot;&gt;#%PAM-1.0&lt;/span&gt;
+
+auth      required  pam_unix.so     try_first_pass nullok
+auth      required    pam_ecryptfs.so unwrap
+auth      optional  pam_permit.so
+auth      required  pam_env.so
+
+account   required  pam_unix.so
+account   optional  pam_permit.so
+account   required  pam_time.so
+
+password  optional    pam_ecryptfs.so
+password  required  pam_unix.so     try_first_pass nullok sha512 shadow
+password  optional  pam_permit.so
+
+session   required  pam_limits.so
+session   required  pam_unix.so
+session    optional    pam_ecryptfs.so
+session   optional  pam_permit.so
+
+&lt;span class=&quot;c&quot;&gt;# after login&lt;/span&gt;
+ecryptfs-unwrap-passphrase
+ecryptfs-add-passphrase
+&lt;span class=&quot;c&quot;&gt;# change passpharase&lt;/span&gt;
+ecryptfs-rewrap-passphrase /home/&lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;/.ecryptfs/wrapped-passphrase&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;grub2-speedup&quot;&gt;GRUB2 Speedup&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# /etc/default/grub&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;GRUB_TIMEOUT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
+&lt;span class=&quot;nv&quot;&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;GRUB_FORCE_HIDDEN_MENU&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+grub-mkconfig &amp;gt; /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;grub2-password&quot;&gt;GRUB2 Password&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grub2-mkpasswd-pbkdf2
+Enter password:
+Reenter password:
+PBKDF2 &lt;span class=&quot;nb&quot;&gt;hash &lt;/span&gt;of your password is grub.pbkdf2.sha512.10000.SOMEHASH
+
+&lt;span class=&quot;c&quot;&gt;# change config /etc/grub.d/40_custom&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;superusers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;root&amp;quot;&lt;/span&gt;
+password_pbkdf2 root grub.pbkdf2.sha512.10000.SOMEHASH
+
+/etc/grub.d/10_linux
+&lt;span class=&quot;nv&quot;&gt;CLASS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;--unrestricted&amp;quot;&lt;/span&gt;
+
+grub-mkconfig &amp;gt; /boot/grub/grub.cfg&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;improve-ext4-performance&quot;&gt;Improve ext4 performance&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# - http://menelkir.itroll.org/2011/06/ext4-optimization-for-daily-use.html&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# - http://blog.smartlogic.io/2009/06/04/rails-development-mount-options-to-improve-ext4-file-system-performance&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+tune2fs -m &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; /dev/sdX
+
+&lt;span class=&quot;c&quot;&gt;# add to fstab&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# rw,noatime,nouser_xattr,relatime,data=ordered&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;system-speedup&quot;&gt;System Speedup&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ln -sfv /run/user/&lt;span class=&quot;nv&quot;&gt;$UID&lt;/span&gt;/ /home/&lt;span class=&quot;nv&quot;&gt;$USER&lt;/span&gt;/.compose-cache
+
+systemd-analyze blame
+systemd-analyze critical-chain
+
+yaourt -S systemd-readahead
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;systemd-readahead-collect systemd-readahead-replay
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;upower
+
+&lt;span class=&quot;c&quot;&gt;# change /etc/systemd/journald.conf&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;SystemMaxUse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;50M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;save-installed-pkg-list&quot;&gt;Save installed pkg list&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pacman -Qqe &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &amp;gt; package_list.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;iptables-rules&quot;&gt;IPtables rules&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget https://github.com/jivoi/scripts/raw/master/iptables_rules.sh
+&lt;span class=&quot;c&quot;&gt;# comment localnet rules&lt;/span&gt;
+./iptables_rules.sh
+iptables-save &amp;gt; /etc/iptables/iptables.rules
+systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;iptables.service
+systemctl start iptables.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/12/30/archlinux-installation-guide/&quot;&gt;ArchLinux Installation Guide&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -3070,56 +3462,56 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;install-settings---user&quot;&gt;Install Settings - User&lt;/h3&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;bold_folder_labels&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;color_scheme&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;Packages/Theme - Flatland/Flatland Dark.tmTheme&amp;quot;&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;create_window_at_startup&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;detect_indentation&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;detect_slow_plugins&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;draw_white_space&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;all&amp;quot;&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;enable_telemetry&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;fade_fold_buttons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;folder_exclude_patterns&amp;quot;&lt;/span&gt;:
-	&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;.svn&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;.git&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;.hg&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;CVS&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;_build&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;dist&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;build&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;site&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;.bin&amp;quot;&lt;/span&gt;,
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;node_modules&amp;quot;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;font_options&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;subpixel_antialias&amp;quot;&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;font_size&amp;quot;&lt;/span&gt;: 12,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;highlight_line&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;highlight_modified_tabs&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;ignored_packages&amp;quot;&lt;/span&gt;:
-	&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-		&lt;span class=&quot;s2&quot;&gt;&amp;quot;Vintage&amp;quot;&lt;/span&gt;
-	&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;line_padding_bottom&amp;quot;&lt;/span&gt;: 1,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;line_padding_top&amp;quot;&lt;/span&gt;: 1,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;open_files_in_new_window&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;preview_on_click&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;remember_open_files&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;rulers&amp;quot;&lt;/span&gt;:
-	&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
-		80
-	&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;scroll_past_end&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;show_encoding&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;show_line_endings&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;show_tab_close_buttons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;soda_folder_icons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;tab_completion&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;tab_size&amp;quot;&lt;/span&gt;: 4,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;theme&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;Soda Dark.sublime-theme&amp;quot;&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;translate_tabs_to_spaces&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;trim_trailing_white_space_on_save&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;vintage_start_in_command_mode&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
-	&lt;span class=&quot;s2&quot;&gt;&amp;quot;word_wrap&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;bold_folder_labels&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;color_scheme&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;Packages/Theme - Flatland/Flatland Dark.tmTheme&amp;quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;create_window_at_startup&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;detect_indentation&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;detect_slow_plugins&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;draw_white_space&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;all&amp;quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;enable_telemetry&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;fade_fold_buttons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;folder_exclude_patterns&amp;quot;&lt;/span&gt;:
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;.svn&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;.git&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;.hg&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;CVS&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;_build&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;dist&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;build&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;site&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;.bin&amp;quot;&lt;/span&gt;,
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;node_modules&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;font_options&amp;quot;&lt;/span&gt;: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;bold&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;subpixel_antialias&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;font_size&amp;quot;&lt;/span&gt;: 12,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;highlight_line&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;highlight_modified_tabs&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;ignored_packages&amp;quot;&lt;/span&gt;:
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&amp;quot;Vintage&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;line_padding_bottom&amp;quot;&lt;/span&gt;: 1,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;line_padding_top&amp;quot;&lt;/span&gt;: 1,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;open_files_in_new_window&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;preview_on_click&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;remember_open_files&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;rulers&amp;quot;&lt;/span&gt;:
+    &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+        80
+    &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;scroll_past_end&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;show_encoding&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;show_line_endings&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;show_tab_close_buttons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;soda_folder_icons&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;tab_completion&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;tab_size&amp;quot;&lt;/span&gt;: 4,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;theme&amp;quot;&lt;/span&gt;: &lt;span class=&quot;s2&quot;&gt;&amp;quot;Soda Dark.sublime-theme&amp;quot;&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;translate_tabs_to_spaces&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;trim_trailing_white_space_on_save&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;vintage_start_in_command_mode&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;,
+    &lt;span class=&quot;s2&quot;&gt;&amp;quot;word_wrap&amp;quot;&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -5121,163 +5513,6 @@ tacacs-server key SecretKeyCisco&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[4G Huawei E392 with Linux]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/" />
-  <id>https://jivoi.github.io/2015/06/26/huawei-e392-with-linux</id>
-  <updated>2015-06-26 12:40:49 +0300T00:00:00-00:00</updated>
-  <published>2015-06-26T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Working with 4G modem Huawei E392 in Linux and OpenWRT&lt;/p&gt;
-
-&lt;h3 id=&quot;ubuntu-linux&quot;&gt;Ubuntu Linux&lt;/h3&gt;
-
-&lt;h5 id=&quot;install-pkgs&quot;&gt;Install pkgs&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install wvdial
-wvdialconf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;add-to-etcwvdialconf&quot;&gt;Add to /etc/wvdial.conf&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Dialer Defaults&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;Init1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ATZ
-&lt;span class=&quot;nv&quot;&gt;Init2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AT+CGDCONT&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1,&lt;span class=&quot;s2&quot;&gt;&amp;quot;IP&amp;quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;Internet&amp;quot;&lt;/span&gt;
-Modem &lt;span class=&quot;nv&quot;&gt;Type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; USB Modem
-&lt;span class=&quot;nv&quot;&gt;Baud&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 57600
-New &lt;span class=&quot;nv&quot;&gt;PPPD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes
-&lt;span class=&quot;nv&quot;&gt;Modem&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /dev/ttyUSB0
-&lt;span class=&quot;nv&quot;&gt;Phone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; *99#
-&lt;span class=&quot;nv&quot;&gt;Password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt; 
-&lt;span class=&quot;nv&quot;&gt;Username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;
-Stupid &lt;span class=&quot;nv&quot;&gt;Mode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; yes&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;auto-reconnect&quot;&gt;Auto Reconnect&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#! /bin/bash&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; : &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-       wvdial
-       sleep 10
-   &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;system-network-configuration&quot;&gt;System network configuration&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/network/interfaces
-auto ppp0
-iface ppp0 inet wvdial&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;openwrt-asus-wl600g&quot;&gt;OpenWRT Asus Wl600g&lt;/h3&gt;
-
-&lt;h5 id=&quot;links&quot;&gt;Links&lt;/h5&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/toh/asus/wl600g&quot;&gt;wl600g&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/doc/howto/basic.config&quot;&gt;basic.config&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wiki.openwrt.org/doc/recipes/ltedongle&quot;&gt;ltedongle&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://intelnuc.blogspot.ru/2014/10/turn-your-old-wireless-router-into-lte.html&quot;&gt;turn-your-old-wireless-router-into-lte&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;download-and-install&quot;&gt;Download and Install&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Load the image into your router via the web interface http://192.168.1.1 or tftp
-wget http://downloads.openwrt.org/backfire/10.03.1/brcm63xx/openwrt-96348GW-generic-squashfs-cfe.bin
-tftp -i 192.168.1.1 PUT openwrt-96348GW-generic-squashfs-cfe.bin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;enable-ssh&quot;&gt;Enable SSH&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Web -&amp;gt; System-Administration -&amp;gt; SSH Access -&amp;gt; Allow remote hosts to connect to &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;SSH forwarded ports&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;install-required-packages&quot;&gt;Install required packages&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;telnet&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;sh 192.168.1.1
-opkg update
-opkg install kmod-mii kmod-usb-net kmod-usb-net-qmi-wwan kmod-usb-serial kmod-usb-serial-option kmod-usb-serial-wwan kmod-usb-wdm uqmi usb-modeswitch
-reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;configuring-modem-with-pppd&quot;&gt;Configuring modem with pppd&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/ppp/peers/megafon-3g
-connect &lt;span class=&quot;s2&quot;&gt;&amp;quot;chat -Vs -r /var/log/ppp -f /etc/chatscripts/megafon-3g&amp;quot;&lt;/span&gt;
-460800
-crtscts
-modem
-ttyUSB1
-noauth
-usepeerdns
-defaultroute
-user &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
-password &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
-logfile /var/log/ppp
-
-and add to
-
-/etc/chatscripts/megafon-3g
-TIMEOUT 35
-ECHO ON
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nBUSY\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nERROR\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO ANSWER\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO CARRIER\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nNO DIALTONE\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nRINGING\r\n\r\nRINGING\r&amp;#39;&lt;/span&gt;
-ABORT &lt;span class=&quot;s1&quot;&gt;&amp;#39;\nUsername/pASSWORD Incorrect\r&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;  &lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;AT
-OK  &lt;span class=&quot;s1&quot;&gt;&amp;#39;AT+CGDCONT=1,&amp;quot;IP&amp;quot;,&amp;quot;Internet&amp;quot;&amp;#39;&lt;/span&gt;
-OK  ATD*99#CONNECT  &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
-
-Now you can run 
-pppd call megafon-3g&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;network-configuration&quot;&gt;Network configuration&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/config/network
-config interface wan
-        option ifname  ppp0 &lt;span class=&quot;c&quot;&gt;# on some carriers enable this line&lt;/span&gt;
-        option device  /dev/ttyUSB1
-        option apn     Internet
-        option service umts
-        option proto   3g
-
-cp /etc/chatscripts/megafon-3g /etc/chatscripts/3g.chat
-
-and now you can run:
-
-ifup wan&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;firewall-configuration&quot;&gt;Firewall configuration&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;go to Network → Firewall, scroll down to wan and click the Edit button
-add a checkmark to the wwan box under Covered networks heading, click Save &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; Apply&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;configuring-modem-on-barrier-breaker&quot;&gt;Configuring modem on Barrier Breaker&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This example will work only with modern openwrt like Barrier Breaker 14.07
-
-root@OpenWrt:~# ls -l /dev/cdc-wdm0
-root@OpenWrt:~# dmesg
-root@OpenWrt:~# cat /sys/kernel/debug/usb/devices
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-signal-info
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --start-network Internet --autoconnect
-root@OpenWrt:~# uqmi -d /dev/cdc-wdm0 --get-data-status&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h5 id=&quot;network-configurationa-on-barrier-breaker&quot;&gt;Network configurationa on Barrier Breaker&lt;/h5&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add new Interface to /etc/config/network
-config interface &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan&amp;#39;&lt;/span&gt;
-option ifname &lt;span class=&quot;s1&quot;&gt;&amp;#39;wwan0&amp;#39;&lt;/span&gt;
-option proto &lt;span class=&quot;s1&quot;&gt;&amp;#39;dhcp&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/26/huawei-e392-with-linux/&quot;&gt;4G Huawei E392 with Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 26, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>

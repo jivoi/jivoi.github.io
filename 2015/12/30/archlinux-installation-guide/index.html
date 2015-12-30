@@ -1,0 +1,638 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>ArchLinux Installation Guide &#8211; EK</title>
+<meta name="description" content="This is MY guide for installing ArchLinux from the official liveCD image.
+
+">
+<meta name="keywords" content="archlinux, howto, admin">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="ArchLinux Installation Guide">
+<meta name="twitter:description" content="This is MY guide for installing ArchLinux from the official liveCD image.
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArchLinux Installation Guide">
+<meta property="og:description" content="This is MY guide for installing ArchLinux from the official liveCD image.
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/" rel="bookmark" title="ArchLinux Installation Guide">ArchLinux Installation Guide</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>This is MY guide for installing ArchLinux from the official liveCD image.</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#download-and-boot" id="markdown-toc-download-and-boot">Download and Boot</a></li>
+  <li><a href="#network-configuration" id="markdown-toc-network-configuration">Network Configuration</a></li>
+  <li><a href="#create-partitions" id="markdown-toc-create-partitions">Create partitions</a></li>
+  <li><a href="#format-and-activate-partitions" id="markdown-toc-format-and-activate-partitions">Format and activate partitions</a></li>
+  <li><a href="#install-the-base-packages" id="markdown-toc-install-the-base-packages">Install the base packages</a></li>
+  <li><a href="#generate-fstab" id="markdown-toc-generate-fstab">Generate fstab</a></li>
+  <li><a href="#enter-the-new-system" id="markdown-toc-enter-the-new-system">Enter the new system</a></li>
+  <li><a href="#set-fastmirrors" id="markdown-toc-set-fastmirrors">Set fastmirrors</a></li>
+  <li><a href="#setup-system-clock" id="markdown-toc-setup-system-clock">Setup system clock</a></li>
+  <li><a href="#set-the-hostname" id="markdown-toc-set-the-hostname">Set the hostname</a></li>
+  <li><a href="#language-and-location-settings" id="markdown-toc-language-and-location-settings">Language and location settings</a></li>
+  <li><a href="#set-root-password" id="markdown-toc-set-root-password">Set root password</a></li>
+  <li><a href="#add-real-user" id="markdown-toc-add-real-user">Add real user</a></li>
+  <li><a href="#add-user-to-sudo" id="markdown-toc-add-user-to-sudo">Add user to sudo</a></li>
+  <li><a href="#configure-repositories" id="markdown-toc-configure-repositories">Configure repositories</a></li>
+  <li><a href="#install-grub" id="markdown-toc-install-grub">Install grub</a></li>
+  <li><a href="#wired-packages" id="markdown-toc-wired-packages">Wired packages</a></li>
+  <li><a href="#install-openssh" id="markdown-toc-install-openssh">Install OpenSSH</a></li>
+  <li><a href="#reboot-into-the-new-system" id="markdown-toc-reboot-into-the-new-system">Reboot into the new system</a></li>
+  <li><a href="#login-and-setup-network" id="markdown-toc-login-and-setup-network">Login and setup network</a></li>
+  <li><a href="#install-x" id="markdown-toc-install-x">Install X</a></li>
+  <li><a href="#kde5-plasma" id="markdown-toc-kde5-plasma">KDE5 Plasma</a></li>
+  <li><a href="#sound" id="markdown-toc-sound">Sound</a></li>
+  <li><a href="#font-rendering" id="markdown-toc-font-rendering">Font Rendering</a></li>
+  <li><a href="#software" id="markdown-toc-software">Software</a></li>
+  <li><a href="#virtualbox" id="markdown-toc-virtualbox">VirtualBox</a></li>
+  <li><a href="#printer" id="markdown-toc-printer">Printer</a></li>
+  <li><a href="#reshift" id="markdown-toc-reshift">Reshift</a></li>
+  <li><a href="#hdd-load-cycle-count" id="markdown-toc-hdd-load-cycle-count">HDD load cycle count</a></li>
+  <li><a href="#sysctl" id="markdown-toc-sysctl">Sysctl</a></li>
+  <li><a href="#encrypt-user-home-with-ecryptfs" id="markdown-toc-encrypt-user-home-with-ecryptfs">Encrypt User Home with ecryptfs</a></li>
+  <li><a href="#grub2-speedup" id="markdown-toc-grub2-speedup">GRUB2 Speedup</a></li>
+  <li><a href="#grub2-password" id="markdown-toc-grub2-password">GRUB2 Password</a></li>
+  <li><a href="#improve-ext4-performance" id="markdown-toc-improve-ext4-performance">Improve ext4 performance</a></li>
+  <li><a href="#system-speedup" id="markdown-toc-system-speedup">System Speedup</a></li>
+  <li><a href="#save-installed-pkg-list" id="markdown-toc-save-installed-pkg-list">Save installed pkg list</a></li>
+  <li><a href="#iptables-rules" id="markdown-toc-iptables-rules">IPtables rules</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<h3 id="download-and-boot">Download and Boot</h3>
+<ul>
+  <li><a href="https://www.archlinux.org/download/">Download and boot with CD\USB</a></li>
+</ul>
+
+<h3 id="network-configuration">Network Configuration</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ip link <span class="nb">set </span>wlp3s0 up
+wifi-menu wlp3s0
+ip addr
+ping -c <span class="m">3</span> www.google.com
+passwd root
+systemctl start sshd</code></pre></div>
+
+<h3 id="create-partitions">Create partitions</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Remove old partitions then create the following partitions:</span>
+<span class="c"># 2MB, type EF02 (BIOS partition). This is used by GRUB2/BIOS-GPT.</span>
+<span class="c"># 1000MB, type 0800 (Linux). This will store /boot (/dev/sda2)</span>
+<span class="c"># 4GB, type XXX (swap). This is our swap partition. (/dev/sda3)</span>
+<span class="c"># Remaining space, type 0800 (Linux). Store both / and /home. (/dev/sda4).</span>
+<span class="c"># You can have a separate /home if you prefer.</span>
+cgdisk /dev/sda</code></pre></div>
+
+<h3 id="format-and-activate-partitions">Format and activate partitions</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mkfs.ext4 /dev/sda2
+mkswap /dev/sda3 <span class="o">&amp;&amp;</span> swapon /dev/sda3
+mkfs.ext4 /dev/sda3
+mount /dev/sda4 /mnt<span class="p">;</span> mkdir /mnt/boot<span class="p">;</span> mount /dev/sda2 /mnt/boot
+mkdir /mnt/home</code></pre></div>
+
+<h3 id="install-the-base-packages">Install the base packages</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacstrap -i /mnt base base-devel dialog wpa_supplicant</code></pre></div>
+
+<h3 id="generate-fstab">Generate fstab</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">genfstab -pU /mnt &gt;&gt; /mnt/etc/fstab
+<span class="nb">echo</span> <span class="s2">&quot;tmpfs /tmp    tmpfs   defaults,noatime,mode=1777  0   0&quot;</span> &gt;&gt; /mnt/etc/fstab</code></pre></div>
+
+<h3 id="enter-the-new-system">Enter the new system</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">arch-chroot /mnt /bin/bash</code></pre></div>
+
+<h3 id="set-fastmirrors">Set fastmirrors</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -S reflector
+reflector -c RU -c FR -c GE --sort rate -p http --save /etc/pacman.d/mirrorlist</code></pre></div>
+
+<h3 id="setup-system-clock">Setup system clock</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ln -s /usr/share/zoneinfo/Europe/SubZone /etc/localtime</code></pre></div>
+
+<h3 id="set-the-hostname">Set the hostname</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo </span>MYHOSTNAME &gt; /etc/hostname</code></pre></div>
+
+<h3 id="language-and-location-settings">Language and location settings</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mv /etc/locale.gen<span class="o">{</span>,.orig<span class="o">}</span>
+<span class="nb">echo</span> <span class="s2">&quot;en_US.UTF-8 UTF-8&quot;</span> &gt; /etc/locale.gen
+<span class="nb">echo</span> <span class="s2">&quot;ru_RU.UTF-8 UTF-8&quot;</span> &gt;&gt; /etc/locale.gen
+locale-gen
+<span class="nb">echo </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8 &gt; /etc/locale.conf
+<span class="nb">echo</span> <span class="s1">&#39;KEYMAP=&quot;us&quot;&#39;</span> &gt;&gt; /etc/vconsole.conf
+<span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8</code></pre></div>
+
+<h3 id="set-root-password">Set root password</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">passwd root</code></pre></div>
+
+<h3 id="add-real-user">Add real user</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">useradd -m -g users -G audio,lp,optical,storage,video,wheel,power,network -s /bin/bash MYUSERNAME</code></pre></div>
+
+<h3 id="add-user-to-sudo">Add user to sudo</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">passwd MYUSERNAME
+pacman -S sudo
+<span class="c"># Uncomment the line &#39;%wheel ALL=(ALL) ALL&#39;</span>
+<span class="nv">EDITOR</span><span class="o">=</span>nano<span class="p">;</span> visudo</code></pre></div>
+
+<h3 id="configure-repositories">Configure repositories</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">nano /etc/pacman.conf
+Color
+
+<span class="o">[</span>multilib<span class="o">]</span>
+<span class="nv">Include</span> <span class="o">=</span> /etc/pacman.d/mirrorlist
+<span class="o">[</span>archlinuxfr<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Never
+<span class="nv">Server</span> <span class="o">=</span> http://repo.archlinux.fr/<span class="nv">$arch</span>
+<span class="o">[</span>infinality-bundle<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Never
+<span class="nv">Server</span> <span class="o">=</span> http://bohoomil.com/repo/<span class="nv">$arch</span>
+<span class="o">[</span>infinality-bundle-fonts<span class="o">]</span>
+<span class="nv">SigLevel</span> <span class="o">=</span> Never
+<span class="nv">Server</span> <span class="o">=</span> http://bohoomil.com/repo/fonts
+
+sudo pacman-key -r 962DDE58
+sudo pacman-key –lsign-key 962DDE58
+pacman -Sy</code></pre></div>
+
+<h3 id="install-grub">Install grub</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -S grub os-prober
+grub-install --target<span class="o">=</span>i386-pc --recheck /dev/sda
+grub-install --target<span class="o">=</span>x86_64-efi --efi-directory<span class="o">=</span>/boot
+grub-mkconfig -o /boot/grub/grub.cfg</code></pre></div>
+
+<h3 id="wired-packages">Wired packages</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -S iw wpa_supplicant dialog wireless_tools wpa_actiond</code></pre></div>
+
+<h3 id="install-openssh">Install OpenSSH</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -S openssh
+systemctl <span class="nb">enable </span>sshd
+nano /etc/ssh/sshd_config</code></pre></div>
+
+<h3 id="reboot-into-the-new-system">Reboot into the new system</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">exit</span>
+umount -R /mnt
+reboot</code></pre></div>
+
+<h3 id="login-and-setup-network">Login and setup network</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo wifi-menu -o
+sudo netctl <span class="nb">enable </span>WIFI_PROFILE</code></pre></div>
+
+<h3 id="install-x">Install X</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S xorg-server xorg-server-utils xorg-xinit libva-intel-driver intel-gpu-tools xf86-video-intel xf86-input-synaptics xorg-twm xorg-xclock xterm</code></pre></div>
+
+<h3 id="kde5-plasma">KDE5 Plasma</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S plasma-desktop plasma-nm plasma-pa bluedevil kscreen dolphin dolphin-plugins kdeplasma-addons kdeconnect sddm sddm-kcm kwalletmanager print-manager sni-qt lib32-sni-qt kdegraphics-ksnapshot networkmanager network-manager-applet kde-gtk-config gwenview sni-qt lib32-sni-qt
+yaourt -S papirus-icons
+yaourt -S breeze-gtk-git
+yaourt -S xembed-sni-proxy-git
+systemctl <span class="nb">set</span>-default graphical.target
+systemctl disable kdm.service
+systemctl <span class="nb">enable </span>sddm.service
+systemctl disable dhcpcd.service
+systemctl <span class="nb">enable </span>NetworkManager.service
+systemctl <span class="nb">enable </span>cronie.service</code></pre></div>
+
+<h3 id="sound">Sound</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S alsa-utils alsa-oss</code></pre></div>
+
+<h3 id="font-rendering">Font Rendering</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S ttf-ubuntu-font-family ttf-liberation ttf-gentium ttf-droid ttf-bitstream-vera ttf-dejavu ttf-font terminus-font
+yaourt -S ttf-ms-fonts ttf-mac-fonts
+pacman -Syyu <span class="o">{</span>fontconfig,freetype2,cairo<span class="o">}</span>-infinality-ultimate
+cat /etc/fonts/local.conf &gt;  ~/.config/fontconfig/fonts.conf</code></pre></div>
+
+<h3 id="software">Software</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S yaourt bash-completion git mercurial subversion cpupower vlc gstreamer0.10-plugins jdk8-openjdk flashplugin ntfs-3g ntfsprogs ntp lshw pm-utils powertop acpid xfsprogs pidgin pidgin-sipe pidgin-libnotify purple-plugin-pack gparted dosfstools ntfsprogs intel-ucode chromium firefox dbus sudo acpi pm-utils vbetool p7zip youtube-dl ntfs-3g transmission-qt net-tools rsync unrar unzip wget zip htop redshift dropbox sublime-text-dev iptables atop clementine curl gsmartcontrol keychain nmap rdesktop screen smartmontools tmux vim workrave moreutils strace lm_sensors kde-wallpapers krusader kde-l10n-ru evince k3b ecryptfs-utils iotop speedtest-cli torsocks hdparm ack konsole plasma-workspace-wallpapers ipython  networkmanager-openvpn openvpn virtualbox x11vnc scrot ecryptfs-utils lsof libreoffice udisks laptop-detect horst colordiff keepass dmidecode archlinux-keyring ark vim-systemd namcap ddrescue testdisk cabextract cpio lzop sshfs fuse ifuse dkms i7z usb_modeswitch gst-plugins-good gst-libav libdvdcss ffmpeg speex x264 x265 xvidcore android-tools gstreamer gst-libav gst-plugins-bad gst-plugins-base gst-plugins-base-libs gst-plugins-good dnsutils wireshark-qt socat tcpflow
+
+yaourt -S chromium-pepper-flash keepass-plugin-http
+yaourt -S krop</code></pre></div>
+
+<h3 id="virtualbox">VirtualBox</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo pacman -S virtualbox virtualbox-guest-iso linux-headers virtualbox-guest-modules xf86-video-vesa
+yaourt virtualbox-ext-oracle
+gpasswd -a username vboxusers
+<span class="c"># Load module on boot</span>
+<span class="c"># Edit /etc/modules-load.d/virtualbox.conf and add: vboxdrv</span>
+sudo sh -c <span class="s1">&#39;cat &gt;&gt; /etc/modules-load.d/virtualbox.conf &lt;&lt; EOF</span>
+<span class="s1">vboxguest</span>
+<span class="s1">vboxsf</span>
+<span class="s1">vboxvideo</span>
+<span class="s1">EOF&#39;</span></code></pre></div>
+
+<h3 id="printer">Printer</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -S cups ghostscript gsfonts
+<span class="c"># groupadd -g107 lpadmin</span>
+/etc/cups/cups-files.conf
+<span class="c"># Administrator user group...</span>
+SystemGroup sys root lpadmin
+
+systemctl start org.cups.cupsd.service
+systemctl <span class="nb">enable </span>org.cups.cupsd.service
+systemctl disable org.cups.cupsd.service</code></pre></div>
+
+<h3 id="reshift">Reshift</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">/usr/bin/redshift -c /dev/null -l 55.8 37.6 -t <span class="m">5500</span> <span class="m">3700</span> -g 1.00 1.00 1.00 -b 1.00
+
+<span class="c"># ~/.config/redshift.conf</span>
+<span class="o">[</span>redshift<span class="o">]</span>
+temp-day<span class="o">=</span>5500
+temp-night<span class="o">=</span>3700
+<span class="nv">brightness</span><span class="o">=</span>1.00
+<span class="nv">gamma</span><span class="o">=</span>1.00
+location-provider<span class="o">=</span>manual
+
+<span class="o">[</span>manual<span class="o">]</span>
+<span class="nv">lat</span><span class="o">=</span>55.6
+<span class="nv">lon</span><span class="o">=</span>37.6</code></pre></div>
+
+<h3 id="hdd-load-cycle-count">HDD load cycle count</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo hdparm -B <span class="m">255</span> /dev/sda
+
+sudo sh -c <span class="s1">&#39;cat &gt;&gt; /etc/udev/rules.d/50-hdparm.rules &lt;&lt; EOF</span>
+<span class="s1">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;block&quot;, KERNEL==&quot;sda&quot;, RUN+=&quot;/usr/sbin/hdparm -B 254 -S 0 /dev/sda&quot;</span>
+<span class="s1">EOF&#39;</span>
+
+sudo sh -c <span class="s1">&#39;cat &gt;&gt; /usr/lib/systemd/system-sleep/hdparm_set &lt;&lt; EOF</span>
+<span class="s1">#!/bin/sh</span>
+<span class="s1">/usr/sbin/hdparm -B 254 -S 0 /dev/sda</span>
+<span class="s1">EOF&#39;</span>
+
+chmod +x /usr/lib/systemd/system-sleep/hdparm_set</code></pre></div>
+
+<h3 id="sysctl">Sysctl</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;vm.swappiness=10&quot;</span> &gt;&gt; /etc/sysctl.conf
+<span class="nb">echo</span> <span class="s2">&quot;vm.vfs_cache_pressure=50&quot;</span> &gt;&gt; /etc/sysctl.conf</code></pre></div>
+
+<h3 id="encrypt-user-home-with-ecryptfs">Encrypt User Home with ecryptfs</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="s2">&quot;ecryptfs&quot;</span> &gt; /etc/modules-load.d/ecryptfs.conf
+modprobe ecryptfs
+sudo ecryptfs-migrate-home -u login
+ecryptfs-mount-private
+ecryptfs-umount-private
+
+cat /etc/pam.d/system-auth
+<span class="c">#%PAM-1.0</span>
+
+auth      required  pam_unix.so     try_first_pass nullok
+auth      required    pam_ecryptfs.so unwrap
+auth      optional  pam_permit.so
+auth      required  pam_env.so
+
+account   required  pam_unix.so
+account   optional  pam_permit.so
+account   required  pam_time.so
+
+password  optional    pam_ecryptfs.so
+password  required  pam_unix.so     try_first_pass nullok sha512 shadow
+password  optional  pam_permit.so
+
+session   required  pam_limits.so
+session   required  pam_unix.so
+session    optional    pam_ecryptfs.so
+session   optional  pam_permit.so
+
+<span class="c"># after login</span>
+ecryptfs-unwrap-passphrase
+ecryptfs-add-passphrase
+<span class="c"># change passpharase</span>
+ecryptfs-rewrap-passphrase /home/<span class="nv">$USER</span>/.ecryptfs/wrapped-passphrase</code></pre></div>
+
+<h3 id="grub2-speedup">GRUB2 Speedup</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># /etc/default/grub</span>
+<span class="nv">GRUB_TIMEOUT</span><span class="o">=</span>0
+<span class="nv">GRUB_CMDLINE_LINUX_DEFAULT</span><span class="o">=</span><span class="s2">&quot;quiet loglevel=3 rd.systemd.show_status=false rd.udev.log-priority=3&quot;</span>
+<span class="nv">GRUB_FORCE_HIDDEN_MENU</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+grub-mkconfig &gt; /boot/grub/grub.cfg</code></pre></div>
+
+<h3 id="grub2-password">GRUB2 Password</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">grub2-mkpasswd-pbkdf2
+Enter password:
+Reenter password:
+PBKDF2 <span class="nb">hash </span>of your password is grub.pbkdf2.sha512.10000.SOMEHASH
+
+<span class="c"># change config /etc/grub.d/40_custom</span>
+<span class="nb">set </span><span class="nv">superusers</span><span class="o">=</span><span class="s2">&quot;root&quot;</span>
+password_pbkdf2 root grub.pbkdf2.sha512.10000.SOMEHASH
+
+/etc/grub.d/10_linux
+<span class="nv">CLASS</span><span class="o">=</span><span class="s2">&quot;--unrestricted&quot;</span>
+
+grub-mkconfig &gt; /boot/grub/grub.cfg</code></pre></div>
+
+<h3 id="improve-ext4-performance">Improve ext4 performance</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># - http://menelkir.itroll.org/2011/06/ext4-optimization-for-daily-use.html</span>
+<span class="c"># - http://blog.smartlogic.io/2009/06/04/rails-development-mount-options-to-improve-ext4-file-system-performance</span>
+<span class="c">#</span>
+tune2fs -m <span class="m">0</span> /dev/sdX
+
+<span class="c"># add to fstab</span>
+<span class="c"># rw,noatime,nouser_xattr,relatime,data=ordered</span></code></pre></div>
+
+<h3 id="system-speedup">System Speedup</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ln -sfv /run/user/<span class="nv">$UID</span>/ /home/<span class="nv">$USER</span>/.compose-cache
+
+systemd-analyze blame
+systemd-analyze critical-chain
+
+yaourt -S systemd-readahead
+systemctl <span class="nb">enable </span>systemd-readahead-collect systemd-readahead-replay
+systemctl <span class="nb">enable </span>upower
+
+<span class="c"># change /etc/systemd/journald.conf</span>
+<span class="nv">SystemMaxUse</span><span class="o">=</span>50M</code></pre></div>
+
+<h3 id="save-installed-pkg-list">Save installed pkg list</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pacman -Qqe <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> &gt; package_list.txt</code></pre></div>
+
+<h3 id="iptables-rules">IPtables rules</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">wget https://github.com/jivoi/scripts/raw/master/iptables_rules.sh
+<span class="c"># comment localnet rules</span>
+./iptables_rules.sh
+iptables-save &gt; /etc/iptables/iptables.rules
+systemctl <span class="nb">enable </span>iptables.service
+systemctl start iptables.service</code></pre></div>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>ArchLinux Installation Guide</strong> was published on <time datetime="2015-12-30T00:00:00+03:00">December 30, 2015</time> and last modified on <time datetime="2015-12-30">December 30, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/" title="Pentest Tips and Tricks #2">Pentest Tips and Tricks #2</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/08/21/awesome-it-jobs/" title="Awesome IT Jobs">Awesome IT Jobs</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/08/17/linux-unix-it-tips-and-tricks-number-4/" title="Linux-Unix-IT Tips and Tricks #4">Linux-Unix-IT Tips and Tricks #4</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+	        
+
+</body>
+</html>
