@@ -201,7 +201,7 @@ sudo pacman -S alsa-utils alsa-oss
 {% endhighlight %}
 
 ### Font Rendering
-{% highlight bash %}s
+{% highlight bash %}
 sudo pacman -S ttf-ubuntu-font-family ttf-liberation ttf-gentium ttf-droid ttf-bitstream-vera ttf-dejavu ttf-font terminus-font
 yaourt -S ttf-ms-fonts ttf-mac-fonts
 pacman -Syyu {fontconfig,freetype2,cairo}-infinality-ultimate
@@ -246,7 +246,8 @@ systemctl disable org.cups.cupsd.service
 ### Reshift
 {% highlight bash %}
 /usr/bin/redshift -c /dev/null -l 55.8 37.6 -t 5500 3700 -g 1.00 1.00 1.00 -b 1.00
-~/.config/redshift.conf
+
+# ~/.config/redshift.conf
 [redshift]
 temp-day=5500
 temp-night=3700
@@ -383,55 +384,4 @@ wget https://github.com/jivoi/scripts/raw/master/iptables_rules.sh
 iptables-save > /etc/iptables/iptables.rules
 systemctl enable iptables.service
 systemctl start iptables.service
-{% endhighlight %}
-
-
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
-{% endhighlight %}
-
-{% highlight bash %}
 {% endhighlight %}
