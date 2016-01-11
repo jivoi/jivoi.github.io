@@ -12,7 +12,7 @@ comments: True
 share:
 ---
 
-This is MY guide for installing ArchLinux from the official liveCD image.
+MY guide for installing ArchLinux 
 
 <section id="table-of-contents" class="toc">
 <header>
@@ -186,7 +186,6 @@ sudo pacman -S xorg-server xorg-server-utils xorg-xinit libva-intel-driver intel
 sudo pacman -S plasma-desktop plasma-nm plasma-pa bluedevil kscreen dolphin dolphin-plugins kdeplasma-addons kdeconnect sddm sddm-kcm kwalletmanager print-manager sni-qt lib32-sni-qt kdegraphics-ksnapshot networkmanager network-manager-applet kde-gtk-config gwenview sni-qt lib32-sni-qt
 yaourt -S papirus-icons
 yaourt -S breeze-gtk-git
-yaourt -S xembed-sni-proxy-git
 systemctl set-default graphical.target
 systemctl disable kdm.service
 systemctl enable sddm.service
@@ -214,6 +213,7 @@ sudo pacman -S yaourt bash-completion git mercurial subversion cpupower vlc gstr
 
 yaourt -S chromium-pepper-flash keepass-plugin-http
 yaourt -S krop
+yaourt -S keebuntu
 {% endhighlight %}
 
 ### VirtualBox
