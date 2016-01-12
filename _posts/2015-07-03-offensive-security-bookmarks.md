@@ -220,7 +220,8 @@ All that things I need to pass OSCP, i think =)
 - [http://www.iodigitalsec.com/windows-null-session-enumeration/](http://www.iodigitalsec.com/windows-null-session-enumeration/)
 - [http://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions](http://pen-testing.sans.org/blog/2013/07/24/plundering-windows-account-info-via-authenticated-smb-sessions)
 - [http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html](http://carnal0wnage.attackresearch.com/2007/07/enumerating-user-accounts-on-linux-and.html)
-- [http://www.madirish.net/59](http://www.madirish.net/59)a
+- [http://www.madirish.net/59](http://www.madirish.net/59)
+- [http://www.enye-sec.org/en/papers/web_vuln-en.txt](http://www.enye-sec.org/en/papers/web_vuln-en.txt)
 
 ## Phase 3 - Exploitation: Verifying Security Weaknesses
 - [http://pwnwiki.io](http://pwnwiki.io)
