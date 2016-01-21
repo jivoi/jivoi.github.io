@@ -64,6 +64,7 @@ My current way for OSCP Certifications
 - [How Linux Works: What Every Superuser Should Know](http://www.amazon.com/How-Linux-Works-Superuser-Should/dp/1593270356)
 - [Metasploit Penetration Testing Cookbook](http://www.amazon.com/Metasploit-Penetration-Testing-Cookbook-Abhinav/dp/1849517428)
 - [Penetration Testing with Raspberry Pi](http://www.amazon.com/Penetration-Testing-Raspberry-Joseph-Muniz/dp/1784396435)
+- [Intermediate Security Testing with Kali Linux 2](http://www.amazon.com/Intermediate-Security-Testing-Kali-Linux/dp/1516945867)
 * [Gray Hat Hacking the Ethical Hacker’s Handbook](http://www.amazon.com/Hacking-Ethical-Hackers-Handbook-Edition/dp/0071742557)
 * [Black Hat Python Python Programming for Hackers and Pentesters](http://www.amazon.com/Black-Hat-Python-Programming-Pentesters/dp/1593275900)
 
