@@ -215,13 +215,64 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 ###[[⬆]]Fun Questions:
 
 * A careless sysadmin executes the following command: ```chmod 444 /bin/chmod ``` - what do you do to fix this?
+
+{% highlight bash %}
+Default permission is 755.
+Y can use C\C++\Python\Perl and other language to fix this.
+
+#!/usr/bin/python
+import os
+os.chmod("/bin/chmod", 0755)
+{% endhighlight %}
+
 * I've lost my root password, what can I do?
+
+{% highlight bash %}
+Simple boot in sigle mode and change it.
+Change in grub -> init=/bin/bash -> boot -> run $mount -o remount,rw / -> change root password with $ passwd root
+{% endhighlight %}
+
 * I've rebooted a remote server but after 10 minutes I'm still not able to ssh into it, what can be wrong?
+
+{% highlight bash %}
+If it does not ping, maybe proble with network\firewall
+If it pings but you can not to connect to it with ssh maybe problem with ssh config\firewall rules
+Bad permission for ssh keys
+Wrong password
+{% endhighlight %}
+
 * If you were stuck on a desert island with only 5 command-line utilities, which would you choose?
+
+{% highlight bash %}
+you do not need computer on a desert island because there is no enegry =)
+{% endhighlight %}
+
 * You come across a random computer and it appears to be a command console for the universe. What is the first thing you type?
+
+{% highlight bash %}
+It cool to live forever =)
+change user 'mylogin' expiration from '84109-12-23' to 'never'
+usermod -e "" mylogin
+{% endhighlight %}
+
 * Tell me about a creative way that you've used SSH?
+
+{% highlight bash %}
+add to .ssh/config this lines and install tor and you can use ssh with tor.
+Host *.onion
+    ProxyCommand socat - SOCKS4A:localhost:%h:%p,socksport=9050
+{% endhighlight %}
+
 * You have deleted by error a running script, what could you do to restore it?
 
+{% highlight bash %}
+While script is running it is not deleted
+Find pid of running script and restore it from procfs
+ls -l /proc/4607/fd/4
+lr-x------ 1 juliet juliet 64 Apr  7 03:19
+/proc/4607/fd/4 -> /home/juliet/testing.txt (deleted)
+$ cp /proc/4607/fd/4 testing.txt.bk
+{% endhighlight %}
 
 ###[[⬆]]Demo Time:
 
