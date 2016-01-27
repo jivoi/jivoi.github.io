@@ -197,16 +197,100 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 ###[[⬆]]DevOps Questions:
 
 * Can you describe your workflow when you create a script?
+
+{% highlight bash %}
+1. Create\check task in tfs\jira
+2. Analysis task description.
+3. Analysis current script collection.
+4. Analysis internet for same job\problem.
+5. Write and test script prototype in test environment.
+6. Commit script to git\svn
+7. Build package\use CMS to deploy script in production.
+8. Close task in tfs\jira
+{% endhighlight %}
+
 * What is GIT?
+
+{% highlight bash %}
+Git is a distributed version control system developed by Linus Torvalds
+{% endhighlight %}
+
 * What is a dynamically/statically linked file?
+
+{% highlight bash %}
+Statically file means that the linker program (ld) after source code compilation adds all librarys and other dependencies directly to executable file
+
+Dynamically file means that the above step doesn't happen. The operating system's loader needs to find the dependencies code, load it into memory, each time the program is run.
+{% endhighlight %}
+
 * What does "configure && make && make install" do?
+
+{% highlight bash %}
+This commands is need if you what to build software from source code.
+
+Configure - is a script which is responsible for getting ready to build the software on your specific system. It makes sure all of the dependencies for the rest of the build and install process are available, and finds out whatever it needs to know to use those dependencies.
+
+Make - is a command  which runs a series of tasks defined in a Makefile to build the finished program from its source code.
+
+Make install - is a command which will copy the built program, and its libraries and documentation, to the correct locations.
+{% endhighlight %}
+
 * What is puppet/chef/ansible used for?
+
+{% highlight bash %}
+Puppet/Chef/Ansible - are a free software platform for configuring and managing computers.
+{% endhighlight %}
+
 * How do you create a new postgres user?
+
+{% highlight bash %}
+$ psql -c "CREATE USER testuser WITH PASSWORD 'XXXXX';"
+{% endhighlight %}
+
 * What is a virtual IP address? What is a cluster?
+
+{% highlight bash %}
+A virtual IP address (VIP or VIPA) is an IP address that doesn't correspond to an actual physical network interface (port). Uses for VIPs include Network Address Translation (especially, One-to-many NAT), fault-tolerance, and mobility.
+
+Virtual IP addresses are commonly used to enable high availability. A standard failover design uses an active/passive server pair connected by replication and watched by a cluster manager. The active server listens on a virtual IP address; applications use it for connections instead of the normal host IP address. Should the active server fail, the cluster manager promotes the passive server and shifts the floating IP address to the newly promoted host. Application connections break and then reconnect to the VIP again, which points them to the new server.
+
+Cluster is a set of loosely or tightly connected computers that work together so that, in many respects, they can be viewed as a single system.
+{% endhighlight %}
+
 * How do you print all strings of printable characters present in a file?
+
+{% highlight bash %}
+Use cmd /usr/bin/strings
+$ strings /path/somefile
+{% endhighlight %}
+
 * How do you find shared library dependencies?
+
+{% highlight bash %}
+ldd - print shared library dependencies
+$ ldd /path/somefile
+        linux-vdso.so.1 (0x00007ffcdabac000)
+        libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f1a42081000)
+{% endhighlight %}
+
 * What is Automake and Autoconf?
+
+{% highlight bash %}
+Automake and Autoconf both are parts of The GNU build system, also known as the Autotools, is a suite of programming tools designed to assist in making source code packages portable to many Unix-like systems.
+
+Automake - is a programming tool to automate parts of the compilation process. It eases usual compilation problems. For example, it points to needed dependencies. It automatically generates one or more Makefile.in from files called Makefile.am. Each Makefile.am contains, among other things, useful variable definitions for the compiled software, such as compiler and linker flags, dependencies and their versions, etc.
+
+Autoconf - generate a configuration script from a TEMPLATE-FILE if given, or configure.ac if present, or else configure.in. Output is sent to the standard output if TEM‐PLATE-FILE is given, else into configure.
+{% endhighlight %}
+
 * ./configure shows an error that libfoobar is missing on your system, how could you fix this, what could be wrong?
+
+{% highlight bash %}
+Configure could not find libfoobar in LD_LIBRARY_PATH or libfoobar is not installed on your system.
+You can fix it by installing libfoobar package with package manager or build it from source.
+If libfoobar is already installed just check /etc/ld.so.conf and add right path to libfoobar
+{% endhighlight %}
+
 * What are the Advantages/disadvantages of script vs compiled program?
 * What's the relationship between continuous delivery and DevOps?
 * What are the important aspects of a system of continous integration and deployment?
@@ -251,7 +335,7 @@ you do not need computer on a desert island because there is no enegry =)
 
 {% highlight bash %}
 It cool to live forever =)
-change user 'mylogin' expiration from '84109-12-23' to 'never'
+change user 'mylogin' expiration from 'XXXXX-XX-XX' to 'never'
 usermod -e "" mylogin
 {% endhighlight %}
 
