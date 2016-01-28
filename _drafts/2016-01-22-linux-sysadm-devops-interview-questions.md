@@ -186,6 +186,11 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 ###[[⬆]]MySQL questions:
 
 * How do you create a user?
+
+{% highlight bash %}
+
+{% endhighlight %}
+
 * How do you provide privileges to a user?
 * What is the difference between a "left" and a "right" join?
 * Explain briefly the differences between InnoDB and MyISAM.
@@ -292,9 +297,44 @@ If libfoobar is already installed just check /etc/ld.so.conf and add right path 
 {% endhighlight %}
 
 * What are the Advantages/disadvantages of script vs compiled program?
+
+{% highlight bash %}
+Script program have the advantages of:
+- flexibility to change the script
+- easier to implement (writing good compilers is very hard!!)
+- no need to run a compilation stage: can execute code directly "on the fly"
+- being more portable.
+
+Script program have the disadvantages of:
+- much slow than compiled program
+- source code is open
+
+Compiled program have the advantages of:
+- faster performance by directly using the native code of the target machine
+- opportunity to apply quite powerful optimisations during the compile stage
+- hides the source code from the end user
+
+Compiled program have the disadvantages of:
+- slow to develop (edit, compile, link and run. The compile/link steps could take serious time).
+- to execute you need to compile a different executable for each type of processor and/or platform that you want your program to run on
+{% endhighlight %}
+
 * What's the relationship between continuous delivery and DevOps?
+
+{% highlight bash %}
+Continuous delivery(CD) is an agile way of working whereby quality products—normally software assets—can be developed, built, tested, and shipped in quick succession.
+DevOps is another way of working whereby developers and system operators work in harmony with little or no organizational barriers between them towards a common goal.
+{% endhighlight %}
+
 * What are the important aspects of a system of continous integration and deployment?
 
+{% highlight bash %}
+Automation\testing are the important aspects of a great development workflow.
+Every task that can be done by a machine should be.
+Automation gives you the time to focus.
+Through testing, you can be sure that the most important steps your customers will take through your system are working, regardless of the changes you make.
+This gives you the confidence to experiment, implement new features, and ship updates quickly.
+{% endhighlight %}
 
 ###[[⬆]]Fun Questions:
 
