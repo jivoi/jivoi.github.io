@@ -160,44 +160,185 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 
 * A running process gets ```EAGAIN: Resource temporarily unavailable``` on reading a socket. How can you close this bad socket/file descriptor without killing the process?
 
+{% highlight bash %}
+$ man errno | grep  EAGAIN
+EAGAIN is just means "there's nothing to read now; try again later".
+{% endhighlight %}
 
 ###[[⬆]]Networking Questions:
 
 * What is localhost and why would ```ping localhost``` fail?
+
+{% highlight bash %}
+A localhost is the standard hostname given to the address assigned to the loopback network interface. Translated into an IP address, a localhost is always designated as 127.0.0.1.
+Ping can fail if loopback interface is down, also it is possible to configure local iptables(firewall) in such a way as to drop all packets received on localhost.
+Also it is possible that icmp_echo is disable with sysctl net.ipv4.icmp_echo_ignore_all=1
+{% endhighlight %}
+
 * What is the similarity between "ping" & "traceroute" ? How is traceroute able to find the hops.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the command used to show all open ports and/or socket connections on a machine?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Is 300.168.0.123 a valid IPv4 address?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Which IP ranges/subnets are "private" or "non-routable" (RFC 1918)?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a VLAN?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is ARP and what is it used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between TCP and UDP?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the purpose of a default gateway?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is command used to show the routing table on a Linux box?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * A TCP connection on a network can be uniquely defined by 4 things. What are those things?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * When a client running a web browser connects to a web server, what is the source port and what is the destination port of the connection?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How do you add an IPv6 address to a specific interface?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * You have added an IPv4 and IPv6 address to interface eth0. A ping to the v4 address is working but a ping to the v6 address gives yout the response ```sendmsg: operation not permitted```. What could be wrong?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is SNAT and when should be used?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Explain how could you ssh login into a Linux system that DROPs all new incomming packets using a SSH tunnel.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How do you stop a DDoS?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How can you see content of ip packet?
 
+{% highlight bash %}
+{% endhighlight %}
 
 ###[[⬆]]MySQL questions:
 
 * How do you create a user?
 
 {% highlight bash %}
-
+$ mysql -u root -ppassword -hsomehost -e 'CREATE USER login@"ip";'
 {% endhighlight %}
 
 * How do you provide privileges to a user?
+
+{% highlight bash %}
+# read only
+GRANT select ON somedb.* TO 'login'@'ip' IDENTIFIED BY 'agoodpassword';
+# all privileges
+GRANT all privileges ON somedb.* TO 'login'@'ip' IDENTIFIED BY 'agoodpassword';
+{% endhighlight %}
+
 * What is the difference between a "left" and a "right" join?
+
+{% highlight bash %}
+Table from which you are taking data is 'LEFT'.
+Table you are joining is 'RIGHT'.
+LEFT JOIN: Take all items from left table AND (only) matching items from right table.
+RIGHT JOIN: Take all items from right table AND (only) matching items from left table.
+Most people only use LEFT JOIN since it seems more intuitive
+{% endhighlight %}
+
 * Explain briefly the differences between InnoDB and MyISAM.
+
+{% highlight bash %}
+MYISAM:
+- MYISAM supports Table-level Locking
+- MyISAM designed for need of speed
+- MyISAM does not support foreign keys hence we call MySQL with MYISAM is DBMS
+- MyISAM stores its tables, data and indexes in diskspace using separate three different files. (- tablename.FRM, tablename.MYD, tablename.MYI)-
+- MYISAM not supports transaction. You cannot commit and rollback with MYISAM. Once you issue a c- ommand - it’s done.
+- MYISAM supports fulltext search
+You can use MyISAM, if the table is more static with lots of select and less update and delete.
+
+INNODB:
+- InnoDB supports Row-level Locking
+- InnoDB designed for maximum performance when processing high volume of data
+- InnoDB support foreign keys hence we call MySQL with InnoDB is RDBMS
+- InnoDB stores its tables and indexes in a tablespace
+- InnoDB has better crash recovery.
+- InnoDB supports transaction. You can commit and rollback with InnoDB
+{% endhighlight %}
+
 * Describe briefly the steps you need to follow in order to create a simple master/slave cluster.
+
+{% highlight bash %}
+AT Master:
+- enable binlog
+- set server-id=1
+- create user with replication grant
+- create dump with master-data
+
+AT Slave:
+- enable binlog \ relay-log
+- set server-id=2
+- restore dump
+- set master_host \ master_log_file \ maste_log_pos
+{% endhighlight %}
+
 * Why should you run "mysql_secure_installation" after installing MySQL?
+
+{% highlight bash %}
+mysql_secure_installation is a script that improve MySQL installation security in the following ways:
+- set a password for root accounts
+- remove root accounts that are accessible from outside the local host
+- remove anonymous-user accounts
+- can remove the test database (which by default can be accessed by all users, even anonymous users), and privileges that permit anyone to access databases with names that start with test_
+{% endhighlight %}
+
 * How do you check which jobs are running?
 
+{% highlight bash %}
+$ mysql -e "show full processlist"
+{% endhighlight %}
 
 ###[[⬆]]DevOps Questions:
 
