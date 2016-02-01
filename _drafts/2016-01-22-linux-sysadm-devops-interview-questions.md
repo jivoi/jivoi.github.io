@@ -178,32 +178,63 @@ Also it is possible that icmp_echo is disable with sysctl net.ipv4.icmp_echo_ign
 * What is the similarity between "ping" & "traceroute" ? How is traceroute able to find the hops.
 
 {% highlight bash %}
+Both of this programs can be used to troubleshoot connection problems.
+
+Traceroute shows you the path that packets take from your local system to a remote host. You see the response time to each step along the way, because each datagram (Unix "traceroute" uses UDP datagrams by default, but you can also choose between ICMP, TCP rather than ICMP on Windows) has a TTL (time-to-live) that's one hop longer than the previous one.
+
+By default you need a superuser privileges to run ping and traceroute with ICMP option
+$ ping example.com
+ping: icmp open socket: Operation not permitted
+
+$ traceroute -I example.com
+You have no enough privileges to use this traceroute method.
 {% endhighlight %}
+
+[Read More](https://serverfault.com/questions/68307/what-is-the-difference-between-ping-and-tracert)
 
 * What is the command used to show all open ports and/or socket connections on a machine?
 
 {% highlight bash %}
+$ lsof -i
+$ netstat -natupx
+$ ss -lptuxa
 {% endhighlight %}
 
 * Is 300.168.0.123 a valid IPv4 address?
 
 {% highlight bash %}
+No, IPv4 addresses are canonically represented in dot-decimal notation, which consists of four decimal numbers, each ranging from 0 to 255, separated by dots, e.g., 172.16.254.1. Each part represents a group of 8 bits (octet) of the address. So 2 ** 8 = 256(255) is a max number for each octet.
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/IP_address)
 
 * Which IP ranges/subnets are "private" or "non-routable" (RFC 1918)?
 
 {% highlight bash %}
+The Internet Assigned Numbers Authority (IANA) has reserved the following three blocks of the IP address space for private internets:
+     10.0.0.0        -   10.255.255.255  (10/8 prefix)
+     172.16.0.0      -   172.31.255.255  (172.16/12 prefix)
+     192.168.0.0     -   192.168.255.255 (192.168/16 prefix)
 {% endhighlight %}
+
+[Read More](https://tools.ietf.org/html/rfc1918)
 
 * What is a VLAN?
 
 {% highlight bash %}
+A virtual LAN (VLAN) is any broadcast domain that is partitioned and isolated in a computer network at the data link layer (OSI layer 2).
+To subdivide a network into virtual LANs, one configures a network switch or router. Simpler network devices can only partition per physical port (if at all), in which case each VLAN is connected with a dedicated network cable (and VLAN connectivity is limited by the number of hardware ports available). More sophisticated devices can mark packets through tagging, so that a single interconnect (trunk) may be used to transport data for multiple VLANs. Since VLANs share bandwidth, a VLAN trunk might use link aggregation and/or quality of service prioritization to route data efficiently.
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Virtual_LAN)
 
 * What is ARP and what is it used for?
 
 {% highlight bash %}
+The Address Resolution Protocol (ARP) is a protocol used for resolution of network layer addresses into link layer addresses, a critical function in multiple-access networks. ARP is used for mapping a network address (e.g. an IPv4 address) to a physical address like an Ethernet address (also named a MAC address).
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Address_Resolution_Protocol)
 
 * What is the difference between TCP and UDP?
 
