@@ -239,57 +239,146 @@ The Address Resolution Protocol (ARP) is a protocol used for resolution of netwo
 * What is the difference between TCP and UDP?
 
 {% highlight bash %}
+TCP is connection-oriented protocol.
+UDP is connectionless protocol
+
+TCP provides delivery guarantee
+UDP is unreliable, it doesn't provide any delivery guarantee.
+
+TCP guarantees order of message
+UDP doesn't provide any ordering or sequencing guarantee
+
+TCP is slow
+UDP is fast
+
+TCP has bigger header than UDP
 {% endhighlight %}
+
+[Read More](http://javarevisited.blogspot.ru/2014/07/9-difference-between-tcp-and-udp-protocol.html)
 
 * What is the purpose of a default gateway?
 
 {% highlight bash %}
+A default gateway in computer networking is the node that is assumed to know how to forward packets on to other networks. Typically in a TCP/IP network, nodes such as servers, workstations and network devices each have a defined default route setting, (pointing to the default gateway), defining where to send packets for IP addresses for which they can determine no specific route. The gateway is by definition a router.
+
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Default_gateway)
 
 * What is command used to show the routing table on a Linux box?
 
 {% highlight bash %}
+You can use one of this:
+$ route -n
+$ netstat -rn
+$ ip route list
 {% endhighlight %}
 
 * A TCP connection on a network can be uniquely defined by 4 things. What are those things?
 
 {% highlight bash %}
+remote-ip-address, remote-port, source-ip-address, source-port
 {% endhighlight %}
 
 * When a client running a web browser connects to a web server, what is the source port and what is the destination port of the connection?
 
 {% highlight bash %}
+destination port - is 80 for HTTP or 443 for HTTPS
+source port - will be random number from option net.ipv4.ip_local_port_range, by default it will be something like between 32768 and 61000 (around 28K source ports available (for a single destination IP:port))
 {% endhighlight %}
 
 * How do you add an IPv6 address to a specific interface?
 
 {% highlight bash %}
+Using ip:
+Usage: /sbin/ip -6 addr add <ipv6address>/<prefixlength> dev <interface>
+Example: /sbin/ip -6 addr add 2001:0db8:0:f101::1/64 dev eth0
+
+Using ifconfig:
+Usage: /sbin/ifconfig <interface> inet6 add <ipv6address>/<prefixlength>
+Example: /sbin/ifconfig eth0 inet6 add 2001:0db8:0:f101::1/64
+
+It is temporarily, you will lost this configuration after reboot. To add permanent ipv6 you need to add option to config file, on Fedora, Redhat Enterprise Linux, and clones like Centos add lines to these files:
+
+/etc/sysconfig/network
+
+NETWORKING_IPV6=yes
+IPV6FORWARDING=no
+IPV6_AUTOCONF=no
+IPV6_AUTOTUNNEL=no
+IPV6_DEFAULTGW=fe80::1
+IPV6_DEFAULTDEV=eth0
+
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+IPV6INIT=yes
+IPV6ADDR=2607:f388:xxxx:yyyy::zzzz/64     # replace with your static address
+
+For Debian and derivatives like Ubuntu add lines to these files:
+
+/etc/sysctl.conf
+
+net.ipv6.conf.eth0.accept_ra=0
+
+/etc/network/interfaces
+iface lo0 inet6 loopback
+iface eth0 inet6 static
+address 2607:f388:xxxx:yyyy::zzzz        # replace with your static address
+netmask 64
+gateway fe80::1
 {% endhighlight %}
 
 * You have added an IPv4 and IPv6 address to interface eth0. A ping to the v4 address is working but a ping to the v6 address gives yout the response ```sendmsg: operation not permitted```. What could be wrong?
 
 {% highlight bash %}
+This means that your server is not allowed to send ICMP packets.
+Check firewall rules:
+$ ip6tables -P INPUT ACCEPT
+$ ip6tables -P OUTPUT ACCEPT
+$ ip6tables -P FORWARD ACCEPT
 {% endhighlight %}
 
 * What is SNAT and when should be used?
 
 {% highlight bash %}
+Source Network Address Translation (SNAT) - changes the source address in IP header of a packet. It may also change the source port in the TCP/UDP headers. The typical usage is to change the a private (rfc1918) address/port into a public address/port for packets leaving your network.
 {% endhighlight %}
+
+[Read More](http://www.commercialventvac.com/finao/DNATs-and-SNATs.html)
 
 * Explain how could you ssh login into a Linux system that DROPs all new incomming packets using a SSH tunnel.
 
 {% highlight bash %}
+Need to think =)
 {% endhighlight %}
 
 * How do you stop a DDoS?
 
 {% highlight bash %}
+It is very complicated questions.
+Before to do something you need answer a lot of questions.
+Simple way is:
+- Limiting the ammount of concurrent connections from ddos IP address to your Server with firewall rules.
+- Optimize you server configuration options
 {% endhighlight %}
+
+[Read More](https://www.reddit.com/r/linux/comments/1klq5r/preventing_a_dos_attack/)
 
 * How can you see content of ip packet?
 
 {% highlight bash %}
+You can use tcpdump\tshark to display captured packets in HEX and ASCII
+$ tcpdump -XX -i eth0
+$ tshark -i eth0 -x
+
+You can write a python\c script for this
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
+while True:
+  print s.recvfrom(65565)
 {% endhighlight %}
+
+[Read More](http://www.binarytides.com/packet-sniffer-code-c-linux/)
 
 ###[[⬆]]MySQL questions:
 
