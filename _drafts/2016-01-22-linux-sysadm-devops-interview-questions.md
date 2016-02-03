@@ -136,25 +136,114 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 ###[[⬆]]Hard Linux Questions:
 
 * What is a tunnel and how you can bypass a http proxy?
+
+{% highlight bash %}
+A tunnel is a mechanism used to ship a foreign protocol across a network that normally wouldn't support it. Tunneling protocols allow you to use, for example, IP to send another protocol in the "data" portion of the IP datagram. Most tunneling protocols operate at layer 4, which means they are implemented as a protocol that replaces something like TCP or UDP.
+
+You can forward a port from your computer to a remote computer, which has the result of tunneling your data over SSH in the process, making it secure. This may not seem useful, after all, why would I want a port on my computer being forwarded to another computer? The answer lies within some clarification. The port forwarding function of SSH works by first listening on a local socket for a connection. When a connection is made, SSH will forward the entire connection onto the remote host and portable.
+
+For example: 'ssh -L80:workserver.com:80 user@workdesktop.com'
+This command creates an SSH connection to your workdesktop.com computer, but at the same time opens port 80 on your local machine. If you point your web browser at http://localhost, the connection will actually be forwarded through your SSH connection to your desktop, and sent onto the workserver.com server, port 80.
+{% endhighlight %}
+
 * What is the difference between IDS and IPS?
+
+{% highlight bash %}
+IDS - Intrusion Detection System - A device or application that analyzes whole packets, both header and payload, looking for known events. When a known event is detected a log message is generated detailing the event.
+
+IPS - Intrusion Prevention System - A device or application that analyzes whole packets, both header and payload, looking for known events. When a known event is detected the packet is rejected.
+{% endhighlight %}
+
 * What shortcuts do you use on a regular basis?
+
+{% highlight bash %}
+A lot, for example check my dotfiles git https://github.com/jivoi/dotfiles/blob/master/.aliases
+{% endhighlight %}
+
 * What is the Linux Standard Base?
+
+{% highlight bash %}
+LSB is a project to standardize the software system structure, including the filesystem hierarchy used in the Linux operating system. The LSB is based on the POSIX specification, the Single UNIX Specification (SUS), and several other open standards, but extends them in certain areas.
+{% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Linux_Standard_Base)
+
 * What is an atomic operation?
+
+{% highlight bash %}
+For example we can say that atomic operation is a an operation during which a process can simultaneously read a location and write it in the same bus operation. This prevents any other process or I/O device from writing or reading memory until the operation is complete. Atomic implies indivisibility and irreducibility, so an atomic operation must be performed entirely or not performed at all.
+{% endhighlight %}
+
 * Your freshly configured http server is not running after a restart, what can you do?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What kind of keys are in ~/.ssh/authorized_keys and what it is this file used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * I've added my public ssh key into authorized_keys but I'm still getting a password prompt, what can be wrong?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Did you ever create RPM's, DEB's or solaris pkg's?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does ```:(){ :|:& };:``` do on your system?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How do you catch a Linux signal on a script?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Can you catch a SIGKILL?
-* What's happening when the Linux kernel is starting the OOM killer and how does it choose which process to kill first?
+
+{% highlight bash %}
+{% endhighlight %}
+
+* What's happening when the Linux kernel is starting the OOM killer and how does it choose which
+process to kill first?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Describe the linux boot process with as much detail as possible, starting from when the system is powered on and ending when you get a prompt.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What's a chroot jail?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * When trying to umount a directory it says it's busy, how to find out which PID holds the directory?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What's LD_PRELOAD and when it's used?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * You ran a binary and nothing happened. How would you debug this?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What are cgroups? Can you specify a scenario where you could use them?
 
+{% highlight bash %}
+{% endhighlight %}
 
 ###[[⬆]]Expert Linux Questions:
 
