@@ -29,6 +29,7 @@ My configuration
 - install gosublime
 - install terminal
 - install Javatar
+- SublimeAStyleFormatter
 
 ### Install Settings - User
 {% highlight bash %}
