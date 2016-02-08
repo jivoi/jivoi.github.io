@@ -177,36 +177,82 @@ For example we can say that atomic operation is a an operation during which a pr
 * Your freshly configured http server is not running after a restart, what can you do?
 
 {% highlight bash %}
+If you rebooted server and http server is not running after it, so first you need to check it configuration file and after you can run it manually with init\upstart\systemd script, if you want that server run automatically you need enable autostart for it.
+You can run one of this command:
+$ chkconfig nginx on (for centos\rhel)
+$ update-rc.d nginx enable (for debian\ubuntu)
+$ systemctl enable nginx (for linux with systemd)
 {% endhighlight %}
 
 * What kind of keys are in ~/.ssh/authorized_keys and what it is this file used for?
 
 {% highlight bash %}
+This is a public ssh key.
+With public key authentication, the authenticating entity has a public key and a private key. Each key is a large number with special mathematical properties. The private key is kept on the computer you log in from, while the public key is stored on the .ssh/authorized_keys file on all the computers you want to log in to.
 {% endhighlight %}
+
+[Read More](https://help.ubuntu.com/community/SSH/OpenSSH/Keys)
 
 * I've added my public ssh key into authorized_keys but I'm still getting a password prompt, what can be wrong?
 
 {% highlight bash %}
+Maybe your ~/.ssh/authorized_keys permissions are too open by OpenSSH standards.
+You need to check this and fix with:
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+Maybe remote server is configured to disable public keys, you can check it in /etc/sshd_config configuration file where PubkeyAuthentication option must be set to YES
+
+Maybe it is something with you local ssh configuration ~/.ssh/config
 {% endhighlight %}
 
 * Did you ever create RPM's, DEB's or solaris pkg's?
 
 {% highlight bash %}
+For RPM you need to create a spec file
 {% endhighlight %}
+
+[Read More](https://fedoraproject.org/wiki/How_to_create_an_RPM_package)
+[Read More](https://wiki.debian.org/IntroDebianPackaging)
 
 * What does ```:(){ :|:& };:``` do on your system?
 
 {% highlight bash %}
+This is a fork bomb using the Bash shell
+In computing, a fork bomb (also called rabbit virus or wabbit[1]) is a denial-of-service attack wherein a process continually replicates itself to deplete available system resources, causing resource starvation and slowing or crashing the system.
+
+We can rewrite this code in this way:
+
+bomb() {
+  bomb | bomb &
+};
+bomb
+
+The fork bomb in this case is a recursive function that runs in the background, thanks to the ampersand operator. This ensures that the child process does not die and keeps forking new copies of the function, consuming system resources.
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Fork_bomb)
 
 * How do you catch a Linux signal on a script?
 
 {% highlight bash %}
+There is a trap command that allows you to catch a linux signal and execute a command when a signal is received by your shell script. It works like this:
+
+$ trap arg signals
+
+So in real script you can write somethins like this:
+
+trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
+
+Here we have added a trap command that will execute "rm $TEMP_FILE" if any of the listed signals is received.
 {% endhighlight %}
+
+[Read More](http://linuxcommand.org/wss0160.php)
 
 * Can you catch a SIGKILL?
 
 {% highlight bash %}
+SIGKILL or signal 9 is one signal that you cannot trap and catch. The linux kernel immediately terminates any process sent this signal and no signal handling is performed. Since it will always terminate a program that is stuck, hung, or otherwise screwed up, it is tempting to think that it's the easy way out when you have to get something to stop and go away.
 {% endhighlight %}
 
 * What's happening when the Linux kernel is starting the OOM killer and how does it choose which
