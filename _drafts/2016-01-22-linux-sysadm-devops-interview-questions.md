@@ -49,89 +49,466 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 ###[[⬆]]Simple Linux Questions:
 
 * What is the name and the UID of the administrator user?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to list all files, including hidden one, in a directory?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the Unix/Linux command to remove a directory and its contents?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Which command will show you free/used memory? Does free memory exist on Linux?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to search for the string "my konfi is the best" in files of a directory recursively?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to connect to a remote server or what is SSH?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to get all environment variables and how can you use them?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * I get "command not found" when I run ```ifconfig -a```. What can be wrong?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What happens if I type TAB-TAB?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What command will show the available disk space on the Unix/Linux system?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What commands do you know that can be used to check DNS records?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What Unix/Linux commands will alter a files ownership, files permissions?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does ```chmod +x FILENAME```do?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does the permission 0750 on a file mean?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does the permission 0750 on a directory mean?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to add a new system user without login permissions?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to add/remove a group from a user?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a bash alias?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How do you set the mail address of the root/a user?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does CTRL-c do?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is in /etc/services?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to redirect STDOUT and STDERR in bash? (> /dev/null 2>&1)
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between UNIX and Linux.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between Telnet and SSH?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Explain the three load averages and what do they indicate.
+
+{% highlight bash %}
+{% endhighlight %}
 
 
 ###[[⬆]]Medium Linux Questions:
 
 * What do the following commands do and how would you use them?
  * ```tee```
+
+{% highlight bash %}
+tee - read from standard input and write to standard output and files
+For example you can use this command like this:
+$ echo "deb http://pkg.jenkins-ci.org/debian binary/" | sudo  tee -a /etc/apt/sources.list.d/jenkins.list
+{% endhighlight %}
+
  * ```awk```
+
+{% highlight bash %}
+The awk is most useful when handling text files that are formatted in a predictable way. For instance, it is excellent at parsing and manipulating tabular data. It operates on a line-by-line basis and iterates through the entire file.
+The awk syntax looks like this:
+awk '/search_pattern/ { action_to_take_on_matches; another_action; }' file_to_parse
+
+For example you can use this command like this:
+$ awk '{print}' /etc/fstab
+{% endhighlight %}
+
  * ```tr```
+
+{% highlight bash %}
+We can use tr for translating, or deleting, or squeezing repeated characters.
+It will read from STDIN and write to STDOUT.
+
+For example you can use this command like this:
+$ tr a-z A-Z
+$ tr '()' '{}'
+{% endhighlight %}
+
  * ```cut```
+
+{% highlight bash %}
+The command cut is used for text processing.
+We can use this command to extract portion of text from a file by selecting columns.
+cut OPTION... [FILE]...
+
+For example you can use this command like this:
+The example displays only the first field of each lines from /etc/passwd file using the field delimiter : (colon). In this case, the 1st field is the username.
+$ cut -d ':' -f 1 < /etc/passwd
+{% endhighlight %}
+
  * ```tac```
+
+{% highlight bash %}
+tac (which is "cat" backwards) concatenate and print files in reverse
+For example you can use this command like this:
+$ cat ok
+1
+2
+3
+
+$ tac ok
+3
+2
+1
+{% endhighlight %}
+
  * ```curl```
+
+{% highlight bash %}
+Curl is a tool to transfer data from or to a server, using one of the supported protocols (DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP).  The command is designed to work without user interaction.
+For example you can use this command like this:
+$ curl https://example.com
+{% endhighlight %}
+
  * ```wget```
+
+{% highlight bash %}
+Wget is a free utility for non-interactive download of files from the Web.
+It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+Wget is non-interactive, meaning that it can work in the background, while the user is not logged on.
+This allows you to start a retrieval and disconnect from the system, letting Wget finish the work.
+By contrast, most of the Web browsers require constant user's presence, which can be a great hindrance when transferring a lot of data.
+For example you can use this command like this:
+$ wget -S https://example.com
+{% endhighlight %}
+
  * ```watch```
+
+{% highlight bash %}
+watch runs command repeatedly, displaying its output and errors (the first screenfull). This allows you to watch the program output change over time. By default, the program is run every 2 seconds. By default, watch will run until interrupted.
+For example you can use this command like this:
+To watch the contents of a directory change, you could use
+$ watch -d ls -l
+{% endhighlight %}
+
  * ```head```
+
+{% highlight bash %}
+Print the first 10 lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is read standard input.
+For example you can use this command like this:
+To print first 10 lines
+$ head /etc/passws
+{% endhighlight %}
+
  * ```tail```
+
+{% highlight bash %}
+Print the last 10 lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is read standard input.
+For example you can use this command like this:
+To print last 10 lines
+$ tail /etc/passws
+{% endhighlight %}
+
 * What does a ```&``` after a command do?
+
+{% highlight bash %}
+This is known as job control under unix. The & informs the shell to put the command in the background.
+This means it continues to run the command but returns you to your shell to allows you to continue doing parallel commands and do not have to wait until the script is finished. If you forget to add & after command, you can stop the current running process with Ctrl-Z and continue it in the background with bg (or in the foreground with fg).
+{% endhighlight %}
+
+[Read More](https://unix.stackexchange.com/questions/86247/what-does-ampersand-mean-at-the-end-of-a-shell-script-line)
+
 * What does ```& disown``` after a command do?
+
+{% highlight bash %}
+& puts the job in the background, that is, makes it block on attempting to read input, and makes the shell not wait for its completion.
+
+disown removes the process from the shell's job control, but it still leaves it connected to the terminal. One of the results is that the shell won't send it a SIGHUP. Obviously, it can only be applied to background jobs, because you cannot enter it when a foreground job is running.
+{% endhighlight %}
+
+[Read More](https://unix.stackexchange.com/questions/3886/difference-between-nohup-disown-and)
+
 * What is a packet filter and how does it work?
+
+{% highlight bash %}
+Packet filters act by inspecting the "packets" which are transferred between computers on the Internet. If a packet does not match the packet filter's set of filtering rules, the packet filter will drop.
+{% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Firewall_(computing))
+
 * What is Virtual Memory?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is swap and what is it used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is an A record, an NS record, a PTR record, a CNAME record, an MX record?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Are there any other RRs and what are they used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a Split-Horizon DNS?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the sticky bit?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does the immutable bit to a file?
-* What is the difference between hardlinks and symlinks? What happens when you remove the source to a symlink/hardlink?
+
+{% highlight bash %}
+{% endhighlight %}
+
+* What is the difference between hardlinks and symlinks? What happens when you remove the source to a symlink/
+hardlink?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is an inode and what fields are stored in an inode?
+
+{% highlight bash %}
+inode is a "database" of all file information that tells about file structure.
+The inode of each file uses a pointer to point to the specific file, directory or object.
+The pointer is a unique number which usually is referred to as the inode number.
+{% endhighlight %}
+
 * Howto force/trigger a file system check on next reboot?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is SNMP and what is it used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a runlevel and how to get the current runlevel?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is SSH port forwarding?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between local and remote port forwarding?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What are the steps to add a user to a system without using useradd/adduser?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is MAJOR and MINOR numbers of special files?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Describe a scenario when you get a "filesystem is full" error, but 'df' shows there is free space.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Describe a scenario when deleting a file, but 'df' not showing the space being freed.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Describe how 'ps' works.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What happens to a child process that dies and has no parent process to wait for it and what’s bad about this?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Explain briefly each one of the process states.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How to know which process listens on a specific port?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a zombie process and what could be the cause of it?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * You run a bash script and you want to see its output on your terminal and save it to a file at the same time. How could you do it?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Explain what echo "1" > /proc/sys/net/ipv4/ip_forward does.
-* Describe briefly the steps you need to take in order to create and install a valid certificate for the site https://foo.example.com.
+
+{% highlight bash %}
+{% endhighlight %}
+
+* Describe briefly the steps you need to take in order to create and install a valid certificate for the site
+https://foo.example.com.
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Can you have several HTTPS virtual hosts sharing the same IP?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is a wildcard certificate?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * Which Linux file types do you know?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between a process and a thread? And parent and child processes after a fork system call?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between exec and fork?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is "nohup" used for?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is the difference between these two commands?
  * ```myvar=hello```
  * ```export myvar=hello```
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How many NTP servers would you configure in your local ntp.conf?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What does the column 'reach' mean in ```ntpq -p``` output?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * You need to upgrade kernel at 100-1000 servers, how you would do this?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How can you get Host, Channel, ID, LUN of SCSI disk?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * How can you limit process memory usage?
 
+{% highlight bash %}
+{% endhighlight %}
 
 ###[[⬆]]Hard Linux Questions:
 
@@ -367,6 +744,7 @@ To subdivide a network into virtual LANs, one configures a network switch or rou
 
 {% highlight bash %}
 The Address Resolution Protocol (ARP) is a protocol used for resolution of network layer addresses into link layer addresses, a critical function in multiple-access networks. ARP is used for mapping a network address (e.g. an IPv4 address) to a physical address like an Ethernet address (also named a MAC address).
+When we try to ping an IP address on our local network, say 192.168.1.2, our system has to turn the IP address 192.168.1.2 into a MAC address. This involves using ARP to resolve the address, hence its name.
 {% endhighlight %}
 
 [Read More](https://en.wikipedia.org/wiki/Address_Resolution_Protocol)
@@ -805,6 +1183,7 @@ $ tar xzvf test.tar.gz
 * Remove all "*.pyc" files from testdir recursively?
 
 {% highlight bash %}
+$ find ./testdir -type f -name "*.pyc" -ls -delete
 $ find ./testdir -type f -name "*.pyc"|xargs rm -f
 {% endhighlight %}
 
