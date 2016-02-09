@@ -641,7 +641,40 @@ process to kill first?
 * Describe the linux boot process with as much detail as possible, starting from when the system is powered on and ending when you get a prompt.
 
 {% highlight bash %}
+The first step of the boot process is the BIOS (Basic Input Output System).
+
+The BIOS initializes hardware, including detecting hard drives, USB disks, CD-ROMs, network cards, and any other hardware.
+
+The BIOS will then go step-by-step through each boot device based on the boot device order it is configured to follow until it finds one it can successfully boot from. In the case of a Linux server, that usually means reading the MBR (master boot record: the first 512 bytes on a hard drive) and loading and executing the boot code inside the MBR to start the boot process.
+
+After the BIOS initializes the hardware and finds the first device to boot, the boot loader takes over. The following list shows the boot loader depending on the device from a boot starts:
+
+GRUB : boot from a hard drive
+syslinux : boot from a USB
+isolinux : boot from a CD-ROM
+pxelinux : boot from a network
+
+Once we select a particular kernel in GRUB, GRUB will load the Linux kernel into RAM and execute it.
+
+Usually GRUB will also load an initrd (initial RAM disk) along with the kernel. initrd (initial RAM disk) has some crucial configuration files, kernel modules, and programs that the kernel needs in order to find and mount the real root file system.
+
+The final step is to execute the /sbin/init program, which takes over the rest of the boot process.
+
+The /sbin/init program is the parent process of every program running on the system. This process always has a PID of 1 and is responsible for starting the rest of the processes that make up a running Linux system.
+
+Here is the list of how we initialize a NIX OS:
+
+System V init such as runlevels and /etc/rc?.d directories - the init process reads a configuration file called /etc/inittab to discover its default runlevel. It then enters that runlevel and starts processes that have been configured to run at that runlevel. Linux distros: Debian 6 and earlier\Ubuntu 9.04 and earlier\CentOS 5 and earlier
+
+Upstart - Upstart was designed not only to address some of the shortcomings of the System V init process, but also to provide a more robust system for managing services.
+One main feature of Upstart is that it is event-driven. Upstart constantly monitors the system for certain events to occur, and when they do, Upstart can be configured to take action based on those events.
+Upstart scripts reside in /etc/init. Linux distros: Ubuntu 9.10 to Ubuntu 14.10, including Ubuntu 14.04
+CentOS 6
+
+systemd is the init system for the most recent linux distros: Debian 7 and Debian 8\Ubuntu 15.04\CentOS 7
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Linux_startup_process)
 
 * What's a chroot jail?
 
