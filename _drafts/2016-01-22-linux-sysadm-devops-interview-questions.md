@@ -38,6 +38,10 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 * Why we must choose you?
 * What function does DNS play on a network?
 * What is HTTP?
+
+{% highlight bash %}
+{% endhighlight %}
+
 * What is an HTTP proxy and how does it work?
 * Describe briefly how HTTPS works.
 * What is SMTP? Give the basic scenario of how a mail message is delivered via SMTP.
@@ -171,8 +175,19 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 * Explain the three load averages and what do they indicate.
 
 {% highlight bash %}
+To see load averages numbers you can run commands:
+$ top (see load average section)
+
+$ cat /proc/loadavg
+1.00 1.01 0.98 2/198 21533
+
+$ uptime
+18:37:28 up 4 days,  7:17,  4 users,  load average: 1.00, 1.01, 0.98
+
+The three numbers after load average -  1.00, 1.01, 0.98 - represent the 1-, 5-, and 15-minute load averages on the machine. A system load average is equal to the average number of processes in a runnable or uninterruptible state. Runnable processes are either currently using the CPU or waiting to do so, and uninterruptible processes are waiting for I/O.
 {% endhighlight %}
 
+[Read More](https://en.wikipedia.org/wiki/Load_(computing))
 
 ###[[⬆]]Medium Linux Questions:
 
@@ -316,12 +331,20 @@ Packet filters act by inspecting the "packets" which are transferred between com
 * What is Virtual Memory?
 
 {% highlight bash %}
+In computing, virtual memory is a memory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called virtual addresses, into physical addresses in computer memory. Main storage as seen by a process or task appears as a contiguous address space or collection of contiguous segments. The operating system manages virtual address spaces and the assignment of real memory to virtual memory.
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Virtual_memory)
 
 * What is swap and what is it used for?
 
 {% highlight bash %}
+Swap is a special type of memory.
+Swap space in Linux is used when the amount of physical memory (RAM) is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. While swap space can help machines with a small amount of RAM, it should not be considered a replacement for more RAM. Swap space is located on hard drives, which have a slower access time than physical memory.
+Swapping is a useful technique that enables a computer to execute programs and manipulate data files larger than main memory. The operating system copies as much data as possible into main memory, and leaves the rest on the disk. When the operating system needs data from the disk, it exchanges a portion of data (called a page or segment) in main memory with a portion of data on the disk.
 {% endhighlight %}
+
+[Read More](https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-swap-what-is.html)
 
 * What is an A record, an NS record, a PTR record, a CNAME record, an MX record?
 
@@ -341,7 +364,16 @@ Packet filters act by inspecting the "packets" which are transferred between com
 * What is the sticky bit?
 
 {% highlight bash %}
+A sticky bit is a permission bit that is set on a directory that allows only the owner of the file within that directory or the root user to delete or rename the file. No other user has the needed privileges to delete the file created by some other user.
+
+To remove sticky bit:
+sudo chmod -t /tmp
+
+To set sticky bit:
+$ sudo chmod +t /tmp
 {% endhighlight %}
+
+[Read More](https://askubuntu.com/questions/432699/what-is-the-t-letter-in-the-output-of-ls-ld-tmp)
 
 * What does the immutable bit to a file?
 
@@ -375,6 +407,23 @@ The pointer is a unique number which usually is referred to as the inode number.
 * What is a runlevel and how to get the current runlevel?
 
 {% highlight bash %}
+Runlevel is a mode of operation in OS, and a runlevel represents the different system state of a Linux system. When the Linux system boots, the kernel is initialized , and then enters one (and only one) runlevel. When a service starts, it will try to start all the services that are associated with that runlevel.
+
+In general, when a computer enters runlevel 0, the system shuts down all running processes, unmounts all file systems, and powers off.
+
+When it enters runlevel 6, it reboots.
+
+The intermediate runlevels (1-5) differ in terms of which drives are mounted, and which network services are started. Default runlevels are typically 3, 4, or 5.
+
+Runlevel 1 is reserved for single-user mode-a state where only a single user can log in to the system. Generally, few processes are started in single-user mode, so it is a very useful runlevel for diagnostics when a system won't fully boot. Even in the default GRUB menu we will notice a recovery mode option that boots us into runlevel 1.
+
+In other words, runlevels define what tasks can be accomplished in the current state (or runlevel) of a Linux system. Every Linux system supports three basic runlevels, plus one or more runlevels for normal operation.
+
+Lower run levels are useful for maintenance or emergency repairs, since they usually don't offer any network services at all.
+
+To check current runlevel:
+$ runlevel
+N 2
 {% endhighlight %}
 
 * What is SSH port forwarding?
@@ -554,7 +603,7 @@ For example we can say that atomic operation is a an operation during which a pr
 * Your freshly configured http server is not running after a restart, what can you do?
 
 {% highlight bash %}
-If you rebooted server and http server is not running after it, so first you need to check it configuration file and after you can run it manually with init\upstart\systemd script, if you want that server run automatically you need enable autostart for it.
+If you rebooted server and http server is not running after it, so first you need to check it configuration file and the server error log where you can find the proble why server is not running, and after you can run it manually with init\upstart\systemd script, if you want that server run automatically you need enable autostart for it.
 You can run one of this command:
 $ chkconfig nginx on (for centos\rhel)
 $ update-rc.d nginx enable (for debian\ubuntu)
