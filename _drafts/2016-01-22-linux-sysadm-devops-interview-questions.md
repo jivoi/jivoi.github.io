@@ -55,37 +55,78 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 * What is the name and the UID of the administrator user?
 
 {% highlight bash %}
+Name - root
+UID - 0
+Can check with command:
+$ id root
+uid=0(root) gid=0(root) groups=0(root)
 {% endhighlight %}
 
 * How to list all files, including hidden one, in a directory?
 
 {% highlight bash %}
+ls - command ti list directory contents
+a - argument show hidden files in a directory
+Full command:
+$ ls -a ./
 {% endhighlight %}
 
 * What is the Unix/Linux command to remove a directory and its contents?
 
 {% highlight bash %}
+rm - command to remove files or directories
+r - argument tp remove directories and their contents recursively
+Full command:
+$ rm -r ./somedir
 {% endhighlight %}
 
 * Which command will show you free/used memory? Does free memory exist on Linux?
-
 {% highlight bash %}
+free - command to display amount of free and used memory in the system
+Full command:
+$ free
+             total       used       free     shared    buffers     cached
+Mem:       1551836    1048324     503512          0     324244     518224
+-/+ buffers/cache:     205856    1345980
+Swap:       731132          0     731132
 {% endhighlight %}
 
 * How to search for the string "my konfi is the best" in files of a directory recursively?
 
 {% highlight bash %}
+You can use find and grep command.
+Full command:
+$ find ./* -type f -exec grep -H 'my konfi is the best' {} \;
+$ grep -r 'my konfi is the best' ./*
 {% endhighlight %}
+
+[Read More](https://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux)
 
 * How to connect to a remote server or what is SSH?
 
 {% highlight bash %}
+Secure Shell, or SSH, is a cryptographic (encrypted) network protocol to allow remote login and other network services to operate securely over an unsecured network.
+To connect to remote server we can use command ssh
+Full command:
+$ ssh login@remote_server_ip
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Secure_Shell)
 
 * How to get all environment variables and how can you use them?
 
 {% highlight bash %}
+All UNIX-like operating systems such as OpenBSD, Linux, Redhat, CentOS, Debian allows you to set environment variables. When you log in on UNIX, your current shell (login shell) sets a unique working environment for you which is maintained until you log out.
+printenv\env - command to print all or part of environment
+Full command:
+$ printenv PATH HOME
+$PATH - Display lists directories the shell searches, for the commands.
+$HOME - User's home directory to store files.
+
+All environment variables you can use in scripts.
 {% endhighlight %}
+
+[Read More](http://www.tutorialspoint.com/unix/unix-environment.htm)
 
 * I get "command not found" when I run ```ifconfig -a```. What can be wrong?
 
