@@ -36,11 +36,27 @@ A collection of Linux SysAdm/DevOps interview questions with my answers
 * Tell me about the last major Linux project you finished.
 * Tell me about the biggest mistake you've made in [some recent time period] and how you would do it differently today. What did you learn from this experience?
 * Why we must choose you?
+
+{% highlight bash %}
+I am awesome!
+{% endhighlight %}
+
 * What function does DNS play on a network?
+
+{% highlight bash %}
+The DNS plays a critical role in supporting the Internet infrastructure by providing a distributed and fairly robust mechanism that resolves Internet host names into IP addresses and IP addresses back into host names.
+{% endhighlight %}
+
+[Read More](http://compsec101.antibozo.net/papers/dnssec/dnssec.html)
+
 * What is HTTP?
 
 {% highlight bash %}
+The Hypertext Transfer Protocol (HTTP) is an application protocol for distributed, collaborative, hypermedia information systems.[1] HTTP is the foundation of data communication for the World Wide Web.
+Hypertext is structured text that uses logical links (hyperlinks) between nodes containing text. HTTP is the protocol to exchange or transfer hypertext.
 {% endhighlight %}
+
+[Read More](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
 
 * What is an HTTP proxy and how does it work?
 * Describe briefly how HTTPS works.
@@ -131,41 +147,67 @@ All environment variables you can use in scripts.
 * I get "command not found" when I run ```ifconfig -a```. What can be wrong?
 
 {% highlight bash %}
+Possible causes:
+1. net-tools package is not installed in your system.
+2. you don`t have "/sbin" directory in your $PATH, so just write full path for command -  /sbin/ifconfig -a
 {% endhighlight %}
 
 * What happens if I type TAB-TAB?
 
 {% highlight bash %}
+It depends where you are type this.
+If we are talking about shells like bash\zsh, so you type TAB-TAB it will enable built in "completion" function.
+Most shells allow command completion, typically bound to the TAB key, which allow you to complete the names of commands stored upon your PATH, file names, or directory names. This is typically used like so:
+$ ls /bo[TAB]
+When you press the TAB key the argument /bo is automatically replaced with the value /boot.
 {% endhighlight %}
+
+[Read More](https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1)
 
 * What command will show the available disk space on the Unix/Linux system?
 
 {% highlight bash %}
+df - report file system disk space usage
+Simple run command and you will see available disk space in your system
+$ df -h
 {% endhighlight %}
 
 * What commands do you know that can be used to check DNS records?
 
 {% highlight bash %}
+$ host example.com
+$ nslookup example.com
+$ dig example.com
+$ python -c "import socket;print(socket.gethostbyname('example.com'))"
 {% endhighlight %}
 
 * What Unix/Linux commands will alter a files ownership, files permissions?
 
 {% highlight bash %}
+chown - command to change file owner and group information.
+chmod - command to change file access permissions such as read, write, and access.
 {% endhighlight %}
 
 * What does ```chmod +x FILENAME```do?
 
 {% highlight bash %}
+This command will set executation bit to FILENAME for everybody owner\group\other.
 {% endhighlight %}
 
 * What does the permission 0750 on a file mean?
 
 {% highlight bash %}
+$ chmod 750 FILENAME
+-rwxr-x--- 1 root root 24 Jan 22 18:02 FILENAME*
+This permissions means that owner can read\write\execute this file, also members of group can read and execute, other users can do nothing with it.
 {% endhighlight %}
 
 * What does the permission 0750 on a directory mean?
 
 {% highlight bash %}
+$ chmod 750 DIRECTORY
+drwxr-x---   5 root root    4.0K Nov 10 12:36 DIRECTORY
+This permissions means that owner can read\write\execute(see file list of directory) this directory, also members of group can read and list, other users can do nothing with it.
 {% endhighlight %}
 
 * How to add a new system user without login permissions?
@@ -922,6 +964,8 @@ remote-ip-address, remote-port, source-ip-address, source-port
 destination port - is 80 for HTTP or 443 for HTTPS
 source port - will be random number from option net.ipv4.ip_local_port_range, by default it will be something like between 32768 and 61000 (around 28K source ports available (for a single destination IP:port))
 {% endhighlight %}
+
+[Read More](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
 
 * How do you add an IPv6 address to a specific interface?
 
