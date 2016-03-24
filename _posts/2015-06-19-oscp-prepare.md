@@ -52,6 +52,7 @@ My current way for OSCP Certifications
 - [Offensive Security Bookmarks](https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/)
 
 ### Books
+- [Kali Linux Web Penetration Testing Cookbook](http://www.amazon.com/Kali-Linux-Penetration-Testing-Cookbook-ebook/dp/B019OP7JJQ)
 - [Web Penetration Testing with Kali Linux - Second Edition](https://www.packtpub.com/networking-and-servers/web-penetration-testing-kali-linux-second-edition)
 - [Web Penetration Testing with Kali Linux](http://www.amazon.com/Web-Penetration-Testing-Kali-Linux/dp/1782163166)
 - [Penetration Testing: A Hands-On Introduction to Hacking](http://www.amazon.com/Penetration-Testing-Hands-On-Introduction-Hacking/dp/1593275641)
