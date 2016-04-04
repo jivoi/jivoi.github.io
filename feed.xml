@@ -5,13 +5,1469 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2016-01-12T14:19:55+03:00</updated>
+<updated>2016-04-04T15:53:43+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
   <uri>https://jivoi.github.io/</uri>
   <email>ekoz@protonmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Move from HDD to SSD with ArchLinux]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/" />
+  <id>https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux</id>
+  <updated>2016-04-04 15:44:01 +0300T00:00:00-00:00</updated>
+  <published>2016-04-04T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Migrate you ArchLinux from HDD to SDD&lt;/p&gt;
+
+&lt;h3 id=&quot;system-prepare&quot;&gt;System prepare&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# clean pacman cache&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pacman -Scc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;boot-from-the-arch-livecd&quot;&gt;Boot from the Arch liveCD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# partitioned via gdisk /dev/sdb1 for /boot 1G and /dev/sdb2 for / with all space&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gdisk /dev/sdb
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkfs.ext4 /dev/sdb1
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkfs.ext4 /dev/sdb2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount /dev/sdb2 /mnt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /mnt/boot
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount /dev/sdb1 /mnt/boot
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /mnt_old
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount /dev/sda3 /mnt_old
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rsync -aAXv --progress /mnt_old /mnt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;genfstab -U -p /mnt &amp;gt; /mnt/etc/fstab
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount --bind /dev /mnt/dev
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount --bind /proc /mnt/proc
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mount --bind /sys /mnt/sys
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chroot /mnt /bin/bash
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grub-install --debug --recheck /dev/sdb
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grub-install --target&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;i386-pc --debug --recheck /dev/sdb
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grub-mkconfig -o /boot/grub/grub.cfg
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkinitcpio -p linux&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;edit-fstab&quot;&gt;Edit fstab&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# add noatime,discard for SSD partions&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;tmpfs   /tmp       tmpfs   defaults,noatime,mode=1777   0 0&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/fstab&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-deadline-scheduler-for-ssd&quot;&gt;Enable deadline scheduler for SSD&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi /etc/udev/rules.d/60-schedulers.rules
+&lt;span class=&quot;nv&quot;&gt;ACTION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;add|change&amp;quot;&lt;/span&gt;, &lt;span class=&quot;nv&quot;&gt;KERNEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;sdb&amp;quot;&lt;/span&gt;, ATTR&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;queue/rotational&lt;span class=&quot;o&quot;&gt;}==&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;, ATTR&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;queue/scheduler&lt;span class=&quot;o&quot;&gt;}=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;deadline&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;enable-fstrim-service&quot;&gt;Enable FSTRIM service&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;fstrim.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exit-chroot-add-reboot&quot;&gt;Exit chroot add reboot&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/&quot;&gt;Move from HDD to SSD with ArchLinux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on April 04, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Linux SysAdm/DevOps Interview Questions]]></title>
+  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/" />
+  <id>https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions</id>
+  <updated>2016-01-22 17:13:26 +0300T00:00:00-00:00</updated>
+  <published>2016-01-22T00:00:00+03:00</published>
+  
+  <author>
+    <name>EK</name>
+    <uri>https://jivoi.github.io</uri>
+    <email>ekoz@protonmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;A collection of Linux SysAdm/DevOps interview questions with my answers&lt;/p&gt;
+
+&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+&lt;header&gt;
+&lt;h3&gt;Contents&lt;/h3&gt;
+&lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#general-questions&quot; id=&quot;markdown-toc-general-questions&quot;&gt;[[⬆]]General Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#simple-linux-questions&quot; id=&quot;markdown-toc-simple-linux-questions&quot;&gt;[[⬆]]Simple Linux Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#medium-linux-questions&quot; id=&quot;markdown-toc-medium-linux-questions&quot;&gt;[[⬆]]Medium Linux Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#hard-linux-questions&quot; id=&quot;markdown-toc-hard-linux-questions&quot;&gt;[[⬆]]Hard Linux Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#expert-linux-questions&quot; id=&quot;markdown-toc-expert-linux-questions&quot;&gt;[[⬆]]Expert Linux Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#networking-questions&quot; id=&quot;markdown-toc-networking-questions&quot;&gt;[[⬆]]Networking Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mysql-questions&quot; id=&quot;markdown-toc-mysql-questions&quot;&gt;[[⬆]]MySQL questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#devops-questions&quot; id=&quot;markdown-toc-devops-questions&quot;&gt;[[⬆]]DevOps Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#fun-questions&quot; id=&quot;markdown-toc-fun-questions&quot;&gt;[[⬆]]Fun Questions:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#demo-time&quot; id=&quot;markdown-toc-demo-time&quot;&gt;[[⬆]]Demo Time:&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/chassing/linux-sysadmin-interview-questions&quot;&gt;SOURCE&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;general-questions&quot;&gt;[[⬆]]General Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What did you learn yesterday/this week?&lt;/li&gt;
+  &lt;li&gt;Talk about your preferred development/administration environment. (OS, Editor, Browsers, Tools etc.)&lt;/li&gt;
+  &lt;li&gt;Tell me about the last major Linux project you finished.&lt;/li&gt;
+  &lt;li&gt;Tell me about the biggest mistake you’ve made in [some recent time period] and how you would do it differently today. What did you learn from this experience?&lt;/li&gt;
+  &lt;li&gt;Why we must choose you?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;I am awesome!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What function does DNS play on a network?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The DNS plays a critical role in supporting the Internet infrastructure by providing a distributed and fairly robust mechanism that resolves Internet host names into IP addresses and IP addresses back into host names.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://compsec101.antibozo.net/papers/dnssec/dnssec.html&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is HTTP?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The Hypertext Transfer Protocol &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;HTTP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is an application protocol &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; distributed, collaborative, hypermedia information systems.&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; HTTP is the foundation of data communication &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the World Wide Web.
+Hypertext is structured text that uses logical links &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;hyperlinks&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; between nodes containing text. HTTP is the protocol to exchange or transfer hypertext.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is an HTTP proxy and how does it work?&lt;/li&gt;
+  &lt;li&gt;Describe briefly how HTTPS works.&lt;/li&gt;
+  &lt;li&gt;What is SMTP? Give the basic scenario of how a mail message is delivered via SMTP.&lt;/li&gt;
+  &lt;li&gt;What is RAID? What is RAID0, RAID1, RAID5, RAID10?&lt;/li&gt;
+  &lt;li&gt;What is a level 0 backup? What is an incremental backup?&lt;/li&gt;
+  &lt;li&gt;Describe the general file system hierarchy of a Linux system.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;simple-linux-questions&quot;&gt;[[⬆]]Simple Linux Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the name and the UID of the administrator user?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Name - root
+UID - 0
+Can check with &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;id root
+&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to list all files, including hidden one, in a directory?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ls - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;ti list directory contents
+a - argument show hidden files in a directory
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls -a ./&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the Unix/Linux command to remove a directory and its contents?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rm - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to remove files or directories
+r - argument tp remove directories and their contents recursively
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rm -r ./somedir&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Which command will show you free/used memory? Does free memory exist on Linux?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;free - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to display amount of free and used memory in the system
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;free
+             total       used       free     shared    buffers     cached
+Mem:       &lt;span class=&quot;m&quot;&gt;1551836&lt;/span&gt;    &lt;span class=&quot;m&quot;&gt;1048324&lt;/span&gt;     &lt;span class=&quot;m&quot;&gt;503512&lt;/span&gt;          &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;     &lt;span class=&quot;m&quot;&gt;324244&lt;/span&gt;     518224
+-/+ buffers/cache:     &lt;span class=&quot;m&quot;&gt;205856&lt;/span&gt;    1345980
+Swap:       &lt;span class=&quot;m&quot;&gt;731132&lt;/span&gt;          &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;     731132&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to search for the string “my konfi is the best” in files of a directory recursively?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;You can use find and grep command.
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find ./* -type f -exec grep -H &lt;span class=&quot;s1&quot;&gt;&amp;#39;my konfi is the best&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;grep -r &lt;span class=&quot;s1&quot;&gt;&amp;#39;my konfi is the best&amp;#39;&lt;/span&gt; ./*&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to connect to a remote server or what is SSH?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Secure Shell, or SSH, is a cryptographic &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; network protocol to allow remote login and other network services to operate securely over an unsecured network.
+To connect to remote server we can use &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;ssh
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ssh login@remote_server_ip&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Secure_Shell&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to get all environment variables and how can you use them?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;All UNIX-like operating systems such as OpenBSD, Linux, Redhat, CentOS, Debian allows you to &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;environment variables. When you log in on UNIX, your current shell &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;login shell&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; sets a unique working environment &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; you which is maintained &lt;span class=&quot;k&quot;&gt;until&lt;/span&gt; you log out.
+printenv&lt;span class=&quot;se&quot;&gt;\e&lt;/span&gt;nv - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to print all or part of environment
+Full &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;printenv PATH HOME
+&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt; - Display lists directories the shell searches, &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the commands.
+&lt;span class=&quot;nv&quot;&gt;$HOME&lt;/span&gt; - User&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s home directory to store files.
+
+All environment variables you can use in scripts.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.tutorialspoint.com/unix/unix-environment.htm&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I get “command not found” when I run &lt;code&gt;ifconfig -a&lt;/code&gt;. What can be wrong?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Possible causes:
+1. net-tools package is not installed in your system.
+2. you don&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;t have &lt;span class=&quot;s2&quot;&gt;&amp;quot;/sbin&amp;quot;&lt;/span&gt; directory in your &lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;, so just write full path &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt; -  /sbin/ifconfig -a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What happens if I type TAB-TAB?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;It depends where you are &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;this.
+If we are talking about shells like bash&lt;span class=&quot;se&quot;&gt;\z&lt;/span&gt;sh, so you &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;TAB-TAB it will &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;built in &lt;span class=&quot;s2&quot;&gt;&amp;quot;completion&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;.
+Most shells allow &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;completion, typically bound to the TAB key, which allow you to &lt;span class=&quot;nb&quot;&gt;complete &lt;/span&gt;the names of commands stored upon your PATH, file names, or directory names. This is typically used like so:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls /bo&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;TAB&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+When you press the TAB key the argument /bo is automatically replaced with the value /boot.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What command will show the available disk space on the Unix/Linux system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;df - report file system disk space usage
+Simple run &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;and you will see available disk space in your system
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;df -h&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What commands do you know that can be used to check DNS records?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;host example.com
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nslookup example.com
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dig example.com
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python -c &lt;span class=&quot;s2&quot;&gt;&amp;quot;import socket;print(socket.gethostbyname(&amp;#39;example.com&amp;#39;))&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What Unix/Linux commands will alter a files ownership, files permissions?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;chown - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to change file owner and group information.
+chmod - &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to change file access permissions such as &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;, write, and access.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does &lt;code&gt;chmod +x FILENAME&lt;/code&gt;do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;will &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;executation bit to FILENAME &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; everybody owner&lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;roup&lt;span class=&quot;se&quot;&gt;\o&lt;/span&gt;ther.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does the permission 0750 on a file mean?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod &lt;span class=&quot;m&quot;&gt;750&lt;/span&gt; FILENAME
+-rwxr-x--- &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; root root &lt;span class=&quot;m&quot;&gt;24&lt;/span&gt; Jan &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; 18:02 FILENAME*
+This permissions means that owner can &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;rite&lt;span class=&quot;se&quot;&gt;\e&lt;/span&gt;xecute this file, also members of group can &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;and execute, other users can &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; nothing with it.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does the permission 0750 on a directory mean?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod &lt;span class=&quot;m&quot;&gt;750&lt;/span&gt; DIRECTORY
+drwxr-x---   &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; root root    4.0K Nov &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; 12:36 DIRECTORY
+This permissions means that owner can &lt;span class=&quot;nb&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\w&lt;/span&gt;rite&lt;span class=&quot;se&quot;&gt;\e&lt;/span&gt;xecute&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;see file list of directory&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; this directory, also members of group can &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;and list, other users can &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; nothing with it.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to add a new system user without login permissions?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to add/remove a group from a user?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is a bash alias?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How do you set the mail address of the root/a user?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What does CTRL-c do?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is in /etc/services?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to redirect STDOUT and STDERR in bash? (&amp;gt; /dev/null 2&amp;gt;&amp;amp;1)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between UNIX and Linux.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between Telnet and SSH?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain the three load averages and what do they indicate.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;To see load averages numbers you can run commands:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;top &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;see load average section&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat /proc/loadavg
+1.00 1.01 0.98 2/198 21533
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;uptime
+18:37:28 up &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; days,  7:17,  &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; users,  load average: 1.00, 1.01, 0.98
+
+The three numbers after load average -  1.00, 1.01, 0.98 - represent the 1-, 5-, and 15-minute load averages on the machine. A system load average is equal to the average number of processes in a runnable or uninterruptible state. Runnable processes are either currently using the CPU or waiting to &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; so, and uninterruptible processes are waiting &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; I/O.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Load_(computing)&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;medium-linux-questions&quot;&gt;[[⬆]]Medium Linux Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What do the following commands do and how would you use them?&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;tee&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tee - &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;from standard input and write to standard output and files
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;deb http://pkg.jenkins-ci.org/debian binary/&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sudo  tee -a /etc/apt/sources.list.d/jenkins.list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;awk&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The awk is most useful when handling text files that are formatted in a predictable way. For instance, it is excellent at parsing and manipulating tabular data. It operates on a line-by-line basis and iterates through the entire file.
+The awk syntax looks like this:
+awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/search_pattern/ { action_to_take_on_matches; another_action; }&amp;#39;&lt;/span&gt; file_to_parse
+
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print}&amp;#39;&lt;/span&gt; /etc/fstab&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;tr&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;We can use tr &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; translating, or deleting, or squeezing repeated characters.
+It will &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;from STDIN and write to STDOUT.
+
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tr a-z A-Z
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tr &lt;span class=&quot;s1&quot;&gt;&amp;#39;()&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;cut&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;cut is used &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; text processing.
+We can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;to extract portion of text from a file by selecting columns.
+cut OPTION... &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;FILE&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;...
+
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+The example displays only the first field of each lines from /etc/passwd file using the field delimiter : &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;colon&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;. In this &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt;, the 1st field is the username.
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cut -d &lt;span class=&quot;s1&quot;&gt;&amp;#39;:&amp;#39;&lt;/span&gt; -f &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &amp;lt; /etc/passwd&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;tac&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tac &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;which is &lt;span class=&quot;s2&quot;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt; backwards&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; concatenate and print files in reverse
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat ok
+1
+2
+3
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tac ok
+3
+2
+1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;curl&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Curl is a tool to transfer data from or to a server, using one of the supported protocols &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.  The &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;is designed to work without user interaction.
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl https://example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;wget&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Wget is a free utility &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; non-interactive download of files from the Web.
+It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+Wget is non-interactive, meaning that it can work in the background, &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; the user is not logged on.
+This allows you to start a retrieval and disconnect from the system, letting Wget finish the work.
+By contrast, most of the Web browsers require constant user&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s presence, which can be a great hindrance when transferring a lot of data.
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -S https://example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;watch&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;watch runs &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;repeatedly, displaying its output and errors &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;the first screenfull&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;. This allows you to watch the program output change over time. By default, the program is run every &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; seconds. By default, watch will run &lt;span class=&quot;k&quot;&gt;until&lt;/span&gt; interrupted.
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+To watch the contents of a directory change, you could use
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;watch -d ls -l&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;head&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Print the first &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;standard input.
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+To print first &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; lines
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;head /etc/passws&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;tail&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Print the last &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;standard input.
+For example you can use this &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;like this:
+To print last &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt; lines
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tail /etc/passws&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does a &lt;code&gt;&amp;amp;&lt;/code&gt; after a command do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This is known as job control under unix. The &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; informs the shell to put the &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;in the background.
+This means it continues to run the &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;but returns you to your shell to allows you to &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt; doing parallel commands and &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; not have to &lt;span class=&quot;nb&quot;&gt;wait &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;until&lt;/span&gt; the script is finished. If you forget to add &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; after &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;, you can stop the current running process with Ctrl-Z and &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt; it in the background with &lt;span class=&quot;nb&quot;&gt;bg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;or in the foreground with &lt;span class=&quot;nb&quot;&gt;fg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/86247/what-does-ampersand-mean-at-the-end-of-a-shell-script-line&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does &lt;code&gt;&amp;amp; disown&lt;/code&gt; after a command do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; puts the job in the background, that is, makes it block on attempting to &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;input, and makes the shell not &lt;span class=&quot;nb&quot;&gt;wait &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; its completion.
+
+&lt;span class=&quot;nb&quot;&gt;disown &lt;/span&gt;removes the process from the shell&lt;span class=&quot;s1&quot;&gt;&amp;#39;s job control, but it still leaves it connected to the terminal. One of the results is that the shell won&amp;#39;&lt;/span&gt;t send it a SIGHUP. Obviously, it can only be applied to background &lt;span class=&quot;nb&quot;&gt;jobs&lt;/span&gt;, because you cannot enter it when a foreground job is running.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://unix.stackexchange.com/questions/3886/difference-between-nohup-disown-and&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a packet filter and how does it work?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Packet filters act by inspecting the &lt;span class=&quot;s2&quot;&gt;&amp;quot;packets&amp;quot;&lt;/span&gt; which are transferred between computers on the Internet. If a packet does not match the packet filter&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;of filtering rules, the packet filter will drop.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Firewall_(computing)&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is Virtual Memory?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;In computing, virtual memory is a memory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called virtual addresses, into physical addresses in computer memory. Main storage as seen by a process or task appears as a contiguous address space or collection of contiguous segments. The operating system manages virtual address spaces and the assignment of real memory to virtual memory.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_memory&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is swap and what is it used for?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Swap is a special &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;of memory.
+Swap space in Linux is used when the amount of physical memory &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;RAM&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. While swap space can &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;machines with a small amount of RAM, it should not be considered a replacement &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; more RAM. Swap space is located on hard drives, which have a slower access &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;than physical memory.
+Swapping is a useful technique that enables a computer to execute programs and manipulate data files larger than main memory. The operating system copies as much data as possible into main memory, and leaves the rest on the disk. When the operating system needs data from the disk, it exchanges a portion of data &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;called a page or segment&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; in main memory with a portion of data on the disk.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-swap-what-is.html&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is an A record, an NS record, a PTR record, a CNAME record, an MX record?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Are there any other RRs and what are they used for?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is a Split-Horizon DNS?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the sticky bit?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A sticky bit is a permission bit that is &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;on a directory that allows only the owner of the file within that directory or the root user to delete or rename the file. No other user has the needed privileges to delete the file created by some other user.
+
+To remove sticky bit:
+sudo chmod -t /tmp
+
+To &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;sticky bit:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo chmod +t /tmp&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://askubuntu.com/questions/432699/what-is-the-t-letter-in-the-output-of-ls-ld-tmp&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What does the immutable bit to a file?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between hardlinks and symlinks? What happens when you remove the source to a symlink/
+hardlink?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is an inode and what fields are stored in an inode?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;inode is a &lt;span class=&quot;s2&quot;&gt;&amp;quot;database&amp;quot;&lt;/span&gt; of all file information that tells about file structure.
+The inode of each file uses a pointer to point to the specific file, directory or object.
+The pointer is a unique number which usually is referred to as the inode number.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Howto force/trigger a file system check on next reboot?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is SNMP and what is it used for?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is a runlevel and how to get the current runlevel?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Runlevel is a mode of operation in OS, and a runlevel represents the different system state of a Linux system. When the Linux system boots, the kernel is initialized , and &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; enters one &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;and only one&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; runlevel. When a service starts, it will try to start all the services that are associated with that runlevel.
+
+In general, when a computer enters runlevel 0, the system shuts down all running processes, unmounts all file systems, and powers off.
+
+When it enters runlevel 6, it reboots.
+
+The intermediate runlevels &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1-5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; differ in terms of which drives are mounted, and which network services are started. Default runlevels are typically 3, 4, or 5.
+
+Runlevel &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; is reserved &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; single-user mode-a state where only a single user can log in to the system. Generally, few processes are started in single-user mode, so it is a very useful runlevel &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; diagnostics when a system won&lt;span class=&quot;s1&quot;&gt;&amp;#39;t fully boot. Even in the default GRUB menu we will notice a recovery mode option that boots us into runlevel 1.&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;In other words, runlevels define what tasks can be accomplished in the current state (or runlevel) of a Linux system. Every Linux system supports three basic runlevels, plus one or more runlevels for normal operation.&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;Lower run levels are useful for maintenance or emergency repairs, since they usually don&amp;#39;&lt;/span&gt;t offer any network services at all.
+
+To check current runlevel:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;runlevel
+N 2&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is SSH port forwarding?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between local and remote port forwarding?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What are the steps to add a user to a system without using useradd/adduser?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is MAJOR and MINOR numbers of special files?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Describe a scenario when you get a “filesystem is full” error, but ‘df’ shows there is free space.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Describe a scenario when deleting a file, but ‘df’ not showing the space being freed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Describe how ‘ps’ works.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What happens to a child process that dies and has no parent process to wait for it and what’s bad about this?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain briefly each one of the process states.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How to know which process listens on a specific port?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is a zombie process and what could be the cause of it?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You run a bash script and you want to see its output on your terminal and save it to a file at the same time. How could you do it?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Explain what echo “1” &amp;gt; /proc/sys/net/ipv4/ip_forward does.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Describe briefly the steps you need to take in order to create and install a valid certificate for the site
+https://foo.example.com.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Can you have several HTTPS virtual hosts sharing the same IP?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is a wildcard certificate?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Which Linux file types do you know?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between a process and a thread? And parent and child processes after a fork system call?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is the difference between exec and fork?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What is “nohup” used for?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;What is the difference between these two commands?&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;myvar=hello&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;export myvar=hello&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How many NTP servers would you configure in your local ntp.conf?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What does the column ‘reach’ mean in &lt;code&gt;ntpq -p&lt;/code&gt; output?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You need to upgrade kernel at 100-1000 servers, how you would do this?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How can you get Host, Channel, ID, LUN of SCSI disk?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;How can you limit process memory usage?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hard-linux-questions&quot;&gt;[[⬆]]Hard Linux Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a tunnel and how you can bypass a http proxy?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A tunnel is a mechanism used to ship a foreign protocol across a network that normally wouldn&lt;span class=&quot;s1&quot;&gt;&amp;#39;t support it. Tunneling protocols allow you to use, for example, IP to send another protocol in the &amp;quot;data&amp;quot; portion of the IP datagram. Most tunneling protocols operate at layer 4, which means they are implemented as a protocol that replaces something like TCP or UDP.&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;You can forward a port from your computer to a remote computer, which has the result of tunneling your data over SSH in the process, making it secure. This may not seem useful, after all, why would I want a port on my computer being forwarded to another computer? The answer lies within some clarification. The port forwarding function of SSH works by first listening on a local socket for a connection. When a connection is made, SSH will forward the entire connection onto the remote host and portable.&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;For example: &amp;#39;&lt;/span&gt;ssh -L80:workserver.com:80 user@workdesktop.com&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;
+This &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;creates an SSH connection to your workdesktop.com computer, but at the same &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;opens port &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; on your &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;machine. If you point your web browser at http://localhost, the connection will actually be forwarded through your SSH connection to your desktop, and sent onto the workserver.com server, port 80.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the difference between IDS and IPS?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;IDS - Intrusion Detection System - A device or application that analyzes whole packets, both header and payload, looking &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; known events. When a known event is detected a log message is generated detailing the event.
+
+IPS - Intrusion Prevention System - A device or application that analyzes whole packets, both header and payload, looking &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; known events. When a known event is detected the packet is rejected.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What shortcuts do you use on a regular basis?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A lot, &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; example check my dotfiles git https://github.com/jivoi/dotfiles/blob/master/.aliases&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the Linux Standard Base?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;LSB is a project to standardize the software system structure, including the filesystem hierarchy used in the Linux operating system. The LSB is based on the POSIX specification, the Single UNIX Specification &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SUS&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, and several other open standards, but extends them in certain areas.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Linux_Standard_Base&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is an atomic operation?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;For example we can say that atomic operation is a an operation during which a process can simultaneously &lt;span class=&quot;nb&quot;&gt;read &lt;/span&gt;a location and write it in the same bus operation. This prevents any other process or I/O device from writing or reading memory &lt;span class=&quot;k&quot;&gt;until&lt;/span&gt; the operation is complete. Atomic implies indivisibility and irreducibility, so an atomic operation must be performed entirely or not performed at all.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your freshly configured http server is not running after a restart, what can you do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;If you rebooted server and http server is not running after it, so first you need to check it configuration file and the server error log where you can find the proble why server is not running, and after you can run it manually with init&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;pstart&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;ystemd script, &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; you want that server run automatically you need &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;autostart &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; it.
+You can run one of this &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chkconfig nginx on &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; centos&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;hel&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;update-rc.d nginx &lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; debian&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;buntu&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;nginx &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; linux with systemd&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What kind of keys are in ~/.ssh/authorized_keys and what it is this file used for?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This is a public ssh key.
+With public key authentication, the authenticating entity has a public key and a private key. Each key is a large number with special mathematical properties. The private key is kept on the computer you log in from, &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; the public key is stored on the .ssh/authorized_keys file on all the computers you want to log in to.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://help.ubuntu.com/community/SSH/OpenSSH/Keys&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’ve added my public ssh key into authorized_keys but I’m still getting a password prompt, what can be wrong?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Maybe your ~/.ssh/authorized_keys permissions are too open by OpenSSH standards.
+You need to check this and fix with:
+chmod &lt;span class=&quot;m&quot;&gt;700&lt;/span&gt; ~/.ssh
+chmod &lt;span class=&quot;m&quot;&gt;600&lt;/span&gt; ~/.ssh/authorized_keys
+
+Maybe remote server is configured to disable public keys, you can check it in /etc/sshd_config configuration file where PubkeyAuthentication option must be &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;to YES
+
+Maybe it is something with you &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;ssh configuration ~/.ssh/config&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Did you ever create RPM’s, DEB’s or solaris pkg’s?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;For RPM you need to create a spec file&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://fedoraproject.org/wiki/How_to_create_an_RPM_package&quot;&gt;Read More&lt;/a&gt;
+&lt;a href=&quot;https://wiki.debian.org/IntroDebianPackaging&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does &lt;code&gt;:(){ :|:&amp;amp; };:&lt;/code&gt; do on your system?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This is a fork bomb using the Bash shell
+In computing, a fork bomb &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;also called rabbit virus or wabbit&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; is a denial-of-service attack wherein a process continually replicates itself to deplete available system resources, causing resource starvation and slowing or crashing the system.
+
+We can rewrite this code in this way:
+
+bomb&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  bomb &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bomb &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+bomb
+
+The fork bomb in this &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; is a recursive &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; that runs in the background, thanks to the ampersand operator. This ensures that the child process does not die and keeps forking new copies of the &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;, consuming system resources.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Fork_bomb&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you catch a Linux signal on a script?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;There is a &lt;span class=&quot;nb&quot;&gt;trap command &lt;/span&gt;that allows you to catch a linux signal and execute a &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;when a signal is received by your shell script. It works like this:
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;trap &lt;/span&gt;arg signals
+
+So in real script you can write somethins like this:
+
+&lt;span class=&quot;nb&quot;&gt;trap&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;rm $TEMP_FILE; exit&amp;quot;&lt;/span&gt; SIGHUP SIGINT SIGTERM
+
+Here we have added a &lt;span class=&quot;nb&quot;&gt;trap command &lt;/span&gt;that will execute &lt;span class=&quot;s2&quot;&gt;&amp;quot;rm $TEMP_FILE&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; any of the listed signals is received.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://linuxcommand.org/wss0160.php&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Can you catch a SIGKILL?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;SIGKILL or signal &lt;span class=&quot;m&quot;&gt;9&lt;/span&gt; is one signal that you cannot &lt;span class=&quot;nb&quot;&gt;trap &lt;/span&gt;and catch. The linux kernel immediately terminates any process sent this signal and no signal handling is performed. Since it will always terminate a program that is stuck, hung, or otherwise screwed up, it is tempting to think that it&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s the easy way out when you have to get something to stop and go away.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What’s happening when the Linux kernel is starting the OOM killer and how does it choose which
+process to kill first?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Describe the linux boot process with as much detail as possible, starting from when the system is powered on and ending when you get a prompt.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The first step of the boot process is the BIOS &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Basic Input Output System&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+
+The BIOS initializes hardware, including detecting hard drives, USB disks, CD-ROMs, network cards, and any other hardware.
+
+The BIOS will &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; go step-by-step through each boot device based on the boot device order it is configured to follow &lt;span class=&quot;k&quot;&gt;until&lt;/span&gt; it finds one it can successfully boot from. In the &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; of a Linux server, that usually means reading the MBR &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;master boot record: the first &lt;span class=&quot;m&quot;&gt;512&lt;/span&gt; bytes on a hard drive&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; and loading and executing the boot code inside the MBR to start the boot process.
+
+After the BIOS initializes the hardware and finds the first device to boot, the boot loader takes over. The following list shows the boot loader depending on the device from a boot starts:
+
+GRUB : boot from a hard drive
+syslinux : boot from a USB
+isolinux : boot from a CD-ROM
+pxelinux : boot from a network
+
+Once we &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; a particular kernel in GRUB, GRUB will load the Linux kernel into RAM and execute it.
+
+Usually GRUB will also load an initrd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;initial RAM disk&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; along with the kernel. initrd &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;initial RAM disk&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; has some crucial configuration files, kernel modules, and programs that the kernel needs in order to find and mount the real root file system.
+
+The final step is to execute the /sbin/init program, which takes over the rest of the boot process.
+
+The /sbin/init program is the parent process of every program running on the system. This process always has a PID of &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; and is responsible &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; starting the rest of the processes that make up a running Linux system.
+
+Here is the list of how we initialize a NIX OS:
+
+System V init such as runlevels and /etc/rc?.d directories - the init process reads a configuration file called /etc/inittab to discover its default runlevel. It &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; enters that runlevel and starts processes that have been configured to run at that runlevel. Linux distros: Debian &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt; and earlier&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;buntu 9.04 and earlier&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;entOS &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; and earlier
+
+Upstart - Upstart was designed not only to address some of the shortcomings of the System V init process, but also to provide a more robust system &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; managing services.
+One main feature of Upstart is that it is event-driven. Upstart constantly monitors the system &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; certain events to occur, and when they &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;, Upstart can be configured to take action based on those events.
+Upstart scripts reside in /etc/init. Linux distros: Ubuntu 9.10 to Ubuntu 14.10, including Ubuntu 14.04
+CentOS 6
+
+systemd is the init system &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the most recent linux distros: Debian &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; and Debian 8&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;buntu 15.04&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;entOS 7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Linux_startup_process&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What’s a chroot jail?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;When trying to umount a directory it says it’s busy, how to find out which PID holds the directory?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What’s LD_PRELOAD and when it’s used?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;You ran a binary and nothing happened. How would you debug this?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What are cgroups? Can you specify a scenario where you could use them?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;expert-linux-questions&quot;&gt;[[⬆]]Expert Linux Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A running process gets &lt;code&gt;EAGAIN: Resource temporarily unavailable&lt;/code&gt; on reading a socket. How can you close this bad socket/file descriptor without killing the process?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;man errno &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep  EAGAIN
+EAGAIN is just means &lt;span class=&quot;s2&quot;&gt;&amp;quot;there&amp;#39;s nothing to read now; try again later&amp;quot;&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;networking-questions&quot;&gt;[[⬆]]Networking Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is localhost and why would &lt;code&gt;ping localhost&lt;/code&gt; fail?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A localhost is the standard hostname given to the address assigned to the loopback network interface. Translated into an IP address, a localhost is always designated as 127.0.0.1.
+Ping can fail &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; loopback interface is down, also it is possible to configure &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;iptables&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;firewall&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; in such a way as to drop all packets received on localhost.
+Also it is possible that icmp_echo is disable with sysctl net.ipv4.icmp_echo_ignore_all&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the similarity between “ping” &amp;amp; “traceroute” ? How is traceroute able to find the hops.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Both of this programs can be used to troubleshoot connection problems.
+
+Traceroute shows you the path that packets take from your &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;system to a remote host. You see the response &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;to each step along the way, because each datagram &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Unix &lt;span class=&quot;s2&quot;&gt;&amp;quot;traceroute&amp;quot;&lt;/span&gt; uses UDP datagrams by default, but you can also choose between ICMP, TCP rather than ICMP on Windows&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; has a TTL &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;-to-live&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; that&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;s one hop longer than the previous one.
+
+By default you need a superuser privileges to run ping and traceroute with ICMP option
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ping example.com
+ping: icmp open socket: Operation not permitted
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;traceroute -I example.com
+You have no enough privileges to use this traceroute method.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://serverfault.com/questions/68307/what-is-the-difference-between-ping-and-tracert&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the command used to show all open ports and/or socket connections on a machine?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;lsof -i
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;netstat -natupx
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ss -lptuxa&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Is 300.168.0.123 a valid IPv4 address?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;No, IPv4 addresses are canonically represented in dot-decimal notation, which consists of four decimal numbers, each ranging from &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; to 255, separated by dots, e.g., 172.16.254.1. Each part represents a group of &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt; bits &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;octet&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; of the address. So &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; ** &lt;span class=&quot;nv&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 256&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;255&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is a max number &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; each octet.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/IP_address&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Which IP ranges/subnets are “private” or “non-routable” (RFC 1918)?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The Internet Assigned Numbers Authority &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;IANA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; has reserved the following three blocks of the IP address space &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; private internets:
+     10.0.0.0        -   10.255.255.255  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;10/8 prefix&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+     172.16.0.0      -   172.31.255.255  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;172.16/12 prefix&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+     192.168.0.0     -   192.168.255.255 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;192.168/16 prefix&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://tools.ietf.org/html/rfc1918&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a VLAN?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A virtual LAN &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;VLAN&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is any broadcast domain that is partitioned and isolated in a computer network at the data link layer &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;OSI layer 2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+To subdivide a network into virtual LANs, one configures a network switch or router. Simpler network devices can only partition per physical port &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; at all&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, in which &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; each VLAN is connected with a dedicated network cable &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;and VLAN connectivity is limited by the number of hardware ports available&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;. More sophisticated devices can mark packets through tagging, so that a single interconnect &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;trunk&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; may be used to transport data &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; multiple VLANs. Since VLANs share bandwidth, a VLAN trunk might use link aggregation and/or quality of service prioritization to route data efficiently.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Virtual_LAN&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is ARP and what is it used for?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;The Address Resolution Protocol &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ARP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is a protocol used &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; resolution of network layer addresses into link layer addresses, a critical &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; in multiple-access networks. ARP is used &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; mapping a network address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. an IPv4 address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; to a physical address like an Ethernet address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;also named a MAC address&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+When we try to ping an IP address on our &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;network, say 192.168.1.2, our system has to turn the IP address 192.168.1.2 into a MAC address. This involves using ARP to resolve the address, hence its name.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Address_Resolution_Protocol&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the difference between TCP and UDP?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;TCP is connection-oriented protocol.
+UDP is connectionless protocol
+
+TCP provides delivery guarantee
+UDP is unreliable, it doesn&lt;span class=&quot;s1&quot;&gt;&amp;#39;t provide any delivery guarantee.&lt;/span&gt;
+
+&lt;span class=&quot;s1&quot;&gt;TCP guarantees order of message&lt;/span&gt;
+&lt;span class=&quot;s1&quot;&gt;UDP doesn&amp;#39;&lt;/span&gt;t provide any ordering or sequencing guarantee
+
+TCP is slow
+UDP is fast
+
+TCP has bigger header than UDP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://javarevisited.blogspot.ru/2014/07/9-difference-between-tcp-and-udp-protocol.html&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the purpose of a default gateway?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A default gateway in computer networking is the node that is assumed to know how to forward packets on to other networks. Typically in a TCP/IP network, nodes such as servers, workstations and network devices each have a defined default route setting, &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;pointing to the default gateway&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, defining where to send packets &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; IP addresses &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; which they can determine no specific route. The gateway is by definition a router.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Default_gateway&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is command used to show the routing table on a Linux box?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;You can use one of this:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;route -n
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;netstat -rn
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip route list&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A TCP connection on a network can be uniquely defined by 4 things. What are those things?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;remote-ip-address, remote-port, &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;-ip-address, &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;-port&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;When a client running a web browser connects to a web server, what is the source port and what is the destination port of the connection?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;destination port - is &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; HTTP or &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; HTTPS
+&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;port - will be random number from option net.ipv4.ip_local_port_range, by default it will be something like between &lt;span class=&quot;m&quot;&gt;32768&lt;/span&gt; and &lt;span class=&quot;m&quot;&gt;61000&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;around 28K &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;ports available &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; a single destination IP:port&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you add an IPv6 address to a specific interface?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Using ip:
+Usage: /sbin/ip -6 addr add &amp;lt;ipv6address&amp;gt;/&amp;lt;prefixlength&amp;gt; dev &amp;lt;interface&amp;gt;
+Example: /sbin/ip -6 addr add 2001:0db8:0:f101::1/64 dev eth0
+
+Using ifconfig:
+Usage: /sbin/ifconfig &amp;lt;interface&amp;gt; inet6 add &amp;lt;ipv6address&amp;gt;/&amp;lt;prefixlength&amp;gt;
+Example: /sbin/ifconfig eth0 inet6 add 2001:0db8:0:f101::1/64
+
+It is temporarily, you will lost this configuration after reboot. To add permanent ipv6 you need to add option to config file, on Fedora, Redhat Enterprise Linux, and clones like Centos add lines to these files:
+
+/etc/sysconfig/network
+
+&lt;span class=&quot;nv&quot;&gt;NETWORKING_IPV6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;yes
+&lt;span class=&quot;nv&quot;&gt;IPV6FORWARDING&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no
+&lt;span class=&quot;nv&quot;&gt;IPV6_AUTOCONF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no
+&lt;span class=&quot;nv&quot;&gt;IPV6_AUTOTUNNEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no
+&lt;span class=&quot;nv&quot;&gt;IPV6_DEFAULTGW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;fe80::1
+&lt;span class=&quot;nv&quot;&gt;IPV6_DEFAULTDEV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;eth0
+
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+&lt;span class=&quot;nv&quot;&gt;IPV6INIT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;yes
+&lt;span class=&quot;nv&quot;&gt;IPV6ADDR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2607:f388:xxxx:yyyy::zzzz/64     &lt;span class=&quot;c&quot;&gt;# replace with your static address&lt;/span&gt;
+
+For Debian and derivatives like Ubuntu add lines to these files:
+
+/etc/sysctl.conf
+
+net.ipv6.conf.eth0.accept_ra&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
+
+/etc/network/interfaces
+iface lo0 inet6 loopback
+iface eth0 inet6 static
+address 2607:f388:xxxx:yyyy::zzzz        &lt;span class=&quot;c&quot;&gt;# replace with your static address&lt;/span&gt;
+netmask 64
+gateway fe80::1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You have added an IPv4 and IPv6 address to interface eth0. A ping to the v4 address is working but a ping to the v6 address gives yout the response &lt;code&gt;sendmsg: operation not permitted&lt;/code&gt;. What could be wrong?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This means that your server is not allowed to send ICMP packets.
+Check firewall rules:
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip6tables -P INPUT ACCEPT
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip6tables -P OUTPUT ACCEPT
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip6tables -P FORWARD ACCEPT&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is SNAT and when should be used?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Source Network Address Translation &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;SNAT&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; - changes the &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;address in IP header of a packet. It may also change the &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;port in the TCP/UDP headers. The typical usage is to change the a private &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;rfc1918&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; address/port into a public address/port &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; packets leaving your network.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.commercialventvac.com/finao/DNATs-and-SNATs.html&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Explain how could you ssh login into a Linux system that DROPs all new incomming packets using a SSH tunnel.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Need to &lt;span class=&quot;nv&quot;&gt;think&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you stop a DDoS?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;It is very complicated questions.
+Before to &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; something you need answer a lot of questions.
+Simple way is:
+- Limiting the ammount of concurrent connections from ddos IP address to your Server with firewall rules.
+- Optimize you server configuration options&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.reddit.com/r/linux/comments/1klq5r/preventing_a_dos_attack/&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How can you see content of ip packet?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;You can use tcpdump&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;shark to display captured packets in HEX and ASCII
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tcpdump -XX -i eth0
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tshark -i eth0 -x
+
+You can write a python&lt;span class=&quot;se&quot;&gt;\c&lt;/span&gt; script &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; this
+import socket
+&lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; socket.socket&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; True:
+  print s.recvfrom&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;65565&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.binarytides.com/packet-sniffer-code-c-linux/&quot;&gt;Read More&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mysql-questions&quot;&gt;[[⬆]]MySQL questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you create a user?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql -u root -ppassword -hsomehost -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;CREATE USER login@&amp;quot;ip&amp;quot;;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you provide privileges to a user?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# read only&lt;/span&gt;
+GRANT &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; ON somedb.* TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;ip&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;&amp;#39;agoodpassword&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# all privileges&lt;/span&gt;
+GRANT all privileges ON somedb.* TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;login&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;ip&amp;#39;&lt;/span&gt; IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;&amp;#39;agoodpassword&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the difference between a “left” and a “right” join?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Table from which you are taking data is &lt;span class=&quot;s1&quot;&gt;&amp;#39;LEFT&amp;#39;&lt;/span&gt;.
+Table you are joining is &lt;span class=&quot;s1&quot;&gt;&amp;#39;RIGHT&amp;#39;&lt;/span&gt;.
+LEFT JOIN: Take all items from left table AND &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; matching items from right table.
+RIGHT JOIN: Take all items from right table AND &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; matching items from left table.
+Most people only use LEFT JOIN since it seems more intuitive&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Explain briefly the differences between InnoDB and MyISAM.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;MYISAM:
+- MYISAM supports Table-level Locking
+- MyISAM designed &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; need of speed
+- MyISAM does not support foreign keys hence we call MySQL with MYISAM is DBMS
+- MyISAM stores its tables, data and indexes in diskspace using separate three different files. &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;- tablename.FRM, tablename.MYD, tablename.MYI&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;-
+- MYISAM not supports transaction. You cannot commit and rollback with MYISAM. Once you issue a c- ommand - it’s &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;.
+- MYISAM supports fulltext search
+You can use MyISAM, &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; the table is more static with lots of &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; and less update and delete.
+
+INNODB:
+- InnoDB supports Row-level Locking
+- InnoDB designed &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; maximum performance when processing high volume of data
+- InnoDB support foreign keys hence we call MySQL with InnoDB is RDBMS
+- InnoDB stores its tables and indexes in a tablespace
+- InnoDB has better crash recovery.
+- InnoDB supports transaction. You can commit and rollback with InnoDB&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Describe briefly the steps you need to follow in order to create a simple master/slave cluster.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;AT Master:
+- &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;binlog
+- &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;server-id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+- create user with replication grant
+- create dump with master-data
+
+AT Slave:
+- &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;binlog &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;relay-log
+- &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;server-id&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
+- restore dump
+- &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;master_host &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;master_log_file &lt;span class=&quot;se&quot;&gt;\ &lt;/span&gt;maste_log_pos&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Why should you run “mysql_secure_installation” after installing MySQL?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql_secure_installation is a script that improve MySQL installation security in the following ways:
+- &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;a password &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; root accounts
+- remove root accounts that are accessible from outside the &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;host
+- remove anonymous-user accounts
+- can remove the &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;database &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;which by default can be accessed by all users, even anonymous users&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, and privileges that permit anyone to access databases with names that start with test_&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you check which jobs are running?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;show full processlist&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;devops-questions&quot;&gt;[[⬆]]DevOps Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Can you describe your workflow when you create a script?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;1. Create&lt;span class=&quot;se&quot;&gt;\c&lt;/span&gt;heck task in tfs&lt;span class=&quot;se&quot;&gt;\j&lt;/span&gt;ira
+2. Analysis task description.
+3. Analysis current script collection.
+4. Analysis internet &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; same job&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;roblem.
+5. Write and &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;script prototype in &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;environment.
+6. Commit script to git&lt;span class=&quot;se&quot;&gt;\s&lt;/span&gt;vn
+7. Build package&lt;span class=&quot;se&quot;&gt;\u&lt;/span&gt;se CMS to deploy script in production.
+8. Close task in tfs&lt;span class=&quot;se&quot;&gt;\j&lt;/span&gt;ira&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is GIT?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git is a distributed version control system developed by Linus Torvalds&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a dynamically/statically linked file?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Statically file means that the linker program &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ld&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; after &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code compilation adds all librarys and other dependencies directly to executable file
+
+Dynamically file means that the above step doesn&lt;span class=&quot;s1&quot;&gt;&amp;#39;t happen. The operating system&amp;#39;&lt;/span&gt;s loader needs to find the dependencies code, load it into memory, each &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;the program is run.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What does “configure &amp;amp;&amp;amp; make &amp;amp;&amp;amp; make install” do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;This commands is need &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; you what to build software from &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code.
+
+Configure - is a script which is responsible &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; getting ready to build the software on your specific system. It makes sure all of the dependencies &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the rest of the build and install process are available, and finds out whatever it needs to know to use those dependencies.
+
+Make - is a &lt;span class=&quot;nb&quot;&gt;command  &lt;/span&gt;which runs a series of tasks defined in a Makefile to build the finished program from its &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code.
+
+Make install - is a &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;which will copy the built program, and its libraries and documentation, to the correct locations.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is puppet/chef/ansible used for?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Puppet/Chef/Ansible - are a free software platform &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; configuring and managing computers.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you create a new postgres user?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;psql -c &lt;span class=&quot;s2&quot;&gt;&amp;quot;CREATE USER testuser WITH PASSWORD &amp;#39;XXXXX&amp;#39;;&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a virtual IP address? What is a cluster?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;A virtual IP address &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;VIP or VIPA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is an IP address that doesn&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;t correspond to an actual physical network interface &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;port&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;. Uses &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; VIPs include Network Address Translation &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;especially, One-to-many NAT&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, fault-tolerance, and mobility.
+
+Virtual IP addresses are commonly used to &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;high availability. A standard failover design uses an active/passive server pair connected by replication and watched by a cluster manager. The active server listens on a virtual IP address&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; applications use it &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; connections instead of the normal host IP address. Should the active server fail, the cluster manager promotes the passive server and shifts the floating IP address to the newly promoted host. Application connections &lt;span class=&quot;nb&quot;&gt;break &lt;/span&gt;and &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; reconnect to the VIP again, which points them to the new server.
+
+Cluster is a &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;of loosely or tightly connected computers that work together so that, in many respects, they can be viewed as a single system.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you print all strings of printable characters present in a file?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Use cmd /usr/bin/strings
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strings /path/somefile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How do you find shared library dependencies?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ldd - print shared library dependencies
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldd /path/somefile
+        linux-vdso.so.1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0x00007ffcdabac000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        libselinux.so.1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; /lib/x86_64-linux-gnu/libselinux.so.1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0x00007f1a42081000&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is Automake and Autoconf?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Automake and Autoconf both are parts of The GNU build system, also known as the Autotools, is a suite of programming tools designed to assist in making &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code packages portable to many Unix-like systems.
+
+Automake - is a programming tool to automate parts of the compilation process. It eases usual compilation problems. For example, it points to needed dependencies. It automatically generates one or more Makefile.in from files called Makefile.am. Each Makefile.am contains, among other things, useful variable definitions &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; the compiled software, such as compiler and linker flags, dependencies and their versions, etc.
+
+Autoconf - generate a configuration script from a TEMPLATE-FILE &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; given, or configure.ac &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; present, or &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; configure.in. Output is sent to the standard output &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; TEM‐PLATE-FILE is given, &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; into configure.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;./configure shows an error that libfoobar is missing on your system, how could you fix this, what could be wrong?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Configure could not find libfoobar in LD_LIBRARY_PATH or libfoobar is not installed on your system.
+You can fix it by installing libfoobar package with package manager or build it from source.
+If libfoobar is already installed just check /etc/ld.so.conf and add right path to libfoobar&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What are the Advantages/disadvantages of script vs compiled program?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Script program have the advantages of:
+- flexibility to change the script
+- easier to implement &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;writing good compilers is very hard!!&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+- no need to run a compilation stage: can execute code directly &lt;span class=&quot;s2&quot;&gt;&amp;quot;on the fly&amp;quot;&lt;/span&gt;
+- being more portable.
+
+Script program have the disadvantages of:
+- much slow than compiled program
+- &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code is open
+
+Compiled program have the advantages of:
+- faster performance by directly using the native code of the target machine
+- opportunity to apply quite powerful optimisations during the compile stage
+- hides the &lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;code from the end user
+
+Compiled program have the disadvantages of:
+- slow to develop &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;edit, compile, link and run. The compile/link steps could take serious &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;.
+- to execute you need to compile a different executable &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; each &lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;of processor and/or platform that you want your program to run on&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What’s the relationship between continuous delivery and DevOps?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Continuous delivery&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CD&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; is an agile way of working whereby quality products—normally software assets—can be developed, built, tested, and shipped in quick succession.
+DevOps is another way of working whereby developers and system operators work in harmony with little or no organizational barriers between them towards a common goal.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What are the important aspects of a system of continous integration and deployment?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Automation&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;esting are the important aspects of a great development workflow.
+Every task that can be &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; by a machine should be.
+Automation gives you the &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;to focus.
+Through testing, you can be sure that the most important steps your customers will take through your system are working, regardless of the changes you make.
+This gives you the confidence to experiment, implement new features, and ship updates quickly.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;fun-questions&quot;&gt;[[⬆]]Fun Questions:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A careless sysadmin executes the following command: &lt;code&gt;chmod 444 /bin/chmod&lt;/code&gt; - what do you do to fix this?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Default permission is 755.
+Y can use C&lt;span class=&quot;se&quot;&gt;\C&lt;/span&gt;++&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;ython&lt;span class=&quot;se&quot;&gt;\P&lt;/span&gt;erl and other language to fix this.
+
+&lt;span class=&quot;c&quot;&gt;#!/usr/bin/python&lt;/span&gt;
+import os
+os.chmod&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;/bin/chmod&amp;quot;&lt;/span&gt;, 0755&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’ve lost my root password, what can I do?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Simple boot in sigle mode and change it.
+Change in grub -&amp;gt; &lt;span class=&quot;nv&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/bash -&amp;gt; boot -&amp;gt; run &lt;span class=&quot;nv&quot;&gt;$mount&lt;/span&gt; -o remount,rw / -&amp;gt; change root password with &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;passwd root&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’ve rebooted a remote server but after 10 minutes I’m still not able to ssh into it, what can be wrong?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;If it does not ping, maybe proble with network&lt;span class=&quot;se&quot;&gt;\f&lt;/span&gt;irewall
+If it pings but you can not to connect to it with ssh maybe problem with ssh config&lt;span class=&quot;se&quot;&gt;\f&lt;/span&gt;irewall rules
+Bad permission &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; ssh keys
+Wrong password&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If you were stuck on a desert island with only 5 command-line utilities, which would you choose?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;you &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; not need computer on a desert island because there is no &lt;span class=&quot;nv&quot;&gt;enegry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You come across a random computer and it appears to be a command console for the universe. What is the first thing you type?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;It cool to live &lt;span class=&quot;nv&quot;&gt;forever&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;
+change user &lt;span class=&quot;s1&quot;&gt;&amp;#39;mylogin&amp;#39;&lt;/span&gt; expiration from &lt;span class=&quot;s1&quot;&gt;&amp;#39;XXXXX-XX-XX&amp;#39;&lt;/span&gt; to &lt;span class=&quot;s1&quot;&gt;&amp;#39;never&amp;#39;&lt;/span&gt;
+usermod -e &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; mylogin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tell me about a creative way that you’ve used SSH?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to .ssh/config this lines and install tor and you can use ssh with tor.
+Host *.onion
+    ProxyCommand socat - SOCKS4A:localhost:%h:%p,socksport&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;9050&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You have deleted by error a running script, what could you do to restore it?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;While script is running it is not deleted
+Find pid of running script and restore it from procfs
+ls -l /proc/4607/fd/4
+lr-x------ &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; juliet juliet &lt;span class=&quot;m&quot;&gt;64&lt;/span&gt; Apr  &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; 03:19
+/proc/4607/fd/4 -&amp;gt; /home/juliet/testing.txt &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;deleted&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cp /proc/4607/fd/4 testing.txt.bk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;demo-time&quot;&gt;[[⬆]]Demo Time:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unpack test.tar.gz without man pages or google.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tar xzvf test.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Remove all “*.pyc” files from testdir recursively?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find ./testdir -type f -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.pyc&amp;quot;&lt;/span&gt; -ls -delete
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find ./testdir -type f -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.pyc&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs rm -f&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Search for “my konfu is the best” in all *.py files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find ./testdir -type f -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;my konfu is the best&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Replace the occurrence of “my konfu is the best” with “I’m a linux jedi master” in all *.txt files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find ./testdir -type f -name &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.txt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs sed -i &lt;span class=&quot;s2&quot;&gt;&amp;quot;s/my konfu is the best/I\&amp;#39;m a linux jedi master/&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Test if port 443 on a machine with IP address X.X.X.X is reachable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt; nc -z -v X.X.X.X 443
+Connection to X.X.X.X &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;tcp/https&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; succeeded!&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Get http://myinternal.webserver.local/test.html via telnet.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;telnet myinternal.webserver.local 80
+GET /test.html HTTP/1.1
+HOST: myinternal.webserver.local
+&amp;lt;ENTER&amp;gt;
+&amp;lt;ENTER&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to send an email without a mail client, just on the command line?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;telnet localhost smtp
+HELO example.com
+mail from: sender@example.com
+rcpt to: user@example.com
+data
+&lt;span class=&quot;m&quot;&gt;354&lt;/span&gt; Enter mail, end with &lt;span class=&quot;s2&quot;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; on a line by itself
+Hey
+This is &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;email only
+
+Thanks
+.
+quit
+
+or
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mail -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;Test Subject&amp;quot;&lt;/span&gt; user@example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write a &lt;code&gt;get_prim&lt;/code&gt; method in python/perl/bash/pseudo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;I don&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;t undestand what is get_prim method, &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; you know, write a comment plz.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Find all files which have been accessed within the last 30 days.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;find /* -type f -atime -30
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;-30&amp;quot;&lt;/span&gt; means that it was accessed &lt;span class=&quot;s2&quot;&gt;&amp;quot;less than 30 days ago&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&amp;quot;+30&amp;quot;&lt;/span&gt; means that it was accessed &lt;span class=&quot;s2&quot;&gt;&amp;quot;more than 30 days ago&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Explain the following command &lt;code&gt;(date ; ps -ef | awk &#39;{print $1}&#39; | sort | uniq | wc -l ) &amp;gt;&amp;gt; Activity.log&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;date &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; ps -ef &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; wc -l
+
+Execute date &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;which print current datetime, &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt; we execute process list &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;and print only UID column, than with pipe we sort it and print only uniq values, after wc -l is counting it number after all we append this to file Activity.log
+
+If file we will see something like this:
+Fri Jan &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; 15:24:07 UTC 2016
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write a script to list all the differences between two directories.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;usage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Usage: $0 DIR1 DIR2&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$# &lt;/span&gt;-gt &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+       &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$usage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;nb&quot;&gt;exit &lt;/span&gt;1
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -z &lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$usage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -d &lt;span class=&quot;s2&quot;&gt;&amp;quot;$1&amp;quot;&lt;/span&gt; -a -d &lt;span class=&quot;s2&quot;&gt;&amp;quot;$2&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Comparing $1 with $2........&amp;quot;&lt;/span&gt;
+        diff -r &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In a log file with contents as &lt;code&gt;&amp;lt;TIME&amp;gt; : [MESSAGE] : [ERROR_NO] - Human readable text&lt;/code&gt; display summary/count of specific error numbers that occured every hour or a specific hour.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat log &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F &lt;span class=&quot;s2&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $3}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sort -n &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;uniq -c
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat log &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep &lt;span class=&quot;s2&quot;&gt;&amp;quot;specific hour&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -F &lt;span class=&quot;s2&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $3}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sort -n &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;uniq -c&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/&quot;&gt;Linux SysAdm/DevOps Interview Questions&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on January 22, 2016.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -3458,6 +4914,7 @@ sysdig -c topconns&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;install gosublime&lt;/li&gt;
   &lt;li&gt;install terminal&lt;/li&gt;
   &lt;li&gt;install Javatar&lt;/li&gt;
+  &lt;li&gt;SublimeAStyleFormatter&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;install-settings---user&quot;&gt;Install Settings - User&lt;/h3&gt;
@@ -4911,609 +6368,6 @@ kernel.panic &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 15
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Linux-Unix-IT Tips and Tricks #3&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[OTPW for SSH in Linux]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/" />
-  <id>https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh</id>
-  <updated>2015-06-29 11:46:36 +0300T00:00:00-00:00</updated>
-  <published>2015-06-29T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;How to use One Time Password for SSH in Ubuntu Linux&lt;/p&gt;
-
-&lt;h3 id=&quot;install-deb-pkgs&quot;&gt;Install deb pkgs&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;apt-get install -y libpam-otpw otpw-bin&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-otpw-pam-modules-in-etcpamdsshd&quot;&gt;Add OTPW pam modules in /etc/pam.d/sshd&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;#@include common-auth&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#Enable OTPW Authentication&lt;/span&gt;
-auth       required     pam_otpw.so
-session    optional     pam_otpw.so&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;check-etcsshsshdconfig&quot;&gt;Check /etc/ssh/sshd_config&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;UsePrivilegeSeparation yes
-ChallengeResponseAuthentication yes
-UsePAM yes
-PubkeyAuthentication yes
-PasswordAuthentication no
-
-Now you can restart sshd:
-service ssh restart
-
-After you can login to server only with ssh-key or &lt;span class=&quot;nv&quot;&gt;otpw&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;generate-otpw-list-for-user&quot;&gt;Generate OTPW list for $USER&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;su - user
-otpw-gen &amp;gt; otpw_list.txt 
-enter prefix &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; password list
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; ex 123&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;login-with-otpw-to-server&quot;&gt;Login with OTPW to server&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ssh user@remote_host
-Password 126:
-Welcome to Ubuntu 14.04.1 LTS &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GNU/Linux 3.13.0-32-generic x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-Find password in otpw_list and add your prefix to it, you will get 123LQQF uFOW
-&lt;span class=&quot;m&quot;&gt;126&lt;/span&gt; LQQF uFOW&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/otpw-in-linux-with-ssh/&quot;&gt;OTPW for SSH in Linux&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Linux-Unix-IT Tips and Tricks #2]]></title>
-  <link rel="alternate" type="text/html" href="https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/" />
-  <id>https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2</id>
-  <updated>2014-06-29 14:54:48 +0400T00:00:00-00:00</updated>
-  <published>2015-06-29T00:00:00+03:00</published>
-  
-  <author>
-    <name>EK</name>
-    <uri>https://jivoi.github.io</uri>
-    <email>ekoz@protonmail.com</email>
-  </author>
-  <content type="html">&lt;p&gt;Different Linux / Unix / IT tips, notes, howto part 2&lt;/p&gt;
-
-&lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
-&lt;header&gt;
-&lt;h3&gt;Contents&lt;/h3&gt;
-&lt;/header&gt;
-&lt;div id=&quot;drawer&quot;&gt;
-&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other parts&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-log-rotate&quot; id=&quot;markdown-toc-mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-dump-with-proceduresfunctionstriggers&quot; id=&quot;markdown-toc-mysql-dump-with-proceduresfunctionstriggers&quot;&gt;MySQL dump with procedures/functions/triggers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#show-last-login-history&quot; id=&quot;markdown-toc-show-last-login-history&quot;&gt;Show last login history&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#enable-postgresql-vacuum&quot; id=&quot;markdown-toc-enable-postgresql-vacuum&quot;&gt;Enable PostgreSQL Vacuum&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-geo-db-for-nginx&quot; id=&quot;markdown-toc-create-geo-db-for-nginx&quot;&gt;Create GEO DB for nginx&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#connect-to-com-port-from-freebsd-or-linux&quot; id=&quot;markdown-toc-connect-to-com-port-from-freebsd-or-linux&quot;&gt;Connect to COM port from FreeBSD or Linux&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#upload-ios-to-cisco-routerswitch-from-centos-tftp&quot; id=&quot;markdown-toc-upload-ios-to-cisco-routerswitch-from-centos-tftp&quot;&gt;Upload IOS to Cisco router\switch from CentOS tftp&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#enable-ssh-on-cisco-2960-switch&quot; id=&quot;markdown-toc-enable-ssh-on-cisco-2960-switch&quot;&gt;Enable SSH on Cisco 2960 switch&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#restore-cisco-password&quot; id=&quot;markdown-toc-restore-cisco-password&quot;&gt;Restore Cisco password&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#boot-centos-in-a-single-user-mode&quot; id=&quot;markdown-toc-boot-centos-in-a-single-user-mode&quot;&gt;Boot CentOS in a Single-User Mode&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#delete-mysql-binary-logs&quot; id=&quot;markdown-toc-delete-mysql-binary-logs&quot;&gt;Delete MySQL binary logs&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#show-memory-map-of-a-process&quot; id=&quot;markdown-toc-show-memory-map-of-a-process&quot;&gt;Show memory map of a process&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#show-all-packages-files-in-centos&quot; id=&quot;markdown-toc-show-all-packages-files-in-centos&quot;&gt;Show all packages files in CentOS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#find-duplicate-files-in-linux&quot; id=&quot;markdown-toc-find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#sshsvn-error&quot; id=&quot;markdown-toc-sshsvn-error&quot;&gt;SSH+SVN error&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#kill-all-long-mysql-request&quot; id=&quot;markdown-toc-kill-all-long-mysql-request&quot;&gt;Kill all long MySQL request&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#check-lastack&quot; id=&quot;markdown-toc-check-lastack&quot;&gt;Check LAST_ACK&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#syn-flood-protection&quot; id=&quot;markdown-toc-syn-flood-protection&quot;&gt;SYN flood protection&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#megacli-on-freebsd&quot; id=&quot;markdown-toc-megacli-on-freebsd&quot;&gt;MegaCli on FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#convert-mysql-db-from-cp1251-to-utf8&quot; id=&quot;markdown-toc-convert-mysql-db-from-cp1251-to-utf8&quot;&gt;Convert MySQL db from cp1251 to Utf8&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#insert-text-in-the-top-of-file&quot; id=&quot;markdown-toc-insert-text-in-the-top-of-file&quot;&gt;Insert text in the top of file&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ipmi-in-linux-of-freebsd&quot; id=&quot;markdown-toc-ipmi-in-linux-of-freebsd&quot;&gt;IPMI in Linux of FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#disable-nginxapache-server-token&quot; id=&quot;markdown-toc-disable-nginxapache-server-token&quot;&gt;Disable NginX\Apache server token&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#show-installed-perl-modules&quot; id=&quot;markdown-toc-show-installed-perl-modules&quot;&gt;Show installed perl modules&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#use-stracelsof&quot; id=&quot;markdown-toc-use-stracelsof&quot;&gt;Use strace\lsof&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-patch&quot; id=&quot;markdown-toc-create-patch&quot;&gt;Create Patch&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-gstripe-in-freebsd&quot; id=&quot;markdown-toc-create-gstripe-in-freebsd&quot;&gt;Create gstripe in FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#delete-trailing-spaces-in-text-with-vim&quot; id=&quot;markdown-toc-delete-trailing-spaces-in-text-with-vim&quot;&gt;Delete trailing spaces in text with VIM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#disable-apache-dir-listing&quot; id=&quot;markdown-toc-disable-apache-dir-listing&quot;&gt;Disable Apache dir listing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-load-data-grant&quot; id=&quot;markdown-toc-mysql-load-data-grant&quot;&gt;MySQL load data grant&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mysql-grants-for-fields-in-table&quot; id=&quot;markdown-toc-mysql-grants-for-fields-in-table&quot;&gt;MySQL grants for fields in table&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#determine-max-mtu&quot; id=&quot;markdown-toc-determine-max-mtu&quot;&gt;Determine MAX MTU&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#upgrade-centos-password-hashing&quot; id=&quot;markdown-toc-upgrade-centos-password-hashing&quot;&gt;Upgrade CentOS Password Hashing&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#linux-pkg-search&quot; id=&quot;markdown-toc-linux-pkg-search&quot;&gt;Linux Pkg search&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#run-echo-cmd-with-sudo&quot; id=&quot;markdown-toc-run-echo-cmd-with-sudo&quot;&gt;Run echo cmd with sudo&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#change-percentage-of-root-fs&quot; id=&quot;markdown-toc-change-percentage-of-root-fs&quot;&gt;Change percentage of root FS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#disable-ipv6-on-centos&quot; id=&quot;markdown-toc-disable-ipv6-on-centos&quot;&gt;Disable Ipv6 on CentOS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#fix-chmod--x-chmod&quot; id=&quot;markdown-toc-fix-chmod--x-chmod&quot;&gt;Fix chmod -x chmod&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#get-webserver-http-code-answer&quot; id=&quot;markdown-toc-get-webserver-http-code-answer&quot;&gt;Get webserver http code answer&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#clone-disk-with-dd-by-network&quot; id=&quot;markdown-toc-clone-disk-with-dd-by-network&quot;&gt;Clone disk with DD by network&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#ssh-x11-forwarding&quot; id=&quot;markdown-toc-ssh-x11-forwarding&quot;&gt;SSH x11 forwarding&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#extract-rpm-pkg&quot; id=&quot;markdown-toc-extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#create-ffs-snapshot&quot; id=&quot;markdown-toc-create-ffs-snapshot&quot;&gt;Create FFS snapshot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#exim-cli-commands&quot; id=&quot;markdown-toc-exim-cli-commands&quot;&gt;Exim cli commands&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#clean-postfix-queue&quot; id=&quot;markdown-toc-clean-postfix-queue&quot;&gt;Clean Postfix queue&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#find-all-notpkgs-files-freebsd&quot; id=&quot;markdown-toc-find-all-notpkgs-files-freebsd&quot;&gt;Find all notpkgs files FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#display-real-lvm-block-devices&quot; id=&quot;markdown-toc-display-real-lvm-block-devices&quot;&gt;Display real LVM block devices&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#mount-iso-in-freebsd&quot; id=&quot;markdown-toc-mount-iso-in-freebsd&quot;&gt;Mount ISO in FreeBSD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;#cisco-css-1501-tacacs&quot; id=&quot;markdown-toc-cisco-css-1501-tacacs&quot;&gt;Cisco CSS 1501 Tacacs&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#show-freebsd-kernel-config&quot; id=&quot;markdown-toc-show-freebsd-kernel-config&quot;&gt;Show FreeBSD kernel config&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#http-redirect-with-html-and-javascript&quot; id=&quot;markdown-toc-http-redirect-with-html-and-javascript&quot;&gt;HTTP redirect with HTML and JavaScript&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-  &lt;/div&gt;
-&lt;/section&gt;
-&lt;!-- /#table-of-contents --&gt;
-
-&lt;h3 id=&quot;other-parts&quot;&gt;Other parts&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2014/06/22/linux-unix-it-tips-and-tricks-number-1/&quot;&gt;Part 1&lt;/a&gt;
-&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;
-&lt;a href=&quot;https://jivoi.github.io/2015/07/01/linux-unix-it-tips-and-tricks-number-3/&quot;&gt;Part 3&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;mysql-log-rotate&quot;&gt;MySQL log rotate&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/logrotate.d/mysql
-/logs/mysql/mysql /logs/mysql/mysql.err /logs/mysql/mysql-slow.log /logs/mysql/query.log &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        notifempty
-        daily
-        rotate 7
-        missingok
-        compress
-        sharedscripts
-        postrotate
-        &lt;span class=&quot;c&quot;&gt;# just if mysqld is really running&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt; -x /usr/bin/mysqladmin &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-           /usr/bin/mysqladmin ping &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&amp;gt;/dev/null
-        &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-           /usr/bin/mysqladmin flush-logs
-        &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
-    endscript
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-dump-with-proceduresfunctionstriggers&quot;&gt;MySQL dump with procedures/functions/triggers&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysqldump --routines --no-create-info --no-data --no-create-db --skip-opt &amp;lt;database&amp;gt; &amp;gt; outputfile.sql
-mysql &amp;lt;database&amp;gt; &amp;lt; outputfile.sql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-last-login-history&quot;&gt;Show last login history&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;last -f  /var/log/wtmp.0
- -f file  Specifies a file to search other than /var/log/wtmp.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;enable-postgresql-vacuum&quot;&gt;Enable PostgreSQL Vacuum&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vacuum full VERBOSE analyze&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-geo-db-for-nginx&quot;&gt;Create GEO DB for nginx&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;For use by the ngx_http_geo_module
-wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
-unzip GeoIPCountryCSV.zip
-wget https://raw.githubusercontent.com/simplegeo/nginx/master/contrib/geo2nginx.pl
-perl geo2nginx.pl &amp;lt; GeoIPCountryWhois.csv &amp;gt; geo.conf&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;connect-to-com-port-from-freebsd-or-linux&quot;&gt;Connect to COM port from FreeBSD or Linux&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;FreeBSD:
-tip -vs9600 com1
-to disconnect  &lt;span class=&quot;nb&quot;&gt;shift&lt;/span&gt;+~~+.
-
-or
-cu -l /dev/cuau0 -s9600
-
-Linux:
-minicom -s
-/dev/ttyS0
-&lt;span class=&quot;m&quot;&gt;9600&lt;/span&gt; 8N1
-sudo -u root minicom -s&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;upload-ios-to-cisco-routerswitch-from-centos-tftp&quot;&gt;Upload IOS to Cisco router\switch from CentOS tftp&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;centos# yum -y install tftp-server tftp
-centos# /etc/xinetd.d/tftp
-&lt;span class=&quot;nv&quot;&gt;disable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
-centos# service xinetd start
-
-switch# copy tftp: flash:
-switch# dir flash:
-switch#show boot
-switch# configure terminal
-switch# &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;config&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#boot system flash:c3550-i5q3l2-mz.121-13.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;enable-ssh-on-cisco-2960-switch&quot;&gt;Enable SSH on Cisco 2960 switch&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;You IOS must support K9, ex c2960s-universalk9-mz.122-55.SE3.bin
-
-conf t
-ip domain-name domain.com
-crypto key generate rsa
-
-line vty &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 4
-transport input ssh
-&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt;-timeout &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;restore-cisco-password&quot;&gt;Restore Cisco password&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Connect COM port
-Reboot router and &lt;span class=&quot;nb&quot;&gt;wait&lt;/span&gt; «Self decompressing the image: » press Ctrl-C or Ctrl-Break
-confreg 0x2142&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default -  2102&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-reload
-copy start run
-make change with config
-config-register 0x2102
-reload&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;boot-centos-in-a-single-user-mode&quot;&gt;Boot CentOS in a Single-User Mode&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;add to grub line that start with kernel - single
-or
-&lt;span class=&quot;nv&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/bin/sh&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;delete-mysql-binary-logs&quot;&gt;Delete MySQL binary logs&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;/etc/my.cnf
-&lt;span class=&quot;nv&quot;&gt;expire_logs_days&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7
-PURGE BINARY LOGS TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;mysqld-bin.000123&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-memory-map-of-a-process&quot;&gt;Show memory map of a process&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pmap PID&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-all-packages-files-in-centos&quot;&gt;Show all packages files in CentOS&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rpm -qa&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; rpm -ql &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;find-duplicate-files-in-linux&quot;&gt;Find duplicate files in Linux&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;find *&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; -f &lt;span class=&quot;s2&quot;&gt;&amp;quot;$i&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;`md5sum \&amp;quot;$i\&amp;quot;`&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;done&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk -- &lt;span class=&quot;s1&quot;&gt;&amp;#39;{ if (LAST==$1) print; else LAST=$1 }&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;or&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;find /dir -type f -print0 | xargs -0 md5sum | sort | uniq -w32 -D # |awk &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;print &lt;span class=&quot;nv&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;sshsvn-error&quot;&gt;SSH+SVN error&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ssh svn: Network connection closed unexpectedly
-This mean that you dont have sshkey fingerprint in know_hosts
-try ssh to server first&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;kill-all-long-mysql-request&quot;&gt;Kill all long MySQL request&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysql -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;show full processlist&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep -v Command &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{if ($6 &amp;gt;= 10) print &amp;quot;kill &amp;quot; $1 &amp;quot;;&amp;quot;}&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;mysql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;check-lastack&quot;&gt;Check LAST_ACK&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;LAST_ACK - mean that remote host is disconnected and socker is closed, we are waiting acknowledgment
-
-sysctl -a &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep last_ack
-net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 30
-sysctl -w net.ipv4.netfilter.ip_conntrack_tcp_timeout_last_ack&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;10
-netstat -ant &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; fgrep &lt;span class=&quot;s2&quot;&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -b 77-90 &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; sort &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; uniq -c
-
-cat /proc/sys/net/netfilter/nf_conntrack_count
-cat /proc/sys/net/ipv4/netfilter/ip_conntrack_count
-cat /proc/sys/net/ipv4/ip_conntrack_max
-&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;131072&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/ip_conntrack_max
-sysctl net.ipv4.netfilter.ip_conntrack_max&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1048576
-
-or disable conntrack &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; port
-
-iptables -A INPUT -p tcp --dport &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -j ACCEPT
-iptables -t raw -A PREROUTING -p tcp --dport &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; -j NOTRACK&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;syn-flood-protection&quot;&gt;SYN flood protection&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_max_syn_backlog
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;1&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_synack_retries
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;30&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_fin_timeout
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;5&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_keepalive_probes
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;15&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/ipv4/tcp_keepalive_intvl
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/core/netdev_max_backlog
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;20000&amp;quot;&lt;/span&gt; &amp;gt; /proc/sys/net/core/somaxconn
-
-iptables -N syn_flood
-&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A INPUT -p tcp --syn -j syn_flood
-&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A syn_flood -m limit --limit 500/s --limit-burst &lt;span class=&quot;m&quot;&gt;1500&lt;/span&gt; -j RETURN
-&lt;span class=&quot;nv&quot;&gt;$IPT&lt;/span&gt; -A syn_flood -j DROP&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;megacli-on-freebsd&quot;&gt;MegaCli on FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Install linux compat from ports
-mkdir -p /usr/compat/linux/proc
-linsys          /compat/linux/sys       linsysfs        rw &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0
-linproc         /compat/linux/proc      linprocfs       rw &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; 0
-mount linsys
-mount linproc
-MegaCli -CfgDsply -a0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;convert-mysql-db-from-cp1251-to-utf8&quot;&gt;Convert MySQL db from cp1251 to Utf8&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mysqldump --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf8 database &amp;gt; database.utf8.sql
-mysql --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf8 database_new &amp;lt; database.utf8.sql
-
-or
-mysqldump -u admin --password&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;PASS --opt --default-character-set&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;latin1 --skip-set-charset -Q DB_NAME &amp;gt; database.sql
-sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/character set cp1251 collate cp1251_bin/character set utf8 collate utf8_bin/&amp;#39;&lt;/span&gt; database.sql
-sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/CHARSET=cp1251/CHARSET=utf8/&amp;#39;&lt;/span&gt; database.sql&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;insert-text-in-the-top-of-file&quot;&gt;Insert text in the top of file&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -i~ -0777pe&lt;span class=&quot;s1&quot;&gt;&amp;#39;s/^/New first line\n/&amp;#39;&lt;/span&gt; yourfile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;ipmi-in-linux-of-freebsd&quot;&gt;IPMI in Linux of FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Linux
-yum install OpenIPMI OpenIPMI-tools
-http://www.openfusion.net/linux/ipmi_on_centos
-/sbin/modprobe ipmi_devintf&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; /sbin/modprobe ipmi_si&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; /sbin/modprobe ipmi_msghandler
-&lt;span class=&quot;c&quot;&gt;# Logging&lt;/span&gt;
-ipmitool sel info
-ipmitool sel list
-
-FreeBSD
-&lt;span class=&quot;c&quot;&gt;# kldload ipmi&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# dmesg | tail&lt;/span&gt;
-ipmi0:  on isa0
-ipmi0: KCS mode found at io 0xca2 alignment 0x1 on isa
-ipmi0: IPMI device rev. 1, firmware rev. 0.2, version 2.0
-ipmi0: Number of channels 2
-ipmi0: Attached watchdog
-
-&lt;span class=&quot;c&quot;&gt;# ipmitool chassis status&lt;/span&gt;
-System Power         : on
-Power Overload       : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-Power Interlock      : inactive
-Main Power Fault     : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-Power Control Fault  : &lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-Power Restore Policy : always-on
-Last Power Event     : &lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;disable-nginxapache-server-token&quot;&gt;Disable NginX\Apache server token&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;NginX
-server_tokens off
-
-Apache
-ServerTokens ProductOnly
-ServerSignature Off&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-installed-perl-modules&quot;&gt;Show installed perl modules&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -MFile::Find&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;find -MFile::Spec::Functions -Tlwe &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-&lt;span class=&quot;s1&quot;&gt;&amp;#39;find { wanted =&amp;gt; sub { print canonpath $_ if /\.pm\z/ }, no_chdir =&amp;gt; 1 }, @INC&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;use-stracelsof&quot;&gt;Use strace\lsof&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;strace -e &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;network -p PID
-strace &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;pidof httpd &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;sed &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/\([0-9]*\)/\-p \1/g&amp;#39;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
-
-lsof -nPp PID
-lsof -a -U -u username
-lsof -F pcfn
-lsof +d /mnt/DIR
-lsof +D /mnt/DIR
-lsof -i &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;46&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;protocol&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;@hostname&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;hostaddr&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;:service&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;port&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-patch&quot;&gt;Create Patch&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;diff -crB tmpl_lib.c.orig tmpl_lib.c &amp;gt; tmpl_lib.patchс
-patch -p1 -i tmpl_lib.patch&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-gstripe-in-freebsd&quot;&gt;Create gstripe in FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;kldload geom_stripe
-sysctl kern.geom.debugflags&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;16
-gstripe lable -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
-gstripe create -v st0 /dev/da1 /dev/da2 /dev/da3 /dev/da4 /dev/da5
-bsdlabel -wB /dev/stripe/st0
-newfs -O &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; -U /dev/stripe/st0a
-mount /dev/stripe/st0a /www
-
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;geom_stripe_load=&amp;quot;YES&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /boot/loader.conf
-
-/etc/fstab
-/dev/stripe/st0a       /www           ufs     rw,noatime              &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;       2
-
-tunefs -m &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; /dev/stripe/st0a&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;delete-trailing-spaces-in-text-with-vim&quot;&gt;Delete trailing spaces in text with VIM&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;:%s/&lt;span class=&quot;se&quot;&gt;\s\+&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$/&lt;/span&gt;/
-delete blank lines
-:g/^&lt;span class=&quot;nv&quot;&gt;$/&lt;/span&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;disable-apache-dir-listing&quot;&gt;Disable Apache dir listing&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&amp;lt;Directory /&amp;gt;
-    Options -Indexes
-    AllowOverride all
-    Order allow,deny
-    Allow from all
-&amp;lt;/Directory&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-load-data-grant&quot;&gt;MySQL load data grant&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;grant file on *.* to user@localhost identified by &lt;span class=&quot;s1&quot;&gt;&amp;#39;P@ssw0rd&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-grants-for-fields-in-table&quot;&gt;MySQL grants for fields in table&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;GRANT SELECT &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;col1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;, INSERT &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;col1,col2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ON mydb.mytbl TO &lt;span class=&quot;s1&quot;&gt;&amp;#39;someuser&amp;#39;&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;&amp;#39;somehost&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;determine-max-mtu&quot;&gt;Determine MAX MTU&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ping ya.ru -v -M dont -s &lt;span class=&quot;m&quot;&gt;1472&lt;/span&gt; -W 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;upgrade-centos-password-hashing&quot;&gt;Upgrade CentOS Password Hashing&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;authconfig --test &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; grep hashing
-authconfig --passalgo&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sha512 --update&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;linux-pkg-search&quot;&gt;Linux Pkg search&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;http://pkgs.org/&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;run-echo-cmd-with-sudo&quot;&gt;Run echo cmd with sudo&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; i in server&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;echo &amp;quot;&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;  /logs/test.log&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;ssh &lt;span class=&quot;nv&quot;&gt;$i&lt;/span&gt; sudo sh&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;change-percentage-of-root-fs&quot;&gt;Change percentage of root FS&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;tune2fs -m &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; /dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;disable-ipv6-on-centos&quot;&gt;Disable Ipv6 on CentOS&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;alias net-pf-10 off&amp;quot;&lt;/span&gt; &amp;gt;/etc/modprobe.conf
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;alias ipv6 off&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt;/etc/modprobe.conf
-chkconfig ip6tables off
-sed -i &lt;span class=&quot;s1&quot;&gt;&amp;#39;s/NETWORKING_IPV6=yes/NETWORKING_IPV6=no/g&amp;#39;&lt;/span&gt; /etc/sysconfig/network
-reboot&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;fix-chmod--x-chmod&quot;&gt;Fix chmod -x chmod&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;perl -e &lt;span class=&quot;s1&quot;&gt;&amp;#39;chmod 0755, &amp;quot;/bin/chmod&amp;quot;&amp;#39;&lt;/span&gt;
-python -c &lt;span class=&quot;s1&quot;&gt;&amp;#39;import os; os.chmod(&amp;quot;chmod&amp;quot;, 0755)&amp;#39;&lt;/span&gt;
-
-or
-
-cp /bin/sh ~/chmod2
-cat /bin/chmod &amp;gt; ~/chmod2
-sudo ~/chmod2 +x /bin/chmod
-rm ~/chmod2
-
-or
-
-sudo apt-get --reinstall install &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dpkg -S /bin/chmod &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cut -f1 -d:&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-
-gcc -x c - &lt;span class=&quot;s&quot;&gt;&amp;lt;&amp;lt;CHMOD&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;#include &amp;lt;sys/stat.h&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;main(){chmod(&amp;quot;/bin/chmod&amp;quot;, S_IXUSR | S_IXGRP | S_IXOTH);}&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;CHMOD&lt;/span&gt;
-sudo ./a.out
-rm a.out
-
-or
-
-/lib/ld-linux-x86-64.so.2 /bin/chown +x /bin/chown&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;get-webserver-http-code-answer&quot;&gt;Get webserver http code answer&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;wget --server-response -T &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; -t &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; http://ya.ru 2&amp;gt;&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/^  HTTP/{print $2}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clone-disk-with-dd-by-network&quot;&gt;Clone disk with DD by network&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdd1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; ssh -c arcfour user@server &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of=/dev/sdf1 bs=1M&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of disk1@server1 is finished&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; mail -s &lt;span class=&quot;s2&quot;&gt;&amp;quot;DD_CLONE&amp;quot;&lt;/span&gt; adm@server.net
-
-disk with errors
-dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdd1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;conv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;sync,noerror &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; ssh -c arcfour user@server &lt;span class=&quot;s2&quot;&gt;&amp;quot;dd of=/dev/sdd1 bs=1M&amp;quot;&lt;/span&gt;
-
-use nc
-dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sde1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; nc newserver 7000
-nc -l &lt;span class=&quot;m&quot;&gt;7000&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; dd &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sde1 &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;ssh-x11-forwarding&quot;&gt;SSH x11 forwarding&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;yum install xorg-x11-xauth
-apt-get install xauth
-ssh -X&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;extract-rpm-pkg&quot;&gt;Extract RPM pkg&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rpm2cpio myrpmfile.rpm &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; cpio -idmv&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;create-ffs-snapshot&quot;&gt;Create FFS snapshot&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mksnap_ffs /www/.snap/1
-mdconfig -a -t vnode -o &lt;span class=&quot;nb&quot;&gt;readonly&lt;/span&gt; -f /www/.snap/1
-mount -o ro /dev/md0 /mnt/
-sync
-umount -f /mnt
-sync
-mdconfig -d -u /dev/md0
-sync
-rm -f /www/.snap/1
-sync&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;exim-cli-commands&quot;&gt;Exim cli commands&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# remove from queue frozen messages&lt;/span&gt;
-exiqgrep -z -i&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;xargs exim -Mrm
-exipick -zi &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
-exim -bp &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;$6~&amp;quot;frozen&amp;quot; { print $3 }&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mrm
-&lt;span class=&quot;c&quot;&gt;# view a message&amp;#39;s headers&lt;/span&gt;
-exim -Mvh &amp;lt;message-id&amp;gt;
-&lt;span class=&quot;c&quot;&gt;# view a message&amp;#39;s body&lt;/span&gt;
-exim -Mvb &amp;lt;message-id&amp;gt;
-&lt;span class=&quot;c&quot;&gt;# remove from queue messages older than week&lt;/span&gt;
-exipick -io &lt;span class=&quot;m&quot;&gt;86400&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
-&lt;span class=&quot;c&quot;&gt;# remove all messages from queue&lt;/span&gt;
-exipick -i &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim4 -Mrm
-&lt;span class=&quot;c&quot;&gt;# remove message by ID&lt;/span&gt;
-exim -v -Mrm ID
-&lt;span class=&quot;c&quot;&gt;# frozen message by email&lt;/span&gt;
-exiqgrep -i -f email &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mf
-&lt;span class=&quot;c&quot;&gt;# remove messages by email&lt;/span&gt;
-exiqgrep -i -f email &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs exim -Mrm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clean-postfix-queue&quot;&gt;Clean Postfix queue&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mailq&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;grep &lt;span class=&quot;s1&quot;&gt;&amp;#39;MAILER-DAEMON&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;postsuper -d -&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;find-all-notpkgs-files-freebsd&quot;&gt;Find all notpkgs files FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;find /usr/local -type f &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; xargs -J% pkg_which -v &lt;span class=&quot;s2&quot;&gt;&amp;quot;%&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;  fgrep &lt;span class=&quot;s1&quot;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;display-real-lvm-block-devices&quot;&gt;Display real LVM block devices&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;lvdisplay&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/LV Name/{n=$3} /Block device/{d=$3; sub(&amp;quot;.*:&amp;quot;,&amp;quot;dm-&amp;quot;,d); print d,n;}&amp;#39;&lt;/span&gt;
-lvdisplay&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; awk &lt;span class=&quot;s1&quot;&gt;&amp;#39;/LV Name/{blockdev=$3} /Block device/{bdid=$3; sub(&amp;quot;[0-9]*:&amp;quot;,&amp;quot;dm-&amp;quot;,bdid); print bdid,blockdev;}&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mount-iso-in-freebsd&quot;&gt;Mount ISO in FreeBSD&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mdconfig -a -t vnode -f image.iso -u 0
-mount -t cd9660 -o ro /dev/md0 /mount_point
-umount /mount_point
-mdconfig -d -u 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;cisco-css-1501-tacacs&quot;&gt;Cisco CSS 1501 Tacacs&lt;/h2&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;virtual authentication primary tacacs
-virtual authentication secondary &lt;span class=&quot;nb&quot;&gt;local&lt;/span&gt;
-tacacs-server authorize config
-tacacs-server authorize non-config
-tacacs-server account non-config
-tacacs-server account config
-tacacs-server X.X.X.X primary frequency 10
-tacacs-server key SecretKeyCisco&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-freebsd-kernel-config&quot;&gt;Show FreeBSD kernel config&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sysctl -b kern.conftxt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;http-redirect-with-html-and-javascript&quot;&gt;HTTP redirect with HTML and JavaScript&lt;/h3&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;301 moved permanently&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;robots&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;noindex&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;refresh&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;0; url=http://example.ru/goto.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;a href=&amp;quot;http://example.ru/goto.html&amp;quot;&amp;gt;Moved permanently&amp;lt;/a&amp;gt; --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://example.ru/goto.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;// --&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/06/29/linux-unix-it-tips-and-tricks-number-2/&quot;&gt;Linux-Unix-IT Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on June 29, 2015.&lt;/p&gt;</content>
 </entry>
 
 </feed>

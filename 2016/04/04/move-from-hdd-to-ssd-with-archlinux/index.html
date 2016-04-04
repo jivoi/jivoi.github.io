@@ -5,17 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Kali Linux Compatible USB Wifi Adapters &#8211; EK</title>
-<meta name="description" content="Below are the most stable usb wifi adapters:
+<title>Move from HDD to SSD with ArchLinux &#8211; EK</title>
+<meta name="description" content="Migrate you ArchLinux from HDD to SDD
 
 ">
-<meta name="keywords" content="kali, linux, wifi">
+<meta name="keywords" content="sysadm, linux, howto">
 
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta name="twitter:description" content="Below are the most stable usb wifi adapters:
+<meta name="twitter:title" content="Move from HDD to SSD with ArchLinux">
+<meta name="twitter:description" content="Migrate you ArchLinux from HDD to SDD
 
 ">
 <meta name="twitter:site" content="@jivoi">
@@ -27,11 +27,11 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_GB">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali Linux Compatible USB Wifi Adapters">
-<meta property="og:description" content="Below are the most stable usb wifi adapters:
+<meta property="og:title" content="Move from HDD to SSD with ArchLinux">
+<meta property="og:description" content="Migrate you ArchLinux from HDD to SDD
 
 ">
-<meta property="og:url" content="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<meta property="og:url" content="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/">
 <meta property="og:site_name" content="EK">
 
 
@@ -39,7 +39,7 @@
 
 
 
-<link rel="canonical" href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/">
+<link rel="canonical" href="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/">
 <link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
 
 
@@ -146,29 +146,59 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="https://jivoi.github.io/2015/06/16/kali-linux-compatible-usb-wifi-adapters/" rel="bookmark" title="Kali Linux Compatible USB Wifi Adapters">Kali Linux Compatible USB Wifi Adapters</a></h1>
+        <h1><a href="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/" rel="bookmark" title="Move from HDD to SSD with ArchLinux">Move from HDD to SSD with ArchLinux</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Below are the most stable usb wifi adapters:</p>
+      <p>Migrate you ArchLinux from HDD to SDD</p>
 
-<h3 id="atheros-ar9271-chipset--ieee-80211bgn">Atheros AR9271 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NHA</li>
-  <li>TP-LINK TP-WN722N or TP-WN722NC</li>
-</ol>
+<h3 id="system-prepare">System prepare</h3>
 
-<h3 id="ralink-rt3070-chipset--ieee-80211bgn">Ralink RT3070 Chipset – IEEE 802.11B/G/N</h3>
-<ol>
-  <li>Alfa AWUS036NH</li>
-  <li>Alfa AWUS036NEH</li>
-</ol>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># clean pacman cache</span>
+<span class="nv">$ </span>pacman -Scc</code></pre></div>
 
-<h3 id="realtek-rtl8187l-chipset--ieee-80211bg">Realtek RTL8187L Chipset – IEEE 802.11B/G</h3>
-<ol>
-  <li>Alfa AWUS036H</li>
-  <li>Alfa AWUS036EW</li>
-</ol>
+<h3 id="boot-from-the-arch-livecd">Boot from the Arch liveCD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># partitioned via gdisk /dev/sdb1 for /boot 1G and /dev/sdb2 for / with all space</span>
+
+<span class="nv">$ </span>gdisk /dev/sdb
+<span class="nv">$ </span>mkfs.ext4 /dev/sdb1
+<span class="nv">$ </span>mkfs.ext4 /dev/sdb2
+<span class="nv">$ </span>mount /dev/sdb2 /mnt
+<span class="nv">$ </span>mkdir /mnt/boot
+<span class="nv">$ </span>mount /dev/sdb1 /mnt/boot
+<span class="nv">$ </span>mkdir /mnt_old
+<span class="nv">$ </span>mount /dev/sda3 /mnt_old
+<span class="nv">$ </span>rsync -aAXv --progress /mnt_old /mnt
+<span class="nv">$ </span>genfstab -U -p /mnt &gt; /mnt/etc/fstab
+<span class="nv">$ </span>mount --bind /dev /mnt/dev
+<span class="nv">$ </span>mount --bind /proc /mnt/proc
+<span class="nv">$ </span>mount --bind /sys /mnt/sys
+<span class="nv">$ </span>chroot /mnt /bin/bash
+<span class="nv">$ </span>grub-install --debug --recheck /dev/sdb
+<span class="nv">$ </span>grub-install --target<span class="o">=</span>i386-pc --debug --recheck /dev/sdb
+<span class="nv">$ </span>grub-mkconfig -o /boot/grub/grub.cfg
+<span class="nv">$ </span>mkinitcpio -p linux</code></pre></div>
+
+<h3 id="edit-fstab">Edit fstab</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># add noatime,discard for SSD partions</span>
+<span class="nb">echo</span> <span class="s2">&quot;tmpfs   /tmp       tmpfs   defaults,noatime,mode=1777   0 0&quot;</span> &gt;&gt; /etc/fstab</code></pre></div>
+
+<h3 id="enable-deadline-scheduler-for-ssd">Enable deadline scheduler for SSD</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>vi /etc/udev/rules.d/60-schedulers.rules
+<span class="nv">ACTION</span><span class="o">==</span><span class="s2">&quot;add|change&quot;</span>, <span class="nv">KERNEL</span><span class="o">==</span><span class="s2">&quot;sdb&quot;</span>, ATTR<span class="o">{</span>queue/rotational<span class="o">}==</span><span class="s2">&quot;0&quot;</span>, ATTR<span class="o">{</span>queue/scheduler<span class="o">}=</span><span class="s2">&quot;deadline&quot;</span></code></pre></div>
+
+<h3 id="enable-fstrim-service">Enable FSTRIM service</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>systemctl <span class="nb">enable </span>fstrim.service</code></pre></div>
+
+<h3 id="exit-chroot-add-reboot">Exit chroot add reboot</h3>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">exit</span>
+<span class="nv">$ </span>reboot</code></pre></div>
+
 
       <hr />
       <footer role="contentinfo">
@@ -200,7 +230,7 @@
 
 
         </div>
-        <p class="byline"><strong>Kali Linux Compatible USB Wifi Adapters</strong> was published on <time datetime="2015-06-16T00:00:00+03:00">June 16, 2015</time> and last modified on <time datetime="2015-06-16">June 16, 2015</time>.</p>
+        <p class="byline"><strong>Move from HDD to SSD with ArchLinux</strong> was published on <time datetime="2016-04-04T00:00:00+03:00">April 04, 2016</time> and last modified on <time datetime="2016-04-04">April 04, 2016</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -214,11 +244,11 @@
   <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/" title="Move from HDD to SSD with ArchLinux">Move from HDD to SSD with ArchLinux</a></li>
-    
       <li><a href="https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/" title="Linux SysAdm/DevOps Interview Questions">Linux SysAdm/DevOps Interview Questions</a></li>
     
       <li><a href="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/" title="ArchLinux Installation Guide">ArchLinux Installation Guide</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/" title="Pentest Tips and Tricks #2">Pentest Tips and Tricks #2</a></li>
     
     </ul>
     <hr />

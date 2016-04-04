@@ -1,0 +1,1636 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Linux SysAdm/DevOps Interview Questions &#8211; EK</title>
+<meta name="description" content="A collection of Linux SysAdm/DevOps interview questions with my answers
+
+">
+<meta name="keywords" content="linux, sysadm, hr">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Linux SysAdm/DevOps Interview Questions">
+<meta name="twitter:description" content="A collection of Linux SysAdm/DevOps interview questions with my answers
+
+">
+<meta name="twitter:site" content="@jivoi">
+<meta name="twitter:creator" content="@jivoi">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jivoi.github.io/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux SysAdm/DevOps Interview Questions">
+<meta property="og:description" content="A collection of Linux SysAdm/DevOps interview questions with my answers
+
+">
+<meta property="og:url" content="https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/">
+<meta property="og:site_name" content="EK">
+
+
+
+
+
+
+<link rel="canonical" href="https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/">
+<link href="https://jivoi.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="EK Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://jivoi.github.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="https://jivoi.github.io/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="https://jivoi.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://jivoi.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="https://jivoi.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="https://jivoi.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://jivoi.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://jivoi.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://jivoi.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="https://jivoi.github.io/">EK</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/archive/" >Archive</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/about/" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="https://jivoi.github.io/feed.xml" >Feed</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="https://jivoi.github.io/2016/01/22/linux-sysadm-devops-interview-questions/" rel="bookmark" title="Linux SysAdm/DevOps Interview Questions">Linux SysAdm/DevOps Interview Questions</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>A collection of Linux SysAdm/DevOps interview questions with my answers</p>
+
+<section id="table-of-contents" class="toc">
+<header>
+<h3>Contents</h3>
+</header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#general-questions" id="markdown-toc-general-questions">[[⬆]]General Questions:</a></li>
+  <li><a href="#simple-linux-questions" id="markdown-toc-simple-linux-questions">[[⬆]]Simple Linux Questions:</a></li>
+  <li><a href="#medium-linux-questions" id="markdown-toc-medium-linux-questions">[[⬆]]Medium Linux Questions:</a></li>
+  <li><a href="#hard-linux-questions" id="markdown-toc-hard-linux-questions">[[⬆]]Hard Linux Questions:</a></li>
+  <li><a href="#expert-linux-questions" id="markdown-toc-expert-linux-questions">[[⬆]]Expert Linux Questions:</a></li>
+  <li><a href="#networking-questions" id="markdown-toc-networking-questions">[[⬆]]Networking Questions:</a></li>
+  <li><a href="#mysql-questions" id="markdown-toc-mysql-questions">[[⬆]]MySQL questions:</a></li>
+  <li><a href="#devops-questions" id="markdown-toc-devops-questions">[[⬆]]DevOps Questions:</a></li>
+  <li><a href="#fun-questions" id="markdown-toc-fun-questions">[[⬆]]Fun Questions:</a></li>
+  <li><a href="#demo-time" id="markdown-toc-demo-time">[[⬆]]Demo Time:</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+
+<p><a href="https://github.com/chassing/linux-sysadmin-interview-questions">SOURCE</a></p>
+
+<h3 id="general-questions">[[⬆]]General Questions:</h3>
+
+<ul>
+  <li>What did you learn yesterday/this week?</li>
+  <li>Talk about your preferred development/administration environment. (OS, Editor, Browsers, Tools etc.)</li>
+  <li>Tell me about the last major Linux project you finished.</li>
+  <li>Tell me about the biggest mistake you’ve made in [some recent time period] and how you would do it differently today. What did you learn from this experience?</li>
+  <li>Why we must choose you?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">I am awesome!</code></pre></div>
+
+<ul>
+  <li>What function does DNS play on a network?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The DNS plays a critical role in supporting the Internet infrastructure by providing a distributed and fairly robust mechanism that resolves Internet host names into IP addresses and IP addresses back into host names.</code></pre></div>
+
+<p><a href="http://compsec101.antibozo.net/papers/dnssec/dnssec.html">Read More</a></p>
+
+<ul>
+  <li>What is HTTP?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The Hypertext Transfer Protocol <span class="o">(</span>HTTP<span class="o">)</span> is an application protocol <span class="k">for</span> distributed, collaborative, hypermedia information systems.<span class="o">[</span>1<span class="o">]</span> HTTP is the foundation of data communication <span class="k">for</span> the World Wide Web.
+Hypertext is structured text that uses logical links <span class="o">(</span>hyperlinks<span class="o">)</span> between nodes containing text. HTTP is the protocol to exchange or transfer hypertext.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">Read More</a></p>
+
+<ul>
+  <li>What is an HTTP proxy and how does it work?</li>
+  <li>Describe briefly how HTTPS works.</li>
+  <li>What is SMTP? Give the basic scenario of how a mail message is delivered via SMTP.</li>
+  <li>What is RAID? What is RAID0, RAID1, RAID5, RAID10?</li>
+  <li>What is a level 0 backup? What is an incremental backup?</li>
+  <li>Describe the general file system hierarchy of a Linux system.</li>
+</ul>
+
+<h3 id="simple-linux-questions">[[⬆]]Simple Linux Questions:</h3>
+
+<ul>
+  <li>What is the name and the UID of the administrator user?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Name - root
+UID - 0
+Can check with <span class="nb">command</span>:
+<span class="nv">$ </span>id root
+<span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span></code></pre></div>
+
+<ul>
+  <li>How to list all files, including hidden one, in a directory?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ls - <span class="nb">command </span>ti list directory contents
+a - argument show hidden files in a directory
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>ls -a ./</code></pre></div>
+
+<ul>
+  <li>What is the Unix/Linux command to remove a directory and its contents?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">rm - <span class="nb">command </span>to remove files or directories
+r - argument tp remove directories and their contents recursively
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>rm -r ./somedir</code></pre></div>
+
+<ul>
+  <li>Which command will show you free/used memory? Does free memory exist on Linux?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">free - <span class="nb">command </span>to display amount of free and used memory in the system
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>free
+             total       used       free     shared    buffers     cached
+Mem:       <span class="m">1551836</span>    <span class="m">1048324</span>     <span class="m">503512</span>          <span class="m">0</span>     <span class="m">324244</span>     518224
+-/+ buffers/cache:     <span class="m">205856</span>    1345980
+Swap:       <span class="m">731132</span>          <span class="m">0</span>     731132</code></pre></div>
+
+<ul>
+  <li>How to search for the string “my konfi is the best” in files of a directory recursively?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">You can use find and grep command.
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>find ./* -type f -exec grep -H <span class="s1">&#39;my konfi is the best&#39;</span> <span class="o">{}</span> <span class="se">\;</span>
+<span class="nv">$ </span>grep -r <span class="s1">&#39;my konfi is the best&#39;</span> ./*</code></pre></div>
+
+<p><a href="https://stackoverflow.com/questions/16956810/finding-all-files-containing-a-text-string-on-linux">Read More</a></p>
+
+<ul>
+  <li>How to connect to a remote server or what is SSH?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Secure Shell, or SSH, is a cryptographic <span class="o">(</span>encrypted<span class="o">)</span> network protocol to allow remote login and other network services to operate securely over an unsecured network.
+To connect to remote server we can use <span class="nb">command </span>ssh
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>ssh login@remote_server_ip</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Secure_Shell">Read More</a></p>
+
+<ul>
+  <li>How to get all environment variables and how can you use them?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">All UNIX-like operating systems such as OpenBSD, Linux, Redhat, CentOS, Debian allows you to <span class="nb">set </span>environment variables. When you log in on UNIX, your current shell <span class="o">(</span>login shell<span class="o">)</span> sets a unique working environment <span class="k">for</span> you which is maintained <span class="k">until</span> you log out.
+printenv<span class="se">\e</span>nv - <span class="nb">command </span>to print all or part of environment
+Full <span class="nb">command</span>:
+<span class="nv">$ </span>printenv PATH HOME
+<span class="nv">$PATH</span> - Display lists directories the shell searches, <span class="k">for</span> the commands.
+<span class="nv">$HOME</span> - User<span class="err">&#39;</span>s home directory to store files.
+
+All environment variables you can use in scripts.</code></pre></div>
+
+<p><a href="http://www.tutorialspoint.com/unix/unix-environment.htm">Read More</a></p>
+
+<ul>
+  <li>I get “command not found” when I run <code>ifconfig -a</code>. What can be wrong?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Possible causes:
+1. net-tools package is not installed in your system.
+2. you don<span class="sb">`</span>t have <span class="s2">&quot;/sbin&quot;</span> directory in your <span class="nv">$PATH</span>, so just write full path <span class="k">for</span> <span class="nb">command</span> -  /sbin/ifconfig -a</code></pre></div>
+
+<ul>
+  <li>What happens if I type TAB-TAB?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">It depends where you are <span class="nb">type </span>this.
+If we are talking about shells like bash<span class="se">\z</span>sh, so you <span class="nb">type </span>TAB-TAB it will <span class="nb">enable </span>built in <span class="s2">&quot;completion&quot;</span> <span class="k">function</span>.
+Most shells allow <span class="nb">command </span>completion, typically bound to the TAB key, which allow you to <span class="nb">complete </span>the names of commands stored upon your PATH, file names, or directory names. This is typically used like so:
+<span class="nv">$ </span>ls /bo<span class="o">[</span>TAB<span class="o">]</span>
+When you press the TAB key the argument /bo is automatically replaced with the value /boot.</code></pre></div>
+
+<p><a href="https://www.debian-administration.org/article/316/An_introduction_to_bash_completion_part_1">Read More</a></p>
+
+<ul>
+  <li>What command will show the available disk space on the Unix/Linux system?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">df - report file system disk space usage
+Simple run <span class="nb">command </span>and you will see available disk space in your system
+<span class="nv">$ </span>df -h</code></pre></div>
+
+<ul>
+  <li>What commands do you know that can be used to check DNS records?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>host example.com
+<span class="nv">$ </span>nslookup example.com
+<span class="nv">$ </span>dig example.com
+<span class="nv">$ </span>python -c <span class="s2">&quot;import socket;print(socket.gethostbyname(&#39;example.com&#39;))&quot;</span></code></pre></div>
+
+<ul>
+  <li>What Unix/Linux commands will alter a files ownership, files permissions?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">chown - <span class="nb">command </span>to change file owner and group information.
+chmod - <span class="nb">command </span>to change file access permissions such as <span class="nb">read</span>, write, and access.</code></pre></div>
+
+<ul>
+  <li>What does <code>chmod +x FILENAME</code>do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This <span class="nb">command </span>will <span class="nb">set </span>executation bit to FILENAME <span class="k">for</span> everybody owner<span class="se">\g</span>roup<span class="se">\o</span>ther.</code></pre></div>
+
+<ul>
+  <li>What does the permission 0750 on a file mean?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>chmod <span class="m">750</span> FILENAME
+-rwxr-x--- <span class="m">1</span> root root <span class="m">24</span> Jan <span class="m">22</span> 18:02 FILENAME*
+This permissions means that owner can <span class="nb">read</span><span class="se">\w</span>rite<span class="se">\e</span>xecute this file, also members of group can <span class="nb">read </span>and execute, other users can <span class="k">do</span> nothing with it.</code></pre></div>
+
+<ul>
+  <li>What does the permission 0750 on a directory mean?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>chmod <span class="m">750</span> DIRECTORY
+drwxr-x---   <span class="m">5</span> root root    4.0K Nov <span class="m">10</span> 12:36 DIRECTORY
+This permissions means that owner can <span class="nb">read</span><span class="se">\w</span>rite<span class="se">\e</span>xecute<span class="o">(</span>see file list of directory<span class="o">)</span> this directory, also members of group can <span class="nb">read </span>and list, other users can <span class="k">do</span> nothing with it.</code></pre></div>
+
+<ul>
+  <li>
+    <p>How to add a new system user without login permissions?</p>
+  </li>
+  <li>
+    <p>How to add/remove a group from a user?</p>
+  </li>
+  <li>
+    <p>What is a bash alias?</p>
+  </li>
+  <li>
+    <p>How do you set the mail address of the root/a user?</p>
+  </li>
+  <li>
+    <p>What does CTRL-c do?</p>
+  </li>
+  <li>
+    <p>What is in /etc/services?</p>
+  </li>
+  <li>
+    <p>How to redirect STDOUT and STDERR in bash? (&gt; /dev/null 2&gt;&amp;1)</p>
+  </li>
+  <li>
+    <p>What is the difference between UNIX and Linux.</p>
+  </li>
+  <li>
+    <p>What is the difference between Telnet and SSH?</p>
+  </li>
+  <li>
+    <p>Explain the three load averages and what do they indicate.</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">To see load averages numbers you can run commands:
+<span class="nv">$ </span>top <span class="o">(</span>see load average section<span class="o">)</span>
+
+<span class="nv">$ </span>cat /proc/loadavg
+1.00 1.01 0.98 2/198 21533
+
+<span class="nv">$ </span>uptime
+18:37:28 up <span class="m">4</span> days,  7:17,  <span class="m">4</span> users,  load average: 1.00, 1.01, 0.98
+
+The three numbers after load average -  1.00, 1.01, 0.98 - represent the 1-, 5-, and 15-minute load averages on the machine. A system load average is equal to the average number of processes in a runnable or uninterruptible state. Runnable processes are either currently using the CPU or waiting to <span class="k">do</span> so, and uninterruptible processes are waiting <span class="k">for</span> I/O.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Load_(computing)">Read More</a></p>
+
+<h3 id="medium-linux-questions">[[⬆]]Medium Linux Questions:</h3>
+
+<ul>
+  <li>What do the following commands do and how would you use them?</li>
+  <li><code>tee</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">tee - <span class="nb">read </span>from standard input and write to standard output and files
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;deb http://pkg.jenkins-ci.org/debian binary/&quot;</span> <span class="p">|</span> sudo  tee -a /etc/apt/sources.list.d/jenkins.list</code></pre></div>
+
+<ul>
+  <li><code>awk</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The awk is most useful when handling text files that are formatted in a predictable way. For instance, it is excellent at parsing and manipulating tabular data. It operates on a line-by-line basis and iterates through the entire file.
+The awk syntax looks like this:
+awk <span class="s1">&#39;/search_pattern/ { action_to_take_on_matches; another_action; }&#39;</span> file_to_parse
+
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span>awk <span class="s1">&#39;{print}&#39;</span> /etc/fstab</code></pre></div>
+
+<ul>
+  <li><code>tr</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">We can use tr <span class="k">for</span> translating, or deleting, or squeezing repeated characters.
+It will <span class="nb">read </span>from STDIN and write to STDOUT.
+
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span>tr a-z A-Z
+<span class="nv">$ </span>tr <span class="s1">&#39;()&#39;</span> <span class="s1">&#39;{}&#39;</span></code></pre></div>
+
+<ul>
+  <li><code>cut</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The <span class="nb">command </span>cut is used <span class="k">for</span> text processing.
+We can use this <span class="nb">command </span>to extract portion of text from a file by selecting columns.
+cut OPTION... <span class="o">[</span>FILE<span class="o">]</span>...
+
+For example you can use this <span class="nb">command </span>like this:
+The example displays only the first field of each lines from /etc/passwd file using the field delimiter : <span class="o">(</span>colon<span class="o">)</span>. In this <span class="k">case</span>, the 1st field is the username.
+<span class="nv">$ </span>cut -d <span class="s1">&#39;:&#39;</span> -f <span class="m">1</span> &lt; /etc/passwd</code></pre></div>
+
+<ul>
+  <li><code>tac</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">tac <span class="o">(</span>which is <span class="s2">&quot;cat&quot;</span> backwards<span class="o">)</span> concatenate and print files in reverse
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span>cat ok
+1
+2
+3
+
+<span class="nv">$ </span>tac ok
+3
+2
+1</code></pre></div>
+
+<ul>
+  <li><code>curl</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Curl is a tool to transfer data from or to a server, using one of the supported protocols <span class="o">(</span>DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3, POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP<span class="o">)</span>.  The <span class="nb">command </span>is designed to work without user interaction.
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span>curl https://example.com</code></pre></div>
+
+<ul>
+  <li><code>wget</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Wget is a free utility <span class="k">for</span> non-interactive download of files from the Web.
+It supports HTTP, HTTPS, and FTP protocols, as well as retrieval through HTTP proxies.
+Wget is non-interactive, meaning that it can work in the background, <span class="k">while</span> the user is not logged on.
+This allows you to start a retrieval and disconnect from the system, letting Wget finish the work.
+By contrast, most of the Web browsers require constant user<span class="err">&#39;</span>s presence, which can be a great hindrance when transferring a lot of data.
+For example you can use this <span class="nb">command </span>like this:
+<span class="nv">$ </span>wget -S https://example.com</code></pre></div>
+
+<ul>
+  <li><code>watch</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">watch runs <span class="nb">command </span>repeatedly, displaying its output and errors <span class="o">(</span>the first screenfull<span class="o">)</span>. This allows you to watch the program output change over time. By default, the program is run every <span class="m">2</span> seconds. By default, watch will run <span class="k">until</span> interrupted.
+For example you can use this <span class="nb">command </span>like this:
+To watch the contents of a directory change, you could use
+<span class="nv">$ </span>watch -d ls -l</code></pre></div>
+
+<ul>
+  <li><code>head</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Print the first <span class="m">10</span> lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is <span class="nb">read </span>standard input.
+For example you can use this <span class="nb">command </span>like this:
+To print first <span class="m">10</span> lines
+<span class="nv">$ </span>head /etc/passws</code></pre></div>
+
+<ul>
+  <li><code>tail</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Print the last <span class="m">10</span> lines of each FILE to standard output.
+With more than one FILE, precede each with a header giving the file name.
+With no FILE is <span class="nb">read </span>standard input.
+For example you can use this <span class="nb">command </span>like this:
+To print last <span class="m">10</span> lines
+<span class="nv">$ </span>tail /etc/passws</code></pre></div>
+
+<ul>
+  <li>What does a <code>&amp;</code> after a command do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This is known as job control under unix. The <span class="p">&amp;</span> informs the shell to put the <span class="nb">command </span>in the background.
+This means it continues to run the <span class="nb">command </span>but returns you to your shell to allows you to <span class="k">continue</span> doing parallel commands and <span class="k">do</span> not have to <span class="nb">wait </span><span class="k">until</span> the script is finished. If you forget to add <span class="p">&amp;</span> after <span class="nb">command</span>, you can stop the current running process with Ctrl-Z and <span class="k">continue</span> it in the background with <span class="nb">bg</span> <span class="o">(</span>or in the foreground with <span class="nb">fg</span><span class="o">)</span>.</code></pre></div>
+
+<p><a href="https://unix.stackexchange.com/questions/86247/what-does-ampersand-mean-at-the-end-of-a-shell-script-line">Read More</a></p>
+
+<ul>
+  <li>What does <code>&amp; disown</code> after a command do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="p">&amp;</span> puts the job in the background, that is, makes it block on attempting to <span class="nb">read </span>input, and makes the shell not <span class="nb">wait </span><span class="k">for</span> its completion.
+
+<span class="nb">disown </span>removes the process from the shell<span class="s1">&#39;s job control, but it still leaves it connected to the terminal. One of the results is that the shell won&#39;</span>t send it a SIGHUP. Obviously, it can only be applied to background <span class="nb">jobs</span>, because you cannot enter it when a foreground job is running.</code></pre></div>
+
+<p><a href="https://unix.stackexchange.com/questions/3886/difference-between-nohup-disown-and">Read More</a></p>
+
+<ul>
+  <li>What is a packet filter and how does it work?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Packet filters act by inspecting the <span class="s2">&quot;packets&quot;</span> which are transferred between computers on the Internet. If a packet does not match the packet filter<span class="err">&#39;</span>s <span class="nb">set </span>of filtering rules, the packet filter will drop.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Firewall_(computing)">Read More</a></p>
+
+<ul>
+  <li>What is Virtual Memory?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">In computing, virtual memory is a memory management technique that is implemented using both hardware and software. It maps memory addresses used by a program, called virtual addresses, into physical addresses in computer memory. Main storage as seen by a process or task appears as a contiguous address space or collection of contiguous segments. The operating system manages virtual address spaces and the assignment of real memory to virtual memory.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Virtual_memory">Read More</a></p>
+
+<ul>
+  <li>What is swap and what is it used for?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Swap is a special <span class="nb">type </span>of memory.
+Swap space in Linux is used when the amount of physical memory <span class="o">(</span>RAM<span class="o">)</span> is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. While swap space can <span class="nb">help </span>machines with a small amount of RAM, it should not be considered a replacement <span class="k">for</span> more RAM. Swap space is located on hard drives, which have a slower access <span class="nb">time </span>than physical memory.
+Swapping is a useful technique that enables a computer to execute programs and manipulate data files larger than main memory. The operating system copies as much data as possible into main memory, and leaves the rest on the disk. When the operating system needs data from the disk, it exchanges a portion of data <span class="o">(</span>called a page or segment<span class="o">)</span> in main memory with a portion of data on the disk.</code></pre></div>
+
+<p><a href="https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-swap-what-is.html">Read More</a></p>
+
+<ul>
+  <li>
+    <p>What is an A record, an NS record, a PTR record, a CNAME record, an MX record?</p>
+  </li>
+  <li>
+    <p>Are there any other RRs and what are they used for?</p>
+  </li>
+  <li>
+    <p>What is a Split-Horizon DNS?</p>
+  </li>
+  <li>
+    <p>What is the sticky bit?</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A sticky bit is a permission bit that is <span class="nb">set </span>on a directory that allows only the owner of the file within that directory or the root user to delete or rename the file. No other user has the needed privileges to delete the file created by some other user.
+
+To remove sticky bit:
+sudo chmod -t /tmp
+
+To <span class="nb">set </span>sticky bit:
+<span class="nv">$ </span>sudo chmod +t /tmp</code></pre></div>
+
+<p><a href="https://askubuntu.com/questions/432699/what-is-the-t-letter-in-the-output-of-ls-ld-tmp">Read More</a></p>
+
+<ul>
+  <li>
+    <p>What does the immutable bit to a file?</p>
+  </li>
+  <li>
+    <p>What is the difference between hardlinks and symlinks? What happens when you remove the source to a symlink/
+hardlink?</p>
+  </li>
+  <li>
+    <p>What is an inode and what fields are stored in an inode?</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">inode is a <span class="s2">&quot;database&quot;</span> of all file information that tells about file structure.
+The inode of each file uses a pointer to point to the specific file, directory or object.
+The pointer is a unique number which usually is referred to as the inode number.</code></pre></div>
+
+<ul>
+  <li>
+    <p>Howto force/trigger a file system check on next reboot?</p>
+  </li>
+  <li>
+    <p>What is SNMP and what is it used for?</p>
+  </li>
+  <li>
+    <p>What is a runlevel and how to get the current runlevel?</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Runlevel is a mode of operation in OS, and a runlevel represents the different system state of a Linux system. When the Linux system boots, the kernel is initialized , and <span class="k">then</span> enters one <span class="o">(</span>and only one<span class="o">)</span> runlevel. When a service starts, it will try to start all the services that are associated with that runlevel.
+
+In general, when a computer enters runlevel 0, the system shuts down all running processes, unmounts all file systems, and powers off.
+
+When it enters runlevel 6, it reboots.
+
+The intermediate runlevels <span class="o">(</span>1-5<span class="o">)</span> differ in terms of which drives are mounted, and which network services are started. Default runlevels are typically 3, 4, or 5.
+
+Runlevel <span class="m">1</span> is reserved <span class="k">for</span> single-user mode-a state where only a single user can log in to the system. Generally, few processes are started in single-user mode, so it is a very useful runlevel <span class="k">for</span> diagnostics when a system won<span class="s1">&#39;t fully boot. Even in the default GRUB menu we will notice a recovery mode option that boots us into runlevel 1.</span>
+
+<span class="s1">In other words, runlevels define what tasks can be accomplished in the current state (or runlevel) of a Linux system. Every Linux system supports three basic runlevels, plus one or more runlevels for normal operation.</span>
+
+<span class="s1">Lower run levels are useful for maintenance or emergency repairs, since they usually don&#39;</span>t offer any network services at all.
+
+To check current runlevel:
+<span class="nv">$ </span>runlevel
+N 2</code></pre></div>
+
+<ul>
+  <li>
+    <p>What is SSH port forwarding?</p>
+  </li>
+  <li>
+    <p>What is the difference between local and remote port forwarding?</p>
+  </li>
+  <li>
+    <p>What are the steps to add a user to a system without using useradd/adduser?</p>
+  </li>
+  <li>
+    <p>What is MAJOR and MINOR numbers of special files?</p>
+  </li>
+  <li>
+    <p>Describe a scenario when you get a “filesystem is full” error, but ‘df’ shows there is free space.</p>
+  </li>
+  <li>
+    <p>Describe a scenario when deleting a file, but ‘df’ not showing the space being freed.</p>
+  </li>
+  <li>
+    <p>Describe how ‘ps’ works.</p>
+  </li>
+  <li>
+    <p>What happens to a child process that dies and has no parent process to wait for it and what’s bad about this?</p>
+  </li>
+  <li>
+    <p>Explain briefly each one of the process states.</p>
+  </li>
+  <li>
+    <p>How to know which process listens on a specific port?</p>
+  </li>
+  <li>
+    <p>What is a zombie process and what could be the cause of it?</p>
+  </li>
+  <li>
+    <p>You run a bash script and you want to see its output on your terminal and save it to a file at the same time. How could you do it?</p>
+  </li>
+  <li>
+    <p>Explain what echo “1” &gt; /proc/sys/net/ipv4/ip_forward does.</p>
+  </li>
+  <li>
+    <p>Describe briefly the steps you need to take in order to create and install a valid certificate for the site
+https://foo.example.com.</p>
+  </li>
+  <li>
+    <p>Can you have several HTTPS virtual hosts sharing the same IP?</p>
+  </li>
+  <li>
+    <p>What is a wildcard certificate?</p>
+  </li>
+  <li>
+    <p>Which Linux file types do you know?</p>
+  </li>
+  <li>
+    <p>What is the difference between a process and a thread? And parent and child processes after a fork system call?</p>
+  </li>
+  <li>
+    <p>What is the difference between exec and fork?</p>
+  </li>
+  <li>
+    <p>What is “nohup” used for?</p>
+  </li>
+  <li>What is the difference between these two commands?</li>
+  <li><code>myvar=hello</code></li>
+  <li>
+    <p><code>export myvar=hello</code></p>
+  </li>
+  <li>
+    <p>How many NTP servers would you configure in your local ntp.conf?</p>
+  </li>
+  <li>
+    <p>What does the column ‘reach’ mean in <code>ntpq -p</code> output?</p>
+  </li>
+  <li>
+    <p>You need to upgrade kernel at 100-1000 servers, how you would do this?</p>
+  </li>
+  <li>
+    <p>How can you get Host, Channel, ID, LUN of SCSI disk?</p>
+  </li>
+  <li>How can you limit process memory usage?</li>
+</ul>
+
+<h3 id="hard-linux-questions">[[⬆]]Hard Linux Questions:</h3>
+
+<ul>
+  <li>What is a tunnel and how you can bypass a http proxy?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A tunnel is a mechanism used to ship a foreign protocol across a network that normally wouldn<span class="s1">&#39;t support it. Tunneling protocols allow you to use, for example, IP to send another protocol in the &quot;data&quot; portion of the IP datagram. Most tunneling protocols operate at layer 4, which means they are implemented as a protocol that replaces something like TCP or UDP.</span>
+
+<span class="s1">You can forward a port from your computer to a remote computer, which has the result of tunneling your data over SSH in the process, making it secure. This may not seem useful, after all, why would I want a port on my computer being forwarded to another computer? The answer lies within some clarification. The port forwarding function of SSH works by first listening on a local socket for a connection. When a connection is made, SSH will forward the entire connection onto the remote host and portable.</span>
+
+<span class="s1">For example: &#39;</span>ssh -L80:workserver.com:80 user@workdesktop.com<span class="err">&#39;</span>
+This <span class="nb">command </span>creates an SSH connection to your workdesktop.com computer, but at the same <span class="nb">time </span>opens port <span class="m">80</span> on your <span class="nb">local </span>machine. If you point your web browser at http://localhost, the connection will actually be forwarded through your SSH connection to your desktop, and sent onto the workserver.com server, port 80.</code></pre></div>
+
+<ul>
+  <li>What is the difference between IDS and IPS?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">IDS - Intrusion Detection System - A device or application that analyzes whole packets, both header and payload, looking <span class="k">for</span> known events. When a known event is detected a log message is generated detailing the event.
+
+IPS - Intrusion Prevention System - A device or application that analyzes whole packets, both header and payload, looking <span class="k">for</span> known events. When a known event is detected the packet is rejected.</code></pre></div>
+
+<ul>
+  <li>What shortcuts do you use on a regular basis?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A lot, <span class="k">for</span> example check my dotfiles git https://github.com/jivoi/dotfiles/blob/master/.aliases</code></pre></div>
+
+<ul>
+  <li>What is the Linux Standard Base?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">LSB is a project to standardize the software system structure, including the filesystem hierarchy used in the Linux operating system. The LSB is based on the POSIX specification, the Single UNIX Specification <span class="o">(</span>SUS<span class="o">)</span>, and several other open standards, but extends them in certain areas.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Linux_Standard_Base">Read More</a></p>
+
+<ul>
+  <li>What is an atomic operation?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">For example we can say that atomic operation is a an operation during which a process can simultaneously <span class="nb">read </span>a location and write it in the same bus operation. This prevents any other process or I/O device from writing or reading memory <span class="k">until</span> the operation is complete. Atomic implies indivisibility and irreducibility, so an atomic operation must be performed entirely or not performed at all.</code></pre></div>
+
+<ul>
+  <li>Your freshly configured http server is not running after a restart, what can you do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">If you rebooted server and http server is not running after it, so first you need to check it configuration file and the server error log where you can find the proble why server is not running, and after you can run it manually with init<span class="se">\u</span>pstart<span class="se">\s</span>ystemd script, <span class="k">if</span> you want that server run automatically you need <span class="nb">enable </span>autostart <span class="k">for</span> it.
+You can run one of this <span class="nb">command</span>:
+<span class="nv">$ </span>chkconfig nginx on <span class="o">(</span><span class="k">for</span> centos<span class="se">\r</span>hel<span class="o">)</span>
+<span class="nv">$ </span>update-rc.d nginx <span class="nb">enable</span> <span class="o">(</span><span class="k">for</span> debian<span class="se">\u</span>buntu<span class="o">)</span>
+<span class="nv">$ </span>systemctl <span class="nb">enable </span>nginx <span class="o">(</span><span class="k">for</span> linux with systemd<span class="o">)</span></code></pre></div>
+
+<ul>
+  <li>What kind of keys are in ~/.ssh/authorized_keys and what it is this file used for?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This is a public ssh key.
+With public key authentication, the authenticating entity has a public key and a private key. Each key is a large number with special mathematical properties. The private key is kept on the computer you log in from, <span class="k">while</span> the public key is stored on the .ssh/authorized_keys file on all the computers you want to log in to.</code></pre></div>
+
+<p><a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">Read More</a></p>
+
+<ul>
+  <li>I’ve added my public ssh key into authorized_keys but I’m still getting a password prompt, what can be wrong?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Maybe your ~/.ssh/authorized_keys permissions are too open by OpenSSH standards.
+You need to check this and fix with:
+chmod <span class="m">700</span> ~/.ssh
+chmod <span class="m">600</span> ~/.ssh/authorized_keys
+
+Maybe remote server is configured to disable public keys, you can check it in /etc/sshd_config configuration file where PubkeyAuthentication option must be <span class="nb">set </span>to YES
+
+Maybe it is something with you <span class="nb">local </span>ssh configuration ~/.ssh/config</code></pre></div>
+
+<ul>
+  <li>Did you ever create RPM’s, DEB’s or solaris pkg’s?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">For RPM you need to create a spec file</code></pre></div>
+
+<p><a href="https://fedoraproject.org/wiki/How_to_create_an_RPM_package">Read More</a>
+<a href="https://wiki.debian.org/IntroDebianPackaging">Read More</a></p>
+
+<ul>
+  <li>What does <code>:(){ :|:&amp; };:</code> do on your system?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This is a fork bomb using the Bash shell
+In computing, a fork bomb <span class="o">(</span>also called rabbit virus or wabbit<span class="o">[</span>1<span class="o">])</span> is a denial-of-service attack wherein a process continually replicates itself to deplete available system resources, causing resource starvation and slowing or crashing the system.
+
+We can rewrite this code in this way:
+
+bomb<span class="o">()</span> <span class="o">{</span>
+  bomb <span class="p">|</span> bomb <span class="p">&amp;</span>
+<span class="o">}</span><span class="p">;</span>
+bomb
+
+The fork bomb in this <span class="k">case</span> is a recursive <span class="k">function</span> that runs in the background, thanks to the ampersand operator. This ensures that the child process does not die and keeps forking new copies of the <span class="k">function</span>, consuming system resources.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Fork_bomb">Read More</a></p>
+
+<ul>
+  <li>How do you catch a Linux signal on a script?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">There is a <span class="nb">trap command </span>that allows you to catch a linux signal and execute a <span class="nb">command </span>when a signal is received by your shell script. It works like this:
+
+<span class="nv">$ </span><span class="nb">trap </span>arg signals
+
+So in real script you can write somethins like this:
+
+<span class="nb">trap</span> <span class="s2">&quot;rm $TEMP_FILE; exit&quot;</span> SIGHUP SIGINT SIGTERM
+
+Here we have added a <span class="nb">trap command </span>that will execute <span class="s2">&quot;rm $TEMP_FILE&quot;</span> <span class="k">if</span> any of the listed signals is received.</code></pre></div>
+
+<p><a href="http://linuxcommand.org/wss0160.php">Read More</a></p>
+
+<ul>
+  <li>Can you catch a SIGKILL?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">SIGKILL or signal <span class="m">9</span> is one signal that you cannot <span class="nb">trap </span>and catch. The linux kernel immediately terminates any process sent this signal and no signal handling is performed. Since it will always terminate a program that is stuck, hung, or otherwise screwed up, it is tempting to think that it<span class="err">&#39;</span>s the easy way out when you have to get something to stop and go away.</code></pre></div>
+
+<ul>
+  <li>
+    <p>What’s happening when the Linux kernel is starting the OOM killer and how does it choose which
+process to kill first?</p>
+  </li>
+  <li>
+    <p>Describe the linux boot process with as much detail as possible, starting from when the system is powered on and ending when you get a prompt.</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The first step of the boot process is the BIOS <span class="o">(</span>Basic Input Output System<span class="o">)</span>.
+
+The BIOS initializes hardware, including detecting hard drives, USB disks, CD-ROMs, network cards, and any other hardware.
+
+The BIOS will <span class="k">then</span> go step-by-step through each boot device based on the boot device order it is configured to follow <span class="k">until</span> it finds one it can successfully boot from. In the <span class="k">case</span> of a Linux server, that usually means reading the MBR <span class="o">(</span>master boot record: the first <span class="m">512</span> bytes on a hard drive<span class="o">)</span> and loading and executing the boot code inside the MBR to start the boot process.
+
+After the BIOS initializes the hardware and finds the first device to boot, the boot loader takes over. The following list shows the boot loader depending on the device from a boot starts:
+
+GRUB : boot from a hard drive
+syslinux : boot from a USB
+isolinux : boot from a CD-ROM
+pxelinux : boot from a network
+
+Once we <span class="k">select</span> a particular kernel in GRUB, GRUB will load the Linux kernel into RAM and execute it.
+
+Usually GRUB will also load an initrd <span class="o">(</span>initial RAM disk<span class="o">)</span> along with the kernel. initrd <span class="o">(</span>initial RAM disk<span class="o">)</span> has some crucial configuration files, kernel modules, and programs that the kernel needs in order to find and mount the real root file system.
+
+The final step is to execute the /sbin/init program, which takes over the rest of the boot process.
+
+The /sbin/init program is the parent process of every program running on the system. This process always has a PID of <span class="m">1</span> and is responsible <span class="k">for</span> starting the rest of the processes that make up a running Linux system.
+
+Here is the list of how we initialize a NIX OS:
+
+System V init such as runlevels and /etc/rc?.d directories - the init process reads a configuration file called /etc/inittab to discover its default runlevel. It <span class="k">then</span> enters that runlevel and starts processes that have been configured to run at that runlevel. Linux distros: Debian <span class="m">6</span> and earlier<span class="se">\U</span>buntu 9.04 and earlier<span class="se">\C</span>entOS <span class="m">5</span> and earlier
+
+Upstart - Upstart was designed not only to address some of the shortcomings of the System V init process, but also to provide a more robust system <span class="k">for</span> managing services.
+One main feature of Upstart is that it is event-driven. Upstart constantly monitors the system <span class="k">for</span> certain events to occur, and when they <span class="k">do</span>, Upstart can be configured to take action based on those events.
+Upstart scripts reside in /etc/init. Linux distros: Ubuntu 9.10 to Ubuntu 14.10, including Ubuntu 14.04
+CentOS 6
+
+systemd is the init system <span class="k">for</span> the most recent linux distros: Debian <span class="m">7</span> and Debian 8<span class="se">\U</span>buntu 15.04<span class="se">\C</span>entOS 7</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Linux_startup_process">Read More</a></p>
+
+<ul>
+  <li>
+    <p>What’s a chroot jail?</p>
+  </li>
+  <li>
+    <p>When trying to umount a directory it says it’s busy, how to find out which PID holds the directory?</p>
+  </li>
+  <li>
+    <p>What’s LD_PRELOAD and when it’s used?</p>
+  </li>
+  <li>
+    <p>You ran a binary and nothing happened. How would you debug this?</p>
+  </li>
+  <li>
+    <p>What are cgroups? Can you specify a scenario where you could use them?</p>
+  </li>
+</ul>
+
+<h3 id="expert-linux-questions">[[⬆]]Expert Linux Questions:</h3>
+
+<ul>
+  <li>A running process gets <code>EAGAIN: Resource temporarily unavailable</code> on reading a socket. How can you close this bad socket/file descriptor without killing the process?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>man errno <span class="p">|</span> grep  EAGAIN
+EAGAIN is just means <span class="s2">&quot;there&#39;s nothing to read now; try again later&quot;</span>.</code></pre></div>
+
+<h3 id="networking-questions">[[⬆]]Networking Questions:</h3>
+
+<ul>
+  <li>What is localhost and why would <code>ping localhost</code> fail?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A localhost is the standard hostname given to the address assigned to the loopback network interface. Translated into an IP address, a localhost is always designated as 127.0.0.1.
+Ping can fail <span class="k">if</span> loopback interface is down, also it is possible to configure <span class="nb">local </span>iptables<span class="o">(</span>firewall<span class="o">)</span> in such a way as to drop all packets received on localhost.
+Also it is possible that icmp_echo is disable with sysctl net.ipv4.icmp_echo_ignore_all<span class="o">=</span>1</code></pre></div>
+
+<ul>
+  <li>What is the similarity between “ping” &amp; “traceroute” ? How is traceroute able to find the hops.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Both of this programs can be used to troubleshoot connection problems.
+
+Traceroute shows you the path that packets take from your <span class="nb">local </span>system to a remote host. You see the response <span class="nb">time </span>to each step along the way, because each datagram <span class="o">(</span>Unix <span class="s2">&quot;traceroute&quot;</span> uses UDP datagrams by default, but you can also choose between ICMP, TCP rather than ICMP on Windows<span class="o">)</span> has a TTL <span class="o">(</span><span class="nb">time</span>-to-live<span class="o">)</span> that<span class="err">&#39;</span>s one hop longer than the previous one.
+
+By default you need a superuser privileges to run ping and traceroute with ICMP option
+<span class="nv">$ </span>ping example.com
+ping: icmp open socket: Operation not permitted
+
+<span class="nv">$ </span>traceroute -I example.com
+You have no enough privileges to use this traceroute method.</code></pre></div>
+
+<p><a href="https://serverfault.com/questions/68307/what-is-the-difference-between-ping-and-tracert">Read More</a></p>
+
+<ul>
+  <li>What is the command used to show all open ports and/or socket connections on a machine?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>lsof -i
+<span class="nv">$ </span>netstat -natupx
+<span class="nv">$ </span>ss -lptuxa</code></pre></div>
+
+<ul>
+  <li>Is 300.168.0.123 a valid IPv4 address?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">No, IPv4 addresses are canonically represented in dot-decimal notation, which consists of four decimal numbers, each ranging from <span class="m">0</span> to 255, separated by dots, e.g., 172.16.254.1. Each part represents a group of <span class="m">8</span> bits <span class="o">(</span>octet<span class="o">)</span> of the address. So <span class="m">2</span> ** <span class="nv">8</span> <span class="o">=</span> 256<span class="o">(</span>255<span class="o">)</span> is a max number <span class="k">for</span> each octet.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/IP_address">Read More</a></p>
+
+<ul>
+  <li>Which IP ranges/subnets are “private” or “non-routable” (RFC 1918)?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The Internet Assigned Numbers Authority <span class="o">(</span>IANA<span class="o">)</span> has reserved the following three blocks of the IP address space <span class="k">for</span> private internets:
+     10.0.0.0        -   10.255.255.255  <span class="o">(</span>10/8 prefix<span class="o">)</span>
+     172.16.0.0      -   172.31.255.255  <span class="o">(</span>172.16/12 prefix<span class="o">)</span>
+     192.168.0.0     -   192.168.255.255 <span class="o">(</span>192.168/16 prefix<span class="o">)</span></code></pre></div>
+
+<p><a href="https://tools.ietf.org/html/rfc1918">Read More</a></p>
+
+<ul>
+  <li>What is a VLAN?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A virtual LAN <span class="o">(</span>VLAN<span class="o">)</span> is any broadcast domain that is partitioned and isolated in a computer network at the data link layer <span class="o">(</span>OSI layer 2<span class="o">)</span>.
+To subdivide a network into virtual LANs, one configures a network switch or router. Simpler network devices can only partition per physical port <span class="o">(</span><span class="k">if</span> at all<span class="o">)</span>, in which <span class="k">case</span> each VLAN is connected with a dedicated network cable <span class="o">(</span>and VLAN connectivity is limited by the number of hardware ports available<span class="o">)</span>. More sophisticated devices can mark packets through tagging, so that a single interconnect <span class="o">(</span>trunk<span class="o">)</span> may be used to transport data <span class="k">for</span> multiple VLANs. Since VLANs share bandwidth, a VLAN trunk might use link aggregation and/or quality of service prioritization to route data efficiently.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Virtual_LAN">Read More</a></p>
+
+<ul>
+  <li>What is ARP and what is it used for?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">The Address Resolution Protocol <span class="o">(</span>ARP<span class="o">)</span> is a protocol used <span class="k">for</span> resolution of network layer addresses into link layer addresses, a critical <span class="k">function</span> in multiple-access networks. ARP is used <span class="k">for</span> mapping a network address <span class="o">(</span>e.g. an IPv4 address<span class="o">)</span> to a physical address like an Ethernet address <span class="o">(</span>also named a MAC address<span class="o">)</span>.
+When we try to ping an IP address on our <span class="nb">local </span>network, say 192.168.1.2, our system has to turn the IP address 192.168.1.2 into a MAC address. This involves using ARP to resolve the address, hence its name.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Address_Resolution_Protocol">Read More</a></p>
+
+<ul>
+  <li>What is the difference between TCP and UDP?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">TCP is connection-oriented protocol.
+UDP is connectionless protocol
+
+TCP provides delivery guarantee
+UDP is unreliable, it doesn<span class="s1">&#39;t provide any delivery guarantee.</span>
+
+<span class="s1">TCP guarantees order of message</span>
+<span class="s1">UDP doesn&#39;</span>t provide any ordering or sequencing guarantee
+
+TCP is slow
+UDP is fast
+
+TCP has bigger header than UDP</code></pre></div>
+
+<p><a href="http://javarevisited.blogspot.ru/2014/07/9-difference-between-tcp-and-udp-protocol.html">Read More</a></p>
+
+<ul>
+  <li>What is the purpose of a default gateway?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A default gateway in computer networking is the node that is assumed to know how to forward packets on to other networks. Typically in a TCP/IP network, nodes such as servers, workstations and network devices each have a defined default route setting, <span class="o">(</span>pointing to the default gateway<span class="o">)</span>, defining where to send packets <span class="k">for</span> IP addresses <span class="k">for</span> which they can determine no specific route. The gateway is by definition a router.</code></pre></div>
+
+<p><a href="https://en.wikipedia.org/wiki/Default_gateway">Read More</a></p>
+
+<ul>
+  <li>What is command used to show the routing table on a Linux box?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">You can use one of this:
+<span class="nv">$ </span>route -n
+<span class="nv">$ </span>netstat -rn
+<span class="nv">$ </span>ip route list</code></pre></div>
+
+<ul>
+  <li>A TCP connection on a network can be uniquely defined by 4 things. What are those things?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">remote-ip-address, remote-port, <span class="nb">source</span>-ip-address, <span class="nb">source</span>-port</code></pre></div>
+
+<ul>
+  <li>When a client running a web browser connects to a web server, what is the source port and what is the destination port of the connection?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">destination port - is <span class="m">80</span> <span class="k">for</span> HTTP or <span class="m">443</span> <span class="k">for</span> HTTPS
+<span class="nb">source </span>port - will be random number from option net.ipv4.ip_local_port_range, by default it will be something like between <span class="m">32768</span> and <span class="m">61000</span> <span class="o">(</span>around 28K <span class="nb">source </span>ports available <span class="o">(</span><span class="k">for</span> a single destination IP:port<span class="o">))</span></code></pre></div>
+
+<p><a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">Read More</a></p>
+
+<ul>
+  <li>How do you add an IPv6 address to a specific interface?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Using ip:
+Usage: /sbin/ip -6 addr add &lt;ipv6address&gt;/&lt;prefixlength&gt; dev &lt;interface&gt;
+Example: /sbin/ip -6 addr add 2001:0db8:0:f101::1/64 dev eth0
+
+Using ifconfig:
+Usage: /sbin/ifconfig &lt;interface&gt; inet6 add &lt;ipv6address&gt;/&lt;prefixlength&gt;
+Example: /sbin/ifconfig eth0 inet6 add 2001:0db8:0:f101::1/64
+
+It is temporarily, you will lost this configuration after reboot. To add permanent ipv6 you need to add option to config file, on Fedora, Redhat Enterprise Linux, and clones like Centos add lines to these files:
+
+/etc/sysconfig/network
+
+<span class="nv">NETWORKING_IPV6</span><span class="o">=</span>yes
+<span class="nv">IPV6FORWARDING</span><span class="o">=</span>no
+<span class="nv">IPV6_AUTOCONF</span><span class="o">=</span>no
+<span class="nv">IPV6_AUTOTUNNEL</span><span class="o">=</span>no
+<span class="nv">IPV6_DEFAULTGW</span><span class="o">=</span>fe80::1
+<span class="nv">IPV6_DEFAULTDEV</span><span class="o">=</span>eth0
+
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+<span class="nv">IPV6INIT</span><span class="o">=</span>yes
+<span class="nv">IPV6ADDR</span><span class="o">=</span>2607:f388:xxxx:yyyy::zzzz/64     <span class="c"># replace with your static address</span>
+
+For Debian and derivatives like Ubuntu add lines to these files:
+
+/etc/sysctl.conf
+
+net.ipv6.conf.eth0.accept_ra<span class="o">=</span>0
+
+/etc/network/interfaces
+iface lo0 inet6 loopback
+iface eth0 inet6 static
+address 2607:f388:xxxx:yyyy::zzzz        <span class="c"># replace with your static address</span>
+netmask 64
+gateway fe80::1</code></pre></div>
+
+<ul>
+  <li>You have added an IPv4 and IPv6 address to interface eth0. A ping to the v4 address is working but a ping to the v6 address gives yout the response <code>sendmsg: operation not permitted</code>. What could be wrong?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This means that your server is not allowed to send ICMP packets.
+Check firewall rules:
+<span class="nv">$ </span>ip6tables -P INPUT ACCEPT
+<span class="nv">$ </span>ip6tables -P OUTPUT ACCEPT
+<span class="nv">$ </span>ip6tables -P FORWARD ACCEPT</code></pre></div>
+
+<ul>
+  <li>What is SNAT and when should be used?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Source Network Address Translation <span class="o">(</span>SNAT<span class="o">)</span> - changes the <span class="nb">source </span>address in IP header of a packet. It may also change the <span class="nb">source </span>port in the TCP/UDP headers. The typical usage is to change the a private <span class="o">(</span>rfc1918<span class="o">)</span> address/port into a public address/port <span class="k">for</span> packets leaving your network.</code></pre></div>
+
+<p><a href="http://www.commercialventvac.com/finao/DNATs-and-SNATs.html">Read More</a></p>
+
+<ul>
+  <li>Explain how could you ssh login into a Linux system that DROPs all new incomming packets using a SSH tunnel.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Need to <span class="nv">think</span> <span class="o">=)</span></code></pre></div>
+
+<ul>
+  <li>How do you stop a DDoS?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">It is very complicated questions.
+Before to <span class="k">do</span> something you need answer a lot of questions.
+Simple way is:
+- Limiting the ammount of concurrent connections from ddos IP address to your Server with firewall rules.
+- Optimize you server configuration options</code></pre></div>
+
+<p><a href="https://www.reddit.com/r/linux/comments/1klq5r/preventing_a_dos_attack/">Read More</a></p>
+
+<ul>
+  <li>How can you see content of ip packet?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">You can use tcpdump<span class="se">\t</span>shark to display captured packets in HEX and ASCII
+<span class="nv">$ </span>tcpdump -XX -i eth0
+<span class="nv">$ </span>tshark -i eth0 -x
+
+You can write a python<span class="se">\c</span> script <span class="k">for</span> this
+import socket
+<span class="nv">s</span> <span class="o">=</span> socket.socket<span class="o">(</span>socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP<span class="o">)</span>
+<span class="k">while</span> True:
+  print s.recvfrom<span class="o">(</span>65565<span class="o">)</span></code></pre></div>
+
+<p><a href="http://www.binarytides.com/packet-sniffer-code-c-linux/">Read More</a></p>
+
+<h3 id="mysql-questions">[[⬆]]MySQL questions:</h3>
+
+<ul>
+  <li>How do you create a user?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mysql -u root -ppassword -hsomehost -e <span class="s1">&#39;CREATE USER login@&quot;ip&quot;;&#39;</span></code></pre></div>
+
+<ul>
+  <li>How do you provide privileges to a user?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># read only</span>
+GRANT <span class="k">select</span> ON somedb.* TO <span class="s1">&#39;login&#39;</span>@<span class="s1">&#39;ip&#39;</span> IDENTIFIED BY <span class="s1">&#39;agoodpassword&#39;</span><span class="p">;</span>
+<span class="c"># all privileges</span>
+GRANT all privileges ON somedb.* TO <span class="s1">&#39;login&#39;</span>@<span class="s1">&#39;ip&#39;</span> IDENTIFIED BY <span class="s1">&#39;agoodpassword&#39;</span><span class="p">;</span></code></pre></div>
+
+<ul>
+  <li>What is the difference between a “left” and a “right” join?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Table from which you are taking data is <span class="s1">&#39;LEFT&#39;</span>.
+Table you are joining is <span class="s1">&#39;RIGHT&#39;</span>.
+LEFT JOIN: Take all items from left table AND <span class="o">(</span>only<span class="o">)</span> matching items from right table.
+RIGHT JOIN: Take all items from right table AND <span class="o">(</span>only<span class="o">)</span> matching items from left table.
+Most people only use LEFT JOIN since it seems more intuitive</code></pre></div>
+
+<ul>
+  <li>Explain briefly the differences between InnoDB and MyISAM.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">MYISAM:
+- MYISAM supports Table-level Locking
+- MyISAM designed <span class="k">for</span> need of speed
+- MyISAM does not support foreign keys hence we call MySQL with MYISAM is DBMS
+- MyISAM stores its tables, data and indexes in diskspace using separate three different files. <span class="o">(</span>- tablename.FRM, tablename.MYD, tablename.MYI<span class="o">)</span>-
+- MYISAM not supports transaction. You cannot commit and rollback with MYISAM. Once you issue a c- ommand - it’s <span class="k">done</span>.
+- MYISAM supports fulltext search
+You can use MyISAM, <span class="k">if</span> the table is more static with lots of <span class="k">select</span> and less update and delete.
+
+INNODB:
+- InnoDB supports Row-level Locking
+- InnoDB designed <span class="k">for</span> maximum performance when processing high volume of data
+- InnoDB support foreign keys hence we call MySQL with InnoDB is RDBMS
+- InnoDB stores its tables and indexes in a tablespace
+- InnoDB has better crash recovery.
+- InnoDB supports transaction. You can commit and rollback with InnoDB</code></pre></div>
+
+<ul>
+  <li>Describe briefly the steps you need to follow in order to create a simple master/slave cluster.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">AT Master:
+- <span class="nb">enable </span>binlog
+- <span class="nb">set </span>server-id<span class="o">=</span>1
+- create user with replication grant
+- create dump with master-data
+
+AT Slave:
+- <span class="nb">enable </span>binlog <span class="se">\ </span>relay-log
+- <span class="nb">set </span>server-id<span class="o">=</span>2
+- restore dump
+- <span class="nb">set </span>master_host <span class="se">\ </span>master_log_file <span class="se">\ </span>maste_log_pos</code></pre></div>
+
+<ul>
+  <li>Why should you run “mysql_secure_installation” after installing MySQL?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mysql_secure_installation is a script that improve MySQL installation security in the following ways:
+- <span class="nb">set </span>a password <span class="k">for</span> root accounts
+- remove root accounts that are accessible from outside the <span class="nb">local </span>host
+- remove anonymous-user accounts
+- can remove the <span class="nb">test </span>database <span class="o">(</span>which by default can be accessed by all users, even anonymous users<span class="o">)</span>, and privileges that permit anyone to access databases with names that start with test_</code></pre></div>
+
+<ul>
+  <li>How do you check which jobs are running?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>mysql -e <span class="s2">&quot;show full processlist&quot;</span></code></pre></div>
+
+<h3 id="devops-questions">[[⬆]]DevOps Questions:</h3>
+
+<ul>
+  <li>Can you describe your workflow when you create a script?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">1. Create<span class="se">\c</span>heck task in tfs<span class="se">\j</span>ira
+2. Analysis task description.
+3. Analysis current script collection.
+4. Analysis internet <span class="k">for</span> same job<span class="se">\p</span>roblem.
+5. Write and <span class="nb">test </span>script prototype in <span class="nb">test </span>environment.
+6. Commit script to git<span class="se">\s</span>vn
+7. Build package<span class="se">\u</span>se CMS to deploy script in production.
+8. Close task in tfs<span class="se">\j</span>ira</code></pre></div>
+
+<ul>
+  <li>What is GIT?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git is a distributed version control system developed by Linus Torvalds</code></pre></div>
+
+<ul>
+  <li>What is a dynamically/statically linked file?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Statically file means that the linker program <span class="o">(</span>ld<span class="o">)</span> after <span class="nb">source </span>code compilation adds all librarys and other dependencies directly to executable file
+
+Dynamically file means that the above step doesn<span class="s1">&#39;t happen. The operating system&#39;</span>s loader needs to find the dependencies code, load it into memory, each <span class="nb">time </span>the program is run.</code></pre></div>
+
+<ul>
+  <li>What does “configure &amp;&amp; make &amp;&amp; make install” do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">This commands is need <span class="k">if</span> you what to build software from <span class="nb">source </span>code.
+
+Configure - is a script which is responsible <span class="k">for</span> getting ready to build the software on your specific system. It makes sure all of the dependencies <span class="k">for</span> the rest of the build and install process are available, and finds out whatever it needs to know to use those dependencies.
+
+Make - is a <span class="nb">command  </span>which runs a series of tasks defined in a Makefile to build the finished program from its <span class="nb">source </span>code.
+
+Make install - is a <span class="nb">command </span>which will copy the built program, and its libraries and documentation, to the correct locations.</code></pre></div>
+
+<ul>
+  <li>What is puppet/chef/ansible used for?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Puppet/Chef/Ansible - are a free software platform <span class="k">for</span> configuring and managing computers.</code></pre></div>
+
+<ul>
+  <li>How do you create a new postgres user?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>psql -c <span class="s2">&quot;CREATE USER testuser WITH PASSWORD &#39;XXXXX&#39;;&quot;</span></code></pre></div>
+
+<ul>
+  <li>What is a virtual IP address? What is a cluster?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">A virtual IP address <span class="o">(</span>VIP or VIPA<span class="o">)</span> is an IP address that doesn<span class="err">&#39;</span>t correspond to an actual physical network interface <span class="o">(</span>port<span class="o">)</span>. Uses <span class="k">for</span> VIPs include Network Address Translation <span class="o">(</span>especially, One-to-many NAT<span class="o">)</span>, fault-tolerance, and mobility.
+
+Virtual IP addresses are commonly used to <span class="nb">enable </span>high availability. A standard failover design uses an active/passive server pair connected by replication and watched by a cluster manager. The active server listens on a virtual IP address<span class="p">;</span> applications use it <span class="k">for</span> connections instead of the normal host IP address. Should the active server fail, the cluster manager promotes the passive server and shifts the floating IP address to the newly promoted host. Application connections <span class="nb">break </span>and <span class="k">then</span> reconnect to the VIP again, which points them to the new server.
+
+Cluster is a <span class="nb">set </span>of loosely or tightly connected computers that work together so that, in many respects, they can be viewed as a single system.</code></pre></div>
+
+<ul>
+  <li>How do you print all strings of printable characters present in a file?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Use cmd /usr/bin/strings
+<span class="nv">$ </span>strings /path/somefile</code></pre></div>
+
+<ul>
+  <li>How do you find shared library dependencies?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ldd - print shared library dependencies
+<span class="nv">$ </span>ldd /path/somefile
+        linux-vdso.so.1 <span class="o">(</span>0x00007ffcdabac000<span class="o">)</span>
+        libselinux.so.1 <span class="o">=</span>&gt; /lib/x86_64-linux-gnu/libselinux.so.1 <span class="o">(</span>0x00007f1a42081000<span class="o">)</span></code></pre></div>
+
+<ul>
+  <li>What is Automake and Autoconf?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Automake and Autoconf both are parts of The GNU build system, also known as the Autotools, is a suite of programming tools designed to assist in making <span class="nb">source </span>code packages portable to many Unix-like systems.
+
+Automake - is a programming tool to automate parts of the compilation process. It eases usual compilation problems. For example, it points to needed dependencies. It automatically generates one or more Makefile.in from files called Makefile.am. Each Makefile.am contains, among other things, useful variable definitions <span class="k">for</span> the compiled software, such as compiler and linker flags, dependencies and their versions, etc.
+
+Autoconf - generate a configuration script from a TEMPLATE-FILE <span class="k">if</span> given, or configure.ac <span class="k">if</span> present, or <span class="k">else</span> configure.in. Output is sent to the standard output <span class="k">if</span> TEM‐PLATE-FILE is given, <span class="k">else</span> into configure.</code></pre></div>
+
+<ul>
+  <li>./configure shows an error that libfoobar is missing on your system, how could you fix this, what could be wrong?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Configure could not find libfoobar in LD_LIBRARY_PATH or libfoobar is not installed on your system.
+You can fix it by installing libfoobar package with package manager or build it from source.
+If libfoobar is already installed just check /etc/ld.so.conf and add right path to libfoobar</code></pre></div>
+
+<ul>
+  <li>What are the Advantages/disadvantages of script vs compiled program?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Script program have the advantages of:
+- flexibility to change the script
+- easier to implement <span class="o">(</span>writing good compilers is very hard!!<span class="o">)</span>
+- no need to run a compilation stage: can execute code directly <span class="s2">&quot;on the fly&quot;</span>
+- being more portable.
+
+Script program have the disadvantages of:
+- much slow than compiled program
+- <span class="nb">source </span>code is open
+
+Compiled program have the advantages of:
+- faster performance by directly using the native code of the target machine
+- opportunity to apply quite powerful optimisations during the compile stage
+- hides the <span class="nb">source </span>code from the end user
+
+Compiled program have the disadvantages of:
+- slow to develop <span class="o">(</span>edit, compile, link and run. The compile/link steps could take serious <span class="nb">time</span><span class="o">)</span>.
+- to execute you need to compile a different executable <span class="k">for</span> each <span class="nb">type </span>of processor and/or platform that you want your program to run on</code></pre></div>
+
+<ul>
+  <li>What’s the relationship between continuous delivery and DevOps?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Continuous delivery<span class="o">(</span>CD<span class="o">)</span> is an agile way of working whereby quality products—normally software assets—can be developed, built, tested, and shipped in quick succession.
+DevOps is another way of working whereby developers and system operators work in harmony with little or no organizational barriers between them towards a common goal.</code></pre></div>
+
+<ul>
+  <li>What are the important aspects of a system of continous integration and deployment?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Automation<span class="se">\t</span>esting are the important aspects of a great development workflow.
+Every task that can be <span class="k">done</span> by a machine should be.
+Automation gives you the <span class="nb">time </span>to focus.
+Through testing, you can be sure that the most important steps your customers will take through your system are working, regardless of the changes you make.
+This gives you the confidence to experiment, implement new features, and ship updates quickly.</code></pre></div>
+
+<h3 id="fun-questions">[[⬆]]Fun Questions:</h3>
+
+<ul>
+  <li>A careless sysadmin executes the following command: <code>chmod 444 /bin/chmod</code> - what do you do to fix this?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Default permission is 755.
+Y can use C<span class="se">\C</span>++<span class="se">\P</span>ython<span class="se">\P</span>erl and other language to fix this.
+
+<span class="c">#!/usr/bin/python</span>
+import os
+os.chmod<span class="o">(</span><span class="s2">&quot;/bin/chmod&quot;</span>, 0755<span class="o">)</span></code></pre></div>
+
+<ul>
+  <li>I’ve lost my root password, what can I do?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Simple boot in sigle mode and change it.
+Change in grub -&gt; <span class="nv">init</span><span class="o">=</span>/bin/bash -&gt; boot -&gt; run <span class="nv">$mount</span> -o remount,rw / -&gt; change root password with <span class="nv">$ </span>passwd root</code></pre></div>
+
+<ul>
+  <li>I’ve rebooted a remote server but after 10 minutes I’m still not able to ssh into it, what can be wrong?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">If it does not ping, maybe proble with network<span class="se">\f</span>irewall
+If it pings but you can not to connect to it with ssh maybe problem with ssh config<span class="se">\f</span>irewall rules
+Bad permission <span class="k">for</span> ssh keys
+Wrong password</code></pre></div>
+
+<ul>
+  <li>If you were stuck on a desert island with only 5 command-line utilities, which would you choose?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">you <span class="k">do</span> not need computer on a desert island because there is no <span class="nv">enegry</span> <span class="o">=)</span></code></pre></div>
+
+<ul>
+  <li>You come across a random computer and it appears to be a command console for the universe. What is the first thing you type?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">It cool to live <span class="nv">forever</span> <span class="o">=)</span>
+change user <span class="s1">&#39;mylogin&#39;</span> expiration from <span class="s1">&#39;XXXXX-XX-XX&#39;</span> to <span class="s1">&#39;never&#39;</span>
+usermod -e <span class="s2">&quot;&quot;</span> mylogin</code></pre></div>
+
+<ul>
+  <li>Tell me about a creative way that you’ve used SSH?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">add to .ssh/config this lines and install tor and you can use ssh with tor.
+Host *.onion
+    ProxyCommand socat - SOCKS4A:localhost:%h:%p,socksport<span class="o">=</span>9050</code></pre></div>
+
+<ul>
+  <li>You have deleted by error a running script, what could you do to restore it?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">While script is running it is not deleted
+Find pid of running script and restore it from procfs
+ls -l /proc/4607/fd/4
+lr-x------ <span class="m">1</span> juliet juliet <span class="m">64</span> Apr  <span class="m">7</span> 03:19
+/proc/4607/fd/4 -&gt; /home/juliet/testing.txt <span class="o">(</span>deleted<span class="o">)</span>
+<span class="nv">$ </span>cp /proc/4607/fd/4 testing.txt.bk</code></pre></div>
+
+<h3 id="demo-time">[[⬆]]Demo Time:</h3>
+
+<ul>
+  <li>Unpack test.tar.gz without man pages or google.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>tar xzvf test.tar.gz</code></pre></div>
+
+<ul>
+  <li>Remove all “*.pyc” files from testdir recursively?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find ./testdir -type f -name <span class="s2">&quot;*.pyc&quot;</span> -ls -delete
+<span class="nv">$ </span>find ./testdir -type f -name <span class="s2">&quot;*.pyc&quot;</span><span class="p">|</span>xargs rm -f</code></pre></div>
+
+<ul>
+  <li>Search for “my konfu is the best” in all *.py files.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find ./testdir -type f -name <span class="s2">&quot;*.py&quot;</span><span class="p">|</span>xargs grep <span class="s2">&quot;my konfu is the best&quot;</span></code></pre></div>
+
+<ul>
+  <li>Replace the occurrence of “my konfu is the best” with “I’m a linux jedi master” in all *.txt files.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find ./testdir -type f -name <span class="s2">&quot;*.txt&quot;</span><span class="p">|</span>xargs sed -i <span class="s2">&quot;s/my konfu is the best/I\&#39;m a linux jedi master/&quot;</span></code></pre></div>
+
+<ul>
+  <li>Test if port 443 on a machine with IP address X.X.X.X is reachable.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span> nc -z -v X.X.X.X 443
+Connection to X.X.X.X <span class="m">443</span> port <span class="o">[</span>tcp/https<span class="o">]</span> succeeded!</code></pre></div>
+
+<ul>
+  <li>Get http://myinternal.webserver.local/test.html via telnet.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>telnet myinternal.webserver.local 80
+GET /test.html HTTP/1.1
+HOST: myinternal.webserver.local
+&lt;ENTER&gt;
+&lt;ENTER&gt;</code></pre></div>
+
+<ul>
+  <li>How to send an email without a mail client, just on the command line?</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>telnet localhost smtp
+HELO example.com
+mail from: sender@example.com
+rcpt to: user@example.com
+data
+<span class="m">354</span> Enter mail, end with <span class="s2">&quot;.&quot;</span> on a line by itself
+Hey
+This is <span class="nb">test </span>email only
+
+Thanks
+.
+quit
+
+or
+
+<span class="nv">$ </span>mail -s <span class="s2">&quot;Test Subject&quot;</span> user@example.com</code></pre></div>
+
+<ul>
+  <li>Write a <code>get_prim</code> method in python/perl/bash/pseudo.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">I don<span class="sb">`</span>t undestand what is get_prim method, <span class="k">if</span> you know, write a comment plz.</code></pre></div>
+
+<ul>
+  <li>Find all files which have been accessed within the last 30 days.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>find /* -type f -atime -30
+<span class="s2">&quot;-30&quot;</span> means that it was accessed <span class="s2">&quot;less than 30 days ago&quot;</span>
+<span class="s2">&quot;+30&quot;</span> means that it was accessed <span class="s2">&quot;more than 30 days ago&quot;</span></code></pre></div>
+
+<ul>
+  <li>Explain the following command <code>(date ; ps -ef | awk '{print $1}' | sort | uniq | wc -l ) &gt;&gt; Activity.log</code></li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>date <span class="p">;</span> ps -ef <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> sort <span class="p">|</span> uniq <span class="p">|</span> wc -l
+
+Execute date <span class="nb">command </span>which print current datetime, <span class="k">then</span> we execute process list <span class="nb">command </span>and print only UID column, than with pipe we sort it and print only uniq values, after wc -l is counting it number after all we append this to file Activity.log
+
+If file we will see something like this:
+Fri Jan <span class="m">22</span> 15:24:07 UTC 2016
+6</code></pre></div>
+
+<ul>
+  <li>Write a script to list all the differences between two directories.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;Usage: $0 DIR1 DIR2&quot;</span>
+
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$# </span>-gt <span class="m">2</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+       <span class="nb">echo</span> <span class="nv">$usage</span><span class="p">;</span>
+       <span class="nb">exit </span>1
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="nv">$usage</span><span class="p">;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;$1&quot;</span> -a -d <span class="s2">&quot;$2&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&quot;Comparing $1 with $2........&quot;</span>
+        diff -r <span class="nv">$1</span> <span class="nv">$2</span>
+<span class="k">fi</span></code></pre></div>
+
+<ul>
+  <li>In a log file with contents as <code>&lt;TIME&gt; : [MESSAGE] : [ERROR_NO] - Human readable text</code> display summary/count of specific error numbers that occured every hour or a specific hour.</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>cat log <span class="p">|</span> awk -F <span class="s2">&quot;:&quot;</span> <span class="s1">&#39;{print $3}&#39;</span><span class="p">|</span>sort -n <span class="p">|</span>uniq -c
+<span class="nv">$ </span>cat log <span class="p">|</span> grep <span class="s2">&quot;specific hour&quot;</span> <span class="p">|</span> awk -F <span class="s2">&quot;:&quot;</span> <span class="s1">&#39;{print $3}&#39;</span><span class="p">|</span>sort -n <span class="p">|</span>uniq -c</code></pre></div>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="article-author-bottom">
+          
+
+
+
+	<img src="https://jivoi.github.io/images/avatar.jpg" class="bio-photo" alt="EK bio photo">
+
+<h3>EK</h3>
+<p>Totally not a hacker</p>
+<a href="mailto:ekoz@protonmail.com" class="author-widgets" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+<a href="http://twitter.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-tw-square"></i> Twitter</a>
+
+
+
+
+
+<a href="http://github.com/jivoi" class="author-widgets" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <p class="byline"><strong>Linux SysAdm/DevOps Interview Questions</strong> was published on <time datetime="2016-01-22T00:00:00+03:00">January 22, 2016</time> and last modified on <time datetime="2016-01-22">January 22, 2016</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="https://jivoi.github.io/archive/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="https://jivoi.github.io/2016/04/04/move-from-hdd-to-ssd-with-archlinux/" title="Move from HDD to SSD with ArchLinux">Move from HDD to SSD with ArchLinux</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/12/30/archlinux-installation-guide/" title="ArchLinux Installation Guide">ArchLinux Installation Guide</a></li>
+    
+      <li><a href="https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/" title="Pentest Tips and Tricks #2">Pentest Tips and Tricks #2</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  <footer>
+    
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://jivoi.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://jivoi.github.io/assets/js/scripts.min.js"></script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-64125092-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'httpjivoigithubcom'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+	        
+
+</body>
+</html>
