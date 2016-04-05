@@ -12,7 +12,7 @@ comments: True
 share:
 ---
 
-Migrate you ArchLinux from HDD to SDD
+Migrate ArchLinux from HDD to SDD
 
 ### System prepare
 {% highlight bash %}
