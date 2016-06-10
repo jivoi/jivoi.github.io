@@ -201,6 +201,7 @@ All that things I need to pass OSCP, i think =)
 - [http://www.darkoperator.com/blog/2009/4/24/metadata-enumeration-with-foca.html](http://www.darkoperator.com/blog/2009/4/24/metadata-enumeration-with-foca.html)
 
 ## Phase 2 - Enumeration: Finding Attack Vectors
+- [https://bitvijays.github.io/blog/2015/04/09/learning-from-the-field-intelligence-gathering/](https://bitvijays.github.io/blog/2015/04/09/learning-from-the-field-intelligence-gathering/)
 - [http://securitysynapse.blogspot.be/2013_08_01_archive.html](http://securitysynapse.blogspot.be/2013_08_01_archive.html)
 - [https://hackertarget.com/attacking-wordpress/](https://hackertarget.com/attacking-wordpress/)
 - [https://code.google.com/p/pentest-bookmarks/wiki/BookmarksList](https://code.google.com/p/pentest-bookmarks/wiki/BookmarksList)
