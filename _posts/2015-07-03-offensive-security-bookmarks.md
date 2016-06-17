@@ -239,6 +239,7 @@ All that things I need to pass OSCP, i think =)
 - [https://www.kali.org/kali-monday/pass-the-hash-toolkit-winexe-updates/](https://www.kali.org/kali-monday/pass-the-hash-toolkit-winexe-updates/)
 
 ### Windows Previlige Escalation
+- [http://toshellandback.com/2015/11/24/ms-priv-esc/](http://toshellandback.com/2015/11/24/ms-priv-esc/)
 - [https://labs.mwrinfosecurity.com/system/assets/760/original/Windows_Services_-_All_roads_lead_to_SYSTEM.pdf](https://labs.mwrinfosecurity.com/system/assets/760/original/Windows_Services_-_All_roads_lead_to_SYSTEM.pdf)
 - [http://travisaltman.com/windows-privilege-escalation-via-weak-service-permissions/](http://travisaltman.com/windows-privilege-escalation-via-weak-service-permissions/)
 - [https://github.com/0xdeafbeef/PSSecSnapshot](https://github.com/0xdeafbeef/PSSecSnapshot)
