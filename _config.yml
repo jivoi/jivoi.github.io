@@ -31,16 +31,16 @@ owner:
   avatar: avatar.jpg
   bio: "Totally not a hacker"
   email: ekoz@protonmail.com
-  disqus-shortname: httpjivoigithubcom
+  disqus-shortname: http-jivoi-github-io
   twitter: jivoi
   facebook: #username
   google:
     plus: #username
     analytics: UA-64125092-1
-    verify: 
-    ad-client: 
-    ad-slot: 
-  bing-verify: 
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
   github: jivoi
   stackoverflow: #http://stackoverflow.com/users/123456/username
   linkedin: #username
