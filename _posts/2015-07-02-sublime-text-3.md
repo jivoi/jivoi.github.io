@@ -29,7 +29,8 @@ My configuration
 - install gosublime
 - install terminal
 - install Javatar
-- SublimeAStyleFormatter
+- install SublimeAStyleFormatter
+- install PyYapf Python Formatter (pip install yapf)
 
 ### Install Settings - User
 {% highlight bash %}
