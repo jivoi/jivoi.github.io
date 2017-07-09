@@ -49,6 +49,7 @@ My current way for OSCP Certifications
 - [https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/](https://www.thesubtlety.com/the-oscp-penetration-testing-with-kali-linux/)
 - [http://nwalsh.me/?p=102](http://nwalsh.me/?p=102)
 - [http://niiconsulting.com/checkmate/2017/06/a-detail-guide-on-oscp-preparation-from-newbie-to-oscp/](http://niiconsulting.com/checkmate/2017/06/a-detail-guide-on-oscp-preparation-from-newbie-to-oscp/)
+- [https://www.jimwilbur.com/2017/07/oscp-review/](https://www.jimwilbur.com/2017/07/oscp-review/)
 
 ### 2 Read
 - [Offensive Security Bookmarks](https://jivoi.github.io/2015/07/03/offensive-security-bookmarks/)
