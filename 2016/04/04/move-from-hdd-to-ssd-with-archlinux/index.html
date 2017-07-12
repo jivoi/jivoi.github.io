@@ -169,7 +169,7 @@
 <span class="nv">$ </span>mount /dev/sdb1 /mnt/boot
 <span class="nv">$ </span>mkdir /mnt_old
 <span class="nv">$ </span>mount /dev/sda3 /mnt_old
-<span class="nv">$ </span>rsync -aAXv --progress /mnt_old /mnt
+<span class="nv">$ </span>rsync -aAXv --progress /mnt_old/ /mnt
 <span class="nv">$ </span>genfstab -U -p /mnt &gt; /mnt/etc/fstab
 <span class="nv">$ </span>mount --bind /dev /mnt/dev
 <span class="nv">$ </span>mount --bind /proc /mnt/proc
